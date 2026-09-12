@@ -1,0 +1,19 @@
+build/bin
+node_modules
+frontend/dist
+
+# SQLite (если файл БД попадёт в проект при отладке)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+
+# macOS
+.DS_Store
+
+# editor
+.vscode/
+.idea/
+
+# logs
+*.log
