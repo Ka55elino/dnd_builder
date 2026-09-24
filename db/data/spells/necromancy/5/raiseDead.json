@@ -1,0 +1,14 @@
+{
+  "id": "raiseDead",
+  "name": "Оживление",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "necromancy",
+  "classes": [
+    "bard",
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Возвращаете к жизни существо, мёртвое не более 10 дней."
+}

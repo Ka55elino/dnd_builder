@@ -1,0 +1,9 @@
+{
+  "id": "actionSurge",
+  "name": "Всплеск действий",
+  "kind": "class",
+  "level": 2,
+  "classes": ["warrior"],
+  "desc": "В свой ход можете совершить одно дополнительное действие (кроме Магии).",
+  "uses": { "count": 1, "per": "shortRest", "scale": [[2, 1], [17, 2]] }
+}

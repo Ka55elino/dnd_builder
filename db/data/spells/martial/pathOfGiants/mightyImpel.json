@@ -1,0 +1,9 @@
+{
+  "id": "mightyImpel",
+  "name": "Могучий толчок",
+  "kind": "martial",
+  "subclass": "pathOfGiants",
+  "level": 10,
+  "action": "bonus",
+  "desc": "Бонусным действием телекинетически толкаете существ вокруг себя (спасбросок Силы)."
+}

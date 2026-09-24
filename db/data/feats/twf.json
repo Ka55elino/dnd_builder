@@ -1,0 +1,17 @@
+{
+  "id": "twf",
+  "name": "Бой двумя оружиями",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "Добавляете модификатор характеристики к урону второго (бонусного) оружия.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "offHandDamage",
+      "value": "abilityMod",
+      "when": {
+        "twoWeapon": true
+      }
+    }
+  ]
+}

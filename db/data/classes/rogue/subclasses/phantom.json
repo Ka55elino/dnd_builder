@@ -1,0 +1,33 @@
+{
+  "id": "phantom",
+  "name": "Фантом",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Шёпот мёртвых",
+      "desc": "После каждого отдыха получаете владение одним навыком или инструментом на выбор (меняется при повторном использовании)."
+    },
+    {
+      "level": 3,
+      "name": "Могильные вопли",
+      "desc": "Нанеся урон Скрытой атакой, наносите второму существу в 9 м некротический урон в размере половины костей Скрытой атаки. Число раз = бонус мастерства."
+    },
+    {
+      "level": 9,
+      "name": "Частица души усопшего",
+      "desc": "Когда рядом кто-то умирает, реакцией создаёте безделушку (до бонуса мастерства): даёт преимущество на спасброски от смерти и Телосложения, питает «Могильные вопли» или отвечает вопросом духу."
+    },
+    {
+      "level": 13,
+      "name": "Призрачная походка",
+      "desc": "Бонусным действием на 10 минут обретаете призрачную форму: скорость полёта 3 м, атаки по вам с помехой, проходите сквозь существа и предметы."
+    },
+    {
+      "level": 17,
+      "name": "Друг смерти",
+      "desc": "«Могильные вопли» теперь наносят урон и первой, и второй цели; в конце длинного отдыха у вас появляется безделушка, если их не осталось."
+    }
+  ]
+}

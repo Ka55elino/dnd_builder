@@ -1,0 +1,17 @@
+{
+  "id": "farmer",
+  "name": "Фермер",
+  "abilities": {
+    "options": [
+      "str",
+      "con",
+      "wis"
+    ]
+  },
+  "feat": "tough",
+  "skills": [
+    "animal",
+    "nature"
+  ],
+  "tool": "Инструменты плотника"
+}

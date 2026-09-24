@@ -1,0 +1,17 @@
+{
+  "id": "flameStrike",
+  "name": "Огненный столб",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Столб огня: спасбросок Ловкости, урон огнём и излучением.",
+  "damage": {
+    "dice": "4d6",
+    "type": "fire"
+  }
+}

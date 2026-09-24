@@ -1,0 +1,14 @@
+{
+  "id": "teleport",
+  "name": "Телепортация",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "conjuration",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Мгновенно переносите себя и до 8 существ в известное место на том же плане."
+}

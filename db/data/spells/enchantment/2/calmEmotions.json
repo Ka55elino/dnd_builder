@@ -1,0 +1,13 @@
+{
+  "id": "calmEmotions",
+  "name": "Успокоение эмоций",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric"
+  ],
+  "desc": "Существа в сфере 6 м — спасбросок Харизмы: снимаете очарование/испуг или гасите враждебность. Концентрация."
+}

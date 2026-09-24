@@ -1,0 +1,18 @@
+{
+  "id": "magicMissile",
+  "name": "Волшебная стрела",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Три светящихся дротика бьют без промаха: каждый 1d4+1 силовым полем.",
+  "damage": {
+    "dice": "3d4",
+    "type": "force"
+  }
+}

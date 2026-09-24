@@ -1,0 +1,22 @@
+{
+  "id": "lesserRestoration",
+  "name": "Малое восстановление",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger"
+  ],
+  "desc": "Касанием снимаете с существа одно состояние: болезнь, отравление, ослепление, оглушение или паралич.",
+  "casting": {
+    "time": "1 действие",
+    "range": "Касание",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  }
+}

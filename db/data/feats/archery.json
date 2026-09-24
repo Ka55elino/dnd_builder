@@ -1,0 +1,17 @@
+{
+  "id": "archery",
+  "name": "Стрельба",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "+2 к броскам атаки дальнобойным оружием.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "attackRoll",
+      "value": 2,
+      "when": {
+        "weapon": "ranged"
+      }
+    }
+  ]
+}

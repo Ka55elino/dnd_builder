@@ -1,0 +1,16 @@
+{
+  "id": "blink",
+  "name": "Мерцание",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "В конце каждого хода 50% шанс исчезнуть в Эфирный план до начала следующего."
+}

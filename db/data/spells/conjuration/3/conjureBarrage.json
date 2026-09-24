@@ -1,0 +1,21 @@
+{
+  "id": "conjureBarrage",
+  "name": "Шквал снарядов",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "ranger"
+  ],
+  "desc": "Метаете оружие/боеприпас, создавая конус 18 м из снарядов: 3d8 урона (тип оружия), спасбросок Ловкости за половину.",
+  "casting": {
+    "time": "1 действие",
+    "range": "На себя (конус 18 м)",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  },
+  "damage": {
+    "dice": "3d8"
+  }
+}

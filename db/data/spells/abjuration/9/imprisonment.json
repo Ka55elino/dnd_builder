@@ -1,0 +1,13 @@
+{
+  "id": "imprisonment",
+  "name": "Заточение",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "abjuration",
+  "classes": [
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Заключаете существо (спасбросок Мудрости) в темницу — погребение, оковы или крошечную клетку."
+}

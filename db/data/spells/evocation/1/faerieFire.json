@@ -1,0 +1,13 @@
+{
+  "id": "faerieFire",
+  "name": "Огонь фей",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "druid"
+  ],
+  "desc": "Существа в кубе 6 м: спасбросок Ловкости или обведены светом — атаки по ним с преимуществом. Концентрация."
+}

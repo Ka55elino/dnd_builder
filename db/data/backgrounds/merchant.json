@@ -1,0 +1,17 @@
+{
+  "id": "merchant",
+  "name": "Торговец",
+  "abilities": {
+    "options": [
+      "con",
+      "int",
+      "cha"
+    ]
+  },
+  "feat": "lucky",
+  "skills": [
+    "animal",
+    "persuasion"
+  ],
+  "tool": "Инструменты навигатора"
+}

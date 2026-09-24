@@ -1,0 +1,16 @@
+{
+  "id": "mirrorImage",
+  "name": "Отражения",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Создаёте 3 иллюзорных двойника, сбивающих атаки по вам."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "silveryBarbs",
+  "name": "Серебряные шипы",
+  "kind": "spell",
+  "action": "reaction",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Реакцией на успешный бросок существа заставляете перебросить с помехой; союзник получает преимущество."
+}

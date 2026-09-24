@@ -1,0 +1,14 @@
+{
+  "id": "controlWeather",
+  "name": "Управление погодой",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "transmutation",
+  "classes": [
+    "cleric",
+    "druid",
+    "wizard"
+  ],
+  "desc": "Меняете погоду в радиусе 8 км на протяжении концентрации."
+}

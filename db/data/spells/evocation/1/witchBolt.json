@@ -1,0 +1,16 @@
+{
+  "id": "witchBolt",
+  "name": "Ведьмин снаряд",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "warlock"
+  ],
+  "desc": "Луч молнии (атака заклинанием): урон электричеством; в свои ходы действием повторяете урон по той же цели. Концентрация.",
+  "damage": {
+    "dice": "1d12",
+    "type": "lightning"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "eyebite",
+  "name": "Дурной глаз",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "necromancy",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Взгляд усыпляет, пугает или ослабляет существо (спасбросок Мудрости). Концентрация."
+}

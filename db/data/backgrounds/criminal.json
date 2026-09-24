@@ -1,0 +1,17 @@
+{
+  "id": "criminal",
+  "name": "Преступник",
+  "abilities": {
+    "options": [
+      "dex",
+      "con",
+      "int"
+    ]
+  },
+  "feat": "alert",
+  "skills": [
+    "sleight",
+    "stealth"
+  ],
+  "tool": "Воровские инструменты"
+}

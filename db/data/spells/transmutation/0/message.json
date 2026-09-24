@@ -1,0 +1,14 @@
+{
+  "id": "message",
+  "name": "Послание",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Шёпотом передаёте сообщение существу в 36 м, которое слышите только вы двое."
+}

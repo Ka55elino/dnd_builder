@@ -1,0 +1,13 @@
+{
+  "id": "bless",
+  "name": "Благословение",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "До 3 существ получают +1d4 к броскам атаки и спасброскам. Концентрация до 1 минуты."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "foresight",
+  "name": "Предвидение",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "druid",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Цель 8 часов имеет преимущество на всё и не может быть застигнута врасплох; атаки по ней с помехой."
+}

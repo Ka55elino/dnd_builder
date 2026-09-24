@@ -1,0 +1,21 @@
+{
+  "id": "passWithoutTrace",
+  "name": "Бесследное передвижение",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "druid",
+    "ranger"
+  ],
+  "desc": "Вы и союзники в 9 м получаете +10 к проверкам Скрытности и не оставляют следов. Концентрация до 1 часа.",
+  "casting": {
+    "time": "1 действие",
+    "range": "На себя (9 м)",
+    "components": "В, С, М",
+    "duration": "Конц., 1 час",
+    "concentration": true
+  }
+}

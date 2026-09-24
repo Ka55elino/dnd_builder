@@ -1,0 +1,13 @@
+{
+  "id": "gentleRepose",
+  "name": "Мирный покой",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Тело защищено от разложения и не может стать нежитью; продлевает срок оживления."
+}

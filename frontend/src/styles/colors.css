@@ -1,0 +1,77 @@
+/* Основная палитра */
+
+:root {
+    /* --- Поверхности --- */
+    --color-bg:            #111014;  /* фон приложения */
+    --color-sidebar:       #17151B;  /* сайдбар */
+    --color-card:          #1D1A21;  /* карточка */
+    --color-card-elevated: #25212A;  /* приподнятая карточка */
+    --color-border:        #38323D;  /* границы */
+
+    /* --- Текст --- */
+    --color-text-primary:   #E8E1D5;
+    --color-text-secondary: #A9A19A;
+    --color-text-muted:     #706A68;
+    --color-text-accent:    #D6BD8C;  /* подзаголовки, акцентный текст — бледное золото */
+
+    /* --- Акценты --- */
+    --color-gold:              #C8A45D;
+    --color-gold-hover:        #E0BD70;
+    --color-magic-purple:      #8E6BB5;
+    --color-magic-purple-dark: #49365F;
+
+    /* --- Состояния --- */
+    --color-danger:  #9B4545;  /* danger / necromancy */
+    --color-success: #668C62;  /* success / nature */
+
+    /* --- Типы действий (иконки и чипы) --- */
+    --color-act-action:   #6FB35F;  /* действие — зелёный */
+    --color-act-bonus:    #E08A3C;  /* бонусное — оранжевый */
+    --color-act-reaction: #A07AD6;  /* реакция — фиолетовый */
+    --color-act-free:     #A9A19A;  /* свободное — нейтральный */
+
+    /* --- Типы урона --- */
+    --color-dmg-bludgeoning: #A9A19A;
+    --color-dmg-piercing:    #B8A07A;
+    --color-dmg-slashing:    #C28E6A;
+    --color-dmg-acid:        #8FB54A;
+    --color-dmg-cold:        #7FB6D9;
+    --color-dmg-fire:        #D9733F;
+    --color-dmg-force:       #B07FD9;
+    --color-dmg-lightning:   #E0C94F;
+    --color-dmg-necrotic:    #7D9B6A;
+    --color-dmg-poison:      #6AAF5E;
+    --color-dmg-psychic:     #D97FB6;
+    --color-dmg-radiant:     #F0D98A;
+    --color-dmg-thunder:     #6F8FD9;
+    --color-dmg-physical:    #A9A19A;
+    --color-dmg-weapon:      #A9A19A;
+
+    /* --- Ячейки заклинаний --- */
+    --color-slot:      #3D8BFF;                  /* обычные ячейки — ярко-синий */
+    --color-slot-pact: var(--color-magic-purple); /* ячейки договора колдуна — фиолетовый */
+
+    /* --- Отдых --- */
+    --color-rest-shortRest: #5D8FB8;
+    --color-rest-longRest:  #D6BD8C;
+    --color-rest-day:       #D6B56A;
+
+    /* --- Свойства заклинаний и ячейки (иконки kind="meta") --- */
+    --color-meta-concentration: #A889C8;
+    --color-meta-ritual:        #D6B56A;
+    --color-meta-dc:            #D99A5B;
+    --color-meta-range:         #6FA8DC;
+    --color-meta-duration:      #6FA8DC;
+    --color-meta-slot:          var(--color-slot);
+    --color-meta-pact:          var(--color-slot-pact);
+
+    /* --- Школы магии (иконки kind="school") --- */
+    --color-school-abjuration:    #6FA8DC;
+    --color-school-conjuration:   #B58AD0;
+    --color-school-divination:    #D6B56A;
+    --color-school-enchantment:   #D27C9A;
+    --color-school-evocation:     #D66A4F;
+    --color-school-illusion:      #9A8BC7;
+    --color-school-necromancy:    #8F7AA8;
+    --color-school-transmutation: #D6B56A;
+}

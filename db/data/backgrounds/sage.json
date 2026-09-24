@@ -1,0 +1,17 @@
+{
+  "id": "sage",
+  "name": "Мудрец",
+  "abilities": {
+    "options": [
+      "con",
+      "int",
+      "wis"
+    ]
+  },
+  "feat": "magicInitiateWizard",
+  "skills": [
+    "arcana",
+    "history"
+  ],
+  "tool": "Каллиграфические принадлежности"
+}

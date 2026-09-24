@@ -1,0 +1,12 @@
+{
+  "id": "spareTheDying",
+  "name": "Уход за умирающим",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "necromancy",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Касанием стабилизируете существо с 0 хитов (дальность 4,5 м)."
+}

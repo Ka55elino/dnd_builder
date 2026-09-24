@@ -1,0 +1,18 @@
+{
+  "id": "dispelMagic",
+  "name": "Рассеивание магии",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Заканчиваете одно заклинание на цели (3 круг и ниже автоматически)."
+}

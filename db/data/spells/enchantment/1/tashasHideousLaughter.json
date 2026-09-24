@@ -1,0 +1,12 @@
+{
+  "id": "tashasHideousLaughter",
+  "name": "Смех Таши",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "bard"
+  ],
+  "desc": "Существо (спасбросок Мудрости) падает в приступе хохота: недееспособно, лежит ничком. Концентрация."
+}

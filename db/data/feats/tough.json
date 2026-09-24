@@ -1,0 +1,15 @@
+{
+  "id": "tough",
+  "name": "Крепкий",
+  "category": "origin",
+  "level": 1,
+  "desc": "Максимум хитов +2 за каждый уровень персонажа.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "hpMax",
+      "value": 2,
+      "per": "level"
+    }
+  ]
+}

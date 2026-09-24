@@ -1,0 +1,19 @@
+{
+  "id": "iceStorm",
+  "name": "Ледяная буря",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Град льда в области: дробящий и холодный урон, труднопроходимость.",
+  "damage": {
+    "dice": "2d8",
+    "type": "bludgeoning"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "dominatePerson",
+  "name": "Доминирование над личностью",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Гуманоид: спасбросок Мудрости или под вашим контролем. Концентрация."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "shieldMaster",
+  "name": "Мастер щита",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str"
+  ],
+  "desc": "+1 Сила; толчок щитом, +щит к спасброскам Лов."
+}

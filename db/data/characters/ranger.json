@@ -1,0 +1,127 @@
+{
+  "id": "seed-ranger",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.572Z",
+  "name": "Сайра Ветролов",
+  "portrait": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "bio": {
+    "gender": "Женский",
+    "identity": "Женщина",
+    "attraction": "—",
+    "age": "56",
+    "height": "204 см",
+    "weight": "37 кг",
+    "eyes": "Зелёные",
+    "skin": "Бледная",
+    "hair": "Рыжие, в косах",
+    "alignment": "Нейтрально-добрый",
+    "trait": "Всегда садится спиной к стене.",
+    "ideal": "Защита. Граница леса — моя граница.",
+    "bond": "Выслеживает чудовище, убившее её семью.",
+    "flaw": "Не доверяет магам.",
+    "weakness": "Не может спать в помещении."
+  },
+  "level": 2,
+  "backgroundId": "guide",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "dex": 2,
+    "wis": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 3,
+    "dex": 0,
+    "con": 2,
+    "int": 4,
+    "wis": 1,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 12,
+    "dex": 15,
+    "con": 13,
+    "int": 10,
+    "wis": 14,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 12,
+    "dex": 17,
+    "con": 13,
+    "int": 10,
+    "wis": 15,
+    "cha": 8
+  },
+  "raceId": "elf",
+  "subraceId": "wood",
+  "classId": "ranger",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "studded",
+    "shield": false,
+    "weaponIds": [
+      "longbow",
+      "shortsword"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "animal",
+        "athletics",
+        "insight"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "ensnaringStrike",
+        "cureWounds"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "poisonSpray",
+        "produceFlame"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "healingWord"
+      ]
+    },
+    "L2:class:expertise:Ловкий следопыт": {
+      "kind": "expertise",
+      "ids": [
+        "animal"
+      ]
+    },
+    "L2:class:fightingStyle:Боевой стиль": {
+      "kind": "fightingStyle",
+      "ids": [
+        "archery"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "fogCloud"
+      ]
+    }
+  }
+}

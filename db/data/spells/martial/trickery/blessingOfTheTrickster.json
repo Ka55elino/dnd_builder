@@ -1,0 +1,9 @@
+{
+  "id": "blessingOfTheTrickster",
+  "name": "Благословение плута",
+  "kind": "martial",
+  "subclass": "trickery",
+  "level": 3,
+  "action": "action",
+  "desc": "Действием даёте себе или существу в 9 м преимущество на проверки Ловкости (Скрытности) на 1 час."
+}

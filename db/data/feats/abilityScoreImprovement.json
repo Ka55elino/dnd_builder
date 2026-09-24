@@ -1,0 +1,21 @@
+{
+  "id": "abilityScoreImprovement",
+  "name": "Повышение характеристик",
+  "category": "general",
+  "level": 4,
+  "repeatable": true,
+  "asi": {
+    "pick": 2,
+    "amount": 1,
+    "max": 20,
+    "options": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ]
+  },
+  "desc": "Повысьте одну характеристику на +2 или две разные на +1 каждую (максимум 20). Эту черту можно брать каждый раз при доступе к черте."
+}

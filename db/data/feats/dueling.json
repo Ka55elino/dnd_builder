@@ -1,0 +1,19 @@
+{
+  "id": "dueling",
+  "name": "Дуэлянт",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "+2 к урону одноручным оружием ближнего боя, если во второй руке нет оружия.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "damage",
+      "value": 2,
+      "when": {
+        "weapon": "melee",
+        "hands": "one",
+        "offHandEmpty": true
+      }
+    }
+  ]
+}

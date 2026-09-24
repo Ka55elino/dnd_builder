@@ -1,0 +1,18 @@
+{
+  "id": "acidSplash",
+  "name": "Кислотные брызги",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "conjuration",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "До двух существ рядом — спасбросок Ловкости или урон кислотой.",
+  "damage": {
+    "dice": "1d6",
+    "type": "acid",
+    "scaling": "cantrip"
+  }
+}

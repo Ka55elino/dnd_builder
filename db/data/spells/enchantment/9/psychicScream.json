@@ -1,0 +1,19 @@
+{
+  "id": "psychicScream",
+  "name": "Психический вопль",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "До 10 существ (спасбросок Интеллекта): психический урон и оглушение; при гибели — череп взрывается.",
+  "damage": {
+    "dice": "14d6",
+    "type": "psychic"
+  }
+}

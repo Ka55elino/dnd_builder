@@ -1,0 +1,18 @@
+{
+  "id": "wallOfFire",
+  "name": "Огненная стена",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "evocation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Стена огня до 18 м: спасбросок Ловкости, урон огнём с одной стороны. Концентрация.",
+  "damage": {
+    "dice": "5d8",
+    "type": "fire"
+  }
+}

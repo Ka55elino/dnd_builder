@@ -1,0 +1,17 @@
+{
+  "id": "sacredFlameB",
+  "name": "Пламя веры",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Существо — спасбросок Ловкости или урон излучением (без укрытия).",
+  "damage": {
+    "dice": "1d8",
+    "type": "radiant",
+    "scaling": "cantrip"
+  }
+}

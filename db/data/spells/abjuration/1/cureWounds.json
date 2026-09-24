@@ -1,0 +1,22 @@
+{
+  "id": "cureWounds",
+  "name": "Лечение ран",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger"
+  ],
+  "desc": "Касанием восстанавливаете существу 2d8 + мод. заклинателя хитов. Не действует на нежить и конструктов.",
+  "casting": {
+    "time": "1 действие",
+    "range": "Касание",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  }
+}

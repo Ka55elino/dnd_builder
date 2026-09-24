@@ -1,0 +1,15 @@
+{
+  "id": "nondetection",
+  "name": "Необнаружение",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "bard",
+    "ranger",
+    "wizard"
+  ],
+  "desc": "Цель скрыта от прорицания и магических сенсоров на 8 часов."
+}

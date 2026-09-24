@@ -1,0 +1,23 @@
+{
+  "id": "rayOfSickness",
+  "name": "Луч болезни",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "necromancy",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Зеленоватый луч: дальнобойная атака заклинанием, урон ядом 2d8; при попадании спасбросок Телосложения или цель отравлена до конца вашего след. хода.",
+  "casting": {
+    "time": "1 действие",
+    "range": "18 м",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  },
+  "damage": {
+    "dice": "2d8",
+    "type": "poison"
+  }
+}

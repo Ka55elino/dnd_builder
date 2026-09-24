@@ -1,0 +1,14 @@
+{
+  "id": "forcecage",
+  "name": "Силовая клетка",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Непробиваемая клетка/коробка из силы заточает существ на 1 час."
+}

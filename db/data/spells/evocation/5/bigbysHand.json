@@ -1,0 +1,17 @@
+{
+  "id": "bigbysHand",
+  "name": "Рука Бигби",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Гигантская силовая рука бьёт, толкает, хватает или защищает. Концентрация.",
+  "damage": {
+    "dice": "4d8",
+    "type": "force"
+  }
+}

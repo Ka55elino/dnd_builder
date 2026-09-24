@@ -1,0 +1,12 @@
+{
+  "id": "mountedCombatant",
+  "name": "Конный боец",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex",
+    "wis"
+  ],
+  "desc": "+1 Сил/Лов/Мдр; бонусы в конном бою."
+}

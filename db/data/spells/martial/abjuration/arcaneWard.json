@@ -1,0 +1,14 @@
+{
+  "id": "arcaneWard",
+  "name": "Тайный щит",
+  "kind": "martial",
+  "subclass": "abjuration",
+  "level": 3,
+  "action": "free",
+  "desc": "Пул хитов щита = 2 × уровень волшебника + мод. Интеллекта. Поглощает получаемый вами урон; восстанавливается, когда творите заклинание Ограждения.",
+  "uses": {
+    "perLevel": 2,
+    "abilityBonus": "int",
+    "per": "longRest"
+  }
+}

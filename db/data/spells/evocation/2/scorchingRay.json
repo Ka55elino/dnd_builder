@@ -1,0 +1,17 @@
+{
+  "id": "scorchingRay",
+  "name": "Опаляющий луч",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Три огненных луча (по отдельной атаке заклинанием): каждый наносит урон огнём.",
+  "damage": {
+    "dice": "2d6",
+    "type": "fire"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "wish",
+  "name": "Исполнение желаний",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "conjuration",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Мощнейшая магия: повторяете любое заклинание 8 круга и ниже или искажаете реальность (с риском)."
+}

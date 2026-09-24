@@ -1,0 +1,16 @@
+{
+  "id": "holdMonster",
+  "name": "Удержание чудовища",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо (не нежить): спасбросок Мудрости или парализовано. Концентрация."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "boonSpeed",
+  "name": "Дар скорости",
+  "category": "boon",
+  "level": 19,
+  "desc": "+9 м скорости; бонусным действием Отход.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "speed",
+      "value": 30
+    }
+  ]
+}

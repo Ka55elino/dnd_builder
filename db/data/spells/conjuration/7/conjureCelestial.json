@@ -1,0 +1,16 @@
+{
+  "id": "conjureCelestial",
+  "name": "Призыв небожителя",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "conjuration",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Призываете небесного духа: лечит союзников и жжёт врагов излучением. Концентрация.",
+  "damage": {
+    "dice": "4d8",
+    "type": "radiant"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "noble",
+  "name": "Дворянин",
+  "abilities": {
+    "options": [
+      "str",
+      "int",
+      "cha"
+    ]
+  },
+  "feat": "skilled",
+  "skills": [
+    "history",
+    "persuasion"
+  ],
+  "tool": "Игровой набор"
+}

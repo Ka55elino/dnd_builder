@@ -1,0 +1,13 @@
+{
+  "id": "mageArmor",
+  "name": "Доспехи мага",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "wizard",
+    "sorcerer"
+  ],
+  "desc": "Касанием даёте существу без доспехов базовый КЗ 13 + мод. Ловкости на 8 часов."
+}

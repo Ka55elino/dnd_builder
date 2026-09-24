@@ -1,0 +1,17 @@
+{
+  "id": "chromaticOrb",
+  "name": "Хроматическая сфера",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Метаете сферу выбранной стихии (атака заклинанием): урон кислотой/холодом/огнём/электричеством/ядом/звуком.",
+  "damage": {
+    "dice": "3d8",
+    "type": "acid"
+  }
+}

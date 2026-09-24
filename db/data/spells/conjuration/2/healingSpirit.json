@@ -1,0 +1,13 @@
+{
+  "id": "healingSpirit",
+  "name": "Целительный дух",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 2,
+  "school": "conjuration",
+  "classes": [
+    "druid",
+    "ranger"
+  ],
+  "desc": "Дух в кубе 1,5 м лечит существо (1d6), когда оно входит/начинает там ход. Концентрация."
+}

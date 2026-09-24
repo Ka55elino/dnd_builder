@@ -1,0 +1,17 @@
+{
+  "id": "burningHands",
+  "name": "Горящие руки",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Конус огня 4,5 м: спасбросок Ловкости за половину.",
+  "damage": {
+    "dice": "3d6",
+    "type": "fire"
+  }
+}

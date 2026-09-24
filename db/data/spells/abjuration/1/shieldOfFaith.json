@@ -1,0 +1,13 @@
+{
+  "id": "shieldOfFaith",
+  "name": "Щит веры",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Существо в 18 м получает +2 к КЗ на время концентрации (до 10 минут)."
+}

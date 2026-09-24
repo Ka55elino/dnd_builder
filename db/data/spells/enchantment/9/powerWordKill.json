@@ -1,0 +1,15 @@
+{
+  "id": "powerWordKill",
+  "name": "Слово силы: смерть",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо с не более 100 хитов немедленно умирает без спасброска."
+}

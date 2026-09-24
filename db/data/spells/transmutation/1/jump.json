@@ -1,0 +1,15 @@
+{
+  "id": "jump",
+  "name": "Прыжок",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "transmutation",
+  "classes": [
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Касанием утраиваете дистанцию прыжка существа на 1 минуту."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "greaterInvisibility",
+  "name": "Высшая невидимость",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Существо невидимо, даже атакуя и колдуя. Концентрация до 1 минуты."
+}

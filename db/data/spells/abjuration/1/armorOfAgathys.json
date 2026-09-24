@@ -1,0 +1,16 @@
+{
+  "id": "armorOfAgathys",
+  "name": "Доспех Агатиса",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "warlock"
+  ],
+  "desc": "Получаете 5 временных хитов; существо, попавшее по вам в ближнем бою, получает 5 урона холодом (растёт с кругом).",
+  "damage": {
+    "dice": "5",
+    "type": "cold"
+  }
+}

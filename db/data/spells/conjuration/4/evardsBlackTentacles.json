@@ -1,0 +1,16 @@
+{
+  "id": "evardsBlackTentacles",
+  "name": "Чёрные щупальца",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "conjuration",
+  "classes": [
+    "wizard"
+  ],
+  "desc": "Область 6 м прорастает щупальцами: спасбросок Ловкости или «Опутано» и урон. Концентрация.",
+  "damage": {
+    "dice": "3d6",
+    "type": "bludgeoning"
+  }
+}

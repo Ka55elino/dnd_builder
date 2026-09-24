@@ -1,0 +1,16 @@
+{
+  "id": "brandingSmite",
+  "name": "Клеймящая кара",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "paladin"
+  ],
+  "desc": "Бонусным действием: следующее попадание наносит доп. 2d6 излучением, цель светится и не может стать невидимой. Концентрация.",
+  "damage": {
+    "dice": "2d6",
+    "type": "radiant"
+  }
+}

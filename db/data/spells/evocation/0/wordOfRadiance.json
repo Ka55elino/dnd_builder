@@ -1,0 +1,17 @@
+{
+  "id": "wordOfRadiance",
+  "name": "Слово сияния",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Существа по вашему выбору в 1,5 м: спасбросок Тел. или урон излучением.",
+  "damage": {
+    "dice": "1d6",
+    "type": "radiant",
+    "scaling": "cantrip"
+  }
+}

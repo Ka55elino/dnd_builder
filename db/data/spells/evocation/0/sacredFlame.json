@@ -1,0 +1,17 @@
+{
+  "id": "sacredFlame",
+  "name": "Священное пламя",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Пламя нисходит на существо в 18 м: спасбросок Ловкости или урон излучением. Не даёт укрытия.",
+  "damage": {
+    "dice": "1d8",
+    "type": "radiant",
+    "scaling": "cantrip"
+  }
+}

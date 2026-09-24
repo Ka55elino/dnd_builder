@@ -1,0 +1,13 @@
+{
+  "id": "barkskin",
+  "name": "Кора",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "druid",
+    "ranger"
+  ],
+  "desc": "КЗ цели не может быть ниже 16 на время концентрации (до 1 часа)."
+}

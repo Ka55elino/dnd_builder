@@ -1,0 +1,33 @@
+{
+  "id": "mastermind",
+  "name": "Комбинатор",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Интриган",
+      "desc": "Владение набором для грима, набором для фальсификации и одним игровым набором; два языка на выбор. Можете подражать речи и акценту существа, которое слышали минуту."
+    },
+    {
+      "level": 3,
+      "name": "Мастер тактики",
+      "desc": "Можете использовать действие Помощь бонусным действием; при помощи союзнику в атаке цель может быть в 9 м от вас."
+    },
+    {
+      "level": 9,
+      "name": "Проницательный манипулятор",
+      "desc": "Понаблюдав за существом минуту вне боя, определяете, равно ли оно, превосходит или уступает вам по двум характеристикам на выбор (Инт, Мудр, Хар или уровень)."
+    },
+    {
+      "level": 13,
+      "name": "Подмена",
+      "desc": "Реакцией перенаправляете нацеленную на вас атаку на существо в 1,5 м, дающее вам укрытие."
+    },
+    {
+      "level": 17,
+      "name": "Душа обмана",
+      "desc": "Ваши мысли защищены от чтения; можете подменять их ложными и обманывать магию определения лжи."
+    }
+  ]
+}

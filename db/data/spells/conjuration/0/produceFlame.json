@@ -1,0 +1,17 @@
+{
+  "id": "produceFlame",
+  "name": "Сотворение пламени",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "conjuration",
+  "classes": [
+    "druid"
+  ],
+  "desc": "Пламя в ладони освещает; можете метнуть его в существо (атака заклинанием, урон огнём).",
+  "damage": {
+    "dice": "1d8",
+    "type": "fire",
+    "scaling": "cantrip"
+  }
+}

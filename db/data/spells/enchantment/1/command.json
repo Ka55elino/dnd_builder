@@ -1,0 +1,13 @@
+{
+  "id": "command",
+  "name": "Приказ",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Существо: спасбросок Мудрости или выполняет односложный приказ в свой следующий ход."
+}

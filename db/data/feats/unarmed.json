@@ -1,0 +1,15 @@
+{
+  "id": "unarmed",
+  "name": "Безоружный бой",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "Безоружные удары наносят 1d6 (1d8 без второго оружия и щита).",
+  "effects": [
+    {
+      "kind": "set",
+      "target": "unarmedDamage",
+      "value": "1d6",
+      "note": "1d8, если нет второго оружия и щита."
+    }
+  ]
+}

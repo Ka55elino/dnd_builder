@@ -1,0 +1,14 @@
+{
+  "id": "plantGrowth",
+  "name": "Рост растений",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "druid",
+    "bard",
+    "ranger"
+  ],
+  "desc": "Обогащаете растения на территории или превращаете область в труднопроходимые заросли."
+}

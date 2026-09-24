@@ -1,0 +1,13 @@
+{
+  "id": "web",
+  "name": "Паутина",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "conjuration",
+  "classes": [
+    "wizard",
+    "sorcerer"
+  ],
+  "desc": "Заполняете куб 6 м липкой паутиной (труднопроходимо; спасбросок Ловкости или «Опутано»). Концентрация."
+}

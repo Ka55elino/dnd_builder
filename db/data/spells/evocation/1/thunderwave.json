@@ -1,0 +1,20 @@
+{
+  "id": "thunderwave",
+  "name": "Волна грома",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Куб 4,5 м: спасбросок Тел., урон звуком и отбрасывание при провале.",
+  "damage": {
+    "dice": "2d8",
+    "type": "thunder"
+  }
+}

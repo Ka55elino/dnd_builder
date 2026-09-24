@@ -1,0 +1,17 @@
+{
+  "id": "prismaticWall",
+  "name": "Призматическая стена",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "wizard"
+  ],
+  "desc": "Многослойная стена света: каждый слой наносит урон или накладывает эффект при прорыве.",
+  "damage": {
+    "dice": "10d6",
+    "type": "fire"
+  }
+}

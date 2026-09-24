@@ -1,0 +1,17 @@
+{
+  "id": "thirstingBlade",
+  "name": "Жаждущий клинок",
+  "category": "invocation",
+  "level": 5,
+  "desc": "Требуется Договор клинка. Совершая действие Атаки, атакуете договорным оружием дважды вместо одного раза.",
+  "prereq": {
+    "boon": "pactOfTheBlade"
+  },
+  "effects": [
+    {
+      "kind": "set",
+      "target": "attacksPerAction",
+      "value": 2
+    }
+  ]
+}

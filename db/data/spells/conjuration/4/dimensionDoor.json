@@ -1,0 +1,16 @@
+{
+  "id": "dimensionDoor",
+  "name": "Дверь в измерение",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "conjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Мгновенно телепортируетесь до 150 м (можно с существом)."
+}

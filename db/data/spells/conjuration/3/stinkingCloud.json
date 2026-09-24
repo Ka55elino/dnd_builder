@@ -1,0 +1,14 @@
+{
+  "id": "stinkingCloud",
+  "name": "Смердящее облако",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Сфера ядовитого газа 6 м: спасбросок Тел. или существо тратит действие на тошноту. Концентрация."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "darkvisionSpell",
+  "name": "Тёмное зрение (закл.)",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Касанием даёте существу тёмное зрение 18 м на 8 часов."
+}

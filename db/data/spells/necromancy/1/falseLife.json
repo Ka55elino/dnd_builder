@@ -1,0 +1,19 @@
+{
+  "id": "falseLife",
+  "name": "Ложная жизнь",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "necromancy",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Получаете 2d4+4 временных хитов на 1 час.",
+  "casting": {
+    "time": "1 действие",
+    "range": "На себя",
+    "components": "В, С, М",
+    "duration": "1 час"
+  }
+}

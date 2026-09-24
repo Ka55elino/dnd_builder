@@ -1,0 +1,14 @@
+{
+  "id": "expeditiousRetreat",
+  "name": "Скорое отступление",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Бонусным действием совершаете Рывок; далее каждый ход бонусным действием. Концентрация."
+}

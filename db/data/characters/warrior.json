@@ -1,0 +1,94 @@
+{
+  "id": "seed-aelar",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.990Z",
+  "name": "Аэлар Лиственный",
+  "portrait": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "bio": {
+    "gender": "Мужской",
+    "identity": "Мужчина",
+    "attraction": "—",
+    "age": "124",
+    "height": "178 см",
+    "weight": "64 кг",
+    "eyes": "Зелёные",
+    "skin": "Светлая, с золотистым отливом",
+    "hair": "Длинные, пепельные",
+    "alignment": "Хаотично-добрый",
+    "trait": "Говорит мало, но всегда по делу; замечает то, что другие пропускают.",
+    "ideal": "Свобода. Лес не терпит клеток — и я тоже.",
+    "bond": "Поклялся найти тех, кто сжёг рощу его наставника.",
+    "flaw": "Не доверяет городам и их жителям, даже когда стоило бы.",
+    "weakness": "Не может пройти мимо раненого зверя."
+  },
+  "level": 1,
+  "backgroundId": "soldier",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "str": 2,
+    "dex": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 2,
+    "dex": 0,
+    "con": 1,
+    "int": 4,
+    "wis": 3,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 13,
+    "dex": 15,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 15,
+    "dex": 16,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 8
+  },
+  "raceId": "elf",
+  "subraceId": "wood",
+  "classId": "warrior",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "chainMail",
+    "shield": false,
+    "weaponIds": [
+      "longbow",
+      "longsword"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "animal"
+      ]
+    },
+    "L1:class:fightingStyle:Боевой стиль": {
+      "kind": "fightingStyle",
+      "ids": [
+        "archery"
+      ]
+    }
+  }
+}

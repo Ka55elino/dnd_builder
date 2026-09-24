@@ -1,0 +1,15 @@
+{
+  "id": "planarBinding",
+  "name": "Заключение",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "bard",
+    "druid",
+    "wizard"
+  ],
+  "desc": "Связываете призванное существо служить вам (спасбросок Харизмы)."
+}

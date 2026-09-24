@@ -1,0 +1,16 @@
+{
+  "id": "stoneskin",
+  "name": "Каменная кожа",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "transmutation",
+  "classes": [
+    "cleric",
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Цель получает сопротивление немагическому дроб./кол./руб. урону. Концентрация."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "sunbeam",
+  "name": "Солнечный луч",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "evocation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Луч солнца 18 м: спасбросок Тел., урон излучением и слепота; повторяете действием. Концентрация.",
+  "damage": {
+    "dice": "6d8",
+    "type": "radiant"
+  }
+}

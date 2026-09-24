@@ -1,0 +1,9 @@
+{
+  "id": "maneuveringAttack",
+  "name": "Маневрирование",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании доп. урон = кость; союзник реакцией перемещается на половину скорости без провокации от цели.",
+  "pool": "maneuver"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "acolyte",
+  "name": "Прислужник",
+  "abilities": {
+    "options": [
+      "int",
+      "wis",
+      "cha"
+    ]
+  },
+  "feat": "magicInitiateCleric",
+  "skills": [
+    "insight",
+    "religion"
+  ],
+  "tool": "Каллиграфические принадлежности"
+}

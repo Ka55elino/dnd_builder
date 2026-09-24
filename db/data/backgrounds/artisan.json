@@ -1,0 +1,17 @@
+{
+  "id": "artisan",
+  "name": "Ремесленник",
+  "abilities": {
+    "options": [
+      "str",
+      "dex",
+      "int"
+    ]
+  },
+  "feat": "crafter",
+  "skills": [
+    "investigation",
+    "persuasion"
+  ],
+  "tool": "Инструменты ремесленника"
+}

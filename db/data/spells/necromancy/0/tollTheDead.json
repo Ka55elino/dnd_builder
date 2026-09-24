@@ -1,0 +1,19 @@
+{
+  "id": "tollTheDead",
+  "name": "Похоронный звон",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо в 18 м: спасбросок Мудрости или урон некротикой (1d12, если ранено).",
+  "damage": {
+    "dice": "1d8",
+    "type": "necrotic",
+    "scaling": "cantrip"
+  }
+}

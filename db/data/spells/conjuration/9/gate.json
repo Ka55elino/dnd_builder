@@ -1,0 +1,14 @@
+{
+  "id": "gate",
+  "name": "Врата",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Открываете портал в другой план и можете призвать существо оттуда. Концентрация."
+}

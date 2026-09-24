@@ -1,0 +1,34 @@
+{
+  "id": "boomingBlade",
+  "name": "Громовой удар",
+  "kind": "spell",
+  "edition": "2014",
+  "source": [
+    "Sword Coast Adventurer's Guide",
+    "Tasha's Cauldron of Everything"
+  ],
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "artificer",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Совершаете рукопашную атаку оружием по существу в пределах 1,5 м. При попадании цель получает обычный урон оружия, а с 5 уровня — дополнительно 1d8 урона громом (2d8 с 11 уровня). Если до начала вашего следующего хода цель добровольно переместится, она получает дополнительный урон громом: 1d8 (2d8 с 5 уровня, 3d8 с 11 уровня).",
+  "weaponAttack": true,
+  "damage": {
+    "initial": {
+      "dice": null,
+      "type": "weapon"
+    },
+    "onHit": {
+      "type": "thunder",
+      "scaling": {
+        "5": "1d8",
+        "11": "2d8"
+      }
+    }
+  }
+}

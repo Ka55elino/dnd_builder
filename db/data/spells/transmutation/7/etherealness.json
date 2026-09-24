@@ -1,0 +1,16 @@
+{
+  "id": "etherealness",
+  "name": "Эфирность",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Переходите в Пограничный Эфир, проходя сквозь предметы."
+}

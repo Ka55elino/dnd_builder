@@ -1,0 +1,20 @@
+{
+  "id": "mistyStep",
+  "name": "Туманный шаг",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 2,
+  "school": "conjuration",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Окутавшись серебристым туманом, телепортируетесь на расстояние до 9 м в свободное пространство, которое видите.",
+  "casting": {
+    "time": "1 бонусное действие",
+    "range": "На себя",
+    "components": "В",
+    "duration": "Мгновенно"
+  }
+}

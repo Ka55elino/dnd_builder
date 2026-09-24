@@ -1,0 +1,10 @@
+{
+  "id": "rally",
+  "name": "Сплочение",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Бонусным действием союзник получает временные хиты = кость превосходства + мод. вашей хар-ки.",
+  "action": "bonus",
+  "pool": "maneuver"
+}

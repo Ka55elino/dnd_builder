@@ -1,0 +1,16 @@
+{
+  "id": "trueSeeing",
+  "name": "Истинное зрение",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Цель видит в темноте, сквозь иллюзии и невидимость на 30 м, 1 час."
+}

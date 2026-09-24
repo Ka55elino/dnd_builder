@@ -1,0 +1,13 @@
+{
+  "id": "mindBlank",
+  "name": "Чистый разум",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "wizard"
+  ],
+  "desc": "Цель 24 часа неуязвима к психическому урону, прорицанию и очарованию."
+}

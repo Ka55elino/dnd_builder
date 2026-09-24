@@ -1,0 +1,18 @@
+{
+  "id": "fireShield",
+  "name": "Огненный щит",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "evocation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Пламя даёт сопротивление огню или холоду; нападающий вблизи получает урон.",
+  "damage": {
+    "dice": "2d8",
+    "type": "fire"
+  }
+}

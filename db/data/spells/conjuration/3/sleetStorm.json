@@ -1,0 +1,15 @@
+{
+  "id": "sleetStorm",
+  "name": "Буря мокрого снега",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Область льда и снега: труднопроходима, гасит огонь, сбивает концентрацию. Концентрация."
+}

@@ -1,0 +1,14 @@
+{
+  "id": "magicWeapon",
+  "name": "Магическое оружие",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "cleric",
+    "paladin",
+    "wizard"
+  ],
+  "desc": "Оружие становится +1 магическим на время концентрации (до 1 часа)."
+}

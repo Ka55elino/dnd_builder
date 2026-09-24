@@ -1,0 +1,13 @@
+{
+  "id": "colorSpray",
+  "name": "Разноцветные брызги",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "illusion",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Вспышка света ослепляет существ в конусе 4,5 м (по сумме хитов)."
+}

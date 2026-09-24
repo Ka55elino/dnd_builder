@@ -1,0 +1,15 @@
+{
+  "id": "dominateMonster",
+  "name": "Доминирование над чудовищем",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Любое существо (спасбросок Мудрости) под вашим контролем. Концентрация."
+}

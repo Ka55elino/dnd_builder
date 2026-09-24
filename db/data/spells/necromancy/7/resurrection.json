@@ -1,0 +1,13 @@
+{
+  "id": "resurrection",
+  "name": "Воскрешение",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "necromancy",
+  "classes": [
+    "bard",
+    "cleric"
+  ],
+  "desc": "Возвращаете к жизни существо, мёртвое не более 100 лет, без штрафов."
+}

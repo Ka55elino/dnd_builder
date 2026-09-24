@@ -1,0 +1,15 @@
+{
+  "id": "resilient",
+  "name": "Стойкий",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "+1 к выбранной хар-ке и владение её спасбросками."
+}

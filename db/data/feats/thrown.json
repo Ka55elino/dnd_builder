@@ -1,0 +1,17 @@
+{
+  "id": "thrown",
+  "name": "Метательное оружие",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "Быстро достаёте метательное оружие; +2 к его урону.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "damage",
+      "value": 2,
+      "when": {
+        "thrown": true
+      }
+    }
+  ]
+}

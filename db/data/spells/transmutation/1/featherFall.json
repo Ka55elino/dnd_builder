@@ -1,0 +1,14 @@
+{
+  "id": "featherFall",
+  "name": "Падение пёрышком",
+  "kind": "spell",
+  "action": "reaction",
+  "level": 1,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Реакцией до 5 падающих существ снижают скорость падения и не получают урона."
+}

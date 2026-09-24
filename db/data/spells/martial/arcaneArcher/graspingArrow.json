@@ -1,0 +1,17 @@
+{
+  "id": "graspingArrow",
+  "name": "Хватающая стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "+2d6 урона ядом; скорость цели −3 м, а при каждом перемещении она получает 2d6 рубящего урона (1 минута или пока не вытащит стрелу действием).",
+  "damage": {
+    "dice": "2d6",
+    "type": "poison",
+    "scaling": {
+      "18": "4d6"
+    }
+  }
+}

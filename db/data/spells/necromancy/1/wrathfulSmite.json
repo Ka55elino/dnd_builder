@@ -1,0 +1,16 @@
+{
+  "id": "wrathfulSmite",
+  "name": "Гневная кара",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "necromancy",
+  "classes": [
+    "paladin"
+  ],
+  "desc": "Бонусным действием: следующее попадание наносит доп. 1d6 психикой; цель — спасбросок Мудрости или испугана. Концентрация.",
+  "damage": {
+    "dice": "1d6",
+    "type": "psychic"
+  }
+}

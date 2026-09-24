@@ -1,0 +1,15 @@
+{
+  "id": "devilsSight",
+  "name": "Дьявольское зрение",
+  "category": "invocation",
+  "level": 1,
+  "desc": "Видите в обычной и магической темноте на 120 фт.",
+  "effects": [
+    {
+      "kind": "sense",
+      "sense": "darkvision",
+      "range": 120,
+      "note": "видит в т.ч. в магической тьме"
+    }
+  ]
+}

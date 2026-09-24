@@ -1,0 +1,16 @@
+{
+  "id": "moonbeam",
+  "name": "Лунный луч",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "druid"
+  ],
+  "desc": "Столб лунного света 1,5 м: существа — спасбросок Тел. или урон излучением; можете двигать луч. Концентрация.",
+  "damage": {
+    "dice": "2d10",
+    "type": "radiant"
+  }
+}

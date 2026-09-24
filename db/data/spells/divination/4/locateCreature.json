@@ -1,0 +1,17 @@
+{
+  "id": "locateCreature",
+  "name": "Обнаружение существа",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger",
+    "wizard"
+  ],
+  "desc": "Чувствуете направление к известному существу в 300 м. Концентрация."
+}

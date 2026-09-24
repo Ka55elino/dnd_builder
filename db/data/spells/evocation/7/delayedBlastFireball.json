@@ -1,0 +1,17 @@
+{
+  "id": "delayedBlastFireball",
+  "name": "Отложенный огненный шар",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Пульсирующая сфера копит силу; при взрыве — спасбросок Ловкости за половину.",
+  "damage": {
+    "dice": "12d6",
+    "type": "fire"
+  }
+}

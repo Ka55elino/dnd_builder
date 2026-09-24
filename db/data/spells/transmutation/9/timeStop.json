@@ -1,0 +1,13 @@
+{
+  "id": "timeStop",
+  "name": "Остановка времени",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Совершаете 1d4+1 ходов подряд, пока остальные застыли (нельзя вредить другим)."
+}

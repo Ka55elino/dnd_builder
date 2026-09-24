@@ -1,0 +1,16 @@
+{
+  "id": "guidingBolt",
+  "name": "Направленный снаряд",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Луч света в существо (атака заклинанием): урон излучением; следующая атака по цели с преимуществом.",
+  "damage": {
+    "dice": "4d6",
+    "type": "radiant"
+  }
+}

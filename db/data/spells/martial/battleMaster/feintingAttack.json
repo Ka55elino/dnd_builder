@@ -1,0 +1,10 @@
+{
+  "id": "feintingAttack",
+  "name": "Финт",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Бонусным действием — преимущество на следующую атаку по цели в этот ход; при попадании доп. урон = кость.",
+  "action": "bonus",
+  "pool": "maneuver"
+}

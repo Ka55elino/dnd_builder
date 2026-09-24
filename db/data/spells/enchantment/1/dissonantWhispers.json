@@ -1,0 +1,16 @@
+{
+  "id": "dissonantWhispers",
+  "name": "Диссонирующий шёпот",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "bard"
+  ],
+  "desc": "Шёпот боли в разум цели (спасбросок Мудрости): урон психикой; при провале использует реакцию, чтобы убежать.",
+  "damage": {
+    "dice": "3d6",
+    "type": "psychic"
+  }
+}

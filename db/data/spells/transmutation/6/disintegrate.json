@@ -1,0 +1,17 @@
+{
+  "id": "disintegrate",
+  "name": "Дезинтеграция",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Зелёный луч (спасбросок Ловкости): огромный силовой урон; при 0 хитов цель рассыпается в прах.",
+  "damage": {
+    "dice": "10d6",
+    "type": "force"
+  }
+}

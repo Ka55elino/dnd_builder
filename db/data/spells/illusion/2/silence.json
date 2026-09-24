@@ -1,0 +1,22 @@
+{
+  "id": "silence",
+  "name": "Тишина",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "cleric",
+    "ranger",
+    "wizard"
+  ],
+  "desc": "В сфере радиусом 6 м не возникает звуков; существа глухи внутри, невозможны заклинания с вербальным компонентом. Концентрация до 10 минут.",
+  "casting": {
+    "time": "1 действие",
+    "range": "36 м",
+    "components": "В, С",
+    "duration": "Конц., 10 мин",
+    "concentration": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "healingWord",
+  "name": "Лечащее слово",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid"
+  ],
+  "desc": "Бонусным действием лечите существо в 18 м на 2d4 + модификатор заклинателя."
+}

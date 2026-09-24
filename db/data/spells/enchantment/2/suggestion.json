@@ -1,0 +1,16 @@
+{
+  "id": "suggestion",
+  "name": "Внушение",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо: спасбросок Мудрости или следует разумному внушённому курсу действий."
+}

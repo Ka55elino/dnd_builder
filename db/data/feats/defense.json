@@ -1,0 +1,17 @@
+{
+  "id": "defense",
+  "name": "Защита",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "+1 к КЗ, пока вы носите броню.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "ac",
+      "value": 1,
+      "when": {
+        "armored": true
+      }
+    }
+  ]
+}

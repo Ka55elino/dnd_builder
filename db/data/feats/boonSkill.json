@@ -1,0 +1,11 @@
+{
+  "id": "boonSkill",
+  "name": "Дар мастерства",
+  "category": "boon",
+  "level": 19,
+  "desc": "Владение 3 навыками на выбор; компетентность в них.",
+  "skillChoice": {
+    "choose": 3,
+    "from": "skills"
+  }
+}

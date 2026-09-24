@@ -1,0 +1,18 @@
+{
+  "id": "rayOfFrost",
+  "name": "Луч холода",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Ледяной луч (атака заклинанием): урон холодом и −3 м к скорости цели.",
+  "damage": {
+    "dice": "1d8",
+    "type": "cold",
+    "scaling": "cantrip"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "tacticalAssessment",
+  "name": "Тактическая оценка",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Прибавляете кость превосходства к проверке Расследования, Истории или Проницательности.",
+  "pool": "maneuver"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "parry",
+  "name": "Парирование",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Реакцией снижаете себе урон от атаки на кость превосходства + мод. Ловкости.",
+  "action": "reaction",
+  "pool": "maneuver"
+}

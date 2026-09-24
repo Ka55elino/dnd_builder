@@ -1,0 +1,18 @@
+{
+  "id": "violentAttraction",
+  "name": "Яростное притяжение",
+  "kind": "martial",
+  "subclass": "graviturgy",
+  "level": 10,
+  "action": "reaction",
+  "desc": "Реакцией, когда существо в 18 м попадает атакой оружием, добавляете 1d10 к урону (или 2d10 при падении). Число раз = мод. Интеллекта.",
+  "uses": {
+    "ability": "int",
+    "min": 1,
+    "per": "longRest"
+  },
+  "damage": {
+    "dice": "1d10",
+    "type": "bludgeoning"
+  }
+}

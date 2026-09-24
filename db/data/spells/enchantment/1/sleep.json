@@ -1,0 +1,14 @@
+{
+  "id": "sleep",
+  "name": "Усыпление",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Существа в 6 м засыпают, пока сумма их хитов не исчерпает 5d8 (начиная с наименьших). Концентрация."
+}

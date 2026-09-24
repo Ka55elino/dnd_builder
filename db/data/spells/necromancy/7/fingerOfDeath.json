@@ -1,0 +1,18 @@
+{
+  "id": "fingerOfDeath",
+  "name": "Перст смерти",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "necromancy",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Волна некротики (спасбросок Тел.): огромный урон; убитый гуманоид встаёт вашим зомби.",
+  "damage": {
+    "dice": "7d8",
+    "type": "necrotic"
+  }
+}

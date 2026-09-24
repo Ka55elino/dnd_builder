@@ -1,0 +1,13 @@
+{
+  "id": "arcaneEye",
+  "name": "Магический глаз",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "divination",
+  "classes": [
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Невидимый глаз-разведчик, которым видите (тёмное зрение 9 м). Концентрация."
+}

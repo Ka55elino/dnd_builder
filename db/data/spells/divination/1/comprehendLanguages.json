@@ -1,0 +1,15 @@
+{
+  "id": "comprehendLanguages",
+  "name": "Понимание языков",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "1 час понимаете любой услышанный язык и прочитанный текст."
+}

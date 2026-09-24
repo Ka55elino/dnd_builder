@@ -1,0 +1,17 @@
+{
+  "id": "callLightning",
+  "name": "Вызов молнии",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "druid"
+  ],
+  "desc": "Грозовая туча: действием бьёте молнией (спасбросок Ловкости за половину). Концентрация.",
+  "damage": {
+    "dice": "3d10",
+    "type": "lightning"
+  }
+}

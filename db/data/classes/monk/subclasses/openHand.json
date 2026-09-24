@@ -1,0 +1,28 @@
+{
+  "id": "openHand",
+  "name": "Путь открытой руки",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "monk",
+  "features": [
+    {
+      "level": 3,
+      "name": "Техника открытой руки",
+      "desc": "Попадая ударом в рамках Шквала ударов, накладываете один эффект (без траты доп. ци): сбить с ног (спасбросок Ловкости), оттолкнуть на 4,5 м (спасбросок Силы) или лишить цель реакции до её следующего хода."
+    },
+    {
+      "level": 6,
+      "name": "Целостность тела",
+      "desc": "Бонусным действием лечите себя на 3 × ваш уровень монаха хитов. Число применений равно бонусу мастерства (на длинный отдых)."
+    },
+    {
+      "level": 11,
+      "name": "Тихий шаг",
+      "desc": "Бонусным действием с преимуществом прячетесь, если рядом нет ярко освещённых участков; получаете преимущество на инициативу."
+    },
+    {
+      "level": 17,
+      "name": "Трепещущая ладонь",
+      "desc": "Попав безоружным ударом, тратите 4 очка ци и запускаете невидимые колебания (до 1 месяца). Действием прекращаете их: цель проходит спасбросок Телосложения или падает до 0 хитов (при успехе — 10d12 урона силовым полем). Одна цель за раз."
+    }
+  ]
+}

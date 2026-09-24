@@ -1,0 +1,16 @@
+{
+  "id": "inflictWounds",
+  "name": "Причинение ран",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "necromancy",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Атака заклинанием касанием: сильный некротический урон.",
+  "damage": {
+    "dice": "3d10",
+    "type": "necrotic"
+  }
+}

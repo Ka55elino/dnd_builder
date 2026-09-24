@@ -1,0 +1,168 @@
+{
+  "id": "wizard",
+  "name": "Волшебник",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 6,
+  "primaryAbility": [
+    "int"
+  ],
+  "savingThrows": [
+    "int",
+    "wis"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "history",
+    "insight",
+    "investigation",
+    "medicine",
+    "nature",
+    "religion"
+  ],
+  "caster": "full",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "int",
+    "list": "wizard",
+    "progression": "full",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        10,
+        5
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        17,
+        19
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        19,
+        21
+      ],
+      [
+        20,
+        22
+      ]
+    ]
+  },
+  "features": [
+    {
+      "level": 1,
+      "name": "Заклинательство",
+      "desc": "Творите заклинания из своей книги заклинаний, используя Интеллект (полный заклинатель). Готовите заклинания из книги; можете переписывать в неё новые."
+    },
+    {
+      "level": 1,
+      "name": "Знаток ритуалов",
+      "desc": "Можете творить любое подготовленное заклинание как ритуал, если у него есть тег ритуала; книга — ваш ритуальный справочник."
+    },
+    {
+      "level": 1,
+      "name": "Магическое восстановление",
+      "desc": "Раз в день на коротком отдыхе восстанавливаете ячейки заклинаний с суммарным кругом до половины вашего уровня волшебника (не выше 5 круга).",
+      "passive": false
+    },
+    {
+      "level": 2,
+      "name": "Учёный",
+      "desc": "Получаете компетентность (удвоение бонуса мастерства) в одном навыке: Тайные знания, История, Магия, Природа, Медицина или Религия.",
+      "choice": {
+        "type": "expertise",
+        "pick": 1
+      }
+    },
+    {
+      "level": 5,
+      "name": "Запоминание заклинания",
+      "desc": "На коротком отдыхе можете заменить одно подготовленное заклинание другим из книги (без переписывания)."
+    },
+    {
+      "level": 18,
+      "name": "Мастерство заклинаний",
+      "desc": "Выбираете заклинание 1 круга и 2 круга — творите их по желанию без траты ячейки (на базовом уровне)."
+    },
+    {
+      "level": 20,
+      "name": "Коронные заклинания",
+      "desc": "Выбираете два заклинания 3 круга — каждое раз на короткий/длинный отдых творите без ячейки."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "revivify",
+  "name": "Возрождение",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Возвращаете к жизни существо, умершее не более минуты назад, с 1 хитом."
+}

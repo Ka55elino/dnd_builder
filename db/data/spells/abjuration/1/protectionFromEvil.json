@@ -1,0 +1,15 @@
+{
+  "id": "protectionFromEvil",
+  "name": "Защита от зла и добра",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "paladin",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Цель защищена от аберраций, исчадий, нежити и фей: помеха их атакам, иммунитет к очарованию/испугу от них. Концентрация."
+}

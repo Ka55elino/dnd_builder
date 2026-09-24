@@ -1,0 +1,16 @@
+{
+  "id": "armsOfHadar",
+  "name": "Длани Хадара",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "warlock"
+  ],
+  "desc": "Щупальца тьмы бьют всех в 3 м: спасбросок Силы, урон некротикой и лишение реакции.",
+  "damage": {
+    "dice": "2d6",
+    "type": "necrotic"
+  }
+}

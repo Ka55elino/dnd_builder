@@ -1,0 +1,15 @@
+{
+  "id": "powerWordStun",
+  "name": "Слово силы: оглушение",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо с не более 150 хитов оглушается без спасброска."
+}

@@ -1,0 +1,105 @@
+{
+  "id": "seed-rogue",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.985Z",
+  "name": "Шёпот",
+  "portrait": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "bio": {
+    "gender": "Небинарный",
+    "identity": "Небинарная персона",
+    "attraction": "—",
+    "age": "56",
+    "height": "110 см",
+    "weight": "93 кг",
+    "eyes": "Зелёные",
+    "skin": "Обветренная",
+    "hair": "Рыжие, в косах",
+    "alignment": "Хаотично-нейтральный",
+    "trait": "Всегда знает, где выход.",
+    "ideal": "Свобода. Замки существуют, чтобы их открывать.",
+    "bond": "Должен крупную сумму гильдии воров Нижнего города.",
+    "flaw": "Не может пройти мимо плохо лежащего кошелька.",
+    "weakness": "Золото."
+  },
+  "level": 3,
+  "backgroundId": "criminal",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "dex": 2,
+    "int": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 0,
+    "con": 2,
+    "int": 1,
+    "wis": 4,
+    "cha": 3
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 15,
+    "con": 13,
+    "int": 14,
+    "wis": 10,
+    "cha": 12
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 17,
+    "con": 13,
+    "int": 15,
+    "wis": 10,
+    "cha": 12
+  },
+  "raceId": "tiefling",
+  "subraceId": "infernal",
+  "classId": "rogue",
+  "subclassId": "thief",
+  "equipment": {
+    "armorId": "leather",
+    "shield": false,
+    "weaponIds": [
+      "rapier",
+      "shortbow",
+      "dagger"
+    ],
+    "packId": "burglarPack",
+    "items": [],
+    "bag": [
+      {
+        "kind": "item",
+        "id": "thievesTools",
+        "qty": 1
+      }
+    ]
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "athletics",
+        "deception",
+        "insight"
+      ]
+    },
+    "L1:class:expertise:Компетентность": {
+      "kind": "expertise",
+      "ids": [
+        "acrobatics",
+        "athletics"
+      ]
+    }
+  }
+}

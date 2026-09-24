@@ -1,0 +1,42 @@
+{
+  "id": "greenFlameBlade",
+  "name": "Зелёное пламя",
+  "kind": "spell",
+  "edition": "2014",
+  "source": [
+    "Sword Coast Adventurer's Guide",
+    "Tasha's Cauldron of Everything"
+  ],
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "artificer",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Совершаете рукопашную атаку оружием по существу в пределах 5 футов. При попадании цель получает обычный урон оружия, а зелёное пламя может перекинуться на другое существо в пределах 5 футов от первой цели.",
+  "weaponAttack": true,
+  "damage": {
+    "primary": {
+      "dice": null,
+      "type": "weapon",
+      "scaling": {
+        "5": "1d8",
+        "11": "2d8",
+        "17": "3d8"
+      }
+    },
+    "secondary": {
+      "dice": "1d8",
+      "type": "fire",
+      "scaling": {
+        "1": "spellcastingModifier",
+        "5": "1d8 + spellcastingModifier",
+        "11": "2d8 + spellcastingModifier",
+        "17": "3d8 + spellcastingModifier"
+      }
+    }
+  }
+}

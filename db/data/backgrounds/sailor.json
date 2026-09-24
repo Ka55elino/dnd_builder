@@ -1,0 +1,17 @@
+{
+  "id": "sailor",
+  "name": "Моряк",
+  "abilities": {
+    "options": [
+      "str",
+      "dex",
+      "wis"
+    ]
+  },
+  "feat": "tavernBrawler",
+  "skills": [
+    "acrobatics",
+    "perception"
+  ],
+  "tool": "Инструменты навигатора"
+}

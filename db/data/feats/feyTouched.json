@@ -1,0 +1,24 @@
+{
+  "id": "feyTouched",
+  "name": "Прикосновение фей",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "+1 Инт/Мдр/Хар; Мерцающий шаг и заклинание 1 круга (прорицание/очарование).",
+  "spells": {
+    "fixed": [
+      "mistyStep"
+    ],
+    "choose": {
+      "count": 1,
+      "list": "wizard",
+      "circles": [
+        1
+      ]
+    }
+  }
+}

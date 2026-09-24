@@ -1,0 +1,17 @@
+{
+  "id": "enfeeblingArrow",
+  "name": "Ослабляющая стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "+2d6 урона некротической энергией; цель совершает спасбросок Телосложения, иначе её урон от атак оружием уменьшается вдвое до начала вашего следующего хода.",
+  "damage": {
+    "dice": "2d6",
+    "type": "necrotic",
+    "scaling": {
+      "18": "4d6"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "fly",
+  "name": "Полёт",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Касанием даёте существу скорость полёта 18 м. Концентрация до 10 минут."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "baitAndSwitch",
+  "name": "Обманный размен",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Меняетесь местами с союзником в пределах 1,5 м; один из вас получает +кость превосходства к КЗ.",
+  "pool": "maneuver"
+}

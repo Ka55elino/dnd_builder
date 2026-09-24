@@ -1,0 +1,14 @@
+{
+  "id": "alert",
+  "name": "Бдительный",
+  "category": "origin",
+  "level": 1,
+  "desc": "+бонус мастерства к инициативе; можете поменяться инициативой с согласным союзником.",
+  "effects": [
+    {
+      "kind": "bonus",
+      "target": "initiative",
+      "value": "prof"
+    }
+  ]
+}

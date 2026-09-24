@@ -1,0 +1,16 @@
+{
+  "id": "polymorph",
+  "name": "Превращение",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Превращаете существо в зверя (спасбросок Мудрости). Концентрация до 1 часа."
+}

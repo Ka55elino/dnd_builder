@@ -1,0 +1,9 @@
+{
+  "id": "lungingAttack",
+  "name": "Выпад",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "+1,5 м досягаемости для одной атаки; при попадании доп. урон = кость.",
+  "pool": "maneuver"
+}

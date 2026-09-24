@@ -1,0 +1,12 @@
+{
+  "id": "entangle",
+  "name": "Опутывание",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "druid"
+  ],
+  "desc": "Область 6 м зарастает: существа — спасбросок Силы или «Опутаны». Концентрация."
+}

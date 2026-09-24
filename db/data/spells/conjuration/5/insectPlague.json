@@ -1,0 +1,18 @@
+{
+  "id": "insectPlague",
+  "name": "Нашествие насекомых",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer"
+  ],
+  "desc": "Рой в сфере 6 м: труднопроходимость и колющий урон. Концентрация.",
+  "damage": {
+    "dice": "4d10",
+    "type": "piercing"
+  }
+}

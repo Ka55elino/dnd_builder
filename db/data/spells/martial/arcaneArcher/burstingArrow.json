@@ -1,0 +1,17 @@
+{
+  "id": "burstingArrow",
+  "name": "Разрывная стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "Стрела взрывается: цель и все существа в 3 м от неё получают 2d6 урона силовым полем.",
+  "damage": {
+    "dice": "2d6",
+    "type": "force",
+    "scaling": {
+      "18": "4d6"
+    }
+  }
+}

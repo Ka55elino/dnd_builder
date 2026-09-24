@@ -1,0 +1,14 @@
+{
+  "id": "eldritchMind",
+  "name": "Мистический разум",
+  "category": "invocation",
+  "level": 1,
+  "desc": "Имеете преимущество на спасброски для поддержания концентрации на заклинаниях.",
+  "effects": [
+    {
+      "kind": "advantage",
+      "target": "concentration",
+      "note": "преимущество на спасброски концентрации"
+    }
+  ]
+}

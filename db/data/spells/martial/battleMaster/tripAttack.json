@@ -1,0 +1,9 @@
+{
+  "id": "tripAttack",
+  "name": "Подсечка",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании доп. урон = кость; цель сбита с ног (спасбросок Силы).",
+  "pool": "maneuver"
+}

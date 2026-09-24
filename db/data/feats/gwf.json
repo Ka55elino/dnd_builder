@@ -1,0 +1,21 @@
+{
+  "id": "gwf",
+  "name": "Бой большим оружием",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "Перебрасываете 1 и 2 на костях урона двуручного/универсального оружия.",
+  "effects": [
+    {
+      "kind": "reroll",
+      "target": "damage",
+      "value": [
+        1,
+        2
+      ],
+      "when": {
+        "weapon": "melee",
+        "hands": "two"
+      }
+    }
+  ]
+}

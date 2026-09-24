@@ -1,0 +1,9 @@
+{
+  "id": "projectedWard",
+  "name": "Спроецированный щит",
+  "kind": "martial",
+  "subclass": "abjuration",
+  "level": 6,
+  "action": "reaction",
+  "desc": "Реакцией, когда существо в 9 м получает урон, поглощаете этот урон Тайным щитом."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "precisionAttack",
+  "name": "Точная атака",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Прибавляете кость превосходства к броску атаки (можно после броска, до объявления результата).",
+  "pool": "maneuver"
+}

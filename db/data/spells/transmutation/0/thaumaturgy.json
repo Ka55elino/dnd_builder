@@ -1,0 +1,18 @@
+{
+  "id": "thaumaturgy",
+  "name": "Чудотворство",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "transmutation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Мелкое чудо: усиливаете голос, мигаете огнём, вызываете дрожь земли, звук или распахиваете дверь.",
+  "casting": {
+    "time": "1 действие",
+    "range": "9 м",
+    "components": "В",
+    "duration": "до 1 минуты"
+  }
+}

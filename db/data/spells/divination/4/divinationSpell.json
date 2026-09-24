@@ -1,0 +1,13 @@
+{
+  "id": "divinationSpell",
+  "name": "Прорицание",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "divination",
+  "classes": [
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Задаёте божеству вопрос о событии в пределах 7 дней и получаете правдивый знак (ритуал)."
+}

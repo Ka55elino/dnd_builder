@@ -1,0 +1,23 @@
+{
+  "id": "fogCloud",
+  "name": "Туманное облако",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "bard",
+    "druid",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Создаёте сферу тумана радиусом 6 м, сильно заслоняющую обзор. Концентрация до 1 часа.",
+  "casting": {
+    "time": "1 действие",
+    "range": "36 м",
+    "components": "В, С",
+    "duration": "Конц., 1 час",
+    "concentration": true
+  }
+}

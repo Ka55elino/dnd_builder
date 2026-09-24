@@ -1,0 +1,195 @@
+{
+  "id": "ranger",
+  "name": "Следопыт",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 10,
+  "primaryAbility": [
+    "dex",
+    "wis"
+  ],
+  "savingThrows": [
+    "str",
+    "dex"
+  ],
+  "skillCount": 3,
+  "skills": [
+    "animal",
+    "athletics",
+    "insight",
+    "investigation",
+    "nature",
+    "perception",
+    "stealth",
+    "survival"
+  ],
+  "caster": "half",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "spellcasting": {
+    "ability": "wis",
+    "list": "ranger",
+    "progression": "half",
+    "startLevel": 1,
+    "cantripsKnown": [],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        7
+      ],
+      [
+        9,
+        9
+      ],
+      [
+        11,
+        10
+      ],
+      [
+        13,
+        11
+      ],
+      [
+        15,
+        12
+      ],
+      [
+        17,
+        14
+      ],
+      [
+        19,
+        15
+      ]
+    ]
+  },
+  "features": [
+    {
+      "level": 1,
+      "name": "Заклинательство",
+      "desc": "Творите заклинания из списка Следопыта, используя Мудрость (полу-заклинатель, готовите заклинания). Заговоров нет."
+    },
+    {
+      "level": 1,
+      "name": "Избранный враг",
+      "desc": "Всегда держите подготовленной «Метку охотника» и можете сотворить её без ячейки число раз, равное вашему бонусу мастерства (на длинный отдых)."
+    },
+    {
+      "level": 1,
+      "name": "Мастерство оружия",
+      "desc": "Используете свойства мастерства 2 видов оружия, которыми владеете (можно менять после отдыха)."
+    },
+    {
+      "level": 2,
+      "name": "Ловкий следопыт",
+      "desc": "Получаете компетентность (удвоение бонуса мастерства) в одном навыке, которым владеете, и учите язык.",
+      "choice": {
+        "type": "expertise",
+        "pick": 1
+      }
+    },
+    {
+      "level": 2,
+      "name": "Боевой стиль",
+      "desc": "Выбираете боевой стиль (Стрельба, Оборона, Дуэлянт, Бой двумя оружиями и др.).",
+      "choice": {
+        "type": "fightingStyle",
+        "pick": 1,
+        "from": "fightingStyles"
+      }
+    },
+    {
+      "level": 5,
+      "name": "Дополнительная атака",
+      "desc": "Две атаки за действие Атаки."
+    },
+    {
+      "level": 6,
+      "name": "Странник",
+      "desc": "Скорость +3 м; получаете скорость лазания и плавания, равную вашей скорости.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "level": 9,
+      "name": "Компетентность",
+      "desc": "Удваиваете бонус мастерства ещё для двух выбранных навыков, которыми владеете.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 10,
+      "name": "Неутомимый",
+      "desc": "Действием даёте себе временные хиты (1d8 + мод. Мудрости) число раз, равное бонусу мастерства (на длинный отдых); при коротком отдыхе снижаете уровень истощения."
+    },
+    {
+      "level": 13,
+      "name": "Неотступный охотник",
+      "desc": "Урон не может нарушить вашу концентрацию на «Метке охотника». Спасброски против ваших заклинаний Следопыта — с помехой у отмеченной цели."
+    },
+    {
+      "level": 14,
+      "name": "Природная вуаль",
+      "desc": "Бонусным действием становитесь невидимым до конца следующего хода; число раз равно бонусу мастерства (на длинный отдых)."
+    },
+    {
+      "level": 17,
+      "name": "Точный охотник",
+      "desc": "Имеете преимущество на броски атаки против цели, помеченной вашей «Меткой охотника»."
+    },
+    {
+      "level": 18,
+      "name": "Чутьё зверя",
+      "desc": "Получаете слепое зрение в пределах 9 м."
+    },
+    {
+      "level": 20,
+      "name": "Губитель врагов",
+      "desc": "Кость «Метки охотника» становится d10; раз в ход можете добавить модификатор Мудрости к урону атаки по отмеченной цели."
+    }
+  ]
+}

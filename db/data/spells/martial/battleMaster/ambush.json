@@ -1,0 +1,9 @@
+{
+  "id": "ambush",
+  "name": "Засада",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Тратя кость превосходства, прибавляете её к проверке Скрытности или Инициативы.",
+  "pool": "maneuver"
+}

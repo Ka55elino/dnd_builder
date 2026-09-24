@@ -1,0 +1,24 @@
+{
+  "id": "spikeGrowth",
+  "name": "Шипы",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "ranger",
+    "druid"
+  ],
+  "desc": "Область радиусом 6 м становится труднопроходимой; за каждые 1,5 м движения существо получает 2d4 колющего урона. Концентрация до 10 минут.",
+  "casting": {
+    "time": "1 действие",
+    "range": "45 м",
+    "components": "В, С, М",
+    "duration": "Конц., 10 мин",
+    "concentration": true
+  },
+  "damage": {
+    "dice": "2d4",
+    "type": "piercing"
+  }
+}

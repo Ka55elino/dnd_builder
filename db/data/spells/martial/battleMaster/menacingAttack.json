@@ -1,0 +1,9 @@
+{
+  "id": "menacingAttack",
+  "name": "Угрожающая атака",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании доп. урон = кость; цель испугана до конца вашего следующего хода (спасбросок Мудрости).",
+  "pool": "maneuver"
+}

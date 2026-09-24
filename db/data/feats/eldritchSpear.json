@@ -1,0 +1,10 @@
+{
+  "id": "eldritchSpear",
+  "name": "Мистическое копьё",
+  "category": "invocation",
+  "level": 1,
+  "desc": "Дальность «Мистического взрыва» увеличивается до 90 м.",
+  "prereq": {
+    "blast": true
+  }
+}

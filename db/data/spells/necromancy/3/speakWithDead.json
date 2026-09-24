@@ -1,0 +1,13 @@
+{
+  "id": "speakWithDead",
+  "name": "Говорить с мёртвыми",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "bard"
+  ],
+  "desc": "Задаёте трупу до 5 вопросов на 10 минут."
+}

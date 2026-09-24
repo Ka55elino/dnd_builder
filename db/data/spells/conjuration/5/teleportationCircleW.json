@@ -1,0 +1,14 @@
+{
+  "id": "teleportationCircleW",
+  "name": "Круг телепортации",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "conjuration",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Рисуете круг-портал к известному постоянному кругу телепортации."
+}

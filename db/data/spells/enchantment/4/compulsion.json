@@ -1,0 +1,14 @@
+{
+  "id": "compulsion",
+  "name": "Принуждение",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Существа: спасбросок Мудрости или вы направляете их перемещение. Концентрация."
+}

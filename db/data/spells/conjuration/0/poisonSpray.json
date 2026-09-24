@@ -1,0 +1,26 @@
+{
+  "id": "poisonSpray",
+  "name": "Ядовитые брызги",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "conjuration",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Выбрасываете облачко ядовитого газа в существо рядом; спасбросок Телосложения, иначе урон ядом (растёт с уровнем).",
+  "casting": {
+    "time": "1 действие",
+    "range": "3 м",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  },
+  "damage": {
+    "dice": "1d12",
+    "type": "poison",
+    "scaling": "cantrip"
+  }
+}

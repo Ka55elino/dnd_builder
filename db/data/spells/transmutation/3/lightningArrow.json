@@ -1,0 +1,23 @@
+{
+  "id": "lightningArrow",
+  "name": "Молниеносная стрела",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "ranger"
+  ],
+  "desc": "Следующая дальнобойная атака превращается в молнию: 4d8 урона электричеством при попадании (половина при промахе); все в 3 м от цели — 2d8 (спасбросок Ловкости за половину). Концентрация до 1 минуты.",
+  "casting": {
+    "time": "1 бонусное действие",
+    "range": "На себя",
+    "components": "В",
+    "duration": "Конц., 1 мин",
+    "concentration": true
+  },
+  "damage": {
+    "dice": "4d8",
+    "type": "lightning"
+  }
+}

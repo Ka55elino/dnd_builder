@@ -1,0 +1,13 @@
+{
+  "id": "deathWard",
+  "name": "Защита от смерти",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Первое сведение цели к 0 хитов оставляет её на 1 хите; смертельный эффект отменяется."
+}

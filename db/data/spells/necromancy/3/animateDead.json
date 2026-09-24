@@ -1,0 +1,13 @@
+{
+  "id": "animateDead",
+  "name": "Оживление мёртвых",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Поднимаете скелет или зомби под вашим контролем."
+}

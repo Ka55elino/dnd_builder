@@ -1,0 +1,17 @@
+{
+  "id": "viciousMockery",
+  "name": "Едкая насмешка",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "enchantment",
+  "classes": [
+    "bard"
+  ],
+  "desc": "Осыпаете существо колкостями (спасбросок Мудрости): урон психикой и помеха на его следующую атаку.",
+  "damage": {
+    "dice": "1d4",
+    "type": "psychic",
+    "scaling": "cantrip"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "id": "warlock",
+  "name": "Колдун",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 8,
+  "primaryAbility": [
+    "cha"
+  ],
+  "savingThrows": [
+    "wis",
+    "cha"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "deception",
+    "history",
+    "intimidation",
+    "investigation",
+    "nature",
+    "religion"
+  ],
+  "caster": "pact",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light"
+  ],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "warlock",
+    "progression": "pact",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        11,
+        11
+      ],
+      [
+        13,
+        12
+      ],
+      [
+        15,
+        13
+      ],
+      [
+        17,
+        14
+      ],
+      [
+        19,
+        15
+      ]
+    ]
+  },
+  "invocationsKnown": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      12,
+      8
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      18,
+      10
+    ]
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Магия договора",
+      "desc": "Творите заклинания из списка Колдуна, используя Харизму. Ячейки договора немногочисленны, все одного (наивысшего доступного) круга и восстанавливаются на коротком отдыхе."
+    },
+    {
+      "level": 1,
+      "name": "Мистические инвокации",
+      "desc": "Изучаете мистические инвокации — постоянные магические усиления. Число известных растёт с уровнем; часть требует определённого уровня, дара договора или заговора."
+    },
+    {
+      "level": 1,
+      "name": "Дар договора",
+      "desc": "Выбираете дар договора как инвокацию: Договор клинка (оружие + атака Харизмой), Договор цепи (фамильяр), Договор книги (заговоры и ритуалы) или Договор талисмана."
+    },
+    {
+      "level": 2,
+      "name": "Магическая хитрость",
+      "desc": "Совершив минутный обряд, восстанавливаете часть потраченных ячеек договора. Раз на длинный отдых."
+    },
+    {
+      "level": 9,
+      "name": "Связь с покровителем",
+      "desc": "Можете творить «Контакт с иным планом» без ячейки (обращаясь к покровителю) и не рискуете безумием.",
+      "passive": false
+    },
+    {
+      "level": 11,
+      "name": "Мистический арканум (6 круг)",
+      "desc": "Выбираете одно заклинание 6 круга как арканум — творите его раз на длинный отдых без ячейки."
+    },
+    {
+      "level": 13,
+      "name": "Мистический арканум (7 круг)",
+      "desc": "Дополнительное заклинание 7 круга как арканум (раз на длинный отдых)."
+    },
+    {
+      "level": 15,
+      "name": "Мистический арканум (8 круг)",
+      "desc": "Дополнительное заклинание 8 круга как арканум (раз на длинный отдых)."
+    },
+    {
+      "level": 17,
+      "name": "Мистический арканум (9 круг)",
+      "desc": "Дополнительное заклинание 9 круга как арканум (раз на длинный отдых)."
+    },
+    {
+      "level": 20,
+      "name": "Мистический мастер",
+      "desc": "Раз на длинный отдых минутным обрядом восстанавливаете все потраченные ячейки договора."
+    }
+  ]
+}

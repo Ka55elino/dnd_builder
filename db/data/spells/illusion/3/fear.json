@@ -1,0 +1,15 @@
+{
+  "id": "fear",
+  "name": "Страх",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существа в конусе 9 м: спасбросок Мудрости или роняют предметы и убегают в испуге. Концентрация."
+}

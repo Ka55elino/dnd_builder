@@ -1,0 +1,11 @@
+{
+  "id": "martialWeaponTraining",
+  "name": "Владение воинским оружием",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex"
+  ],
+  "desc": "+1 Сила или Ловкость; владение всем воинским оружием."
+}

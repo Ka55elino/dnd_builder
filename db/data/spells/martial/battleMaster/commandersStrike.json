@@ -1,0 +1,10 @@
+{
+  "id": "commandersStrike",
+  "name": "Удар по команде",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Отказавшись от одной атаки, командуете союзнику: он реакцией совершает атаку с доп. уроном = кость превосходства.",
+  "action": "reaction",
+  "pool": "maneuver"
+}

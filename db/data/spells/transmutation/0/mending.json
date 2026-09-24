@@ -1,0 +1,16 @@
+{
+  "id": "mending",
+  "name": "Починка",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "За минуту чините единичный разрыв или пролом в предмете."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "feeblemind",
+  "name": "Слабоумие",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "druid",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Раздираете разум цели (спасбросок Интеллекта): Инт и Хар падают до 1.",
+  "damage": {
+    "dice": "4d6",
+    "type": "psychic"
+  }
+}

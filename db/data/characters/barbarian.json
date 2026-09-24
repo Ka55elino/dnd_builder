@@ -1,0 +1,88 @@
+{
+  "id": "seed-barbarian",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.964Z",
+  "name": "Гром Каменная Челюсть",
+  "portrait": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "bio": {
+    "gender": "Мужской",
+    "identity": "Мужчина",
+    "attraction": "—",
+    "age": "31",
+    "height": "114 см",
+    "weight": "70 кг",
+    "eyes": "Золотые",
+    "skin": "Смуглая",
+    "hair": "Чёрные, короткие",
+    "alignment": "Хаотично-нейтральный",
+    "trait": "Громко смеётся и так же громко злится.",
+    "ideal": "Сила. Слабые должны стать сильнее — или уйти с дороги.",
+    "bond": "Его клан погиб под лавиной; он ищет, кто её вызвал.",
+    "flaw": "Бросается в бой, не дослушав план.",
+    "weakness": "Боится глубокой воды."
+  },
+  "level": 3,
+  "backgroundId": "soldier",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "str": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 0,
+    "dex": 2,
+    "con": 1,
+    "int": 5,
+    "wis": 3,
+    "cha": 4
+  },
+  "abilities": {
+    "str": 15,
+    "dex": 13,
+    "con": 14,
+    "int": 8,
+    "wis": 12,
+    "cha": 10
+  },
+  "totalAbilities": {
+    "str": 17,
+    "dex": 13,
+    "con": 15,
+    "int": 8,
+    "wis": 12,
+    "cha": 10
+  },
+  "raceId": "goliath",
+  "subraceId": "stone",
+  "classId": "barbarian",
+  "subclassId": "berserker",
+  "equipment": {
+    "armorId": "hide",
+    "shield": false,
+    "weaponIds": [
+      "greataxe",
+      "handaxe"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "animal",
+        "nature"
+      ]
+    }
+  }
+}

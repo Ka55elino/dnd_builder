@@ -1,0 +1,19 @@
+{
+  "id": "cloudkill",
+  "name": "Смертельное облако",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Облако ядовитого тумана движется от вас: урон ядом (спасбросок Тел. за половину). Концентрация.",
+  "damage": {
+    "dice": "5d8",
+    "type": "poison"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "vampiricTouch",
+  "name": "Прикосновение вампира",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Касание некротикой; половину урона получаете как исцеление. Концентрация до 1 минуты.",
+  "damage": {
+    "dice": "3d6",
+    "type": "necrotic"
+  }
+}

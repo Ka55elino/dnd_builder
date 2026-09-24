@@ -1,0 +1,15 @@
+{
+  "id": "wsBrownBear",
+  "name": "Форма: Бурый медведь",
+  "kind": "class",
+  "level": 8,
+  "classes": [
+    "druid"
+  ],
+  "action": "action",
+  "desc": "ПО 1. Хиты 34, КЗ 11, скорость 12 м, лазание 9 м. Мультиатака: укус (1d8 кол.) и когти (2d6 руб.).",
+  "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+  }
+}

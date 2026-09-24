@@ -1,0 +1,21 @@
+{
+  "id": "detectThoughts",
+  "name": "Обнаружение мыслей",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Читаете поверхностные мысли существ рядом; при углублении — спасбросок Интеллекта. Концентрация до 1 минуты.",
+  "casting": {
+    "time": "1 действие",
+    "range": "На себя",
+    "components": "В, С, М",
+    "duration": "Конц., 1 мин",
+    "concentration": true
+  }
+}

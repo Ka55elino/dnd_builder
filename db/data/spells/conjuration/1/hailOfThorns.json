@@ -1,0 +1,23 @@
+{
+  "id": "hailOfThorns",
+  "name": "Град шипов",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "ranger"
+  ],
+  "desc": "Следующее попадание дальнобойным оружием осыпает шипами всех в 1,5 м от цели: 1d10 колющего урона (спасбросок Ловкости за половину). Концентрация до 1 минуты.",
+  "casting": {
+    "time": "1 бонусное действие",
+    "range": "На себя",
+    "components": "В",
+    "duration": "Конц., 1 мин",
+    "concentration": true
+  },
+  "damage": {
+    "dice": "1d10",
+    "type": "piercing"
+  }
+}

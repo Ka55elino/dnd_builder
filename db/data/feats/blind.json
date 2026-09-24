@@ -1,0 +1,14 @@
+{
+  "id": "blind",
+  "name": "Слепой бой",
+  "category": "fightingStyle",
+  "level": 1,
+  "desc": "Слепое зрение 3 м: «видите» невидимых существ рядом.",
+  "effects": [
+    {
+      "kind": "sense",
+      "sense": "blindsight",
+      "range": 10
+    }
+  ]
+}

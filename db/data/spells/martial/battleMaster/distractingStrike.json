@@ -1,0 +1,9 @@
+{
+  "id": "distractingStrike",
+  "name": "Отвлекающий удар",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании доп. урон = кость; следующая атака союзника по цели с преимуществом.",
+  "pool": "maneuver"
+}

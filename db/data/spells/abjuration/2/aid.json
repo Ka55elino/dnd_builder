@@ -1,0 +1,13 @@
+{
+  "id": "aid",
+  "name": "Помощь",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "До 3 существ: макс. и текущие хиты +5 на 8 часов."
+}

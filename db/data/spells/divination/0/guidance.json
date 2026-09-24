@@ -1,0 +1,13 @@
+{
+  "id": "guidance",
+  "name": "Указание",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "divination",
+  "classes": [
+    "cleric",
+    "druid"
+  ],
+  "desc": "Касанием даёте существу +1d4 к одной проверке характеристики. Концентрация до 1 минуты."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "shield",
+  "name": "Щит",
+  "kind": "spell",
+  "action": "reaction",
+  "level": 1,
+  "school": "abjuration",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Реакцией создаёте невидимый барьер: +5 к КЗ до начала вашего следующего хода, в том числе против вызвавшей атаки, и иммунитет к «Волшебному снаряду».",
+  "casting": {
+    "time": "1 реакция",
+    "range": "На себя",
+    "components": "В, С",
+    "duration": "1 раунд"
+  }
+}

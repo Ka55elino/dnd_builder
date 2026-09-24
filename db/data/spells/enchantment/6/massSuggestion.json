@@ -1,0 +1,15 @@
+{
+  "id": "massSuggestion",
+  "name": "Массовое внушение",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "До 12 существ (спасбросок Мудрости) следуют разумному внушению."
+}

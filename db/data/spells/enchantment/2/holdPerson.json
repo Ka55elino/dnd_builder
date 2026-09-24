@@ -1,0 +1,23 @@
+{
+  "id": "holdPerson",
+  "name": "Удержание личности",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Гуманоид проходит спасбросок Мудрости или парализован; повторный спасбросок в конце каждого своего хода. Концентрация.",
+  "casting": {
+    "time": "1 действие",
+    "range": "18 м",
+    "components": "В, С, М",
+    "duration": "Концентрация, до 1 минуты"
+  }
+}

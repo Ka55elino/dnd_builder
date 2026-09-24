@@ -1,0 +1,12 @@
+{
+  "id": "bane",
+  "name": "Проклятие",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "enchantment",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "До 3 существ: спасбросок Харизмы или −1d4 к атакам и спасброскам. Концентрация до 1 минуты."
+}

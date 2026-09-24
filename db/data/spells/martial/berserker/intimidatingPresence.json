@@ -1,0 +1,9 @@
+{
+  "id": "intimidatingPresence",
+  "name": "Устрашающее присутствие",
+  "kind": "martial",
+  "subclass": "berserker",
+  "level": 10,
+  "action": "bonus",
+  "desc": "Бонусным действием пугаете существ в 9 м (спасбросок Мудрости против вашей Сл)."
+}

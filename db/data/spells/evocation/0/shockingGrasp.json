@@ -1,0 +1,18 @@
+{
+  "id": "shockingGrasp",
+  "name": "Электрический захват",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Касание молнией (атака заклинанием, преимущество по цели в металле); цель теряет реакцию.",
+  "damage": {
+    "dice": "1d8",
+    "type": "lightning",
+    "scaling": "cantrip"
+  }
+}

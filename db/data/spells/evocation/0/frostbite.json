@@ -1,0 +1,20 @@
+{
+  "id": "frostbite",
+  "name": "Обморожение",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо — спасбросок Тел.: урон холодом и помеха на следующую атаку.",
+  "damage": {
+    "dice": "1d6",
+    "type": "cold",
+    "scaling": "cantrip"
+  }
+}

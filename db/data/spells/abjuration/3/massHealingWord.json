@@ -1,0 +1,13 @@
+{
+  "id": "massHealingWord",
+  "name": "Массовое лечащее слово",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric"
+  ],
+  "desc": "Бонусным действием до 6 существ лечатся на 1d4 + мод. заклинателя."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "spiritGuardians",
+  "name": "Стражи веры",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Духи кружат в 4,5 м: труднопроходимая местность и урон (излуч./некрот.) врагам, спасбросок Мудрости за половину. Концентрация.",
+  "damage": {
+    "dice": "3d8",
+    "type": "radiant"
+  }
+}

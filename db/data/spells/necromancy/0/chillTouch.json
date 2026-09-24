@@ -1,0 +1,26 @@
+{
+  "id": "chillTouch",
+  "name": "Ледяное прикосновение",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Дальнобойная атака заклинанием призрачной рукой; при попадании некротический урон, и цель не может восстанавливать хиты до начала вашего следующего хода. Урон растёт с уровнем.",
+  "casting": {
+    "time": "1 действие",
+    "range": "36 м",
+    "components": "В, С",
+    "duration": "1 раунд"
+  },
+  "damage": {
+    "dice": "1d10",
+    "type": "necrotic",
+    "scaling": "cantrip"
+  }
+}

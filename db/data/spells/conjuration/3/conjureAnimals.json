@@ -1,0 +1,17 @@
+{
+  "id": "conjureAnimals",
+  "name": "Призыв животных",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "druid",
+    "ranger"
+  ],
+  "desc": "Призываете духов зверей: аура наносит урон и создаёт труднопроходимость вокруг вас. Концентрация.",
+  "damage": {
+    "dice": "2d8",
+    "type": "slashing"
+  }
+}

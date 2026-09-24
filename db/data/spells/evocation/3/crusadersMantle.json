@@ -1,0 +1,17 @@
+{
+  "id": "crusadersMantle",
+  "name": "Мантия крестоносца",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Союзники в 9 м наносят доп. 1d4 излучением. Концентрация.",
+  "damage": {
+    "dice": "1d4",
+    "type": "radiant"
+  }
+}

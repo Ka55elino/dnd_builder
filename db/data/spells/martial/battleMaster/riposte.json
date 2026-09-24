@@ -1,0 +1,10 @@
+{
+  "id": "riposte",
+  "name": "Ответный удар",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Когда враг промахивается по вам в ближнем бою — реакцией атакуете его с доп. уроном = кость.",
+  "action": "reaction",
+  "pool": "maneuver"
+}

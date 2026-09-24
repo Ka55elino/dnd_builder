@@ -1,0 +1,17 @@
+{
+  "id": "mediumArmorMaster",
+  "name": "Мастер средних доспехов",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "dex"
+  ],
+  "desc": "+1 Ловкость; в средней броне потолок бонуса Ловкости к КЗ повышается с +2 до +3.",
+  "effects": [
+    {
+      "kind": "set",
+      "target": "mediumArmorMaxDex",
+      "value": 3
+    }
+  ]
+}

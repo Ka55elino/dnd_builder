@@ -1,0 +1,19 @@
+{
+  "id": "rayOfEnfeeblement",
+  "name": "Луч ослабления",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "necromancy",
+  "classes": [
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Чёрный луч: дальнобойная атака заклинанием; при попадании цель наносит вдвое меньше урона Силой. Концентрация.",
+  "casting": {
+    "time": "1 действие",
+    "range": "18 м",
+    "components": "В, С",
+    "duration": "Концентрация, до 1 минуты"
+  }
+}

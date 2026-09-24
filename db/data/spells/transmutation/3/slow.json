@@ -1,0 +1,14 @@
+{
+  "id": "slow",
+  "name": "Замедление",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "До 6 существ: спасбросок Мудрости или скорость и действия ограничены. Концентрация."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "commune",
+  "name": "Общение с божеством",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "divination",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Задаёте божеству 3 вопроса «да/нет»."
+}

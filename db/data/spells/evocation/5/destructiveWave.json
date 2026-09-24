@@ -1,0 +1,17 @@
+{
+  "id": "destructiveWave",
+  "name": "Разрушительная волна",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Волна энергии от вас: спасбросок Тел., дробящий + излуч./некрот. урон, сбивание с ног.",
+  "damage": {
+    "dice": "5d6",
+    "type": "radiant"
+  }
+}

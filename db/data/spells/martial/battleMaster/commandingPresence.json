@@ -1,0 +1,9 @@
+{
+  "id": "commandingPresence",
+  "name": "Командный вид",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "Прибавляете кость превосходства к проверке Запугивания, Выступления или Убеждения.",
+  "pool": "maneuver"
+}

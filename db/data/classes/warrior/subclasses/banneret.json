@@ -1,0 +1,28 @@
+{
+  "id": "banneret",
+  "name": "Рыцарь Пурпурного дракона",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Сплочающий крик",
+      "desc": "Используя «Второе дыхание», выбираете до трёх союзников в 18 м: каждый видящий и слышащий вас восстанавливает хиты в размере вашего уровня воина."
+    },
+    {
+      "level": 7,
+      "name": "Посланник короны",
+      "desc": "Получаете владение навыком Убеждение (или другим на выбор, если уже владеете), и удваиваете бонус мастерства при проверках Убеждения."
+    },
+    {
+      "level": 10,
+      "name": "Вдохновляющий всплеск",
+      "desc": "Используя «Всплеск действий», позволяете союзнику в 18 м реакцией совершить атаку оружием. С 18 уровня — двум союзникам."
+    },
+    {
+      "level": 15,
+      "name": "Оплот",
+      "desc": "Используя «Упорный» для переброса спасброска Инт/Мдр/Хар, позволяете союзнику в 18 м, провалившему такой же спасбросок, тоже перебросить его."
+    }
+  ]
+}

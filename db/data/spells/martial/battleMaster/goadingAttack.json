@@ -1,0 +1,9 @@
+{
+  "id": "goadingAttack",
+  "name": "Провокация",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании доп. урон = кость; цель с помехой атакует всех, кроме вас (спасбросок Мудрости).",
+  "pool": "maneuver"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "shapechangerWiz",
+  "name": "Меняющий форму",
+  "kind": "martial",
+  "subclass": "transmutation",
+  "level": 10,
+  "action": "action",
+  "desc": "По желанию, не тратя ячейку, творите «Превращение» на себя, обращаясь в зверя с ПО не выше 1."
+}

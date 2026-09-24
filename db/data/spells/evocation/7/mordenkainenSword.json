@@ -1,0 +1,17 @@
+{
+  "id": "mordenkainenSword",
+  "name": "Меч Морденкайнена",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "wizard"
+  ],
+  "desc": "Призрачный меч атакует по вашей команде силовым уроном. Концентрация.",
+  "damage": {
+    "dice": "3d10",
+    "type": "force"
+  }
+}

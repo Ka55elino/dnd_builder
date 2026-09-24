@@ -1,0 +1,14 @@
+{
+  "id": "massCureWounds",
+  "name": "Массовое лечение ран",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "bard",
+    "druid"
+  ],
+  "desc": "До 6 существ в области лечатся на 3d8 + мод. заклинателя."
+}

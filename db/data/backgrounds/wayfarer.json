@@ -1,0 +1,17 @@
+{
+  "id": "wayfarer",
+  "name": "Странник",
+  "abilities": {
+    "options": [
+      "dex",
+      "wis",
+      "cha"
+    ]
+  },
+  "feat": "lucky",
+  "skills": [
+    "insight",
+    "stealth"
+  ],
+  "tool": "Воровские инструменты"
+}

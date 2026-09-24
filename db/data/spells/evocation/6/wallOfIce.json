@@ -1,0 +1,16 @@
+{
+  "id": "wallOfIce",
+  "name": "Ледяная стена",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "evocation",
+  "classes": [
+    "wizard"
+  ],
+  "desc": "Стена льда: урон холодом при прорыве, преграда. Концентрация.",
+  "damage": {
+    "dice": "10d6",
+    "type": "cold"
+  }
+}

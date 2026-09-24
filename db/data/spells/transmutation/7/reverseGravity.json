@@ -1,0 +1,14 @@
+{
+  "id": "reverseGravity",
+  "name": "Обратная гравитация",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "transmutation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "В цилиндре 15 м гравитация переворачивается — всё падает вверх. Концентрация."
+}

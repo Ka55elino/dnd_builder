@@ -1,0 +1,91 @@
+{
+  "id": "arcaneTrickster",
+  "name": "Мистический ловкач",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "rogue",
+  "spellcasting": {
+    "ability": "int",
+    "list": "wizard",
+    "progression": "third",
+    "cantripsKnown": [
+      [
+        3,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        6
+      ],
+      [
+        11,
+        7
+      ],
+      [
+        13,
+        8
+      ],
+      [
+        14,
+        9
+      ],
+      [
+        16,
+        10
+      ],
+      [
+        19,
+        11
+      ],
+      [
+        20,
+        13
+      ]
+    ],
+    "startLevel": 3
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Использование заклинаний",
+      "desc": "Учите и творите заклинания из списка Волшебника (преимущественно Очарование и Иллюзия), используя Интеллект. Треть-заклинатель; один из заговоров — «Волшебная рука»."
+    },
+    {
+      "level": 3,
+      "name": "Ловкость рук мага",
+      "desc": "Ваша «Волшебная рука» невидима и может совершать Ловкость рук: подкладывать/красть предметы, отпирать замки и обезвреживать ловушки на расстоянии."
+    },
+    {
+      "level": 9,
+      "name": "Магическая засада",
+      "desc": "Если вы спрятаны, когда творите заклинание по существу, оно совершает спасбросок против этого заклинания с помехой."
+    },
+    {
+      "level": 13,
+      "name": "Разносторонний ловкач",
+      "desc": "Бонусным действием через «Волшебную руку» отвлекаете существо в 1,5 м от руки — получаете преимущество на атаки по нему до конца хода."
+    },
+    {
+      "level": 17,
+      "name": "Похититель заклинаний",
+      "desc": "Успешно пройдя спасбросок против заклинания (или при промахе заклинателя по вам), реакцией крадёте это заклинание: оно недоступно цели и доступно вам до следующего длинного отдыха. Раз на длинный отдых."
+    }
+  ]
+}

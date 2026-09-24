@@ -1,0 +1,14 @@
+{
+  "id": "counterspell",
+  "name": "Контрзаклинание",
+  "kind": "spell",
+  "action": "reaction",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Реакцией прерываете творимое существом заклинание (3 круг и ниже — автоматически, иначе проверка)."
+}

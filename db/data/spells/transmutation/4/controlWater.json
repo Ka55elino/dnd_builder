@@ -1,0 +1,14 @@
+{
+  "id": "controlWater",
+  "name": "Управление водой",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "transmutation",
+  "classes": [
+    "cleric",
+    "druid",
+    "wizard"
+  ],
+  "desc": "Поднимаете/разделяете/направляете большие объёмы воды. Концентрация."
+}

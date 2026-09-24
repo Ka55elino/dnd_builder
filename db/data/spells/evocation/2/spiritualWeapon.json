@@ -1,0 +1,16 @@
+{
+  "id": "spiritualWeapon",
+  "name": "Духовное оружие",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Создаёте парящее оружие (бонусным действием атакует, урон силовым полем + мод.). 1 минута.",
+  "damage": {
+    "dice": "1d8",
+    "type": "force"
+  }
+}

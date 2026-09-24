@@ -1,0 +1,18 @@
+{
+  "id": "sunburst",
+  "name": "Вспышка солнца",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "evocation",
+  "classes": [
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Ослепительная вспышка в сфере 18 м: спасбросок Тел., урон излучением и слепота.",
+  "damage": {
+    "dice": "12d6",
+    "type": "radiant"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "meteorSwarm",
+  "name": "Метеоритный дождь",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Огненные шары падают в четырёх точках: спасбросок Ловкости за половину, огонь и дробление.",
+  "damage": {
+    "dice": "40d6",
+    "type": "fire"
+  }
+}

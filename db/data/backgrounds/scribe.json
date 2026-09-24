@@ -1,0 +1,17 @@
+{
+  "id": "scribe",
+  "name": "Писец",
+  "abilities": {
+    "options": [
+      "dex",
+      "int",
+      "wis"
+    ]
+  },
+  "feat": "skilled",
+  "skills": [
+    "investigation",
+    "perception"
+  ],
+  "tool": "Каллиграфические принадлежности"
+}

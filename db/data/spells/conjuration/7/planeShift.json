@@ -1,0 +1,16 @@
+{
+  "id": "planeShift",
+  "name": "Переход между планами",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Переносите до 8 согласных существ на другой план (или изгоняете одно, спасбросок Харизмы)."
+}

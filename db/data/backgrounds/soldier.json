@@ -1,0 +1,17 @@
+{
+  "id": "soldier",
+  "name": "Солдат",
+  "abilities": {
+    "options": [
+      "str",
+      "dex",
+      "con"
+    ]
+  },
+  "feat": "savageAttacker",
+  "skills": [
+    "athletics",
+    "intimidation"
+  ],
+  "tool": "Игровой набор"
+}

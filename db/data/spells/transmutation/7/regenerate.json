@@ -1,0 +1,14 @@
+{
+  "id": "regenerate",
+  "name": "Регенерация",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid"
+  ],
+  "desc": "Цель лечится и восстанавливает конечности; регенерирует хиты каждый ход 1 час."
+}

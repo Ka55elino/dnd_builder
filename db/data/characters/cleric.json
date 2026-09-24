@@ -1,0 +1,160 @@
+{
+  "id": "seed-cleric",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.564Z",
+  "name": "Брат Торвальд",
+  "portrait": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "bio": {
+    "gender": "Мужской",
+    "identity": "Мужчина",
+    "attraction": "—",
+    "age": "56",
+    "height": "122 см",
+    "weight": "24 кг",
+    "eyes": "Карие",
+    "skin": "Бледная",
+    "hair": "Каштановые",
+    "alignment": "Законно-добрый",
+    "trait": "Спокоен, как скала, пока не обижают слабых.",
+    "ideal": "Милосердие. Каждый заслуживает второго шанса.",
+    "bond": "Храм в родной горе — его дом и долг.",
+    "flaw": "Слишком доверяет тем, кто просит помощи.",
+    "weakness": "Не может отказать нуждающемуся."
+  },
+  "level": 4,
+  "backgroundId": "acolyte",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "wis": 2,
+    "cha": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 2,
+    "dex": 5,
+    "con": 1,
+    "int": 4,
+    "wis": 0,
+    "cha": 3
+  },
+  "abilities": {
+    "str": 13,
+    "dex": 8,
+    "con": 14,
+    "int": 10,
+    "wis": 15,
+    "cha": 12
+  },
+  "totalAbilities": {
+    "str": 15,
+    "dex": 8,
+    "con": 14,
+    "int": 10,
+    "wis": 17,
+    "cha": 13
+  },
+  "raceId": "dwarf",
+  "subraceId": "hill",
+  "classId": "cleric",
+  "subclassId": "life",
+  "equipment": {
+    "armorId": "scaleMail",
+    "shield": true,
+    "weaponIds": [
+      "mace"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "history",
+        "medicine",
+        "persuasion"
+      ]
+    },
+    "L1:class:generic:Божественный орден": {
+      "kind": "option",
+      "ids": [
+        "protector"
+      ]
+    },
+    "L1:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "sacredFlame",
+        "guidance",
+        "light"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "healingWord",
+        "protectionFromEvil",
+        "shieldOfFaith",
+        "cureWounds"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "sacredFlameB",
+        "wordOfRadiance"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "detectMagic"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "identify"
+      ]
+    },
+    "L3:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "aid"
+      ]
+    },
+    "L4:class:feat": {
+      "kind": "feat",
+      "ids": [
+        "abilityScoreImprovement"
+      ]
+    },
+    "L4:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "chillTouch"
+      ]
+    },
+    "L4:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "lesserRestoration"
+      ]
+    },
+    "L4:class:feat:asi": {
+      "kind": "asi",
+      "asi": {
+        "str": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "hypnoticPattern",
+  "name": "Гипнотический узор",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Мерцающий узор: существа в кубе 9 м — спасбросок Мудрости или зачарованы и недееспособны. Концентрация."
+}

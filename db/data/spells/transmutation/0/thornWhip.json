@@ -1,0 +1,17 @@
+{
+  "id": "thornWhip",
+  "name": "Тернистый кнут",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "transmutation",
+  "classes": [
+    "druid"
+  ],
+  "desc": "Лоза бьёт существо в 9 м (атака заклинанием): урон колющий и подтягивание на 3 м.",
+  "damage": {
+    "dice": "1d6",
+    "type": "piercing",
+    "scaling": "cantrip"
+  }
+}

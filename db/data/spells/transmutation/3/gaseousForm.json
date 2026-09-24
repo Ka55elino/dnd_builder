@@ -1,0 +1,14 @@
+{
+  "id": "gaseousForm",
+  "name": "Газообразная форма",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо и его снаряжение становятся туманом: сопротивление физическому урону, полёт 3 м. Концентрация."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "greaterRestoration",
+  "name": "Высшее восстановление",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger"
+  ],
+  "desc": "Снимаете истощение, очарование, окаменение или снижение характеристики/хитов."
+}

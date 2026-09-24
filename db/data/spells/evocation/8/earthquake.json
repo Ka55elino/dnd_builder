@@ -1,0 +1,14 @@
+{
+  "id": "earthquake",
+  "name": "Землетрясение",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "evocation",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer"
+  ],
+  "desc": "Толчки рушат строения и валят существ с ног в области 30 м. Концентрация."
+}

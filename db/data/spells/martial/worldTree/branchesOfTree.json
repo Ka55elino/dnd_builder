@@ -1,0 +1,9 @@
+{
+  "id": "branchesOfTree",
+  "name": "Ветви Древа",
+  "kind": "martial",
+  "subclass": "worldTree",
+  "level": 6,
+  "action": "reaction",
+  "desc": "Реакцией телепортируете врага в 9 м к себе, его скорость 0 до конца его следующего хода."
+}

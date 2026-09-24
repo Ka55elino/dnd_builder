@@ -1,0 +1,17 @@
+{
+  "id": "charlatan",
+  "name": "Шарлатан",
+  "abilities": {
+    "options": [
+      "dex",
+      "con",
+      "cha"
+    ]
+  },
+  "feat": "skilled",
+  "skills": [
+    "deception",
+    "sleight"
+  ],
+  "tool": "Набор для подделок"
+}

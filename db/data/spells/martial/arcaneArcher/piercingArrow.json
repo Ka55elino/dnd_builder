@@ -1,0 +1,17 @@
+{
+  "id": "piercingArrow",
+  "name": "Пронзающая стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "Стрела проходит линией 9 м × 30 см сквозь существа; каждое совершает спасбросок Ловкости: урон оружия +1d6 колющего (половина при успехе).",
+  "damage": {
+    "dice": "1d6",
+    "type": "piercing",
+    "scaling": {
+      "18": "2d6"
+    }
+  }
+}

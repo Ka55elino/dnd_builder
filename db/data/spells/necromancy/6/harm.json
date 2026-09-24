@@ -1,0 +1,16 @@
+{
+  "id": "harm",
+  "name": "Вред",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "necromancy",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Насылаете болезнь (спасбросок Тел.): огромный некротический урон, максимум хитов снижен.",
+  "damage": {
+    "dice": "14d6",
+    "type": "necrotic"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mageHand",
+  "name": "Рука мага",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "conjuration",
+  "classes": [
+    "wizard",
+    "sorcerer",
+    "warlock",
+    "bard"
+  ],
+  "desc": "Создаёте призрачную руку, поднимающую и передвигающую предметы до 4,5 кг на 9 м."
+}

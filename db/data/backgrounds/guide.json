@@ -1,0 +1,17 @@
+{
+  "id": "guide",
+  "name": "Проводник",
+  "abilities": {
+    "options": [
+      "dex",
+      "con",
+      "wis"
+    ]
+  },
+  "feat": "magicInitiateDruid",
+  "skills": [
+    "stealth",
+    "survival"
+  ],
+  "tool": "Инструменты картографа"
+}

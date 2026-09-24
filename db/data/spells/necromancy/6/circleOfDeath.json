@@ -1,0 +1,18 @@
+{
+  "id": "circleOfDeath",
+  "name": "Круг смерти",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "necromancy",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Волна отрицательной энергии в сфере 18 м: спасбросок Тел. за половину.",
+  "damage": {
+    "dice": "8d6",
+    "type": "necrotic"
+  }
+}

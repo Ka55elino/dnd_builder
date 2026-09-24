@@ -1,0 +1,19 @@
+{
+  "id": "enlargeReduce",
+  "name": "Увеличение/уменьшение",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Меняете размер существа/предмета на категорию: +/-урон и преимущество/помеха на Силу. Концентрация.",
+  "damage": {
+    "dice": "1d4",
+    "type": "physical"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "modifyMemory",
+  "name": "Изменение памяти",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "enchantment",
+  "classes": [
+    "cleric",
+    "bard",
+    "wizard"
+  ],
+  "desc": "Изменяете воспоминание существа о недавнем событии (спасбросок Мудрости). Концентрация."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "shatter",
+  "name": "Дробление",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Резкий звон в сфере 3 м: спасбросок Тел., урон звуком.",
+  "damage": {
+    "dice": "3d8",
+    "type": "thunder"
+  }
+}

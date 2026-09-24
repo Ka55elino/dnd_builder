@@ -1,0 +1,24 @@
+{
+  "id": "hellishRebuke",
+  "name": "Адское возмездие",
+  "kind": "spell",
+  "action": "reaction",
+  "level": 1,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Реакцией в ответ на урон окутываете обидчика пламенем: спасбросок Ловкости, урон огнём 2d10 (половина при успехе).",
+  "casting": {
+    "time": "1 реакция",
+    "range": "18 м",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  },
+  "damage": {
+    "dice": "2d10",
+    "type": "fire"
+  }
+}

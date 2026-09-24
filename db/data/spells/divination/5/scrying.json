@@ -1,0 +1,17 @@
+{
+  "id": "scrying",
+  "name": "Слежка",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Видите и слышите известную цель через магический сенсор. Концентрация."
+}

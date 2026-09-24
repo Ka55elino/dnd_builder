@@ -1,0 +1,24 @@
+{
+  "id": "shadowTouched",
+  "name": "Прикосновение тени",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "+1 Инт/Мдр/Хар; Невидимость и заклинание 1 круга (некромантия/иллюзия).",
+  "spells": {
+    "fixed": [
+      "invisibility"
+    ],
+    "choose": {
+      "count": 1,
+      "list": "wizard",
+      "circles": [
+        1
+      ]
+    }
+  }
+}

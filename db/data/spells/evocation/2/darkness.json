@@ -1,0 +1,20 @@
+{
+  "id": "darkness",
+  "name": "Тьма",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Магическая тьма в сфере радиусом 4,5 м, сквозь которую не видит даже тёмное зрение. Концентрация.",
+  "casting": {
+    "time": "1 действие",
+    "range": "18 м",
+    "components": "В, М",
+    "duration": "Концентрация, до 10 минут"
+  }
+}

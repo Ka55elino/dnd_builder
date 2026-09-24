@@ -1,0 +1,12 @@
+{
+  "id": "prayerOfHealing",
+  "name": "Молитва лечения",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "abjuration",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "До 6 существ восстанавливают 2d8 + мод. заклинателя хитов (время накладывания 10 минут)."
+}

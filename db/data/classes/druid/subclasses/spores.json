@@ -1,0 +1,33 @@
+{
+  "id": "spores",
+  "name": "Круг спор",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Ореол спор",
+      "desc": "Реакцией, когда существо в 3 м, наносите ему некротический урон (кость растёт с уровнем; спасбросок не требуется — автоматически)."
+    },
+    {
+      "level": 3,
+      "name": "Симбиотическая сущность",
+      "desc": "Тратя применение Дикого облика (вместо превращения), получаете 4 × уровень друида временных хитов; ближние атаки наносят +1d6 некротикой, а Ореол спор удваивается."
+    },
+    {
+      "level": 6,
+      "name": "Грибковое заражение",
+      "desc": "Реакцией, когда зверь/гуманоид гибнет в 3 м, поднимаете его как зомби (PB/длинный отдых)."
+    },
+    {
+      "level": 10,
+      "name": "Распространение спор",
+      "desc": "Бонусным действием (пока активна Симбиотическая сущность) создаёте облако спор 3 м на 1 минуту: враги внутри получают урон Ореола."
+    },
+    {
+      "level": 14,
+      "name": "Грибковое тело",
+      "desc": "Не получаете критических попаданий и невосприимчивы к «Слепоте», «Глухоте», «Испугу» и «Отравлению»."
+    }
+  ]
+}

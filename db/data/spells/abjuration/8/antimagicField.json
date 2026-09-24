@@ -1,0 +1,13 @@
+{
+  "id": "antimagicField",
+  "name": "Поле подавления магии",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Сфера 3 м, где магия не действует: заклинания подавлены, предметы инертны. Концентрация."
+}

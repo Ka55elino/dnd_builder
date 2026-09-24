@@ -1,0 +1,13 @@
+{
+  "id": "antilifeShell",
+  "name": "Панцирь против жизни",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "druid"
+  ],
+  "desc": "Барьер в 3 м не пускает живых существ. Концентрация."
+}

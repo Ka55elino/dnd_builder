@@ -1,0 +1,10 @@
+{
+  "id": "sweepingCinderStrike",
+  "name": "Дисциплина: Разметающий пепел",
+  "kind": "martial",
+  "subclass": "fourElements",
+  "level": 3,
+  "action": "action",
+  "desc": "Стоимость 2 очка ци. Конус огня 4,5 м: 3d10 урона огнём всем в области (спасбросок Ловкости за половину).",
+  "damage": { "dice": "3d10", "type": "fire" }
+}

@@ -1,0 +1,134 @@
+{
+  "id": "rogue",
+  "name": "Плут",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 8,
+  "primaryAbility": [
+    "dex"
+  ],
+  "savingThrows": [
+    "dex",
+    "int"
+  ],
+  "skillCount": 4,
+  "skills": [
+    "acrobatics",
+    "athletics",
+    "deception",
+    "insight",
+    "intimidation",
+    "investigation",
+    "perception",
+    "performance",
+    "persuasion",
+    "sleight",
+    "stealth"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    10,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Компетентность",
+      "desc": "Удваиваете бонус мастерства для двух выбранных навыков, которыми владеете.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 1,
+      "name": "Скрытая атака",
+      "desc": "Раз за ход при попадании оружием с фехтовальным (Finesse) или дальнобойным свойством наносите доп. урон, если имеете преимущество или союзник рядом с целью. Кости растут с уровнем (см. «Действия класса»)."
+    },
+    {
+      "level": 1,
+      "name": "Воровской жаргон",
+      "desc": "Тайный набор диалектов, знаков и жаргона, позволяющий скрывать сообщения в обычной беседе."
+    },
+    {
+      "level": 1,
+      "name": "Мастерство оружия",
+      "desc": "Используете свойства мастерства 2 видов оружия, которыми владеете (можно менять после отдыха)."
+    },
+    {
+      "level": 2,
+      "name": "Хитрое действие",
+      "desc": "Бонусным действием каждый ход совершаете Рывок, Отход или Засаду (Hide)."
+    },
+    {
+      "level": 3,
+      "name": "Точный прицел",
+      "desc": "Бонусным действием получаете преимущество на следующую атаку в этот ход, но ваша скорость становится 0 до конца хода."
+    },
+    {
+      "level": 5,
+      "name": "Хитрый удар",
+      "desc": "Жертвуя костями Скрытой атаки, добавляете к попаданию эффекты (отравление, обездвиживание, подсечка, отвлечение и т.п.)."
+    },
+    {
+      "level": 5,
+      "name": "Невероятное уклонение",
+      "desc": "Реакцией вдвое уменьшаете урон от одной видимой атаки по вам."
+    },
+    {
+      "level": 6,
+      "name": "Компетентность",
+      "desc": "Удваиваете бонус мастерства ещё для двух выбранных навыков, которыми владеете.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 7,
+      "name": "Уклонение",
+      "desc": "При спасброске Ловкости за половину урона: успех — урона нет, провал — половина."
+    },
+    {
+      "level": 7,
+      "name": "Надёжный талант",
+      "desc": "Броски характеристик с вашим бонусом мастерства: результат d20 меньше 10 считается как 10."
+    },
+    {
+      "level": 11,
+      "name": "Улучшенный хитрый удар",
+      "desc": "Можете применять два разных эффекта Хитрого удара к одной атаке."
+    },
+    {
+      "level": 14,
+      "name": "Ловкие удары",
+      "desc": "Применяя эффекты Хитрого удара, не тратите на них кости Скрытой атаки (для части эффектов)."
+    },
+    {
+      "level": 15,
+      "name": "Скользкий разум",
+      "desc": "Получаете владение спасбросками Мудрости и Харизмы."
+    },
+    {
+      "level": 18,
+      "name": "Неуловимый",
+      "desc": "Пока вы не недееспособны, по вам нельзя атаковать с преимуществом."
+    },
+    {
+      "level": 20,
+      "name": "Удар удачи",
+      "desc": "Раз за короткий/длинный отдых: промах превращаете в попадание, либо проваленную проверку характеристики — в 20 на d20."
+    }
+  ]
+}

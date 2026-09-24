@@ -1,0 +1,17 @@
+{
+  "id": "entertainer",
+  "name": "Артист",
+  "abilities": {
+    "options": [
+      "str",
+      "dex",
+      "cha"
+    ]
+  },
+  "feat": "musician",
+  "skills": [
+    "acrobatics",
+    "performance"
+  ],
+  "tool": "Музыкальный инструмент"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "bladeBarrier",
+  "name": "Клинковый барьер",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "evocation",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Стена вращающихся клинков: спасбросок Ловкости, урон рубящий, укрытие. Концентрация.",
+  "damage": {
+    "dice": "6d10",
+    "type": "slashing"
+  }
+}

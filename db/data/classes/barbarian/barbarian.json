@@ -1,0 +1,156 @@
+{
+  "id": "barbarian",
+  "name": "Варвар",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 12,
+  "primaryAbility": [
+    "str"
+  ],
+  "savingThrows": [
+    "str",
+    "con"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "animal",
+    "athletics",
+    "intimidation",
+    "nature",
+    "perception",
+    "survival"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "unarmoredDefense": [
+    "dex",
+    "con"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Ярость",
+      "desc": "Бонусным действием входите в ярость: сопротивление дроб./кол./руб. урону, бонус к урону ближней атакой Силой — +2 (ур. 1–8), +3 (ур. 9–15), +4 (ур. 16+), преимущество на проверки и спасброски Силы. Нельзя концентрироваться и колдовать. Длится 10 минут."
+    },
+    {
+      "level": 1,
+      "name": "Защита без доспехов",
+      "desc": "Без брони КЗ = 10 + модификатор Ловкости + модификатор Телосложения (можно со щитом)."
+    },
+    {
+      "level": 1,
+      "name": "Мастерство оружия",
+      "desc": "Используете свойства мастерства 2 видов оружия (растёт с уровнем)."
+    },
+    {
+      "level": 2,
+      "name": "Чувство опасности",
+      "desc": "Преимущество на спасброски Ловкости против видимых эффектов (ловушки, заклинания)."
+    },
+    {
+      "level": 2,
+      "name": "Безрассудная атака",
+      "desc": "Преимущество на ближние атаки Силой в свой ход, но атаки по вам тоже с преимуществом до вашего следующего хода."
+    },
+    {
+      "level": 3,
+      "name": "Первобытное знание",
+      "desc": "Дополнительный навык; в ярости определённые проверки характеристик можно совершать через Силу."
+    },
+    {
+      "level": 5,
+      "name": "Дополнительная атака",
+      "desc": "Две атаки за действие Атаки."
+    },
+    {
+      "level": 5,
+      "name": "Быстрое передвижение",
+      "desc": "Скорость +3 м, пока вы без тяжёлой брони.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Чувство инстинкта",
+      "desc": "Преимущество на Инициативу."
+    },
+    {
+      "level": 7,
+      "name": "Инстинктивный бросок",
+      "desc": "При входе в ярость бонусным действием перемещаетесь на половину скорости."
+    },
+    {
+      "level": 9,
+      "name": "Жестокий удар",
+      "desc": "Отказавшись от Безрассудной атаки, при попадании наносите +1 кость урона и накладываете эффект (толчок/замедление)."
+    },
+    {
+      "level": 11,
+      "name": "Неустанная ярость",
+      "desc": "Опустившись до 0 хитов в ярости (не убитым), проходите спасбросок Телосложения и остаётесь на 1 хите."
+    },
+    {
+      "level": 13,
+      "name": "Улучшенный жестокий удар",
+      "desc": "Дополнительный эффект и +кость к Жестокому удару."
+    },
+    {
+      "level": 15,
+      "name": "Стойкая ярость",
+      "desc": "Ярость длится до вашего беспамятства или добровольного прекращения; бонусным действием возвращаете себе временные хиты."
+    },
+    {
+      "level": 18,
+      "name": "Неукротимая мощь",
+      "desc": "Если бросок Силы (проверка/спасбросок) меньше вашей Силы — используете значение Силы."
+    },
+    {
+      "level": 20,
+      "name": "Первобытный чемпион",
+      "desc": "Сила и Телосложение +4 (максимум 25).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "str",
+            "value": 4,
+            "max": 25
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "con",
+            "value": 4,
+            "max": 25
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "id": "paladin",
+  "name": "Паладин",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 10,
+  "primaryAbility": [
+    "str",
+    "cha"
+  ],
+  "savingThrows": [
+    "wis",
+    "cha"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "athletics",
+    "insight",
+    "intimidation",
+    "medicine",
+    "persuasion",
+    "religion"
+  ],
+  "caster": "half",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "heavy",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "paladin",
+    "progression": "half",
+    "startLevel": 1,
+    "cantripsKnown": [],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        7
+      ],
+      [
+        9,
+        9
+      ],
+      [
+        11,
+        10
+      ],
+      [
+        13,
+        11
+      ],
+      [
+        15,
+        12
+      ],
+      [
+        17,
+        14
+      ],
+      [
+        19,
+        15
+      ]
+    ]
+  },
+  "features": [
+    {
+      "level": 1,
+      "name": "Наложение рук",
+      "desc": "Пул целительной силы = 5 × уровень паладина. Действием касанием восстанавливаете хиты из пула; за 5 очков вместо этого снимаете болезнь или яд. Пул обновляется на длинном отдыхе."
+    },
+    {
+      "level": 1,
+      "name": "Заклинательство",
+      "desc": "Творите заклинания из списка Паладина, используя Харизму (полу-заклинатель, готовите заклинания). Священный символ — фокус."
+    },
+    {
+      "level": 1,
+      "name": "Мастерство оружия",
+      "desc": "Используете свойства мастерства 2 видов оружия, которыми владеете."
+    },
+    {
+      "level": 2,
+      "name": "Боевой стиль",
+      "desc": "Выбираете боевой стиль (Оборона, Дуэлянт, Великое оружие и др.).",
+      "choice": {
+        "type": "fightingStyle",
+        "pick": 1,
+        "from": "fightingStyles"
+      }
+    },
+    {
+      "level": 2,
+      "name": "Божественная кара",
+      "desc": "Всегда держите подготовленным заклинание «Божественная кара» (см. «Действия класса»). Тратя ячейку при попадании в ближнем бою, наносите доп. 2d8 урона излучением, +1d8 за каждый круг ячейки выше 1-го (макс. 5d8), и ещё +1d8 против нежити и исчадий."
+    },
+    {
+      "level": 3,
+      "name": "Божественный канал",
+      "desc": "Получаете использования Божественного канала для клятвенных приёмов. Восстанавливаются на коротком/длинном отдыхе (2 использования, 3 на 11 ур.)."
+    },
+    {
+      "level": 5,
+      "name": "Дополнительная атака",
+      "desc": "Совершая действие Атаки, атакуете дважды вместо одного раза."
+    },
+    {
+      "level": 6,
+      "name": "Аура защиты",
+      "desc": "Вы и союзники в 3 м (с 18 ур. — 9 м) получаете бонус к спасброскам, равный модификатору Харизмы (мин. +1).",
+      "grants": [
+        {
+          "type": "passive",
+          "note": "аура: вы и союзники в 3 м {chaMod} к спасброскам"
+        }
+      ]
+    },
+    {
+      "level": 9,
+      "name": "Отвержение врагов",
+      "desc": "Действием заставляете видимых существ в 9 м пройти спасбросок Мудрости или их скорость становится 0 и они получают помеху."
+    },
+    {
+      "level": 10,
+      "name": "Аура отваги",
+      "desc": "Вы и союзники в 3 м не могут быть испуганы."
+    },
+    {
+      "level": 11,
+      "name": "Излучающие удары",
+      "desc": "Каждое ваше попадание в ближнем бою наносит доп. 1d8 урона излучением."
+    },
+    {
+      "level": 14,
+      "name": "Восстанавливающее касание",
+      "desc": "Наложением рук можете также снимать состояния: очарование, испуг, паралич, окаменение."
+    },
+    {
+      "level": 18,
+      "name": "Расширенные ауры",
+      "desc": "Радиус ваших аур увеличивается до 9 м."
+    },
+    {
+      "level": 20,
+      "name": "Клятвенный образец",
+      "desc": "Достигаете вершины своей клятвы (эффект зависит от подкласса)."
+    }
+  ]
+}

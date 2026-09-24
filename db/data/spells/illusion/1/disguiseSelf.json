@@ -1,0 +1,15 @@
+{
+  "id": "disguiseSelf",
+  "name": "Маскировка",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Меняете свою внешность (иллюзия) на 1 час."
+}

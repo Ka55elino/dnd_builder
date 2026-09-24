@@ -1,0 +1,17 @@
+{
+  "id": "shadowArrow",
+  "name": "Теневая стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "+2d6 урона психической энергией; цель совершает спасбросок Мудрости или не видит дальше 1,5 м до начала вашего следующего хода.",
+  "damage": {
+    "dice": "2d6",
+    "type": "psychic",
+    "scaling": {
+      "18": "4d6"
+    }
+  }
+}

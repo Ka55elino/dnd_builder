@@ -1,0 +1,20 @@
+{
+  "id": "geasSpell",
+  "name": "Гейс",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "wizard"
+  ],
+  "desc": "Приказываете существу (спасбросок Мудрости) выполнять поручение под угрозой психического урона.",
+  "damage": {
+    "dice": "5d10",
+    "type": "psychic"
+  }
+}

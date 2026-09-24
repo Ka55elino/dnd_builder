@@ -1,0 +1,213 @@
+{
+  "id": "monk",
+  "name": "Монах",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 8,
+  "primaryAbility": [
+    "dex",
+    "wis"
+  ],
+  "savingThrows": [
+    "str",
+    "dex"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "acrobatics",
+    "athletics",
+    "history",
+    "insight",
+    "religion",
+    "stealth"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "unarmoredDefense": [
+    "dex",
+    "wis"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Боевые искусства",
+      "desc": "Безоружные удары и монашеские виды оружия используют Ловкость, наносят урон по кости боевых искусств (растёт с уровнем: d6/d8/d10/d12) и дают безоружный удар бонусным действием."
+    },
+    {
+      "level": 1,
+      "name": "Защита без доспехов",
+      "desc": "Без доспехов и щита КЗ = 10 + модификатор Ловкости + модификатор Мудрости."
+    },
+    {
+      "level": 2,
+      "name": "Очки сосредоточения (ци)",
+      "desc": "Получаете очки ци, равные вашему уровню монаха. Тратятся на особые приёмы; восстанавливаются на коротком или длинном отдыхе."
+    },
+    {
+      "level": 2,
+      "name": "Движение без доспехов",
+      "desc": "Скорость растёт, пока вы без доспехов и щита: +3 м (растёт до +9 м).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Ускоренный метаболизм",
+      "desc": "Раз на длинный отдых в начале боя с 0 очков ци восстанавливаете 1 очко и лечите себя на {monkHeal2} хитов (2 × уровень монаха)."
+    },
+    {
+      "level": 3,
+      "name": "Отражение атак",
+      "desc": "Реакцией уменьшаете дробящий/колющий/рубящий урон от атаки на 1d10 {dexMod} (Лов) +{level} (ур.); потратив 1 очко ци, перенаправляете оставшийся урон в существо в 1,5 м (спасбросок Ловкости)."
+    },
+    {
+      "level": 4,
+      "name": "Замедленное падение",
+      "desc": "Реакцией уменьшаете урон от падения на пятикратный уровень монаха."
+    },
+    {
+      "level": 5,
+      "name": "Дополнительная атака",
+      "desc": "Две атаки за действие Атаки."
+    },
+    {
+      "level": 5,
+      "name": "Оглушающий удар",
+      "desc": "Попав ближней атакой, тратите 1 очко ци: цель проходит спасбросок Телосложения или получает «Оглушение» до начала вашего следующего хода."
+    },
+    {
+      "level": 6,
+      "name": "Усиленные удары",
+      "desc": "Безоружные удары могут наносить урон силовым полем вместо обычного типа."
+    },
+    {
+      "level": 6,
+      "name": "Движение без доспехов",
+      "desc": "Бонус скорости увеличивается до +4,5 м.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Уклонение",
+      "desc": "При спасброске Ловкости за половину урона: успех — урона нет, провал — половина."
+    },
+    {
+      "level": 9,
+      "name": "Акробатическое перемещение",
+      "desc": "Пока вы без доспехов и щита, можете перемещаться по вертикальным поверхностям и жидкостям, не падая."
+    },
+    {
+      "level": 10,
+      "name": "Обострённое сосредоточение",
+      "desc": "Шквал ударов даёт 3 удара; Терпеливая оборона даёт временные хиты; Шаг ветра может переместить и союзника.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 10,
+      "name": "Самовосстановление",
+      "desc": "В начале хода бесплатно снимаете с себя одно состояние (очарование/испуг/отравление); не нуждаетесь в еде и питье."
+    },
+    {
+      "level": 13,
+      "name": "Отражение энергии",
+      "desc": "Отражением атак можете уменьшать урон любого типа (кислота/холод/огонь/сила/электр./звук и т.д.)."
+    },
+    {
+      "level": 14,
+      "name": "Дисциплинированный выживший",
+      "desc": "Владеете всеми спасбросками. Потратив 1 очко ци, перебрасываете проваленный спасбросок.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 15,
+      "name": "Идеальное сосредоточение",
+      "desc": "Начиная бой с менее чем 4 очками ци, восстанавливаете их до 4."
+    },
+    {
+      "level": 18,
+      "name": "Высшая оборона",
+      "desc": "Бонусным действием тратите 3 очка ци: 1 минуту имеете сопротивление всем типам урона, кроме силового.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 20,
+      "name": "Тело и разум",
+      "desc": "Ловкость и Мудрость +4 (максимум 25).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "dex",
+            "value": 4,
+            "max": 25
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "wis",
+            "value": 4,
+            "max": 25
+          }
+        }
+      ]
+    }
+  ]
+}

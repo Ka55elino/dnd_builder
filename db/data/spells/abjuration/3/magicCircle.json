@@ -1,0 +1,15 @@
+{
+  "id": "magicCircle",
+  "name": "Магический круг",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "paladin",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Цилиндр защищает от избранного типа существ (демоны, нежить и т.п.)."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "animateObjects",
+  "name": "Оживление предметов",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Оживляете до 10 предметов, атакующих по вашей команде. Концентрация.",
+  "damage": {
+    "dice": "2d6",
+    "type": "bludgeoning"
+  }
+}

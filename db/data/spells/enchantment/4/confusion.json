@@ -1,0 +1,16 @@
+{
+  "id": "confusion",
+  "name": "Замешательство",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Существа в области: спасбросок Мудрости или действуют случайно. Концентрация."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "cunningAction",
+  "name": "Хитрое действие",
+  "kind": "class",
+  "level": 2,
+  "classes": ["rogue"],
+  "action": "bonus",
+  "desc": "Бонусным действием совершаете Рывок, Отход или Засаду (Hide)."
+}

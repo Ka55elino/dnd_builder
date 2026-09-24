@@ -1,0 +1,15 @@
+{
+  "id": "bladeWard",
+  "name": "Клинковая защита",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "До конца следующего хода получаете сопротивление дроб./кол./руб. урону."
+}

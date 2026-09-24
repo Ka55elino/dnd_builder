@@ -1,0 +1,20 @@
+{
+  "id": "blight",
+  "name": "Гниль",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "druid",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Иссушение существа: спасбросок Тел., сильный некротический урон.",
+  "damage": {
+    "dice": "8d8",
+    "type": "necrotic"
+  }
+}

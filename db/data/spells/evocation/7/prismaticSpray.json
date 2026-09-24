@@ -1,0 +1,17 @@
+{
+  "id": "prismaticSpray",
+  "name": "Призматический спрей",
+  "kind": "spell",
+  "action": "action",
+  "level": 7,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Восемь разноцветных лучей случайных эффектов и стихийного урона (спасбросок Ловкости).",
+  "damage": {
+    "dice": "10d6",
+    "type": "fire"
+  }
+}

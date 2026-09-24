@@ -1,0 +1,17 @@
+{
+  "id": "chainLightning",
+  "name": "Цепная молния",
+  "kind": "spell",
+  "action": "action",
+  "level": 6,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Молния бьёт цель и перескакивает на 3 других: спасбросок Ловкости за половину.",
+  "damage": {
+    "dice": "10d8",
+    "type": "lightning"
+  }
+}

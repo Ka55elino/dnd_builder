@@ -1,0 +1,9 @@
+{
+  "id": "evasiveFootwork",
+  "name": "Уклончивый шаг",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При перемещении прибавляете кость превосходства к КЗ до конца хода.",
+  "pool": "maneuver"
+}

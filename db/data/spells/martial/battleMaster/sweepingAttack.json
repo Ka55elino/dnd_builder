@@ -1,0 +1,9 @@
+{
+  "id": "sweepingAttack",
+  "name": "Размашистая атака",
+  "kind": "martial",
+  "subclass": "battleMaster",
+  "level": 3,
+  "desc": "При попадании по цели наносите второй цели рядом урон = кость превосходства (того же типа).",
+  "pool": "maneuver"
+}

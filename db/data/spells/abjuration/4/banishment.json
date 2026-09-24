@@ -1,0 +1,17 @@
+{
+  "id": "banishment",
+  "name": "Изгнание",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "abjuration",
+  "classes": [
+    "cleric",
+    "druid",
+    "paladin",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Существо (спасбросок Харизмы) отправляется в иной план на время концентрации; иномировое — навсегда."
+}

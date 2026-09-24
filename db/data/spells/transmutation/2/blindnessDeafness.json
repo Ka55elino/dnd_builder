@@ -1,0 +1,15 @@
+{
+  "id": "blindnessDeafness",
+  "name": "Слепота/глухота",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "cleric",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Существо: спасбросок Тел. или «Слепота»/«Глухота» на 1 минуту."
+}

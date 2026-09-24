@@ -1,0 +1,16 @@
+{
+  "id": "hungerOfHadar",
+  "name": "Голод Хадара",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "conjuration",
+  "classes": [
+    "warlock"
+  ],
+  "desc": "Область пустоты 6 м: слепая зона, урон холодом в начале ходов и колющий при выходе. Концентрация.",
+  "damage": {
+    "dice": "2d6",
+    "type": "cold"
+  }
+}

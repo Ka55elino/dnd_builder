@@ -1,0 +1,17 @@
+{
+  "id": "phantasmalKiller",
+  "name": "Фантомный убийца",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "wizard"
+  ],
+  "desc": "Иллюзия страха преследует цель (спасбросок Мудрости): психический урон каждый ход. Концентрация.",
+  "damage": {
+    "dice": "4d10",
+    "type": "psychic"
+  }
+}

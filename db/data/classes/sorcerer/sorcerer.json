@@ -1,0 +1,176 @@
+{
+  "id": "sorcerer",
+  "name": "Чародей",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "hitDie": 6,
+  "primaryAbility": [
+    "cha"
+  ],
+  "savingThrows": [
+    "con",
+    "cha"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "deception",
+    "insight",
+    "intimidation",
+    "persuasion",
+    "religion"
+  ],
+  "caster": "full",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "sorcerer",
+    "progression": "full",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        10,
+        6
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        17,
+        19
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        19,
+        21
+      ],
+      [
+        20,
+        22
+      ]
+    ]
+  },
+  "metamagicKnown": [
+    [
+      2,
+      2
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      17,
+      4
+    ]
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Заклинательство",
+      "desc": "Творите заклинания из списка Чародея, используя Харизму (полный заклинатель, готовите заклинания). Ваша магия — врождённая."
+    },
+    {
+      "level": 1,
+      "name": "Врождённое чародейство",
+      "desc": "Бонусным действием на 1 минуту усиливаете магию: +1 к Сл ваших заклинаний и преимущество на броски атаки заклинаниями. Число раз равно бонусу мастерства (на длинный отдых)."
+    },
+    {
+      "level": 2,
+      "name": "Источник магии (очки чародейства)",
+      "desc": "Получаете очки чародейства, равные вашему уровню чародея. Бонусным действием превращаете очки в ячейки заклинаний и наоборот; тратите их на метамагию."
+    },
+    {
+      "level": 2,
+      "name": "Метамагия",
+      "desc": "Изучаете приёмы метамагии, изменяющие ваши заклинания за очки чародейства. Число известных растёт (2 → 3 на 10 ур. → 4 на 17 ур.)."
+    },
+    {
+      "level": 5,
+      "name": "Чародейское восстановление",
+      "desc": "Раз на день на коротком отдыхе восстанавливаете очки чародейства, равные половине вашего уровня чародея."
+    },
+    {
+      "level": 7,
+      "name": "Воплощённое чародейство",
+      "desc": "Активируя Врождённое чародейство, можете одновременно потратить очки чародейства на метамагию к одному заклинанию без обычных ограничений."
+    },
+    {
+      "level": 20,
+      "name": "Апофеоз тайной магии",
+      "desc": "Пока активно Врождённое чародейство, применение одной метамагии в ход не стоит очков чародейства."
+    }
+  ]
+}

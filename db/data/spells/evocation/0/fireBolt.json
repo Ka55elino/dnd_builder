@@ -1,0 +1,24 @@
+{
+  "id": "fireBolt",
+  "name": "Огненный снаряд",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "evocation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Метаете сгусток огня; дальнобойная атака заклинанием, урон огнём (растёт с уровнем). Поджигает горючие незакреплённые предметы.",
+  "casting": {
+    "time": "1 действие",
+    "range": "36 м",
+    "components": "В, С",
+    "duration": "Мгновенно"
+  },
+  "damage": {
+    "dice": "1d10",
+    "type": "fire",
+    "scaling": "cantrip"
+  }
+}

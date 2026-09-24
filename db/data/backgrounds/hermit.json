@@ -1,0 +1,17 @@
+{
+  "id": "hermit",
+  "name": "Отшельник",
+  "abilities": {
+    "options": [
+      "con",
+      "wis",
+      "cha"
+    ]
+  },
+  "feat": "healer",
+  "skills": [
+    "medicine",
+    "religion"
+  ],
+  "tool": "Набор травника"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "slashingFlourish",
+  "name": "Росчерк: Рубящий",
+  "kind": "martial",
+  "subclass": "swords",
+  "level": 3,
+  "action": "free",
+  "desc": "Тратя Кость вдохновения при попадании: доп. урон = кости цели и ещё одному существу в 1,5 м от вас.",
+  "damage": {
+    "dice": "1d6",
+    "type": "slashing"
+  }
+}

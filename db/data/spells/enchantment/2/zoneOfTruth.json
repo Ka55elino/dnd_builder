@@ -1,0 +1,14 @@
+{
+  "id": "zoneOfTruth",
+  "name": "Зона истины",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "enchantment",
+  "classes": [
+    "bard",
+    "cleric",
+    "paladin"
+  ],
+  "desc": "В сфере 4,5 м существа не могут намеренно лгать (спасбросок Харизмы)."
+}

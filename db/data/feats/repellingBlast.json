@@ -1,0 +1,10 @@
+{
+  "id": "repellingBlast",
+  "name": "Отталкивающий взрыв",
+  "category": "invocation",
+  "level": 1,
+  "desc": "Попав «Мистическим взрывом», можете оттолкнуть цель на 3 м по прямой.",
+  "prereq": {
+    "blast": true
+  }
+}

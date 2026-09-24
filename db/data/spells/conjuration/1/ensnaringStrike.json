@@ -1,0 +1,23 @@
+{
+  "id": "ensnaringStrike",
+  "name": "Опутывающий удар",
+  "kind": "spell",
+  "action": "bonus",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "ranger"
+  ],
+  "desc": "Следующее попадание оружием оплетает цель лозой: спасбросок Силы или «Опутана». Опутанная получает 1d6 колющего урона в начале своих ходов. Концентрация до 1 минуты.",
+  "casting": {
+    "time": "1 бонусное действие",
+    "range": "На себя",
+    "components": "В",
+    "duration": "Конц., 1 мин",
+    "concentration": true
+  },
+  "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+  }
+}

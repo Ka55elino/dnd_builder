@@ -1,0 +1,11 @@
+{
+  "id": "skilled",
+  "name": "Умелый",
+  "category": "origin",
+  "level": 1,
+  "desc": "Владение любыми тремя навыками или инструментами.",
+  "skillChoice": {
+    "choose": 3,
+    "from": "skills"
+  }
+}

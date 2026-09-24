@@ -1,0 +1,14 @@
+{
+  "id": "identify",
+  "name": "Опознание",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "cleric",
+    "wizard"
+  ],
+  "desc": "Узнаёте свойства магического предмета или наложенных на цель заклинаний."
+}

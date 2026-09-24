@@ -1,0 +1,14 @@
+{
+  "id": "dancingLights",
+  "name": "Пляшущие огни",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Создаёте до 4 парящих огоньков (или светящуюся фигуру) на 36 м. Концентрация."
+}

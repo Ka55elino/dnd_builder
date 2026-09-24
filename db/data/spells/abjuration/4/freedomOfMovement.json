@@ -1,0 +1,16 @@
+{
+  "id": "freedomOfMovement",
+  "name": "Свобода перемещения",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "abjuration",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger"
+  ],
+  "desc": "Цель не сковывается, не парализуется магией и игнорирует труднопроходимость."
+}

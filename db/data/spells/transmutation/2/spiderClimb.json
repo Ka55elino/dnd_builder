@@ -1,0 +1,14 @@
+{
+  "id": "spiderClimb",
+  "name": "Паучье лазание",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Касанием даёте существу скорость лазания и хождение по стенам/потолку. Концентрация до 1 часа."
+}

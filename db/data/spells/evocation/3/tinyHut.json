@@ -1,0 +1,13 @@
+{
+  "id": "tinyHut",
+  "name": "Крошечная хижина",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "evocation",
+  "classes": [
+    "bard",
+    "wizard"
+  ],
+  "desc": "Купол 3 м защищает до 9 существ от погоды и урона снаружи на 8 часов (ритуал)."
+}

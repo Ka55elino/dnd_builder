@@ -1,0 +1,24 @@
+{
+  "id": "detectMagic",
+  "name": "Обнаружение магии",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "cleric",
+    "druid",
+    "paladin",
+    "ranger",
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Чувствуете присутствие магии в пределах 9 м. Действием можно увидеть слабую ауру вокруг магического существа/предмета и узнать его школу магии.",
+  "casting": {
+    "time": "1 действие",
+    "range": "На себя (9 м)",
+    "components": "В, С",
+    "duration": "Концентрация, до 10 минут"
+  }
+}

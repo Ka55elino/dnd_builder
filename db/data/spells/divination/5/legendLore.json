@@ -1,0 +1,14 @@
+{
+  "id": "legendLore",
+  "name": "Сказания",
+  "kind": "spell",
+  "action": "action",
+  "level": 5,
+  "school": "divination",
+  "classes": [
+    "cleric",
+    "bard",
+    "wizard"
+  ],
+  "desc": "Узнаёте предания о знаменитом лице, месте или предмете."
+}

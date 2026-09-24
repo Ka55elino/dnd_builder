@@ -1,0 +1,17 @@
+{
+  "id": "incendiaryCloud",
+  "name": "Зажигательное облако",
+  "kind": "spell",
+  "action": "action",
+  "level": 8,
+  "school": "conjuration",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "desc": "Облако дыма и огня движется, нанося урон в начале ходов (спасбросок Ловкости). Концентрация.",
+  "damage": {
+    "dice": "10d8",
+    "type": "fire"
+  }
+}

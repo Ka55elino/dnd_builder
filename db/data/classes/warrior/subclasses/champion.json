@@ -1,0 +1,43 @@
+{
+  "id": "champion",
+  "name": "Чемпион",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Улучшенный критический удар",
+      "desc": "Критическое попадание оружием срабатывает на 19–20."
+    },
+    {
+      "level": 3,
+      "name": "Замечательный атлет",
+      "desc": "Преимущество на проверки Инициативы и Атлетики; после критического попадания можете переместиться на половину скорости."
+    },
+    {
+      "level": 7,
+      "name": "Дополнительный боевой стиль",
+      "desc": "Получаете ещё одну черту боевого стиля.",
+      "choice": {
+        "type": "fightingStyle",
+        "pick": 1,
+        "from": "fightingStyles"
+      }
+    },
+    {
+      "level": 10,
+      "name": "Героический воин",
+      "desc": "В начале своего хода в бою, если у вас нет Героического вдохновения, вы его получаете."
+    },
+    {
+      "level": 15,
+      "name": "Высший критический удар",
+      "desc": "Критическое попадание оружием срабатывает на 18–20."
+    },
+    {
+      "level": 18,
+      "name": "Выживший",
+      "desc": "Преимущество на спасброски от смерти; в начале хода при 'при смерти' (не 0 хитов) лечитесь на 5 + мод. Телосложения."
+    }
+  ]
+}

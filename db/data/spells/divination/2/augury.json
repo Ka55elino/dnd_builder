@@ -1,0 +1,12 @@
+{
+  "id": "augury",
+  "name": "Предзнаменование",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "divination",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "Узнаёте, к добру или худу приведёт действие в ближайшие 30 минут."
+}

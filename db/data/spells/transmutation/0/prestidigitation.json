@@ -1,0 +1,21 @@
+{
+  "id": "prestidigitation",
+  "name": "Фокусы",
+  "kind": "spell",
+  "action": "action",
+  "level": 0,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "warlock",
+    "wizard"
+  ],
+  "desc": "Мелкий магический трюк: безобидный сенсорный эффект, зажечь/потушить огонёк, почистить или испачкать предмет, охладить/согреть, создать метку или безделушку.",
+  "casting": {
+    "time": "1 действие",
+    "range": "3 м",
+    "components": "В, С",
+    "duration": "до 1 часа"
+  }
+}

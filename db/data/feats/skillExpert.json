@@ -1,0 +1,15 @@
+{
+  "id": "skillExpert",
+  "name": "Эксперт навыков",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "+1 к любой хар-ке; владение навыком и компетентность."
+}

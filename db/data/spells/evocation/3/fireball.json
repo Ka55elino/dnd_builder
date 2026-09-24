@@ -1,0 +1,17 @@
+{
+  "id": "fireball",
+  "name": "Огненный шар",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "evocation",
+  "classes": [
+    "wizard",
+    "sorcerer"
+  ],
+  "desc": "Взрыв пламени в сфере 6 м на расстоянии до 45 м: спасбросок Ловкости, урон огнём.",
+  "damage": {
+    "dice": "8d6",
+    "type": "fire"
+  }
+}

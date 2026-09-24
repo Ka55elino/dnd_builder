@@ -1,0 +1,17 @@
+{
+  "id": "guard",
+  "name": "Стражник",
+  "abilities": {
+    "options": [
+      "str",
+      "int",
+      "wis"
+    ]
+  },
+  "feat": "alert",
+  "skills": [
+    "athletics",
+    "perception"
+  ],
+  "tool": "Игровой набор"
+}

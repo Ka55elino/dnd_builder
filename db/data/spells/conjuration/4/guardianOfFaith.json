@@ -1,0 +1,17 @@
+{
+  "id": "guardianOfFaith",
+  "name": "Страж веры",
+  "kind": "spell",
+  "action": "action",
+  "level": 4,
+  "school": "conjuration",
+  "classes": [
+    "cleric",
+    "paladin"
+  ],
+  "desc": "Призрачный страж наносит 20 излучением врагам рядом (спасбросок Ловкости за половину).",
+  "damage": {
+    "dice": "20",
+    "type": "radiant"
+  }
+}

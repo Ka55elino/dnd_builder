@@ -1,0 +1,21 @@
+{
+  "id": "longstrider",
+  "name": "Шаги великана",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "druid",
+    "ranger",
+    "wizard"
+  ],
+  "desc": "Касанием увеличиваете скорость существа на 3 м на 1 час.",
+  "casting": {
+    "time": "1 действие",
+    "range": "Касание",
+    "components": "В, С, М",
+    "duration": "1 час"
+  }
+}

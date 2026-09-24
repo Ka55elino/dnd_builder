@@ -1,0 +1,12 @@
+{
+  "id": "beaconOfHope",
+  "name": "Маяк надежды",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "abjuration",
+  "classes": [
+    "cleric"
+  ],
+  "desc": "До существ: преимущество на спасброски Мудрости и Смерти, макс. лечение. Концентрация."
+}

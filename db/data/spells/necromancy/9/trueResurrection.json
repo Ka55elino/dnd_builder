@@ -1,0 +1,13 @@
+{
+  "id": "trueResurrection",
+  "name": "Истинное воскрешение",
+  "kind": "spell",
+  "action": "action",
+  "level": 9,
+  "school": "necromancy",
+  "classes": [
+    "cleric",
+    "druid"
+  ],
+  "desc": "Полностью возвращаете к жизни существо, мёртвое не более 200 лет, создавая новое тело при нужде."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "banishingArrow",
+  "name": "Изгоняющая стрела",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "pool": "arcaneShot",
+  "level": 3,
+  "action": "free",
+  "desc": "При попадании цель совершает спасбросок Харизмы или изгоняется в Страну фей до конца своего следующего хода. С 18 уровня — ещё 2d6 урона силовым полем.",
+  "damage": {
+    "type": "force",
+    "scaling": {
+      "18": "2d6"
+    }
+  }
+}
