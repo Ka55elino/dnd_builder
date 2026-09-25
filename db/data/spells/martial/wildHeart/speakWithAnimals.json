@@ -1,9 +1,9 @@
 {
   "id": "whSpeakWithAnimals",
-  "name": "Разговор с животными (ритуал)",
+  "name": "Speak with Animals (Ritual)",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 3,
   "action": "action",
-  "desc": "Ритуалом (без траты ячейки) на 10 минут получаете возможность общаться со зверями, задавать им вопросы и понимать ответы в меру их разума."
+  "desc": "As a Ritual (without expending a spell slot), for 10 minutes you can communicate with Beasts, ask them questions, and understand their answers to the extent of their intelligence."
 }

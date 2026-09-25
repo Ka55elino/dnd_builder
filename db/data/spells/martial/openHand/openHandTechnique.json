@@ -1,8 +1,8 @@
 {
   "id": "openHandTechnique",
-  "name": "Техника открытой руки",
+  "name": "Open Hand Technique",
   "kind": "martial",
   "subclass": "openHand",
   "level": 3,
-  "desc": "Без доп. затрат ци: попав ударом Шквала ударов, наложите один эффект — сбить с ног (спасбросок Ловкости), оттолкнуть на 4,5 м (спасбросок Силы) или лишить цель реакции до конца её следующего хода."
+  "desc": "No extra Focus Points: when you hit with a Flurry of Blows strike, you impose one effect: knock the target Prone (Dexterity saving throw), push it 15 feet (Strength saving throw), or deny it Reactions until the end of its next turn."
 }

@@ -1,6 +1,6 @@
 {
   "id": "suggestion",
-  "name": "Внушение",
+  "name": "Suggestion",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо: спасбросок Мудрости или следует разумному внушённому курсу действий."
+  "desc": "A creature makes a Wisdom saving throw or follows a reasonable suggested course of action."
 }

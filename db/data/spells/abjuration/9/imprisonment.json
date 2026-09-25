@@ -1,6 +1,6 @@
 {
   "id": "imprisonment",
-  "name": "Заточение",
+  "name": "Imprisonment",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,5 +9,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Заключаете существо (спасбросок Мудрости) в темницу — погребение, оковы или крошечную клетку."
+  "desc": "You imprison a creature (Wisdom saving throw): burial, chains, or a tiny cage."
 }

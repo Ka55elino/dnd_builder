@@ -1,7 +1,7 @@
 {
   "id": "empoweredSpell",
-  "name": "Мощное заклинание",
+  "name": "Empowered Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Перебрасываете до (мод. Харизмы) костей урона заклинания; берёте новые результаты. Можно совмещать с другой метамагией."
+  "desc": "You reroll up to (Charisma modifier) of a spell's damage dice and use the new rolls. You can combine this with another Metamagic option."
 }

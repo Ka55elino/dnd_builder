@@ -2,7 +2,7 @@
 
 package main
 
-// devMode — true при `wails dev` (Wails собирает с тегом dev).
-// В dev-режиме БД удаляется при каждом запуске и собирается заново
-// из db/schema + db/data (см. openDB).
+// devMode is true under `wails dev` (Wails builds with the dev tag).
+// In dev mode the database is deleted on every launch and rebuilt
+// from db/schema + db/data (see openDB).
 const devMode = true

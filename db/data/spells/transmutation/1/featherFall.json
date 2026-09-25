@@ -1,6 +1,6 @@
 {
   "id": "featherFall",
-  "name": "Падение пёрышком",
+  "name": "Feather Fall",
   "kind": "spell",
   "action": "reaction",
   "level": 1,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Реакцией до 5 падающих существ снижают скорость падения и не получают урона."
+  "desc": "As a Reaction, up to 5 falling creatures slow their descent and take no falling damage."
 }

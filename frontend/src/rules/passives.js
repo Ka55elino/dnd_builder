@@ -1,78 +1,78 @@
 /**
- * Пассивные эффекты персонажа — то, что действует всегда и не тратит действие:
+ * Character passive effects — things that are always on and cost no action:
  *
- *   effects   — сводка структурированных эффектов, по группам
- *               (сопротивления, чувства, преимущества, помехи, бонусы…)
- *               источники: гранты черт расы { type: 'effect' }, гранты умений
- *               класса { type: 'effect' | 'passive' }, поле effects черт/воззваний
- *   abilities — пассивные умения списком (Уклонение, Мастерство оружия,
- *               воззвания, боевые стили, черты…) с описанием для подсказки
+ *   effects   — summary of structured effects, by group
+ *               (resistances, senses, advantages, disadvantages, bonuses…)
+ *               sources: race trait grants { type: 'effect' }, class feature
+ *               grants { type: 'effect' | 'passive' }, the effects field of feats/invocations
+ *   abilities — list of passive features (Evasion, Weapon Mastery,
+ *               invocations, fighting styles, feats…) with a description for the tooltip
  *
- * Умение класса считается пассивным, если у него нет карточки действия
- * (записи в таблице способностей с тем же именем), это не контейнер выбора
- * и не «служебное» умение (Заклинательство, Боевой стиль…).
- * Явно переопределить можно полем умения passive: true | false.
+ * A class feature is considered passive if it has no action card
+ * (an entry in the abilities table with the same name), is not a choice container
+ * and is not a "service" feature (Spellcasting, Fighting Style…).
+ * Can be overridden explicitly with the feature field passive: true | false.
  */
 import { DAMAGE_TYPES } from './labels.js';
 import { ABILITIES } from './abilities.js';
 import { SKILLS } from './skills.js';
 
-// группы сводки — в этом порядке
+// summary groups — in this order
 export const EFFECT_GROUPS = [
-    { id: 'resistance', title: 'Сопротивление' },
-    { id: 'immunity', title: 'Иммунитет' },
-    { id: 'sense', title: 'Чувства' },
-    { id: 'advantage', title: 'Преимущество' },
-    { id: 'disadvantage', title: 'Помеха' },
-    { id: 'bonus', title: 'Бонусы' },
-    { id: 'note', title: 'Прочее' },
+    { id: 'resistance', title: 'Resistance' },
+    { id: 'immunity', title: 'Immunity' },
+    { id: 'sense', title: 'Senses' },
+    { id: 'advantage', title: 'Advantage' },
+    { id: 'disadvantage', title: 'Disadvantage' },
+    { id: 'bonus', title: 'Bonuses' },
+    { id: 'note', title: 'Other' },
 ];
 
-// служебные умения: сами по себе ничего не дают (их суть — выбор, ячейки, ресурсы)
+// service features: give nothing by themselves (their point is choices, slots, resources)
 const SERVICE =
-    /^(Заклинательство|Магия договора|Использование заклинаний|Мистические инвокации|Метамагия|Мистический арканум|Боевой стиль|Дополнительный боевой стиль|Повышение характеристик|Дар договора|Источник магии|Очки сосредоточения)/i;
+    /^(Spellcasting|Pact Magic|Eldritch Invocations|Metamagic|Mystic Arcanum|Fighting Style|Additional Fighting Style|Ability Score Improvement|Pact Boon|Font of Magic|Sorcery Points|Focus Points)/i;
 
 const SENSES = {
-    darkvision: 'Тёмное зрение',
-    blindsight: 'Слепое зрение',
-    tremorsense: 'Чувство вибрации',
-    truesight: 'Истинное зрение',
+    darkvision: 'Darkvision',
+    blindsight: 'Blindsight',
+    tremorsense: 'Tremorsense',
+    truesight: 'Truesight',
 };
 
 const CONDITIONS = {
-    charmed: 'очарования',
-    frightened: 'испуга',
-    paralyzed: 'паралича',
-    poisoned: 'отравления',
-    poison: 'яда',
-    stunned: 'ошеломления',
-    magic: 'магии',
+    charmed: 'the Charmed condition',
+    frightened: 'the Frightened condition',
+    paralyzed: 'the Paralyzed condition',
+    poisoned: 'the Poisoned condition',
+    poison: 'poison',
+    stunned: 'the Stunned condition',
+    magic: 'magic',
 };
 
 const TARGETS = {
-    savingThrow: 'спасброски',
-    skillCheck: 'проверки',
-    attackRoll: 'броски атаки',
-    concentration: 'спасброски концентрации',
-    initiative: 'инициатива',
+    savingThrow: 'saving throws',
+    skillCheck: 'ability checks',
+    attackRoll: 'attack rolls',
+    concentration: 'Concentration saving throws',
+    initiative: 'Initiative',
 };
 
 const ABIL_SHORT = Object.fromEntries(
     Object.entries(ABILITIES ?? {}).map(([k, a]) => [k, a?.short ?? a?.name ?? k]),
 );
 const skillName = (id) => SKILLS.find((s) => s.id === id)?.name ?? id;
-// «сопротивление: огонь» — именительный падеж (в DAMAGE_TYPES — «уроном огнём»)
+// "resistance: fire" — lowercase noun form (DAMAGE_TYPES holds the capitalized names)
 const DMG_NOUN = {
-    acid: 'кислота', cold: 'холод', fire: 'огонь', force: 'силовое поле', lightning: 'электричество',
-    necrotic: 'некротическая энергия', poison: 'яд', psychic: 'психическая энергия', radiant: 'излучение',
-    thunder: 'звук', bludgeoning: 'дробящий', piercing: 'колющий', slashing: 'рубящий',
+    acid: 'acid', cold: 'cold', fire: 'fire', force: 'force', lightning: 'lightning',
+    necrotic: 'necrotic', poison: 'poison', psychic: 'psychic', radiant: 'radiant',
+    thunder: 'thunder', bludgeoning: 'bludgeoning', piercing: 'piercing', slashing: 'slashing',
 };
 const dmgName = (t) => DMG_NOUN[t] ?? DAMAGE_TYPES[t]?.name?.toLowerCase() ?? t;
-/** «Наложение рук (пул)» → «наложение рук» — для сравнения умения с карточкой действия. */
+/** "Lay On Hands (pool)" → "lay on hands" — to match a feature against an action card. */
 export const normName = (s) => String(s ?? '').toLowerCase().replace(/\s*\(.*?\)\s*/g, ' ').trim();
 const sign = (n) => (n >= 0 ? `+${n}` : `${n}`);
 
-/** Подстановка {chaMod}, {level}, {halfLevel}, {rageBonus}, {prof} в текст. */
+/** Substitutes {chaMod}, {level}, {halfLevel}, {rageBonus}, {prof} into text. */
 export function fillTemplate(text, ctx) {
     const vars = {
         level: ctx.level,
@@ -84,23 +84,23 @@ export function fillTemplate(text, ctx) {
     return String(text ?? '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? String(vars[k]) : m));
 }
 
-/** Условие эффекта — «против очарования», «Скрытность», «на солнце». */
+/** Effect condition — "against the Charmed condition", "Stealth", "in sunlight". */
 function whenText(w = {}) {
     const parts = [];
-    if (w.against && ABIL_SHORT[w.against]) parts.push(ABIL_SHORT[w.against]); // «спасброски ИНТ»
-    else if (w.against) parts.push(`против ${CONDITIONS[w.against] ?? w.against}`);
+    if (w.against && ABIL_SHORT[w.against]) parts.push(ABIL_SHORT[w.against]); // "INT saving throws"
+    else if (w.against) parts.push(`against ${CONDITIONS[w.against] ?? w.against}`);
     if (w.skill) parts.push(skillName(w.skill));
-    if (w.in === 'sunlight') parts.push('на солнечном свету');
+    if (w.in === 'sunlight') parts.push('in sunlight');
     else if (w.in) parts.push(w.in);
-    if (w.weapon === 'ranged') parts.push('дальнобойное оружие');
-    if (w.weapon === 'melee') parts.push('рукопашное оружие');
-    if (w.armored) parts.push('в доспехе');
+    if (w.weapon === 'ranged') parts.push('ranged weapons');
+    if (w.weapon === 'melee') parts.push('melee weapons');
+    if (w.armored) parts.push('while wearing armor');
     return parts.join(', ');
 }
 
 /**
- * Эффект → { group, key, label } для сводки или null, если такой эффект
- * в сводку не выносим (он уже учтён в листе или описан самим умением).
+ * Effect → { group, key, label } for the summary, or null if the effect
+ * is not shown in the summary (already accounted for in the sheet or described by the feature itself).
  */
 function effectLine(e, ctx) {
     if (!e) return null;
@@ -111,7 +111,7 @@ function effectLine(e, ctx) {
             return { group: 'immunity', key: `imm:${e.value}`, label: CONDITIONS[e.value] ?? dmgName(e.value) };
         case 'sense': {
             const name = SENSES[e.sense] ?? e.sense;
-            return { group: 'sense', key: `sense:${e.sense}`, label: `${name} ${e.range} фт.`, range: e.range, note: e.note };
+            return { group: 'sense', key: `sense:${e.sense}`, label: `${name} ${e.range} ft.`, range: e.range, note: e.note };
         }
         case 'advantage':
         case 'disadvantage': {
@@ -122,19 +122,19 @@ function effectLine(e, ctx) {
         }
         case 'bonus': {
             if (e.target === 'note') return { group: 'note', key: `note:${e.note}`, label: fillTemplate(e.note, ctx) };
-            if (ABILITIES?.[e.target]) return null; // бонусы характеристик уже в значениях
+            if (ABILITIES?.[e.target]) return null; // ability bonuses are already in the scores
             let v = e.value;
             if (e.ability) v = ctx.mods?.[e.ability] ?? 0;
             else if (v === 'prof') v = ctx.prof;
             else if (e.per === 'level') v = Number(v) * ctx.level;
             if (typeof v !== 'number') return null;
             const names = {
-                speed: `Скорость ${sign(v)} фт.`,
-                initiative: `Инициатива ${sign(v)}`,
-                hpMax: `Хиты ${sign(v)}`,
-                ac: `КД ${sign(v)}`,
-                attackRoll: `Атака ${sign(v)}`,
-                damage: `Урон ${sign(v)}`,
+                speed: `Speed ${sign(v)} ft.`,
+                initiative: `Initiative ${sign(v)}`,
+                hpMax: `HP ${sign(v)}`,
+                ac: `AC ${sign(v)}`,
+                attackRoll: `Attack ${sign(v)}`,
+                damage: `Damage ${sign(v)}`,
             };
             const base = names[e.target];
             if (!base) return null;
@@ -142,17 +142,17 @@ function effectLine(e, ctx) {
             return { group: 'bonus', key: `bonus:${e.target}:${cond}`, label: cond ? `${base} (${cond})` : base, value: v };
         }
         default:
-            // set / reroll / rider… — если есть пояснение, показываем его
+            // set / reroll / rider… — show the note if there is one
             return e.note ? { group: 'note', key: `note:${e.note}`, label: fillTemplate(e.note, ctx) } : null;
     }
 }
 
 /**
  * @param src {
- *   raceTraits, classFeatures, subclassFeatures,  — уже отфильтрованы по уровню
+ *   raceTraits, classFeatures, subclassFeatures,  — already filtered by level
  *   raceName, className, subclassName,
- *   feats: [{ ...feat, sourceTitle }]               — выбранные черты/стили/воззвания
- *   activeNames: Set<string>                        — имена умений с карточкой действия
+ *   feats: [{ ...feat, sourceTitle }]               — chosen feats/styles/invocations
+ *   activeNames: Set<string>                        — names of features with an action card
  *   ctx: { level, prof, mods }
  * }
  * @returns {{ effects: [{ id, title, items: [{ label, sources: [{ name, desc }] }] }], abilities: [...] }}
@@ -164,7 +164,7 @@ export function collectPassives(src) {
         const l = effectLine(e, ctx);
         if (!l) return;
         const prev = lines.get(l.key);
-        // чувства: берём наибольшую дальность
+        // senses: take the longest range
         if (prev && l.group === 'sense' && l.range > prev.range) {
             prev.label = l.label;
             prev.range = l.range;
@@ -177,7 +177,7 @@ export function collectPassives(src) {
     const addAbility = (f, source, extra = []) =>
         abilities.push({ name: f.name, desc: f.desc ?? '', level: f.level ?? null, source, notes: extra });
 
-    // --- раса: эффекты — в сводку; текстовые черты без грантов — в умения ---
+    // --- race: effects go to the summary; text traits without grants go to abilities ---
     for (const t of src.raceTraits ?? []) {
         const grants = t.grants ?? [];
         const source = { name: t.name, desc: t.desc, from: src.raceName };
@@ -185,7 +185,7 @@ export function collectPassives(src) {
         if (!grants.length && t.passive !== false) addAbility(t, src.raceName);
     }
 
-    // --- класс и подкласс ---
+    // --- class and subclass ---
     const features = [
         ...(src.classFeatures ?? []).map((f) => [f, src.className]),
         ...(src.subclassFeatures ?? []).map((f) => [f, src.subclassName]),
@@ -204,7 +204,7 @@ export function collectPassives(src) {
                 !SERVICE.test(f.name) &&
                 !src.activeNames?.has(normName(f.name));
         }
-        // одно и то же умение (Дополнительная атака / Движение без доспехов на 2 и 6 ур.) — один раз, последнее
+        // the same feature (Extra Attack / Unarmored Movement at lvl 2 and 6) — once, the latest
         if (passive) {
             const key = `${from}:${f.name}`;
             if (seenFeature.has(key)) {
@@ -216,7 +216,7 @@ export function collectPassives(src) {
         }
     }
 
-    // --- черты, боевые стили, воззвания ---
+    // --- feats, fighting styles, invocations ---
     for (const f of src.feats ?? []) {
         const source = { name: f.name, desc: f.desc, from: f.sourceTitle };
         (f.effects ?? f.data?.effects ?? []).forEach((e) => push(e, source));

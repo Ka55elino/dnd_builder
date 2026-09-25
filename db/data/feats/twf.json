@@ -1,9 +1,9 @@
 {
   "id": "twf",
-  "name": "Бой двумя оружиями",
+  "name": "Two-Weapon Fighting",
   "category": "fightingStyle",
   "level": 1,
-  "desc": "Добавляете модификатор характеристики к урону второго (бонусного) оружия.",
+  "desc": "You add your ability modifier to the damage of the second (Bonus Action) weapon attack.",
   "effects": [
     {
       "kind": "bonus",

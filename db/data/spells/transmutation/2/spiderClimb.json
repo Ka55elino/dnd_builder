@@ -1,6 +1,6 @@
 {
   "id": "spiderClimb",
-  "name": "Паучье лазание",
+  "name": "Spider Climb",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Касанием даёте существу скорость лазания и хождение по стенам/потолку. Концентрация до 1 часа."
+  "desc": "You touch a creature to give it a Climb Speed and the ability to move along walls and ceilings. Concentration, up to 1 hour."
 }

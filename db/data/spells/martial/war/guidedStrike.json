@@ -1,9 +1,9 @@
 {
   "id": "guidedStrike",
-  "name": "Направленный удар",
+  "name": "Guided Strike",
   "kind": "martial",
   "subclass": "war",
   "level": 3,
   "action": "free",
-  "desc": "Стоимость 1 использование Божественного канала. Прибавляете +10 к броску атаки (можно после броска, до результата)."
+  "desc": "Costs 1 use of Channel Divinity. You add +10 to an attack roll (you can do so after the roll, before the result)."
 }

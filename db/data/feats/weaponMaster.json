@@ -1,11 +1,11 @@
 {
   "id": "weaponMaster",
-  "name": "Мастер оружия",
+  "name": "Weapon Master",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; доп. свойства мастерства оружия."
+  "desc": "+1 Strength or Dexterity; extra weapon mastery properties."
 }

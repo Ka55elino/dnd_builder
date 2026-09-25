@@ -1,12 +1,20 @@
 {
   "id": "secondWind",
-  "name": "Второе дыхание",
+  "name": "Second Wind",
   "kind": "class",
   "level": 1,
-  "classes": ["warrior"],
-  "desc": "Бонусным действием восстанавливаете 1d10 + уровень воина хитов.",
-  "uses": { "count": 2, "per": "shortRest" },
+  "classes": [
+    "warrior"
+  ],
+  "desc": "As a Bonus Action, you regain Hit Points equal to 1d10 + your Fighter level.",
+  "uses": {
+    "count": 2,
+    "per": "shortRest"
+  },
   "effects": [
-    { "kind": "heal", "value": "1d10+level" }
+    {
+      "kind": "heal",
+      "value": "1d10+level"
+    }
   ]
 }

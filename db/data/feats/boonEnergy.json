@@ -1,7 +1,7 @@
 {
   "id": "boonEnergy",
-  "name": "Дар сопротивления энергии",
+  "name": "Boon of Energy Resistance",
   "category": "boon",
   "level": 19,
-  "desc": "Сопротивление к 2 типам урона; иногда игнор урона."
+  "desc": "Resistance to 2 damage types; sometimes negate damage."
 }

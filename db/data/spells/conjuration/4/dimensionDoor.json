@@ -1,6 +1,6 @@
 {
   "id": "dimensionDoor",
-  "name": "Дверь в измерение",
+  "name": "Dimension Door",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Мгновенно телепортируетесь до 150 м (можно с существом)."
+  "desc": "You instantly teleport up to 500 feet (you can bring a creature with you)."
 }

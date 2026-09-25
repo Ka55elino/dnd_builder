@@ -1,7 +1,7 @@
 {
   "id": "armorOfShadows",
-  "name": "Доспех теней",
+  "name": "Armor of Shadows",
   "category": "invocation",
   "level": 1,
-  "desc": "По желанию творите «Доспехи мага» на себя без траты ячейки."
+  "desc": "You can cast Mage Armor on yourself at will, without expending a spell slot."
 }

@@ -1,6 +1,6 @@
 {
   "id": "hermit",
-  "name": "Отшельник",
+  "name": "Hermit",
   "abilities": {
     "options": [
       "con",
@@ -13,5 +13,5 @@
     "medicine",
     "religion"
   ],
-  "tool": "Набор травника"
+  "tool": "Herbalism Kit"
 }

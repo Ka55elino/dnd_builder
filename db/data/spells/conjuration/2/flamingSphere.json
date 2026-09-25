@@ -1,6 +1,6 @@
 {
   "id": "flamingSphere",
-  "name": "Пылающая сфера",
+  "name": "Flaming Sphere",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,7 +9,7 @@
     "druid",
     "wizard"
   ],
-  "desc": "Огненный шар 1,5 м: врезаясь в существо — спасбросок Ловкости, урон огнём; двигаете бонусным действием. Концентрация.",
+  "desc": "A 5-foot ball of fire: when it rams a creature, Dexterity saving throw, Fire damage; you move it as a Bonus Action. Concentration.",
   "damage": {
     "dice": "2d6",
     "type": "fire"

@@ -1,9 +1,9 @@
 {
   "id": "tripAttack",
-  "name": "Подсечка",
+  "name": "Trip Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При попадании доп. урон = кость; цель сбита с ног (спасбросок Силы).",
+  "desc": "On a hit, extra damage equal to the die; the target is knocked Prone (Strength saving throw).",
   "pool": "maneuver"
 }

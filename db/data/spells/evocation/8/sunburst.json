@@ -1,6 +1,6 @@
 {
   "id": "sunburst",
-  "name": "Вспышка солнца",
+  "name": "Sunburst",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Ослепительная вспышка в сфере 18 м: спасбросок Тел., урон излучением и слепота.",
+  "desc": "A dazzling flash in a 60-foot Sphere: Constitution saving throw, Radiant damage and Blinded.",
   "damage": {
     "dice": "12d6",
     "type": "radiant"

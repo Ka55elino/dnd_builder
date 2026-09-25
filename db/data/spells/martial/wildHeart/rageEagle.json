@@ -1,9 +1,9 @@
 {
   "id": "whRageEagle",
-  "name": "Ярость: Орёл",
+  "name": "Rage: Eagle",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 3,
   "action": "bonus",
-  "desc": "Вариант «Ярости дикой природы». Пока вы в ярости, можете бонусным действием совершать Рывок и Отход; атаки по возможности против вас — с помехой."
+  "desc": "Rage of the Wilds variant. While your Rage is active, you can take the Dash and Disengage actions as a Bonus Action; Opportunity Attacks against you have Disadvantage."
 }

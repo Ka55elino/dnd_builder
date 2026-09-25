@@ -1,12 +1,12 @@
 {
   "id": "enfeeblingArrow",
-  "name": "Ослабляющая стрела",
+  "name": "Enfeebling Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "+2d6 урона некротической энергией; цель совершает спасбросок Телосложения, иначе её урон от атак оружием уменьшается вдвое до начала вашего следующего хода.",
+  "desc": "+2d6 Necrotic damage; the target makes a Constitution saving throw, or the damage of its weapon attacks is halved until the start of your next turn.",
   "damage": {
     "dice": "2d6",
     "type": "necrotic",

@@ -1,11 +1,11 @@
 {
   "id": "cosmicOmen",
-  "name": "Космическое знамение",
+  "name": "Cosmic Omen",
   "kind": "martial",
   "subclass": "stars",
   "level": 6,
   "action": "reaction",
-  "desc": "Реакцией, когда существо в 9 м совершает бросок атаки, спасбросок или проверку, прибавляете или вычитаете d6 (по вашему знамению). Число применений равно бонусу мастерства (на длинный отдых).",
+  "desc": "As a Reaction, when a creature within 30 feet makes an attack roll, saving throw, or ability check, you add or subtract a d6 (according to your portent). Number of uses equals your Proficiency Bonus (per Long Rest).",
   "uses": {
     "count": 2,
     "per": "longRest",

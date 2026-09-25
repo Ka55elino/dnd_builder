@@ -1,11 +1,11 @@
 {
   "id": "instinctiveCharm",
-  "name": "Инстинктивное очарование",
+  "name": "Instinctive Charm",
   "kind": "martial",
   "subclass": "enchantment",
   "level": 6,
   "action": "reaction",
-  "desc": "Реакцией, когда видимое существо в 9 м атакует вас, перенаправляете атаку на ближайшее другое существо (спасбросок Мудрости). Раз до отдыха на цель.",
+  "desc": "As a Reaction, when a creature you can see within 30 feet attacks you, you redirect the attack to the nearest other creature (Wisdom saving throw). Once per rest per target.",
   "uses": {
     "count": 1,
     "per": "longRest"

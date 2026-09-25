@@ -1,6 +1,6 @@
 {
   "id": "thaumaturgy",
-  "name": "Чудотворство",
+  "name": "Thaumaturgy",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,11 +8,11 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Мелкое чудо: усиливаете голос, мигаете огнём, вызываете дрожь земли, звук или распахиваете дверь.",
+  "desc": "A minor wonder: you amplify your voice, make flames flicker, cause harmless tremors in the ground, create a sound, or throw open a door.",
   "casting": {
-    "time": "1 действие",
-    "range": "9 м",
-    "components": "В",
-    "duration": "до 1 минуты"
+    "time": "1 action",
+    "range": "30 feet",
+    "components": "V",
+    "duration": "up to 1 minute"
   }
 }

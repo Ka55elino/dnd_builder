@@ -1,15 +1,15 @@
 /**
- * Формулы в данных (без eval). Используются для max ресурсов и т.п.
+ * Formulas in data (no eval). Used for resource max etc.
  *
- *   3                                  — число
- *   "level"                            — уровень класса
- *   "prof"                             — бонус мастерства
- *   { "byLevel": { "1": 2, "3": 3 } }  — таблица: берётся значение
- *                                        для наибольшего ключа ≤ уровня
- *   { "abilityMod": "cha", "min": 1 }  — модификатор характеристики
- *   { "sum": [ ... ] }                 — сумма нескольких формул
+ *   3                                  — number
+ *   "level"                            — class level
+ *   "prof"                             — proficiency bonus
+ *   { "byLevel": { "1": 2, "3": 3 } }  — table: takes the value
+ *                                        for the largest key ≤ level
+ *   { "abilityMod": "cha", "min": 1 }  — ability modifier
+ *   { "sum": [ ... ] }                 — sum of several formulas
  *
- * Для любой формулы-объекта можно добавить "min" / "max".
+ * Any object formula may add "min" / "max".
  *
  * ctx: { level, prof, mods: { str, dex, ... } }
  */
@@ -31,7 +31,7 @@ export function evalFormula(f, ctx) {
     return Number(f) || 0;
 }
 
-/** Значение из таблицы { уровень: значение } для текущего уровня. */
+/** Value from a { level: value } table for the current level. */
 export function byLevel(table, level) {
     let best = 0;
     let bestLvl = -Infinity;
@@ -45,6 +45,6 @@ export function byLevel(table, level) {
     return best;
 }
 
-/** Таблица в формате v2: [[minLevel, value], ...] → значение для уровня. */
+/** v2-format table: [[minLevel, value], ...] → value for the level. */
 export const byLevelPairs = (pairs, level) =>
     byLevel(Object.fromEntries((pairs ?? []).map(([l, v]) => [l, v])), level);

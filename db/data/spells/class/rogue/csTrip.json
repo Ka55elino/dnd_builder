@@ -1,8 +1,10 @@
 {
   "id": "csTrip",
-  "name": "Хитрый удар: Подсечка",
+  "name": "Cunning Strike: Trip",
   "kind": "class",
   "level": 5,
-  "classes": ["rogue"],
-  "desc": "Стоимость 1 кость Скрытой атаки. Если цель размером не больше Большого — спасбросок Ловкости (Сл 8 + Лов + бонус мастерства), при провале сбита с ног."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 1 Sneak Attack die. If the target is Large or smaller, it makes a Dexterity saving throw (DC 8 + Dex + Proficiency Bonus) or is knocked Prone."
 }

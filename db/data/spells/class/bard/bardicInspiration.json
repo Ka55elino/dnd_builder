@@ -1,11 +1,34 @@
 {
   "id": "bardicInspiration",
-  "name": "Вдохновение барда",
+  "name": "Bardic Inspiration",
   "kind": "class",
   "level": 1,
-  "classes": ["bard"],
+  "classes": [
+    "bard"
+  ],
   "action": "bonus",
-  "uses": { "ability": "cha", "min": 1, "per": "longRest" },
-  "scaleDie": [[1, "d6"], [5, "d8"], [10, "d10"], [15, "d12"]],
-  "desc": "Бонусным действием даёте существу в 18 м Кость вдохновения. В течение 10 минут оно прибавляет её к одной проверке характеристики, броску атаки или спасброску. Число применений = модификатору Харизмы (восстанавливается на длинном отдыхе, а с 5 ур. — и на коротком)."
+  "uses": {
+    "ability": "cha",
+    "min": 1,
+    "per": "longRest"
+  },
+  "scaleDie": [
+    [
+      1,
+      "d6"
+    ],
+    [
+      5,
+      "d8"
+    ],
+    [
+      10,
+      "d10"
+    ],
+    [
+      15,
+      "d12"
+    ]
+  ],
+  "desc": "As a Bonus Action, you give a creature within 60 feet a Bardic Inspiration die. Within 10 minutes, it can add the die to one ability check, attack roll, or saving throw. Number of uses = your Charisma modifier (regained on a Long Rest, and starting at level 5 on a Short Rest as well)."
 }

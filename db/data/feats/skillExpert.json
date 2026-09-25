@@ -1,6 +1,6 @@
 {
   "id": "skillExpert",
-  "name": "Эксперт навыков",
+  "name": "Skill Expert",
   "category": "general",
   "level": 4,
   "asi": [
@@ -11,5 +11,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 к любой хар-ке; владение навыком и компетентность."
+  "desc": "+1 to any ability score; proficiency and Expertise in a skill."
 }

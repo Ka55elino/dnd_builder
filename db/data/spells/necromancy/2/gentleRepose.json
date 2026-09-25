@@ -1,6 +1,6 @@
 {
   "id": "gentleRepose",
-  "name": "Мирный покой",
+  "name": "Gentle Repose",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,5 +9,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Тело защищено от разложения и не может стать нежитью; продлевает срок оживления."
+  "desc": "A body is protected from decay and can't become Undead; extends the time limit for raising it from the dead."
 }

@@ -1,10 +1,13 @@
 {
   "id": "turnTheTide",
-  "name": "Переломить ход",
+  "name": "Turn the Tide",
   "kind": "martial",
   "subclass": "crown",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Бонусным действием до 6 существ в 9 м (с 1+ хитом) восстанавливают 1d6 + модификатор Харизмы хитов.",
-  "damage": { "dice": "1d6", "type": "radiant" }
+  "desc": "Costs 1 use of Channel Divinity. As a Bonus Action, up to 6 creatures within 30 feet (with at least 1 Hit Point) regain Hit Points equal to 1d6 + your Charisma modifier.",
+  "damage": {
+    "dice": "1d6",
+    "type": "radiant"
+  }
 }

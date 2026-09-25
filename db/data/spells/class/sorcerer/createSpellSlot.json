@@ -1,9 +1,11 @@
 {
   "id": "createSpellSlot",
-  "name": "Очки → ячейка заклинания",
+  "name": "Points → Spell Slot",
   "kind": "class",
   "level": 2,
-  "classes": ["sorcerer"],
+  "classes": [
+    "sorcerer"
+  ],
   "action": "bonus",
-  "desc": "Бонусным действием тратите очки чародейства, создавая ячейку: 1 круг — 2 очка, 2 круг — 3, 3 круг — 5, 4 круг — 6, 5 круг — 7."
+  "desc": "As a Bonus Action, you spend Sorcery Points to create a spell slot: level 1 — 2 points, level 2 — 3, level 3 — 5, level 4 — 6, level 5 — 7."
 }

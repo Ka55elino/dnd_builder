@@ -1,10 +1,13 @@
 {
   "id": "beastOfSea",
-  "name": "Спутник: Зверь Моря",
+  "name": "Companion: Beast of the Sea",
   "kind": "martial",
   "subclass": "beastMaster",
   "level": 3,
   "action": "bonus",
-  "desc": "Водный спутник (крокодил/скат и т.п.). КЗ 13 + мод. Мудрости, хиты {beastHp} (5 × ур.), скорость 1,5 м, плавание 12 м, дыхание под водой. Атака «Укус/жало»: досягаемость 1,5 м; при попадании цель размером не больше Большого может быть схвачена (Сл побега = ваша Сл заклинаний).",
-  "damage": { "dice": "1d6", "type": "piercing" }
+  "desc": "Aquatic companion (crocodile, ray, etc.). AC 13 + your Wisdom modifier, Hit Points {beastHp} (5 × level), Speed 5 feet, Swim 40 feet, water breathing. Bite/Sting attack: reach 5 feet; on a hit, a Large or smaller target can be Grappled (escape DC = your spell save DC).",
+  "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+  }
 }

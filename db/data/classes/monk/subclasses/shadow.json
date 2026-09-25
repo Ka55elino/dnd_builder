@@ -1,28 +1,28 @@
 {
   "id": "shadow",
-  "name": "Путь тени",
+  "name": "Warrior of Shadow",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "monk",
   "features": [
     {
       "level": 3,
-      "name": "Искусство тени",
-      "desc": "Изучаете заговор «Малая иллюзия». Тратя 1 очко ци, действием создаёте «Тьму» на 10 минут и видите сквозь неё. Также осваиваете «Шаг тени»."
+      "name": "Shadow Arts",
+      "desc": "You learn the Minor Illusion cantrip. By spending 1 Focus Point, you can use an action to create Darkness for 10 minutes and see through it. You also master Shadow Step."
     },
     {
       "level": 6,
-      "name": "Шаг тени",
-      "desc": "Находясь в тусклом свете или темноте, бонусным действием телепортируетесь до 18 м в другую область тусклого света/темноты; следующая ближняя атака до конца хода — с преимуществом."
+      "name": "Shadow Step",
+      "desc": "While in Dim Light or Darkness, as a Bonus Action, you teleport up to 60 feet to another area of Dim Light or Darkness; your next melee attack before the end of the turn has Advantage."
     },
     {
       "level": 11,
-      "name": "Плащ теней",
-      "desc": "Действием в тусклом свете/темноте становитесь невидимым, пока не атакуете, не сотворите заклинание или не окажетесь на ярком свету."
+      "name": "Cloak of Shadows",
+      "desc": "As an action in Dim Light or Darkness, you become Invisible until you attack, cast a spell, or enter Bright Light."
     },
     {
       "level": 17,
-      "name": "Незримость",
-      "desc": "Действием и 3 очка ци становитесь незримым для существ и приборов на 1 минуту; атаки по вам с помехой, ваши атаки по отмеченным — с преимуществом."
+      "name": "Imperceptible Form",
+      "desc": "As an action, by spending 3 Focus Points, you become undetectable by creatures and devices for 1 minute; attacks against you have Disadvantage, and your attacks against marked targets have Advantage."
     }
   ]
 }

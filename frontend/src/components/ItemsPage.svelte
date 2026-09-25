@@ -1,8 +1,8 @@
 <script>
     /**
-     * «Предметы» — справочник всего снаряжения (включая именное)
-     * и своё снаряжение: создать, изменить, скопировать, удалить (хранится в БД).
-     * onBack() — в меню
+     * “Items” — reference of all equipment (including named items)
+     * and custom equipment: create, edit, copy, delete (stored in the DB).
+     * onBack() — to the menu
      */
     import { onMount } from "svelte";
     import { DeleteCustomEquipment } from "../../wailsjs/go/main/App.js";
@@ -18,12 +18,12 @@
     let error = $state(null);
     let status = $state("");
 
-    // открытая форма: { kind, initial, copy } | null
+    // open form: { kind, initial, copy } | null
     let editor = $state(null);
-    // id записи, для которой ждём подтверждения удаления
+    // id of the record awaiting delete confirmation
     let confirmDelete = $state(null);
 
-    const KIND_ADD = { item: "предмет", armor: "доспех", weapon: "оружие" };
+    const KIND_ADD = { item: "item", armor: "armor", weapon: "weapon" };
 
     onMount(async () => {
         try {
@@ -44,7 +44,7 @@
         editor = null;
         await reload();
         tab = kind;
-        status = wasEdit ? "Изменения сохранены" : "Добавлено";
+        status = wasEdit ? "Changes saved" : "Added";
         setTimeout(() => (status = ""), 2500);
     }
 
@@ -53,9 +53,9 @@
         try {
             await DeleteCustomEquipment(kind, x.id);
             await reload();
-            status = `«${x.name}» удалено`;
+            status = `“${x.name}” deleted`;
         } catch (e) {
-            status = "Ошибка: " + (e?.message ?? e);
+            status = "Error: " + (e?.message ?? e);
         }
         setTimeout(() => (status = ""), 2500);
     }
@@ -64,34 +64,34 @@
 {#snippet actions(x, kind)}
     {#if x.data?.custom}
         {#if confirmDelete === x.id}
-            <span class="ask">Удалить?</span>
-            <button class="ghost small danger" onclick={() => remove(kind, x)}>Да</button>
-            <button class="ghost small" onclick={() => (confirmDelete = null)}>Нет</button>
+            <span class="ask">Delete?</span>
+            <button class="ghost small danger" onclick={() => remove(kind, x)}>Yes</button>
+            <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
         {:else}
-            <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: false })}>Изменить</button>
-            <button class="ghost small" onclick={() => (confirmDelete = x.id)} title="Удалить">✕</button>
+            <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: false })}>Edit</button>
+            <button class="ghost small" onclick={() => (confirmDelete = x.id)} title="Delete">✕</button>
         {/if}
     {:else}
-        <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: true })} title="Создать своё на основе этого">Копия</button>
+        <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: true })} title="Create your own based on this one">Copy</button>
     {/if}
 {/snippet}
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={onBack}>← Меню</button>
-        <h1>Предметы</h1>
+        <button class="ghost" onclick={onBack}>← Menu</button>
+        <h1>Items</h1>
         <span class="status">{status}</span>
         {#if !loading && !error}
             <button class="add" onclick={() => (editor = { kind: tab, initial: null, copy: false })}>
-                + Добавить {KIND_ADD[tab]}
+                + Add {KIND_ADD[tab]}
             </button>
         {/if}
     </header>
 
     {#if loading}
-        <p class="muted">Загрузка…</p>
+        <p class="muted">Loading…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить: {error}</p>
+        <p class="error">Failed to load: {error}</p>
     {:else}
         <CatalogList {catalog} bind:tab {actions} />
     {/if}

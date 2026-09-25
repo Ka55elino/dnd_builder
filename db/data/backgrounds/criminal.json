@@ -1,6 +1,6 @@
 {
   "id": "criminal",
-  "name": "Преступник",
+  "name": "Criminal",
   "abilities": {
     "options": [
       "dex",
@@ -13,5 +13,5 @@
     "sleight",
     "stealth"
   ],
-  "tool": "Воровские инструменты"
+  "tool": "Thieves' Tools"
 }

@@ -7,9 +7,9 @@
 </script>
 
 <div class="grid">
-    <button class="cell create" onclick={onCreate} title="Создать персонажа">
+    <button class="cell create" onclick={onCreate} title="Create character">
         <span class="plus">+</span>
-        <span class="label">Создать</span>
+        <span class="label">Create</span>
     </button>
 
     {#each characters as c (c.id)}
@@ -23,7 +23,7 @@
             {/if}
             <span class="label name">{c.name}</span>
             <span class="label meta">
-                {[c.className, c.level ? `${c.level} ур.` : ""].filter(Boolean).join(" · ")}
+                {[c.className, c.level ? `Level ${c.level}` : ""].filter(Boolean).join(" · ")}
             </span>
         </button>
     {/each}
@@ -33,13 +33,13 @@
     .grid {
         --cell-size: 200px;
 
-        /* на всю ширину: иначе в центрированном flex-родителе сетка
-           сжимается до одной колонки и карточки идут столбиком */
+        /* full width: otherwise inside a centered flex parent the grid
+           shrinks to a single column and the cards stack vertically */
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, var(--cell-size));
         grid-auto-rows: var(--cell-size);
-        justify-content: center; /* ряды по центру страницы */
+        justify-content: center; /* rows centered on the page */
         gap: 12px;
     }
 

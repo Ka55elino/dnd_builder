@@ -1,9 +1,9 @@
 {
   "id": "hypnoticGaze",
-  "name": "Гипнотический взгляд",
+  "name": "Hypnotic Gaze",
   "kind": "martial",
   "subclass": "enchantment",
   "level": 3,
   "action": "action",
-  "desc": "Действием существо в 1,5 м — спасбросок Мудрости или очаровано и ошеломлено, пока вы каждый ход поддерживаете взгляд действием и находитесь рядом."
+  "desc": "As an action, a creature within 5 feet must succeed on a Wisdom saving throw or have the Charmed and Stunned conditions for as long as you maintain your gaze with an action each turn and stay nearby."
 }

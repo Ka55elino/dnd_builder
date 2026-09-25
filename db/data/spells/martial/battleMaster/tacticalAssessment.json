@@ -1,9 +1,9 @@
 {
   "id": "tacticalAssessment",
-  "name": "Тактическая оценка",
+  "name": "Tactical Assessment",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Прибавляете кость превосходства к проверке Расследования, Истории или Проницательности.",
+  "desc": "You add a Superiority Die to an Investigation, History, or Insight check.",
   "pool": "maneuver"
 }

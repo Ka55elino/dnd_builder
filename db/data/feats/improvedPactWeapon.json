@@ -1,9 +1,9 @@
 {
   "id": "improvedPactWeapon",
-  "name": "Улучшенное договорное оружие",
+  "name": "Improved Pact Weapon",
   "category": "invocation",
   "level": 1,
-  "desc": "Требуется Договор клинка. Договорное оружие даёт +1 к атаке и урону и может служить магическим фокусом; можете призывать также лук/арбалет.",
+  "desc": "Requires Pact of the Blade. Your pact weapon gains a +1 bonus to attack and damage rolls and can serve as a Spellcasting Focus; you can also conjure a bow or crossbow.",
   "prereq": {
     "boon": "pactOfTheBlade"
   }

@@ -1,10 +1,10 @@
 {
   "id": "keenMind",
-  "name": "Острый ум",
+  "name": "Keen Mind",
   "category": "general",
   "level": 4,
   "asi": [
     "int"
   ],
-  "desc": "+1 Интеллект; идеальная память, всегда знаете стороны света."
+  "desc": "+1 Intelligence; perfect memory, you always know which way is north."
 }

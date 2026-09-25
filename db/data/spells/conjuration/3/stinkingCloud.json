@@ -1,6 +1,6 @@
 {
   "id": "stinkingCloud",
-  "name": "Смердящее облако",
+  "name": "Stinking Cloud",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Сфера ядовитого газа 6 м: спасбросок Тел. или существо тратит действие на тошноту. Концентрация."
+  "desc": "A 20-foot Sphere of poisonous gas: Constitution saving throw or a creature spends its action retching. Concentration."
 }

@@ -1,6 +1,6 @@
 {
   "id": "silveryBarbs",
-  "name": "Серебряные шипы",
+  "name": "Silvery Barbs",
   "kind": "spell",
   "action": "reaction",
   "level": 1,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Реакцией на успешный бросок существа заставляете перебросить с помехой; союзник получает преимущество."
+  "desc": "As a Reaction to a creature's successful roll, you force it to reroll with Disadvantage; an ally gains Advantage."
 }

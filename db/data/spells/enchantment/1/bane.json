@@ -1,6 +1,6 @@
 {
   "id": "bane",
-  "name": "Проклятие",
+  "name": "Bane",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "До 3 существ: спасбросок Харизмы или −1d4 к атакам и спасброскам. Концентрация до 1 минуты."
+  "desc": "Up to 3 creatures: Charisma saving throw or subtract 1d4 from attack rolls and saving throws. Concentration, up to 1 minute."
 }

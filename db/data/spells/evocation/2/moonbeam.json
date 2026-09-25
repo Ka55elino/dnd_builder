@@ -1,6 +1,6 @@
 {
   "id": "moonbeam",
-  "name": "Лунный луч",
+  "name": "Moonbeam",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -8,7 +8,7 @@
   "classes": [
     "druid"
   ],
-  "desc": "Столб лунного света 1,5 м: существа — спасбросок Тел. или урон излучением; можете двигать луч. Концентрация.",
+  "desc": "A 5-foot column of moonlight: creatures make a Constitution saving throw or take Radiant damage; you can move the beam. Concentration.",
   "damage": {
     "dice": "2d10",
     "type": "radiant"

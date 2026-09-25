@@ -1,12 +1,12 @@
 {
   "id": "seekingArrow",
-  "name": "Ищущая стрела",
+  "name": "Seeking Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "Выберите существо, которое видели за последнюю минуту: стрела летит к нему, огибая препятствия; спасбросок Ловкости — урон оружия +1d6 силовым полем (половина при успехе), вы узнаёте его местоположение.",
+  "desc": "Choose a creature you have seen within the past minute: the arrow flies toward it, going around obstacles; Dexterity saving throw: weapon damage + 1d6 Force damage (half on a success), and you learn its location.",
   "damage": {
     "dice": "1d6",
     "type": "force",

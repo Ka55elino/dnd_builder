@@ -1,9 +1,9 @@
 {
   "id": "mageHandLegerdemain",
-  "name": "Ловкость рук мага",
+  "name": "Mage Hand Legerdemain",
   "kind": "martial",
   "subclass": "arcaneTrickster",
   "level": 3,
   "action": "bonus",
-  "desc": "Управляете невидимой «Волшебной рукой»: бонусным действием совершаете ею Ловкость рук — подложить/украсть предмет, отпереть замок или обезвредить ловушку на расстоянии."
+  "desc": "You control an invisible Mage Hand: as a Bonus Action, you use it for Sleight of Hand to plant or steal an object, pick a lock, or disarm a trap at a distance."
 }

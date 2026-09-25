@@ -1,6 +1,6 @@
 {
   "id": "identify",
-  "name": "Опознание",
+  "name": "Identify",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -10,5 +10,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Узнаёте свойства магического предмета или наложенных на цель заклинаний."
+  "desc": "You learn the properties of a magic item or the spells affecting a target."
 }

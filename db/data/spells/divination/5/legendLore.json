@@ -1,6 +1,6 @@
 {
   "id": "legendLore",
-  "name": "Сказания",
+  "name": "Legend Lore",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,5 +10,5 @@
     "bard",
     "wizard"
   ],
-  "desc": "Узнаёте предания о знаменитом лице, месте или предмете."
+  "desc": "You learn lore about a famous person, place, or object."
 }

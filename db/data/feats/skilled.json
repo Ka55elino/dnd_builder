@@ -1,9 +1,9 @@
 {
   "id": "skilled",
-  "name": "Умелый",
+  "name": "Skilled",
   "category": "origin",
   "level": 1,
-  "desc": "Владение любыми тремя навыками или инструментами.",
+  "desc": "Proficiency in any three skills or tools.",
   "skillChoice": {
     "choose": 3,
     "from": "skills"

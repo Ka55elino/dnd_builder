@@ -1,6 +1,6 @@
 {
   "id": "haste",
-  "name": "Ускорение",
+  "name": "Haste",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,5 +9,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Цель: +2 КЗ, удвоенная скорость, преимущество на Ловкость и доп. действие. По окончании — вялость 1 ход. Концентрация."
+  "desc": "Target: +2 AC, doubled Speed, Advantage on Dexterity saving throws, and an additional action. When the spell ends, lethargy for 1 turn. Concentration."
 }

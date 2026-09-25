@@ -1,11 +1,11 @@
 {
   "id": "defensiveFlourish",
-  "name": "Росчерк: Оборонительный",
+  "name": "Defensive Flourish",
   "kind": "martial",
   "subclass": "swords",
   "level": 3,
   "action": "free",
-  "desc": "Тратя Кость вдохновения при попадании: доп. урон = кости, и до вашего следующего хода ваш КЗ увеличивается на выпавшее значение.",
+  "desc": "Expending a Bardic Inspiration die on a hit: extra damage equal to the die, and your AC increases by the number rolled until your next turn.",
   "damage": {
     "dice": "1d6",
     "type": "slashing"

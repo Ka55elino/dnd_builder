@@ -1,7 +1,7 @@
 {
   "id": "tavernBrawler",
-  "name": "Драчун",
+  "name": "Tavern Brawler",
   "category": "origin",
   "level": 1,
-  "desc": "Безоружный удар 1d4 + мод. Силы; перебрасываете 1 на уроне; толчок при попадании; владение импровизированным оружием."
+  "desc": "Unarmed Strike deals 1d4 + Strength modifier; reroll 1s on damage; push on a hit; proficiency with improvised weapons."
 }

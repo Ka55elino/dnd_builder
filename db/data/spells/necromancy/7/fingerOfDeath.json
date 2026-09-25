@@ -1,6 +1,6 @@
 {
   "id": "fingerOfDeath",
-  "name": "Перст смерти",
+  "name": "Finger of Death",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -10,7 +10,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Волна некротики (спасбросок Тел.): огромный урон; убитый гуманоид встаёт вашим зомби.",
+  "desc": "A wave of necrotic energy (Constitution saving throw): massive damage; a slain Humanoid rises as your zombie.",
   "damage": {
     "dice": "7d8",
     "type": "necrotic"

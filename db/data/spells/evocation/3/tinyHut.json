@@ -1,6 +1,6 @@
 {
   "id": "tinyHut",
-  "name": "Крошечная хижина",
+  "name": "Tiny Hut",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,5 +9,5 @@
     "bard",
     "wizard"
   ],
-  "desc": "Купол 3 м защищает до 9 существ от погоды и урона снаружи на 8 часов (ритуал)."
+  "desc": "A 10-foot dome protects up to 9 creatures from weather and damage from outside for 8 hours (ritual)."
 }

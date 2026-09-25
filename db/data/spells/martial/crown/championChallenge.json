@@ -1,9 +1,9 @@
 {
   "id": "championChallenge",
-  "name": "Чемпион вызова",
+  "name": "Champion Challenge",
   "kind": "martial",
   "subclass": "crown",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Бонусным действием бросаете вызов существам на выбор в 9 м: спасбросок Мудрости или они не могут добровольно уйти дальше чем на 9 м от вас."
+  "desc": "Costs 1 use of Channel Divinity. As a Bonus Action, you challenge creatures of your choice within 30 feet: on a failed Wisdom saving throw, they can't willingly move more than 30 feet away from you."
 }

@@ -1,9 +1,9 @@
 {
   "id": "draconicPresence",
-  "name": "Драконье присутствие",
+  "name": "Draconic Presence",
   "kind": "martial",
   "subclass": "draconic",
   "level": 18,
   "action": "action",
-  "desc": "Стоимость 5 очков чародейства. Действием на 1 минуту создаёте ауру 18 м: враги — спасбросок Мудрости или очарованы (трепет) либо испуганы (страх) вами."
+  "desc": "Costs 5 Sorcery Points. As an action, you create a 60-foot aura for 1 minute: enemies must succeed on a Wisdom saving throw or have the Charmed (awe) or Frightened (fear) condition from you."
 }

@@ -1,6 +1,6 @@
 {
   "id": "web",
-  "name": "Паутина",
+  "name": "Web",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,5 +9,5 @@
     "wizard",
     "sorcerer"
   ],
-  "desc": "Заполняете куб 6 м липкой паутиной (труднопроходимо; спасбросок Ловкости или «Опутано»). Концентрация."
+  "desc": "You fill a 20-foot Cube with sticky webs (Difficult Terrain; Dexterity saving throw or Restrained). Concentration."
 }

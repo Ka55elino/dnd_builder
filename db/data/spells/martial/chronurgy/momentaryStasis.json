@@ -1,11 +1,11 @@
 {
   "id": "momentaryStasis",
-  "name": "Мгновенный застой",
+  "name": "Momentary Stasis",
   "kind": "martial",
   "subclass": "chronurgy",
   "level": 6,
   "action": "action",
-  "desc": "Действием существо в 9 м — спасбросок Телосложения или недееспособно и неподвижно до конца вашего следующего хода. Число раз = мод. Интеллекта.",
+  "desc": "As an action, a creature within 30 feet must succeed on a Constitution saving throw or have the Incapacitated condition and a Speed of 0 until the end of your next turn. Number of uses = your Intelligence modifier.",
   "uses": {
     "count": 1,
     "per": "longRest",

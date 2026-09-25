@@ -1,9 +1,9 @@
 {
   "id": "fastHands",
-  "name": "Быстрые руки",
+  "name": "Fast Hands",
   "kind": "martial",
   "subclass": "thief",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием (из Хитрого действия) совершаете проверку Ловкости рук, обезвреживаете ловушку/взламываете замок воровскими инструментами или используете предмет."
+  "desc": "As a Bonus Action (via Cunning Action), you make a Dexterity (Sleight of Hand) check, disarm a trap or pick a lock with Thieves' Tools, or use an object."
 }

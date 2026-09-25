@@ -1,6 +1,6 @@
 {
   "id": "powerWordKill",
-  "name": "Слово силы: смерть",
+  "name": "Power Word Kill",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо с не более 100 хитов немедленно умирает без спасброска."
+  "desc": "A creature with 100 Hit Points or fewer dies instantly, with no saving throw."
 }

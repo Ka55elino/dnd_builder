@@ -1,6 +1,6 @@
 {
   "id": "dispelMagic",
-  "name": "Рассеивание магии",
+  "name": "Dispel Magic",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -14,5 +14,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Заканчиваете одно заклинание на цели (3 круг и ниже автоматически)."
+  "desc": "You end one spell on a target (level 3 or lower automatically)."
 }

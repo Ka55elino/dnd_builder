@@ -1,6 +1,6 @@
 {
   "id": "mageSlayer",
-  "name": "Убийца магов",
+  "name": "Mage Slayer",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,5 +8,5 @@
     "dex",
     "con"
   ],
-  "desc": "+1 Сил/Лов/Тел; помеха концентрации врагов, реакция-атака по колдующим."
+  "desc": "+1 Str/Dex/Con; impose Disadvantage on enemies' Concentration, Reaction attack against spellcasters."
 }

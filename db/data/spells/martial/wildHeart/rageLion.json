@@ -1,8 +1,8 @@
 {
   "id": "whRageLion",
-  "name": "Сила: Лев",
+  "name": "Power: Lion",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 14,
-  "desc": "Вариант «Силы дикой природы». Пока вы в ярости, враги в пределах 1,5 м от вас совершают с помехой атаки по любым целям, кроме вас."
+  "desc": "Power of the Wilds variant. While your Rage is active, enemies within 5 feet of you have Disadvantage on attack rolls against any target other than you."
 }

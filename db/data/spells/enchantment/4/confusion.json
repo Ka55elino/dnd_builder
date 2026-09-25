@@ -1,6 +1,6 @@
 {
   "id": "confusion",
-  "name": "Замешательство",
+  "name": "Confusion",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,5 +12,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Существа в области: спасбросок Мудрости или действуют случайно. Концентрация."
+  "desc": "Creatures in the area: Wisdom saving throw or they act randomly. Concentration."
 }

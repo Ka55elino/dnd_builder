@@ -1,9 +1,9 @@
 {
   "id": "telekineticMaster",
-  "name": "Телекинетический мастер",
+  "name": "Telekinetic Master",
   "kind": "martial",
   "subclass": "psiWarrior",
   "level": 15,
   "action": "bonus",
-  "desc": "Бонусным действием совершаете одну оружейную атаку и телекинетически толкаете/тянете существо на 9 м (спасбросок Силы). Можете постоянно поддерживать «Телекинез»."
+  "desc": "As a Bonus Action, you make one weapon attack and telekinetically push or pull a creature up to 30 feet (Strength saving throw). You can maintain Telekinesis continuously."
 }

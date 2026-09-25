@@ -1,6 +1,6 @@
 {
   "id": "trueSeeing",
-  "name": "Истинное зрение",
+  "name": "True Seeing",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Цель видит в темноте, сквозь иллюзии и невидимость на 30 м, 1 час."
+  "desc": "The target sees in darkness and through illusions and invisibility within 30 feet for 1 hour."
 }

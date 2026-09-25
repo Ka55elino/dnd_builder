@@ -1,13 +1,13 @@
 {
   "id": "wsGiantSpider",
-  "name": "Форма: Гигантский паук",
+  "name": "Form: Giant Spider",
   "kind": "class",
   "level": 8,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1. Хиты 26, КЗ 14, скорость 9 м, лазание 9 м. Укус +2d8 ядом (спасбросок Тел.); паутина обездвиживает; хождение по паутине.",
+  "desc": "CR 1. HP 26, AC 14, Speed 30 ft., Climb 30 ft. Bite +2d8 Poison (Constitution saving throw); web restrains; web walker.",
   "damage": {
     "dice": "1d8",
     "type": "piercing"

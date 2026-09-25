@@ -1,9 +1,9 @@
 {
   "id": "imperceptibleForm",
-  "name": "Незримость",
+  "name": "Imperceptible Form",
   "kind": "martial",
   "subclass": "shadow",
   "level": 17,
   "action": "action",
-  "desc": "Стоимость 3 очка ци. На 1 минуту становитесь незримым для существ и приборов: атаки по вам с помехой, а ваши атаки — с преимуществом. Эффект заканчивается, если вы становитесь недееспособны."
+  "desc": "Costs 3 Focus Points. For 1 minute, you become imperceptible to creatures and devices: attack rolls against you have Disadvantage, and your attack rolls have Advantage. The effect ends if you have the Incapacitated condition."
 }

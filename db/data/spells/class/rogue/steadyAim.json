@@ -1,9 +1,11 @@
 {
   "id": "steadyAim",
-  "name": "Точный прицел",
+  "name": "Steady Aim",
   "kind": "class",
   "level": 3,
-  "classes": ["rogue"],
+  "classes": [
+    "rogue"
+  ],
   "action": "bonus",
-  "desc": "Бонусным действием получаете преимущество на следующую атаку в этот ход; скорость становится 0 до конца хода. Только если вы не двигались в этом ходу."
+  "desc": "As a Bonus Action, you gain Advantage on your next attack roll this turn; your Speed becomes 0 until the end of the turn. Only if you haven't moved this turn."
 }

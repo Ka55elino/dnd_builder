@@ -1,6 +1,6 @@
 {
   "id": "forcecage",
-  "name": "Силовая клетка",
+  "name": "Forcecage",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Непробиваемая клетка/коробка из силы заточает существ на 1 час."
+  "desc": "An impenetrable cage or box of force imprisons creatures for 1 hour."
 }

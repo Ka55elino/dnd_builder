@@ -1,9 +1,9 @@
 {
   "id": "houndOfIllOmen",
-  "name": "Пёс дурного знамения",
+  "name": "Hound of Ill Omen",
   "kind": "martial",
   "subclass": "shadowMagic",
   "level": 6,
   "action": "bonus",
-  "desc": "Стоимость 3 очка чародейства. Бонусным действием призываете теневого пса рядом с целью в 36 м на 5 раундов: цель получает помеху на спасброски против ваших заклинаний, а пёс её преследует."
+  "desc": "Costs 3 Sorcery Points. As a Bonus Action, you summon a shadow hound next to a target within 120 feet for 5 rounds: the target has Disadvantage on saving throws against your spells, and the hound pursues it."
 }

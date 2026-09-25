@@ -1,6 +1,6 @@
 {
   "id": "cureWounds",
-  "name": "Лечение ран",
+  "name": "Cure Wounds",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -12,11 +12,11 @@
     "paladin",
     "ranger"
   ],
-  "desc": "Касанием восстанавливаете существу 2d8 + мод. заклинателя хитов. Не действует на нежить и конструктов.",
+  "desc": "You touch a creature to restore 2d8 + your spellcasting ability modifier Hit Points. Has no effect on Undead or Constructs.",
   "casting": {
-    "time": "1 действие",
-    "range": "Касание",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "Touch",
+    "components": "V, S",
+    "duration": "Instantaneous"
   }
 }

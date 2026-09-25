@@ -1,9 +1,9 @@
 {
   "id": "retaliation",
-  "name": "Возмездие",
+  "name": "Retaliation",
   "kind": "martial",
   "subclass": "berserker",
   "level": 14,
   "action": "reaction",
-  "desc": "Реакцией атакуете существо в 1,5 м, нанёсшее вам урон."
+  "desc": "As a Reaction, you make an attack against a creature within 5 feet that damaged you."
 }

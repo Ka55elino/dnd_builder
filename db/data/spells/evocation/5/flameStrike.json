@@ -1,6 +1,6 @@
 {
   "id": "flameStrike",
-  "name": "Огненный столб",
+  "name": "Flame Strike",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -9,7 +9,7 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Столб огня: спасбросок Ловкости, урон огнём и излучением.",
+  "desc": "A column of fire: Dexterity saving throw, Fire and Radiant damage.",
   "damage": {
     "dice": "4d6",
     "type": "fire"

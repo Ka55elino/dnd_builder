@@ -1,8 +1,8 @@
 {
   "id": "whRageFalcon",
-  "name": "Сила: Сокол",
+  "name": "Power: Falcon",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 14,
-  "desc": "Вариант «Силы дикой природы». Пока вы в ярости и без тяжёлой брони, получаете скорость полёта, равную вашей скорости."
+  "desc": "Power of the Wilds variant. While your Rage is active and you aren't wearing Heavy armor, you have a Fly Speed equal to your Speed."
 }

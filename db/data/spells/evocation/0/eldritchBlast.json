@@ -1,6 +1,6 @@
 {
   "id": "eldritchBlast",
-  "name": "Мистический взрыв",
+  "name": "Eldritch Blast",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "warlock"
   ],
-  "desc": "Луч потрескивающей энергии в существо (атака заклинанием): урон силовым полем. С уровнем добавляются лучи (2 на 5, 3 на 11, 4 на 17), каждый можно направить в свою цель.",
+  "desc": "A beam of crackling energy streaks toward a creature (spell attack): Force damage. You gain more beams as you level (2 at level 5, 3 at 11, 4 at 17), and each can be directed at a different target.",
   "damage": {
     "dice": "1d10",
     "type": "force",

@@ -1,6 +1,6 @@
 {
   "id": "tollTheDead",
-  "name": "Похоронный звон",
+  "name": "Toll the Dead",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -10,7 +10,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо в 18 м: спасбросок Мудрости или урон некротикой (1d12, если ранено).",
+  "desc": "A creature within 60 feet: Wisdom saving throw or Necrotic damage (1d12 if it's missing any Hit Points).",
   "damage": {
     "dice": "1d8",
     "type": "necrotic",

@@ -1,7 +1,7 @@
 {
   "id": "extendedSpell",
-  "name": "Продлённое заклинание",
+  "name": "Extended Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Удваиваете длительность заклинания (макс. 24 часа); преимущество на спасброски концентрации по нему."
+  "desc": "You double a spell's duration (maximum 24 hours); Advantage on Concentration saving throws for it."
 }

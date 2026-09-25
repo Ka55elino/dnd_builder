@@ -1,9 +1,9 @@
 {
   "id": "preserveLife",
-  "name": "Сохранение жизни",
+  "name": "Preserve Life",
   "kind": "martial",
   "subclass": "life",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Восстанавливаете хиты, равные 5 × уровень жреца, распределяя между существами в 9 м (не выше половины их максимума)."
+  "desc": "Costs 1 use of Channel Divinity. You restore Hit Points equal to 5 × your Cleric level, divided among creatures within 30 feet (no higher than half their Hit Point maximum)."
 }

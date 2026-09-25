@@ -1,11 +1,11 @@
 {
   "id": "martialWeaponTraining",
-  "name": "Владение воинским оружием",
+  "name": "Martial Weapon Training",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; владение всем воинским оружием."
+  "desc": "+1 Strength or Dexterity; proficiency with all Martial weapons."
 }

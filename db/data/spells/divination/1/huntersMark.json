@@ -1,6 +1,6 @@
 {
   "id": "huntersMark",
-  "name": "Метка охотника",
+  "name": "Hunter's Mark",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,12 +8,12 @@
   "classes": [
     "ranger"
   ],
-  "desc": "Бонусным действием помечаете видимое существо. Ваши атаки по нему наносят доп. 1d6 урона (d10 на 20 ур. Следопыта). При падении цели до 0 хитов переносите метку. Концентрация до 1 часа.",
+  "desc": "As a Bonus Action, you mark a creature you can see. Your attacks against it deal an extra 1d6 damage (d10 at Ranger level 20). If the target drops to 0 Hit Points, you can move the mark. Concentration, up to 1 hour.",
   "casting": {
-    "time": "1 бонусное действие",
-    "range": "27 м",
-    "components": "В",
-    "duration": "Конц., 1 час",
+    "time": "1 bonus action",
+    "range": "90 feet",
+    "components": "V",
+    "duration": "Conc., 1 hour",
     "concentration": true
   },
   "damage": {

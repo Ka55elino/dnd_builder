@@ -1,6 +1,6 @@
 {
   "id": "shillelagh",
-  "name": "Дубинка",
+  "name": "Shillelagh",
   "kind": "spell",
   "edition": "2024",
   "action": "bonus_action",
@@ -9,7 +9,7 @@
   "classes": [
     "druid"
   ],
-  "desc": "Вы наполняете природной силой удерживаемую дубинку или боевой посох. Для атак и урона этим оружием можете использовать характеристику заклинателя вместо Силы. Кость урона оружия становится d8. Урон может быть силовым или обычным типом урона оружия.",
+  "desc": "You imbue a Club or Quarterstaff you are holding with the power of nature. You can use your spellcasting ability instead of Strength for attack and damage rolls with that weapon. The weapon's damage die becomes a d8. The damage can be Force or the weapon's normal damage type.",
   "weaponAttack": true,
   "damage": {
     "dice": "1d8",

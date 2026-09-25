@@ -1,10 +1,35 @@
 {
   "id": "hillsTumble",
-  "name": "Толчок холма",
+  "name": "Hill's Tumble",
   "kind": "action",
-  "source": "Голиаф (Холм)",
+  "source": "Goliath (Hill)",
   "level": 1,
   "action": "free",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Когда вы попадаете по существу размером не больше Большого атакой, можете сбить его с ног (без спасброска). Число применений равно вашему бонусу мастерства (на длинный отдых)."
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "When you hit a Large or smaller creature with an attack, you can knock it Prone (no saving throw). Number of uses equals your Proficiency Bonus (per Long Rest)."
 }

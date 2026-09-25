@@ -1,6 +1,6 @@
 {
   "id": "mageHand",
-  "name": "Рука мага",
+  "name": "Mage Hand",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,5 +11,5 @@
     "warlock",
     "bard"
   ],
-  "desc": "Создаёте призрачную руку, поднимающую и передвигающую предметы до 4,5 кг на 9 м."
+  "desc": "You create a spectral hand that lifts and moves objects weighing up to 10 lb. up to 30 feet."
 }

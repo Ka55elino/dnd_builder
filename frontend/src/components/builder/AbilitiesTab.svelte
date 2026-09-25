@@ -1,7 +1,7 @@
 <script>
     /**
-     * Вкладка «Атрибуты»: выбор метода и распределение характеристик.
-     * build — экземпляр CharacterBuild.
+     * "Abilities" tab: choosing a method and assigning ability scores.
+     * build — a CharacterBuild instance.
      */
     import {
         ABILITY_KEYS,
@@ -21,10 +21,10 @@
     const method = $derived(build.abilityMethod);
     const isPool = $derived(method === "array" || method === "roll");
 
-    /** Какой характеристике назначен индекс пула (для подписи). */
+    /** Which ability a pool index is assigned to (for the label). */
     const ownerOf = (i) => ABILITY_KEYS.find((k) => build.abilityAssign[k] === i);
 
-    /** Индекс откинутого (наименьшего) кубика в броске. */
+    /** Index of the dropped (lowest) die in a roll. */
     const droppedIndex = (dice) => dice.indexOf(Math.min(...dice));
 
     function onAssign(key, e) {
@@ -36,7 +36,7 @@
 <div class="abilities">
     <OriginPicker {build} />
 
-    <!-- метод -->
+    <!-- method -->
     <div class="methods">
         {#each Object.entries(ABILITY_METHODS) as [id, m]}
             <button
@@ -50,18 +50,18 @@
         {/each}
     </div>
 
-    <!-- панель метода -->
+    <!-- method panel -->
     <div class="toolbar">
         {#if method === "pointbuy"}
             <div class="points" class:empty={build.pointsLeft === 0}>
-                Осталось очков: <b>{build.pointsLeft}</b> / {POINT_BUY_BUDGET}
+                Points left: <b>{build.pointsLeft}</b> / {POINT_BUY_BUDGET}
             </div>
-            <button class="ghost" onclick={() => build.resetPointBuy()}>Сбросить</button>
+            <button class="ghost" onclick={() => build.resetPointBuy()}>Reset</button>
         {:else}
             <div class="pool">
                 {#each build.abilityPool as value, i}
                     {@const owner = ownerOf(i)}
-                    <div class="token" class:used={owner} title={owner ? ABILITIES[owner].name : "Свободно"}>
+                    <div class="token" class:used={owner} title={owner ? ABILITIES[owner].name : "Free"}>
                         <span class="token-value">{value}</span>
                         {#if method === "roll" && build.abilityRolls?.[i]}
                             {@const dice = build.abilityRolls[i].dice}
@@ -78,14 +78,14 @@
             </div>
             <div class="actions">
                 {#if method === "roll"}
-                    <button class="ghost" onclick={() => build.reroll()}>Перебросить</button>
+                    <button class="ghost" onclick={() => build.reroll()}>Reroll</button>
                 {/if}
-                <button class="ghost" onclick={() => build.clearAssign()}>Сбросить</button>
+                <button class="ghost" onclick={() => build.clearAssign()}>Reset</button>
             </div>
         {/if}
     </div>
 
-    <!-- характеристики -->
+    <!-- ability scores -->
     <div class="grid">
         {#each ABILITY_KEYS as key (key)}
             {@const score = build.abilities[key]}
@@ -101,7 +101,7 @@
                 <div class="mod">{formatModifier(modifier(total))}</div>
                 <div class="calc" class:boosted={bonus}>
                     {#if score != null}
-                        {score}{#if bonus} <b>+{bonus}</b> происх.{/if}
+                        {score}{#if bonus} <b>+{bonus}</b> origin{/if}
                     {:else}&nbsp;{/if}
                 </div>
 
@@ -111,20 +111,20 @@
                         <button
                             onclick={() => build.pointBuyStep(key, -1)}
                             disabled={score <= POINT_BUY_MIN}
-                            aria-label="Уменьшить">−</button>
-                        <span class="cost">{up == null ? "макс" : `+1: ${up} оч.`}</span>
+                            aria-label="Decrease">−</button>
+                        <span class="cost">{up == null ? "max" : `+1: ${up} pt.`}</span>
                         <button
                             onclick={() => build.pointBuyStep(key, +1)}
                             disabled={score >= POINT_BUY_MAX || up > build.pointsLeft}
-                            aria-label="Увеличить">+</button>
+                            aria-label="Increase">+</button>
                     </div>
                 {:else if isPool}
                     <select value={build.abilityAssign[key] ?? ""} onchange={(e) => onAssign(key, e)}>
-                        <option value="">— выбрать —</option>
+                        <option value="">— choose —</option>
                         {#each build.abilityPool as value, i}
                             {@const owner = ownerOf(i)}
                             <option value={i}>
-                                {value}{owner && owner !== key ? ` (сейчас ${ABILITIES[owner].short})` : ""}
+                                {value}{owner && owner !== key ? ` (now ${ABILITIES[owner].short})` : ""}
                             </option>
                         {/each}
                     </select>
@@ -134,7 +134,7 @@
     </div>
 
     <p class="note">
-        Итоговое значение = база + бонус происхождения. Повышения за уровни добавятся на экране уровня.
+        Final score = base + origin bonus. Level-up increases are added on the level screen.
     </p>
 </div>
 
@@ -145,7 +145,7 @@
         gap: 20px;
     }
 
-    /* --- методы --- */
+    /* --- methods --- */
     .methods {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -185,7 +185,7 @@
         font-size: 12px;
     }
 
-    /* --- панель --- */
+    /* --- panel --- */
     .toolbar {
         display: flex;
         flex-wrap: wrap;
@@ -277,7 +277,7 @@
         color: var(--color-gold-hover);
     }
 
-    /* --- карточки характеристик --- */
+    /* --- ability score cards --- */
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

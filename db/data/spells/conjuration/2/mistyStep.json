@@ -1,6 +1,6 @@
 {
   "id": "mistyStep",
-  "name": "Туманный шаг",
+  "name": "Misty Step",
   "kind": "spell",
   "action": "bonus",
   "level": 2,
@@ -10,11 +10,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Окутавшись серебристым туманом, телепортируетесь на расстояние до 9 м в свободное пространство, которое видите.",
+  "desc": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see.",
   "casting": {
-    "time": "1 бонусное действие",
-    "range": "На себя",
-    "components": "В",
-    "duration": "Мгновенно"
+    "time": "1 bonus action",
+    "range": "Self",
+    "components": "V",
+    "duration": "Instantaneous"
   }
 }

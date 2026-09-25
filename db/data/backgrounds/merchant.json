@@ -1,6 +1,6 @@
 {
   "id": "merchant",
-  "name": "Торговец",
+  "name": "Merchant",
   "abilities": {
     "options": [
       "con",
@@ -13,5 +13,5 @@
     "animal",
     "persuasion"
   ],
-  "tool": "Инструменты навигатора"
+  "tool": "Navigator's Tools"
 }

@@ -1,11 +1,11 @@
 {
   "id": "illusorySelf",
-  "name": "Иллюзорное «я»",
+  "name": "Illusory Self",
   "kind": "martial",
   "subclass": "illusion",
   "level": 10,
   "action": "reaction",
-  "desc": "Реакцией, когда существо попадает по вам атакой, создаёте иллюзорного двойника — атака промахивается. Число раз = мод. Интеллекта (восстанавливается на коротком/длинном отдыхе).",
+  "desc": "As a Reaction when a creature hits you with an attack, you create an illusory duplicate, and the attack misses. Number of uses = your Intelligence modifier (regained on a Short or Long Rest).",
   "uses": {
     "ability": "int",
     "min": 1,

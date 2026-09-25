@@ -1,6 +1,6 @@
 {
   "id": "frostbite",
-  "name": "Обморожение",
+  "name": "Frostbite",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,7 +11,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо — спасбросок Тел.: урон холодом и помеха на следующую атаку.",
+  "desc": "A creature makes a Constitution saving throw: Cold damage and Disadvantage on its next attack roll.",
   "damage": {
     "dice": "1d6",
     "type": "cold",

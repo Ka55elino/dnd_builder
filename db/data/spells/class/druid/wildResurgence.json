@@ -1,11 +1,11 @@
 {
   "id": "wildResurgence",
-  "name": "Дикое возрождение",
+  "name": "Wild Resurgence",
   "kind": "class",
   "level": 5,
   "classes": [
     "druid"
   ],
   "action": "bonus",
-  "desc": "Раз в ход бонусным действием тратите ячейку заклинания, чтобы вернуть одно применение Дикого облика."
+  "desc": "Once per turn, as a Bonus Action, you expend a spell slot to regain one use of Wild Shape."
 }

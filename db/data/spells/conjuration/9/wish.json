@@ -1,6 +1,6 @@
 {
   "id": "wish",
-  "name": "Исполнение желаний",
+  "name": "Wish",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,5 +9,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Мощнейшая магия: повторяете любое заклинание 8 круга и ниже или искажаете реальность (с риском)."
+  "desc": "The mightiest magic: you duplicate any spell of level 8 or lower or alter reality (at a risk)."
 }

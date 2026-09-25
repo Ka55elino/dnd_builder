@@ -1,6 +1,6 @@
 {
   "id": "hex",
-  "name": "Порча",
+  "name": "Hex",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "warlock"
   ],
-  "desc": "Бонусным действием проклинаете существо: ваши атаки по нему наносят +1d6 некротикой, и цель с помехой на проверки выбранной характеристики. Концентрация.",
+  "desc": "As a Bonus Action, you curse a creature: your attacks against it deal an extra 1d6 Necrotic damage, and the target has Disadvantage on ability checks with the chosen ability. Concentration.",
   "damage": {
     "dice": "1d6",
     "type": "necrotic"

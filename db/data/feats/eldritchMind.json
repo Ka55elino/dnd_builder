@@ -1,14 +1,14 @@
 {
   "id": "eldritchMind",
-  "name": "Мистический разум",
+  "name": "Eldritch Mind",
   "category": "invocation",
   "level": 1,
-  "desc": "Имеете преимущество на спасброски для поддержания концентрации на заклинаниях.",
+  "desc": "You have Advantage on saving throws to maintain Concentration on spells.",
   "effects": [
     {
       "kind": "advantage",
       "target": "concentration",
-      "note": "преимущество на спасброски концентрации"
+      "note": "Advantage on Concentration saving throws"
     }
   ]
 }

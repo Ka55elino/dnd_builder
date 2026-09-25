@@ -1,6 +1,6 @@
 {
   "id": "wizard",
-  "name": "Волшебник",
+  "name": "Wizard",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 6,
   "primaryAbility": [
@@ -126,24 +126,24 @@
   "features": [
     {
       "level": 1,
-      "name": "Заклинательство",
-      "desc": "Творите заклинания из своей книги заклинаний, используя Интеллект (полный заклинатель). Готовите заклинания из книги; можете переписывать в неё новые."
+      "name": "Spellcasting",
+      "desc": "You cast spells from your spellbook using Intelligence (full caster). You prepare spells from your spellbook; you can copy new spells into it."
     },
     {
       "level": 1,
-      "name": "Знаток ритуалов",
-      "desc": "Можете творить любое подготовленное заклинание как ритуал, если у него есть тег ритуала; книга — ваш ритуальный справочник."
+      "name": "Ritual Adept",
+      "desc": "You can cast any prepared spell as a Ritual if it has the Ritual tag; your spellbook is your ritual reference."
     },
     {
       "level": 1,
-      "name": "Магическое восстановление",
-      "desc": "Раз в день на коротком отдыхе восстанавливаете ячейки заклинаний с суммарным кругом до половины вашего уровня волшебника (не выше 5 круга).",
+      "name": "Arcane Recovery",
+      "desc": "Once per day, when you finish a Short Rest, you recover spell slots with a combined level of up to half your Wizard level (none higher than level 5).",
       "passive": false
     },
     {
       "level": 2,
-      "name": "Учёный",
-      "desc": "Получаете компетентность (удвоение бонуса мастерства) в одном навыке: Тайные знания, История, Магия, Природа, Медицина или Религия.",
+      "name": "Scholar",
+      "desc": "You gain Expertise (double Proficiency Bonus) in one skill: Arcana, History, Investigation, Nature, Medicine, or Religion.",
       "choice": {
         "type": "expertise",
         "pick": 1
@@ -151,18 +151,18 @@
     },
     {
       "level": 5,
-      "name": "Запоминание заклинания",
-      "desc": "На коротком отдыхе можете заменить одно подготовленное заклинание другим из книги (без переписывания)."
+      "name": "Memorize Spell",
+      "desc": "When you finish a Short Rest, you can replace one prepared spell with another from your spellbook (without copying)."
     },
     {
       "level": 18,
-      "name": "Мастерство заклинаний",
-      "desc": "Выбираете заклинание 1 круга и 2 круга — творите их по желанию без траты ячейки (на базовом уровне)."
+      "name": "Spell Mastery",
+      "desc": "You choose a level 1 and a level 2 spell; you can cast them at will without expending a spell slot (at their base level)."
     },
     {
       "level": 20,
-      "name": "Коронные заклинания",
-      "desc": "Выбираете два заклинания 3 круга — каждое раз на короткий/длинный отдых творите без ячейки."
+      "name": "Signature Spells",
+      "desc": "You choose two level 3 spells; you can cast each once per Short or Long Rest without a spell slot."
     }
   ]
 }

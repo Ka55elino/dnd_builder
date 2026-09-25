@@ -1,7 +1,7 @@
 {
   "id": "magicInitiateCleric",
-  "name": "Посвящённый в магию (жрец)",
+  "name": "Magic Initiate (Cleric)",
   "category": "origin",
   "level": 1,
-  "desc": "Два заговора и одно заклинание 1 круга из списка жреца; заклинание раз в долгий отдых бесплатно."
+  "desc": "Two cantrips and one level 1 spell from the Cleric list; cast the spell once per Long Rest for free."
 }

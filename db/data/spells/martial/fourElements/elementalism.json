@@ -1,9 +1,9 @@
 {
   "id": "monkElementalism",
-  "name": "Стихиализм (заговор)",
+  "name": "Elementalism (Cantrip)",
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
-  "desc": "Без траты ци. Заговор: небольшой стихийный эффект — двигаете предметы, создаёте вспышку/порыв, сенсорный эффект стихии."
+  "desc": "No Focus Points needed. Cantrip-like effect: a minor elemental effect, such as moving objects, creating a flash or gust, or a sensory elemental effect."
 }

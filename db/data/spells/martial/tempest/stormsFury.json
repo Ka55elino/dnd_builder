@@ -1,9 +1,9 @@
 {
   "id": "stormsFury",
-  "name": "Поступь бури",
+  "name": "Stormborn",
   "kind": "martial",
   "subclass": "tempest",
   "level": 17,
   "action": "reaction",
-  "desc": "Реакцией, получив урон, немедленно летите со скоростью до 18 м, не провоцируя атак по возможности."
+  "desc": "As a Reaction when you take damage, you immediately fly up to 60 feet without provoking Opportunity Attacks."
 }

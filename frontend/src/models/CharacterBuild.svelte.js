@@ -1,14 +1,14 @@
 /**
- * CharacterBuild — все данные, которые собирает билдер.
+ * CharacterBuild — all the data the builder collects.
  *
- * Реактивный класс (Svelte 5 runes): поля объявлены через $state,
- * поэтому компоненты можно напрямую связывать с ними:
+ * Reactive class (Svelte 5 runes): fields are declared with $state,
+ * so components can bind to them directly:
  *   <input bind:value={build.name} />
  *
- * Файл обязательно с суффиксом .svelte.js — иначе $state не сработает.
+ * The file must have the .svelte.js suffix — otherwise $state won't work.
  *
- * Хранит только выбор игрока (id-шники, значения). Производные
- * показатели (КД, хиты, бонусы) считаются отдельно.
+ * Stores only the player's choices (ids, values). Derived
+ * stats (AC, Hit Points, bonuses) are computed separately.
  */
 
 import {
@@ -29,33 +29,33 @@ export const MIN_LEVEL = 1;
 export const MAX_LEVEL = 20;
 
 /**
- * Текстовые поля описания персонажа, сгруппированные для UI.
- * Каждое поле: { key, label, wide } — wide = многострочное поле на всю ширину.
+ * Character description text fields, grouped for the UI.
+ * Each field: { key, label, wide } — wide = full-width multiline field.
  */
 export const BIO_GROUPS = [
     {
-        title: 'Внешность',
+        title: 'Appearance',
         fields: [
-            { key: 'gender', label: 'Пол', wide: false },
-            { key: 'identity', label: 'Самоощущение', wide: false },
-            { key: 'attraction', label: 'Влечение', wide: false },
-            { key: 'age', label: 'Возраст', wide: false },
-            { key: 'height', label: 'Рост', wide: false },
-            { key: 'weight', label: 'Вес', wide: false },
-            { key: 'eyes', label: 'Глаза', wide: false },
-            { key: 'skin', label: 'Кожа', wide: false },
-            { key: 'hair', label: 'Волосы', wide: false },
+            { key: 'gender', label: 'Gender', wide: false },
+            { key: 'identity', label: 'Identity', wide: false },
+            { key: 'attraction', label: 'Attraction', wide: false },
+            { key: 'age', label: 'Age', wide: false },
+            { key: 'height', label: 'Height', wide: false },
+            { key: 'weight', label: 'Weight', wide: false },
+            { key: 'eyes', label: 'Eyes', wide: false },
+            { key: 'skin', label: 'Skin', wide: false },
+            { key: 'hair', label: 'Hair', wide: false },
         ],
     },
     {
-        title: 'Личность',
+        title: 'Personality',
         fields: [
-            { key: 'alignment', label: 'Мировоззрение', wide: true },
-            { key: 'trait', label: 'Черта характера', wide: true },
-            { key: 'ideal', label: 'Идеал', wide: true },
-            { key: 'bond', label: 'Привязанность', wide: true },
-            { key: 'flaw', label: 'Изъян / секрет', wide: true },
-            { key: 'weakness', label: 'Слабость', wide: true },
+            { key: 'alignment', label: 'Alignment', wide: true },
+            { key: 'trait', label: 'Personality trait', wide: true },
+            { key: 'ideal', label: 'Ideal', wide: true },
+            { key: 'bond', label: 'Bond', wide: true },
+            { key: 'flaw', label: 'Flaw / secret', wide: true },
+            { key: 'weakness', label: 'Weakness', wide: true },
         ],
     }
 ];
@@ -73,37 +73,37 @@ const defaultPointBuy = () => byAbility(() => POINT_BUY_MIN);
 const emptyAssign = () => byAbility(() => null);
 
 const defaultEquipment = () => ({
-    armorId: null,   // доспех (один)
+    armorId: null,   // armor (one)
     shield: false,
-    weaponIds: [],   // оружие (несколько)
-    packId: null,    // набор снаряжения (один)
-    items: [],       // отдельные предметы: [{ id, qty }]
-    bag: [],         // выданное позже («Дать предмет»): [{ kind: 'weapon'|'armor'|'item', id, qty }]
+    weaponIds: [],   // weapons (several)
+    packId: null,    // equipment pack (one)
+    items: [],       // individual items: [{ id, qty }]
+    bag: [],         // granted later ("Give item"): [{ kind: 'weapon'|'armor'|'item', id, qty }]
 });
 
 const newId = () =>
     globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export class CharacterBuild {
-    // --- служебное ---
+    // --- internal ---
     id = $state('');
     createdAt = $state('');
     updatedAt = $state('');
 
-    // --- Основа ---
+    // --- Basics ---
     name = $state('');
-    portrait = $state(null);   // картинка персонажа, data URL (image/jpeg) или null
-    bio = $state(defaultBio()); // Личность + Внешность, см. BIO_GROUPS
+    portrait = $state(null);   // character portrait, data URL (image/jpeg) or null
+    bio = $state(defaultBio()); // Personality + Appearance, see BIO_GROUPS
     level = $state(MIN_LEVEL);
     backgroundId = $state(null);
 
-    // --- Атрибуты ---
+    // --- Abilities ---
     abilityMethod = $state('array');       // 'array' | 'pointbuy' | 'roll'
-    pointBuy = $state(defaultPointBuy());  // { str: 8..15, ... } — для 'pointbuy'
-    abilityRolls = $state(null);           // [{ dice: [4], total }] ×6 — для 'roll'
-    abilityAssign = $state(emptyAssign()); // { str: индекс в пуле | null } — для 'array' и 'roll'
+    pointBuy = $state(defaultPointBuy());  // { str: 8..15, ... } — for 'pointbuy'
+    abilityRolls = $state(null);           // [{ dice: [4], total }] ×6 — for 'roll'
+    abilityAssign = $state(emptyAssign()); // { str: pool index | null } — for 'array' and 'roll'
 
-    /** Пул значений для распределения (array / roll). */
+    /** Pool of values to assign (array / roll). */
     abilityPool = $derived(
         this.abilityMethod === 'array'
             ? STANDARD_ARRAY
@@ -112,7 +112,7 @@ export class CharacterBuild {
                 : [],
     );
 
-    /** Итоговые базовые значения { str, ... } (null — ещё не назначено). */
+    /** Resulting base scores { str, ... } (null — not assigned yet). */
     abilities = $derived(
         this.abilityMethod === 'pointbuy'
             ? { ...this.pointBuy }
@@ -122,14 +122,14 @@ export class CharacterBuild {
             }),
     );
 
-    // --- Происхождение (предыстория 2024): бонусы к характеристикам ---
-    // режим '2-1': одной +2, другой +1; '1-1-1': трём по +1 (из списка предыстории)
+    // --- Origin (2024 background): ability score bonuses ---
+    // mode '2-1': +2 to one, +1 to another; '1-1-1': +1 to three (from the background's list)
     backgroundBonusMode = $state('2-1');
     backgroundBonus = $state({});          // { str: 2, dex: 1 }
 
     /**
-     * Итоговые характеристики: база + происхождение + повышения из выборов
-     * уровней (choices[*].asi). Максимум 20. null — база ещё не назначена.
+     * Final ability scores: base + origin + increases from level
+     * choices (choices[*].asi). Max 20. null — base not assigned yet.
      */
     totalAbilities = $derived(
         byAbility((k) => {
@@ -146,19 +146,19 @@ export class CharacterBuild {
     pointsSpent = $derived(pointBuySpent(this.pointBuy));
     pointsLeft = $derived(POINT_BUY_BUDGET - this.pointsSpent);
 
-    // --- Раса ---
+    // --- Species ---
     raceId = $state(null);
     subraceId = $state(null);
 
-    // --- Класс ---
+    // --- Class ---
     classId = $state(null);
     subclassId = $state(null);
 
-    // --- Снаряжение ---
+    // --- Equipment ---
     equipment = $state(defaultEquipment());
 
-    // --- Прочие выборы (навыки, языки, черты и т.п.) ---
-    // ключ — источник выбора, например 'class:skills', 'background:abilities'
+    // --- Other choices (skills, languages, feats, etc.) ---
+    // key — the choice source, e.g. 'class:skills', 'background:abilities'
     choices = $state({});
 
     constructor(data = {}) {
@@ -192,14 +192,14 @@ export class CharacterBuild {
         this.choices = { ...(data.choices ?? {}) };
     }
 
-    // --- изменения ---
+    // --- mutations ---
 
     setLevel(n) {
         this.level = clampLevel(n);
         this.touch();
     }
 
-    // --- атрибуты ---
+    // --- abilities ---
 
     setAbilityMethod(method) {
         if (!(method in ABILITY_METHODS) || method === this.abilityMethod) return;
@@ -209,7 +209,7 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Покупка очков: изменить значение на delta (+1 / -1), если хватает очков. */
+    /** Point buy: change a score by delta (+1 / -1) if enough points remain. */
     pointBuyStep(key, delta) {
         const next = this.pointBuy[key] + delta;
         if (next < POINT_BUY_MIN || next > POINT_BUY_MAX) return false;
@@ -226,8 +226,8 @@ export class CharacterBuild {
     }
 
     /**
-     * Назначить характеристике значение из пула (индекс) или снять (null).
-     * Если индекс уже занят другой характеристикой — значения меняются местами.
+     * Assign a pool value (index) to an ability, or clear it (null).
+     * If the index is already taken by another ability, the values are swapped.
      */
     assignAbility(key, index) {
         const prev = this.abilityAssign[key];
@@ -248,49 +248,49 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Выбрать расу (null — снять выбор). Подраса при этом сбрасывается. */
+    /** Select a species (null — clear). The subrace is reset. */
     setRace(raceId, subraceId = null) {
         this.raceId = raceId ?? null;
         this.subraceId = this.raceId ? subraceId : null;
         this.touch();
     }
 
-    /** Выбрать подрасу текущей расы (null — снять выбор). */
+    /** Select a subrace of the current species (null — clear). */
     setSubrace(subraceId) {
         if (!this.raceId) return;
         this.subraceId = subraceId ?? null;
         this.touch();
     }
 
-    /** Выбрать класс (null — снять выбор). Подкласс при этом сбрасывается. */
+    /** Select a class (null — clear). The subclass is reset. */
     setClass(classId, subclassId = null) {
         this.classId = classId ?? null;
         this.subclassId = this.classId ? subclassId : null;
         this.touch();
     }
 
-    /** Выбрать подкласс текущего класса (null — снять выбор). */
+    /** Select a subclass of the current class (null — clear). */
     setSubclass(subclassId) {
         if (!this.classId) return;
         this.subclassId = subclassId ?? null;
         this.touch();
     }
 
-    // --- снаряжение ---
+    // --- equipment ---
 
-    /** Доспех (null — снять). */
+    /** Armor (null — remove). */
     setArmor(armorId) {
         this.equipment.armorId = armorId ?? null;
         this.touch();
     }
 
-    /** Щит: взят / не взят. */
+    /** Shield: taken / not taken. */
     setShield(on) {
         this.equipment.shield = !!on;
         this.touch();
     }
 
-    /** Добавить / убрать оружие. */
+    /** Add / remove a weapon. */
     toggleWeapon(weaponId) {
         const list = this.equipment.weaponIds;
         const i = list.indexOf(weaponId);
@@ -299,13 +299,13 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Набор снаряжения (null — снять). */
+    /** Equipment pack (null — remove). */
     setPack(packId) {
         this.equipment.packId = packId ?? null;
         this.touch();
     }
 
-    /** Выдать предмет в рюкзак (оружие, доспех или предмет из каталога). */
+    /** Give an item to the backpack (weapon, armor or catalog item). */
     addToBag(kind, id, qty = 1) {
         const bag = this.equipment.bag ?? (this.equipment.bag = []);
         const it = bag.find((b) => b.kind === kind && b.id === id);
@@ -314,7 +314,7 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Убрать выданный предмет (qty штук; 0 — все). */
+    /** Remove a granted item (qty pieces; 0 — all). */
     removeFromBag(kind, id, qty = 1) {
         const bag = this.equipment.bag ?? [];
         const i = bag.findIndex((b) => b.kind === kind && b.id === id);
@@ -324,12 +324,12 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Сколько такого предмета выдано. */
+    /** How many of this item have been granted. */
     bagCount(kind, id) {
         return (this.equipment.bag ?? []).find((b) => b.kind === kind && b.id === id)?.qty ?? 0;
     }
 
-    /** Добавить / убрать отдельный предмет. */
+    /** Add / remove an individual item. */
     toggleItem(itemId, qty = 1) {
         const list = this.equipment.items;
         const i = list.findIndex((it) => it.id === itemId);
@@ -338,13 +338,13 @@ export class CharacterBuild {
         this.touch();
     }
 
-    // --- происхождение ---
+    // --- origin ---
 
     setBackground(backgroundId) {
         if (backgroundId === this.backgroundId) return;
         this.backgroundId = backgroundId ?? null;
         this.backgroundBonus = {};
-        // выборы, завязанные на черту предыстории, больше не актуальны
+        // choices tied to the background's feat are no longer relevant
         for (const k of Object.keys(this.choices)) if (k.includes(':background')) delete this.choices[k];
         this.touch();
     }
@@ -356,9 +356,9 @@ export class CharacterBuild {
     }
 
     /**
-     * Назначить бонус характеристике.
-     * '2-1': value 2 или 1 (у каждого значения — одна характеристика);
-     * '1-1-1': переключатель +1.
+     * Assign a bonus to an ability.
+     * '2-1': value 2 or 1 (each value goes to one ability);
+     * '1-1-1': +1 toggle.
      */
     setBackgroundBonus(key, value) {
         const b = { ...this.backgroundBonus };
@@ -373,16 +373,16 @@ export class CharacterBuild {
         this.touch();
     }
 
-    // --- выборы уровней (см. rules/progression.js) ---
+    // --- level choices (see rules/progression.js) ---
 
-    /** value: { kind, ids?: [...], asi?: { str: 1 } } или null — снять. */
+    /** value: { kind, ids?: [...], asi?: { str: 1 } } or null — clear. */
     setChoice(key, value) {
         if (value == null) delete this.choices[key];
         else this.choices[key] = value;
         this.touch();
     }
 
-    /** Удалить выборы уровней выше указанного (например, при отмене повышения). */
+    /** Drop level choices above the given level (e.g. when undoing a level-up). */
     dropChoicesAbove(level) {
         for (const k of Object.keys(this.choices)) {
             const m = /^L(\d+):/.exec(k);
@@ -394,9 +394,9 @@ export class CharacterBuild {
         this.updatedAt = new Date().toISOString();
     }
 
-    // --- сериализация ---
+    // --- serialization ---
 
-    /** Простой объект для сохранения (JSON / Go-бэкенд). */
+    /** Plain object for saving (JSON / Go backend). */
     toJSON() {
         return $state.snapshot({
             id: this.id,
@@ -413,8 +413,8 @@ export class CharacterBuild {
             pointBuy: this.pointBuy,
             abilityRolls: this.abilityRolls,
             abilityAssign: this.abilityAssign,
-            abilities: this.abilities, // производное, для удобства чтения
-            totalAbilities: this.totalAbilities, // производное: с бонусами
+            abilities: this.abilities, // derived, for readability
+            totalAbilities: this.totalAbilities, // derived: with bonuses
             raceId: this.raceId,
             subraceId: this.subraceId,
             classId: this.classId,

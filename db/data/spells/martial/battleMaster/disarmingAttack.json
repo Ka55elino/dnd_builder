@@ -1,9 +1,9 @@
 {
   "id": "disarmingAttack",
-  "name": "Обезоруживающая атака",
+  "name": "Disarming Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При попадании доп. урон = кость; цель роняет предмет по её выбору (спасбросок Силы).",
+  "desc": "On a hit, extra damage equal to the die; the target drops an item of its choice (Strength saving throw).",
   "pool": "maneuver"
 }

@@ -1,11 +1,39 @@
 {
   "id": "stormsThunder",
-  "name": "Гром бури",
+  "name": "Storm's Thunder",
   "kind": "action",
-  "source": "Голиаф (Шторм)",
+  "source": "Goliath (Storm)",
   "level": 1,
   "action": "reaction",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Реакцией, когда существо в пределах 18 м наносит вам урон, наносите ему 1d8 урона звуком. Число применений равно вашему бонусу мастерства (на длинный отдых).",
-  "damage": { "dice": "1d8", "type": "thunder" }
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "As a Reaction when a creature within 60 feet deals damage to you, you deal 1d8 Thunder damage to it. Number of uses equals your Proficiency Bonus (per Long Rest).",
+  "damage": {
+    "dice": "1d8",
+    "type": "thunder"
+  }
 }

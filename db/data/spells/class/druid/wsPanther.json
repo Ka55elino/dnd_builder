@@ -1,13 +1,13 @@
 {
   "id": "wsPanther",
-  "name": "Форма: Пантера",
+  "name": "Form: Panther",
   "kind": "class",
   "level": 2,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1/4. Хиты 13, КЗ 12, скорость 15 м, лазание 12 м. Наскок: сблизившись 6 м и попав, можете бонусным действием сбить с ног.",
+  "desc": "CR 1/4. HP 13, AC 12, Speed 50 ft., Climb 40 ft. Pounce: if it moves 20 feet toward a target and hits, it can knock the target Prone as a Bonus Action.",
   "damage": {
     "dice": "1d6",
     "type": "piercing"

@@ -1,33 +1,33 @@
 {
   "id": "swashbuckler",
-  "name": "Дуэлянт",
+  "name": "Dueling",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "rogue",
   "features": [
     {
       "level": 3,
-      "name": "Ловкое манёврирование",
-      "desc": "Совершив рукопашную атаку по существу, до конца хода оно не может совершать по вам провоцированные атаки."
+      "name": "Elegant Maneuver",
+      "desc": "When you make a melee attack against a creature, it can't make Opportunity Attacks against you until the end of the turn."
     },
     {
       "level": 3,
-      "name": "Лихая удаль",
-      "desc": "Добавляете мод. Харизмы к инициативе. Скрытую атаку можно применять без преимущества, если цель в 1,5 м, рядом с ней нет других существ и нет помехи."
+      "name": "Rakish Audacity",
+      "desc": "You add your Charisma modifier to your Initiative. You can apply Sneak Attack without Advantage if the target is within 5 feet of you, no other creatures are next to it, and you don't have Disadvantage."
     },
     {
       "level": 9,
-      "name": "Щегольство",
-      "desc": "Действием проводите состязание Харизмы (Убеждение) против Мудрости (Проницательность): при успехе враг атакует других с помехой и не провоцируется ими, а невраждебное существо очаровывается на 1 минуту."
+      "name": "Panache",
+      "desc": "As an action, you make a Charisma (Persuasion) check contested by the target's Wisdom (Insight): on a success, an enemy has Disadvantage on attacks against others and can't make Opportunity Attacks against them, while a non-hostile creature is Charmed for 1 minute."
     },
     {
       "level": 13,
-      "name": "Элегантный манёвр",
-      "desc": "Бонусным действием даёте себе преимущество на следующую проверку Акробатики или Атлетики в этом ходу."
+      "name": "Elegant Maneuver",
+      "desc": "As a Bonus Action, you give yourself Advantage on your next Dexterity (Acrobatics) or Strength (Athletics) check this turn."
     },
     {
       "level": 17,
-      "name": "Мастер дуэлянт",
-      "desc": "Промахнувшись атакой, можете перебросить её с преимуществом. Раз на короткий или длинный отдых."
+      "name": "Master Duelist",
+      "desc": "When you miss with an attack, you can reroll it with Advantage. Once per Short or Long Rest."
     }
   ]
 }

@@ -1,33 +1,33 @@
 {
   "id": "conjuration",
-  "name": "Школа Вызова",
+  "name": "School of Conjuration",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "wizard",
   "features": [
     {
       "level": 3,
-      "name": "Знаток вызова",
-      "desc": "Копируете заклинания Вызова за половину времени и золота."
+      "name": "Conjuration Savant",
+      "desc": "You copy Conjuration spells in half the time and for half the gold."
     },
     {
       "level": 3,
-      "name": "Малый вызов",
-      "desc": "Действием создаёте неживой предмет (до 1 м, 4,5 кг) на 1 час."
+      "name": "Minor Conjuration",
+      "desc": "As an action, you create a nonliving object (up to 3 feet, 10 lb.) for 1 hour."
     },
     {
       "level": 6,
-      "name": "Благотворное перемещение",
-      "desc": "Бонусным действием телепортируетесь до 9 м или меняетесь местами с согласным существом."
+      "name": "Benign Transposition",
+      "desc": "As a Bonus Action, you teleport up to 30 feet or swap places with a willing creature."
     },
     {
       "level": 10,
-      "name": "Сосредоточенный вызов",
-      "desc": "Урон не нарушает вашу концентрацию на заклинаниях Вызова."
+      "name": "Focused Conjuration",
+      "desc": "Taking damage can't break your Concentration on Conjuration spells."
     },
     {
       "level": 14,
-      "name": "Стойкие вызовы",
-      "desc": "Существа, призванные вашими заклинаниями Вызова, получают +30 к максимуму хитов."
+      "name": "Durable Summons",
+      "desc": "Creatures summoned by your Conjuration spells gain +30 to their Hit Point maximum."
     }
   ]
 }

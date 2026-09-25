@@ -1,9 +1,9 @@
 <script>
     /**
-     * Сетка выбора: ячейки 250×250 — картинка + название.
+     * Choice grid: 250×250 cells — image + name.
      * items    — [{ id, name, image }]
      * onpick(id)
-     * caption  — (item) => строка под названием (необязательно)
+     * caption  — (item) => line below the name (optional)
      */
     let { items = [], onpick, caption = null } = $props();
 </script>

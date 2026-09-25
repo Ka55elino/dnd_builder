@@ -1,10 +1,13 @@
 {
   "id": "radiantConsumption",
-  "name": "Излучающее пожирание",
+  "name": "Radiant Consumption",
   "kind": "action",
-  "source": "Аасимар-каратель",
+  "source": "Scourge Aasimar",
   "level": 3,
   "action": "bonus",
-  "uses": { "count": 1, "per": "longRest" },
-  "desc": "Бонусным действием на 1 минуту испускаете жгучий свет: в начале каждого хода урон себе и всем в 3 м (излучающий = бонусу мастерства)."
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "As a Bonus Action, you radiate searing light for 1 minute: at the start of each of your turns, you and everyone within 10 feet take Radiant damage equal to your Proficiency Bonus."
 }

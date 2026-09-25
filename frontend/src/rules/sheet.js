@@ -1,30 +1,30 @@
 /**
- * Производные показатели для листа персонажа.
- * Чистые функции: build (CharacterBuild) + справочные данные → числа.
+ * Derived stats for the character sheet.
+ * Pure functions: build (CharacterBuild) + reference data → numbers.
  *
- * Пока без бонусов предыстории/черт и выбранных навыков класса —
- * учитываются только фиксированные гранты расы/подрасы.
+ * No background/feat bonuses or chosen class skills yet —
+ * only fixed race/subrace grants are counted.
  */
 import { ABILITY_KEYS, modifier } from './abilities.js';
 import { SKILLS } from './skills.js';
 
-/** Бонус мастерства по уровню: +2 на 1–4, +3 на 5–8 … +6 на 17–20. */
+/** Proficiency bonus by level: +2 at 1–4, +3 at 5–8 … +6 at 17–20. */
 export const proficiencyBonus = (level) => 2 + Math.floor((Math.max(1, level) - 1) / 4);
 
-/** Все гранты черт расы и подрасы (плоско). */
+/** All race and subrace trait grants (flat). */
 const traitGrants = (...sources) =>
     sources.flatMap((s) => s?.data?.traits ?? []).flatMap((t) => t.grants ?? []);
 
 /**
- * Считает всё для листа.
+ * Computes everything for the sheet.
  * ctx: {
  *   race, subrace, cls,
- *   armor   — надетый доспех (или null),
- *   shield  — щит в руке (объект щита или true / false),
- *   hands   — оружие в руках: [{ hand: 'main' | 'off', weapon }]
- *   skills  — доп. владение навыками (выборы уровней, предыстория): [id]
- *   expertise — компетентность: [id]
- *   perks   — эффекты черт/боевых стилей: Set id ('tough', 'alert',
+ *   armor   — worn armor (or null),
+ *   shield  — shield in hand (shield object or true / false),
+ *   hands   — weapons in hand: [{ hand: 'main' | 'off', weapon }]
+ *   skills  — extra skill proficiencies (level choices, background): [id]
+ *   expertise — expertise: [id]
+ *   perks   — feat/fighting style effects: Set id ('tough', 'alert',
  *             'defense', 'archery', 'dueling', 'twf')
  * }
  */
@@ -43,7 +43,7 @@ export function computeSheet(
     const grants = traitGrants(race, subrace);
     const effects = grants.filter((g) => g.type === 'effect').map((g) => g.effect);
 
-    // --- спасброски ---
+    // --- saving throws ---
     const saveProf = new Set(cls?.data?.savingThrows ?? []);
     const saves = ABILITY_KEYS.map((k) => ({
         key: k,
@@ -51,7 +51,7 @@ export function computeSheet(
         value: mods[k] + (saveProf.has(k) ? prof : 0),
     }));
 
-    // --- навыки (владение — только фиксированные гранты расы) ---
+    // --- skills (proficiency — only fixed race grants) ---
     const skillProf = new Set([
         ...grants.filter((g) => g.type === 'skill' && g.id).map((g) => g.id),
         ...extraSkills,
@@ -64,51 +64,51 @@ export function computeSheet(
     });
     const passivePerception = 10 + (skills.find((s) => s.id === 'perception')?.value ?? mods.wis);
 
-    // --- КД ---
-    // без доспеха: 10 + Лов, либо «Защита без доспехов» класса (монах: Лов+Мдр, варвар: Лов+Тел)
+    // --- AC ---
+    // no armor: 10 + Dex, or the class's "Unarmored Defense" (monk: Dex+Wis, barbarian: Dex+Con)
     const unarmored = cls?.data?.unarmoredDefense ?? [];
     let ac = unarmored.length ? 10 + unarmored.reduce((sum, k) => sum + (mods[k] ?? 0), 0) : 10 + mods.dex;
     if (armor && armor.category !== 'shield') {
         const d = armor.data ?? {};
         let dex = d.addDex ? mods.dex : 0;
         if (d.addDex && d.maxDex != null) dex = Math.min(dex, d.maxDex);
-        ac = (armor.baseAC ?? 10) + dex + (Number(d.acBonus) || 0); // + магический бонус доспеха
+        ac = (armor.baseAC ?? 10) + dex + (Number(d.acBonus) || 0); // + armor's magic bonus
     }
-    // щит: +2 (или его acBonus, если щит магический); shield — объект щита или true
+    // shield: +2 (or its acBonus if the shield is magic); shield — shield object or true
     if (shield) ac += Number(shield?.data?.acBonus) || 2;
-    if (perks.has('defense') && armor && armor.category !== 'shield') ac += 1; // боевой стиль «Защита»
+    if (perks.has('defense') && armor && armor.category !== 'shield') ac += 1; // "Defense" fighting style
 
-    // --- скорость (база расы + бонусы-эффекты) ---
+    // --- speed (race base + bonus effects) ---
     const speed =
         (race?.data?.speed ?? 30) +
         effects
             .filter((e) => e.kind === 'bonus' && e.target === 'speed')
             .reduce((sum, e) => sum + (Number(e.value) || 0), 0);
 
-    // --- хиты: 1 ур. — максимум кости, дальше — среднее (кость/2 + 1) ---
+    // --- hit points: lvl 1 — max die, then average (die/2 + 1) ---
     const hitDie = cls?.hitDie ?? 8;
     const hp = Math.max(
         1,
         hitDie + mods.con + (level - 1) * (Math.floor(hitDie / 2) + 1 + mods.con) +
-            (perks.has('tough') ? 2 * level : 0), // черта «Крепкий»
+            (perks.has('tough') ? 2 * level : 0), // "Tough" feat
     );
 
-    // --- тёмное зрение ---
+    // --- darkvision ---
     const darkvision =
         effects.find((e) => e.kind === 'sense' && e.sense === 'darkvision')?.range ?? 0;
 
-    // --- атаки: оружие в руках; руки пусты — безоружный удар ---
+    // --- attacks: weapons in hand; empty hands — unarmed strike ---
     const weaponProf = new Set(cls?.data?.weaponProficiencies ?? []);
     const attacks = handAttacks(hands, {
         mods, prof, weaponProf,
-        bonusAddsMod: perks.has('twf'), // боевой стиль «Бой двумя оружиями»
+        bonusAddsMod: perks.has('twf'), // "Two-Weapon Fighting" fighting style
         archery: perks.has('archery'),
         dueling: perks.has('dueling'),
     });
     if (!attacks.length) {
         attacks.push({
             id: 'unarmed',
-            name: 'Безоружный удар',
+            name: 'Unarmed Strike',
             hand: 'main',
             action: 'action',
             ability: 'str',
@@ -127,7 +127,7 @@ export function computeSheet(
         skills,
         passivePerception,
         ac,
-        initiative: mods.dex + (perks.has('alert') ? prof : 0), // черта «Бдительный»
+        initiative: mods.dex + (perks.has('alert') ? prof : 0), // "Alert" feat
         speed,
         hp,
         hitDie,
@@ -139,19 +139,19 @@ export function computeSheet(
 const isLight = (w) => (w?.data?.properties ?? []).includes('light');
 
 /**
- * Атаки из того, что в руках (правила 2024, свойство «Лёгкое»):
+ * Attacks from what is in hand (2024 rules, the "Light" property):
  *
- *   - Оружие в правой руке — обычная атака (действие «Атака»).
- *   - Оружие в левой руке:
- *       · если ОБА оружия лёгкие — дополнительная атака бонусным действием,
- *         урон без модификатора характеристики (кроме отрицательного);
- *       · иначе — просто второе оружие для действия «Атака» (полный модификатор),
- *         доп. атаки нет;
- *       · если правая рука пуста/со щитом — левое оружие и есть основное.
+ *   - Weapon in the right hand — a normal attack (the "Attack" action).
+ *   - Weapon in the left hand:
+ *       · if BOTH weapons are light — an extra attack as a Bonus Action,
+ *         damage without the ability modifier (unless negative);
+ *       · otherwise — just a second weapon for the "Attack" action (full modifier),
+ *         no extra attack;
+ *       · if the right hand is empty/holds a shield — the left weapon is the main one.
  *
- * opts.bonusAddsMod — задел под умение/черту (боевой стиль «Бой двумя оружиями»),
- * которые добавляют модификатор к урону доп. атаки. opts.anyLight — под черту
- * «Боец с двумя оружиями» (доп. атака не только лёгким оружием).
+ * opts.bonusAddsMod — hook for a feature/feat ("Two-Weapon Fighting" fighting style)
+ * that adds the modifier to the extra attack's damage. opts.anyLight — for the
+ * "Dual Wielder" feat (extra attack not only with light weapons).
  */
 export function handAttacks(
     hands,
@@ -159,7 +159,7 @@ export function handAttacks(
 ) {
     const main = hands.find((h) => h.hand === 'main')?.weapon ?? null;
     const off = hands.find((h) => h.hand === 'off')?.weapon ?? null;
-    // «Дуэлянт»: +2 к урону оружием ближнего боя в одной руке, если во второй нет оружия
+    // "Dueling": +2 damage with a one-handed melee weapon if the other hand holds no weapon
     const oneWeapon = !!main !== !!off;
     const base = { mods, prof, weaponProf, archery, dueling: dueling && oneWeapon };
     const out = [];
@@ -172,7 +172,7 @@ export function handAttacks(
             out.push(weaponAttack(off, { ...base, hand: 'off', bonus: true, bonusAddsMod }));
         } else {
             const a = weaponAttack(off, { ...base, hand: 'off' });
-            if (main) a.note = 'без доп. атаки: оба оружия должны быть лёгкими';
+            if (main) a.note = 'no extra attack: both weapons must be light';
             out.push(a);
         }
     }
@@ -180,9 +180,9 @@ export function handAttacks(
 }
 
 /**
- * Атака оружием.
- * bonus — доп. атака бонусным действием: урон без модификатора
- * (кроме отрицательного), если не bonusAddsMod.
+ * Weapon attack.
+ * bonus — extra attack as a Bonus Action: damage without the modifier
+ * (unless negative), unless bonusAddsMod.
  */
 export function weaponAttack(
     w,
@@ -198,7 +198,7 @@ export function weaponAttack(
     const noMod = bonus && !bonusAddsMod;
     const twoHanded = p.includes('twoHanded');
 
-    // бонусы самого оружия (магическое / именное): +к попаданию, +к урону, доп. урон
+    // the weapon's own bonuses (magic / named): +to hit, +to damage, extra damage
     const d = w.data ?? {};
     const magicHit = Number(d.attackBonus) || 0;
     const magicDmg = Number(d.damageBonus) || 0;
@@ -208,7 +208,7 @@ export function weaponAttack(
         (noMod ? Math.min(0, abilMod) : abilMod) +
         (dueling && !ranged && !twoHanded ? 2 : 0) +
         magicDmg;
-    const hitBonus = (archery && ranged ? 2 : 0) + magicHit; // «Стрельба» + бонус оружия
+    const hitBonus = (archery && ranged ? 2 : 0) + magicHit; // "Archery" + weapon bonus
 
     return {
         id: w.id,
@@ -220,9 +220,9 @@ export function weaponAttack(
         toHit: abilMod + (proficient ? prof : 0) + hitBonus,
         damage: w.damage ? `${w.damage}${fmtMod(dmgMod)}` : '—',
         damageType: w.damageType,
-        extra, // [{ dice, type }] — доп. урон при попадании
+        extra, // [{ dice, type }] — extra damage on hit
         magic: magicHit || magicDmg || extra.length ? { hit: magicHit, dmg: magicDmg } : null,
-        note: noMod ? 'без модификатора к урону' : null,
+        note: noMod ? 'no modifier to damage' : null,
     };
 }
 

@@ -1,6 +1,6 @@
 {
   "id": "resurrection",
-  "name": "Воскрешение",
+  "name": "Resurrection",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -9,5 +9,5 @@
     "bard",
     "cleric"
   ],
-  "desc": "Возвращаете к жизни существо, мёртвое не более 100 лет, без штрафов."
+  "desc": "You return to life a creature that has been dead no longer than 100 years, with no penalties."
 }

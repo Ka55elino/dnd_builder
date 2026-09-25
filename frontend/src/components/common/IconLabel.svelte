@@ -1,15 +1,15 @@
 <script>
     /**
-     * Подпись-иконка: если SVG есть — показываем иконку, а текст уходит в подсказку;
-     * если нет — показываем текст как раньше.
+     * Icon label: if an SVG exists, show the icon and move the text into the tooltip;
+     * otherwise show the text as before.
      *
-     *   <b>2d8</b> <IconLabel name="fire" kind="dmg" label="Огнём" text="огонь" />
+     *   <b>2d8</b> <IconLabel name="fire" kind="dmg" label="Fire" text="fire" />
      *
-     * name  — id иконки (assets/icons/<name>.svg)
-     * kind  — группа цвета (--color-<kind>-<name>), см. Icon
-     * label — полное название для подсказки
-     * text  — что показать без иконки (по умолчанию label); '' — ничего
-     * hint  — дополнительная строка подсказки (необязательно)
+     * name  — icon id (assets/icons/<name>.svg)
+     * kind  — color group (--color-<kind>-<name>), see Icon
+     * label — full name for the tooltip
+     * text  — what to show without an icon (defaults to label); '' — nothing
+     * hint  — extra tooltip line (optional)
      */
     import Icon, { hasIcon } from "./Icon.svelte";
     import Tooltip from "./Tooltip.svelte";

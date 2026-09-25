@@ -1,6 +1,6 @@
 {
   "id": "fireStorm",
-  "name": "Огненная буря",
+  "name": "Fire Storm",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -10,7 +10,7 @@
     "druid",
     "sorcerer"
   ],
-  "desc": "Столбы пламени в области: спасбросок Ловкости за половину.",
+  "desc": "Columns of flame in an area: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "7d10",
     "type": "fire"

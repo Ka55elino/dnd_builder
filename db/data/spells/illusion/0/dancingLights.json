@@ -1,6 +1,6 @@
 {
   "id": "dancingLights",
-  "name": "Пляшущие огни",
+  "name": "Dancing Lights",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Создаёте до 4 парящих огоньков (или светящуюся фигуру) на 36 м. Концентрация."
+  "desc": "You create up to 4 hovering lights (or a glowing humanoid form) within 120 feet. Concentration."
 }

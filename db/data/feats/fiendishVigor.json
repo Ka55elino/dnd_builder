@@ -1,7 +1,7 @@
 {
   "id": "fiendishVigor",
-  "name": "Дьявольская бодрость",
+  "name": "Fiendish Vigor",
   "category": "invocation",
   "level": 1,
-  "desc": "По желанию творите «Ложную жизнь» на себя (на минимальном эффекте) без ячейки."
+  "desc": "You can cast False Life on yourself at will (at its minimum effect), without a spell slot."
 }

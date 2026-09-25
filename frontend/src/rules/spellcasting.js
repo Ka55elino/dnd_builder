@@ -1,9 +1,9 @@
 /**
- * Ячейки заклинаний (D&D 2024).
+ * Spell slots (D&D 2024).
  * progression: full | half | third | pact | none
  */
 
-// Ячейки полного заклинателя по уровню заклинателя: [1-й … 9-й круг]
+// Full caster slots by caster level: [1st … 9th level]
 const FULL = [
     [],
     [2],
@@ -28,25 +28,25 @@ const FULL = [
     [4, 3, 3, 3, 3, 2, 2, 1, 1],
 ];
 
-// Магия договора (колдун): [кол-во ячеек, круг] по уровню
+// Pact Magic (warlock): [slot count, slot level] by level
 const PACT = [
     [0, 0], [1, 1], [2, 1], [2, 2], [2, 2], [2, 3], [2, 3], [2, 4], [2, 4], [2, 5], [2, 5],
     [3, 5], [3, 5], [3, 5], [3, 5], [3, 5], [3, 5], [4, 5], [4, 5], [4, 5], [4, 5],
 ];
 
-/** Уровень заклинателя для таблицы FULL. */
+/** Caster level for the FULL table. */
 export function casterLevel(progression, level) {
     switch (progression) {
         case 'full': return level;
-        case 'half': return Math.ceil(level / 2);   // 2024: полузаклинатели с 1 уровня
+        case 'half': return Math.ceil(level / 2);   // 2024: half casters from level 1
         case 'third': return level >= 3 ? Math.ceil(level / 3) : 0;
         default: return 0;
     }
 }
 
 /**
- * Ячейки для класса: [{ level: круг, max, pact? }]
- * Колдун — отдельные ячейки договора (восстанавливаются на коротком отдыхе).
+ * Slots for a class: [{ level: slot level, max, pact? }]
+ * Warlock — separate pact slots (recovered on a Short Rest).
  */
 export function spellSlots(progression, level) {
     if (progression === 'pact') {

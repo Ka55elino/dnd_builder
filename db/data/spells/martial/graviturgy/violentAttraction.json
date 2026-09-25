@@ -1,11 +1,11 @@
 {
   "id": "violentAttraction",
-  "name": "Яростное притяжение",
+  "name": "Violent Attraction",
   "kind": "martial",
   "subclass": "graviturgy",
   "level": 10,
   "action": "reaction",
-  "desc": "Реакцией, когда существо в 18 м попадает атакой оружием, добавляете 1d10 к урону (или 2d10 при падении). Число раз = мод. Интеллекта.",
+  "desc": "As a Reaction, when a creature within 60 feet hits with a weapon attack, you add 1d10 to the damage (or 2d10 when falling). Number of uses = your Intelligence modifier.",
   "uses": {
     "ability": "int",
     "min": 1,

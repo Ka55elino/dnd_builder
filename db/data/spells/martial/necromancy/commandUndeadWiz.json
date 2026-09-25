@@ -1,9 +1,9 @@
 {
   "id": "commandUndeadWiz",
-  "name": "Управление нежитью",
+  "name": "Command Undead",
   "kind": "martial",
   "subclass": "necromancy",
   "level": 14,
   "action": "action",
-  "desc": "Действием существо-нежить в 18 м — спасбросок Харизмы (с помехой, если его Инт ниже вашего) или переходит под ваш контроль."
+  "desc": "As an action, an Undead creature within 60 feet must succeed on a Charisma saving throw (with Disadvantage if its Intelligence is lower than yours) or fall under your control."
 }

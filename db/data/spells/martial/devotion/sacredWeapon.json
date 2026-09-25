@@ -1,9 +1,9 @@
 {
   "id": "sacredWeapon",
-  "name": "Священное оружие",
+  "name": "Sacred Weapon",
   "kind": "martial",
   "subclass": "devotion",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Наделяете оружие на 10 минут: +мод. Харизмы к броскам атаки, испускает свет 6 м, урон считается излучением."
+  "desc": "Costs 1 use of Channel Divinity. You imbue a weapon for 10 minutes: + your Charisma modifier to attack rolls, it sheds light in a 20-foot radius, and its damage counts as Radiant."
 }

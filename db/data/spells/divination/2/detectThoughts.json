@@ -1,6 +1,6 @@
 {
   "id": "detectThoughts",
-  "name": "Обнаружение мыслей",
+  "name": "Detect Thoughts",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -10,12 +10,12 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Читаете поверхностные мысли существ рядом; при углублении — спасбросок Интеллекта. Концентрация до 1 минуты.",
+  "desc": "You read the surface thoughts of nearby creatures; probing deeper requires an Intelligence saving throw. Concentration, up to 1 minute.",
   "casting": {
-    "time": "1 действие",
-    "range": "На себя",
-    "components": "В, С, М",
-    "duration": "Конц., 1 мин",
+    "time": "1 action",
+    "range": "Self",
+    "components": "V, S, M",
+    "duration": "Conc., 1 min",
     "concentration": true
   }
 }

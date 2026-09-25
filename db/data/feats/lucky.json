@@ -1,7 +1,7 @@
 {
   "id": "lucky",
-  "name": "Везунчик",
+  "name": "Lucky",
   "category": "origin",
   "level": 1,
-  "desc": "Очки удачи = бонусу мастерства на долгий отдых: преимущество на свой бросок к20 или помеха атакующему вас."
+  "desc": "Luck Points equal to your Proficiency Bonus per Long Rest: gain Advantage on your own d20 roll or impose Disadvantage on an attacker."
 }

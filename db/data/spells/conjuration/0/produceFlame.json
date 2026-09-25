@@ -1,6 +1,6 @@
 {
   "id": "produceFlame",
-  "name": "Сотворение пламени",
+  "name": "Produce Flame",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "druid"
   ],
-  "desc": "Пламя в ладони освещает; можете метнуть его в существо (атака заклинанием, урон огнём).",
+  "desc": "A flame in your palm sheds light; you can hurl it at a creature (spell attack, Fire damage).",
   "damage": {
     "dice": "1d8",
     "type": "fire",

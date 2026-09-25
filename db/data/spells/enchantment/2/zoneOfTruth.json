@@ -1,6 +1,6 @@
 {
   "id": "zoneOfTruth",
-  "name": "Зона истины",
+  "name": "Zone of Truth",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -10,5 +10,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "В сфере 4,5 м существа не могут намеренно лгать (спасбросок Харизмы)."
+  "desc": "Creatures in a 15-foot Sphere can't deliberately lie (Charisma saving throw)."
 }

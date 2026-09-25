@@ -1,13 +1,13 @@
 <script>
     /**
-     * Вкладка «Класс» — по той же схеме, что и «Раса».
-     * Нет выбора        → сетка классов.
-     * Класс выбран      → только его карточка (×) + сетка подклассов.
-     * Подкласс выбран   → только его карточка (×).
-     * Выбор пишется в build (CharacterBuild.classId / subclassId).
+     * "Class" tab — same pattern as "Species".
+     * Nothing selected  → grid of classes.
+     * Class selected    → only its card (×) + grid of subclasses.
+     * Subclass selected → only its card (×).
+     * The choice is written to build (CharacterBuild.classId / subclassId).
      *
-     * TODO: подкласс по правилам выбирается на subclassLevel (обычно 3) —
-     * пока это ограничение не применяем.
+     * TODO: per the rules, the subclass is chosen at subclassLevel (usually 3) —
+     * this restriction is not enforced yet.
      */
     import { onMount } from "svelte";
     import { GetClasses } from "../../../wailsjs/go/main/App.js";
@@ -27,9 +27,9 @@
         cls?.subclasses.find((s) => s.id === build.subclassId) ?? null,
     );
 
-    const ARMOR = { light: "лёгкие", medium: "средние", heavy: "тяжёлые", shield: "щиты" };
-    const WEAPONS = { simple: "простое", martial: "воинское" };
-    const CASTER = { full: "полный", half: "половинный", third: "треть", none: "нет" };
+    const ARMOR = { light: "light", medium: "medium", heavy: "heavy", shield: "shields" };
+    const WEAPONS = { simple: "simple", martial: "martial" };
+    const CASTER = { full: "full", half: "half", third: "third", none: "none" };
 
     const abilityList = (keys) =>
         (keys ?? []).map((k) => ABILITIES[k]?.short ?? k).join(", ") || "—";
@@ -49,34 +49,34 @@
 
 <div class="tab">
     {#if loading}
-        <p class="muted">Загрузка классов…</p>
+        <p class="muted">Loading classes…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить классы: {error}</p>
+        <p class="error">Failed to load classes: {error}</p>
     {:else if !cls}
         {#if classes.length === 0}
-            <p class="muted">Классы не найдены.</p>
+            <p class="muted">No classes found.</p>
         {:else}
             <ChoiceGrid items={classes} onpick={(id) => build.setClass(id)} />
         {/if}
     {:else}
-        <ChoiceCard item={cls} badge="Класс" onclear={() => build.setClass(null)}>
+        <ChoiceCard item={cls} badge="Class" onclear={() => build.setClass(null)}>
             <div class="stats">
-                <span>Кость хитов: <b>d{cls.hitDie}</b></span>
-                <span>Основная: <b>{abilityList(cls.data.primaryAbility)}</b></span>
-                <span>Спасброски: <b>{abilityList(cls.data.savingThrows)}</b></span>
-                <span>Доспехи: <b>{mapList(cls.data.armorTraining, ARMOR)}</b></span>
-                <span>Оружие: <b>{mapList(cls.data.weaponProficiencies, WEAPONS)}</b></span>
-                <span>Заклинатель: <b>{CASTER[cls.caster] ?? cls.caster ?? "—"}</b></span>
+                <span>Hit Point Die: <b>d{cls.hitDie}</b></span>
+                <span>Primary ability: <b>{abilityList(cls.data.primaryAbility)}</b></span>
+                <span>Saving throws: <b>{abilityList(cls.data.savingThrows)}</b></span>
+                <span>Armor: <b>{mapList(cls.data.armorTraining, ARMOR)}</b></span>
+                <span>Weapons: <b>{mapList(cls.data.weaponProficiencies, WEAPONS)}</b></span>
+                <span>Spellcaster: <b>{CASTER[cls.caster] ?? cls.caster ?? "—"}</b></span>
             </div>
             <FeatureList items={cls.data.features} />
         </ChoiceCard>
 
         {#if cls.subclasses.length}
-            <h4>Подкласс</h4>
+            <h4>Subclass</h4>
             {#if subclass}
                 <ChoiceCard
                     item={subclass}
-                    badge="Подкласс"
+                    badge="Subclass"
                     sub
                     onclear={() => build.setSubclass(null)}
                 >

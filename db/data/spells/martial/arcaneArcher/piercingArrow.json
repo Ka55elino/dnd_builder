@@ -1,12 +1,12 @@
 {
   "id": "piercingArrow",
-  "name": "Пронзающая стрела",
+  "name": "Piercing Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "Стрела проходит линией 9 м × 30 см сквозь существа; каждое совершает спасбросок Ловкости: урон оружия +1d6 колющего (половина при успехе).",
+  "desc": "The arrow flies in a 30-foot-long, 1-foot-wide Line through creatures; each makes a Dexterity saving throw: weapon damage + 1d6 Piercing damage (half on a success).",
   "damage": {
     "dice": "1d6",
     "type": "piercing",

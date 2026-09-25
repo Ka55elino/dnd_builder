@@ -1,6 +1,6 @@
 {
   "id": "insectPlague",
-  "name": "Нашествие насекомых",
+  "name": "Insect Plague",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,7 +10,7 @@
     "druid",
     "sorcerer"
   ],
-  "desc": "Рой в сфере 6 м: труднопроходимость и колющий урон. Концентрация.",
+  "desc": "A swarm in a 20-foot Sphere: Difficult Terrain and Piercing damage. Concentration.",
   "damage": {
     "dice": "4d10",
     "type": "piercing"

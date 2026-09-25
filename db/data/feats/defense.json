@@ -1,9 +1,9 @@
 {
   "id": "defense",
-  "name": "Защита",
+  "name": "Defense",
   "category": "fightingStyle",
   "level": 1,
-  "desc": "+1 к КЗ, пока вы носите броню.",
+  "desc": "+1 to AC while you are wearing armor.",
   "effects": [
     {
       "kind": "bonus",

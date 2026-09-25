@@ -1,10 +1,10 @@
 {
   "id": "recklessAttack",
-  "name": "Безрассудная атака",
+  "name": "Reckless Attack",
   "kind": "class",
   "level": 2,
   "classes": [
     "barbarian"
   ],
-  "desc": "В свой ход первая ближняя атака Силой — с преимуществом, но атаки по вам до вашего следующего хода тоже с преимуществом."
+  "desc": "On your turn, your first Strength-based melee attack has Advantage, but attack rolls against you also have Advantage until your next turn."
 }

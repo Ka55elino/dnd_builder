@@ -1,6 +1,6 @@
 {
   "id": "iceStorm",
-  "name": "Ледяная буря",
+  "name": "Ice Storm",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -11,7 +11,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Град льда в области: дробящий и холодный урон, труднопроходимость.",
+  "desc": "A hail of ice in an area: Bludgeoning and Cold damage; creates Difficult Terrain.",
   "damage": {
     "dice": "2d8",
     "type": "bludgeoning"

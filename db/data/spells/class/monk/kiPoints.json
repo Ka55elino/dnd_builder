@@ -1,12 +1,12 @@
 {
   "id": "kiPoints",
-  "name": "Очки ци (сосредоточение)",
+  "name": "Focus Points",
   "kind": "class",
   "level": 2,
   "classes": [
     "monk"
   ],
-  "desc": "Пул очков ци, равный вашему уровню монаха. Тратятся на монашеские приёмы; восстанавливаются на коротком или длинном отдыхе.",
+  "desc": "A pool of Focus Points equal to your Monk level. You spend them on Monk techniques; you regain them on a Short or Long Rest.",
   "uses": {
     "count": 2,
     "per": "shortRest",

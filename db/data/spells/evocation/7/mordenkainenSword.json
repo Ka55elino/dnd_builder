@@ -1,6 +1,6 @@
 {
   "id": "mordenkainenSword",
-  "name": "Меч Морденкайнена",
+  "name": "Mordenkainen's Sword",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -9,7 +9,7 @@
     "bard",
     "wizard"
   ],
-  "desc": "Призрачный меч атакует по вашей команде силовым уроном. Концентрация.",
+  "desc": "A spectral sword attacks at your command, dealing Force damage. Concentration.",
   "damage": {
     "dice": "3d10",
     "type": "force"

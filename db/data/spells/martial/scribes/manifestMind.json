@@ -1,11 +1,11 @@
 {
   "id": "manifestMind",
-  "name": "Проявленный разум",
+  "name": "Manifest Mind",
   "kind": "martial",
   "subclass": "scribes",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием призываете призрачный разум в 9 м (парит, свет 3 м). Можете творить заклинания так, будто находитесь в его точке, и реакцией защищаться его сопротивлением. Число раз = мод. Интеллекта.",
+  "desc": "As a Bonus Action, you summon a spectral mind within 30 feet (it hovers and sheds light in a 10-foot radius). You can cast spells as if you were at its location, and use your Reaction to protect yourself with its resistance. Number of uses = your Intelligence modifier.",
   "uses": {
     "ability": "int",
     "min": 1,

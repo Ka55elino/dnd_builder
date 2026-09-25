@@ -1,6 +1,6 @@
 <script>
     /**
-     * Главное меню (стартовая страница): Персонажи · Заклинания · Предметы.
+     * Main menu (start page): Characters · Spells · Items.
      * onNavigate(screen) — 'characters' | 'spells' | 'items'
      */
     import { onMount } from "svelte";
@@ -26,30 +26,28 @@
     });
 
     const SECTIONS = [
-        { id: "characters", title: "Персонажи", sub: "Создание, листы и повышение уровня", glyph: "⚔" },
-        { id: "spells", title: "Заклинания", sub: "Справочник заклинаний по кругам и классам", glyph: "✦" },
-        { id: "items", title: "Предметы", sub: "Оружие, доспехи и снаряжение", glyph: "⚜" },
+        { id: "characters", title: "Characters", sub: "Creation, sheets and leveling up", glyph: "⚔" },
+        { id: "spells", title: "Spells", sub: "Spell reference by level and class", glyph: "✦" },
+        { id: "items", title: "Items", sub: "Weapons, armor and gear", glyph: "⚜" },
     ];
 
     const plural = (n, one, few, many) => {
-        const m10 = n % 10, m100 = n % 100;
-        if (m10 === 1 && m100 !== 11) return one;
-        if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+        if (n === 1) return one;
         return many;
     };
     const countText = (id) => {
         const n = counts[id];
         if (n == null) return "";
-        if (id === "characters") return `${n} ${plural(n, "персонаж", "персонажа", "персонажей")}`;
-        if (id === "spells") return `${n} ${plural(n, "заклинание", "заклинания", "заклинаний")}`;
-        return `${n} ${plural(n, "предмет", "предмета", "предметов")}`;
+        if (id === "characters") return `${n} ${plural(n, "character", "characters", "characters")}`;
+        if (id === "spells") return `${n} ${plural(n, "spell", "spells", "spells")}`;
+        return `${n} ${plural(n, "item", "items", "items")}`;
     };
 </script>
 
 <main class="menu">
     <header>
         <h1>D&D Builder</h1>
-        <p class="tagline">Редакция 2024</p>
+        <p class="tagline">2024 Edition</p>
     </header>
 
     <nav class="sections">

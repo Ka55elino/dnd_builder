@@ -1,10 +1,13 @@
 {
   "id": "necroticShroud",
-  "name": "Некротическая пелена",
+  "name": "Necrotic Shroud",
   "kind": "action",
-  "source": "Аасимар-падший",
+  "source": "Fallen Aasimar",
   "level": 3,
   "action": "bonus",
-  "uses": { "count": 1, "per": "longRest" },
-  "desc": "Бонусным действием на 1 минуту проявляете призрачные крылья: враги в 3 м при появлении пугаются. Раз за ход добавляете к атаке/заклу некротический урон, равный бонусу мастерства."
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "As a Bonus Action, you manifest spectral wings for 1 minute: enemies within 10 feet become Frightened when they appear. Once per turn, you can add extra Necrotic damage equal to your Proficiency Bonus to an attack or spell."
 }

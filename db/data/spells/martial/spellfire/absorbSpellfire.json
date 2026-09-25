@@ -1,9 +1,9 @@
 {
   "id": "absorbSpellfire",
-  "name": "Поглощение чароплам",
+  "name": "Absorb Spellfire",
   "kind": "martial",
   "subclass": "spellfire",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией, когда по вам нацелено заклинание, можете поглотить его вместо эффекта: получаете заряды чароплам, равные кругу поглощённого заклинания."
+  "desc": "As a Reaction when you are targeted by a spell, you can absorb it instead of suffering its effect: you gain Spellfire charges equal to the absorbed spell's level."
 }

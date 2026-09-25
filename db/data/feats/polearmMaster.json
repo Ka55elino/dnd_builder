@@ -1,11 +1,11 @@
 {
   "id": "polearmMaster",
-  "name": "Мастер древкового оружия",
+  "name": "Polearm Master",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; бонусная атака древком, атака при входе в зону."
+  "desc": "+1 Strength or Dexterity; Bonus Action attack with the haft, attack when a creature enters your reach."
 }

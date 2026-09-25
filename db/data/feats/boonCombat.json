@@ -1,7 +1,7 @@
 {
   "id": "boonCombat",
-  "name": "Дар боевого мастерства",
+  "name": "Boon of Combat Prowess",
   "category": "boon",
   "level": 19,
-  "desc": "Раз в ход промах превращается в попадание."
+  "desc": "Once per turn, a miss becomes a hit."
 }

@@ -1,6 +1,6 @@
 {
   "id": "ancients",
-  "name": "Клятва Древних",
+  "name": "Oath of the Ancients",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "paladin",
   "domainSpells": {
@@ -24,23 +24,23 @@
   "features": [
     {
       "level": 3,
-      "name": "Гнев природы / Изгнание неверных",
-      "desc": "Божественным каналом опутываете врагов лозами либо изгоняете фей и исчадий (как Изгнание нежити)."
+      "name": "Nature's Wrath / Turn the Faithless",
+      "desc": "With Channel Divinity, you ensnare enemies with vines or turn Fey and Fiends (as with Turn Undead)."
     },
     {
       "level": 7,
-      "name": "Аура ограждения",
-      "desc": "Вы и союзники в 3 м получаете сопротивление урону от заклинаний."
+      "name": "Aura of Warding",
+      "desc": "You and allies within 10 feet gain Resistance to damage from spells."
     },
     {
       "level": 15,
-      "name": "Неумирающий страж",
-      "desc": "Опустившись до 0 хитов (не убитым), остаётесь на 1 хите (раз на длинный отдых)."
+      "name": "Undying Sentinel",
+      "desc": "When you drop to 0 Hit Points (and aren't killed), you drop to 1 Hit Point instead (once per Long Rest)."
     },
     {
       "level": 20,
-      "name": "Древний чемпион",
-      "desc": "Действием на 1 минуту: регенерация, преимущество и помеха врагам, творите заклинания паладина 1-2 круга бонусным действием."
+      "name": "Elder Champion",
+      "desc": "As an action, for 1 minute: regeneration, Advantage for you and Disadvantage for enemies, and you can cast level 1-2 Paladin spells as a Bonus Action."
     }
   ]
 }

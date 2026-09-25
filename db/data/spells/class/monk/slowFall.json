@@ -1,11 +1,11 @@
 {
   "id": "slowFall",
-  "name": "Замедленное падение",
+  "name": "Slow Fall",
   "kind": "class",
   "level": 4,
   "classes": [
     "monk"
   ],
   "action": "reaction",
-  "desc": "Реакцией при падении уменьшаете урон от него на пятикратный уровень монаха."
+  "desc": "As a Reaction when you fall, you reduce the falling damage by five times your Monk level."
 }

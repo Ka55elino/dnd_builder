@@ -1,10 +1,13 @@
 {
   "id": "sweepingCinderStrike",
-  "name": "Дисциплина: Разметающий пепел",
+  "name": "Discipline: Sweeping Cinder Strike",
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 2 очка ци. Конус огня 4,5 м: 3d10 урона огнём всем в области (спасбросок Ловкости за половину).",
-  "damage": { "dice": "3d10", "type": "fire" }
+  "desc": "Costs 2 Focus Points. A 15-foot Cone of fire: 3d10 Fire damage to everyone in the area (Dexterity saving throw for half).",
+  "damage": {
+    "dice": "3d10",
+    "type": "fire"
+  }
 }

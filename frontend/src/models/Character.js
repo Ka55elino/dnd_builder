@@ -1,21 +1,21 @@
 /**
- * Character — ПРОИЗВОДНЫЙ слой.
+ * Character — the DERIVED layer.
  *
- *   CharacterBuild  (выбор игрока, build_json)
- *        +  справочники (расы, классы, снаряжение из БД)
- *        =  Character  (всё посчитанное: КД, хиты, атаки, ресурсы, ячейки…)
+ *   CharacterBuild  (player choices, build_json)
+ *        +  reference data (species, classes, equipment from the DB)
+ *        =  Character  (everything computed: AC, Hit Points, attacks, resources, spell slots…)
  *
- *   CharacterState  (текущие хиты, потраченные ресурсы — state_json)
- *   хранится отдельно и опирается на максимумы из Character.
+ *   CharacterState  (current Hit Points, spent resources — state_json)
+ *   is stored separately and relies on the maximums from Character.
  *
- * Character НЕ сохраняется — он всегда пересчитывается, поэтому при
- * изменении справочников или правил персонаж обновляется сам.
+ * Character is NOT saved — it is always recomputed, so when the
+ * reference data or rules change, the character updates itself.
  *
- * Ресурсы собираются из грантов умений:
- *   { "type": "resource", "id": "rage", "name": "Ярость",
- *     "max": <формула, см. rules/formula.js>,
+ * Resources are collected from feature grants:
+ *   { "type": "resource", "id": "rage", "name": "Rage",
+ *     "max": <formula, see rules/formula.js>,
  *     "recharge": "long" | "short" | "none",
- *     "shortRestRegain": 1            // необязательно: сколько вернуть на коротком отдыхе
+ *     "shortRestRegain": 1            // optional: how many to regain on a Short Rest
  *   }
  */
 import { computeSheet } from '../rules/sheet.js';
@@ -25,15 +25,15 @@ import { defaultEquipped, normalize, resolve } from '../rules/loadout.js';
 import { summarizeChoices, spellcastingOf } from '../rules/progression.js';
 import { collectPassives, normName } from '../rules/passives.js';
 
-// эффекты черт и боевых стилей, которые учитывает лист (rules/sheet.js)
+// feat and Fighting Style effects that the sheet accounts for (rules/sheet.js)
 const PERKS = { tough: 'tough', alert: 'alert', defense: 'defense', archery: 'archery', dueling: 'dueling', twf: 'twf' };
 
 /**
- * Максимум использований из поля uses способности (формат v2):
- *   { count, scale: [[уровень, кол-во], ...] }     — таблица
- *   { ability: 'cha', bonus?: 1, min?: 1 }         — модификатор (+бонус)
- *   { perLevel: 5, abilityBonus?: 'int' }          — N × уровень (+ модификатор)
- *   { pb: true }                                   — бонус мастерства
+ * Max uses from an ability's uses field (v2 format):
+ *   { count, scale: [[level, count], ...] }        — table
+ *   { ability: 'cha', bonus?: 1, min?: 1 }         — modifier (+bonus)
+ *   { perLevel: 5, abilityBonus?: 'int' }          — N × level (+ modifier)
+ *   { pb: true }                                   — Proficiency Bonus
  */
 export function usesMax(u, { level, prof, mods }) {
     let v;
@@ -48,10 +48,10 @@ export function usesMax(u, { level, prof, mods }) {
 
 export class Character {
     /**
-     * @param build CharacterBuild (или его JSON-объект с тем же набором полей)
+     * @param build CharacterBuild (or its JSON object with the same fields)
      * @param refs  { races, classes, eq: { armor, weapons, packs } }
-     * @param equipped экипировка из CharacterState ({ main, off, armor }) или null —
-     *                 тогда берётся по умолчанию из выбора в билдере
+     * @param equipped loadout from CharacterState ({ main, off, armor }) or null —
+     *                 then the default from the builder choices is used
      */
     constructor(build, refs = {}, equipped = null) {
         const races = refs.races ?? [];
@@ -61,13 +61,13 @@ export class Character {
         this.build = build;
         this.level = build.level ?? 1;
 
-        // --- источники ---
+        // --- sources ---
         this.race = races.find((r) => r.id === build.raceId) ?? null;
         this.subrace = this.race?.subraces?.find((s) => s.id === build.subraceId) ?? null;
         this.cls = classes.find((c) => c.id === build.classId) ?? null;
         this.subclass = this.cls?.subclasses?.find((s) => s.id === build.subclassId) ?? null;
 
-        // --- снаряжение ---
+        // --- equipment ---
         const e = build.equipment ?? {};
         this.armor = (eq.armor ?? []).find((a) => a.id === e.armorId) ?? null;
         this.weapons = (eq.weapons ?? []).filter((w) => (e.weaponIds ?? []).includes(w.id));
@@ -76,7 +76,7 @@ export class Character {
             ? (eq.armor ?? []).find((a) => a.category === 'shield') ?? null
             : null;
 
-        // --- рюкзак: всё, что есть (доспех, щит, оружие, предметы набора, выданное) ---
+        // --- backpack: everything owned (armor, shield, weapons, pack items, granted) ---
         const catalog = refs.catalog ?? {};
         const pool = (list, extra) => [...(list ?? []), ...(extra ?? [])];
         const findIn = (kind, id) => {
@@ -92,7 +92,7 @@ export class Character {
                 key: `item:${pi.item.id}`, kind: 'item', name: pi.item.name, ref: pi.item, qty: pi.qty,
             })),
         ];
-        // выданное: одинаковые предметы складываются в одну строку с количеством
+        // granted: identical items stack into one row with a quantity
         this.inventory = [...baseInventory];
         for (const b of e.bag ?? []) {
             const ref = findIn(b.kind, b.id);
@@ -105,7 +105,7 @@ export class Character {
             else this.inventory.push({ key, kind, name: ref.name, ref, qty: b.qty, given: true });
         }
 
-        // --- экипировка: что в руках и что надето ---
+        // --- loadout: what's in hand and what's worn ---
         this.equipped = equipped
             ? normalize(equipped, this.inventory)
             : defaultEquipped(this.inventory);
@@ -115,12 +115,12 @@ export class Character {
             { hand: 'off', item: this.loadout.off },
         ];
 
-        // --- выборы уровней: навыки, черты, стили, заклинания ---
+        // --- level choices: skills, feats, styles, spells ---
         this.chosen = summarizeChoices(build, refs);
         const perkIds = [...this.chosen.feats, ...this.chosen.fightingStyles];
         const perks = new Set(perkIds.map((id) => PERKS[id]).filter(Boolean));
 
-        // --- лист: КД, хиты, спасброски, навыки, атаки ---
+        // --- sheet: AC, Hit Points, saving throws, skills, attacks ---
         Object.assign(
             this,
             computeSheet(build, {
@@ -139,7 +139,7 @@ export class Character {
         );
         this.maxHp = this.hp;
 
-        // --- умения (до текущего уровня), сгруппированные по источнику ---
+        // --- features (up to the current level), grouped by source ---
         const upTo = (list) => (list ?? []).filter((f) => !f.level || f.level <= this.level);
         this.featureGroups = [
             { source: 'race', title: this.race?.name, items: upTo(this.race?.data?.traits) },
@@ -148,7 +148,7 @@ export class Character {
             { source: 'subclass', title: this.subclass?.name, items: upTo(this.subclass?.data?.features) },
         ].filter((g) => g.title && g.items.length);
 
-        // черты, боевые стили, воззвания, метамагия — отдельной группой
+        // feats, Fighting Styles, invocations, Metamagic — as a separate group
         const feats = refs.feats ?? [];
         const byId = (id) => feats.find((f) => f.id === id);
         const chosenFeats = [
@@ -159,7 +159,7 @@ export class Character {
         if (chosenFeats.length) {
             this.featureGroups.push({
                 source: 'feats',
-                title: 'Черты и выбранные умения',
+                title: 'Feats and chosen features',
                 items: chosenFeats.map((f) => ({ name: f.name, desc: f.desc })),
             });
         }
@@ -168,10 +168,10 @@ export class Character {
             g.items.flatMap((f) => (f.grants ?? []).map((gr) => ({ ...gr, feature: f.name }))),
         );
 
-        // --- способности (таблица spells: kind = class | martial | action) ---
-        //   класс:    kind 'class', classes ∋ classId, без подкласса, level ≤ уровня
-        //   подкласс: subclass = subclassId, level ≤ уровня
-        //   раса:     по грантам черт { type: 'ability', id }
+        // --- abilities (spells table: kind = class | martial | action) ---
+        //   class:    kind 'class', classes ∋ classId, no subclass, level ≤ character level
+        //   subclass: subclass = subclassId, level ≤ character level
+        //   species:  via trait grants { type: 'ability', id }
         const spells = refs.spells ?? [];
         const lvl = this.level;
         const raceAbilityIds = new Set(grants.filter((g) => g.type === 'ability').map((g) => g.id));
@@ -179,16 +179,16 @@ export class Character {
             if (sp.kind === 'spell') return false;
             const d = sp.data ?? {};
             if (raceAbilityIds.has(sp.id)) return true;
-            // варианты пула (приёмы, выстрелы) — только выбранные
+            // pool options (maneuvers, arcane shots) — only the chosen ones
             if (d.pool && !this.chosen.pool.includes(sp.id)) return false;
             if (sp.level > lvl) return false;
             if (d.subclass) return d.subclass === build.subclassId && !!build.subclassId;
             return sp.kind === 'class' && (d.classes ?? []).includes(build.classId);
         });
 
-        // --- ресурсы ---
-        //   1) из способностей с uses (Божественный канал, ци, дикий облик…)
-        //   2) из грантов { type: 'resource' } в данных (на будущее / свои правила)
+        // --- resources ---
+        //   1) from abilities with uses (Channel Divinity, Focus Points, Wild Shape…)
+        //   2) from { type: 'resource' } grants in the data (for the future / homebrew)
         const ctx = { level: this.level, prof: this.prof, mods: this.mods };
         const fromUses = this.powers
             .filter((sp) => sp.data?.uses)
@@ -216,8 +216,8 @@ export class Character {
         this.resources = [...fromUses, ...fromGrants]
             .filter((r) => r.max > 0 && !seen.has(r.id) && seen.add(r.id));
 
-        // --- заклинательство ---
-        // заклинательство класса или подкласса (Мистический рыцарь / ловкач)
+        // --- spellcasting ---
+        // class or subclass spellcasting (Eldritch Knight / Arcane Trickster)
         const sc = spellcastingOf(this.cls, this.subclass);
         const progression = sc?.progression ?? this.cls?.caster ?? 'none';
         this.spellcasting = sc
@@ -230,7 +230,7 @@ export class Character {
             : null;
         this.spellSlots = sc && this.level >= (sc.startLevel ?? 1) ? spellSlots(progression, this.level) : [];
 
-        // --- известные заклинания: выбранные + фиксированные гранты расы ---
+        // --- known spells: chosen + fixed species grants ---
         const raceSpellIds = grants.filter((g) => g.type === 'spell' && g.id).map((g) => g.id);
         const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...raceSpellIds])];
         this.spellbook = spellIds
@@ -238,51 +238,51 @@ export class Character {
             .filter(Boolean)
             .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
 
-        // --- карточки действий и заклинаний (группы для листа) ---
+        // --- action and spell cards (groups for the sheet) ---
         const withUses = (sp) =>
             sp.data?.uses ? { max: usesMax(sp.data.uses, ctx), per: sp.data.uses.per } : null;
         const card = (sp, source) => ({ item: sp, source, uses: withUses(sp) });
         const racePowers = this.powers.filter((sp) => raceAbilityIds.has(sp.id));
         const classPowers = this.powers.filter((sp) => !raceAbilityIds.has(sp.id) && !sp.data?.subclass);
         const subPowers = this.powers.filter((sp) => !raceAbilityIds.has(sp.id) && sp.data?.subclass);
-        const speciesName = this.subrace?.name ?? this.race?.name ?? 'Вид';
+        const speciesName = this.subrace?.name ?? this.race?.name ?? 'Species';
 
         this.actionGroups = [
-            { title: 'Действия класса', cards: classPowers.map((sp) => card(sp, this.cls?.name ?? 'Класс')) },
-            { title: this.subclass?.name ?? 'Подкласс', cards: subPowers.map((sp) => card(sp, this.subclass?.name ?? '')) },
-            { title: 'Способности вида', cards: racePowers.map((sp) => card(sp, speciesName)) },
-            { title: 'Метамагия', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Метамагия')) },
+            { title: 'Class Actions', cards: classPowers.map((sp) => card(sp, this.cls?.name ?? 'Class')) },
+            { title: this.subclass?.name ?? 'Subclass', cards: subPowers.map((sp) => card(sp, this.subclass?.name ?? '')) },
+            { title: 'Species Abilities', cards: racePowers.map((sp) => card(sp, speciesName)) },
+            { title: 'Metamagic', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Metamagic')) },
         ];
         const byCircle = {};
         for (const sp of this.spellbook) (byCircle[sp.level] ??= []).push(sp);
         for (const c of Object.keys(byCircle).map(Number).sort((a, b) => a - b)) {
-            const title = c === 0 ? 'Заговоры' : `${c} круг`;
+            const title = c === 0 ? 'Cantrips' : `Level ${c}`;
             this.actionGroups.push({ title, spells: true, cards: byCircle[c].map((sp) => card(sp, title)) });
         }
         this.actionGroups = this.actionGroups.filter((g) => g.cards.length);
 
-        // --- пассивные эффекты: сопротивления, чувства, преимущества + пассивные умения ---
-        // воззвания живут здесь (а не в «Действиях»): почти все они действуют постоянно
-        const FEAT_SOURCE = { origin: 'Черта', general: 'Черта', boon: 'Дар', fightingStyle: 'Боевой стиль', invocation: 'Воззвание' };
+        // --- passive effects: resistances, senses, advantages + passive features ---
+        // invocations live here (not in "Actions"): almost all of them are always on
+        const FEAT_SOURCE = { origin: 'Feat', general: 'Feat', boon: 'Boon', fightingStyle: 'Fighting Style', invocation: 'Invocation' };
         const passiveFeats = [...this.chosen.feats, ...this.chosen.fightingStyles, ...this.chosen.invocations]
-            .filter((id) => id !== 'abilityScoreImprovement') // сама по себе — только +к характеристикам
+            .filter((id) => id !== 'abilityScoreImprovement') // on its own — only + to ability scores
             .map(byId)
             .filter(Boolean)
-            .map((f) => ({ ...f, sourceTitle: FEAT_SOURCE[f.category] ?? 'Черта' }));
+            .map((f) => ({ ...f, sourceTitle: FEAT_SOURCE[f.category] ?? 'Feat' }));
         this.passives = collectPassives({
             raceTraits: [...upTo(this.race?.data?.traits), ...upTo(this.subrace?.data?.traits)],
             raceName: speciesName,
             classFeatures: upTo(this.cls?.data?.features),
-            className: this.cls?.name ?? 'Класс',
+            className: this.cls?.name ?? 'Class',
             subclassFeatures: upTo(this.subclass?.data?.features),
-            subclassName: this.subclass?.name ?? 'Подкласс',
+            subclassName: this.subclass?.name ?? 'Subclass',
             feats: passiveFeats,
             activeNames: new Set([...this.powers, ...this.resources].map((x) => normName(x.name))),
             ctx,
         });
     }
 
-    /** Ресурс по id. */
+    /** Resource by id. */
     resource(id) {
         return this.resources.find((r) => r.id === id) ?? null;
     }

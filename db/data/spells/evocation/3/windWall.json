@@ -1,6 +1,6 @@
 {
   "id": "windWall",
-  "name": "Стена ветра",
+  "name": "Wind Wall",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,12 +9,12 @@
     "ranger",
     "druid"
   ],
-  "desc": "Создаёте стену сильного ветра до 15 м длиной: отклоняет снаряды, газы и мелких существ; 3d8 дробящего при попытке пройти. Концентрация до 1 минуты.",
+  "desc": "You create a wall of strong wind up to 50 feet long: it deflects projectiles, gases, and small creatures; 3d8 Bludgeoning damage when a creature tries to pass through. Concentration, up to 1 minute.",
   "casting": {
-    "time": "1 действие",
-    "range": "36 м",
-    "components": "В, С, М",
-    "duration": "Конц., 1 мин",
+    "time": "1 action",
+    "range": "120 feet",
+    "components": "V, S, M",
+    "duration": "Conc., 1 min",
     "concentration": true
   },
   "damage": {

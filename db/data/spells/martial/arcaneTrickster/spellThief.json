@@ -1,11 +1,11 @@
 {
   "id": "spellThief",
-  "name": "Похититель заклинаний",
+  "name": "Spell Thief",
   "kind": "martial",
   "subclass": "arcaneTrickster",
   "level": 17,
   "action": "reaction",
-  "desc": "Реакцией, успешно пройдя спасбросок против заклинания (или когда заклинатель промахивается по вам заклинанием-атакой), крадёте это заклинание: цель теряет к нему доступ, а вы получаете его до следующего длинного отдыха. Раз на длинный отдых.",
+  "desc": "As a Reaction, when you succeed on a saving throw against a spell (or when a caster misses you with a spell attack), you steal that spell: the caster loses access to it, and you gain it until your next Long Rest. Once per Long Rest.",
   "uses": {
     "count": 1,
     "per": "longRest"

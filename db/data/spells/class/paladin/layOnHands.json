@@ -1,10 +1,15 @@
 {
   "id": "layOnHands",
-  "name": "Наложение рук (пул)",
+  "name": "Lay on Hands (Pool)",
   "kind": "class",
   "level": 1,
-  "classes": ["paladin"],
+  "classes": [
+    "paladin"
+  ],
   "action": "action",
-  "uses": { "perLevel": 5, "per": "longRest" },
-  "desc": "Пул хитов = 5 × уровень паладина. Действием касанием восстанавливаете хиты из пула; за 5 очков вместо этого снимаете болезнь или яд. Обновляется на длинном отдыхе."
+  "uses": {
+    "perLevel": 5,
+    "per": "longRest"
+  },
+  "desc": "Hit Point pool = 5 × your Paladin level. As an action, you touch a creature and restore Hit Points from the pool; alternatively, you can expend 5 points to cure a disease or poison instead. Replenishes on a Long Rest."
 }

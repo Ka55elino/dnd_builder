@@ -1,6 +1,6 @@
 {
   "id": "spiritGuardians",
-  "name": "Стражи веры",
+  "name": "Spirit Guardians",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Духи кружат в 4,5 м: труднопроходимая местность и урон (излуч./некрот.) врагам, спасбросок Мудрости за половину. Концентрация.",
+  "desc": "Spirits swirl within 15 feet: Difficult Terrain and Radiant or Necrotic damage to enemies, Wisdom saving throw for half. Concentration.",
   "damage": {
     "dice": "3d8",
     "type": "radiant"

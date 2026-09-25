@@ -1,11 +1,11 @@
 {
   "id": "arcaneWard",
-  "name": "Тайный щит",
+  "name": "Arcane Ward",
   "kind": "martial",
   "subclass": "abjuration",
   "level": 3,
   "action": "free",
-  "desc": "Пул хитов щита = 2 × уровень волшебника + мод. Интеллекта. Поглощает получаемый вами урон; восстанавливается, когда творите заклинание Ограждения.",
+  "desc": "The ward's Hit Point pool = 2 × your Wizard level + your Intelligence modifier. It absorbs damage you take and recovers when you cast an Abjuration spell.",
   "uses": {
     "perLevel": 2,
     "abilityBonus": "int",

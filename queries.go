@@ -8,17 +8,17 @@ import (
 	"strings"
 )
 
-// SQL-запросы лежат в db/queries/*.sql.
-// Каждый запрос начинается со строки «-- name: ИмяЗапроса»,
-// всё до следующего «-- name:» — его текст.
+// SQL queries live in db/queries/*.sql.
+// Each query starts with a "-- name: QueryName" line;
+// everything up to the next "-- name:" is its text.
 
 //go:embed db/queries/*.sql
 var queriesFS embed.FS
 
 var queries = mustLoadQueries()
 
-// Q возвращает текст запроса по имени. Паникует, если запроса нет —
-// это ошибка программиста, её видно при первом же запуске.
+// Q returns the query text by name. It panics if the query does not exist:
+// that is a programmer error and shows up on the very first run.
 func Q(name string) string {
 	q, ok := queries[name]
 	if !ok {
@@ -75,7 +75,7 @@ func parseQueries(src string) map[string]string {
 			continue
 		}
 		if name == "" || strings.HasPrefix(trimmed, "--") {
-			continue // комментарии и текст до первого запроса пропускаем
+			continue // skip comments and text before the first query
 		}
 		body.WriteString(line)
 		body.WriteByte('\n')

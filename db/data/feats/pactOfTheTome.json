@@ -1,8 +1,8 @@
 {
   "id": "pactOfTheTome",
-  "name": "Договор книги",
+  "name": "Pact of the Tome",
   "category": "invocation",
   "level": 1,
-  "desc": "Получаете Книгу теней: 3 дополнительных заговора из любых списков и можете творить ритуалы из книги. Заговоры считаются заговорами Колдуна.",
+  "desc": "You gain a Book of Shadows: 3 extra cantrips from any spell lists, and you can cast Ritual spells from the book. The cantrips count as Warlock cantrips.",
   "boon": true
 }

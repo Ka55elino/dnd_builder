@@ -18,8 +18,8 @@ func NewApp() *App {
 	return &App{}
 }
 
-// startup: открываем БД, создаём таблицы и заполняем справочники,
-// если они пустые.
+// startup opens the database, creates the tables and seeds the reference
+// data if it is empty.
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 
@@ -40,9 +40,9 @@ func (a *App) shutdown(ctx context.Context) {
 	}
 }
 
-var errNoDB = errors.New("база данных не открыта")
+var errNoDB = errors.New("database is not open")
 
-// GetRaces — все расы с вложенными подрасами.
+// GetRaces returns all races with their nested subraces.
 func (a *App) GetRaces() ([]Race, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -50,7 +50,7 @@ func (a *App) GetRaces() ([]Race, error) {
 	return getAllRaces(a.db)
 }
 
-// GetClasses — все классы с вложенными подклассами.
+// GetClasses returns all classes with their nested subclasses.
 func (a *App) GetClasses() ([]Class, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -58,7 +58,7 @@ func (a *App) GetClasses() ([]Class, error) {
 	return getAllClasses(a.db)
 }
 
-// GetEquipment — оружие, доспехи, предметы и наборы (только is_default = 1).
+// GetEquipment returns weapons, armor, items and packs (is_default = 1 only).
 func (a *App) GetEquipment() (Equipment, error) {
 	if a.db == nil {
 		return Equipment{}, errNoDB
@@ -66,7 +66,7 @@ func (a *App) GetEquipment() (Equipment, error) {
 	return getEquipment(a.db)
 }
 
-// SaveCharacter — сохранить персонажа (JSON CharacterBuild). Возвращает id.
+// SaveCharacter saves a character (CharacterBuild JSON) and returns its id.
 func (a *App) SaveCharacter(buildJSON string) (string, error) {
 	if a.db == nil {
 		return "", errNoDB
@@ -74,7 +74,7 @@ func (a *App) SaveCharacter(buildJSON string) (string, error) {
 	return saveCharacter(a.db, buildJSON)
 }
 
-// GetCharacter — сохранённый персонаж по id (объект CharacterBuild).
+// GetCharacter returns a saved character by id (a CharacterBuild object).
 func (a *App) GetCharacter(id string) (map[string]any, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -82,7 +82,7 @@ func (a *App) GetCharacter(id string) (map[string]any, error) {
 	return getCharacter(a.db, id)
 }
 
-// ListCharacters — все сохранённые персонажи (кратко).
+// ListCharacters returns all saved characters (summary only).
 func (a *App) ListCharacters() ([]CharacterSummary, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -90,7 +90,7 @@ func (a *App) ListCharacters() ([]CharacterSummary, error) {
 	return listCharacters(a.db)
 }
 
-// GetCharacterState — игровое состояние (хиты, ресурсы). null — ещё не было.
+// GetCharacterState returns the play state (hit points, resources); null if none has been saved yet.
 func (a *App) GetCharacterState(id string) (map[string]any, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -98,7 +98,7 @@ func (a *App) GetCharacterState(id string) (map[string]any, error) {
 	return getCharacterState(a.db, id)
 }
 
-// SaveCharacterState — сохранить игровое состояние (JSON CharacterState).
+// SaveCharacterState saves the play state (CharacterState JSON).
 func (a *App) SaveCharacterState(id, stateJSON string) error {
 	if a.db == nil {
 		return errNoDB
@@ -106,7 +106,7 @@ func (a *App) SaveCharacterState(id, stateJSON string) error {
 	return saveCharacterState(a.db, id, stateJSON)
 }
 
-// GetBackgrounds — предыстории (происхождения).
+// GetBackgrounds returns backgrounds (origins).
 func (a *App) GetBackgrounds() ([]Background, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -114,7 +114,7 @@ func (a *App) GetBackgrounds() ([]Background, error) {
 	return getBackgrounds(a.db)
 }
 
-// GetFeats — черты, боевые стили, метамагия, воззвания (по category).
+// GetFeats returns feats, fighting styles, metamagic options and invocations (by category).
 func (a *App) GetFeats() ([]Feat, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -122,7 +122,7 @@ func (a *App) GetFeats() ([]Feat, error) {
 	return getFeats(a.db)
 }
 
-// GetSpells — заклинания и классовые/расовые способности.
+// GetSpells returns spells and class/species abilities.
 func (a *App) GetSpells() ([]Spell, error) {
 	if a.db == nil {
 		return nil, errNoDB
@@ -130,7 +130,7 @@ func (a *App) GetSpells() ([]Spell, error) {
 	return getSpells(a.db)
 }
 
-// GetCatalog — всё оружие, доспехи и предметы (включая именные) — для выдачи.
+// GetCatalog returns all weapons, armor and items (including named ones), for handing out to characters.
 func (a *App) GetCatalog() (Catalog, error) {
 	if a.db == nil {
 		return Catalog{}, errNoDB
@@ -138,8 +138,8 @@ func (a *App) GetCatalog() (Catalog, error) {
 	return getCatalog(a.db)
 }
 
-// SaveCustomEquipment — создать/обновить своё снаряжение.
-// kind: weapon | armor | item; itemJSON — объект в формате db/data (без id — создаст новый).
+// SaveCustomEquipment creates or updates custom equipment.
+// kind: weapon | armor | item; itemJSON is an object in db/data format (without an id, a new one is created).
 func (a *App) SaveCustomEquipment(kind, itemJSON string) (string, error) {
 	if a.db == nil {
 		return "", errNoDB
@@ -147,7 +147,7 @@ func (a *App) SaveCustomEquipment(kind, itemJSON string) (string, error) {
 	return saveCustomRecord(a.db, kind, itemJSON)
 }
 
-// SaveCustomSpell — создать/обновить своё заклинание (формат db/data/spells; без id — новое).
+// SaveCustomSpell creates or updates a custom spell (db/data/spells format; without an id, a new one is created).
 func (a *App) SaveCustomSpell(spellJSON string) (string, error) {
 	if a.db == nil {
 		return "", errNoDB
@@ -155,7 +155,7 @@ func (a *App) SaveCustomSpell(spellJSON string) (string, error) {
 	return saveCustomRecord(a.db, "spell", spellJSON)
 }
 
-// DeleteCustomSpell — удалить своё заклинание (справочное удалить нельзя).
+// DeleteCustomSpell deletes a custom spell (built-in spells cannot be deleted).
 func (a *App) DeleteCustomSpell(id string) error {
 	if a.db == nil {
 		return errNoDB
@@ -163,7 +163,7 @@ func (a *App) DeleteCustomSpell(id string) error {
 	return deleteCustomRecord(a.db, "spell", id)
 }
 
-// DeleteCustomEquipment — удалить своё снаряжение (справочное удалить нельзя).
+// DeleteCustomEquipment deletes custom equipment (built-in equipment cannot be deleted).
 func (a *App) DeleteCustomEquipment(kind, id string) error {
 	if a.db == nil {
 		return errNoDB

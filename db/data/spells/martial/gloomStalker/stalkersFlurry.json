@@ -1,8 +1,8 @@
 {
   "id": "stalkersFlurry",
-  "name": "Шквал охотника",
+  "name": "Stalker's Flurry",
   "kind": "martial",
   "subclass": "gloomStalker",
   "level": 11,
-  "desc": "Раз за ход при промахе оружейной атакой немедленно совершаете ещё одну атаку тем же оружием по любой цели в досягаемости."
+  "desc": "Once per turn when you miss with a weapon attack, you can immediately make another attack with the same weapon against any target within reach."
 }

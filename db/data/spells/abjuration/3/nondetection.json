@@ -1,6 +1,6 @@
 {
   "id": "nondetection",
-  "name": "Необнаружение",
+  "name": "Nondetection",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -11,5 +11,5 @@
     "ranger",
     "wizard"
   ],
-  "desc": "Цель скрыта от прорицания и магических сенсоров на 8 часов."
+  "desc": "The target is hidden from divination and magical sensors for 8 hours."
 }

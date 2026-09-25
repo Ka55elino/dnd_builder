@@ -1,6 +1,6 @@
 {
   "id": "rayOfEnfeeblement",
-  "name": "Луч ослабления",
+  "name": "Ray of Enfeeblement",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,11 +9,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Чёрный луч: дальнобойная атака заклинанием; при попадании цель наносит вдвое меньше урона Силой. Концентрация.",
+  "desc": "A black ray: ranged spell attack; on a hit, the target deals only half damage with Strength-based attacks. Concentration.",
   "casting": {
-    "time": "1 действие",
-    "range": "18 м",
-    "components": "В, С",
-    "duration": "Концентрация, до 1 минуты"
+    "time": "1 action",
+    "range": "60 feet",
+    "components": "V, S",
+    "duration": "Concentration, up to 1 minute"
   }
 }

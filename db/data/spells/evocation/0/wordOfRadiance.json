@@ -1,6 +1,6 @@
 {
   "id": "wordOfRadiance",
-  "name": "Слово сияния",
+  "name": "Word of Radiance",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Существа по вашему выбору в 1,5 м: спасбросок Тел. или урон излучением.",
+  "desc": "Creatures of your choice within 5 feet: Constitution saving throw or Radiant damage.",
   "damage": {
     "dice": "1d6",
     "type": "radiant",

@@ -1,16 +1,16 @@
 /**
- * Урон заклинаний и способностей с ростом по уровню (формат данных v2).
+ * Spell and ability damage scaling with level (v2 data format).
  *
  *   damage: { dice: '1d10', type: 'fire', scaling: 'cantrip' }
- *   damage: { dice: '1d6', scaling: 'sneak' }              — скрытая атака: ⌈ур/2⌉ d6
- *   damage: { dice: '1d6', scaling: 'mark' }               — метка охотника: d10 на 20 ур.
- *   damage: { dice: '2d8', scaling: { 5: '3d8', 11: '4d8' } } — таблица по уровням
- *   damage: { primary: {...}, secondary: {...} }            — несколько частей
+ *   damage: { dice: '1d6', scaling: 'sneak' }              — sneak attack: ⌈lvl/2⌉ d6
+ *   damage: { dice: '1d6', scaling: 'mark' }               — hunter's mark: d10 at lvl 20
+ *   damage: { dice: '2d8', scaling: { 5: '3d8', 11: '4d8' } } — table by level
+ *   damage: { primary: {...}, secondary: {...} }            — several parts
  *
- *   scaleDie: [[2, '2d8'], [7, '3d8']]                      — кость способности по уровню
+ *   scaleDie: [[2, '2d8'], [7, '3d8']]                      — ability die by level
  */
 
-/** Части урона на уровне персонажа: [{ dice, type }]. */
+/** Damage parts at the character's level: [{ dice, type }]. */
 export function damageParts(dmg, level = 1) {
     if (!dmg) return [];
     const isPart = (v) => v && typeof v === 'object' && ('dice' in v || 'type' in v || 'scaling' in v);
@@ -43,7 +43,7 @@ function part(p, level) {
         return dice ? { dice, type } : null;
     }
 
-    if (!p.dice) return type ? { dice: null, type } : null; // урон оружия без своих костей
+    if (!p.dice) return type ? { dice: null, type } : null; // weapon damage without its own dice
     return { dice: p.dice, type };
 }
 
@@ -52,11 +52,11 @@ function formatDice(v) {
     const s = String(v);
     const m = s.match(/\d+d\d+/);
     const mod = /spellcastingmodifier/i.test(s);
-    if (m) return m[0] + (mod ? '+мод' : '');
-    return mod ? 'мод' : s;
+    if (m) return m[0] + (mod ? '+mod' : '');
+    return mod ? 'mod' : s;
 }
 
-/** Кость способности по уровню из scaleDie: [[уровень, 'кость'], ...]. */
+/** Ability die by level from scaleDie: [[level, 'die'], ...]. */
 export function dieAt(scaleDie, level = 1) {
     let val = null;
     for (const [l, d] of scaleDie ?? []) if (level >= l) val = d;

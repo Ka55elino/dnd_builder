@@ -1,13 +1,13 @@
 {
   "id": "interception",
-  "name": "Перехват",
+  "name": "Interception",
   "category": "fightingStyle",
   "level": 1,
-  "desc": "Реакцией снижаете урон союзнику рядом на 1d10 + бонус мастерства.",
+  "desc": "As a Reaction, you reduce damage to a nearby ally by 1d10 + your Proficiency Bonus.",
   "effects": [
     {
       "kind": "feature",
-      "note": "Реакция: снизить урон союзнику на 1d10 + бонус мастерства."
+      "note": "Reaction: reduce the damage an ally takes by 1d10 + your Proficiency Bonus."
     }
   ]
 }

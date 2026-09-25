@@ -1,11 +1,11 @@
 {
   "id": "starryFormChalice",
-  "name": "Звёздная форма: Чаша",
+  "name": "Starry Form: Chalice",
   "kind": "martial",
   "subclass": "stars",
   "level": 3,
   "action": "bonus",
-  "desc": "Форма Чаши: когда вы или существо в 9 м лечится заклинанием 1 круга+, цель также восстанавливает 1d8 + мод. Мудрости.",
+  "desc": "Chalice form: when you or a creature within 30 feet is healed by a spell of level 1 or higher, the target also regains 1d8 + your Wisdom modifier.",
   "damage": {
     "dice": "1d8",
     "type": "radiant"

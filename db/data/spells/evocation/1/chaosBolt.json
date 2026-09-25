@@ -1,6 +1,6 @@
 {
   "id": "chaosBolt",
-  "name": "Хаотический снаряд",
+  "name": "Chaos Bolt",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "sorcerer"
   ],
-  "desc": "Снаряд случайной стихии (атака заклинанием): 2d8 + 1d6; если оба d8 совпали — прыгает на новую цель.",
+  "desc": "A mote of a random element (spell attack): 2d8 + 1d6; if both d8s show the same number, it leaps to a new target.",
   "damage": {
     "dice": "2d8",
     "type": "force"

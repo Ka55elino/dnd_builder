@@ -1,8 +1,8 @@
 {
   "id": "pactOfTheChain",
-  "name": "Договор цепи",
+  "name": "Pact of the Chain",
   "category": "invocation",
   "level": 1,
-  "desc": "Творите «Поиск фамильяра» как ритуал; фамильяр может принять форму беса, псевдодракона, квазита или крылатой змеи. Можете жертвовать своей атакой, чтобы он атаковал реакцией.",
+  "desc": "You cast Find Familiar as a Ritual; the familiar can take the form of an imp, pseudodragon, quasit, or sprite. You can forgo one of your attacks to let it attack with its Reaction.",
   "boon": true
 }

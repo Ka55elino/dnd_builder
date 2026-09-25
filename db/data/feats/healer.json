@@ -1,7 +1,7 @@
 {
   "id": "healer",
-  "name": "Лекарь",
+  "name": "Healer",
   "category": "origin",
   "level": 1,
-  "desc": "Набором целителя восстанавливаете хиты действием (1 кость хитов + бонус мастерства); перебрасываете 1 на костях лечения."
+  "desc": "With a Healer's Kit, you restore Hit Points as an action (1 Hit Point Die + Proficiency Bonus); reroll 1s on healing dice."
 }

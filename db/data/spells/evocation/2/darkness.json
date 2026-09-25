@@ -1,6 +1,6 @@
 {
   "id": "darkness",
-  "name": "Тьма",
+  "name": "Darkness",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -10,11 +10,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Магическая тьма в сфере радиусом 4,5 м, сквозь которую не видит даже тёмное зрение. Концентрация.",
+  "desc": "Magical Darkness in a 15-foot-radius Sphere that even Darkvision can't see through. Concentration.",
   "casting": {
-    "time": "1 действие",
-    "range": "18 м",
-    "components": "В, М",
-    "duration": "Концентрация, до 10 минут"
+    "time": "1 action",
+    "range": "60 feet",
+    "components": "V, M",
+    "duration": "Concentration, up to 10 minutes"
   }
 }

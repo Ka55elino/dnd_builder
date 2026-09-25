@@ -1,10 +1,10 @@
 {
   "id": "durable",
-  "name": "Живучий",
+  "name": "Durable",
   "category": "general",
   "level": 4,
   "asi": [
     "con"
   ],
-  "desc": "+1 Телосложение; лучше восстановление хитов на отдыхе."
+  "desc": "+1 Constitution; better Hit Point recovery during rests."
 }

@@ -1,13 +1,13 @@
 {
   "id": "gloomStalker",
-  "name": "Жуткий охотник",
+  "name": "Gloom Stalker",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "ranger",
   "features": [
     {
       "level": 3,
-      "name": "Жуткая засада",
-      "desc": "Прибавляете модификатор Мудрости к броску инициативы. В первый ход боя ваша скорость +3 м, и вы совершаете одну доп. атаку, наносящую при попадании доп. 2d6 урона.",
+      "name": "Dread Ambusher",
+      "desc": "You add your Wisdom modifier to your Initiative rolls. On your first turn of combat, your Speed increases by 10 feet, and you make one extra attack that deals an extra 2d6 damage on a hit.",
       "grants": [
         {
           "type": "effect",
@@ -21,8 +21,8 @@
     },
     {
       "level": 3,
-      "name": "Сумеречное зрение",
-      "desc": "Получаете тёмное зрение 27 м (или +27 м к имеющемуся). В темноте вас не видят существа, полагающиеся на тёмное зрение.",
+      "name": "Umbral Sight",
+      "desc": "You gain Darkvision with a range of 90 feet (or +90 feet to the range you already have). In darkness, creatures relying on Darkvision can't see you.",
       "grants": [
         {
           "type": "effect",
@@ -36,18 +36,18 @@
     },
     {
       "level": 7,
-      "name": "Стальной разум",
-      "desc": "Получаете владение спасбросками Мудрости."
+      "name": "Iron Mind",
+      "desc": "You gain proficiency in Wisdom saving throws."
     },
     {
       "level": 11,
-      "name": "Шквал охотника",
-      "desc": "Раз за ход при промахе оружейной атакой можете совершить ещё одну атаку тем же оружием по любой цели в пределах досягаемости."
+      "name": "Stalker's Flurry",
+      "desc": "Once per turn, when you miss with a weapon attack, you can make another attack with the same weapon against any target within reach."
     },
     {
       "level": 15,
-      "name": "Теневой уворот",
-      "desc": "Реакцией, когда существо атакует вас, налагаете на этот бросок атаки помеху (если не недееспособны)."
+      "name": "Shadowy Dodge",
+      "desc": "As a Reaction when a creature attacks you, you impose Disadvantage on that attack roll (unless you are Incapacitated)."
     }
   ]
 }

@@ -1,9 +1,9 @@
 {
   "id": "zealousPresence",
-  "name": "Ревностное присутствие",
+  "name": "Zealous Presence",
   "kind": "martial",
   "subclass": "zealot",
   "level": 10,
   "action": "bonus",
-  "desc": "Бонусным действием до 10 существ в 18 м получают преимущество на атаки и спасброски до начала вашего следующего хода."
+  "desc": "As a Bonus Action, up to 10 creatures within 60 feet gain Advantage on attack rolls and saving throws until the start of your next turn."
 }

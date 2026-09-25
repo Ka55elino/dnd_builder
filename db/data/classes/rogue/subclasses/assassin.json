@@ -1,28 +1,28 @@
 {
   "id": "assassin",
-  "name": "Ассасин",
+  "name": "Assassin",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "rogue",
   "features": [
     {
       "level": 3,
-      "name": "Убийство",
-      "desc": "Владеете набором отравителя и набором для маскировки. В первом раунде боя имеете преимущество на атаки по существам, которые ещё не ходили. При попадании Скрытой атакой по существу, застигнутому врасплох, наносите доп. урон, равный вашему уровню плута."
+      "name": "Assassinate",
+      "desc": "You have proficiency with the Poisoner's Kit and the Disguise Kit. In the first round of combat, you have Advantage on attack rolls against creatures that haven't taken a turn yet. When you hit a Surprised creature with Sneak Attack, you deal extra damage equal to your Rogue level."
     },
     {
       "level": 9,
-      "name": "Мастер маскировки",
-      "desc": "За 7 дней создаёте фальшивую личность (документы, знакомства). Действием маскируетесь как другой человек с преимуществом."
+      "name": "Impostor",
+      "desc": "Over 7 days, you create a false identity (documents, acquaintances). As an action, you disguise yourself as another person with Advantage."
     },
     {
       "level": 13,
-      "name": "Отравленное оружие",
-      "desc": "Эффект отравления Хитрого удара усиливается: цель также получает доп. яд-урон, равный числу истраченных костей Скрытой атаки."
+      "name": "Envenom Weapons",
+      "desc": "The Poison effect of Cunning Strike is enhanced: the target also takes extra Poison damage equal to the number of Sneak Attack dice expended."
     },
     {
       "level": 17,
-      "name": "Смертельный удар",
-      "desc": "Попав по существу, застигнутому врасплох, вынуждаете спасбросок Телосложения (Сл 8 + Лов + бонус мастерства); при провале урон атаки удваивается."
+      "name": "Death Strike",
+      "desc": "When you hit a Surprised creature, you force it to make a Constitution saving throw (DC 8 + Dex modifier + Proficiency Bonus); on a failure, the attack's damage is doubled."
     }
   ]
 }

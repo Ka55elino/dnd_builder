@@ -1,6 +1,6 @@
 {
   "id": "stoneskin",
-  "name": "Каменная кожа",
+  "name": "Stoneskin",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,5 +12,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Цель получает сопротивление немагическому дроб./кол./руб. урону. Концентрация."
+  "desc": "The target has Resistance to nonmagical Bludgeoning, Piercing, and Slashing damage. Concentration."
 }

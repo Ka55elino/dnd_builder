@@ -1,9 +1,9 @@
 {
   "id": "shadowStep",
-  "name": "Шаг тени",
+  "name": "Shadow Step",
   "kind": "martial",
   "subclass": "shadow",
   "level": 6,
   "action": "bonus",
-  "desc": "Без траты ци. В тусклом свете/темноте бонусным действием телепортируетесь до 18 м в другую тень; следующая ближняя атака до конца хода — с преимуществом."
+  "desc": "No Focus Points needed. In Dim Light or Darkness, as a Bonus Action you teleport up to 60 feet to another shadow; your next melee attack before the end of the turn has Advantage."
 }

@@ -1,13 +1,13 @@
--- Предметы снаряжения (фляга, верёвка, отмычки...).
+-- Adventuring gear (flask, rope, thieves' tools...).
 CREATE TABLE IF NOT EXISTS items (
     id          TEXT PRIMARY KEY,                -- 'rope'
-    name        TEXT NOT NULL,                   -- 'Верёвка (15 м)'
+    name        TEXT NOT NULL,                   -- 'Rope (50 feet)'
     image       TEXT,                            -- data URL (base64) | NULL
-    weight      REAL,                            -- фунты
-    cost        TEXT,                            -- '1 зм'
-    description TEXT,                            -- поле 'desc' из JSON
+    weight      REAL,                            -- pounds
+    cost        TEXT,                            -- '1 GP'
+    description TEXT,                            -- the 'desc' field from JSON
     is_default  INTEGER NOT NULL DEFAULT 0,      -- 0/1
-    data_json   TEXT NOT NULL,                   -- прочее
+    data_json   TEXT NOT NULL,                   -- everything else
     is_custom   INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),
     updated_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))

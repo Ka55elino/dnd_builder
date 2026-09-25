@@ -1,11 +1,11 @@
 /**
- * Справочники из БД одним объектом, с кэшем на время работы приложения.
+ * Reference data from the DB as one object, cached for the app's lifetime.
  *
  *   const refs = await loadRefs();
  *   refs.races, refs.classes, refs.eq, refs.backgrounds, refs.feats, refs.spells
  *
- * Справочники грузятся один раз. Исключение — снаряжение и заклинания:
- * пользователь может добавлять своё, тогда refreshCatalog() / refreshSpells().
+ * Reference data loads once. Exceptions are equipment and spells:
+ * the user can add their own, then refreshCatalog() / refreshSpells().
  */
 import {
     GetBackgrounds,
@@ -36,23 +36,23 @@ export function loadRefs() {
             backgrounds,
             feats,
             spells,
-            catalog, // всё снаряжение, включая именное: { weapons, armor, items }
+            catalog, // all equipment, including named items: { weapons, armor, items }
         }))
         .catch((e) => {
-            cache = null; // следующая попытка загрузит заново
+            cache = null; // the next attempt reloads
             throw e;
         });
     return cache;
 }
 
-/** Перечитать каталог снаряжения из БД (после сохранения/удаления своего). */
+/** Re-read the equipment catalog from the DB (after saving/deleting a custom one). */
 export async function refreshCatalog() {
     const refs = await loadRefs();
     refs.catalog = await GetCatalog();
     return refs.catalog;
 }
 
-/** Перечитать заклинания и способности из БД (после сохранения/удаления своего). */
+/** Re-read spells and abilities from the DB (after saving/deleting a custom one). */
 export async function refreshSpells() {
     const refs = await loadRefs();
     refs.spells = await GetSpells();

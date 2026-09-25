@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 )
 
-// Class — класс персонажа для фронтенда.
-// Data — исходный JSON из data_json (primaryAbility, savingThrows, skills, features...).
+// Class is a character class for the frontend.
+// Data is the raw JSON from data_json (primaryAbility, savingThrows, skills, features...).
 type Class struct {
 	ID            string         `json:"id"`
 	Name          string         `json:"name"`
-	Image         string         `json:"image"` // data URL (base64) или ""
+	Image         string         `json:"image"` // data URL (base64) or ""
 	HitDie        int            `json:"hitDie"`
 	Caster        string         `json:"caster"` // full | half | third | none
 	SubclassLevel int            `json:"subclassLevel"`
@@ -19,7 +19,7 @@ type Class struct {
 	Subclasses    []Subclass     `json:"subclasses"`
 }
 
-// Subclass — подкласс, привязан к классу через ClassID.
+// Subclass is a subclass, linked to its class via ClassID.
 type Subclass struct {
 	ID       string         `json:"id"`
 	ClassID  string         `json:"classId"`
@@ -29,7 +29,7 @@ type Subclass struct {
 	Data     map[string]any `json:"data"`
 }
 
-// getAllClasses — все классы, у каждого вложены его подклассы.
+// getAllClasses returns all classes, each with its subclasses nested.
 func getAllClasses(db *sql.DB) ([]Class, error) {
 	classes, err := queryClasses(db)
 	if err != nil {

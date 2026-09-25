@@ -1,6 +1,6 @@
 {
   "id": "sage",
-  "name": "Мудрец",
+  "name": "Sage",
   "abilities": {
     "options": [
       "con",
@@ -13,5 +13,5 @@
     "arcana",
     "history"
   ],
-  "tool": "Каллиграфические принадлежности"
+  "tool": "Calligrapher's Supplies"
 }

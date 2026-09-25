@@ -1,11 +1,11 @@
 {
   "id": "powerSurge",
-  "name": "Всплеск силы",
+  "name": "Power Surge",
   "kind": "martial",
   "subclass": "warMagic",
   "level": 6,
   "action": "free",
-  "desc": "Тратите накопленный всплеск силы, добавляя к урону одного заклинания половину уровня волшебника (силовым полем). Хранится до (мод. Интеллекта) всплесков.",
+  "desc": "You expend a stored Power Surge, adding half your Wizard level to one spell's damage (as Force damage). You can store up to (Intelligence modifier) surges.",
   "uses": {
     "ability": "int",
     "min": 1,

@@ -1,6 +1,6 @@
 {
   "id": "greaterInvisibility",
-  "name": "Высшая невидимость",
+  "name": "Greater Invisibility",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Существо невидимо, даже атакуя и колдуя. Концентрация до 1 минуты."
+  "desc": "A creature is Invisible, even while attacking or casting spells. Concentration, up to 1 minute."
 }

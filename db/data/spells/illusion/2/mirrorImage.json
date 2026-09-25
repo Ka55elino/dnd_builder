@@ -1,6 +1,6 @@
 {
   "id": "mirrorImage",
-  "name": "Отражения",
+  "name": "Mirror Image",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Создаёте 3 иллюзорных двойника, сбивающих атаки по вам."
+  "desc": "You create 3 illusory duplicates that divert attacks against you."
 }

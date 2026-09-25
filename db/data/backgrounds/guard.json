@@ -1,6 +1,6 @@
 {
   "id": "guard",
-  "name": "Стражник",
+  "name": "Guard",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "athletics",
     "perception"
   ],
-  "tool": "Игровой набор"
+  "tool": "Gaming Set"
 }

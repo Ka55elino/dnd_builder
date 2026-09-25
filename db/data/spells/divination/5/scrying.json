@@ -1,6 +1,6 @@
 {
   "id": "scrying",
-  "name": "Слежка",
+  "name": "Scrying",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -13,5 +13,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Видите и слышите известную цель через магический сенсор. Концентрация."
+  "desc": "You see and hear a known target through a magical sensor. Concentration."
 }

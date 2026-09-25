@@ -1,6 +1,6 @@
 {
   "id": "planarBinding",
-  "name": "Заключение",
+  "name": "Planar Binding",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -11,5 +11,5 @@
     "druid",
     "wizard"
   ],
-  "desc": "Связываете призванное существо служить вам (спасбросок Харизмы)."
+  "desc": "You bind a summoned creature to serve you (Charisma saving throw)."
 }

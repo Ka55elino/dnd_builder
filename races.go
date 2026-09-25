@@ -5,19 +5,19 @@ import (
 	"encoding/json"
 )
 
-// Race — раса или подраса для фронтенда.
-// Data — исходный JSON из data_json (size, speed, traits, subraceLevel...).
+// Race is a race or subrace for the frontend.
+// Data is the raw JSON from data_json (size, speed, traits, subraceLevel...).
 type Race struct {
 	ID         string         `json:"id"`
 	Name       string         `json:"name"`
 	ParentRace string         `json:"parentRace,omitempty"`
-	Image      string         `json:"image"` // data URL (base64) или ""
+	Image      string         `json:"image"` // data URL (base64) or ""
 	IsCustom   bool           `json:"isCustom"`
 	Data       map[string]any `json:"data"`
 	Subraces   []Race         `json:"subraces"`
 }
 
-// getAllRaces — базовые расы, у каждой вложены её подрасы.
+// getAllRaces returns the base races, each with its subraces nested.
 func getAllRaces(db *sql.DB) ([]Race, error) {
 	rows, err := db.Query(Q("GetAllRaces"))
 	if err != nil {

@@ -1,7 +1,7 @@
 {
   "id": "maskOfManyFaces",
-  "name": "Маска многоликости",
+  "name": "Mask of Many Faces",
   "category": "invocation",
   "level": 1,
-  "desc": "По желанию творите «Маскировку» без траты ячейки."
+  "desc": "You can cast Disguise Self at will, without expending a spell slot."
 }

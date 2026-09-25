@@ -1,11 +1,11 @@
 {
   "id": "clockworkCavalcade",
-  "name": "Кавалькада часов",
+  "name": "Clockwork Cavalcade",
   "kind": "martial",
   "subclass": "clockwork",
   "level": 18,
   "action": "action",
-  "desc": "Раз на длинный отдых. Действием призываете духов-часовщиков в кубе 9 м: восстанавливаете хиты существам, чините предметы и снимаете заклинания уровнем не выше вашего.",
+  "desc": "Once per Long Rest. As an action, you summon clockwork spirits in a 30-foot Cube: they restore Hit Points to creatures, repair objects, and end spells of a level no higher than yours.",
   "uses": {
     "count": 1,
     "per": "longRest"

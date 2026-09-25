@@ -1,6 +1,6 @@
 {
   "id": "magicalCunning",
-  "name": "Магическая хитрость",
+  "name": "Magical Cunning",
   "kind": "class",
   "level": 2,
   "classes": [
@@ -11,5 +11,5 @@
     "count": 1,
     "per": "longRest"
   },
-  "desc": "Минутным обрядом восстанавливаете число потраченных ячеек договора, равное половине максимума (округл. вверх). Раз на длинный отдых."
+  "desc": "With a 1-minute rite, you regain expended Pact Magic spell slots equal to half your maximum (rounded up). Once per Long Rest."
 }

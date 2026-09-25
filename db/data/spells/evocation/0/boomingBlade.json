@@ -1,6 +1,6 @@
 {
   "id": "boomingBlade",
-  "name": "Громовой удар",
+  "name": "Booming Blade",
   "kind": "spell",
   "edition": "2014",
   "source": [
@@ -16,7 +16,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Совершаете рукопашную атаку оружием по существу в пределах 1,5 м. При попадании цель получает обычный урон оружия, а с 5 уровня — дополнительно 1d8 урона громом (2d8 с 11 уровня). Если до начала вашего следующего хода цель добровольно переместится, она получает дополнительный урон громом: 1d8 (2d8 с 5 уровня, 3d8 с 11 уровня).",
+  "desc": "You make a melee weapon attack against a creature within 5 feet. On a hit, the target suffers the weapon's normal effects, and starting at level 5 it takes an extra 1d8 Thunder damage (2d8 at level 11). If the target willingly moves before the start of your next turn, it takes extra Thunder damage: 1d8 (2d8 at level 5, 3d8 at level 11).",
   "weaponAttack": true,
   "damage": {
     "initial": {

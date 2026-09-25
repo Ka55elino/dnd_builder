@@ -1,7 +1,7 @@
 {
   "id": "carefulSpell",
-  "name": "Бережное заклинание",
+  "name": "Careful Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Творя заклинание с областью и спасбросками, до (мод. Харизмы) выбранных существ автоматически преуспевают в спасброске и не получают урона."
+  "desc": "When you cast a spell with an area of effect that calls for saving throws, up to (Charisma modifier) chosen creatures automatically succeed on the saving throw and take no damage."
 }

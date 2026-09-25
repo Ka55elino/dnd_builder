@@ -1,9 +1,9 @@
 {
   "id": "naturesSanctuary",
-  "name": "Убежище природы",
+  "name": "Nature's Sanctuary",
   "kind": "martial",
   "subclass": "land",
   "level": 14,
   "action": "bonus",
-  "desc": "Бонусным действием создаёте зону защиты 3 м на 1 минуту: враги не могут войти в неё без успешного спасброска Мудрости."
+  "desc": "As a Bonus Action, you create a 10-foot protective zone for 1 minute: enemies can't enter it without succeeding on a Wisdom saving throw."
 }

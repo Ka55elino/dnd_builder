@@ -1,9 +1,9 @@
 {
   "id": "combatInspiration",
-  "name": "Боевое вдохновение",
+  "name": "Combat Inspiration",
   "kind": "martial",
   "subclass": "valor",
   "level": 3,
   "action": "reaction",
-  "desc": "Существо, имеющее вашу Кость вдохновения, реакцией прибавляет её к своему КЗ против атаки или к броску урона оружием."
+  "desc": "A creature that has one of your Bardic Inspiration dice can, as a Reaction, add it to its AC against an attack or to a weapon damage roll."
 }

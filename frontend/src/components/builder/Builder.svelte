@@ -13,9 +13,9 @@
     import { levelPlan, evaluatePlan } from "../../rules/progression.js";
 
     /**
-     * initial  — данные сохранённого персонажа (для редактирования) или null
-     * onExit() — назад на стартовую
-     * onSaved(id) — персонаж сохранён
+     * initial  — saved character data (for editing) or null
+     * onExit() — back to the start screen
+     * onSaved(id) — the character was saved
      */
     let {
         initial = null,
@@ -23,19 +23,19 @@
         onSaved = (id) => console.log("[saved]", id),
     } = $props();
 
-    // initial читаем один раз: при смене персонажа App пересоздаёт билдер ({#key})
+    // initial is read once: when the character changes, App recreates the builder ({#key})
     let build = new CharacterBuild(untrack(() => initial) ?? {});
 
-    // 5 вкладок + экран 1 уровня (итог и выборы)
+    // 5 tabs + the level 1 screen (summary and choices)
     const LEVEL_STEP = BUILDER_TABS.length;
-    const steps = [...BUILDER_TABS, build.level > 1 ? "Уровни" : "Итог · 1 ур."];
+    const steps = [...BUILDER_TABS, build.level > 1 ? "Levels" : "Summary · Lvl 1"];
 
-    // уровни: при редактировании персонажа можно пройти и поправить каждый
+    // levels: when editing a character, each one can be revisited and adjusted
     const levels = Array.from({ length: build.level }, (_, i) => i + 1);
     let levelTab = $state(untrack(() => build.level));
     let step = $state(0);
 
-    // справочники: для валидации (подраса, доспех) и экрана уровня
+    // reference data: for validation (subspecies, armor) and the level screen
     let refs = $state(EMPTY_REFS);
     let refsError = $state(null);
     onMount(async () => {
@@ -49,9 +49,9 @@
     const errors = $derived(validateBuild(build, refs));
     const tabHasError = $derived(new Set(errors.map((e) => e.tab)));
 
-    // ошибки показываем только после попытки перейти к итогу
+    // errors are shown only after an attempt to go to the summary
     let attempted = $state(false);
-    // сделаны ли выборы на каждом уровне (не только на открытом)
+    // whether choices are made on every level (not only the open one)
     const levelDone = $derived(
         Object.fromEntries(
             levels.map((l) => [l, evaluatePlan(levelPlan(build, l, refs), build, refs).complete]),
@@ -63,7 +63,7 @@
 
     const onLevelStep = $derived(step === LEVEL_STEP);
 
-    /** «Далее»: следующая вкладка; с последней — проверка и экран уровня. */
+    /** "Next": the next tab; from the last one — validation and the level screen. */
     function next() {
         if (step < LEVEL_STEP - 1) {
             step += 1;
@@ -78,7 +78,7 @@
     }
 
     function goTo(i) {
-        if (i === LEVEL_STEP) return next(); // к итогу — только через проверку
+        if (i === LEVEL_STEP) return next(); // to the summary — only via validation
         step = i;
     }
 
@@ -105,15 +105,15 @@
 
 <div class="builder">
     <header class="top">
-        <button class="back" onclick={onExit}>← Назад</button>
-        <h1>{initial ? "Редактирование персонажа" : "Создание персонажа"}</h1>
+        <button class="back" onclick={onExit}>← Back</button>
+        <h1>{initial ? "Edit character" : "Create character"}</h1>
         {#if onLevelStep}
             <button class="save" onclick={save} disabled={saving || !levelComplete}
-                title={levelComplete ? "" : "Сделайте все выборы на каждом уровне"}>
-                {saving ? "Сохранение…" : "Сохранить"}
+                title={levelComplete ? "" : "Make all choices on every level"}>
+                {saving ? "Saving…" : "Save"}
             </button>
         {:else}
-            <button class="save" onclick={next}>Далее →</button>
+            <button class="save" onclick={next}>Next →</button>
         {/if}
     </header>
 
@@ -132,12 +132,12 @@
     </nav>
 
     {#if saveError}
-        <div class="alert">Не удалось сохранить: {saveError}</div>
+        <div class="alert">Failed to save: {saveError}</div>
     {/if}
 
     {#if attempted && errors.length}
         <div class="alert">
-            <b>Заполните, чтобы перейти к итогу:</b>
+            <b>Complete these to go to the summary:</b>
             {#each BUILDER_TABS as tabLabel, t}
                 {@const list = errors.filter((e) => e.tab === t)}
                 {#if list.length}
@@ -162,7 +162,7 @@
         {:else if step === 4}
             <EquipmentTab {build} />
         {:else if refsError}
-            <p class="err">Не удалось загрузить справочники: {refsError}</p>
+            <p class="err">Failed to load reference data: {refsError}</p>
         {:else}
             {#if levels.length > 1}
                 <nav class="level-tabs">
@@ -172,7 +172,7 @@
                             class:active={l === levelTab}
                             class:invalid={!levelDone[l]}
                             onclick={() => (levelTab = l)}
-                        >{l} ур.</button>
+                        >Lvl {l}</button>
                     {/each}
                 </nav>
             {/if}

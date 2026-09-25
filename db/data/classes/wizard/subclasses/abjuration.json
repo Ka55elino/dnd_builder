@@ -1,33 +1,33 @@
 {
   "id": "abjuration",
-  "name": "Школа Ограждения",
+  "name": "School of Abjuration",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "wizard",
   "features": [
     {
       "level": 3,
-      "name": "Знаток ограждения",
-      "desc": "Копируете заклинания Ограждения в книгу за половину времени и золота."
+      "name": "Abjuration Savant",
+      "desc": "You copy Abjuration spells into your spellbook in half the time and for half the gold."
     },
     {
       "level": 3,
-      "name": "Тайный щит",
-      "desc": "Творя заклинание Ограждения 1 круга и выше, создаёте магический щит с пулом хитов = 2 × уровень волшебника + мод. Интеллекта, поглощающий урон по вам."
+      "name": "Arcane Ward",
+      "desc": "When you cast an Abjuration spell of level 1 or higher, you create a magical ward with a Hit Point pool = 2 × Wizard level + Int modifier that absorbs damage dealt to you."
     },
     {
       "level": 6,
-      "name": "Спроецированный щит",
-      "desc": "Реакцией используете Тайный щит, чтобы поглотить урон существа в 9 м."
+      "name": "Projected Ward",
+      "desc": "As a Reaction, you use your Arcane Ward to absorb damage dealt to a creature within 30 feet."
     },
     {
       "level": 10,
-      "name": "Улучшенное ограждение",
-      "desc": "Прибавляете бонус мастерства к проверкам характеристики «Контрзаклинания» и «Рассеивания магии»."
+      "name": "Improved Abjuration",
+      "desc": "You add your Proficiency Bonus to the ability checks you make for Counterspell and Dispel Magic."
     },
     {
       "level": 14,
-      "name": "Сопротивление заклинаниям",
-      "desc": "Преимущество на спасброски против заклинаний и сопротивление их урону."
+      "name": "Spell Resistance",
+      "desc": "Advantage on saving throws against spells and Resistance to their damage."
     }
   ]
 }

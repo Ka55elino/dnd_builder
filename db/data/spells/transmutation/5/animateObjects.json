@@ -1,6 +1,6 @@
 {
   "id": "animateObjects",
-  "name": "Оживление предметов",
+  "name": "Animate Objects",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Оживляете до 10 предметов, атакующих по вашей команде. Концентрация.",
+  "desc": "You animate up to 10 objects that attack at your command. Concentration.",
   "damage": {
     "dice": "2d6",
     "type": "bludgeoning"

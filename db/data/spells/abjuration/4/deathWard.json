@@ -1,6 +1,6 @@
 {
   "id": "deathWard",
-  "name": "Защита от смерти",
+  "name": "Death Ward",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Первое сведение цели к 0 хитов оставляет её на 1 хите; смертельный эффект отменяется."
+  "desc": "The first time the target drops to 0 Hit Points, it drops to 1 Hit Point instead; an instant-death effect is negated."
 }

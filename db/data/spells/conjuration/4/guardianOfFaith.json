@@ -1,6 +1,6 @@
 {
   "id": "guardianOfFaith",
-  "name": "Страж веры",
+  "name": "Guardian of Faith",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -9,7 +9,7 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Призрачный страж наносит 20 излучением врагам рядом (спасбросок Ловкости за половину).",
+  "desc": "A spectral guardian deals 20 Radiant damage to nearby enemies (Dexterity saving throw for half).",
   "damage": {
     "dice": "20",
     "type": "radiant"

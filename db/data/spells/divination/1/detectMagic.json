@@ -1,6 +1,6 @@
 {
   "id": "detectMagic",
-  "name": "Обнаружение магии",
+  "name": "Detect Magic",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -14,11 +14,11 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Чувствуете присутствие магии в пределах 9 м. Действием можно увидеть слабую ауру вокруг магического существа/предмета и узнать его школу магии.",
+  "desc": "You sense the presence of magic within 30 feet. As an action, you can see a faint aura around a magical creature or object and learn its school of magic.",
   "casting": {
-    "time": "1 действие",
-    "range": "На себя (9 м)",
-    "components": "В, С",
-    "duration": "Концентрация, до 10 минут"
+    "time": "1 action",
+    "range": "Self (30 feet)",
+    "components": "V, S",
+    "duration": "Concentration, up to 10 minutes"
   }
 }

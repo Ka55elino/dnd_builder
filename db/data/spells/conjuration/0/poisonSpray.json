@@ -1,6 +1,6 @@
 {
   "id": "poisonSpray",
-  "name": "Ядовитые брызги",
+  "name": "Poison Spray",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,12 +11,12 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Выбрасываете облачко ядовитого газа в существо рядом; спасбросок Телосложения, иначе урон ядом (растёт с уровнем).",
+  "desc": "You project a puff of noxious gas at a nearby creature; it makes a Constitution saving throw or takes Poison damage (increases with level).",
   "casting": {
-    "time": "1 действие",
-    "range": "3 м",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "10 feet",
+    "components": "V, S",
+    "duration": "Instantaneous"
   },
   "damage": {
     "dice": "1d12",

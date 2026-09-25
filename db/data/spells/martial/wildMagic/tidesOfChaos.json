@@ -1,11 +1,11 @@
 {
   "id": "tidesOfChaos",
-  "name": "Приливы хаоса",
+  "name": "Tides of Chaos",
   "kind": "martial",
   "subclass": "wildMagic",
   "level": 3,
   "action": "free",
-  "desc": "Раз на длинный отдых даёте себе преимущество на один бросок атаки, проверку характеристики или спасбросок. Восстанавливается, когда срабатывает Всплеск дикой магии.",
+  "desc": "Once per Long Rest, you give yourself Advantage on one attack roll, ability check, or saving throw. Regained when Wild Magic Surge triggers.",
   "uses": {
     "count": 1,
     "per": "longRest"

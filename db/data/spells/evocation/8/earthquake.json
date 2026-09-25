@@ -1,6 +1,6 @@
 {
   "id": "earthquake",
-  "name": "Землетрясение",
+  "name": "Earthquake",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -10,5 +10,5 @@
     "druid",
     "sorcerer"
   ],
-  "desc": "Толчки рушат строения и валят существ с ног в области 30 м. Концентрация."
+  "desc": "Tremors topple structures and knock creatures Prone in a 100-foot area. Concentration."
 }

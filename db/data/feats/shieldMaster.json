@@ -1,10 +1,10 @@
 {
   "id": "shieldMaster",
-  "name": "Мастер щита",
+  "name": "Shield Master",
   "category": "general",
   "level": 4,
   "asi": [
     "str"
   ],
-  "desc": "+1 Сила; толчок щитом, +щит к спасброскам Лов."
+  "desc": "+1 Strength; Shield shove, add your Shield to Dexterity saving throws."
 }

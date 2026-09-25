@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-// Weapon — оружие. Data — остальное из JSON (mastery, properties, range...).
+// Weapon is a weapon. Data holds the rest of the JSON (mastery, properties, range...).
 type Weapon struct {
 	ID         string         `json:"id"`
 	Name       string         `json:"name"`
@@ -13,11 +13,11 @@ type Weapon struct {
 	Category   string         `json:"category"` // simple | martial
 	Damage     string         `json:"damage"`
 	DamageType string         `json:"damageType"`
-	IsDefault  bool           `json:"isDefault"` // false — именное/магическое
+	IsDefault  bool           `json:"isDefault"` // false: named/magic
 	Data       map[string]any `json:"data"`
 }
 
-// Armor — доспех или щит. Data — addDex, maxDex, stealthDisadvantage, strengthReq...
+// Armor is armor or a shield. Data holds addDex, maxDex, stealthDisadvantage, strengthReq...
 type Armor struct {
 	ID        string         `json:"id"`
 	Name      string         `json:"name"`
@@ -28,7 +28,7 @@ type Armor struct {
 	Data      map[string]any `json:"data"`
 }
 
-// Item — предмет снаряжения.
+// Item is a piece of adventuring gear.
 type Item struct {
 	ID     string         `json:"id"`
 	Name   string         `json:"name"`
@@ -39,13 +39,13 @@ type Item struct {
 	Data   map[string]any `json:"data"`
 }
 
-// PackItem — предмет в наборе с количеством.
+// PackItem is an item in a pack, with its quantity.
 type PackItem struct {
 	Item Item `json:"item"`
 	Qty  int  `json:"qty"`
 }
 
-// Pack — набор снаряжения с содержимым.
+// Pack is an equipment pack with its contents.
 type Pack struct {
 	ID    string         `json:"id"`
 	Name  string         `json:"name"`
@@ -56,7 +56,7 @@ type Pack struct {
 	Items []PackItem     `json:"items"`
 }
 
-// Catalog — ВСЁ снаряжение, включая именное (выдача предметов персонажу).
+// Catalog is ALL equipment, including named items (for handing items out to a character).
 type Catalog struct {
 	Weapons []Weapon `json:"weapons"`
 	Armor   []Armor  `json:"armor"`
@@ -80,7 +80,7 @@ func getCatalog(db *sql.DB) (Catalog, error) {
 	return c, nil
 }
 
-// Equipment — всё снаряжение для билдера (только is_default = 1).
+// Equipment is all equipment for the builder (is_default = 1 only).
 type Equipment struct {
 	Weapons []Weapon `json:"weapons"`
 	Armor   []Armor  `json:"armor"`
@@ -188,8 +188,8 @@ func queryItems(db *sql.DB, query string) ([]Item, error) {
 	return out, rows.Err()
 }
 
-// readItem читает колонки id, name, image, weight, cost, description, data_json
-// (плюс любые колонки перед ними — через prefix).
+// readItem reads the columns id, name, image, weight, cost, description, data_json
+// (plus any columns before them, via prefix).
 func readItem(scan func(...any) error, prefix ...any) (Item, error) {
 	var (
 		it                Item
@@ -238,7 +238,7 @@ func queryPacks(db *sql.DB) ([]Pack, error) {
 	}
 	rows.Close()
 
-	// содержимое наборов через pack_items
+	// pack contents via pack_items
 	index := make(map[string]int, len(packs))
 	for i, p := range packs {
 		index[p.ID] = i

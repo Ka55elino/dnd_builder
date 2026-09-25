@@ -1,6 +1,6 @@
 {
   "id": "gaseousForm",
-  "name": "Газообразная форма",
+  "name": "Gaseous Form",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо и его снаряжение становятся туманом: сопротивление физическому урону, полёт 3 м. Концентрация."
+  "desc": "A creature and its gear turn into mist: Resistance to Bludgeoning, Piercing, and Slashing damage, Fly Speed 10 feet. Concentration."
 }

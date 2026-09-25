@@ -1,38 +1,38 @@
 {
   "id": "echoKnight",
-  "name": "Рыцарь Эха",
+  "name": "Echo Knight",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "warrior",
   "features": [
     {
       "level": 3,
-      "name": "Манифест эха",
-      "desc": "Бонусным действием создаёте эхо себя в 4,5 м (КД 14 + бонус мастерства, 1 хит). Можете атаковать с его позиции, меняться с ним местами за 15 футов передвижения и совершать провоцированные атаки от него."
+      "name": "Manifest Echo",
+      "desc": "As a Bonus Action, you create an echo of yourself within 15 feet (AC 14 + your Proficiency Bonus, 1 Hit Point). You can attack from its position, swap places with it for 15 feet of movement, and make Opportunity Attacks from it."
     },
     {
       "level": 3,
-      "name": "Раскрыть потенциал",
-      "desc": "Совершая действие Атака, можете сделать одну дополнительную рукопашную атаку с позиции эха (число раз = мод. Телосложения)."
+      "name": "Unleash Incarnation",
+      "desc": "When you take the Attack action, you can make one extra melee attack from the echo's position (a number of times equal to your Constitution modifier)."
     },
     {
       "level": 7,
-      "name": "Аватар эха",
-      "desc": "Действием переносите сознание в эхо, видя и слыша его чувствами (сами глухи и слепы); эхо может удаляться до 300 м, до 10 минут."
+      "name": "Echo Avatar",
+      "desc": "As an action, you project your consciousness into the echo, seeing and hearing through its senses (while you are Deafened and Blinded); the echo can move up to 1,000 feet away, for up to 10 minutes."
     },
     {
       "level": 10,
-      "name": "Эхо-мученик",
-      "desc": "Реакцией телепортируете эхо под удар, направленный на другое существо: атака совершается по эху. Раз на короткий или длинный отдых."
+      "name": "Echo Avatar",
+      "desc": "As a Reaction, you teleport the echo into the path of an attack aimed at another creature; the attack targets the echo instead. Once per Short or Long Rest."
     },
     {
       "level": 15,
-      "name": "Поглотить потенциал",
-      "desc": "Когда эхо уничтожается уроном, получаете 2к6 + мод. Телосложения временных хитов (число раз = мод. Телосложения)."
+      "name": "Reclaim Potential",
+      "desc": "When the echo is destroyed by damage, you gain Temporary Hit Points equal to 2d6 + your Constitution modifier (a number of times equal to your Constitution modifier)."
     },
     {
       "level": 18,
-      "name": "Легион единого",
-      "desc": "Можете иметь два эха одновременно; при броске инициативы без использований «Раскрыть потенциал» восстанавливаете одно."
+      "name": "Legion of One",
+      "desc": "You can have two echoes at once; when you roll Initiative and have no uses of Unleash Incarnation left, you regain one."
     }
   ]
 }

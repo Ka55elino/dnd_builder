@@ -1,11 +1,11 @@
 {
   "id": "starryFormArcher",
-  "name": "Звёздная форма: Лучник",
+  "name": "Starry Form: Archer",
   "kind": "martial",
   "subclass": "stars",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием (тратя применение Дикого облика) на 10 минут принимаете форму. Бонусным действием — светящаяся стрела по цели в 18 м (атака заклинанием, урон излучением).",
+  "desc": "As a Bonus Action (expending a use of Wild Shape), you assume a form for 10 minutes. As a Bonus Action, you shoot a luminous arrow at a target within 60 feet (spell attack, Radiant damage).",
   "damage": {
     "dice": "2d8",
     "type": "radiant"

@@ -1,6 +1,6 @@
 {
   "id": "heroism",
-  "name": "Героизм",
+  "name": "Heroism",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -10,5 +10,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Существо неуязвимо к испугу и получает временные хиты (мод. заклинателя) в начале своих ходов. Концентрация."
+  "desc": "A creature is immune to the Frightened condition and gains Temporary Hit Points (equal to your spellcasting modifier) at the start of each of its turns. Concentration."
 }

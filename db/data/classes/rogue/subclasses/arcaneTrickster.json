@@ -1,6 +1,6 @@
 {
   "id": "arcaneTrickster",
-  "name": "Мистический ловкач",
+  "name": "Arcane Trickster",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "rogue",
   "spellcasting": {
@@ -64,28 +64,28 @@
   "features": [
     {
       "level": 3,
-      "name": "Использование заклинаний",
-      "desc": "Учите и творите заклинания из списка Волшебника (преимущественно Очарование и Иллюзия), используя Интеллект. Треть-заклинатель; один из заговоров — «Волшебная рука»."
+      "name": "Spellcasting",
+      "desc": "You learn and cast spells from the Wizard spell list (mostly Enchantment and Illusion), using Intelligence. One-third caster; one of your cantrips is Mage Hand."
     },
     {
       "level": 3,
-      "name": "Ловкость рук мага",
-      "desc": "Ваша «Волшебная рука» невидима и может совершать Ловкость рук: подкладывать/красть предметы, отпирать замки и обезвреживать ловушки на расстоянии."
+      "name": "Mage Hand Legerdemain",
+      "desc": "Your Mage Hand is Invisible and can perform Sleight of Hand: plant or steal objects, pick locks, and disarm traps at a distance."
     },
     {
       "level": 9,
-      "name": "Магическая засада",
-      "desc": "Если вы спрятаны, когда творите заклинание по существу, оно совершает спасбросок против этого заклинания с помехой."
+      "name": "Magical Ambush",
+      "desc": "If you are hidden when you cast a spell on a creature, it has Disadvantage on its saving throw against that spell."
     },
     {
       "level": 13,
-      "name": "Разносторонний ловкач",
-      "desc": "Бонусным действием через «Волшебную руку» отвлекаете существо в 1,5 м от руки — получаете преимущество на атаки по нему до конца хода."
+      "name": "Versatile Trickster",
+      "desc": "As a Bonus Action, you use your Mage Hand to distract a creature within 5 feet of the hand, gaining Advantage on attack rolls against it until the end of the turn."
     },
     {
       "level": 17,
-      "name": "Похититель заклинаний",
-      "desc": "Успешно пройдя спасбросок против заклинания (или при промахе заклинателя по вам), реакцией крадёте это заклинание: оно недоступно цели и доступно вам до следующего длинного отдыха. Раз на длинный отдых."
+      "name": "Spell Thief",
+      "desc": "When you succeed on a saving throw against a spell (or its caster misses you with it), you can use your Reaction to steal the spell: the caster can't use it, and you can cast it until your next Long Rest. Once per Long Rest."
     }
   ]
 }

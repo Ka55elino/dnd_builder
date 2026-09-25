@@ -32,15 +32,16 @@ func appDataDir() (string, error) {
 	return dir, nil
 }
 
-// dbFileName — отдельный файл для dev, чтобы не затирать рабочую БД.
+// dbFileName returns the database file name including the app version: dnd-v0.1.0.db.
+// In dev mode a separate file (dnd-dev-v0.1.0.db) is used so the working database is not overwritten.
 func dbFileName() string {
 	if devMode {
-		return "dnd-dev.db"
+		return fmt.Sprintf("dnd-dev-v%s.db", APP_VERSION)
 	}
-	return "dnd.db"
+	return fmt.Sprintf("dnd-v%s.db", APP_VERSION)
 }
 
-// removeDB удаляет файл БД вместе с WAL/SHM (если их нет — не ошибка).
+// removeDB deletes the database file along with its WAL/SHM files (missing files are not an error).
 func removeDB(path string) error {
 	for _, p := range []string{path, path + "-wal", path + "-shm"} {
 		if err := os.Remove(p); err != nil && !errors.Is(err, os.ErrNotExist) {
@@ -59,11 +60,11 @@ func openDB() (db *sql.DB, err error) {
 	path := filepath.Join(dir, dbFileName())
 
 	if devMode {
-		// dev: всегда чистая БД — схема и сиды применяются заново
+		// dev: always a fresh database; schema and seeds are applied again
 		if err := removeDB(path); err != nil {
 			return nil, err
 		}
-		log.Printf("[dev] БД пересоздана: %s", path)
+		log.Printf("[dev] database recreated: %s", path)
 	}
 
 	db, err = sql.Open("sqlite", path)
@@ -116,13 +117,13 @@ func initSchema(db *sql.DB) error {
 	return nil
 }
 
-// migrate — изменения схемы для уже существующих БД
-// (CREATE TABLE IF NOT EXISTS не добавляет новые колонки в старую таблицу).
+// migrate applies schema changes to existing databases
+// (CREATE TABLE IF NOT EXISTS does not add new columns to an old table).
 func migrate(db *sql.DB) error {
-	// Колонка image: если её пришлось добавить, справочные записи были
-	// загружены без картинок — удаляем их, seedAll загрузит заново из JSON.
-	// Пользовательские (is_custom = 1) не трогаем.
-	// Порядок важен: subclasses раньше classes (внешний ключ).
+	// image column: if it had to be added, the built-in records were
+	// loaded without images, so delete them and seedAll reloads them from JSON.
+	// User-defined records (is_custom = 1) are left untouched.
+	// Order matters: subclasses before classes (foreign key).
 	for _, table := range []string{"races", "subclasses", "classes"} {
 		added, err := ensureColumn(db, table, "image", "TEXT")
 		if err != nil {
@@ -134,11 +135,11 @@ func migrate(db *sql.DB) error {
 			}
 		}
 	}
-	// state_json у персонажей — просто добавляем, данные не трогаем
+	// state_json on characters: just add it, existing data is left untouched
 	if _, err := ensureColumn(db, "characters", "state_json", "TEXT"); err != nil {
 		return err
 	}
-	// своё снаряжение (страница «Предметы») — is_custom и даты у старых таблиц
+	// custom equipment (the "Items" page): is_custom and timestamps on old tables
 	for _, table := range []string{"weapons", "armor", "items"} {
 		if _, err := ensureColumn(db, table, "is_custom", "INTEGER NOT NULL DEFAULT 0"); err != nil {
 			return err
@@ -147,7 +148,7 @@ func migrate(db *sql.DB) error {
 	return nil
 }
 
-// ensureColumn добавляет колонку, если её нет. Возвращает true, если добавила.
+// ensureColumn adds a column if it does not exist. It returns true if the column was added.
 func ensureColumn(db *sql.DB, table, column, def string) (bool, error) {
 	rows, err := db.Query(fmt.Sprintf("SELECT name FROM pragma_table_info('%s')", table))
 	if err != nil {

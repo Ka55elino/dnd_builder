@@ -1,9 +1,9 @@
 {
   "id": "touchOfDeath",
-  "name": "Прикосновение смерти",
+  "name": "Touch of Death",
   "kind": "martial",
   "subclass": "death",
   "level": 3,
   "action": "free",
-  "desc": "Стоимость 1 использование Божественного канала. Попав ближней атакой, наносите цели доп. {touchOfDeath} некротического урона (5 + двойной уровень жреца)."
+  "desc": "Costs 1 use of Channel Divinity. When you hit with a melee attack, you deal an extra {touchOfDeath} Necrotic damage to the target (5 + twice your Cleric level)."
 }

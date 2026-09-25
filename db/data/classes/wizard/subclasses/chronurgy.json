@@ -1,13 +1,13 @@
 {
   "id": "chronurgy",
-  "name": "Магия хронургии",
+  "name": "Chronurgy Magic",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "wizard",
   "features": [
     {
       "level": 3,
-      "name": "Временная осознанность",
-      "desc": "Прибавляете модификатор Интеллекта к своей инициативе.",
+      "name": "Temporal Awareness",
+      "desc": "You add your Intelligence modifier to your Initiative.",
       "grants": [
         {
           "type": "effect",
@@ -21,23 +21,23 @@
     },
     {
       "level": 3,
-      "name": "Хрональный сдвиг",
-      "desc": "Реакцией (дважды на длинный отдых) заставляете существо в 9 м перебросить только что сделанный бросок атаки, проверку или спасбросок."
+      "name": "Chronal Shift",
+      "desc": "As a Reaction (twice per Long Rest), you force a creature within 30 feet to reroll an attack roll, ability check, or saving throw it just made."
     },
     {
       "level": 6,
-      "name": "Мгновенный застой",
-      "desc": "Действием (спасбросок Тел.) вводите существо в 9 м в стазис — недееспособно и неподвижно до конца вашего следующего хода."
+      "name": "Momentary Stasis",
+      "desc": "As an action (Con saving throw), you put a creature within 30 feet into stasis: it is Incapacitated and can't move until the end of your next turn."
     },
     {
       "level": 10,
-      "name": "Тайная отсрочка",
-      "desc": "Помещаете заклинание 4 круга и ниже в крошечную сферу, чтобы сотворить его позже."
+      "name": "Arcane Abeyance",
+      "desc": "You store a spell of level 4 or lower in a tiny sphere to cast it later."
     },
     {
       "level": 14,
-      "name": "Сходящееся будущее",
-      "desc": "Вместо броска d20 (своего или чужого) объявляете результат 1 или 20, платя истощением очков."
+      "name": "Convergent Future",
+      "desc": "Instead of rolling a d20 (yours or another creature's), you declare a result of 1 or 20, paying for it with Exhaustion."
     }
   ]
 }

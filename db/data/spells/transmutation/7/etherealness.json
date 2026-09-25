@@ -1,6 +1,6 @@
 {
   "id": "etherealness",
-  "name": "Эфирность",
+  "name": "Etherealness",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Переходите в Пограничный Эфир, проходя сквозь предметы."
+  "desc": "You step into the Border Ethereal, passing through objects."
 }

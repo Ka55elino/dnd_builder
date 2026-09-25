@@ -1,9 +1,9 @@
 {
   "id": "evasiveFootwork",
-  "name": "Уклончивый шаг",
+  "name": "Evasive Footwork",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При перемещении прибавляете кость превосходства к КЗ до конца хода.",
+  "desc": "When you move, you add a Superiority Die to your AC until the end of the turn.",
   "pool": "maneuver"
 }

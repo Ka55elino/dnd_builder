@@ -1,6 +1,6 @@
 {
   "id": "eyebite",
-  "name": "Дурной глаз",
+  "name": "Eyebite",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Взгляд усыпляет, пугает или ослабляет существо (спасбросок Мудрости). Концентрация."
+  "desc": "Your gaze puts a creature to sleep, frightens it, or sickens it (Wisdom saving throw). Concentration."
 }

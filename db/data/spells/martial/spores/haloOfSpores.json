@@ -1,11 +1,11 @@
 {
   "id": "haloOfSpores",
-  "name": "Ореол спор",
+  "name": "Halo of Spores",
   "kind": "martial",
   "subclass": "spores",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией, когда существо входит/начинает ход в 3 м, наносите ему некротический урон (спасбросок Тел. за половину). Кость растёт с уровнем друида.",
+  "desc": "As a Reaction, when a creature enters or starts its turn within 10 feet of you, you deal Necrotic damage to it (Constitution saving throw for half). The die increases with your Druid level.",
   "scaleDie": [
     [
       3,

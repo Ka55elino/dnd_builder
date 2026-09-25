@@ -1,6 +1,6 @@
 {
   "id": "hellishRebuke",
-  "name": "Адское возмездие",
+  "name": "Hellish Rebuke",
   "kind": "spell",
   "action": "reaction",
   "level": 1,
@@ -10,12 +10,12 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Реакцией в ответ на урон окутываете обидчика пламенем: спасбросок Ловкости, урон огнём 2d10 (половина при успехе).",
+  "desc": "As a Reaction to taking damage, you wreathe the attacker in flame: Dexterity saving throw, 2d10 Fire damage (half on a success).",
   "casting": {
-    "time": "1 реакция",
-    "range": "18 м",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 reaction",
+    "range": "60 feet",
+    "components": "V, S",
+    "duration": "Instantaneous"
   },
   "damage": {
     "dice": "2d10",

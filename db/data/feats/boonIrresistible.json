@@ -1,11 +1,11 @@
 {
   "id": "boonIrresistible",
-  "name": "Дар неотразимого удара",
+  "name": "Boon of Irresistible Offense",
   "category": "boon",
   "level": 19,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость (макс 30); удары пробивают сопротивления."
+  "desc": "+1 Strength or Dexterity (maximum 30); your strikes bypass Resistances."
 }

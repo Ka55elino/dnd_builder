@@ -1,10 +1,13 @@
 {
   "id": "waterWhip",
-  "name": "Дисциплина: Водяной кнут",
+  "name": "Discipline: Water Whip",
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 2 очка ци. Хлыст воды бьёт существо в 9 м: 3d10 дробящего урона (спасбросок Ловкости за половину); при провале притягиваете цель на 7,5 м или сбиваете с ног.",
-  "damage": { "dice": "3d10", "type": "bludgeoning" }
+  "desc": "Costs 2 Focus Points. A whip of water strikes a creature within 30 feet: 3d10 Bludgeoning damage (Dexterity saving throw for half); on a failed save, you pull the target up to 25 feet or knock it Prone.",
+  "damage": {
+    "dice": "3d10",
+    "type": "bludgeoning"
+  }
 }

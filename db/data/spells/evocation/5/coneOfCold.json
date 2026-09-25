@@ -1,6 +1,6 @@
 {
   "id": "coneOfCold",
-  "name": "Конус холода",
+  "name": "Cone of Cold",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Конус мороза 18 м: спасбросок Тел. за половину.",
+  "desc": "A 60-foot Cone of frost: Constitution saving throw for half damage.",
   "damage": {
     "dice": "8d8",
     "type": "cold"

@@ -1,6 +1,6 @@
 {
   "id": "abilityScoreImprovement",
-  "name": "Повышение характеристик",
+  "name": "Ability Score Improvement",
   "category": "general",
   "level": 4,
   "repeatable": true,
@@ -17,5 +17,5 @@
       "cha"
     ]
   },
-  "desc": "Повысьте одну характеристику на +2 или две разные на +1 каждую (максимум 20). Эту черту можно брать каждый раз при доступе к черте."
+  "desc": "Increase one ability score by 2, or two different ability scores by 1 each (maximum 20). You can take this feat each time you gain a feat."
 }

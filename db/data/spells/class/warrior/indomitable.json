@@ -1,9 +1,28 @@
 {
   "id": "indomitable",
-  "name": "Несокрушимость",
+  "name": "Indomitable",
   "kind": "class",
   "level": 9,
-  "classes": ["warrior"],
-  "desc": "Перебросьте проваленный спасбросок, прибавив к результату уровень воина. Число применений растёт на 13 и 17 уровнях.",
-  "uses": { "count": 1, "per": "longRest", "scale": [[9, 1], [13, 2], [17, 3]] }
+  "classes": [
+    "warrior"
+  ],
+  "desc": "You reroll a failed saving throw, adding your Fighter level to the roll. The number of uses increases at levels 13 and 17.",
+  "uses": {
+    "count": 1,
+    "per": "longRest",
+    "scale": [
+      [
+        9,
+        1
+      ],
+      [
+        13,
+        2
+      ],
+      [
+        17,
+        3
+      ]
+    ]
+  }
 }

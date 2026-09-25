@@ -1,9 +1,9 @@
 {
   "id": "inspiringSmite",
-  "name": "Вдохновляющая кара",
+  "name": "Inspiring Smite",
   "kind": "martial",
   "subclass": "glory",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Сразу после Божественной кары распределяете временные хиты (2d8 + уровень паладина) между существами в 9 м."
+  "desc": "Cost: 1 use of Channel Divinity. Immediately after Divine Smite, you distribute Temporary Hit Points (2d8 + your Paladin level) among creatures within 30 feet."
 }

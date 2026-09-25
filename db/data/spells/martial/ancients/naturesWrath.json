@@ -1,9 +1,9 @@
 {
   "id": "naturesWrath",
-  "name": "Гнев природы",
+  "name": "Nature's Wrath",
   "kind": "martial",
   "subclass": "ancients",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Призрачные лозы хватают существо в 3 м (спасбросок Силы или Ловкости) — «Опутано», пока не вырвется."
+  "desc": "Costs 1 use of Channel Divinity. Spectral vines seize a creature within 10 feet (Strength or Dexterity saving throw); it has the Restrained condition until it breaks free."
 }

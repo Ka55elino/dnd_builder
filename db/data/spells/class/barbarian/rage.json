@@ -1,13 +1,13 @@
 {
   "id": "rage",
-  "name": "Ярость",
+  "name": "Rage",
   "kind": "class",
   "level": 1,
   "classes": [
     "barbarian"
   ],
   "action": "bonus",
-  "desc": "Бонусным действием входите в ярость на 10 минут: сопротивление дроб./кол./руб. урону, преимущество на проверки и спасброски Силы, и бонус к урону ближней атакой Силой — +2 (ур. 1–8), +3 (ур. 9–15), +4 (ур. 16+).",
+  "desc": "As a Bonus Action, you enter a Rage for 10 minutes: Resistance to Bludgeoning, Piercing, and Slashing damage, Advantage on Strength checks and Strength saving throws, and a bonus to damage with Strength-based melee attacks: +2 (levels 1–8), +3 (levels 9–15), +4 (levels 16+).",
   "uses": {
     "count": 2,
     "per": "longRest",

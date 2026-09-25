@@ -1,8 +1,8 @@
 <script>
     /**
-     * Происхождение (предыстория 2024) на вкладке «Атрибуты».
-     * Выбор предыстории → её навыки, инструменты, черта происхождения
-     * и бонус к характеристикам: +2/+1 или +1/+1/+1 (из трёх её характеристик).
+     * Origin (2024 background) on the "Abilities" tab.
+     * Choosing a background → its skills, tools, Origin feat
+     * and ability score bonus: +2/+1 or +1/+1/+1 (from its three abilities).
      */
     import { onMount } from "svelte";
     import { loadRefs } from "../../data/refs.js";
@@ -32,10 +32,10 @@
 </script>
 
 <section class="origin">
-    <h3>Происхождение</h3>
+    <h3>Origin</h3>
 
     {#if error}
-        <p class="error">Не удалось загрузить предыстории: {error}</p>
+        <p class="error">Failed to load backgrounds: {error}</p>
     {:else}
         <div class="bg-list">
             {#each backgrounds as b (b.id)}
@@ -53,10 +53,10 @@
         {#if bg}
             <div class="details">
                 <div class="info">
-                    <span>Навыки: <b>{(bg.data?.skills ?? []).map(skillName).join(", ")}</b></span>
-                    {#if bg.data?.tool}<span>Инструменты: <b>{bg.data.tool}</b></span>{/if}
+                    <span>Skills: <b>{(bg.data?.skills ?? []).map(skillName).join(", ")}</b></span>
+                    {#if bg.data?.tool}<span>Tools: <b>{bg.data.tool}</b></span>{/if}
                     {#if feat}
-                        <span class="feat">Черта: <b>{feat.name}</b> — {feat.desc}</span>
+                        <span class="feat">Feat: <b>{feat.name}</b> — {feat.desc}</span>
                     {/if}
                 </div>
 

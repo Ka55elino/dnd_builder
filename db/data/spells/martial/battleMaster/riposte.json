@@ -1,10 +1,10 @@
 {
   "id": "riposte",
-  "name": "Ответный удар",
+  "name": "Riposte",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Когда враг промахивается по вам в ближнем бою — реакцией атакуете его с доп. уроном = кость.",
+  "desc": "When an enemy misses you with a melee attack, you use your Reaction to attack it, with extra damage equal to the die.",
   "action": "reaction",
   "pool": "maneuver"
 }

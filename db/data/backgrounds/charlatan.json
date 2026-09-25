@@ -1,6 +1,6 @@
 {
   "id": "charlatan",
-  "name": "Шарлатан",
+  "name": "Charlatan",
   "abilities": {
     "options": [
       "dex",
@@ -13,5 +13,5 @@
     "deception",
     "sleight"
   ],
-  "tool": "Набор для подделок"
+  "tool": "Forgery Kit"
 }

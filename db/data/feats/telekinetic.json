@@ -1,6 +1,6 @@
 {
   "id": "telekinetic",
-  "name": "Телекинетик",
+  "name": "Telekinetic",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,7 +8,7 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; Волшебная рука бонусным действием, толчок разумом.",
+  "desc": "+1 Int, Wis, or Cha; Mage Hand as a Bonus Action, telekinetic shove.",
   "spells": {
     "fixed": [
       "mageHand"

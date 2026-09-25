@@ -1,12 +1,12 @@
 {
   "id": "beguilingArrow",
-  "name": "Чарующая стрела",
+  "name": "Beguiling Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "+2d6 урона психической энергией; цель совершает спасбросок Мудрости или очарована одним из ваших союзников в 9 м до начала вашего следующего хода.",
+  "desc": "+2d6 Psychic damage; the target must succeed on a Wisdom saving throw or have the Charmed condition from one of your allies within 30 feet until the start of your next turn.",
   "damage": {
     "dice": "2d6",
     "type": "psychic",

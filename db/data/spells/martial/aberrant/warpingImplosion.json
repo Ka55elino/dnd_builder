@@ -1,11 +1,11 @@
 {
   "id": "warpingImplosion",
-  "name": "Искажающий взрыв",
+  "name": "Warping Implosion",
   "kind": "martial",
   "subclass": "aberrant",
   "level": 18,
   "action": "action",
-  "desc": "Стоимость 5 очков чародейства. Действием телепортируетесь до 36 м; каждое существо в 9 м от точки отбытия — спасбросок Силы или притягивается и получает 3d10 силового урона.",
+  "desc": "Costs 5 Sorcery Points. As an action, you teleport up to 120 feet; each creature within 30 feet of the point you left must succeed on a Strength saving throw or be pulled and take 3d10 Force damage.",
   "uses": {
     "count": 1,
     "per": "longRest"

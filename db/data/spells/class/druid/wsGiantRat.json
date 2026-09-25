@@ -1,13 +1,13 @@
 {
   "id": "wsGiantRat",
-  "name": "Форма: Гигантская крыса",
+  "name": "Form: Giant Rat",
   "kind": "class",
   "level": 2,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1/8. Хиты 7, КЗ 12, скорость 9 м. Стайная тактика (преимущество, если союзник рядом с целью).",
+  "desc": "CR 1/8. HP 7, AC 12, Speed 30 ft. Pack Tactics (Advantage if an ally is next to the target).",
   "damage": {
     "dice": "1d4",
     "type": "piercing"

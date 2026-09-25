@@ -1,33 +1,33 @@
 {
   "id": "land",
-  "name": "Круг земли",
+  "name": "Circle of the Land",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "druid",
   "features": [
     {
       "level": 3,
-      "name": "Заклинания круга",
-      "desc": "Выбираете тип местности (засушливая, полярная, умеренная, тропическая) — связанные заклинания всегда подготовлены и не считаются в лимит."
+      "name": "Circle Spells",
+      "desc": "You choose a land type (arid, polar, temperate, or tropical) — its associated spells are always prepared and don't count against your limit."
     },
     {
       "level": 3,
-      "name": "Помощь земли",
-      "desc": "Бонусным действием тратите применение Дикого облика: существо в 18 м лечит или наносит 2d6 некротикой (растёт с уровнем)."
+      "name": "Land's Aid",
+      "desc": "As a Bonus Action, you expend a use of Wild Shape: a creature within 60 feet regains Hit Points or takes 2d6 Necrotic damage (increases with level)."
     },
     {
       "level": 6,
-      "name": "Природное восстановление",
-      "desc": "На коротком отдыхе восстанавливаете ячейки заклинаний с суммарным уровнем до половины вашего уровня друида."
+      "name": "Natural Recovery",
+      "desc": "During a Short Rest, you recover expended spell slots with a combined level of up to half your Druid level."
     },
     {
       "level": 10,
-      "name": "Защита природы",
-      "desc": "Иммунитет к яду и болезням; сопротивление выбранному стихийному урону."
+      "name": "Nature's Ward",
+      "desc": "Immunity to poison and disease; Resistance to one elemental damage type of your choice."
     },
     {
       "level": 14,
-      "name": "Убежище природы",
-      "desc": "Бонусным действием создаёте зону, куда враги не могут войти без спасброска Мудрости."
+      "name": "Nature's Sanctuary",
+      "desc": "As a Bonus Action, you create an area that enemies can't enter without succeeding on a Wisdom saving throw."
     }
   ],
   "domainSpells": {

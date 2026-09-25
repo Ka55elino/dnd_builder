@@ -1,12 +1,12 @@
 {
   "id": "sneakAttack",
-  "name": "Скрытая атака",
+  "name": "Sneak Attack",
   "kind": "class",
   "level": 1,
   "classes": [
     "rogue"
   ],
-  "desc": "Раз за ход добавляете доп. урон к одной атаке фехтовальным/дальнобойным оружием (нужно преимущество на атаку или союзник в 1,5 м от цели, и у вас нет помехи). Число костей растёт с уровнем плута.",
+  "desc": "Once per turn, you deal extra damage with one attack using a Finesse or Ranged weapon (you need Advantage on the attack roll or an ally within 5 feet of the target, and you must not have Disadvantage). The number of dice increases with your Rogue level.",
   "damage": {
     "dice": "1d6",
     "scaling": "sneak"

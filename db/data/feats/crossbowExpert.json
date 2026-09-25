@@ -1,10 +1,10 @@
 {
   "id": "crossbowExpert",
-  "name": "Знаток арбалета",
+  "name": "Crossbow Expert",
   "category": "general",
   "level": 4,
   "asi": [
     "dex"
   ],
-  "desc": "+1 Ловкость; игнор перезарядки, стрельба вблизи без помех."
+  "desc": "+1 Dexterity; ignore the Loading property, no Disadvantage on ranged attacks at close range."
 }

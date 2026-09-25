@@ -1,11 +1,11 @@
 {
   "id": "mobileFlourish",
-  "name": "Росчерк: Подвижный",
+  "name": "Mobile Flourish",
   "kind": "martial",
   "subclass": "swords",
   "level": 3,
   "action": "free",
-  "desc": "Тратя Кость вдохновения при попадании: доп. урон = кости; отталкиваете цель на выпавшее + 1,5 м и можете переместиться к ней без провокации.",
+  "desc": "Expending a Bardic Inspiration die on a hit: extra damage equal to the die; you push the target a number of feet equal to the roll + 5 feet and can move toward it without provoking Opportunity Attacks.",
   "damage": {
     "dice": "1d6",
     "type": "slashing"

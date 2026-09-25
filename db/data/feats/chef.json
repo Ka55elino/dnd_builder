@@ -1,11 +1,11 @@
 {
   "id": "chef",
-  "name": "Повар",
+  "name": "Chef",
   "category": "general",
   "level": 4,
   "asi": [
     "con",
     "wis"
   ],
-  "desc": "+1 Тел или Мдр; готовите еду, дающую хиты и врем. хиты."
+  "desc": "+1 Constitution or Wisdom; cook food that grants Hit Points and Temporary Hit Points."
 }

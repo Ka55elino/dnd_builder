@@ -1,6 +1,6 @@
 {
   "id": "silence",
-  "name": "Тишина",
+  "name": "Silence",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,12 +11,12 @@
     "ranger",
     "wizard"
   ],
-  "desc": "В сфере радиусом 6 м не возникает звуков; существа глухи внутри, невозможны заклинания с вербальным компонентом. Концентрация до 10 минут.",
+  "desc": "No sound can be created within a 20-foot-radius Sphere; creatures inside are Deafened, and spells with a Verbal component can't be cast there. Concentration, up to 10 minutes.",
   "casting": {
-    "time": "1 действие",
-    "range": "36 м",
-    "components": "В, С",
-    "duration": "Конц., 10 мин",
+    "time": "1 action",
+    "range": "120 feet",
+    "components": "V, S",
+    "duration": "Conc., 10 min",
     "concentration": true
   }
 }

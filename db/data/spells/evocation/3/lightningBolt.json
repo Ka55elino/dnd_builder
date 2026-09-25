@@ -1,6 +1,6 @@
 {
   "id": "lightningBolt",
-  "name": "Молния",
+  "name": "Lightning Bolt",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Линия молнии 30 м: спасбросок Ловкости за половину.",
+  "desc": "A 100-foot Line of lightning: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "8d6",
     "type": "lightning"

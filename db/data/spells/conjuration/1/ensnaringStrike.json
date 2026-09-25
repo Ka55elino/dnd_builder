@@ -1,6 +1,6 @@
 {
   "id": "ensnaringStrike",
-  "name": "Опутывающий удар",
+  "name": "Ensnaring Strike",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,12 +8,12 @@
   "classes": [
     "ranger"
   ],
-  "desc": "Следующее попадание оружием оплетает цель лозой: спасбросок Силы или «Опутана». Опутанная получает 1d6 колющего урона в начале своих ходов. Концентрация до 1 минуты.",
+  "desc": "Your next weapon hit entangles the target in vines: Strength saving throw or Restrained. While Restrained, it takes 1d6 Piercing damage at the start of each of its turns. Concentration, up to 1 minute.",
   "casting": {
-    "time": "1 бонусное действие",
-    "range": "На себя",
-    "components": "В",
-    "duration": "Конц., 1 мин",
+    "time": "1 bonus action",
+    "range": "Self",
+    "components": "V",
+    "duration": "Conc., 1 min",
     "concentration": true
   },
   "damage": {

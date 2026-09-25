@@ -1,8 +1,10 @@
 {
   "id": "csObscure",
-  "name": "Хитрый удар: Ослепление",
+  "name": "Cunning Strike: Obscure",
   "kind": "class",
   "level": 14,
-  "classes": ["rogue"],
-  "desc": "Стоимость 3 кости Скрытой атаки. Спасбросок Ловкости; при провале цель получает «Ослепление» до конца своего следующего хода."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 3 Sneak Attack dice. Dexterity saving throw; on a failed save, the target has the Blinded condition until the end of its next turn."
 }

@@ -1,12 +1,12 @@
 {
   "id": "sorceryPoints",
-  "name": "Очки чародейства",
+  "name": "Sorcery Points",
   "kind": "class",
   "level": 2,
   "classes": [
     "sorcerer"
   ],
-  "desc": "Пул очков чародейства, равный вашему уровню чародея. Тратятся на метамагию и превращение в ячейки; восстанавливаются на длинном отдыхе (часть — на коротком через Чародейское восстановление).",
+  "desc": "A pool of Sorcery Points equal to your Sorcerer level. Spent on Metamagic and on creating spell slots; regained on a Long Rest (some on a Short Rest through Sorcerous Restoration).",
   "uses": {
     "count": 2,
     "per": "longRest",

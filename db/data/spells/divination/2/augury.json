@@ -1,6 +1,6 @@
 {
   "id": "augury",
-  "name": "Предзнаменование",
+  "name": "Augury",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Узнаёте, к добру или худу приведёт действие в ближайшие 30 минут."
+  "desc": "You learn whether an action will lead to weal or woe within the next 30 minutes."
 }

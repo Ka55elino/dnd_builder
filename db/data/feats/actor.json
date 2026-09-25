@@ -1,10 +1,10 @@
 {
   "id": "actor",
-  "name": "Актёр",
+  "name": "Actor",
   "category": "general",
   "level": 4,
   "asi": [
     "cha"
   ],
-  "desc": "+1 Харизма; преимущество на обман/выступление при подражании, копирование речи."
+  "desc": "+1 Charisma; Advantage on Deception and Performance checks when mimicking, copy speech."
 }

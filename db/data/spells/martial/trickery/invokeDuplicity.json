@@ -1,9 +1,9 @@
 {
   "id": "invokeDuplicity",
-  "name": "Призыв двуличности",
+  "name": "Invoke Duplicity",
   "kind": "martial",
   "subclass": "trickery",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Создаёте иллюзорную копию себя на 1 минуту: сквозь неё творите заклинания и получаете преимущество на атаки по существам в 1,5 м от неё."
+  "desc": "Costs 1 use of Channel Divinity. You create an illusory duplicate of yourself for 1 minute: you can cast spells through it and have Advantage on attack rolls against creatures within 5 feet of it."
 }

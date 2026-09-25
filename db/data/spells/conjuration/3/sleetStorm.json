@@ -1,6 +1,6 @@
 {
   "id": "sleetStorm",
-  "name": "Буря мокрого снега",
+  "name": "Sleet Storm",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Область льда и снега: труднопроходима, гасит огонь, сбивает концентрацию. Концентрация."
+  "desc": "An area of ice and snow: Difficult Terrain, extinguishes fires, and breaks Concentration. Concentration."
 }

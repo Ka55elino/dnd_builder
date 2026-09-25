@@ -10,47 +10,47 @@ import (
 	"strings"
 )
 
-// Справочные данные (JSON), вшитые в бинарник.
-// Структура: db/data/<таблица>/... — любые вложенные папки, файлы *.json.
+// Reference data (JSON) embedded into the binary.
+// Layout: db/data/<table>/... with any nested folders, *.json files.
 //
 //go:embed all:db/data
 var dataFS embed.FS
 
-// seeder заполняет одну таблицу из папки с JSON, если таблица пустая.
+// seeder fills one table from a folder of JSON files if the table is empty.
 type seeder struct {
-	table string                             // для логов
-	dir   string                             // папка в dataFS
-	match func(path string) bool             // какие файлы брать (nil — все *.json)
-	count string                             // имя запроса COUNT(*)
-	row   func(tx *sql.Tx, raw []byte) error // вставка одного файла
-	dev   bool                               // только в dev-режиме (wails dev)
+	table string                             // for logging
+	dir   string                             // folder in dataFS
+	match func(path string) bool             // which files to take (nil: all *.json)
+	count string                             // name of the COUNT(*) query
+	row   func(tx *sql.Tx, raw []byte) error // inserts one file
+	dev   bool                               // dev mode only (wails dev)
 }
 
-// Порядок важен: classes раньше subclasses (внешний ключ class_id).
+// Order matters: classes before subclasses (class_id foreign key).
 var seeders = []seeder{
 	{table: "races", dir: "db/data/races", count: "CountRaces", row: insertRaceJSON},
 	{table: "classes", dir: "db/data/classes", match: notInSubclasses, count: "CountClasses", row: insertClassJSON},
 	{table: "subclasses", dir: "db/data/classes", match: inSubclasses, count: "CountSubclasses", row: insertSubclassJSON},
 
-	// снаряжение: items раньше packs (pack_items ссылается на оба)
+	// equipment: items before packs (pack_items references both)
 	{table: "weapons", dir: "db/data/weapons", count: "CountWeapons", row: insertWeaponJSON},
 	{table: "armor", dir: "db/data/armor", count: "CountArmor", row: insertArmorJSON},
 	{table: "items", dir: "db/data/items", count: "CountItems", row: insertItemJSON},
 	{table: "packs", dir: "db/data/packs", count: "CountPacks", row: insertPackJSON},
 
-	// правила: предыстории, черты, заклинания и способности
+	// rules: backgrounds, feats, spells and abilities
 	{table: "backgrounds", dir: "db/data/backgrounds", count: "CountBackgrounds", row: insertBackgroundJSON},
 	{table: "feats", dir: "db/data/feats", count: "CountFeats", row: insertFeatJSON},
 	{table: "spells", dir: "db/data/spells", count: "CountSpells", row: insertSpellJSON},
 
-	// примеры персонажей — только в dev-режиме и только если персонажей ещё нет
+	// sample characters: dev mode only, and only if there are no characters yet
 	{table: "characters", dir: "db/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
 }
 
 func inSubclasses(path string) bool    { return strings.Contains(path, "/subclasses/") }
 func notInSubclasses(path string) bool { return !inSubclasses(path) }
 
-// seedAll вызывается при старте приложения.
+// seedAll is called on application startup.
 func seedAll(db *sql.DB) error {
 	for _, s := range seeders {
 		if s.dev && !devMode {
@@ -69,7 +69,7 @@ func (s seeder) run(db *sql.DB) error {
 		return err
 	}
 	if n > 0 {
-		return nil // таблица уже заполнена — ничего не трогаем
+		return nil // table is already populated; leave it alone
 	}
 
 	tx, err := db.Begin()
@@ -101,7 +101,7 @@ func (s seeder) run(db *sql.DB) error {
 	return tx.Commit()
 }
 
-// insertRaceJSON — раса или подраса. У подрасы есть поле "race" (id родителя).
+// insertRaceJSON inserts a race or subrace. A subrace has a "race" field (the parent id).
 func insertRaceJSON(tx *sql.Tx, raw []byte) error {
 	var head struct {
 		ID    string  `json:"id"`
@@ -116,7 +116,7 @@ func insertRaceJSON(tx *sql.Tx, raw []byte) error {
 		return fmt.Errorf("missing id or name")
 	}
 
-	// image хранится в отдельной колонке — из data_json убираем.
+	// image is stored in its own column, so remove it from data_json.
 	data, err := withoutKeys(raw, "image")
 	if err != nil {
 		return err
@@ -126,7 +126,7 @@ func insertRaceJSON(tx *sql.Tx, raw []byte) error {
 	return err
 }
 
-// insertClassJSON — класс: скалярные поля в колонки, остальное в data_json.
+// insertClassJSON inserts a class: scalar fields go into columns, the rest into data_json.
 func insertClassJSON(tx *sql.Tx, raw []byte) error {
 	var head struct {
 		ID            string  `json:"id"`
@@ -153,7 +153,7 @@ func insertClassJSON(tx *sql.Tx, raw []byte) error {
 	return err
 }
 
-// insertSubclassJSON — подкласс. Поле "class" — id родительского класса.
+// insertSubclassJSON inserts a subclass. The "class" field is the parent class id.
 func insertSubclassJSON(tx *sql.Tx, raw []byte) error {
 	var head struct {
 		ID    string  `json:"id"`
@@ -177,9 +177,9 @@ func insertSubclassJSON(tx *sql.Tx, raw []byte) error {
 	return err
 }
 
-// ---------- снаряжение ----------
+// ---------- equipment ----------
 
-// Общие поля всех справочников снаряжения.
+// Common fields of all equipment reference tables.
 type equipHead struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
@@ -259,7 +259,7 @@ func insertItemJSON(tx *sql.Tx, raw []byte) error {
 	return err
 }
 
-// insertPackJSON — набор + его строки в pack_items.
+// insertPackJSON inserts a pack and its rows in pack_items.
 // JSON: "items": [{ "id": "rope", "qty": 1 }, ...]
 func insertPackJSON(tx *sql.Tx, raw []byte) error {
 	var head struct {
@@ -297,7 +297,7 @@ func insertPackJSON(tx *sql.Tx, raw []byte) error {
 	return nil
 }
 
-// withoutKeys возвращает компактный JSON объекта без указанных ключей.
+// withoutKeys returns the object's compact JSON without the given keys.
 func withoutKeys(raw []byte, keys ...string) (string, error) {
 	var obj map[string]json.RawMessage
 	if err := json.Unmarshal(raw, &obj); err != nil {

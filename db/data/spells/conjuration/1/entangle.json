@@ -1,6 +1,6 @@
 {
   "id": "entangle",
-  "name": "Опутывание",
+  "name": "Entangle",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,5 +8,5 @@
   "classes": [
     "druid"
   ],
-  "desc": "Область 6 м зарастает: существа — спасбросок Силы или «Опутаны». Концентрация."
+  "desc": "A 20-foot area becomes overgrown: creatures make a Strength saving throw or are Restrained. Concentration."
 }

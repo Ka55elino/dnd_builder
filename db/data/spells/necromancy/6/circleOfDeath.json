@@ -1,6 +1,6 @@
 {
   "id": "circleOfDeath",
-  "name": "Круг смерти",
+  "name": "Circle of Death",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -10,7 +10,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Волна отрицательной энергии в сфере 18 м: спасбросок Тел. за половину.",
+  "desc": "A wave of negative energy in a 60-foot Sphere: Constitution saving throw for half damage.",
   "damage": {
     "dice": "8d6",
     "type": "necrotic"

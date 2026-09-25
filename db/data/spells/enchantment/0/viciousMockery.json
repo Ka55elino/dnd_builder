@@ -1,6 +1,6 @@
 {
   "id": "viciousMockery",
-  "name": "Едкая насмешка",
+  "name": "Vicious Mockery",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "bard"
   ],
-  "desc": "Осыпаете существо колкостями (спасбросок Мудрости): урон психикой и помеха на его следующую атаку.",
+  "desc": "You unleash a string of insults at a creature (Wisdom saving throw): Psychic damage and Disadvantage on its next attack roll.",
   "damage": {
     "dice": "1d4",
     "type": "psychic",

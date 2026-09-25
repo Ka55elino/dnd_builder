@@ -1,43 +1,43 @@
 {
   "id": "cavalier",
-  "name": "Кавалерист",
+  "name": "Cavalier",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "warrior",
   "features": [
     {
       "level": 3,
-      "name": "Дополнительные владения",
-      "desc": "Получаете владение одним навыком (Выступление, История, Проницательность, Убеждение или Уход за животными) либо одним языком на выбор."
+      "name": "Bonus Proficiencies",
+      "desc": "You gain proficiency in one skill (Performance, History, Insight, Persuasion, or Animal Handling) or one language of your choice."
     },
     {
       "level": 3,
-      "name": "Непоколебимая метка",
-      "desc": "Попав рукопашной атакой, помечаете цель: рядом с вами она атакует других с помехой, а вы можете бонусным действием совершить по ней особую атаку с преимуществом и доп. уроном (число раз = мод. Силы)."
+      "name": "Unwavering Mark",
+      "desc": "When you hit with a melee attack, you mark the target: while it is near you, it has Disadvantage on attacks against others, and you can make a special attack against it as a Bonus Action with Advantage and extra damage (a number of times equal to your Strength modifier)."
     },
     {
       "level": 3,
-      "name": "Рождённый в седле",
-      "desc": "С преимуществом совершаете спасброски против падения со скакуна; при падении в 3 м приземляетесь на ноги; садиться и спешиваться стоит лишь 5 футов передвижения."
+      "name": "Born to the Saddle",
+      "desc": "You have Advantage on saving throws to avoid falling off your mount; if you fall 10 feet or less, you land on your feet; mounting and dismounting costs only 5 feet of movement."
     },
     {
       "level": 7,
-      "name": "Защитный манёвр",
-      "desc": "Реакцией добавляете 1к8 к КД себе или существу в 1,5 м против атаки; при попадании цель получает сопротивление урону от неё (число раз = мод. Телосложения)."
+      "name": "Warding Maneuver",
+      "desc": "As a Reaction, you add 1d8 to the AC of yourself or a creature within 5 feet against an attack; if the attack hits, the target has Resistance to its damage (a number of times equal to your Constitution modifier)."
     },
     {
       "level": 10,
-      "name": "Держать строй",
-      "desc": "Совершаете провоцированную атаку по врагу, сдвинувшемуся на 1,5 м и более в пределах досягаемости; при попадании его скорость становится 0 до конца хода."
+      "name": "Hold the Line",
+      "desc": "You make an Opportunity Attack against an enemy that moves 5 feet or more while within your reach; on a hit, its Speed becomes 0 until the end of the turn."
     },
     {
       "level": 15,
-      "name": "Свирепый натиск",
-      "desc": "Пройдя перед атакой не менее 3 м по прямой, при попадании заставляете цель совершить спасбросок Силы или быть сбитой с ног (раз за ход)."
+      "name": "Ferocious Charger",
+      "desc": "If you move at least 10 feet in a straight line before an attack, on a hit you force the target to make a Strength saving throw or have the Prone condition (once per turn)."
     },
     {
       "level": 18,
-      "name": "Бдительный защитник",
-      "desc": "Получаете особую реакцию для провоцированной атаки, доступную раз в ход каждого существа кроме вас; не сочетается с обычной реакцией в тот же ход."
+      "name": "Vigilant Defender",
+      "desc": "You gain a special Reaction for Opportunity Attacks, usable once on each creature's turn other than yours; it can't be combined with your normal Reaction on the same turn."
     }
   ]
 }

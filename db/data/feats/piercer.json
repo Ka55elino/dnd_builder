@@ -1,11 +1,11 @@
 {
   "id": "piercer",
-  "name": "Пронзатель",
+  "name": "Piercer",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; переброс кости колющего урона, доп. кость при крите."
+  "desc": "+1 Strength or Dexterity; reroll a Piercing damage die, an extra die on a Critical Hit."
 }

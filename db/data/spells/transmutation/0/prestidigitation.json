@@ -1,6 +1,6 @@
 {
   "id": "prestidigitation",
-  "name": "Фокусы",
+  "name": "Prestidigitation",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,11 +11,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Мелкий магический трюк: безобидный сенсорный эффект, зажечь/потушить огонёк, почистить или испачкать предмет, охладить/согреть, создать метку или безделушку.",
+  "desc": "A minor magical trick: a harmless sensory effect, light or snuff out a small flame, clean or soil an object, chill or warm it, create a mark or a trinket.",
   "casting": {
-    "time": "1 действие",
-    "range": "3 м",
-    "components": "В, С",
-    "duration": "до 1 часа"
+    "time": "1 action",
+    "range": "10 feet",
+    "components": "V, S",
+    "duration": "up to 1 hour"
   }
 }

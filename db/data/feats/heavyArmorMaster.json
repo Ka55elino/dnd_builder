@@ -1,11 +1,11 @@
 {
   "id": "heavyArmorMaster",
-  "name": "Мастер тяжёлых доспехов",
+  "name": "Heavy Armor Master",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "con"
   ],
-  "desc": "+1 Сила или Тел; снижение дроб./кол./руб. урона."
+  "desc": "+1 Strength or Constitution; reduce Bludgeoning, Piercing, and Slashing damage."
 }

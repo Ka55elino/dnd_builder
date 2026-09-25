@@ -1,6 +1,6 @@
 {
   "id": "massHeal",
-  "name": "Массовое исцеление",
+  "name": "Mass Heal",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Поток силы восстанавливает до 700 хитов, распределённых между существами в 18 м; снимает недуги."
+  "desc": "A flood of energy restores up to 700 Hit Points divided among creatures within 60 feet and removes ailments."
 }

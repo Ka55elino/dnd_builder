@@ -5,7 +5,7 @@
 
     let { onCreate, onOpen, onBack } = $props();
 
-    // сохранённые персонажи из БД
+    // saved characters from the DB
     let characters = $state([]);
 
     onMount(async () => {
@@ -19,8 +19,8 @@
 
 <main class="start">
     <header class="top">
-        {#if onBack}<button class="ghost" onclick={onBack}>← Меню</button>{/if}
-        <h1>Персонажи</h1>
+        {#if onBack}<button class="ghost" onclick={onBack}>← Menu</button>{/if}
+        <h1>Characters</h1>
     </header>
     <CharacterGrid {characters} {onCreate} {onOpen} />
 </main>

@@ -9,17 +9,17 @@ import (
 	"fmt"
 )
 
-// Пользовательские записи справочников: предметы, доспехи и оружие
-// (страница «Предметы») и заклинания (страница «Заклинания»).
-// Хранятся в тех же таблицах, что и справочные, с is_custom = 1 и полем
-// "custom": true в data (чтобы фронтенд их отличал).
-// Справочные записи (is_custom = 0) этими методами не меняются и не удаляются.
+// User-defined reference records: items, armor and weapons
+// (the "Items" page) and spells (the "Spells" page).
+// They are stored in the same tables as the built-in records, with is_custom = 1
+// and "custom": true in data (so the frontend can tell them apart).
+// Built-in records (is_custom = 0) are never modified or deleted by these methods.
 
 type customKind struct {
 	table     string
-	insert    func(*sql.Tx, []byte) error // та же вставка из JSON, что у сидов
-	equipment bool                        // снаряжение: isDefault = false (не в стартовом выборе билдера)
-	children  []string                    // связанные таблицы (spell_id) — чистим при замене/удалении
+	insert    func(*sql.Tx, []byte) error // the same JSON insert as used by the seeders
+	equipment bool                        // equipment: isDefault = false (not in the builder's starting choices)
+	children  []string                    // related tables (spell_id), cleared on replace/delete
 }
 
 var customKinds = map[string]customKind{
@@ -29,7 +29,7 @@ var customKinds = map[string]customKind{
 	"spell":  {table: "spells", insert: insertSpellJSON, children: []string{"spell_classes"}},
 }
 
-// deleteChildren — строки связанных таблиц (напр. spell_classes) для записи.
+// deleteChildren deletes a record's rows in related tables (e.g. spell_classes).
 func deleteChildren(tx *sql.Tx, k customKind, id string) error {
 	for _, t := range k.children {
 		if _, err := tx.Exec(fmt.Sprintf("DELETE FROM %s WHERE spell_id = ?", t), id); err != nil {
@@ -39,7 +39,7 @@ func deleteChildren(tx *sql.Tx, k customKind, id string) error {
 	return nil
 }
 
-var errNotCustom = errors.New("это справочная запись — её нельзя изменить или удалить")
+var errNotCustom = errors.New("this is a built-in record and cannot be modified or deleted")
 
 func newCustomID() string {
 	b := make([]byte, 6)
@@ -47,7 +47,7 @@ func newCustomID() string {
 	return "custom_" + hex.EncodeToString(b)
 }
 
-// isCustomRow: exists — есть ли запись с таким id; custom — пользовательская ли она.
+// isCustomRow reports whether a record with this id exists and whether it is user-defined.
 func isCustomRow(tx *sql.Tx, table, id string) (exists, custom bool, err error) {
 	var c int
 	err = tx.QueryRow(fmt.Sprintf("SELECT is_custom FROM %s WHERE id = ?", table), id).Scan(&c)
@@ -57,11 +57,11 @@ func isCustomRow(tx *sql.Tx, table, id string) (exists, custom bool, err error) 
 	return err == nil, c == 1, err
 }
 
-// saveCustomRecord создаёт или обновляет пользовательскую запись. Возвращает её id.
+// saveCustomRecord creates or updates a user-defined record and returns its id.
 func saveCustomRecord(db *sql.DB, kind, raw string) (string, error) {
 	k, ok := customKinds[kind]
 	if !ok {
-		return "", fmt.Errorf("неизвестный вид записи: %q", kind)
+		return "", fmt.Errorf("unknown record kind: %q", kind)
 	}
 
 	var obj map[string]any
@@ -75,7 +75,7 @@ func saveCustomRecord(db *sql.DB, kind, raw string) (string, error) {
 	obj["id"] = id
 	obj["custom"] = true
 	if k.equipment {
-		obj["isDefault"] = false // своё снаряжение не попадает в стартовый выбор билдера
+		obj["isDefault"] = false // custom equipment is not included in the builder's starting choices
 	}
 	b, err := json.Marshal(obj)
 	if err != nil {
@@ -97,7 +97,7 @@ func saveCustomRecord(db *sql.DB, kind, raw string) (string, error) {
 	}
 	var created any = nil
 	if exists {
-		// сохраняем дату создания при обновлении
+		// keep the creation date on update
 		var c int64
 		if err := tx.QueryRow(fmt.Sprintf("SELECT created_at FROM %s WHERE id = ?", k.table), id).Scan(&c); err != nil {
 			return "", err
@@ -121,11 +121,11 @@ func saveCustomRecord(db *sql.DB, kind, raw string) (string, error) {
 	return id, tx.Commit()
 }
 
-// deleteCustomRecord удаляет пользовательскую запись (и её связанные строки).
+// deleteCustomRecord deletes a user-defined record (and its related rows).
 func deleteCustomRecord(db *sql.DB, kind, id string) error {
 	k, ok := customKinds[kind]
 	if !ok {
-		return fmt.Errorf("неизвестный вид записи: %q", kind)
+		return fmt.Errorf("unknown record kind: %q", kind)
 	}
 	tx, err := db.Begin()
 	if err != nil {

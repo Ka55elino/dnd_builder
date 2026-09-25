@@ -1,6 +1,6 @@
 {
   "id": "blight",
-  "name": "Гниль",
+  "name": "Blight",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,7 +12,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Иссушение существа: спасбросок Тел., сильный некротический урон.",
+  "desc": "You wither a creature: Constitution saving throw, heavy Necrotic damage.",
   "damage": {
     "dice": "8d8",
     "type": "necrotic"

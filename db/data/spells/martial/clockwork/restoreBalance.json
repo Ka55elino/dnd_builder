@@ -1,11 +1,11 @@
 {
   "id": "restoreBalance",
-  "name": "Восстановление равновесия",
+  "name": "Restore Balance",
   "kind": "martial",
   "subclass": "clockwork",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией, когда существо в 18 м собирается бросить d20 с преимуществом или помехой, отменяете преимущество/помеху для этого броска. Число раз = бонусу мастерства (на длинный отдых).",
+  "desc": "As a Reaction, when a creature within 60 feet is about to roll a d20 with Advantage or Disadvantage, you cancel the Advantage or Disadvantage for that roll. Number of uses = Proficiency Bonus (per Long Rest).",
   "uses": {
     "count": 2,
     "per": "longRest",

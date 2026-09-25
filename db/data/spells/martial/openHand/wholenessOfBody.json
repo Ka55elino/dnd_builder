@@ -1,10 +1,35 @@
 {
   "id": "wholenessOfBody",
-  "name": "Целостность тела",
+  "name": "Wholeness of Body",
   "kind": "martial",
   "subclass": "openHand",
   "level": 6,
   "action": "bonus",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Без траты ци. Бонусным действием лечите себя на 3 × уровень монаха хитов. Число применений равно бонусу мастерства (на длинный отдых)."
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "No Focus Points needed. As a Bonus Action, you heal yourself for 3 × your Monk level Hit Points. Number of uses equals your Proficiency Bonus (per Long Rest)."
 }

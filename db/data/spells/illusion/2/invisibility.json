@@ -1,6 +1,6 @@
 {
   "id": "invisibility",
-  "name": "Невидимость",
+  "name": "Invisibility",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо становится невидимым, пока не атакует или не сотворит заклинание. Концентрация до 1 часа."
+  "desc": "A creature becomes Invisible until it attacks or casts a spell. Concentration, up to 1 hour."
 }

@@ -1,11 +1,11 @@
 {
   "id": "clairvoyantCombatant",
-  "name": "Ясновидящий боец",
+  "name": "Clairvoyant Combatant",
   "kind": "martial",
   "subclass": "greatOldOne",
   "level": 6,
   "action": "bonus",
-  "desc": "Бонусным действием устанавливаете связь с существом в 9 м (спасбросок Мудрости): пока связь активна, оно атакует вас с помехой, а вы его — с преимуществом.",
+  "desc": "As a Bonus Action, you forge a bond with a creature within 30 feet (Wisdom saving throw): while the bond is active, it has Disadvantage on attack rolls against you, and you have Advantage on attack rolls against it.",
   "uses": {
     "count": 1,
     "per": "longRest",

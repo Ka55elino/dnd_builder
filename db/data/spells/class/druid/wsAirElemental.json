@@ -1,13 +1,13 @@
 {
   "id": "wsAirElemental",
-  "name": "Форма: Воздушный элементаль",
+  "name": "Form: Air Elemental",
   "kind": "class",
   "level": 10,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 5. Хиты 90, КЗ 15, скорость полёт 27 м. ТОЛЬКО Круг луны (Стихийный дикий облик, 10 ур.). Мультиатака 2 удара; форма вихря.",
+  "desc": "CR 5. HP 90, AC 15, Fly Speed 90 ft. Circle of the Moon ONLY (Elemental Wild Shape, level 10). Multiattack: 2 Slams; Whirlwind form.",
   "damage": {
     "dice": "2d8",
     "type": "bludgeoning"

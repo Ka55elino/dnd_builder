@@ -1,9 +1,9 @@
 {
   "id": "dragonWings",
-  "name": "Драконьи крылья",
+  "name": "Dragon Wings",
   "kind": "martial",
   "subclass": "draconic",
   "level": 14,
   "action": "bonus",
-  "desc": "Бонусным действием проявляете крылья на 1 час (пока без доспехов на торсе): получаете скорость полёта, равную удвоенной скорости передвижения."
+  "desc": "As a Bonus Action, you manifest wings for 1 hour (while not wearing armor on your torso): you gain a Fly Speed equal to twice your Speed."
 }

@@ -1,9 +1,12 @@
 {
   "id": "fangsOfFireSnake",
-  "name": "Дисциплина: Клыки огненной змеи",
+  "name": "Discipline: Fangs of the Fire Snake",
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
-  "desc": "Стоимость 1 очко ци. Досягаемость безоружных ударов +3 м в этот ход; при попадании — доп. 1d10 урона огнём.",
-  "damage": { "dice": "1d10", "type": "fire" }
+  "desc": "Costs 1 Focus Point. Your Unarmed Strikes have +10 feet of reach this turn; on a hit, they deal an extra 1d10 Fire damage.",
+  "damage": {
+    "dice": "1d10",
+    "type": "fire"
+  }
 }

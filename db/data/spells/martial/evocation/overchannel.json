@@ -1,11 +1,11 @@
 {
   "id": "overchannel",
-  "name": "Сверхканал",
+  "name": "Overchannel",
   "kind": "martial",
   "subclass": "evocation",
   "level": 14,
   "action": "free",
-  "desc": "Творя заклинание 5 круга и ниже, наносящее урон, считаете все кости урона выпавшими на максимум. Без вреда раз на длинный отдых; далее — растущий некротический урон себе.",
+  "desc": "When you cast a damaging spell of level 5 or lower, you treat all damage dice as rolling their maximum. Harmless once per Long Rest; afterward, you take escalating Necrotic damage.",
   "uses": {
     "count": 1,
     "per": "longRest"

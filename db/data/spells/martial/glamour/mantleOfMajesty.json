@@ -1,9 +1,9 @@
 {
   "id": "mantleOfMajesty",
-  "name": "Мантия величия",
+  "name": "Mantle of Majesty",
   "kind": "martial",
   "subclass": "glamour",
   "level": 6,
   "action": "bonus",
-  "desc": "Бонусным действием на 1 минуту создаёте ауру величия: в каждый свой ход бонусным действием творите «Приказ» без траты ячейки."
+  "desc": "As a Bonus Action, you create an aura of majesty for 1 minute: on each of your turns, you can cast Command as a Bonus Action without expending a spell slot."
 }

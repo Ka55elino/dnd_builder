@@ -1,8 +1,8 @@
 {
   "id": "quiveringPalm",
-  "name": "Трепещущая ладонь",
+  "name": "Quivering Palm",
   "kind": "martial",
   "subclass": "openHand",
   "level": 17,
-  "desc": "Стоимость 4 очка ци. Попав безоружным ударом, запускаете смертельные колебания. Действием прекращаете их: цель проходит спасбросок Телосложения (Сл монаха) или падает до 0 хитов; при успехе получает 10d12 урона силовым полем."
+  "desc": "Costs 4 Focus Points. When you hit with an Unarmed Strike, you set up lethal vibrations. As an action, you end them: the target makes a Constitution saving throw (your Monk DC) or drops to 0 Hit Points; on a success, it takes 10d12 Force damage."
 }

@@ -1,9 +1,9 @@
 {
   "id": "dreadfulAspect",
-  "name": "Ужасающий облик",
+  "name": "Dreadful Aspect",
   "kind": "martial",
   "subclass": "oathbreaker",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Испускаете магию страха: существа на выбор в 9 м — спасбросок Мудрости или испуганы вами на 1 минуту."
+  "desc": "Costs 1 use of Channel Divinity. You exude fearsome magic: creatures of your choice within 30 feet must succeed on a Wisdom saving throw or have the Frightened condition from you for 1 minute."
 }

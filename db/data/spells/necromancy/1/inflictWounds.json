@@ -1,6 +1,6 @@
 {
   "id": "inflictWounds",
-  "name": "Причинение ран",
+  "name": "Inflict Wounds",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Атака заклинанием касанием: сильный некротический урон.",
+  "desc": "Melee spell attack by touch: heavy Necrotic damage.",
   "damage": {
     "dice": "3d10",
     "type": "necrotic"

@@ -1,11 +1,41 @@
 {
   "id": "favoredEnemy",
-  "name": "Метка охотника (Избранный враг)",
+  "name": "Hunter's Mark (Favored Enemy)",
   "kind": "class",
   "level": 1,
-  "classes": ["ranger"],
+  "classes": [
+    "ranger"
+  ],
   "action": "bonus",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "«Метка охотника» всегда подготовлена. Можете сотворить её без траты ячейки число раз, равное бонусу мастерства (на длинный отдых). Помеченная цель получает доп. урон от каждого вашего попадания; кость растёт до d10 на 20 ур.",
-  "damage": { "dice": "1d6", "scaling": "mark" }
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "You always have Hunter's Mark prepared. You can cast it without expending a spell slot a number of times equal to your Proficiency Bonus (per Long Rest). The marked target takes extra damage from each of your hits; the die increases to a d10 at level 20.",
+  "damage": {
+    "dice": "1d6",
+    "scaling": "mark"
+  }
 }

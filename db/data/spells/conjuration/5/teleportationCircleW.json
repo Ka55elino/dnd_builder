@@ -1,6 +1,6 @@
 {
   "id": "teleportationCircleW",
-  "name": "Круг телепортации",
+  "name": "Teleportation Circle",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Рисуете круг-портал к известному постоянному кругу телепортации."
+  "desc": "You draw a portal circle linked to a known permanent teleportation circle."
 }

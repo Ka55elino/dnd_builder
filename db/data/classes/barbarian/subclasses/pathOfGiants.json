@@ -1,28 +1,28 @@
 {
   "id": "pathOfGiants",
-  "name": "Путь гигантов",
+  "name": "Path of the Giant",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "barbarian",
   "features": [
     {
       "level": 3,
-      "name": "Мощь гигантов",
-      "desc": "В ярости растёте (как «Увеличение»): +досягаемость, доп. урон, крушащий бросок предметов/существ."
+      "name": "Giant's Power",
+      "desc": "While raging, you grow (like Enlarge/Reduce): increased reach, extra damage, and a crushing throw of objects or creatures."
     },
     {
       "level": 6,
-      "name": "Стихийный резак",
-      "desc": "Входя в ярость, наделяете оружие ближнего боя одной стихией на выбор: оно наносит доп. 1d6 урона этого типа (кислота/холод/огонь/гром) и получает свойство «Метательное» с дистанцией 6/18 м, возвращаясь к вам после броска. Тип можно менять при каждом входе в ярость."
+      "name": "Elemental Cleaver",
+      "desc": "When you enter a Rage, you imbue your melee weapon with an element of your choice: it deals an extra 1d6 damage of that type (Acid, Cold, Fire, or Thunder) and gains the Thrown property with a range of 20/60 feet, returning to you after being thrown. You can change the type each time you enter a Rage."
     },
     {
       "level": 10,
-      "name": "Могучий толчок",
-      "desc": "Бонусным действием телекинетически толкаете существ вокруг себя."
+      "name": "Mighty Impel",
+      "desc": "As a Bonus Action, you telekinetically push creatures around you."
     },
     {
       "level": 14,
-      "name": "Колосс",
-      "desc": "Становитесь ещё больше; преимущество на спасброски Силы, повышенный доп. урон."
+      "name": "Demiurgic Colossus",
+      "desc": "You become even larger; Advantage on Strength saving throws and increased extra damage."
     }
   ]
 }

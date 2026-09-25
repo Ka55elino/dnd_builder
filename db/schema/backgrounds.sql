@@ -1,8 +1,8 @@
--- Предыстории (справочник).
+-- Backgrounds (reference data).
 CREATE TABLE IF NOT EXISTS backgrounds (
     id         TEXT PRIMARY KEY,                 -- 'wayfarer'
-    name       TEXT NOT NULL,                    -- 'Странник'
-    feat       TEXT,                             -- стартовая черта (напр. 'lucky')
+    name       TEXT NOT NULL,                    -- 'Wayfarer'
+    feat       TEXT,                             -- starting feat (e.g. 'lucky')
     data_json  TEXT NOT NULL,                    -- abilities.options, skills, tool...
     is_custom  INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),

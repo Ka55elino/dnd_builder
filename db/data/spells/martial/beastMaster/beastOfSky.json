@@ -1,10 +1,13 @@
 {
   "id": "beastOfSky",
-  "name": "Спутник: Зверь Небес",
+  "name": "Companion: Beast of the Sky",
   "kind": "martial",
   "subclass": "beastMaster",
   "level": 3,
   "action": "bonus",
-  "desc": "Летающий спутник (сокол/сова и т.п.). КЗ 13 + мод. Мудрости, хиты {beastHp} (5 × ур.), скорость 3 м, полёт 18 м. Атака «Клюв»: досягаемость 1,5 м; после атаки не провоцирует атак по возможности (пролёт).",
-  "damage": { "dice": "1d4", "type": "piercing" }
+  "desc": "Flying companion (hawk, owl, etc.). AC 13 + your Wisdom modifier, Hit Points {beastHp} (5 × level), Speed 10 feet, Fly 60 feet. Beak attack: reach 5 feet; it doesn't provoke Opportunity Attacks after attacking (Flyby).",
+  "damage": {
+    "dice": "1d4",
+    "type": "piercing"
+  }
 }

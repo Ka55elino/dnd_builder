@@ -1,6 +1,6 @@
 {
   "id": "planeShift",
-  "name": "Переход между планами",
+  "name": "Plane Shift",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Переносите до 8 согласных существ на другой план (или изгоняете одно, спасбросок Харизмы)."
+  "desc": "You transport up to 8 willing creatures to another plane (or banish one creature, Charisma saving throw)."
 }

@@ -1,6 +1,6 @@
 {
   "id": "undead",
-  "name": "Нежить",
+  "name": "Undead",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "warlock",
   "domainSpells": {
@@ -24,23 +24,23 @@
   "features": [
     {
       "level": 3,
-      "name": "Облик ужаса",
-      "desc": "Бонусным действием на 1 минуту принимаете жуткий облик: временные хиты, невосприимчивость к «Испугу»; раз в ход попадание пугает цель и наносит доп. некротический урон."
+      "name": "Form of Dread",
+      "desc": "As a Bonus Action, you assume a dreadful form for 1 minute: Temporary Hit Points, immunity to the Frightened condition; once per turn, a hit frightens the target and deals extra Necrotic damage."
     },
     {
       "level": 6,
-      "name": "Тронутый могилой",
-      "desc": "Ваши атаки и заклинания могут наносить некротический урон вместо обычного; не нуждаетесь в еде, воде и воздухе."
+      "name": "Grave Touched",
+      "desc": "Your attacks and spells can deal Necrotic damage instead of their normal type; you don't need food, water, or air."
     },
     {
       "level": 10,
-      "name": "Некротическая оболочка",
-      "desc": "Сопротивление некротическому урону (иммунитет в Облике ужаса); при сведении к 0 хитов взрываетесь некротикой."
+      "name": "Necrotic Husk",
+      "desc": "Resistance to Necrotic damage (Immunity while in Form of Dread); when you are reduced to 0 Hit Points, you explode with necrotic energy."
     },
     {
       "level": 14,
-      "name": "Проекция духа",
-      "desc": "Действием проецируете дух: перемещаетесь неосязаемо, ваши атаки и заклинания действуют из тела и духа."
+      "name": "Spirit Projection",
+      "desc": "As an action, you project your spirit: you move incorporeally, and your attacks and spells can originate from both your body and your spirit."
     }
   ]
 }

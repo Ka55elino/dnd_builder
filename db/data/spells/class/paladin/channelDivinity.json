@@ -1,9 +1,24 @@
 {
   "id": "channelDivinityPaladin",
-  "name": "Божественный канал",
+  "name": "Channel Divinity",
   "kind": "class",
   "level": 3,
-  "classes": ["paladin"],
-  "desc": "Пул использований для клятвенных приёмов вашего подкласса. Восстанавливается на коротком или длинном отдыхе.",
-  "uses": { "count": 2, "per": "shortRest", "scale": [[3,2],[11,3]] }
+  "classes": [
+    "paladin"
+  ],
+  "desc": "A pool of uses for your subclass's Oath techniques. Regained on a Short or Long Rest.",
+  "uses": {
+    "count": 2,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        2
+      ],
+      [
+        11,
+        3
+      ]
+    ]
+  }
 }

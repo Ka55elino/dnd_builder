@@ -1,13 +1,13 @@
 {
   "id": "speedy",
-  "name": "Быстроногий",
+  "name": "Speedy",
   "category": "general",
   "level": 4,
   "asi": [
     "dex",
     "con"
   ],
-  "desc": "+1 Лов или Тел; +3 м скорости, Рывок без провокаций.",
+  "desc": "+1 Dex or Con; +10 feet Speed, Dash without provoking Opportunity Attacks.",
   "effects": [
     {
       "kind": "bonus",

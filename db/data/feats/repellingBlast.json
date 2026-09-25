@@ -1,9 +1,9 @@
 {
   "id": "repellingBlast",
-  "name": "Отталкивающий взрыв",
+  "name": "Repelling Blast",
   "category": "invocation",
   "level": 1,
-  "desc": "Попав «Мистическим взрывом», можете оттолкнуть цель на 3 м по прямой.",
+  "desc": "When you hit with Eldritch Blast, you can push the target 10 feet straight away from you.",
   "prereq": {
     "blast": true
   }

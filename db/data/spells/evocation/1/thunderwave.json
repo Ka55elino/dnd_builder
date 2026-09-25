@@ -1,6 +1,6 @@
 {
   "id": "thunderwave",
-  "name": "Волна грома",
+  "name": "Thunderwave",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -12,7 +12,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Куб 4,5 м: спасбросок Тел., урон звуком и отбрасывание при провале.",
+  "desc": "A 15-foot Cube: Constitution saving throw, Thunder damage, and pushed away on a failed save.",
   "damage": {
     "dice": "2d8",
     "type": "thunder"

@@ -1,6 +1,6 @@
 {
   "id": "warCaster",
-  "name": "Боевой заклинатель",
+  "name": "War Caster",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,5 +8,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; преимущество на концентрацию, колдовство по возможности."
+  "desc": "+1 Int/Wis/Cha; Advantage on Concentration, cast spells as Opportunity Attacks."
 }

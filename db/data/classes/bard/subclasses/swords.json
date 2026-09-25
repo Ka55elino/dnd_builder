@@ -1,13 +1,13 @@
 {
   "id": "swords",
-  "name": "Коллегия клинков",
+  "name": "College of Swords",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "bard",
   "features": [
     {
       "level": 3,
-      "name": "Обучение дуэлянта",
-      "desc": "Владеете средними доспехами и скимитаром (и другим воинским оружием); используете его как фокус.",
+      "name": "Duelist Training",
+      "desc": "You gain proficiency with Medium armor and the Scimitar (and other Martial weapons); you can use it as a spellcasting focus.",
       "grants": [
         {
           "type": "armor",
@@ -21,18 +21,18 @@
     },
     {
       "level": 3,
-      "name": "Клинковый росчерк",
-      "desc": "Совершая действие Атаки, тратите Кость вдохновения на росчерк: Оборонительный (+КЗ), Рубящий (доп. урон по цели и второму существу) или Подвижный (доп. урон + перемещение без провокации)."
+      "name": "Blade Flourish",
+      "desc": "When you take the Attack action, you can expend a Bardic Inspiration die on a flourish: Defensive (+AC), Slashing (extra damage to the target and a second creature), or Mobile (extra damage + movement without provoking)."
     },
     {
       "level": 6,
-      "name": "Дополнительная атака",
-      "desc": "Совершая действие Атаки, атакуете дважды вместо одного раза."
+      "name": "Extra Attack",
+      "desc": "You can attack twice, instead of once, whenever you take the Attack action."
     },
     {
       "level": 14,
-      "name": "Мастерский росчерк",
-      "desc": "Можете совершать Клинковый росчерк без траты Кости вдохновения (бросаете d6 вместо неё)."
+      "name": "Master's Flourish",
+      "desc": "You can use Blade Flourish without expending a Bardic Inspiration die (you roll a d6 instead)."
     }
   ]
 }

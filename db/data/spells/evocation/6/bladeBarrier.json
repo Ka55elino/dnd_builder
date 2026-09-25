@@ -1,6 +1,6 @@
 {
   "id": "bladeBarrier",
-  "name": "Клинковый барьер",
+  "name": "Blade Barrier",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Стена вращающихся клинков: спасбросок Ловкости, урон рубящий, укрытие. Концентрация.",
+  "desc": "A wall of whirling blades: Dexterity saving throw, Slashing damage, provides Cover. Concentration.",
   "damage": {
     "dice": "6d10",
     "type": "slashing"

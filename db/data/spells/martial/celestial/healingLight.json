@@ -1,11 +1,11 @@
 {
   "id": "healingLight",
-  "name": "Целительный свет",
+  "name": "Healing Light",
   "kind": "martial",
   "subclass": "celestial",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием тратите кости из пула (пул = 1 + уровень колдуна, до мод. Харизмы костей за раз), чтобы вылечить существо в 18 м на сумму d6.",
+  "desc": "As a Bonus Action, you expend dice from your pool (pool = 1 + your Warlock level; up to your Charisma modifier in dice at a time) to heal a creature within 60 feet for the total rolled on the d6s.",
   "damage": {
     "dice": "1d6",
     "type": "radiant"

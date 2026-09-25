@@ -1,6 +1,6 @@
 {
   "id": "arcaneEye",
-  "name": "Магический глаз",
+  "name": "Arcane Eye",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -9,5 +9,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Невидимый глаз-разведчик, которым видите (тёмное зрение 9 м). Концентрация."
+  "desc": "An Invisible scouting eye you can see through (Darkvision 30 feet). Concentration."
 }

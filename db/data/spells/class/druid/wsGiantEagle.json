@@ -1,13 +1,13 @@
 {
   "id": "wsGiantEagle",
-  "name": "Форма: Гигантский орёл",
+  "name": "Form: Giant Eagle",
   "kind": "class",
   "level": 8,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1. Хиты 26, КЗ 13, скорость 3 м, полёт 24 м. Мультиатака: клюв (1d6 кол.) и когти (2d6 руб.). Полёт доступен с 8 ур.",
+  "desc": "CR 1. HP 26, AC 13, Speed 10 ft., Fly 80 ft. Multiattack: Beak (1d6 Piercing) and Talons (2d6 Slashing). Flying is available starting at level 8.",
   "damage": {
     "dice": "1d6",
     "type": "piercing"

@@ -1,13 +1,13 @@
 {
   "id": "wsCrocodile",
-  "name": "Форма: Крокодил",
+  "name": "Form: Crocodile",
   "kind": "class",
   "level": 4,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1/2. Хиты 19, КЗ 12, скорость 6 м, плавание 9 м. Укус захватывает цель (Сл побега 12); задержка дыхания 15 мин.",
+  "desc": "CR 1/2. HP 19, AC 12, Speed 20 ft., Swim 30 ft. Bite grapples the target (escape DC 12); holds its breath for 15 minutes.",
   "damage": {
     "dice": "1d10",
     "type": "piercing"

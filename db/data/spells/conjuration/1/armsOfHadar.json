@@ -1,6 +1,6 @@
 {
   "id": "armsOfHadar",
-  "name": "Длани Хадара",
+  "name": "Arms of Hadar",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "warlock"
   ],
-  "desc": "Щупальца тьмы бьют всех в 3 м: спасбросок Силы, урон некротикой и лишение реакции.",
+  "desc": "Tendrils of darkness strike everyone within 10 feet: Strength saving throw, Necrotic damage, and the target can't take Reactions.",
   "damage": {
     "dice": "2d6",
     "type": "necrotic"

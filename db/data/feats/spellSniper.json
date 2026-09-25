@@ -1,6 +1,6 @@
 {
   "id": "spellSniper",
-  "name": "Магический снайпер",
+  "name": "Spell Sniper",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,5 +8,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; удвоение дальности атакующих заклинаний, +заговор."
+  "desc": "+1 Int/Wis/Cha; double the range of attack spells, +1 cantrip."
 }

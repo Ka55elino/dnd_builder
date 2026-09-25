@@ -1,65 +1,65 @@
 /**
- * Общие справочные подписи: типы урона, действий, отдыха, школы магии.
- * Используются в карточках, таблицах и выборах. Иконки — по тем же id
- * (см. components/common/Icon.svelte, файлы src/assets/icons/<id>.svg).
+ * Common reference labels: damage types, action types, rest types, schools of magic.
+ * Used in cards, tables and choices. Icons use the same ids
+ * (see components/common/Icon.svelte, files src/assets/icons/<id>.svg).
  */
 
-/** Типы урона. short — для узких мест (таблицы, чипы). */
+/** Damage types. short — for narrow spots (tables, chips). */
 export const DAMAGE_TYPES = {
-    bludgeoning: { name: 'Дробящий', short: 'дроб.' },
-    piercing: { name: 'Колющий', short: 'кол.' },
-    slashing: { name: 'Рубящий', short: 'руб.' },
-    acid: { name: 'Кислотой', short: 'кисл.' },
-    cold: { name: 'Холодом', short: 'холод' },
-    fire: { name: 'Огнём', short: 'огонь' },
-    force: { name: 'Силовым полем', short: 'силов.' },
-    lightning: { name: 'Электричеством', short: 'электр.' },
-    necrotic: { name: 'Некротический', short: 'некр.' },
-    poison: { name: 'Ядом', short: 'яд' },
-    psychic: { name: 'Психический', short: 'псих.' },
-    radiant: { name: 'Излучением', short: 'излуч.' },
-    thunder: { name: 'Звуком', short: 'звук' },
-    physical: { name: 'Физический', short: 'физ.' },
-    weapon: { name: 'Урон оружия', short: 'оруж.' },
+    bludgeoning: { name: 'Bludgeoning', short: 'bludg.' },
+    piercing: { name: 'Piercing', short: 'pierc.' },
+    slashing: { name: 'Slashing', short: 'slash.' },
+    acid: { name: 'Acid', short: 'acid' },
+    cold: { name: 'Cold', short: 'cold' },
+    fire: { name: 'Fire', short: 'fire' },
+    force: { name: 'Force', short: 'force' },
+    lightning: { name: 'Lightning', short: 'light.' },
+    necrotic: { name: 'Necrotic', short: 'necr.' },
+    poison: { name: 'Poison', short: 'poison' },
+    psychic: { name: 'Psychic', short: 'psych.' },
+    radiant: { name: 'Radiant', short: 'rad.' },
+    thunder: { name: 'Thunder', short: 'thund.' },
+    physical: { name: 'Physical', short: 'phys.' },
+    weapon: { name: 'Weapon damage', short: 'weap.' },
 };
 
-/** Типы действий (поле action у заклинаний и способностей). */
+/** Action types (the action field of spells and abilities). */
 export const ACTION_TYPES = {
-    action: { name: 'Действие', short: 'Д' },
-    bonus: { name: 'Бонусное действие', short: 'Б' },
-    reaction: { name: 'Реакция', short: 'Р' },
-    free: { name: 'Свободное действие', short: 'С' },
+    action: { name: 'Action', short: 'A' },
+    bonus: { name: 'Bonus Action', short: 'BA' },
+    reaction: { name: 'Reaction', short: 'R' },
+    free: { name: 'Free Action', short: 'F' },
 };
 
-/** Периоды восстановления (uses.per). */
+/** Recovery periods (uses.per). */
 export const REST_TYPES = {
-    shortRest: { name: 'Короткий отдых', short: 'кор.' },
-    longRest: { name: 'Долгий отдых', short: 'долг.' },
-    day: { name: 'День', short: 'день' },
+    shortRest: { name: 'Short Rest', short: 'SR' },
+    longRest: { name: 'Long Rest', short: 'LR' },
+    day: { name: 'Day', short: 'day' },
 };
 
-/** Школы магии. */
+/** Schools of magic. */
 export const SCHOOLS = {
-    abjuration: 'Ограждение',
-    conjuration: 'Вызов',
-    divination: 'Прорицание',
-    enchantment: 'Очарование',
-    evocation: 'Воплощение',
-    illusion: 'Иллюзия',
-    necromancy: 'Некромантия',
-    transmutation: 'Преобразование',
+    abjuration: 'Abjuration',
+    conjuration: 'Conjuration',
+    divination: 'Divination',
+    enchantment: 'Enchantment',
+    evocation: 'Evocation',
+    illusion: 'Illusion',
+    necromancy: 'Necromancy',
+    transmutation: 'Transmutation',
 };
 
-/** Нормализация действия: 'bonus_action' → 'bonus'. */
+/** Action normalization: 'bonus_action' → 'bonus'. */
 export const normAction = (a) => (a ? String(a).replace(/_action$/, '') : null);
 
 export const damageName = (t) => DAMAGE_TYPES[t]?.name ?? t ?? '';
-/** Подпись для подсказки: «Урон огнём», «Колющий урон». */
+/** Tooltip label: "Fire damage", "Piercing damage". */
 export const damageLabel = (t) => {
     const n = DAMAGE_TYPES[t]?.name;
     if (!n) return t ?? '';
     if (t === 'weapon') return n;
-    return /ий$/.test(n) ? `${n} урон` : `Урон ${n.toLowerCase()}`;
+    return `${n} damage`;
 };
 export const damageShort = (t) => DAMAGE_TYPES[t]?.short ?? t ?? '';
 export const actionName = (a) => ACTION_TYPES[normAction(a)]?.name ?? a ?? '';

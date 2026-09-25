@@ -1,12 +1,12 @@
 {
   "id": "burstingArrow",
-  "name": "Разрывная стрела",
+  "name": "Bursting Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "Стрела взрывается: цель и все существа в 3 м от неё получают 2d6 урона силовым полем.",
+  "desc": "The arrow explodes: the target and each creature within 10 feet of it take 2d6 Force damage.",
   "damage": {
     "dice": "2d6",
     "type": "force",

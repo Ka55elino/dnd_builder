@@ -1,9 +1,9 @@
 {
   "id": "cloakOfShadows",
-  "name": "Плащ теней",
+  "name": "Cloak of Shadows",
   "kind": "martial",
   "subclass": "shadow",
   "level": 11,
   "action": "action",
-  "desc": "Без траты ци. В тусклом свете/темноте становитесь невидимым, пока не атакуете, не сотворите заклинание или не окажетесь на ярком свету."
+  "desc": "No Focus Points needed. In Dim Light or Darkness, you have the Invisible condition until you attack, cast a spell, or enter Bright Light."
 }

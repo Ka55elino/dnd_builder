@@ -1,11 +1,11 @@
 {
   "id": "persistentRage",
-  "name": "Стойкая ярость (восстановление)",
+  "name": "Persistent Rage (Restore)",
   "kind": "class",
   "level": 15,
   "classes": [
     "barbarian"
   ],
   "action": "bonus",
-  "desc": "Бонусным действием, пока вы в ярости, возвращаете себе временные хиты, равные вашему уровню варвара."
+  "desc": "As a Bonus Action while your Rage is active, you gain Temporary Hit Points equal to your Barbarian level."
 }

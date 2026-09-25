@@ -1,9 +1,9 @@
 {
   "id": "geniesWrath",
-  "name": "Гнев джинна",
+  "name": "Genie's Wrath",
   "kind": "martial",
   "subclass": "nobleGenies",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. На 10 минут ваши попадания оружием наносят доп. 1d8 стихийного урона (тип на выбор: огонь/холод/гром/электричество)."
+  "desc": "Costs 1 use of Channel Divinity. For 10 minutes, your weapon hits deal an extra 1d8 elemental damage (type of your choice: Fire, Cold, Thunder, or Lightning)."
 }

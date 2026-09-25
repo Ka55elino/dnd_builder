@@ -1,13 +1,13 @@
 <script>
     /**
-     * Вкладка «Основа»: портрет, имя, Личность, Внешность.
-     * build — экземпляр CharacterBuild (реактивный), поля правятся напрямую.
+     * "Basics" tab: portrait, name, Personality, Appearance.
+     * build — a CharacterBuild instance (reactive); fields are edited directly.
      */
     import { BIO_GROUPS } from "../../models/CharacterBuild.svelte.js";
 
     let { build } = $props();
 
-    const PORTRAIT_MAX = 512; // px — большие картинки ужимаем, чтобы не раздувать сохранение
+    const PORTRAIT_MAX = 512; // px — large images are downscaled to keep saves small
 
     let fileInput;
 
@@ -43,19 +43,19 @@
             <button
                 class="portrait-box"
                 onclick={() => fileInput.click()}
-                title="Выбрать картинку"
+                title="Choose image"
             >
                 {#if build.portrait}
-                    <img src={build.portrait} alt="Портрет персонажа" />
+                    <img src={build.portrait} alt="Character portrait" />
                 {:else}
                     <span class="placeholder">
                         <span class="plus">+</span>
-                        Портрет
+                        Portrait
                     </span>
                 {/if}
             </button>
             {#if build.portrait}
-                <button class="link" onclick={clearPortrait}>Убрать</button>
+                <button class="link" onclick={clearPortrait}>Remove</button>
             {/if}
             <input
                 bind:this={fileInput}
@@ -67,10 +67,10 @@
         </div>
 
         <label class="field name">
-            <span>Имя</span>
+            <span>Name</span>
             <input
                 type="text"
-                placeholder="Например, Торин"
+                placeholder="E.g. Thorin"
                 bind:value={build.name}
                 oninput={() => build.touch()}
             />
@@ -111,7 +111,7 @@
         gap: 24px;
     }
 
-    /* --- портрет + имя --- */
+    /* --- portrait + name --- */
     .identity {
         display: flex;
         align-items: flex-start;
@@ -186,7 +186,7 @@
         font-size: 20px;
     }
 
-    /* --- группы --- */
+    /* --- groups --- */
     .group {
         margin: 0;
         padding: 16px;
@@ -207,7 +207,7 @@
         gap: 12px;
     }
 
-    /* --- поле --- */
+    /* --- field --- */
     .field {
         display: flex;
         flex-direction: column;

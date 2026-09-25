@@ -1,6 +1,6 @@
 {
   "id": "dominatePerson",
-  "name": "Доминирование над личностью",
+  "name": "Dominate Person",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Гуманоид: спасбросок Мудрости или под вашим контролем. Концентрация."
+  "desc": "A Humanoid makes a Wisdom saving throw or falls under your control. Concentration."
 }

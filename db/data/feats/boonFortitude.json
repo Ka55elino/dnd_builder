@@ -1,6 +1,6 @@
 {
   "id": "boonFortitude",
-  "name": "Дар стойкости",
+  "name": "Boon of Fortitude",
   "category": "boon",
   "level": 19,
   "asi": [
@@ -11,5 +11,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 к хар-ке (макс 30); +Тел×2 к макс. хитам, восстановление."
+  "desc": "+1 to an ability score (max 30); +Con modifier × 2 to maximum Hit Points, healing."
 }

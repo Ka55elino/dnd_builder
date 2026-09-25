@@ -1,9 +1,9 @@
 {
   "id": "transmutersStone",
-  "name": "Камень преобразователя",
+  "name": "Transmuter's Stone",
   "kind": "martial",
   "subclass": "transmutation",
   "level": 6,
   "action": "action",
-  "desc": "Действием (за 8 часов работы) создаёте камень. Носитель получает один эффект: тёмное зрение 18 м, +3 м скорости, владение спасбросками Телосложения или сопротивление стихийному типу урона."
+  "desc": "As an action (over 8 hours of work), you create a stone. Its bearer gains one effect: Darkvision 60 feet, +10 feet Speed, proficiency in Constitution saving throws, or Resistance to an elemental damage type."
 }

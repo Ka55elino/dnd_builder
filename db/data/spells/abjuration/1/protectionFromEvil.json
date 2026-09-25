@@ -1,6 +1,6 @@
 {
   "id": "protectionFromEvil",
-  "name": "Защита от зла и добра",
+  "name": "Protection from Evil and Good",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Цель защищена от аберраций, исчадий, нежити и фей: помеха их атакам, иммунитет к очарованию/испугу от них. Концентрация."
+  "desc": "The target is protected from Aberrations, Fiends, Undead, and Fey: their attacks have Disadvantage, and it is immune to being Charmed or Frightened by them. Concentration."
 }

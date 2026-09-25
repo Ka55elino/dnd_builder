@@ -1,6 +1,6 @@
 {
   "id": "lesserRestoration",
-  "name": "Малое восстановление",
+  "name": "Lesser Restoration",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -12,11 +12,11 @@
     "paladin",
     "ranger"
   ],
-  "desc": "Касанием снимаете с существа одно состояние: болезнь, отравление, ослепление, оглушение или паралич.",
+  "desc": "You touch a creature to end one condition on it: a disease, Poisoned, Blinded, Stunned, or Paralyzed.",
   "casting": {
-    "time": "1 действие",
-    "range": "Касание",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "Touch",
+    "components": "V, S",
+    "duration": "Instantaneous"
   }
 }

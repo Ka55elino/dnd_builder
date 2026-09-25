@@ -1,9 +1,28 @@
 {
   "id": "channelDivinity",
-  "name": "Божественный канал",
+  "name": "Channel Divinity",
   "kind": "class",
   "level": 2,
-  "classes": ["cleric"],
-  "desc": "Пул использований божественной энергии для особых приёмов (Божественная искра, Изгнание нежити и опции подкласса). Восстанавливается на коротком или длинном отдыхе.",
-  "uses": { "count": 2, "per": "shortRest", "scale": [[2,2],[6,3],[18,4]] }
+  "classes": [
+    "cleric"
+  ],
+  "desc": "A pool of uses of divine energy for special techniques (Divine Spark, Turn Undead, and subclass options). Regained on a Short or Long Rest.",
+  "uses": {
+    "count": 2,
+    "per": "shortRest",
+    "scale": [
+      [
+        2,
+        2
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        18,
+        4
+      ]
+    ]
+  }
 }

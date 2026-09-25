@@ -1,6 +1,6 @@
 {
   "id": "enlargeReduce",
-  "name": "Увеличение/уменьшение",
+  "name": "Enlarge/Reduce",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,7 +11,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Меняете размер существа/предмета на категорию: +/-урон и преимущество/помеха на Силу. Концентрация.",
+  "desc": "You change a creature's or object's size by one category: +/- damage and Advantage/Disadvantage on Strength checks. Concentration.",
   "damage": {
     "dice": "1d4",
     "type": "physical"

@@ -1,6 +1,6 @@
 {
   "id": "wallOfFire",
-  "name": "Огненная стена",
+  "name": "Wall of Fire",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Стена огня до 18 м: спасбросок Ловкости, урон огнём с одной стороны. Концентрация.",
+  "desc": "A wall of fire up to 60 feet long: Dexterity saving throw, Fire damage on one side. Concentration.",
   "damage": {
     "dice": "5d8",
     "type": "fire"

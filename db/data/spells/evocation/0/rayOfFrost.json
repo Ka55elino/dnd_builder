@@ -1,6 +1,6 @@
 {
   "id": "rayOfFrost",
-  "name": "Луч холода",
+  "name": "Ray of Frost",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Ледяной луч (атака заклинанием): урон холодом и −3 м к скорости цели.",
+  "desc": "A frigid beam (spell attack): Cold damage and the target's Speed is reduced by 10 feet.",
   "damage": {
     "dice": "1d8",
     "type": "cold",

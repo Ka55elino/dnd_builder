@@ -1,6 +1,6 @@
 {
   "id": "acidSplash",
-  "name": "Кислотные брызги",
+  "name": "Acid Splash",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "До двух существ рядом — спасбросок Ловкости или урон кислотой.",
+  "desc": "Up to two creatures near each other make a Dexterity saving throw or take Acid damage.",
   "damage": {
     "dice": "1d6",
     "type": "acid",

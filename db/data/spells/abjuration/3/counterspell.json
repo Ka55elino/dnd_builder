@@ -1,6 +1,6 @@
 {
   "id": "counterspell",
-  "name": "Контрзаклинание",
+  "name": "Counterspell",
   "kind": "spell",
   "action": "reaction",
   "level": 3,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Реакцией прерываете творимое существом заклинание (3 круг и ниже — автоматически, иначе проверка)."
+  "desc": "As a Reaction, you interrupt a creature casting a spell (level 3 or lower automatically; otherwise make a check)."
 }

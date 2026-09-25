@@ -1,6 +1,6 @@
 {
   "id": "gate",
-  "name": "Врата",
+  "name": "Gate",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Открываете портал в другой план и можете призвать существо оттуда. Концентрация."
+  "desc": "You open a portal to another plane and can summon a creature from it. Concentration."
 }

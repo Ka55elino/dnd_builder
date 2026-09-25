@@ -1,6 +1,6 @@
 {
   "id": "conjureAnimals",
-  "name": "Призыв животных",
+  "name": "Conjure Animals",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,7 +9,7 @@
     "druid",
     "ranger"
   ],
-  "desc": "Призываете духов зверей: аура наносит урон и создаёт труднопроходимость вокруг вас. Концентрация.",
+  "desc": "You summon bestial spirits: an aura that deals damage and creates Difficult Terrain around you. Concentration.",
   "damage": {
     "dice": "2d8",
     "type": "slashing"

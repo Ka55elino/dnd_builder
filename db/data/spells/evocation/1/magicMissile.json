@@ -1,6 +1,6 @@
 {
   "id": "magicMissile",
-  "name": "Волшебная стрела",
+  "name": "Magic Missile",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Три светящихся дротика бьют без промаха: каждый 1d4+1 силовым полем.",
+  "desc": "Three glowing darts hit automatically: each deals 1d4+1 Force damage.",
   "damage": {
     "dice": "3d4",
     "type": "force"

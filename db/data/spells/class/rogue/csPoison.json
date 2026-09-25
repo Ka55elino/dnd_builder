@@ -1,8 +1,10 @@
 {
   "id": "csPoison",
-  "name": "Хитрый удар: Отравление",
+  "name": "Cunning Strike: Poison",
   "kind": "class",
   "level": 5,
-  "classes": ["rogue"],
-  "desc": "Стоимость 1 кость Скрытой атаки. Цель совершает спасбросок Телосложения (Сл 8 + Лов + бонус мастерства); при провале получает состояние «Отравление» на 1 минуту (повтор в конце своих ходов)."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 1 Sneak Attack die. The target makes a Constitution saving throw (DC 8 + Dex + Proficiency Bonus); on a failed save, it has the Poisoned condition for 1 minute (repeating the save at the end of each of its turns)."
 }

@@ -1,6 +1,6 @@
 {
   "id": "locateCreature",
-  "name": "Обнаружение существа",
+  "name": "Locate Creature",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -13,5 +13,5 @@
     "ranger",
     "wizard"
   ],
-  "desc": "Чувствуете направление к известному существу в 300 м. Концентрация."
+  "desc": "You sense the direction to a known creature within 1,000 feet. Concentration."
 }

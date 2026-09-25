@@ -1,14 +1,14 @@
--- Наборы снаряжения (набор взломщика, путешественника...).
--- Связь с предметами — многие-ко-многим через pack_items:
--- в наборе много предметов, один предмет может входить в разные наборы.
+-- Equipment packs (Burglar's Pack, Explorer's Pack...).
+-- Items are linked many-to-many via pack_items:
+-- a pack contains many items, and one item can belong to several packs.
 CREATE TABLE IF NOT EXISTS packs (
     id          TEXT PRIMARY KEY,                -- 'explorerPack'
-    name        TEXT NOT NULL,                   -- 'Набор путешественника'
+    name        TEXT NOT NULL,                   -- 'Explorer''s Pack'
     image       TEXT,                            -- data URL (base64) | NULL
-    cost        TEXT,                            -- '10 зм'
-    description TEXT,                            -- поле 'desc' из JSON
+    cost        TEXT,                            -- '10 GP'
+    description TEXT,                            -- the 'desc' field from JSON
     is_default  INTEGER NOT NULL DEFAULT 0,      -- 0/1
-    data_json   TEXT NOT NULL,                   -- прочее (без items — они в pack_items)
+    data_json   TEXT NOT NULL,                   -- everything else (without items, which are in pack_items)
     is_custom   INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),
     updated_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS packs (
 CREATE INDEX IF NOT EXISTS idx_packs_default ON packs(is_default);
 CREATE INDEX IF NOT EXISTS idx_packs_name    ON packs(name COLLATE NOCASE);
 
--- Промежуточная таблица: какие предметы и сколько лежат в наборе.
+-- Junction table: which items, and how many, are in a pack.
 CREATE TABLE IF NOT EXISTS pack_items (
     pack_id  TEXT NOT NULL REFERENCES packs(id) ON DELETE CASCADE,
     item_id  TEXT NOT NULL REFERENCES items(id) ON DELETE CASCADE,

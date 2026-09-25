@@ -1,6 +1,6 @@
 {
   "id": "acolyte",
-  "name": "Прислужник",
+  "name": "Acolyte",
   "abilities": {
     "options": [
       "int",
@@ -13,5 +13,5 @@
     "insight",
     "religion"
   ],
-  "tool": "Каллиграфические принадлежности"
+  "tool": "Calligrapher's Supplies"
 }

@@ -1,7 +1,7 @@
 {
   "id": "crafter",
-  "name": "Ремесленник",
+  "name": "Crafter",
   "category": "origin",
   "level": 1,
-  "desc": "Владение тремя ремесленными инструментами; скидка 20% на немагические предметы; быстрое изготовление."
+  "desc": "Proficiency with three Artisan's Tools; 20% discount on nonmagical items; fast crafting."
 }

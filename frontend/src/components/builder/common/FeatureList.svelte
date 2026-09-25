@@ -1,9 +1,9 @@
 <script>
     /**
-     * Список черт / умений: [{ name, desc, level? }].
-     * Уровень показывается пометкой «N ур.».
+     * List of traits / features: [{ name, desc, level? }].
+     * The level is shown as a "Lvl N" tag.
      */
-    let { items = [], empty = "Описание пока не заполнено." } = $props();
+    let { items = [], empty = "No description yet." } = $props();
 </script>
 
 {#if items?.length}
@@ -12,7 +12,7 @@
             <li>
                 <span class="name">
                     {f.name}
-                    {#if f.level}<span class="lvl">{f.level} ур.</span>{/if}
+                    {#if f.level}<span class="lvl">Lvl {f.level}</span>{/if}
                 </span>
                 <span class="desc">{f.desc}</span>
             </li>

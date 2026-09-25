@@ -1,6 +1,6 @@
 {
   "id": "wayfarer",
-  "name": "Странник",
+  "name": "Wayfarer",
   "abilities": {
     "options": [
       "dex",
@@ -13,5 +13,5 @@
     "insight",
     "stealth"
   ],
-  "tool": "Воровские инструменты"
+  "tool": "Thieves' Tools"
 }

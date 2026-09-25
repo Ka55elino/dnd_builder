@@ -1,6 +1,6 @@
 {
   "id": "antimagicField",
-  "name": "Поле подавления магии",
+  "name": "Antimagic Field",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -9,5 +9,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Сфера 3 м, где магия не действует: заклинания подавлены, предметы инертны. Концентрация."
+  "desc": "A 10-foot sphere in which magic doesn't function: spells are suppressed and magic items become mundane. Concentration."
 }

@@ -1,8 +1,10 @@
 {
   "id": "csWithdraw",
-  "name": "Хитрый удар: Отход",
+  "name": "Cunning Strike: Withdraw",
   "kind": "class",
   "level": 5,
-  "classes": ["rogue"],
-  "desc": "Стоимость 1 кость Скрытой атаки. Сразу после атаки перемещаетесь на расстояние до половины скорости, не провоцируя атак по возможности."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 1 Sneak Attack die. Immediately after the attack, you move up to half your Speed without provoking Opportunity Attacks."
 }

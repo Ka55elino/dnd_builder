@@ -7,15 +7,15 @@ import (
 	"strings"
 )
 
-// Background — предыстория (происхождение 2024): +характеристики, навыки, черта.
+// Background is a background (2024 origin): ability score increases, skills, feat.
 type Background struct {
 	ID   string         `json:"id"`
 	Name string         `json:"name"`
-	Feat string         `json:"feat"` // id черты происхождения
+	Feat string         `json:"feat"` // origin feat id
 	Data map[string]any `json:"data"` // abilities.options, skills, tool
 }
 
-// Feat — черта или «опция»: category = origin | general | boon | fightingStyle | metamagic | invocation.
+// Feat is a feat or an "option": category = origin | general | boon | fightingStyle | metamagic | invocation.
 type Feat struct {
 	ID       string         `json:"id"`
 	Name     string         `json:"name"`
@@ -25,12 +25,12 @@ type Feat struct {
 	Data     map[string]any `json:"data"` // asi, effects, prereq...
 }
 
-// Spell — заклинание или способность: kind = spell | class | martial | action.
+// Spell is a spell or an ability: kind = spell | class | martial | action.
 type Spell struct {
 	ID            string         `json:"id"`
 	Name          string         `json:"name"`
 	Kind          string         `json:"kind"`
-	Level         int            `json:"level"` // круг (0 — заговор) или уровень получения способности
+	Level         int            `json:"level"` // spell level (0 = cantrip) or the level at which the ability is gained
 	School        string         `json:"school"`
 	Action        string         `json:"action"`
 	Concentration bool           `json:"concentration"`
@@ -39,7 +39,7 @@ type Spell struct {
 	Data          map[string]any `json:"data"` // classes, subclass, uses, damage, casting...
 }
 
-// ---------- чтение ----------
+// ---------- reading ----------
 
 func getBackgrounds(db *sql.DB) ([]Background, error) {
 	rows, err := db.Query(Q("GetAllBackgrounds"))
@@ -118,7 +118,7 @@ func getSpells(db *sql.DB) ([]Spell, error) {
 	return out, rows.Err()
 }
 
-// ---------- сиды ----------
+// ---------- seeds ----------
 
 func insertBackgroundJSON(tx *sql.Tx, raw []byte) error {
 	var head struct {

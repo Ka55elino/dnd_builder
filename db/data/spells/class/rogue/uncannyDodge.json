@@ -1,9 +1,11 @@
 {
   "id": "uncannyDodge",
-  "name": "Невероятное уклонение",
+  "name": "Uncanny Dodge",
   "kind": "class",
   "level": 5,
-  "classes": ["rogue"],
+  "classes": [
+    "rogue"
+  ],
   "action": "reaction",
-  "desc": "Реакцией, когда видимый атакующий попадает по вам, уменьшаете вдвое урон этой атаки."
+  "desc": "As a Reaction when an attacker you can see hits you, you halve the attack's damage against you."
 }

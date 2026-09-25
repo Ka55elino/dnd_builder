@@ -1,12 +1,12 @@
 <script>
     /**
-     * Каталог снаряжения: вкладки Предметы / Доспехи / Оружие + поиск по названию.
-     * Используется на странице «Предметы» (справочник) и «Дать предмет».
+     * Equipment catalog: Items / Armor / Weapons tabs + search by name.
+     * Used on the "Items" (reference) and "Give item" pages.
      *
      * catalog — { weapons, armor, items } (refs.catalog)
-     * tab     — (bindable) текущая вкладка: 'item' | 'armor' | 'weapon'
-     * actions — снипет (x, tab) справа в строке (кнопки «Добавить» и т.п.)
-     * marked  — (x, tab) => bool — подсветить строку (напр. «уже в рюкзаке»)
+     * tab     — (bindable) current tab: 'item' | 'armor' | 'weapon'
+     * actions — snippet (x, tab) on the right of a row ("Add" buttons etc.)
+     * marked  — (x, tab) => bool — highlight a row (e.g. "already in backpack")
      */
     import { damageShort, damageName, damageLabel } from "../../rules/labels.js";
     import IconLabel from "./IconLabel.svelte";
@@ -15,14 +15,14 @@
     let { catalog, tab = $bindable("item"), actions = null, marked = null } = $props();
 
     const TABS = [
-        { id: "item", label: "Предметы", list: "items" },
-        { id: "armor", label: "Доспехи", list: "armor" },
-        { id: "weapon", label: "Оружие", list: "weapons" },
+        { id: "item", label: "Items", list: "items" },
+        { id: "armor", label: "Armor", list: "armor" },
+        { id: "weapon", label: "Weapons", list: "weapons" },
     ];
 
     let query = $state("");
 
-    const norm = (s) => String(s ?? "").toLowerCase().replace(/ё/g, "е").trim();
+    const norm = (s) => String(s ?? "").toLowerCase().replace(/\u0451/g, "\u0435").trim();
     const match = (x) => !query || norm(x.name).includes(norm(query));
     const current = $derived(TABS.find((t) => t.id === tab) ?? TABS[0]);
     const list = $derived((catalog?.[current.list] ?? []).filter(match));
@@ -33,25 +33,25 @@
     const fmt = (n) => (n > 0 ? `+${n}` : `${n}`);
 
     /**
-     * Содержимое карточки:
-     *   sub   — строка под названием (категория)
-     *   stat  — главная характеристика крупно (урон / КД / цена)
-     *   extra — второстепенное рядом со stat (доп. урон, вес…)
-     *   tags  — бонусы и свойства
-     *   warn  — ограничения (Сила, помеха Скрытности)
+     * Card contents:
+     *   sub   — line below the name (category)
+     *   stat  — main stat, large (damage / AC / cost)
+     *   extra — secondary info next to stat (extra damage, weight…)
+     *   tags  — bonuses and properties
+     *   warn  — restrictions (Strength, Stealth Disadvantage)
      */
     function weaponCard(w) {
         const d = w.data ?? {};
         return {
             sub: WEAPON_CAT[w.category] ?? w.category,
             stat: w.damage ?? "",
-            statType: w.damageType ?? null, // тип урона — иконкой (или текстом без иконки)
-            statLabel: "урон",
+            statType: w.damageType ?? null, // damage type — as an icon (or text if there's no icon)
+            statLabel: "damage",
             extra: (d.extraDamage ?? []).map((x) => ({ text: `+${x.dice}`, type: x.type })),
             tags: [
-                d.attackBonus ? `${fmt(d.attackBonus)} к попаданию` : "",
-                d.damageBonus ? `${fmt(d.damageBonus)} к урону` : "",
-                d.mastery ? `мастерство: ${d.mastery}` : "",
+                d.attackBonus ? `${fmt(d.attackBonus)} to hit` : "",
+                d.damageBonus ? `${fmt(d.damageBonus)} to damage` : "",
+                d.mastery ? `mastery: ${d.mastery}` : "",
                 ...(d.properties ?? []).map((p) => WEAPON_PROPS[p] ?? p),
             ].filter(Boolean),
             warn: [],
@@ -64,18 +64,18 @@
         return {
             sub: ARMOR_CAT[a.category] ?? a.category,
             stat: acText(a) + bonus,
-            statLabel: "КД",
+            statLabel: "AC",
             extra: [],
             tags: [],
-            warn: [d.strengthReq ? `Сила ${d.strengthReq}` : "", d.stealthDisadvantage ? "помеха Скрытности" : ""].filter(Boolean),
+            warn: [d.strengthReq ? `Str ${d.strengthReq}` : "", d.stealthDisadvantage ? "Stealth Disadvantage" : ""].filter(Boolean),
         };
     }
 
     const itemCard = (i) => ({
-        sub: "Снаряжение",
+        sub: "Gear",
         stat: i.cost ?? "",
-        statLabel: i.cost ? "цена" : "",
-        extra: i.weight ? [{ text: `${i.weight} фнт.` }] : [],
+        statLabel: i.cost ? "cost" : "",
+        extra: i.weight ? [{ text: `${i.weight} lb.` }] : [],
         tags: [],
         warn: [],
     });
@@ -94,7 +94,7 @@
             </button>
         {/each}
     </nav>
-    <input class="search" type="search" placeholder="Поиск по названию…" bind:value={query} />
+    <input class="search" type="search" placeholder="Search by name…" bind:value={query} />
 </div>
 
 <div class="grid">
@@ -114,7 +114,7 @@
                     <b>{x.name}</b>
                     <span class="sub">
                         {c.sub}
-                        {#if isCustom(x)}<span class="badge own">своё</span>{:else if x.isDefault === false}<span class="badge">именное</span>{/if}
+                        {#if isCustom(x)}<span class="badge own">custom</span>{:else if x.isDefault === false}<span class="badge">named</span>{/if}
                     </span>
                 </div>
             </header>
@@ -153,7 +153,7 @@
             {/if}
         </article>
     {:else}
-        <p class="muted">Ничего не найдено.</p>
+        <p class="muted">Nothing found.</p>
     {/each}
 </div>
 
@@ -209,7 +209,7 @@
         border-color: var(--color-gold);
     }
 
-    /* --- карточки --- */
+    /* --- cards --- */
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

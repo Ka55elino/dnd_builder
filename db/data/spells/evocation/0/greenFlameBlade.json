@@ -1,6 +1,6 @@
 {
   "id": "greenFlameBlade",
-  "name": "Зелёное пламя",
+  "name": "Green-Flame Blade",
   "kind": "spell",
   "edition": "2014",
   "source": [
@@ -16,7 +16,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Совершаете рукопашную атаку оружием по существу в пределах 5 футов. При попадании цель получает обычный урон оружия, а зелёное пламя может перекинуться на другое существо в пределах 5 футов от первой цели.",
+  "desc": "You make a melee weapon attack against a creature within 5 feet. On a hit, the target suffers the weapon's normal effects, and green fire can leap to another creature within 5 feet of the first target.",
   "weaponAttack": true,
   "damage": {
     "primary": {

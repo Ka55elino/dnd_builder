@@ -1,6 +1,6 @@
 {
   "id": "vampiricTouch",
-  "name": "Прикосновение вампира",
+  "name": "Vampiric Touch",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,7 +10,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Касание некротикой; половину урона получаете как исцеление. Концентрация до 1 минуты.",
+  "desc": "A necrotic touch; you regain Hit Points equal to half the damage dealt. Concentration, up to 1 minute.",
   "damage": {
     "dice": "3d6",
     "type": "necrotic"

@@ -1,20 +1,20 @@
 <script>
     /**
-     * Карточка заклинания / способности / черты (по мотивам dndbuilder-v2).
+     * Spell / ability / feat card (inspired by dndbuilder-v2).
      *
      *  ┌────────────────────────────── source ┐
-     *  │ Название                              │
-     *  │ описание…                             │
-     *  │ [⚡ бонусное] [2d8 🔥] [2 × долг.] [Сл 13]│
+     *  │ Name                                  │
+     *  │ description…                          │
+     *  │ [⚡ bonus] [2d8 🔥] [2 × long] [DC 13]    │
      *  └───────────────────────────────────────┘
      *
-     * item      — запись из справочника (spells / feats): name, desc, action,
+     * item      — reference record (spells / feats): name, desc, action,
      *             level, school, concentration, ritual, data.{damage, scaleDie, uses, casting}
-     * level     — уровень персонажа (для роста урона)
-     * source    — подпись справа сверху ('Класс', '1 круг', 'Эльф'…)
-     * uses      — { max, per } — сколько раз и когда восстанавливается
-     * saveDC    — сложность спасброска (покажется, если в описании есть спасбросок)
-     * selectable / selected / onclick — режим выбора (экран уровня)
+     * level     — character level (for damage scaling)
+     * source    — top-right label ('Class', 'Level 1', 'Elf'…)
+     * uses      — { max, per } — how many times and when it recharges
+     * saveDC    — saving throw DC (shown if the description mentions a saving throw)
+     * selectable / selected / onclick — selection mode (level screen)
      */
     import IconLabel from "./IconLabel.svelte";
     import { hasIcon } from "./Icon.svelte";
@@ -41,7 +41,7 @@
     const casting = $derived(d.casting ?? null);
     const isSpell = $derived(item?.kind === "spell");
     const desc = $derived(item?.desc ?? d.desc ?? "");
-    const showDC = $derived(saveDC != null && /спасброс/i.test(desc));
+    const showDC = $derived(saveDC != null && /saving throw|\b(?:strength|dexterity|constitution|intelligence|wisdom|charisma) save\b/i.test(desc));
 </script>
 
 <svelte:element
@@ -60,7 +60,7 @@
 
     {#if desc}<p class="desc">{desc}</p>{/if}
 
-    <!-- если у подписи есть SVG — показываем иконку, а текст уходит в подсказку (IconLabel) -->
+    <!-- if the label has an SVG, show the icon and move the text into the tooltip (IconLabel) -->
     <div class="meta">
         {#if action && ACTION_TYPES[action]}
             <span class="chip act" style="--c: var(--color-act-{action})">
@@ -77,7 +77,7 @@
             </span>
         {/each}
 
-        {#if die}<span class="chip">кость <b>{die}</b></span>{/if}
+        {#if die}<span class="chip">die <b>{die}</b></span>{/if}
 
         {#if uses?.max}
             <span class="chip rest" style="--c: var(--color-rest-{uses.per})">
@@ -88,7 +88,7 @@
 
         {#if showDC}
             <span class="chip meta-chip" style="--c: var(--color-meta-dc)">
-                <IconLabel name="dc" kind="meta" label="Сложность спасброска" text="Сл" />
+                <IconLabel name="dc" kind="meta" label="Saving throw DC" text="DC" />
                 <b>{saveDC}</b>
             </span>
         {/if}
@@ -96,27 +96,27 @@
         {#if isSpell}
             {#if casting?.range}
                 <span class="chip meta-chip" style="--c: var(--color-meta-range)">
-                    <IconLabel name="range" kind="meta" label="Дистанция" text="" />{casting.range}
+                    <IconLabel name="range" kind="meta" label="Range" text="" />{casting.range}
                 </span>
             {/if}
             {#if casting?.duration}
                 <span class="chip meta-chip" style="--c: var(--color-meta-duration)">
-                    <IconLabel name="duration" kind="meta" label="Длительность" text="" />{casting.duration}
+                    <IconLabel name="duration" kind="meta" label="Duration" text="" />{casting.duration}
                 </span>
             {/if}
-            {#if item.concentration && (hasIcon("concentration") || !/конц/i.test(casting?.duration ?? ""))}
+            {#if item.concentration && (hasIcon("concentration") || !/conc/i.test(casting?.duration ?? ""))}
                 <span class="chip flag" style="--c: var(--color-meta-concentration)">
-                    <IconLabel name="concentration" kind="meta" label="Концентрация" text="конц." hint="Эффект длится, пока вы сохраняете концентрацию" />
+                    <IconLabel name="concentration" kind="meta" label="Concentration" text="conc." hint="The effect lasts as long as you maintain Concentration" />
                 </span>
             {/if}
             {#if item.ritual}
                 <span class="chip flag" style="--c: var(--color-meta-ritual)">
-                    <IconLabel name="ritual" kind="meta" label="Ритуал" text="ритуал" hint="Можно сотворить ритуалом: +10 минут, без ячейки" />
+                    <IconLabel name="ritual" kind="meta" label="Ritual" text="ritual" hint="Can be cast as a Ritual: +10 minutes, no spell slot" />
                 </span>
             {/if}
             {#if item.school}
                 <span class="chip school" style="--c: var(--color-school-{item.school})">
-                    <IconLabel name={item.school} kind="school" label={`Школа: ${SCHOOLS[item.school] ?? item.school}`} text={SCHOOLS[item.school] ?? item.school} />
+                    <IconLabel name={item.school} kind="school" label={`School: ${SCHOOLS[item.school] ?? item.school}`} text={SCHOOLS[item.school] ?? item.school} />
                 </span>
             {/if}
         {/if}

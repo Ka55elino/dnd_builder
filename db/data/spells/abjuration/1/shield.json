@@ -1,6 +1,6 @@
 {
   "id": "shield",
-  "name": "Щит",
+  "name": "Shield",
   "kind": "spell",
   "action": "reaction",
   "level": 1,
@@ -9,11 +9,11 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Реакцией создаёте невидимый барьер: +5 к КЗ до начала вашего следующего хода, в том числе против вызвавшей атаки, и иммунитет к «Волшебному снаряду».",
+  "desc": "As a Reaction, you create an invisible barrier: +5 to AC until the start of your next turn, including against the triggering attack, and immunity to Magic Missile.",
   "casting": {
-    "time": "1 реакция",
-    "range": "На себя",
-    "components": "В, С",
-    "duration": "1 раунд"
+    "time": "1 reaction",
+    "range": "Self",
+    "components": "V, S",
+    "duration": "1 round"
   }
 }

@@ -1,9 +1,9 @@
 {
   "id": "tandemFootwork",
-  "name": "Головокружительный финал",
+  "name": "Tandem Footwork",
   "kind": "martial",
   "subclass": "dance",
   "level": 14,
   "action": "bonus",
-  "desc": "Тратя Кость вдохновения бонусным действием, перемещаетесь на свою скорость, не провоцируя атак, и совершаете один безоружный удар с доп. уроном = Кости вдохновения."
+  "desc": "Expending a Bardic Inspiration die as a Bonus Action, you move up to your Speed without provoking Opportunity Attacks and make one Unarmed Strike with extra damage equal to the Bardic Inspiration die."
 }

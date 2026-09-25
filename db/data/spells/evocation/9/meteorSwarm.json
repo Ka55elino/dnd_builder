@@ -1,6 +1,6 @@
 {
   "id": "meteorSwarm",
-  "name": "Метеоритный дождь",
+  "name": "Meteor Swarm",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Огненные шары падают в четырёх точках: спасбросок Ловкости за половину, огонь и дробление.",
+  "desc": "Fiery globes fall at four points: Dexterity saving throw for half damage; Fire and Bludgeoning damage.",
   "damage": {
     "dice": "40d6",
     "type": "fire"

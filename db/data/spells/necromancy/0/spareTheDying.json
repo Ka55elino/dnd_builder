@@ -1,6 +1,6 @@
 {
   "id": "spareTheDying",
-  "name": "Уход за умирающим",
+  "name": "Spare the Dying",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Касанием стабилизируете существо с 0 хитов (дальность 4,5 м)."
+  "desc": "With a touch, you stabilize a creature with 0 Hit Points (range 15 feet)."
 }

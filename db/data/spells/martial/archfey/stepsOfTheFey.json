@@ -1,11 +1,11 @@
 {
   "id": "stepsOfTheFey",
-  "name": "Шаги фей",
+  "name": "Steps of the Fey",
   "kind": "martial",
   "subclass": "archfey",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием телепортируетесь до 9 м. «Ликующий шаг»: существо в 3 м от точки прибытия — спасбросок Мудрости или испуг; «Скорбный»: атаки по вам с помехой до вашего следующего хода.",
+  "desc": "As a Bonus Action, you teleport up to 30 feet. Joyful Step: a creature within 10 feet of your destination must succeed on a Wisdom saving throw or have the Frightened condition. Mournful Step: attack rolls against you have Disadvantage until your next turn.",
   "uses": {
     "count": 1,
     "per": "longRest",

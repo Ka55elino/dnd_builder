@@ -1,6 +1,6 @@
 {
   "id": "revivify",
-  "name": "Возрождение",
+  "name": "Revivify",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Возвращаете к жизни существо, умершее не более минуты назад, с 1 хитом."
+  "desc": "You return to life a creature that died within the last minute, with 1 Hit Point."
 }

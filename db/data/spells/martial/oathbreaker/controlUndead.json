@@ -1,9 +1,9 @@
 {
   "id": "controlUndead",
-  "name": "Управление нежитью",
+  "name": "Command Undead",
   "kind": "martial",
   "subclass": "oathbreaker",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Нежить с ПО не выше вашего уровня в 9 м — спасбросок Харизмы или подчиняется вам на 24 часа."
+  "desc": "Costs 1 use of Channel Divinity. Undead with a CR no higher than your level within 30 feet must succeed on a Charisma saving throw or obey you for 24 hours."
 }

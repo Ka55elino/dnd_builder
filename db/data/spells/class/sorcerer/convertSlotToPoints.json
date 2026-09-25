@@ -1,9 +1,11 @@
 {
   "id": "convertSlotToPoints",
-  "name": "Ячейка → очки чародейства",
+  "name": "Slot → Sorcery Points",
   "kind": "class",
   "level": 2,
-  "classes": ["sorcerer"],
+  "classes": [
+    "sorcerer"
+  ],
   "action": "bonus",
-  "desc": "Бонусным действием тратите ячейку заклинания, получая очки чародейства, равные кругу ячейки."
+  "desc": "As a Bonus Action, you expend a spell slot to gain Sorcery Points equal to the slot's level."
 }

@@ -1,9 +1,9 @@
 {
   "id": "visionsOfThePast",
-  "name": "Провидец",
+  "name": "Visions of the Past",
   "kind": "martial",
   "subclass": "knowledge",
   "level": 17,
   "action": "action",
-  "desc": "Действием сосредотачиваетесь на 10 минут, чтобы увидеть и услышать происходившее в знакомом месте на расстоянии до 1,6 км."
+  "desc": "As an action, you concentrate for 10 minutes to see and hear what happened at a familiar place up to 1 mile away."
 }

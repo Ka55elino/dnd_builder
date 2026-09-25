@@ -1,11 +1,11 @@
 {
   "id": "portent",
-  "name": "Знамение",
+  "name": "Portent",
   "kind": "martial",
   "subclass": "divination",
   "level": 3,
   "action": "free",
-  "desc": "На длинном отдыхе заранее бросаете кости знамения (2, с 14 ур. — 3). Заменяете результатом любой бросок d20 существа, которое видите.",
+  "desc": "When you finish a Long Rest, you roll the Portent dice in advance (2, or 3 starting at level 14). You can replace any d20 roll made by a creature you can see with one of these rolls.",
   "uses": {
     "count": 2,
     "per": "longRest",

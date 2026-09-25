@@ -1,6 +1,6 @@
 {
   "id": "beaconOfHope",
-  "name": "Маяк надежды",
+  "name": "Beacon of Hope",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "До существ: преимущество на спасброски Мудрости и Смерти, макс. лечение. Концентрация."
+  "desc": "Chosen creatures: Advantage on Wisdom saving throws and Death Saving Throws, and they regain the maximum number of Hit Points from healing. Concentration."
 }

@@ -1,43 +1,43 @@
 {
   "id": "runeKnight",
-  "name": "Рунный рыцарь",
+  "name": "Rune Knight",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "warrior",
   "features": [
     {
       "level": 3,
-      "name": "Бонусные владения",
-      "desc": "Получаете владение инструментами кузнеца и учитесь читать, писать и говорить на Великаньем языке."
+      "name": "Bonus Proficiencies",
+      "desc": "You gain proficiency with Smith's Tools, and you learn to speak, read, and write Giant."
     },
     {
       "level": 3,
-      "name": "Резчик рун",
-      "desc": "Учите руны (2 на 3, до 5 на 15 уровне) и наносите их на снаряжение при отдыхе. Руны дают пассивные бонусы и активируемый эффект (реакцией или бонусным действием)."
+      "name": "Rune Carver",
+      "desc": "You learn runes (2 at level 3, up to 5 at level 15) and inscribe them on your gear during a rest. Runes grant passive benefits and an activated effect (as a Reaction or Bonus Action)."
     },
     {
       "level": 3,
-      "name": "Мощь великана",
-      "desc": "Бонусным действием на 1 минуту становитесь Большим, совершаете с преимуществом проверки и спасброски Силы и раз в ход наносите доп. урон (1к6/1к8/1к10). Число раз = бонус мастерства."
+      "name": "Giant's Might",
+      "desc": "As a Bonus Action, you become Large for 1 minute, have Advantage on Strength checks and saving throws, and once per turn deal extra damage (1d6/1d8/1d10). Number of uses equals your Proficiency Bonus."
     },
     {
       "level": 7,
-      "name": "Рунический щит",
-      "desc": "Реакцией заставляете атакующего по союзнику в 18 м перебросить к20 (число раз = бонус мастерства)."
+      "name": "Runic Shield",
+      "desc": "As a Reaction, you force a creature attacking an ally within 60 feet to reroll the d20 (a number of times equal to your Proficiency Bonus)."
     },
     {
       "level": 10,
-      "name": "Великий рост",
-      "desc": "Становитесь выше на 3к4 дюйма; доп. урон от «Мощи великана» растёт до 1к8."
+      "name": "Great Stature",
+      "desc": "You grow 3d4 inches taller; the extra damage from Giant's Might increases to 1d8."
     },
     {
       "level": 15,
-      "name": "Мастер рун",
-      "desc": "Можете дважды пробуждать каждую известную руну, восстанавливая пробуждения на отдыхе."
+      "name": "Master of Runes",
+      "desc": "You can invoke each rune you know twice, regaining its invocations on a rest."
     },
     {
       "level": 18,
-      "name": "Рунический джаггернаут",
-      "desc": "Доп. урон «Мощи великана» растёт до 1к10; при её использовании можете стать Огромным, увеличивая досягаемость на 5 футов."
+      "name": "Runic Juggernaut",
+      "desc": "The extra damage from Giant's Might increases to 1d10; when you use it, you can become Huge, increasing your reach by 5 feet."
     }
   ]
 }

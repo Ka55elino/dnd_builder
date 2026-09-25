@@ -1,9 +1,9 @@
 {
   "id": "umbralForm",
-  "name": "Призрачная форма",
+  "name": "Umbral Form",
   "kind": "martial",
   "subclass": "shadowMagic",
   "level": 18,
   "action": "action",
-  "desc": "Стоимость 6 очков чародейства. Действием на 1 минуту превращаетесь в тень: сопротивление всему урону, кроме силового и излучения; можете проходить сквозь предметы и существ."
+  "desc": "Costs 6 Sorcery Points. As an action, for 1 minute you turn into a shadow: Resistance to all damage except Force and Radiant; you can move through objects and creatures."
 }

@@ -1,6 +1,6 @@
 {
   "id": "magicCircle",
-  "name": "Магический круг",
+  "name": "Magic Circle",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Цилиндр защищает от избранного типа существ (демоны, нежить и т.п.)."
+  "desc": "A cylinder protects against a chosen creature type (Fiends, Undead, and so on)."
 }

@@ -1,10 +1,13 @@
 {
   "id": "beastOfLand",
-  "name": "Спутник: Зверь Земли",
+  "name": "Companion: Beast of the Land",
   "kind": "martial",
   "subclass": "beastMaster",
   "level": 3,
   "action": "bonus",
-  "desc": "Наземный спутник (кошка/волк и т.п.). КЗ 13 + мод. Мудрости, хиты {beastHp} (5 × ур.), скорость 12 м. Атака «Резак»: досягаемость 1,5 м, попадание = бонус к атаке = ваш бонус заклинаний; при попадании цель размером не больше Большого может быть сбита с ног.",
-  "damage": { "dice": "1d8", "type": "slashing" }
+  "desc": "Land companion (cat, wolf, etc.). AC 13 + your Wisdom modifier, Hit Points {beastHp} (5 × level), Speed 40 feet. Rend attack: reach 5 feet, attack bonus equal to your spell attack bonus; on a hit, a Large or smaller target can be knocked Prone.",
+  "damage": {
+    "dice": "1d8",
+    "type": "slashing"
+  }
 }

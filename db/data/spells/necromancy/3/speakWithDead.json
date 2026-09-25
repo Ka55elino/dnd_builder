@@ -1,6 +1,6 @@
 {
   "id": "speakWithDead",
-  "name": "Говорить с мёртвыми",
+  "name": "Speak with Dead",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,5 +9,5 @@
     "cleric",
     "bard"
   ],
-  "desc": "Задаёте трупу до 5 вопросов на 10 минут."
+  "desc": "You ask a corpse up to 5 questions over 10 minutes."
 }

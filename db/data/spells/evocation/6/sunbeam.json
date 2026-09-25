@@ -1,6 +1,6 @@
 {
   "id": "sunbeam",
-  "name": "Солнечный луч",
+  "name": "Sunbeam",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Луч солнца 18 м: спасбросок Тел., урон излучением и слепота; повторяете действием. Концентрация.",
+  "desc": "A 60-foot beam of sunlight: Constitution saving throw, Radiant damage and Blinded; you can repeat it as a Magic action. Concentration.",
   "damage": {
     "dice": "6d8",
     "type": "radiant"

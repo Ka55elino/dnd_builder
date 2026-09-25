@@ -1,8 +1,8 @@
 {
   "id": "assassinate",
-  "name": "Убийство",
+  "name": "Assassinate",
   "kind": "martial",
   "subclass": "assassin",
   "level": 3,
-  "desc": "В первом раунде боя атаки по ещё не ходившим существам — с преимуществом. Скрытая атака по застигнутому врасплох существу наносит доп. урон, равный вашему уровню плута."
+  "desc": "In the first round of combat, you have Advantage on attack rolls against creatures that haven't taken a turn yet. Your Sneak Attack against a Surprised creature deals extra damage equal to your Rogue level."
 }

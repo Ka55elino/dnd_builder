@@ -1,6 +1,6 @@
 {
   "id": "holdMonster",
-  "name": "Удержание чудовища",
+  "name": "Hold Monster",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо (не нежить): спасбросок Мудрости или парализовано. Концентрация."
+  "desc": "A creature (not Undead) makes a Wisdom saving throw or is Paralyzed. Concentration."
 }

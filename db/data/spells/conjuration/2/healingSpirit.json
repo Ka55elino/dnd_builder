@@ -1,6 +1,6 @@
 {
   "id": "healingSpirit",
-  "name": "Целительный дух",
+  "name": "Healing Spirit",
   "kind": "spell",
   "action": "bonus",
   "level": 2,
@@ -9,5 +9,5 @@
     "druid",
     "ranger"
   ],
-  "desc": "Дух в кубе 1,5 м лечит существо (1d6), когда оно входит/начинает там ход. Концентрация."
+  "desc": "A spirit in a 5-foot Cube heals a creature (1d6) when it enters or starts its turn there. Concentration."
 }

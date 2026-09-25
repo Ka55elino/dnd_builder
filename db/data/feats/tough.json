@@ -1,9 +1,9 @@
 {
   "id": "tough",
-  "name": "Крепкий",
+  "name": "Tough",
   "category": "origin",
   "level": 1,
-  "desc": "Максимум хитов +2 за каждый уровень персонажа.",
+  "desc": "Your Hit Point maximum increases by 2 for each character level.",
   "effects": [
     {
       "kind": "bonus",

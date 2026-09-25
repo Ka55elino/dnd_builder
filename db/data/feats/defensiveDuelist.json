@@ -1,10 +1,10 @@
 {
   "id": "defensiveDuelist",
-  "name": "Дуэлянт-защитник",
+  "name": "Defensive Duelist",
   "category": "general",
   "level": 4,
   "asi": [
     "dex"
   ],
-  "desc": "+1 Ловкость; реакцией +бонус мастерства к КЗ финес. оружием."
+  "desc": "+1 Dexterity; as a Reaction, add your Proficiency Bonus to AC with a Finesse weapon."
 }

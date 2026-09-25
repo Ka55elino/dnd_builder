@@ -1,10 +1,10 @@
 {
   "id": "sharpshooter",
-  "name": "Меткий стрелок",
+  "name": "Sharpshooter",
   "category": "general",
   "level": 4,
   "asi": [
     "dex"
   ],
-  "desc": "+1 Ловкость; игнор укрытия и дальности, штраф-урон дальнобойным оружием."
+  "desc": "+1 Dexterity; ignore cover and long-range Disadvantage, a power-attack damage bonus with ranged weapons."
 }

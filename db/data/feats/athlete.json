@@ -1,11 +1,11 @@
 {
   "id": "athlete",
-  "name": "Атлет",
+  "name": "Athlete",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; быстрый подъём, лазание не тратит доп. движение."
+  "desc": "+1 Strength or Dexterity; stand up quickly, climbing costs no extra movement."
 }

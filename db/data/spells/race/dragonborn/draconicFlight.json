@@ -1,10 +1,13 @@
 {
   "id": "draconicFlight",
-  "name": "Драконий полёт",
+  "name": "Draconic Flight",
   "kind": "action",
-  "source": "Драконорождённый",
+  "source": "Dragonborn",
   "level": 5,
   "action": "bonus",
-  "uses": { "count": 1, "per": "longRest" },
-  "desc": "Бонусным действием на 10 минут получаете скорость полёта, равную вашей скорости."
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "As a Bonus Action, you gain a Fly Speed equal to your Speed for 10 minutes."
 }

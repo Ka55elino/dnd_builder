@@ -1,6 +1,6 @@
 {
   "id": "cleric",
-  "name": "Жрец",
+  "name": "Cleric",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 8,
   "primaryAbility": [
@@ -128,44 +128,44 @@
   "features": [
     {
       "level": 1,
-      "name": "Заклинательство",
-      "desc": "Творите заклинания из списка Жреца, используя Мудрость (полный заклинатель, готовите заклинания). Можете использовать священный символ как фокус."
+      "name": "Spellcasting",
+      "desc": "You cast spells from the Cleric spell list using Wisdom (full caster, prepared spells). You can use a Holy Symbol as your spellcasting focus."
     },
     {
       "level": 1,
-      "name": "Божественный орден",
-      "desc": "Выбираете призвание: «Защитник» — владение воинским оружием и тяжёлыми доспехами; или «Богослов» — дополнительный заговор Жреца и добавляете мод. Мудрости к проверкам Тайных знаний/Религии.",
+      "name": "Divine Order",
+      "desc": "You choose a Divine Order: Protector (proficiency with Martial weapons and Heavy armor) or Thaumaturge (an extra Cleric cantrip, and you add your Wis modifier to Arcana and Religion checks).",
       "choice": {
         "type": "generic",
         "pick": 1,
         "options": [
           {
             "id": "protector",
-            "name": "Защитник",
-            "desc": "Владение воинским оружием и тяжёлыми доспехами."
+            "name": "Protector",
+            "desc": "Proficiency with Martial weapons and Heavy armor."
           },
           {
             "id": "thaumaturge",
-            "name": "Богослов",
-            "desc": "Дополнительный заговор жреца; +мод. Мудрости к проверкам Магии и Религии."
+            "name": "Thaumaturge",
+            "desc": "An extra Cleric cantrip; + Wis modifier to Arcana and Religion checks."
           }
         ]
       }
     },
     {
       "level": 2,
-      "name": "Божественный канал",
-      "desc": "Тратите использование Божественного канала на «Божественную искру» или «Изгнание нежити» (и опции подкласса). Восстанавливается на коротком/длинном отдыхе. 2 использования (3 на 6 ур., 4 на 18 ур.)."
+      "name": "Channel Divinity",
+      "desc": "You expend a use of Channel Divinity on Divine Spark or Turn Undead (and your subclass options). You regain uses when you finish a Short or Long Rest. 2 uses (3 at level 6, 4 at level 18)."
     },
     {
       "level": 5,
-      "name": "Опаляющая нежить",
-      "desc": "Изгнание нежити теперь наносит изгоняемым существам урон излучением (кости растут с уровнем)."
+      "name": "Sear Undead",
+      "desc": "Turn Undead now deals Radiant damage to the creatures it turns (the dice increase with level)."
     },
     {
       "level": 7,
-      "name": "Благословенные удары",
-      "desc": "Действуют оба: раз в ход попадание оружием наносит доп. 1d8 излучением/некротикой (2d8 с 14 ур.), И к урону ваших заговоров прибавляется модификатор Мудрости.",
+      "name": "Blessed Strikes",
+      "desc": "Both apply: once per turn, a weapon hit deals an extra 1d8 Radiant or Necrotic damage (2d8 from level 14), AND your Wisdom modifier is added to the damage of your cantrips.",
       "grants": [
         {
           "type": "effect",
@@ -199,18 +199,18 @@
     },
     {
       "level": 10,
-      "name": "Божественное вмешательство",
-      "desc": "Действием призываете помощь божества: немедленно творите любое заклинание Жреца 5 круга и ниже без затрат. После использования — раз на длинный отдых."
+      "name": "Divine Intervention",
+      "desc": "As an action, you call on your deity for aid: you immediately cast any Cleric spell of level 5 or lower at no cost. After use, once per Long Rest."
     },
     {
       "level": 14,
-      "name": "Улучшенные благословенные удары",
-      "desc": "Божественный удар растёт до 2d8; Мощное заклинательство добавляет мод. Мудрости к урону одного заклинания."
+      "name": "Improved Blessed Strikes",
+      "desc": "Divine Strike increases to 2d8; Potent Spellcasting adds your Wis modifier to the damage of one spell."
     },
     {
       "level": 20,
-      "name": "Высшее божественное вмешательство",
-      "desc": "Божественное вмешательство больше не требует длинного отдыха между применениями и может воспроизвести «Желание» (истощая божество)."
+      "name": "Greater Divine Intervention",
+      "desc": "Divine Intervention no longer requires a Long Rest between uses and can duplicate Wish (exhausting your deity)."
     }
   ]
 }

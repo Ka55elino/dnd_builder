@@ -1,6 +1,6 @@
 {
   "id": "maze",
-  "name": "Лабиринт",
+  "name": "Maze",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -8,5 +8,5 @@
   "classes": [
     "wizard"
   ],
-  "desc": "Изгоняете существо в лабиринтный полуплан, пока оно не выберется (проверка Интеллекта). Концентрация."
+  "desc": "You banish a creature to a labyrinthine demiplane until it escapes (Intelligence check). Concentration."
 }

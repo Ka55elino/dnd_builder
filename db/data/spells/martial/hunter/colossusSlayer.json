@@ -1,9 +1,11 @@
 {
   "id": "colossusSlayer",
-  "name": "Добыча: Убийца колоссов",
+  "name": "Hunter's Prey: Colossus Slayer",
   "kind": "martial",
   "subclass": "hunter",
   "level": 3,
-  "desc": "Раз за ход, попав по существу ниже его максимума хитов, наносите ему доп. 1d8 урона.",
-  "damage": { "dice": "1d8" }
+  "desc": "Once per turn, when you hit a creature that is below its Hit Point maximum, you deal an extra 1d8 damage to it.",
+  "damage": {
+    "dice": "1d8"
+  }
 }

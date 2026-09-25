@@ -1,10 +1,10 @@
 <script>
     /**
-     * Вкладка «Раса».
-     * Нет выбора      → сетка рас.
-     * Раса выбрана    → только её карточка (× — отмена) + сетка подрас.
-     * Подраса выбрана → только её карточка (×).
-     * Выбор сразу пишется в build (CharacterBuild.raceId / subraceId).
+     * "Species" tab.
+     * Nothing selected    → grid of species.
+     * Species selected    → only its card (× — cancel) + grid of subspecies.
+     * Subspecies selected → only its card (×).
+     * The choice is written straight to build (CharacterBuild.raceId / subraceId).
      */
     import { onMount } from "svelte";
     import { GetRaces } from "../../../wailsjs/go/main/App.js";
@@ -36,30 +36,30 @@
 
 <div class="tab">
     {#if loading}
-        <p class="muted">Загрузка рас…</p>
+        <p class="muted">Loading species…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить расы: {error}</p>
+        <p class="error">Failed to load species: {error}</p>
     {:else if !race}
         {#if races.length === 0}
-            <p class="muted">Расы не найдены.</p>
+            <p class="muted">No species found.</p>
         {:else}
             <ChoiceGrid items={races} onpick={(id) => build.setRace(id)} />
         {/if}
     {:else}
-        <ChoiceCard item={race} badge="Раса" onclear={() => build.setRace(null)}>
+        <ChoiceCard item={race} badge="Species" onclear={() => build.setRace(null)}>
             <div class="stats">
-                <span>Размер: <b>{race.data.size ?? "—"}</b></span>
-                <span>Скорость: <b>{race.data.speed ?? "—"} фт.</b></span>
+                <span>Size: <b>{race.data.size ?? "—"}</b></span>
+                <span>Speed: <b>{race.data.speed ?? "—"} ft.</b></span>
             </div>
             <FeatureList items={race.data.traits} />
         </ChoiceCard>
 
         {#if race.subraces.length}
-            <h4>Подраса</h4>
+            <h4>Subspecies</h4>
             {#if subrace}
                 <ChoiceCard
                     item={subrace}
-                    badge="Подраса"
+                    badge="Subspecies"
                     sub
                     onclear={() => build.setSubrace(null)}
                 >

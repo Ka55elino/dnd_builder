@@ -1,6 +1,6 @@
 {
   "id": "goodberry",
-  "name": "Хорошая ягода",
+  "name": "Goodberry",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,11 +9,11 @@
     "ranger",
     "druid"
   ],
-  "desc": "Создаёте 10 ягод; съеденная восстанавливает 1 хит и питает существо на день.",
+  "desc": "You create 10 berries; eating one restores 1 Hit Point and provides enough nourishment to sustain a creature for a day.",
   "casting": {
-    "time": "1 действие",
-    "range": "Касание",
-    "components": "В, С, М",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "Touch",
+    "components": "V, S, M",
+    "duration": "Instantaneous"
   }
 }

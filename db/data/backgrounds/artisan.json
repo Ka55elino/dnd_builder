@@ -1,6 +1,6 @@
 {
   "id": "artisan",
-  "name": "Ремесленник",
+  "name": "Artisan",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "investigation",
     "persuasion"
   ],
-  "tool": "Инструменты ремесленника"
+  "tool": "Artisan's Tools"
 }

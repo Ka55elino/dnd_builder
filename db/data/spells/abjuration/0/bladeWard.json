@@ -1,6 +1,6 @@
 {
   "id": "bladeWard",
-  "name": "Клинковая защита",
+  "name": "Blade Ward",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "До конца следующего хода получаете сопротивление дроб./кол./руб. урону."
+  "desc": "Until the end of your next turn, you have Resistance to Bludgeoning, Piercing, and Slashing damage."
 }

@@ -1,9 +1,9 @@
 {
   "id": "pathToTheGrave",
-  "name": "Путь к могиле",
+  "name": "Path to the Grave",
   "kind": "martial",
   "subclass": "grave",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Проклинаете существо в 9 м: следующая атака по нему в этот/следующий ход попадает с уязвимостью ко всему урону."
+  "desc": "Costs 1 use of Channel Divinity. You curse a creature within 30 feet: the next attack that hits it this turn or next turn gives it Vulnerability to all of that damage."
 }

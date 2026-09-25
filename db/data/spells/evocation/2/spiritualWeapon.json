@@ -1,6 +1,6 @@
 {
   "id": "spiritualWeapon",
-  "name": "Духовное оружие",
+  "name": "Spiritual Weapon",
   "kind": "spell",
   "action": "bonus",
   "level": 2,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Создаёте парящее оружие (бонусным действием атакует, урон силовым полем + мод.). 1 минута.",
+  "desc": "You create a floating spectral weapon (it attacks as a Bonus Action, dealing Force damage + your modifier). 1 minute.",
   "damage": {
     "dice": "1d8",
     "type": "force"

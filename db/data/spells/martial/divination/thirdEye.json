@@ -1,9 +1,9 @@
 {
   "id": "thirdEye",
-  "name": "Третий глаз",
+  "name": "The Third Eye",
   "kind": "martial",
   "subclass": "divination",
   "level": 10,
   "action": "action",
-  "desc": "Действием получаете: тёмное зрение 18 м, видение Эфирного плана 3 м, понимание любых письмён или зрение до 300 м."
+  "desc": "As an action, you gain one of the following: Darkvision 60 feet, sight of the Ethereal Plane within 10 feet, the ability to read any writing, or sight out to 1,000 feet."
 }

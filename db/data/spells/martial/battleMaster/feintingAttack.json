@@ -1,10 +1,10 @@
 {
   "id": "feintingAttack",
-  "name": "Финт",
+  "name": "Feinting Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Бонусным действием — преимущество на следующую атаку по цели в этот ход; при попадании доп. урон = кость.",
+  "desc": "As a Bonus Action, you gain Advantage on your next attack roll against the target this turn; on a hit, extra damage equal to the die.",
   "action": "bonus",
   "pool": "maneuver"
 }

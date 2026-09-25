@@ -1,7 +1,7 @@
 {
   "id": "distantSpell",
-  "name": "Дальнее заклинание",
+  "name": "Distant Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Удваиваете дальность заклинания (мин. 1,5 м) или превращаете дальность «Касание» в 9 м."
+  "desc": "You double a spell's range (minimum 5 feet) or change a range of Touch to 30 feet."
 }

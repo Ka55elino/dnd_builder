@@ -1,6 +1,6 @@
 {
   "id": "guidance",
-  "name": "Указание",
+  "name": "Guidance",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -9,5 +9,5 @@
     "cleric",
     "druid"
   ],
-  "desc": "Касанием даёте существу +1d4 к одной проверке характеристики. Концентрация до 1 минуты."
+  "desc": "You touch a creature to give it +1d4 to one ability check. Concentration, up to 1 minute."
 }

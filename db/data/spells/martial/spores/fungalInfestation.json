@@ -1,11 +1,11 @@
 {
   "id": "fungalInfestation",
-  "name": "Грибковое заражение",
+  "name": "Fungal Infestation",
   "kind": "martial",
   "subclass": "spores",
   "level": 6,
   "action": "reaction",
-  "desc": "Реакцией, когда зверь или гуманоид погибает в 3 м от вас, поднимаете его как дружественного зомби на 1 час. Число применений равно бонусу мастерства (на длинный отдых).",
+  "desc": "As a Reaction, when a Beast or Humanoid dies within 10 feet of you, you raise it as a friendly zombie for 1 hour. Number of uses equals your Proficiency Bonus (per Long Rest).",
   "uses": {
     "count": 2,
     "per": "longRest",

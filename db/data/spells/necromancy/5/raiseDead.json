@@ -1,6 +1,6 @@
 {
   "id": "raiseDead",
-  "name": "Оживление",
+  "name": "Raise Dead",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,5 +10,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Возвращаете к жизни существо, мёртвое не более 10 дней."
+  "desc": "You return to life a creature that has been dead no longer than 10 days."
 }

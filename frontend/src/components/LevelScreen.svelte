@@ -1,18 +1,18 @@
 <script>
     /**
-     * Экран уровня: что даёт уровень и что на нём нужно выбрать.
-     * Используется в билдере (любой уровень при редактировании) и при повышении.
+     * Level screen: what the level grants and what must be chosen at it.
+     * Used in the builder (any level when editing) and when leveling up.
      *
-     * build    — CharacterBuild (выборы пишутся в build.choices)
-     * level    — какой уровень показываем
-     * refs     — справочники (data/refs.js)
-     * complete — (bindable) все ли выборы сделаны
+     * build    — CharacterBuild (choices are written to build.choices)
+     * level    — which level to show
+     * refs     — reference data (data/refs.js)
+     * complete — (bindable) whether all choices are made
      */
     import { levelPlan, evaluatePlan } from "../rules/progression.js";
     import { formatModifier } from "../rules/abilities.js";
     import ActionCard from "./common/ActionCard.svelte";
 
-    // эти выборы показываем карточками с описанием; навыки — компактными чипами
+    // these choices are shown as cards with a description; skills as compact chips
     const CARD_KINDS = new Set([
         "cantrips", "spells", "feat", "fightingStyle", "metamagic", "invocations", "option", "subclass", "pool", "invocationForget",
     ]);
@@ -20,10 +20,10 @@
     let { build, level, refs, complete = $bindable(false) } = $props();
 
     const plan = $derived(levelPlan(build, level, refs));
-    // visible / valid / count / need / done для каждого выбора
+    // visible / valid / count / need / done for each choice
     const ev = $derived(evaluatePlan(plan, build, refs));
 
-    // недопустимые значения убираем из build, чтобы они не занимали место
+    // remove invalid values from build so they don't take up slots
     $effect(() => {
         for (const c of ev.choices) {
             if (c.kind === "asi" || c.kind === "subclass" || !c.value?.ids) continue;
@@ -37,7 +37,7 @@
         complete = ev.complete;
     });
 
-    // --- изменение выбора ---
+    // --- changing a choice ---
     function toggle(choice, id) {
         const ids = [...choice.valid];
         const i = ids.indexOf(id);
@@ -49,12 +49,12 @@
         if (choice.kind === "subclass") build.setSubclass(ids[0] ?? null);
         build.setChoice(choice.key, ids.length ? { kind: choice.kind, ids } : null);
 
-        // отменили замену воззвания — убрать и выбранное взамен
+        // invocation replacement cancelled — remove the replacement pick too
         if (choice.kind === "invocationForget" && !ids.length) {
             build.setChoice(choice.key.replace(/Forget$/, "Swap"), null);
         }
 
-        // смена черты — сбросить зависящие от неё выборы (…:asi, …:skills)
+        // feat changed — reset the choices that depend on it (…:asi, …:skills)
         if (choice.kind === "feat") {
             for (const k of Object.keys(build.choices)) {
                 if (k.startsWith(choice.key + ":")) build.setChoice(k, null);
@@ -77,37 +77,37 @@
 </script>
 
 <div class="level">
-    <!-- итог уровня -->
+    <!-- level summary -->
     <section class="summary">
         <div class="big">
-            <span class="lbl">Уровень</span>
+            <span class="lbl">Level</span>
             <span class="val">{level}</span>
         </div>
         <div class="stat">
-            <span class="lbl">Хиты</span>
+            <span class="lbl">Hit Points</span>
             <span class="val">+{plan.hp.gain}</span>
             <small>{plan.hp.formula}</small>
         </div>
         <div class="stat" class:dim={!plan.profChanged}>
-            <span class="lbl">Мастерство</span>
+            <span class="lbl">Proficiency</span>
             <span class="val">{formatModifier(plan.prof)}</span>
-            <small>{plan.profChanged ? (level === 1 ? "начальный" : "вырос") : "без изменений"}</small>
+            <small>{plan.profChanged ? (level === 1 ? "starting" : "increased") : "no change"}</small>
         </div>
         {#if plan.slots.length}
             <div class="stat" class:dim={!plan.slotsChanged}>
-                <span class="lbl">Ячейки</span>
+                <span class="lbl">Spell Slots</span>
                 <span class="val slots">
-                    {#each plan.slots as s}<span>{s.level}<sup>{s.pact ? "дог" : "кр"}</sup>×{s.max}</span>{/each}
+                    {#each plan.slots as s}<span>{s.level}<sup>{s.pact ? "pact" : "lvl"}</sup>×{s.max}</span>{/each}
                 </span>
-                <small>{plan.slotsChanged ? "обновлены" : "без изменений"}</small>
+                <small>{plan.slotsChanged ? "updated" : "no change"}</small>
             </div>
         {/if}
     </section>
 
     <div class="cols">
-        <!-- что даёт уровень -->
+        <!-- what the level grants -->
         <section class="gains">
-            <h3>Что даёт уровень</h3>
+            <h3>What this level grants</h3>
             {#each plan.gains as g}
                 <div class="gain-group">
                     <h4>{g.title}</h4>
@@ -129,13 +129,13 @@
                     {/if}
                 </div>
             {:else}
-                <p class="muted">На этом уровне новых умений нет.</p>
+                <p class="muted">No new features at this level.</p>
             {/each}
         </section>
 
-        <!-- выборы -->
+        <!-- choices -->
         <section class="choices">
-            <h3>Выбор</h3>
+            <h3>Choices</h3>
             {#each ev.choices as c (c.key)}
                 {@const n = c.count}
                 {@const opts = c.visible}
@@ -143,7 +143,7 @@
                 <div class="choice" class:done={c.done}>
                     <div class="c-head">
                         <b>{c.title}</b>
-                        <span class="count">{#if c.optional}по желанию · {/if}{n} / {c.pick}</span>
+                        <span class="count">{#if c.optional}optional · {/if}{n} / {c.pick}</span>
                     </div>
                     {#if c.desc}<p class="c-desc">{c.desc}</p>{/if}
 
@@ -174,7 +174,7 @@
                                         onclick={() => toggle(c, o.id)}
                                     />
                                 {:else}
-                                    <p class="muted">Нет доступных вариантов.</p>
+                                    <p class="muted">No options available.</p>
                                 {/each}
                             </div>
                         {:else}
@@ -185,14 +185,14 @@
                                         {#if o.meta}<small>{o.meta}</small>{/if}
                                     </button>
                                 {:else}
-                                    <p class="muted">Нет доступных вариантов.</p>
+                                    <p class="muted">No options available.</p>
                                 {/each}
                             </div>
                         {/if}
                     {/if}
                 </div>
             {:else}
-                <p class="muted">На этом уровне выбирать нечего.</p>
+                <p class="muted">Nothing to choose at this level.</p>
             {/each}
         </section>
     </div>
@@ -205,7 +205,7 @@
         gap: 20px;
     }
 
-    /* --- итог --- */
+    /* --- summary --- */
     .summary {
         display: flex;
         flex-wrap: wrap;
@@ -267,7 +267,7 @@
         color: var(--color-text-muted);
     }
 
-    /* --- колонки --- */
+    /* --- columns --- */
     .cols {
         display: grid;
         grid-template-columns: 2fr 3fr;
@@ -344,7 +344,7 @@
         color: var(--color-text-muted);
     }
 
-    /* --- выбор --- */
+    /* --- choices --- */
     .choice {
         padding: 12px 14px;
         background: var(--color-card-elevated);

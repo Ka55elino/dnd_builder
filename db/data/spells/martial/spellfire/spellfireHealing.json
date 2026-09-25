@@ -1,9 +1,9 @@
 {
   "id": "spellfireHealing",
-  "name": "Целебные чаропламы",
+  "name": "Spellfire Healing",
   "kind": "martial",
   "subclass": "spellfire",
   "level": 14,
   "action": "action",
-  "desc": "Действием тратите заряды чароплам, восстанавливая существу в 18 м хиты (по 1d6 за заряд) или снимая с него одно состояние."
+  "desc": "As a Magic action, you expend Spellfire charges to restore Hit Points to a creature within 60 feet (1d6 per charge) or end one condition on it."
 }

@@ -1,9 +1,9 @@
 {
   "id": "shadowArtsDarkness",
-  "name": "Искусство тени: Тьма",
+  "name": "Shadow Arts: Darkness",
   "kind": "martial",
   "subclass": "shadow",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 очко ци. Создаёте магическую «Тьму» (сфера радиусом 4,5 м) на 10 минут и видите сквозь неё."
+  "desc": "Costs 1 Focus Point. You create magical Darkness (a 15-foot-radius Sphere) for 10 minutes and can see through it."
 }

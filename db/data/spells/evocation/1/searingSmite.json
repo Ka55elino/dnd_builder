@@ -1,6 +1,6 @@
 {
   "id": "searingSmite",
-  "name": "Опаляющая кара",
+  "name": "Searing Smite",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "paladin"
   ],
-  "desc": "Бонусным действием: следующее попадание оружием поджигает цель — доп. 1d6 огнём и 1d6 в начале её ходов (спасбросок Тел. чтобы потушить). Концентрация.",
+  "desc": "As a Bonus Action: your next weapon hit sets the target ablaze, dealing an extra 1d6 Fire damage and 1d6 at the start of each of its turns (Constitution saving throw to extinguish the flames). Concentration.",
   "damage": {
     "dice": "1d6",
     "type": "fire"

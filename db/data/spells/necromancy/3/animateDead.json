@@ -1,6 +1,6 @@
 {
   "id": "animateDead",
-  "name": "Оживление мёртвых",
+  "name": "Animate Dead",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,5 +9,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Поднимаете скелет или зомби под вашим контролем."
+  "desc": "You raise a Skeleton or Zombie under your control."
 }

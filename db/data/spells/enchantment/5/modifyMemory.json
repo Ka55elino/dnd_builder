@@ -1,6 +1,6 @@
 {
   "id": "modifyMemory",
-  "name": "Изменение памяти",
+  "name": "Modify Memory",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -10,5 +10,5 @@
     "bard",
     "wizard"
   ],
-  "desc": "Изменяете воспоминание существа о недавнем событии (спасбросок Мудрости). Концентрация."
+  "desc": "You alter a creature's memory of a recent event (Wisdom saving throw). Concentration."
 }

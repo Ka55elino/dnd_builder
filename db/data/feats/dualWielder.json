@@ -1,11 +1,11 @@
 {
   "id": "dualWielder",
-  "name": "Двурукий боец",
+  "name": "Dual Wielder",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; бой двумя более крупными оружиями, доп. атака."
+  "desc": "+1 Strength or Dexterity; fight with two larger weapons, extra attack."
 }

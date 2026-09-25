@@ -1,6 +1,6 @@
 {
   "id": "chromaticOrb",
-  "name": "Хроматическая сфера",
+  "name": "Chromatic Orb",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Метаете сферу выбранной стихии (атака заклинанием): урон кислотой/холодом/огнём/электричеством/ядом/звуком.",
+  "desc": "You hurl a sphere of the chosen element (spell attack): Acid, Cold, Fire, Lightning, Poison, or Thunder damage.",
   "damage": {
     "dice": "3d8",
     "type": "acid"

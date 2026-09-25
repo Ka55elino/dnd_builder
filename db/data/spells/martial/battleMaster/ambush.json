@@ -1,9 +1,9 @@
 {
   "id": "ambush",
-  "name": "Засада",
+  "name": "Ambush",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Тратя кость превосходства, прибавляете её к проверке Скрытности или Инициативы.",
+  "desc": "By expending a Superiority Die, you add it to a Stealth check or Initiative roll.",
   "pool": "maneuver"
 }

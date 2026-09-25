@@ -1,9 +1,9 @@
 {
   "id": "agonizingBlast",
-  "name": "Мучительный взрыв",
+  "name": "Agonizing Blast",
   "category": "invocation",
   "level": 1,
-  "desc": "Выбираете заговор (обычно «Мистический взрыв»): прибавляете модификатор Харизмы к урону каждого его луча.",
+  "desc": "Choose a cantrip (usually Eldritch Blast): add your Charisma modifier to the damage of each of its beams.",
   "prereq": {
     "blast": true
   },
@@ -11,7 +11,7 @@
     {
       "kind": "bonus",
       "target": "note",
-      "note": "+мод. Харизмы к урону каждого луча Мистического взрыва"
+      "note": "+ your Charisma modifier to the damage of each Eldritch Blast beam"
     }
   ]
 }

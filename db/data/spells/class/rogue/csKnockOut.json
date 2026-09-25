@@ -1,8 +1,10 @@
 {
   "id": "csKnockOut",
-  "name": "Хитрый удар: Нокаут",
+  "name": "Cunning Strike: Knock Out",
   "kind": "class",
   "level": 14,
-  "classes": ["rogue"],
-  "desc": "Стоимость 6 костей Скрытой атаки. Спасбросок Телосложения; при провале цель получает «Без сознания» на 1 минуту или пока не получит урон/её не растолкают."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 6 Sneak Attack dice. Constitution saving throw; on a failed save, the target has the Unconscious condition for 1 minute or until it takes damage or someone shakes it awake."
 }

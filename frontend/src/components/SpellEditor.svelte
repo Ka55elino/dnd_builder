@@ -1,11 +1,11 @@
 <script>
     /**
-     * Форма своего заклинания. Результат — объект в формате db/data/spells,
-     * сохраняется через SaveCustomSpell. Справа — живой предпросмотр карточки.
+     * Custom spell form. The result is an object in db/data/spells format,
+     * saved via SaveCustomSpell. On the right is a live card preview.
      *
-     * initial — запись справочника для правки (или основа для копии), null — новое
-     * copy    — true: initial — только основа, сохраняем как новую запись
-     * classes — классы (refs.classes) для выбора списков
+     * initial — reference record to edit (or the base for a copy), null — new
+     * copy    — true: initial is only a base, save as a new record
+     * classes — classes (refs.classes) for choosing spell lists
      * onSaved(id) / onCancel()
      */
     import { untrack } from "svelte";
@@ -15,15 +15,15 @@
 
     let { initial = null, copy = false, classes = [], onSaved, onCancel } = $props();
 
-    // время накладывания по умолчанию для типа действия
-    const TIME_BY_ACTION = { action: "1 действие", bonus: "1 бонусное действие", reaction: "1 реакция", free: "" };
+    // default casting time for the action type
+    const TIME_BY_ACTION = { action: "1 action", bonus: "1 bonus action", reaction: "1 reaction", free: "" };
     const DMG = Object.entries(DAMAGE_TYPES).filter(([k]) => k !== "physical" && k !== "weapon");
     const DICE = /^\d+(d\d+)?$/i;
 
     let f = $state(untrack(() => formFrom(initial, copy)));
 
-    // поля исходной записи, которые форма не редактирует (сложный урон из нескольких частей,
-    // weaponAttack, scaleDie…) — сохраняем как есть, чтобы правка/копия их не теряла
+    // fields of the source record the form doesn't edit (complex multi-part damage,
+    // weaponAttack, scaleDie…) — kept as is so an edit/copy doesn't lose them
     const MANAGED = ["id", "name", "kind", "level", "school", "action", "classes", "casting", "damage", "custom", "desc"];
     const kept = untrack(() => {
         const d = initial?.data ?? {};
@@ -35,34 +35,34 @@
     function formFrom(initial, copy) {
         const d = initial?.data ?? {};
         const c = d.casting ?? {};
-        const comp = String(c.components ?? "В, С");
-        const material = /М\s*\((.*)\)/.exec(comp)?.[1] ?? "";
+        const comp = String(c.components ?? "V, S");
+        const material = /\bM\s*\((.*)\)/.exec(comp)?.[1] ?? "";
         const dmg = d.damage && ("dice" in d.damage || "type" in d.damage) ? d.damage : null;
         const action = initial?.action ?? d.action ?? "action";
         return {
-            name: initial ? (copy ? `${initial.name} (копия)` : initial.name) : "",
+            name: initial ? (copy ? `${initial.name} (copy)` : initial.name) : "",
             level: initial?.level ?? 1,
             school: initial?.school ?? "evocation",
             classes: [...(d.classes ?? [])],
             action,
             time: c.time ?? TIME_BY_ACTION[action] ?? "",
             range: c.range ?? "",
-            duration: c.duration ?? "Мгновенно",
-            v: /В/.test(comp),
-            s: /С/.test(comp),
-            m: /М/.test(comp),
+            duration: c.duration ?? "Instantaneous",
+            v: /\bV\b/.test(comp),
+            s: /\bS\b/.test(comp),
+            m: /\bM\b/.test(comp),
             material,
             concentration: !!(c.concentration ?? initial?.concentration),
             ritual: !!(c.ritual ?? initial?.ritual),
             hasDamage: !!dmg?.dice,
             dice: dmg?.dice ?? "1d10",
             dmgType: dmg?.type ?? "fire",
-            cantripScaling: dmg ? dmg.scaling === "cantrip" : true, // у нового заговора урон растёт по умолчанию
+            cantripScaling: dmg ? dmg.scaling === "cantrip" : true, // a new cantrip's damage scales by default
             desc: initial?.desc ?? d.desc ?? "",
         };
     }
 
-    // смена типа действия подставляет время, если его не меняли вручную
+    // changing the action type fills in the time unless it was edited manually
     function setAction(a) {
         if (f.time === (TIME_BY_ACTION[f.action] ?? "")) f.time = TIME_BY_ACTION[a] ?? "";
         f.action = a;
@@ -75,10 +75,10 @@
     }
 
     const components = $derived(
-        [f.v && "В", f.s && "С", f.m && (f.material.trim() ? `М (${f.material.trim()})` : "М")].filter(Boolean).join(", "),
+        [f.v && "V", f.s && "S", f.m && (f.material.trim() ? `M (${f.material.trim()})` : "M")].filter(Boolean).join(", "),
     );
 
-    /** Объект в формате db/data/spells (без проверок — для предпросмотра). */
+    /** Object in db/data/spells format (no validation — for the preview). */
     function toSpell() {
         const level = Number(f.level) || 0;
         const casting = {
@@ -111,16 +111,16 @@
         };
     }
 
-    // предпросмотр — в форме записи справочника (как приходит из GetSpells)
+    // preview — shaped like a reference record (as returned by GetSpells)
     const preview = $derived.by(() => {
         const sp = toSpell();
         const { desc, ...data } = sp;
         return {
             ...sp,
-            name: sp.name || "Название",
+            name: sp.name || "Name",
             concentration: f.concentration,
             ritual: f.ritual,
-            desc: desc || "Описание заклинания…",
+            desc: desc || "Spell description…",
             data,
         };
     });
@@ -134,15 +134,15 @@
     async function save() {
         error = "";
         const sp = toSpell();
-        if (!sp.name) return (error = "Укажите название.");
-        if (!sp.desc) return (error = "Добавьте описание.");
-        if (f.hasDamage && !DICE.test(sp.damage.dice)) return (error = "Урон — кость вида 2d6 или число.");
+        if (!sp.name) return (error = "Enter a name.");
+        if (!sp.desc) return (error = "Add a description.");
+        if (f.hasDamage && !DICE.test(sp.damage.dice)) return (error = "Damage must be a die like 2d6 or a number.");
         saving = true;
         try {
             const id = await SaveCustomSpell(JSON.stringify(sp));
             onSaved?.(id);
         } catch (e) {
-            error = "Не удалось сохранить: " + (e?.message ?? e);
+            error = "Failed to save: " + (e?.message ?? e);
         } finally {
             saving = false;
         }
@@ -157,72 +157,72 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 <div class="backdrop" onclick={(e) => e.target === e.currentTarget && onCancel?.()}>
-    <div class="dialog" role="dialog" aria-modal="true" aria-label="Своё заклинание">
-        <h2>{initial && !copy ? "Изменить заклинание" : "Новое заклинание"}</h2>
+    <div class="dialog" role="dialog" aria-modal="true" aria-label="Custom spell">
+        <h2>{initial && !copy ? "Edit spell" : "New spell"}</h2>
 
         <div class="layout">
             <div class="form">
                 <label class="field">
-                    <span>Название *</span>
-                    <input type="text" bind:value={f.name} placeholder="Например, Ледяной шип" />
+                    <span>Name *</span>
+                    <input type="text" bind:value={f.name} placeholder="E.g. Ice Knife" />
                 </label>
 
                 <div class="grid">
                     <label class="field">
-                        <span>Круг</span>
+                        <span>Level</span>
                         <select bind:value={f.level}>
                             {#each Array.from({ length: 10 }, (_, i) => i) as l}
-                                <option value={l}>{l === 0 ? "Заговор" : `${l} круг`}</option>
+                                <option value={l}>{l === 0 ? "Cantrip" : `Level ${l}`}</option>
                             {/each}
                         </select>
                     </label>
                     <label class="field">
-                        <span>Школа</span>
+                        <span>School</span>
                         <select bind:value={f.school}>
                             {#each Object.entries(SCHOOLS) as [k, v]}<option value={k}>{v}</option>{/each}
                         </select>
                     </label>
                     <label class="field">
-                        <span>Тип действия</span>
+                        <span>Action type</span>
                         <select value={f.action} onchange={(e) => setAction(e.currentTarget.value)}>
                             {#each Object.entries(ACTION_TYPES) as [k, v]}<option value={k}>{v.name}</option>{/each}
-                            <option value="">— другое —</option>
+                            <option value="">— other —</option>
                         </select>
                     </label>
                     <label class="field">
-                        <span>Время накладывания</span>
-                        <input type="text" bind:value={f.time} placeholder="1 минута" />
+                        <span>Casting time</span>
+                        <input type="text" bind:value={f.time} placeholder="1 minute" />
                     </label>
                     <label class="field">
-                        <span>Дистанция</span>
-                        <input type="text" bind:value={f.range} placeholder="18 м / на себя / касание" />
+                        <span>Range</span>
+                        <input type="text" bind:value={f.range} placeholder="60 feet / Self / Touch" />
                     </label>
                     <label class="field">
-                        <span>Длительность</span>
-                        <input type="text" bind:value={f.duration} placeholder="Мгновенно" />
+                        <span>Duration</span>
+                        <input type="text" bind:value={f.duration} placeholder="Instantaneous" />
                     </label>
                 </div>
 
                 <div class="field">
-                    <span>Компоненты и флаги</span>
+                    <span>Components and flags</span>
                     <div class="checks">
-                        <label class="check"><input type="checkbox" bind:checked={f.v} /> В</label>
-                        <label class="check"><input type="checkbox" bind:checked={f.s} /> С</label>
-                        <label class="check"><input type="checkbox" bind:checked={f.m} /> М</label>
-                        <label class="check"><input type="checkbox" bind:checked={f.concentration} /> Концентрация</label>
-                        <label class="check"><input type="checkbox" bind:checked={f.ritual} /> Ритуал</label>
+                        <label class="check"><input type="checkbox" bind:checked={f.v} /> V</label>
+                        <label class="check"><input type="checkbox" bind:checked={f.s} /> S</label>
+                        <label class="check"><input type="checkbox" bind:checked={f.m} /> M</label>
+                        <label class="check"><input type="checkbox" bind:checked={f.concentration} /> Concentration</label>
+                        <label class="check"><input type="checkbox" bind:checked={f.ritual} /> Ritual</label>
                     </div>
                     {#if f.m}
-                        <input type="text" bind:value={f.material} placeholder="материальный компонент (необязательно)" />
+                        <input type="text" bind:value={f.material} placeholder="material component (optional)" />
                     {/if}
                 </div>
 
                 <div class="field">
-                    <span>Урон</span>
+                    <span>Damage</span>
                     {#if kept.complexDamage && !f.hasDamage}
-                        <small class="hint">Урон из нескольких частей сохранится как в исходном заклинании.</small>
+                        <small class="hint">Multi-part damage will be kept as in the original spell.</small>
                     {/if}
-                    <label class="check"><input type="checkbox" bind:checked={f.hasDamage} /> {kept.complexDamage ? "Заменить урон на простой" : "Наносит урон"}</label>
+                    <label class="check"><input type="checkbox" bind:checked={f.hasDamage} /> {kept.complexDamage ? "Replace with simple damage" : "Deals damage"}</label>
                     {#if f.hasDamage}
                         <div class="dmg-row">
                             <input type="text" bind:value={f.dice} placeholder="2d6" />
@@ -230,30 +230,30 @@
                                 {#each DMG as [k, v]}<option value={k}>{v.short}</option>{/each}
                             </select>
                             {#if Number(f.level) === 0}
-                                <label class="check"><input type="checkbox" bind:checked={f.cantripScaling} /> растёт на 5/11/17 ур.</label>
+                                <label class="check"><input type="checkbox" bind:checked={f.cantripScaling} /> scales at levels 5/11/17</label>
                             {/if}
                         </div>
                     {/if}
                 </div>
 
                 <div class="field">
-                    <span>Списки классов</span>
+                    <span>Class spell lists</span>
                     <div class="chips">
                         {#each classes as c (c.id)}
                             <button class="chip" class:on={f.classes.includes(c.id)} onclick={() => toggleClass(c.id)}>{c.name}</button>
                         {/each}
                     </div>
-                    <small class="hint">Отмеченные классы смогут выбирать это заклинание при создании и повышении уровня.</small>
+                    <small class="hint">Checked classes can choose this spell at character creation and on level up.</small>
                 </div>
 
                 <label class="field">
-                    <span>Описание *</span>
-                    <textarea rows="5" bind:value={f.desc} placeholder="Что делает заклинание, спасбросок, эффект на больших кругах…"></textarea>
+                    <span>Description *</span>
+                    <textarea rows="5" bind:value={f.desc} placeholder="What the spell does, saving throw, effect at higher levels…"></textarea>
                 </label>
             </div>
 
             <aside class="preview">
-                <span class="p-label">Предпросмотр</span>
+                <span class="p-label">Preview</span>
                 <ActionCard item={preview} source={previewSource} />
             </aside>
         </div>
@@ -261,8 +261,8 @@
         {#if error}<p class="error">{error}</p>{/if}
 
         <div class="actions">
-            <button class="ghost" onclick={onCancel}>Отмена</button>
-            <button class="primary" onclick={save} disabled={saving}>{saving ? "Сохранение…" : "Сохранить"}</button>
+            <button class="ghost" onclick={onCancel}>Cancel</button>
+            <button class="primary" onclick={save} disabled={saving}>{saving ? "Saving…" : "Save"}</button>
         </div>
     </div>
 </div>

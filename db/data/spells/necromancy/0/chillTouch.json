@@ -1,6 +1,6 @@
 {
   "id": "chillTouch",
-  "name": "Ледяное прикосновение",
+  "name": "Chill Touch",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,12 +11,12 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Дальнобойная атака заклинанием призрачной рукой; при попадании некротический урон, и цель не может восстанавливать хиты до начала вашего следующего хода. Урон растёт с уровнем.",
+  "desc": "A ranged spell attack with a ghostly hand; on a hit, Necrotic damage, and the target can't regain Hit Points until the start of your next turn. The damage increases with level.",
   "casting": {
-    "time": "1 действие",
-    "range": "36 м",
-    "components": "В, С",
-    "duration": "1 раунд"
+    "time": "1 action",
+    "range": "120 feet",
+    "components": "V, S",
+    "duration": "1 round"
   },
   "damage": {
     "dice": "1d10",

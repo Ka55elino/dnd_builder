@@ -1,6 +1,6 @@
 {
   "id": "massHealingWord",
-  "name": "Массовое лечащее слово",
+  "name": "Mass Healing Word",
   "kind": "spell",
   "action": "bonus",
   "level": 3,
@@ -9,5 +9,5 @@
     "bard",
     "cleric"
   ],
-  "desc": "Бонусным действием до 6 существ лечатся на 1d4 + мод. заклинателя."
+  "desc": "As a Bonus Action, up to 6 creatures heal 1d4 + your spellcasting ability modifier."
 }

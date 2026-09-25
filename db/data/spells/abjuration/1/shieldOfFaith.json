@@ -1,6 +1,6 @@
 {
   "id": "shieldOfFaith",
-  "name": "Щит веры",
+  "name": "Shield of Faith",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Существо в 18 м получает +2 к КЗ на время концентрации (до 10 минут)."
+  "desc": "A creature within 60 feet gains +2 to AC for the duration (Concentration, up to 10 minutes)."
 }

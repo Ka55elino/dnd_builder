@@ -1,9 +1,11 @@
 {
   "id": "turnUndead",
-  "name": "Изгнание нежити",
+  "name": "Turn Undead",
   "kind": "class",
   "level": 2,
-  "classes": ["cleric"],
+  "classes": [
+    "cleric"
+  ],
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Нежить в 9 м: спасбросок Мудрости (Сл {saveDc}) или изгнана на 1 минуту (тратит ходы, убегая). С 5 ур. (Опаляющая нежить) изгоняемые получают {searUndead} урона излучением."
+  "desc": "Cost: 1 use of Channel Divinity. Undead within 30 feet make a Wisdom saving throw (DC {saveDc}) or are Turned for 1 minute (spending their turns fleeing). Starting at level 5 (Sear Undead), turned creatures take {searUndead} Radiant damage."
 }

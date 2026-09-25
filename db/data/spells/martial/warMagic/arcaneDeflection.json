@@ -1,9 +1,9 @@
 {
   "id": "arcaneDeflection",
-  "name": "Тайное отклонение",
+  "name": "Arcane Deflection",
   "kind": "martial",
   "subclass": "warMagic",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией, когда по вам совершают бросок атаки или вы проходите спасбросок, получаете +2 к КЗ (против атаки) или +4 к спасброску. До конца следующего хода можете творить только заговоры."
+  "desc": "As a Reaction, when an attack roll is made against you or you make a saving throw, you gain +2 to AC (against the attack) or +4 to the saving throw. Until the end of your next turn, you can cast only cantrips."
 }

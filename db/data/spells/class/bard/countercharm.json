@@ -1,9 +1,11 @@
 {
   "id": "countercharm",
-  "name": "Контрочарование",
+  "name": "Countercharm",
   "kind": "class",
   "level": 7,
-  "classes": ["bard"],
+  "classes": [
+    "bard"
+  ],
   "action": "action",
-  "desc": "Действием на 1 минуту вы и союзники в 9 м получаете преимущество на спасброски против состояний «Испуг» и «Очарование»."
+  "desc": "As an action, for 1 minute you and allies within 30 feet have Advantage on saving throws to avoid or end the Frightened and Charmed conditions."
 }

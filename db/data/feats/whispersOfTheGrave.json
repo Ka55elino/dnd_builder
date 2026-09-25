@@ -1,7 +1,7 @@
 {
   "id": "whispersOfTheGrave",
-  "name": "Шёпот могилы",
+  "name": "Whispers of the Grave",
   "category": "invocation",
   "level": 7,
-  "desc": "По желанию творите «Говорить с мёртвыми» без ячейки."
+  "desc": "You can cast Speak with Dead at will, without a spell slot."
 }

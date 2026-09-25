@@ -1,28 +1,28 @@
 {
   "id": "hunter",
-  "name": "Охотник",
+  "name": "Hunter",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "ranger",
   "features": [
     {
       "level": 3,
-      "name": "Добыча охотника",
-      "desc": "Выбираете приём: «Убийца колоссов» — раз за ход +1d8 урона цели ниже максимума хитов; или «Крушитель орды» — раз за ход одна из ваших атак повторяется по другой цели в 1,5 м от первой."
+      "name": "Hunter's Prey",
+      "desc": "You choose a technique: Colossus Slayer (once per turn, +1d8 damage to a target missing any of its Hit Points) or Horde Breaker (once per turn, one of your attacks is repeated against another target within 5 feet of the first)."
     },
     {
       "level": 7,
-      "name": "Оборонительная тактика",
-      "desc": "Выбираете: «Ускользание от орды» (атаки по возможности против вас — с помехой) или «Защита от мультиатаки» (после попадания по вам существо атакует вас с помехой до конца хода)."
+      "name": "Defensive Tactics",
+      "desc": "You choose Escape the Horde (Opportunity Attacks against you have Disadvantage) or Multiattack Defense (after a creature hits you, it has Disadvantage on attacks against you until the end of the turn)."
     },
     {
       "level": 11,
-      "name": "Высшая добыча охотника",
-      "desc": "Приёмы «Добычи охотника» усиливаются: Убийца колоссов срабатывает по двум разным целям за ход; Крушитель орды повторяет каждую атаку по соседней цели."
+      "name": "Superior Hunter's Prey",
+      "desc": "Your Hunter's Prey techniques improve: Colossus Slayer triggers on two different targets per turn; Horde Breaker repeats each attack against an adjacent target."
     },
     {
       "level": 15,
-      "name": "Высшая оборона охотника",
-      "desc": "Реакцией на получаемый урон уменьшаете его на 1d8 + уровень Следопыта и получаете сопротивление этому типу урона до начала вашего следующего хода."
+      "name": "Superior Hunter's Defense",
+      "desc": "As a Reaction when you take damage, you reduce it by 1d8 + your Ranger level and gain Resistance to that damage type until the start of your next turn."
     }
   ]
 }

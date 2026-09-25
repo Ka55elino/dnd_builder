@@ -1,6 +1,6 @@
 {
   "id": "ritualCaster",
-  "name": "Ритуальный заклинатель",
+  "name": "Ritual Caster",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,5 +8,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; книга ритуалов, ритуальное колдовство."
+  "desc": "+1 Int/Wis/Cha; ritual book, Ritual casting."
 }

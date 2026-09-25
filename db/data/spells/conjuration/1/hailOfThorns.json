@@ -1,6 +1,6 @@
 {
   "id": "hailOfThorns",
-  "name": "Град шипов",
+  "name": "Hail of Thorns",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,12 +8,12 @@
   "classes": [
     "ranger"
   ],
-  "desc": "Следующее попадание дальнобойным оружием осыпает шипами всех в 1,5 м от цели: 1d10 колющего урона (спасбросок Ловкости за половину). Концентрация до 1 минуты.",
+  "desc": "Your next hit with a ranged weapon showers thorns on everyone within 5 feet of the target: 1d10 Piercing damage (Dexterity saving throw for half). Concentration, up to 1 minute.",
   "casting": {
-    "time": "1 бонусное действие",
-    "range": "На себя",
-    "components": "В",
-    "duration": "Конц., 1 мин",
+    "time": "1 bonus action",
+    "range": "Self",
+    "components": "V",
+    "duration": "Conc., 1 min",
     "concentration": true
   },
   "damage": {

@@ -1,11 +1,39 @@
 {
   "id": "fireBurn",
-  "name": "Огненный ожог",
+  "name": "Fire's Burn",
   "kind": "action",
-  "source": "Голиаф (Огонь)",
+  "source": "Goliath (Fire)",
   "level": 1,
   "action": "free",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Когда вы попадаете по цели атакой, можете нанести ей доп. 1d10 урона огнём. Число применений равно вашему бонусу мастерства (на длинный отдых).",
-  "damage": { "dice": "1d10", "type": "fire" }
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "When you hit a target with an attack, you can deal an extra 1d10 Fire damage to it. Number of uses equals your Proficiency Bonus (per Long Rest).",
+  "damage": {
+    "dice": "1d10",
+    "type": "fire"
+  }
 }

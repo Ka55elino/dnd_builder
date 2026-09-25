@@ -1,7 +1,7 @@
 {
   "id": "subtleSpell",
-  "name": "Незаметное заклинание",
+  "name": "Subtle Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Творите заклинание без вербального и соматического компонентов."
+  "desc": "You cast a spell without Verbal and Somatic components."
 }

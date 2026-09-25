@@ -1,7 +1,7 @@
 {
   "id": "ascendantStep",
-  "name": "Восходящий шаг",
+  "name": "Ascendant Step",
   "category": "invocation",
   "level": 9,
-  "desc": "По желанию творите «Левитацию» на себя без ячейки."
+  "desc": "You can cast Levitate on yourself at will, without a spell slot."
 }

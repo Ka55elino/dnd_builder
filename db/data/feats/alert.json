@@ -1,9 +1,9 @@
 {
   "id": "alert",
-  "name": "Бдительный",
+  "name": "Alert",
   "category": "origin",
   "level": 1,
-  "desc": "+бонус мастерства к инициативе; можете поменяться инициативой с согласным союзником.",
+  "desc": "Add your Proficiency Bonus to Initiative; you can swap Initiative with a willing ally.",
   "effects": [
     {
       "kind": "bonus",

@@ -1,8 +1,8 @@
 {
   "id": "pactOfTheTalisman",
-  "name": "Договор талисмана",
+  "name": "Pact of the Talisman",
   "category": "invocation",
   "level": 1,
-  "desc": "Носитель талисмана раз на длинный отдых прибавляет 1d4 к проваленной проверке характеристики (число раз растёт с уровнем).",
+  "desc": "Once per Long Rest, the bearer of the talisman can add 1d4 to a failed ability check (the number of uses increases with level).",
   "boon": true
 }

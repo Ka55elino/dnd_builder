@@ -1,6 +1,6 @@
 {
   "id": "longstrider",
-  "name": "Шаги великана",
+  "name": "Longstrider",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -11,11 +11,11 @@
     "ranger",
     "wizard"
   ],
-  "desc": "Касанием увеличиваете скорость существа на 3 м на 1 час.",
+  "desc": "With a touch, you increase a creature's Speed by 10 feet for 1 hour.",
   "casting": {
-    "time": "1 действие",
-    "range": "Касание",
-    "components": "В, С, М",
-    "duration": "1 час"
+    "time": "1 action",
+    "range": "Touch",
+    "components": "V, S, M",
+    "duration": "1 hour"
   }
 }

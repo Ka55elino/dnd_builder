@@ -1,9 +1,9 @@
 {
   "id": "travelAlongTree",
-  "name": "Путь по Древу",
+  "name": "Travel Along the Tree",
   "kind": "martial",
   "subclass": "worldTree",
   "level": 14,
   "action": "bonus",
-  "desc": "Бонусным действием телепортируетесь до 18 м в видимую точку. Раз за каждую ярость можете вместо этого телепортироваться до 45 м и взять с собой до 6 согласных существ в пределах 3 м, появляющихся рядом с вами."
+  "desc": "As a Bonus Action, you teleport up to 60 feet to a point you can see. Once per Rage, you can instead teleport up to 150 feet and bring up to 6 willing creatures within 10 feet of you, who appear next to you."
 }

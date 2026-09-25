@@ -1,13 +1,13 @@
 {
   "id": "wsGiantOctopus",
-  "name": "Форма: Гигантский осьминог",
+  "name": "Form: Giant Octopus",
   "kind": "class",
   "level": 8,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1. Хиты 52, КЗ 11, скорость 3 м, плавание 18 м. Щупальца захватывают (Сл побега 16); чернильное облако; дыхание под водой.",
+  "desc": "CR 1. HP 52, AC 11, Speed 10 ft., Swim 60 ft. Tentacles grapple (escape DC 16); ink cloud; Water Breathing.",
   "damage": {
     "dice": "2d6",
     "type": "bludgeoning"

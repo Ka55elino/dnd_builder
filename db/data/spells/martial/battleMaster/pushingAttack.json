@@ -1,9 +1,9 @@
 {
   "id": "pushingAttack",
-  "name": "Толкающая атака",
+  "name": "Pushing Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При попадании доп. урон = кость; толкаете цель на 4,5 м (спасбросок Силы).",
+  "desc": "On a hit, extra damage equal to the die; you push the target up to 15 feet (Strength saving throw).",
   "pool": "maneuver"
 }

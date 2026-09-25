@@ -1,11 +1,11 @@
 {
   "id": "sentinel",
-  "name": "Страж",
+  "name": "Sentinel",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; атака по возможности останавливает, ловите уходящих врагов."
+  "desc": "+1 Strength or Dexterity; Opportunity Attacks stop movement, catch fleeing enemies."
 }

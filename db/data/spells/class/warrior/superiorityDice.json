@@ -1,10 +1,40 @@
 {
   "id": "superiorityDice",
-  "name": "Кости превосходства",
+  "name": "Superiority Dice",
   "kind": "class",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Ресурс для боевых приёмов. Тратятся на приёмы, восстанавливаются на коротком или длинном отдыхе. Кость растёт с уровнем (d8 → d10 на 10 ур. → d12 на 18 ур.).",
-  "uses": { "count": 4, "per": "shortRest", "scale": [[3, 4], [7, 5], [15, 6]] },
-  "scaleDie": [[3, "d8"], [10, "d10"], [18, "d12"]]
+  "desc": "A resource for combat maneuvers. Spent on maneuvers; regained on a Short or Long Rest. The die increases with level (d8 → d10 at level 10 → d12 at level 18).",
+  "uses": {
+    "count": 4,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        4
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        15,
+        6
+      ]
+    ]
+  },
+  "scaleDie": [
+    [
+      3,
+      "d8"
+    ],
+    [
+      10,
+      "d10"
+    ],
+    [
+      18,
+      "d12"
+    ]
+  ]
 }

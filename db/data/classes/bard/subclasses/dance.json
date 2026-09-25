@@ -1,33 +1,33 @@
 {
   "id": "dance",
-  "name": "Коллегия танца",
+  "name": "College of Dance",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "bard",
   "features": [
     {
       "level": 3,
-      "name": "Ослепительная работа ног",
-      "desc": "Без доспехов и щита КЗ = 10 + мод. Ловкости + мод. Харизмы. Безоружные удары наносят урон по Кости вдохновения (Ловкость).",
+      "name": "Dazzling Footwork",
+      "desc": "Without armor or a Shield, your AC = 10 + Dex modifier + Cha modifier. Your Unarmed Strikes deal damage equal to your Bardic Inspiration die (Dexterity).",
       "grants": [
         {
           "type": "effect",
           "effect": {
             "kind": "note",
             "target": "note",
-            "note": "КЗ без доспехов = 10 + Лов + Хар (Ослепительная работа ног)"
+            "note": "AC without armor = 10 + Dex + Cha (Dazzling Footwork)"
           }
         }
       ]
     },
     {
       "level": 6,
-      "name": "Ловкое уклонение",
-      "desc": "При спасброске Ловкости за половину урона: успех — урона нет; можете реакцией защитить союзника, разделив с ним преимущество уклонения."
+      "name": "Leading Evasion",
+      "desc": "When you make a Dexterity saving throw to take half damage: on a success, you take no damage; you can use your Reaction to protect an ally, sharing the benefit of Evasion with them."
     },
     {
       "level": 14,
-      "name": "Головокружительный финал",
-      "desc": "Тратя Кость вдохновения бонусным действием, перемещаетесь на свою скорость, не провоцируя атак, и совершаете безоружный удар с доп. уроном."
+      "name": "Tandem Footwork",
+      "desc": "When you expend a Bardic Inspiration die as a Bonus Action, you move up to your Speed without provoking Opportunity Attacks and make an Unarmed Strike that deals extra damage."
     }
   ]
 }

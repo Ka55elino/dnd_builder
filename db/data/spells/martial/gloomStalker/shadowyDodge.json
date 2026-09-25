@@ -1,9 +1,9 @@
 {
   "id": "shadowyDodge",
-  "name": "Теневой уворот",
+  "name": "Shadowy Dodge",
   "kind": "martial",
   "subclass": "gloomStalker",
   "level": 15,
   "action": "reaction",
-  "desc": "Реакцией, когда существо совершает по вам бросок атаки, налагаете на этот бросок помеху (если вы не недееспособны)."
+  "desc": "As a Reaction, when a creature makes an attack roll against you, you impose Disadvantage on that roll (unless you have the Incapacitated condition)."
 }

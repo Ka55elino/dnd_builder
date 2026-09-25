@@ -1,6 +1,6 @@
 {
   "id": "blink",
-  "name": "Мерцание",
+  "name": "Blink",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -12,5 +12,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "В конце каждого хода 50% шанс исчезнуть в Эфирный план до начала следующего."
+  "desc": "At the end of each of your turns, there's a 50% chance you vanish to the Ethereal Plane until the start of your next turn."
 }

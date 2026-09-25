@@ -1,6 +1,6 @@
 {
   "id": "shatter",
-  "name": "Дробление",
+  "name": "Shatter",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -12,7 +12,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Резкий звон в сфере 3 м: спасбросок Тел., урон звуком.",
+  "desc": "A sudden loud ringing in a 10-foot Sphere: Constitution saving throw, Thunder damage.",
   "damage": {
     "dice": "3d8",
     "type": "thunder"

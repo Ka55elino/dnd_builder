@@ -1,10 +1,10 @@
 {
   "id": "parry",
-  "name": "Парирование",
+  "name": "Parry",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Реакцией снижаете себе урон от атаки на кость превосходства + мод. Ловкости.",
+  "desc": "As a Reaction, you reduce the damage you take from an attack by a Superiority Die + your Dexterity modifier.",
   "action": "reaction",
   "pool": "maneuver"
 }

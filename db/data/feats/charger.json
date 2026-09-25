@@ -1,11 +1,11 @@
 {
   "id": "charger",
-  "name": "Таранщик",
+  "name": "Charger",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; рывок-атака с доп. уроном или толчком."
+  "desc": "+1 Strength or Dexterity; charge attack with extra damage or a push."
 }

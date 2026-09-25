@@ -1,11 +1,11 @@
 {
   "id": "wrathOfTheSea",
-  "name": "Гнев моря",
+  "name": "Wrath of the Sea",
   "kind": "martial",
   "subclass": "sea",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием (тратя применение Дикого облика) на 10 минут окружаете себя аурой моря 1,5 м. Бонусным действием выбираете существо в ауре: спасбросок Тел. или урон холодом и отталкивание на 4,5 м.",
+  "desc": "As a Bonus Action (expending a use of Wild Shape), you surround yourself with a 5-foot aura of the sea for 10 minutes. As a Bonus Action, you choose a creature in the aura: it makes a Constitution saving throw or takes Cold damage and is pushed 15 feet.",
   "damage": {
     "dice": "2d6",
     "type": "cold"

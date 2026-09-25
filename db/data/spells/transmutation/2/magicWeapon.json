@@ -1,6 +1,6 @@
 {
   "id": "magicWeapon",
-  "name": "Магическое оружие",
+  "name": "Magic Weapon",
   "kind": "spell",
   "action": "bonus",
   "level": 2,
@@ -10,5 +10,5 @@
     "paladin",
     "wizard"
   ],
-  "desc": "Оружие становится +1 магическим на время концентрации (до 1 часа)."
+  "desc": "A weapon becomes a +1 magic weapon for the duration (Concentration, up to 1 hour)."
 }

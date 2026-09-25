@@ -1,10 +1,13 @@
 {
   "id": "exaltedChampion",
-  "name": "Возвышенный чемпион",
+  "name": "Exalted Champion",
   "kind": "martial",
   "subclass": "crown",
   "level": 20,
   "action": "action",
-  "uses": { "count": 1, "per": "longRest" },
-  "desc": "Действием на 1 час получаете сопротивление немагическому дробящему, колющему и рубящему урону; союзники в 9 м имеют преимущество на спасброски Мудрости и спасброски от смерти."
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "As an action, for 1 hour you gain Resistance to nonmagical Bludgeoning, Piercing, and Slashing damage; allies within 30 feet have Advantage on Wisdom saving throws and Death Saving Throws."
 }

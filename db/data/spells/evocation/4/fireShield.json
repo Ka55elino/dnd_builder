@@ -1,6 +1,6 @@
 {
   "id": "fireShield",
-  "name": "Огненный щит",
+  "name": "Fire Shield",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -10,7 +10,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Пламя даёт сопротивление огню или холоду; нападающий вблизи получает урон.",
+  "desc": "Flames grant Resistance to Fire or Cold damage; a nearby attacker takes damage.",
   "damage": {
     "dice": "2d8",
     "type": "fire"

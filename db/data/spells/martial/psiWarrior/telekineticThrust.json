@@ -1,8 +1,8 @@
 {
   "id": "telekineticThrust",
-  "name": "Телекинетический рывок",
+  "name": "Telekinetic Thrust",
   "kind": "martial",
   "subclass": "psiWarrior",
   "level": 7,
-  "desc": "При Псионическом ударе можете вместо урона (или вместе) телекинезом толкнуть или притянуть цель на 3 м либо сбить с ног (спасбросок Силы)."
+  "desc": "When you use Psionic Strike, instead of (or in addition to) the damage, you can telekinetically push or pull the target 10 feet or knock it Prone (Strength saving throw)."
 }

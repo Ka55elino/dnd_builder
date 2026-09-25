@@ -1,10 +1,10 @@
 <script>
     /**
-     * «Дать предмет»: выдача персонажу чего угодно из каталога —
-     * включая именное и магическое (не только то, что есть в билдере).
-     * Выданное хранится в build.equipment.bag и сразу сохраняется.
+     * “Give Item”: give the character anything from the catalog —
+     * including named and magic items (not only what the builder offers).
+     * Given items are stored in build.equipment.bag and saved immediately.
      *
-     * id — персонаж; onBack() — назад на страницу персонажа
+     * id — character; onBack() — back to the character page
      */
     import { onMount } from "svelte";
     import { GetCharacter, SaveCharacter } from "../../wailsjs/go/main/App.js";
@@ -19,7 +19,7 @@
     let tab = $state("item");
     let loading = $state(true);
     let error = $state(null);
-    let status = $state(""); // «Сохранено» / ошибка сохранения
+    let status = $state(""); // “Saved” / save error
 
     onMount(async () => {
         try {
@@ -40,9 +40,9 @@
         saveTimer = setTimeout(async () => {
             try {
                 await SaveCharacter(JSON.stringify(build));
-                status = "Сохранено";
+                status = "Saved";
             } catch (e) {
-                status = "Ошибка: " + (e?.message ?? e);
+                status = "Error: " + (e?.message ?? e);
             }
         }, 300);
     }
@@ -61,26 +61,26 @@
 {#snippet actions(x, kind)}
     {@const have = build.bagCount(kind, x.id)}
     {#if have}
-        <span class="have">в рюкзаке ×{have}</span>
-        <button class="ghost small" onclick={() => take(kind, x)} title="Убрать одну">−</button>
+        <span class="have">in backpack ×{have}</span>
+        <button class="ghost small" onclick={() => take(kind, x)} title="Remove one">−</button>
     {/if}
-    <button class="give" onclick={() => give(kind, x)}>+ Добавить</button>
+    <button class="give" onclick={() => give(kind, x)}>+ Add</button>
 {/snippet}
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={onBack}>← К персонажу</button>
+        <button class="ghost" onclick={onBack}>← To character</button>
         <h1>
-            Дать предмет
+            Give Item
             {#if build}<span>{build.name}</span>{/if}
         </h1>
         <span class="status">{status}</span>
     </header>
 
     {#if loading}
-        <p class="muted">Загрузка…</p>
+        <p class="muted">Loading…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить: {error}</p>
+        <p class="error">Failed to load: {error}</p>
     {:else}
         <CatalogList {catalog} bind:tab {actions} marked={(x, kind) => build.bagCount(kind, x.id) > 0} />
     {/if}

@@ -1,6 +1,6 @@
 {
   "id": "freedomOfMovement",
-  "name": "Свобода перемещения",
+  "name": "Freedom of Movement",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,5 +12,5 @@
     "paladin",
     "ranger"
   ],
-  "desc": "Цель не сковывается, не парализуется магией и игнорирует труднопроходимость."
+  "desc": "The target can't be Restrained or Paralyzed by magic and ignores Difficult Terrain."
 }

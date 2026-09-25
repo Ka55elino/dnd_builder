@@ -1,8 +1,8 @@
 {
   "id": "whRageWolf",
-  "name": "Ярость: Волк",
+  "name": "Rage: Wolf",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 3,
-  "desc": "Вариант «Ярости дикой природы». Пока вы в ярости, ваши союзники получают преимущество на ближние атаки по врагам в пределах 1,5 м от вас."
+  "desc": "Rage of the Wilds variant. While your Rage is active, your allies have Advantage on melee attack rolls against enemies within 5 feet of you."
 }

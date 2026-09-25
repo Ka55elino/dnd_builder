@@ -1,6 +1,6 @@
 {
   "id": "entertainer",
-  "name": "Артист",
+  "name": "Entertainer",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "acrobatics",
     "performance"
   ],
-  "tool": "Музыкальный инструмент"
+  "tool": "Musical Instrument"
 }

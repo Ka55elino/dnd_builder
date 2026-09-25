@@ -1,10 +1,35 @@
 {
   "id": "cloudsJaunt",
-  "name": "Прыжок облака",
+  "name": "Cloud's Jaunt",
   "kind": "action",
-  "source": "Голиаф (Облако)",
+  "source": "Goliath (Cloud)",
   "level": 1,
   "action": "bonus",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Бонусным действием телепортируетесь в свободное пространство, которое видите, на расстояние до 9 м. Число применений равно вашему бонусу мастерства (на длинный отдых)."
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "As a Bonus Action, you teleport up to 30 feet to an unoccupied space you can see. Number of uses equals your Proficiency Bonus (per Long Rest)."
 }

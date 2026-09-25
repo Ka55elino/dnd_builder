@@ -1,9 +1,9 @@
 {
   "id": "versatileTrickster",
-  "name": "Разносторонний ловкач",
+  "name": "Versatile Trickster",
   "kind": "martial",
   "subclass": "arcaneTrickster",
   "level": 13,
   "action": "bonus",
-  "desc": "Бонусным действием через «Волшебную руку» отвлекаете существо в 1,5 м от неё — получаете преимущество на атаки по этому существу до конца хода."
+  "desc": "As a Bonus Action, you use your Mage Hand to distract a creature within 5 feet of it, gaining Advantage on attack rolls against that creature until the end of the turn."
 }

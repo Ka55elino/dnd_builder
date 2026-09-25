@@ -1,6 +1,6 @@
 {
   "id": "thornWhip",
-  "name": "Тернистый кнут",
+  "name": "Thorn Whip",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "druid"
   ],
-  "desc": "Лоза бьёт существо в 9 м (атака заклинанием): урон колющий и подтягивание на 3 м.",
+  "desc": "A vine lashes out at a creature within 30 feet (spell attack): Piercing damage, and the target is pulled up to 10 feet toward you.",
   "damage": {
     "dice": "1d6",
     "type": "piercing",

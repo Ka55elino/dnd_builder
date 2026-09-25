@@ -1,6 +1,6 @@
 {
   "id": "resilient",
-  "name": "Стойкий",
+  "name": "Resilient",
   "category": "general",
   "level": 4,
   "asi": [
@@ -11,5 +11,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 к выбранной хар-ке и владение её спасбросками."
+  "desc": "+1 to a chosen ability score and proficiency in its saving throws."
 }

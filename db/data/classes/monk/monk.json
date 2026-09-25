@@ -1,6 +1,6 @@
 {
   "id": "monk",
-  "name": "Монах",
+  "name": "Monk",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 8,
   "primaryAbility": [
@@ -41,23 +41,23 @@
   "features": [
     {
       "level": 1,
-      "name": "Боевые искусства",
-      "desc": "Безоружные удары и монашеские виды оружия используют Ловкость, наносят урон по кости боевых искусств (растёт с уровнем: d6/d8/d10/d12) и дают безоружный удар бонусным действием."
+      "name": "Martial Arts",
+      "desc": "Your Unarmed Strikes and Monk weapons use Dexterity, deal damage using your Martial Arts die (which increases with level: d6/d8/d10/d12), and let you make an Unarmed Strike as a Bonus Action."
     },
     {
       "level": 1,
-      "name": "Защита без доспехов",
-      "desc": "Без доспехов и щита КЗ = 10 + модификатор Ловкости + модификатор Мудрости."
+      "name": "Unarmored Defense",
+      "desc": "Without armor or a Shield, your AC = 10 + Dexterity modifier + Wisdom modifier."
     },
     {
       "level": 2,
-      "name": "Очки сосредоточения (ци)",
-      "desc": "Получаете очки ци, равные вашему уровню монаха. Тратятся на особые приёмы; восстанавливаются на коротком или длинном отдыхе."
+      "name": "Focus Points",
+      "desc": "You gain Focus Points equal to your Monk level. You spend them on special techniques; you regain them when you finish a Short or Long Rest."
     },
     {
       "level": 2,
-      "name": "Движение без доспехов",
-      "desc": "Скорость растёт, пока вы без доспехов и щита: +3 м (растёт до +9 м).",
+      "name": "Unarmored Movement",
+      "desc": "Your Speed increases while you aren't wearing armor or wielding a Shield: +10 feet (increasing to +30 feet).",
       "grants": [
         {
           "type": "effect",
@@ -71,38 +71,38 @@
     },
     {
       "level": 2,
-      "name": "Ускоренный метаболизм",
-      "desc": "Раз на длинный отдых в начале боя с 0 очков ци восстанавливаете 1 очко и лечите себя на {monkHeal2} хитов (2 × уровень монаха)."
+      "name": "Heightened Metabolism",
+      "desc": "Once per Long Rest, when you start combat with 0 Focus Points, you regain 1 point and heal yourself for {monkHeal2} Hit Points (2 × Monk level)."
     },
     {
       "level": 3,
-      "name": "Отражение атак",
-      "desc": "Реакцией уменьшаете дробящий/колющий/рубящий урон от атаки на 1d10 {dexMod} (Лов) +{level} (ур.); потратив 1 очко ци, перенаправляете оставшийся урон в существо в 1,5 м (спасбросок Ловкости)."
+      "name": "Deflect Attacks",
+      "desc": "As a Reaction, you reduce Bludgeoning, Piercing, or Slashing damage from an attack by 1d10 {dexMod} (Dex) +{level} (level); by spending 1 Focus Point, you redirect the remaining damage to a creature within 5 feet (Dexterity saving throw)."
     },
     {
       "level": 4,
-      "name": "Замедленное падение",
-      "desc": "Реакцией уменьшаете урон от падения на пятикратный уровень монаха."
+      "name": "Slow Fall",
+      "desc": "As a Reaction, you reduce falling damage by five times your Monk level."
     },
     {
       "level": 5,
-      "name": "Дополнительная атака",
-      "desc": "Две атаки за действие Атаки."
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
     },
     {
       "level": 5,
-      "name": "Оглушающий удар",
-      "desc": "Попав ближней атакой, тратите 1 очко ци: цель проходит спасбросок Телосложения или получает «Оглушение» до начала вашего следующего хода."
+      "name": "Stunning Strike",
+      "desc": "When you hit with a melee attack, you can spend 1 Focus Point: the target must succeed on a Constitution saving throw or have the Stunned condition until the start of your next turn."
     },
     {
       "level": 6,
-      "name": "Усиленные удары",
-      "desc": "Безоружные удары могут наносить урон силовым полем вместо обычного типа."
+      "name": "Empowered Strikes",
+      "desc": "Your Unarmed Strikes can deal Force damage instead of their normal damage type."
     },
     {
       "level": 6,
-      "name": "Движение без доспехов",
-      "desc": "Бонус скорости увеличивается до +4,5 м.",
+      "name": "Unarmored Movement",
+      "desc": "Your Speed bonus increases to +15 feet.",
       "grants": [
         {
           "type": "effect",
@@ -116,18 +116,18 @@
     },
     {
       "level": 7,
-      "name": "Уклонение",
-      "desc": "При спасброске Ловкости за половину урона: успех — урона нет, провал — половина."
+      "name": "Evasion",
+      "desc": "When you make a Dexterity saving throw to take half damage: on a success, you take no damage; on a failure, you take half."
     },
     {
       "level": 9,
-      "name": "Акробатическое перемещение",
-      "desc": "Пока вы без доспехов и щита, можете перемещаться по вертикальным поверхностям и жидкостям, не падая."
+      "name": "Acrobatic Movement",
+      "desc": "While you aren't wearing armor or wielding a Shield, you can move along vertical surfaces and across liquids without falling."
     },
     {
       "level": 10,
-      "name": "Обострённое сосредоточение",
-      "desc": "Шквал ударов даёт 3 удара; Терпеливая оборона даёт временные хиты; Шаг ветра может переместить и союзника.",
+      "name": "Heightened Focus",
+      "desc": "Flurry of Blows grants 3 strikes; Patient Defense grants Temporary Hit Points; Step of the Wind can also move an ally.",
       "grants": [
         {
           "type": "effect",
@@ -141,18 +141,18 @@
     },
     {
       "level": 10,
-      "name": "Самовосстановление",
-      "desc": "В начале хода бесплатно снимаете с себя одно состояние (очарование/испуг/отравление); не нуждаетесь в еде и питье."
+      "name": "Self-Restoration",
+      "desc": "At the start of your turn, you can end one condition on yourself for free (Charmed, Frightened, or Poisoned); you don't need food or drink."
     },
     {
       "level": 13,
-      "name": "Отражение энергии",
-      "desc": "Отражением атак можете уменьшать урон любого типа (кислота/холод/огонь/сила/электр./звук и т.д.)."
+      "name": "Deflect Energy",
+      "desc": "Deflect Attacks can reduce damage of any type (Acid, Cold, Fire, Force, Lightning, Thunder, etc.)."
     },
     {
       "level": 14,
-      "name": "Дисциплинированный выживший",
-      "desc": "Владеете всеми спасбросками. Потратив 1 очко ци, перебрасываете проваленный спасбросок.",
+      "name": "Disciplined Survivor",
+      "desc": "You gain proficiency in all saving throws. By spending 1 Focus Point, you reroll a failed saving throw.",
       "grants": [
         {
           "type": "effect",
@@ -166,13 +166,13 @@
     },
     {
       "level": 15,
-      "name": "Идеальное сосредоточение",
-      "desc": "Начиная бой с менее чем 4 очками ци, восстанавливаете их до 4."
+      "name": "Perfect Focus",
+      "desc": "When you start combat with fewer than 4 Focus Points, you regain points until you have 4."
     },
     {
       "level": 18,
-      "name": "Высшая оборона",
-      "desc": "Бонусным действием тратите 3 очка ци: 1 минуту имеете сопротивление всем типам урона, кроме силового.",
+      "name": "Superior Defense",
+      "desc": "As a Bonus Action, you spend 3 Focus Points: for 1 minute, you have Resistance to all damage types except Force.",
       "grants": [
         {
           "type": "effect",
@@ -186,8 +186,8 @@
     },
     {
       "level": 20,
-      "name": "Тело и разум",
-      "desc": "Ловкость и Мудрость +4 (максимум 25).",
+      "name": "Body and Mind",
+      "desc": "Dexterity and Wisdom +4 (maximum 25).",
       "grants": [
         {
           "type": "effect",

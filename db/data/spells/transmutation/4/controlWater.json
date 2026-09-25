@@ -1,6 +1,6 @@
 {
   "id": "controlWater",
-  "name": "Управление водой",
+  "name": "Control Water",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -10,5 +10,5 @@
     "druid",
     "wizard"
   ],
-  "desc": "Поднимаете/разделяете/направляете большие объёмы воды. Концентрация."
+  "desc": "You raise, part, or redirect large volumes of water. Concentration."
 }

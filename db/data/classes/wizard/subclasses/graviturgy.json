@@ -1,28 +1,28 @@
 {
   "id": "graviturgy",
-  "name": "Магия гравитургии",
+  "name": "Graviturgy Magic",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "wizard",
   "features": [
     {
       "level": 3,
-      "name": "Настройка плотности",
-      "desc": "Действием удваиваете или уменьшаете вдвое вес и скорость существа/предмета в 9 м на 1 минуту (спасбросок для враждебных)."
+      "name": "Adjust Density",
+      "desc": "As an action, you double or halve the weight and Speed of a creature or object within 30 feet for 1 minute (hostile targets get a saving throw)."
     },
     {
       "level": 6,
-      "name": "Гравитационный колодец",
-      "desc": "Попадая по существу заклинанием, можете сдвинуть его на 1,5 м в свободное место."
+      "name": "Gravity Well",
+      "desc": "When you hit a creature with a spell, you can move it 5 feet into an unoccupied space."
     },
     {
       "level": 10,
-      "name": "Яростное притяжение",
-      "desc": "Реакцией, когда существо в 18 м попадает атакой, добавляете к урону кости (+d10 или больше)."
+      "name": "Violent Attraction",
+      "desc": "As a Reaction when a creature within 60 feet hits with an attack, you add dice to the damage (+d10 or more)."
     },
     {
       "level": 14,
-      "name": "Горизонт событий",
-      "desc": "Аура 9 м замедляет врагов и наносит силовой урон входящим/начинающим ход."
+      "name": "Event Horizon",
+      "desc": "A 30-foot aura slows enemies and deals Force damage to those that enter it or start their turn there."
     }
   ]
 }

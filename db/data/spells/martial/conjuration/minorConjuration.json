@@ -1,9 +1,9 @@
 {
   "id": "minorConjuration",
-  "name": "Малый вызов",
+  "name": "Minor Conjuration",
   "kind": "martial",
   "subclass": "conjuration",
   "level": 3,
   "action": "action",
-  "desc": "Действием создаёте неживой предмет (не больше 1 м в грани, до 4,5 кг) в 9 м на 1 час или пока не получит урон."
+  "desc": "As an action, you create a nonliving object (no larger than 3 feet on a side, up to 10 lb.) within 30 feet for 1 hour or until it takes damage."
 }

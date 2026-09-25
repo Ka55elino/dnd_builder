@@ -1,10 +1,29 @@
 {
   "id": "wildShape",
-  "name": "Дикий облик",
+  "name": "Wild Shape",
   "kind": "class",
   "level": 2,
-  "classes": ["druid"],
+  "classes": [
+    "druid"
+  ],
   "action": "action",
-  "uses": { "count": 2, "per": "shortRest", "scale": [[2,2],[6,3],[17,4]] },
-  "desc": "Действием превращаетесь в зверя из доступных форм (см. ниже). Доступная ПО и типы движения растут с уровнем; Круг луны расширяет боевые формы. Число применений восстанавливается на коротком/длинном отдыхе."
+  "uses": {
+    "count": 2,
+    "per": "shortRest",
+    "scale": [
+      [
+        2,
+        2
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        17,
+        4
+      ]
+    ]
+  },
+  "desc": "As an action, you transform into a Beast from the available forms (see below). The available CR and movement types increase with level; Circle of the Moon expands your combat forms. Uses are regained on a Short or Long Rest."
 }

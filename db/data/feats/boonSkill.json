@@ -1,9 +1,9 @@
 {
   "id": "boonSkill",
-  "name": "Дар мастерства",
+  "name": "Boon of Skill",
   "category": "boon",
   "level": 19,
-  "desc": "Владение 3 навыками на выбор; компетентность в них.",
+  "desc": "Proficiency in 3 skills of your choice; Expertise in them.",
   "skillChoice": {
     "choose": 3,
     "from": "skills"

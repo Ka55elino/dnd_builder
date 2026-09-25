@@ -1,6 +1,6 @@
 {
   "id": "minorIllusion",
-  "name": "Малая иллюзия",
+  "name": "Minor Illusion",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -11,11 +11,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Создаёте на 1 минуту звук или образ неодушевлённого предмета в пределах 9 м (не больше куба 1,5 м). Существо действием и успешной проверкой Расследования распознаёт иллюзию.",
+  "desc": "For 1 minute, you create a sound or an image of an inanimate object within 30 feet (no larger than a 5-foot Cube). A creature can take an action and succeed on an Intelligence (Investigation) check to discern the illusion.",
   "casting": {
-    "time": "1 действие",
-    "range": "9 м",
-    "components": "С, М",
-    "duration": "1 минута"
+    "time": "1 action",
+    "range": "30 feet",
+    "components": "S, M",
+    "duration": "1 minute"
   }
 }

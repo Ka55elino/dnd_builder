@@ -1,6 +1,6 @@
 {
   "id": "druidcraft",
-  "name": "Искусство друидов",
+  "name": "Druidcraft",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,5 +8,5 @@
   "classes": [
     "druid"
   ],
-  "desc": "Мелкий природный эффект: предсказываете погоду, оживляете цветок, создаёте огонёк или сенсорный эффект."
+  "desc": "A minor nature effect: you predict the weather, make a flower bloom, create a small flame, or produce a sensory effect."
 }

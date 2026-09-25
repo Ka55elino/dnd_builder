@@ -1,12 +1,12 @@
 <script>
     /**
-     * «Заклинания» — справочник. Два режима:
-     *   Заклинания          — поиск, фильтр по кругу, классу и школе;
-     *   Особые способности  — умения классов, подклассов (приёмы, выстрелы…)
-     *                         и видов: Ярость, Безрассудная атака, Наложение рук…
-     * Свои заклинания: «+ Добавить заклинание», у своих — «Изменить» / удалить,
-     * у справочных — «Копия» (своё на их основе). Хранятся в БД.
-     * onBack() — в меню
+     * “Spells” — reference. Two modes:
+     *   Spells              — search, filter by level, class and school;
+     *   Special abilities   — class and subclass features (maneuvers, shots…)
+     *                         and species traits: Rage, Reckless Attack, Lay on Hands…
+     * Custom spells: “+ Add spell”; custom ones get “Edit” / delete,
+     * reference ones get “Copy” (a custom spell based on them). Stored in the DB.
+     * onBack() — to the menu
      */
     import { onMount } from "svelte";
     import { loadRefs, refreshSpells } from "../data/refs.js";
@@ -28,10 +28,10 @@
 
     let query = $state("");
     let circle = $state("all"); // 'all' | 0..9
-    let cls = $state("");       // id класса или '' — все
-    let school = $state("");    // id школы или '' — все
+    let cls = $state("");       // class id or '' — all
+    let school = $state("");    // school id or '' — all
 
-    // своё заклинание: открытая форма { initial, copy } | null; id ждёт подтверждения удаления
+    // custom spell: open form { initial, copy } | null; id awaiting delete confirmation
     let editor = $state(null);
     let confirmDelete = $state(null);
     let status = $state("");
@@ -53,9 +53,9 @@
         editor = null;
         await reload();
         const sp = spells.find((s) => s.id === id);
-        // показать круг нового заклинания, если сейчас выбран другой
+        // show the new spell's level if a different one is selected
         if (sp && circle !== "all" && circle !== sp.level) circle = sp.level;
-        flash(wasEdit ? "Изменения сохранены" : "Заклинание добавлено");
+        flash(wasEdit ? "Changes saved" : "Spell added");
     }
 
     async function remove(sp) {
@@ -63,9 +63,9 @@
         try {
             await DeleteCustomSpell(sp.id);
             await reload();
-            flash(`«${sp.name}» удалено`);
+            flash(`“${sp.name}” deleted`);
         } catch (e) {
-            flash("Ошибка: " + (e?.message ?? e));
+            flash("Error: " + (e?.message ?? e));
         }
     }
 
@@ -82,14 +82,14 @@
         }
     });
 
-    const norm = (s) => String(s ?? "").toLowerCase().replace(/ё/g, "е").trim();
+    const norm = (s) => String(s ?? "").toLowerCase().trim();
     const baseFilter = (s) =>
         (!query || norm(s.name).includes(norm(query))) &&
         (!cls || (s.data?.classes ?? []).includes(cls)) &&
         (!school || s.school === school);
 
     const filtered = $derived(spells.filter((s) => baseFilter(s) && (circle === "all" || s.level === circle)));
-    // сколько заклинаний каждого круга с учётом остальных фильтров
+    // how many spells of each level, given the other filters
     const byCircleCount = $derived(
         spells.filter(baseFilter).reduce((acc, s) => ((acc[s.level] = (acc[s.level] ?? 0) + 1), acc), {}),
     );
@@ -99,14 +99,14 @@
         return Object.keys(g)
             .map(Number)
             .sort((a, b) => a - b)
-            .map((lvl) => ({ lvl, title: lvl === 0 ? "Заговоры" : `${lvl} круг`, items: g[lvl].sort((a, b) => a.name.localeCompare(b.name)) }));
+            .map((lvl) => ({ lvl, title: lvl === 0 ? "Cantrips" : `Level ${lvl}`, items: g[lvl].sort((a, b) => a.name.localeCompare(b.name)) }));
     });
 
-    // ---------- особые способности ----------
-    let source = $state(""); // '' — все, id класса или '__race' — способности видов
-    let abQuery = $state(""); // свой поиск — не смешивается с поиском заклинаний
+    // ---------- special abilities ----------
+    let source = $state(""); // '' — all, a class id, or '__race' — species traits
+    let abQuery = $state(""); // separate search — not mixed with the spell search
 
-    /** Чьё это умение: класс, подкласс (→ класс) или вид. */
+    /** Whose feature this is: class, subclass (→ class) or species. */
     function ownerOf(a) {
         const d = a.data ?? {};
         if (d.subclass) {
@@ -118,9 +118,9 @@
         }
         if (a.kind === "class") {
             const c = classes.find((x) => (d.classes ?? []).includes(x.id));
-            return { group: c?.name ?? "Класс", classId: c?.id ?? null, order: 0 };
+            return { group: c?.name ?? "Class", classId: c?.id ?? null, order: 0 };
         }
-        return { group: d.source ?? "Вид", classId: "__race", order: 2 };
+        return { group: d.source ?? "Species", classId: "__race", order: 2 };
     }
 
     const abFiltered = $derived(
@@ -131,7 +131,7 @@
         }),
     );
 
-    // группы: класс → его подклассы → виды
+    // groups: class → its subclasses → species
     const abGroups = $derived.by(() => {
         const g = new Map();
         for (const a of abFiltered) {
@@ -151,7 +151,7 @@
             .map((grp) => ({ ...grp, items: grp.items.sort((a, b) => a.level - b.level || a.name.localeCompare(b.name)) }));
     });
 
-    // использования на уровне получения умения (для чипа «N × отдых»)
+    // uses at the level the feature is gained (for the “N × rest” chip)
     const usesAt = (a) =>
         a.data?.uses
             ? { max: usesMax(a.data.uses, { level: a.level || 1, prof: proficiencyBonus(a.level || 1), mods: {} }), per: a.data.uses.per }
@@ -163,36 +163,36 @@
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={onBack}>← Меню</button>
-        <h1>Заклинания</h1>
+        <button class="ghost" onclick={onBack}>← Menu</button>
+        <h1>Spells</h1>
         <nav class="modes">
             <button class="chip" class:active={mode === "spells"} onclick={() => (mode = "spells")}>
-                Заклинания <small>{spells.length}</small>
+                Spells <small>{spells.length}</small>
             </button>
             <button class="chip" class:active={mode === "abilities"} onclick={() => (mode = "abilities")}>
-                Особые способности <small>{abilities.length}</small>
+                Special abilities <small>{abilities.length}</small>
             </button>
         </nav>
         <span class="total">
             {#if status}<span class="status">{status}</span>{/if}
-            {mode === "spells" ? `${filtered.length} из ${spells.length}` : `${abFiltered.length} из ${abilities.length}`}
+            {mode === "spells" ? `${filtered.length} of ${spells.length}` : `${abFiltered.length} of ${abilities.length}`}
         </span>
         {#if mode === "spells" && !loading && !error}
-            <button class="add" onclick={() => (editor = { initial: null, copy: false })}>+ Добавить заклинание</button>
+            <button class="add" onclick={() => (editor = { initial: null, copy: false })}>+ Add spell</button>
         {/if}
     </header>
 
     {#if loading}
-        <p class="muted">Загрузка…</p>
+        <p class="muted">Loading…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить: {error}</p>
+        <p class="error">Failed to load: {error}</p>
     {:else if mode === "abilities"}
         <div class="filters">
-            <input class="search" type="search" placeholder="Поиск по названию…" bind:value={abQuery} />
+            <input class="search" type="search" placeholder="Search by name…" bind:value={abQuery} />
             <select bind:value={source}>
-                <option value="">Все источники</option>
+                <option value="">All sources</option>
                 {#each classes as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
-                <option value="__race">Способности видов</option>
+                <option value="__race">Species traits</option>
             </select>
         </div>
 
@@ -204,34 +204,34 @@
                         <ActionCard
                             item={a}
                             level={a.level || 1}
-                            source={a.level ? `${a.level} ур.` : ""}
+                            source={a.level ? `Level ${a.level}` : ""}
                             uses={usesAt(a)}
                         />
                     {/each}
                 </div>
             </section>
         {:else}
-            <p class="muted">Ничего не найдено.</p>
+            <p class="muted">Nothing found.</p>
         {/each}
     {:else}
         <div class="filters">
-            <input class="search" type="search" placeholder="Поиск по названию…" bind:value={query} />
+            <input class="search" type="search" placeholder="Search by name…" bind:value={query} />
             <select bind:value={cls}>
-                <option value="">Все классы</option>
+                <option value="">All classes</option>
                 {#each classes as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
             </select>
             <select bind:value={school}>
-                <option value="">Все школы</option>
+                <option value="">All schools</option>
                 {#each Object.entries(SCHOOLS) as [id, name]}<option value={id}>{name}</option>{/each}
             </select>
         </div>
 
         <nav class="circles">
-            <button class="chip" class:active={circle === "all"} onclick={() => (circle = "all")}>Все</button>
+            <button class="chip" class:active={circle === "all"} onclick={() => (circle = "all")}>All</button>
             {#each Array.from({ length: 10 }, (_, i) => i) as lvl}
                 {#if byCircleCount[lvl]}
                     <button class="chip" class:active={circle === lvl} onclick={() => (circle = lvl)}>
-                        {lvl === 0 ? "Заговоры" : `${lvl} круг`} <small>{byCircleCount[lvl]}</small>
+                        {lvl === 0 ? "Cantrips" : `Level ${lvl}`} <small>{byCircleCount[lvl]}</small>
                     </button>
                 {/if}
             {/each}
@@ -243,19 +243,19 @@
                 <div class="cards">
                     {#each g.items as s (s.id)}
                         <div class="spell" class:custom={isCustom(s)}>
-                            <ActionCard item={s} source={[isCustom(s) ? "своё" : "", classNames(s)].filter(Boolean).join(" · ")} />
+                            <ActionCard item={s} source={[isCustom(s) ? "custom" : "", classNames(s)].filter(Boolean).join(" · ")} />
                             <div class="spell-actions">
                                 {#if isCustom(s)}
                                     {#if confirmDelete === s.id}
-                                        <span class="ask">Удалить?</span>
-                                        <button class="ghost small danger" onclick={() => remove(s)}>Да</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = null)}>Нет</button>
+                                        <span class="ask">Delete?</span>
+                                        <button class="ghost small danger" onclick={() => remove(s)}>Yes</button>
+                                        <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
                                     {:else}
-                                        <button class="ghost small" onclick={() => (editor = { initial: s, copy: false })}>Изменить</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = s.id)} title="Удалить">✕</button>
+                                        <button class="ghost small" onclick={() => (editor = { initial: s, copy: false })}>Edit</button>
+                                        <button class="ghost small" onclick={() => (confirmDelete = s.id)} title="Delete">✕</button>
                                     {/if}
                                 {:else}
-                                    <button class="ghost small" onclick={() => (editor = { initial: s, copy: true })} title="Создать своё на основе этого">Копия</button>
+                                    <button class="ghost small" onclick={() => (editor = { initial: s, copy: true })} title="Create your own based on this one">Copy</button>
                                 {/if}
                             </div>
                         </div>
@@ -263,7 +263,7 @@
                 </div>
             </section>
         {:else}
-            <p class="muted">Ничего не найдено.</p>
+            <p class="muted">Nothing found.</p>
         {/each}
     {/if}
 </div>
@@ -440,7 +440,7 @@
         color: var(--color-text-accent);
     }
 
-    /* карточка заклинания + кнопки: у справочных появляются при наведении */
+    /* spell card + buttons: on reference spells they appear on hover */
     .spell {
         position: relative;
         display: flex;
@@ -476,7 +476,7 @@
     }
 
     .spell.custom > :global(.card) {
-        padding-bottom: 40px; /* место под кнопки своего заклинания */
+        padding-bottom: 40px; /* room for the custom spell buttons */
     }
 
     .ask {

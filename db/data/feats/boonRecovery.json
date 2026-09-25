@@ -1,7 +1,7 @@
 {
   "id": "boonRecovery",
-  "name": "Дар восстановления",
+  "name": "Boon of Recovery",
   "category": "boon",
   "level": 19,
-  "desc": "Раз в день лечитесь на половину хитов; восстановление костей хитов."
+  "desc": "Once per day, heal for half your Hit Points; recover Hit Point Dice."
 }

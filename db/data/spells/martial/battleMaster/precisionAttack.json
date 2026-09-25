@@ -1,9 +1,9 @@
 {
   "id": "precisionAttack",
-  "name": "Точная атака",
+  "name": "Precision Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Прибавляете кость превосходства к броску атаки (можно после броска, до объявления результата).",
+  "desc": "You add a Superiority Die to an attack roll (you can do so after the roll, before the result is determined).",
   "pool": "maneuver"
 }

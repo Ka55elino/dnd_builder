@@ -1,6 +1,6 @@
 {
   "id": "colorSpray",
-  "name": "Разноцветные брызги",
+  "name": "Color Spray",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,5 +9,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Вспышка света ослепляет существ в конусе 4,5 м (по сумме хитов)."
+  "desc": "A flash of light Blinds creatures in a 15-foot Cone (based on total Hit Points)."
 }

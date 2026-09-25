@@ -1,6 +1,6 @@
 {
   "id": "slow",
-  "name": "Замедление",
+  "name": "Slow",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "До 6 существ: спасбросок Мудрости или скорость и действия ограничены. Концентрация."
+  "desc": "Up to 6 creatures: Wisdom saving throw or their Speed and actions are limited. Concentration."
 }

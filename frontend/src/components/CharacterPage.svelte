@@ -3,17 +3,17 @@
     import IconLabel from "./common/IconLabel.svelte";
     import Icon, { hasIcon } from "./common/Icon.svelte";
     /**
-     * Страница персонажа — по мотивам классического листа D&D.
+     * Character page — modeled on the classic D&D character sheet.
      *
      *  ┌──────────── 2 ────────────┬──────────────────── 4 ────────────────────┐
-     *  │ портрет                   │ КД · Инициатива · Скорость · Хиты · …    │
-     *  │ имя / класс / уровень     │ 6 характеристик + спасброски              │
+     *  │ portrait                  │ AC · Initiative · Speed · Hit Points · … │
+     *  │ name / class / level      │ 6 abilities + saving throws               │
      *  ├───────── 3 ─────────┬─────┴──────────────── 7 ────────────────────────┤
-     *  │ Внешность           │ Атаки · Снаряжение · Навыки · Черты и умения    │
-     *  │ Личность            │                                                 │
+     *  │ Appearance          │ Attacks · Equipment · Skills · Features & traits│
+     *  │ Personality         │                                                 │
      *  └─────────────────────┴─────────────────────────────────────────────────┘
      *
-     * id — id персонажа в БД; onBack(); onEdit(data)
+     * id — character id in the DB; onBack(); onEdit(data)
      */
     import { onMount } from "svelte";
     import {
@@ -40,10 +40,10 @@
 
     let { id, onBack, onEdit, onLevelUp, onGiveItem } = $props();
 
-    let raw = $state(null); // как пришло из БД — для редактирования
+    let raw = $state(null); // as loaded from the DB — for editing
     let build = $state(null);
     let ref = $state(EMPTY_REFS);
-    let state = $state(null); // CharacterState — хиты, ресурсы, ячейки
+    let state = $state(null); // CharacterState — Hit Points, resources, slots
     let loading = $state(true);
     let error = $state(null);
 
@@ -65,16 +65,16 @@
         }
     });
 
-    // производный слой: всё посчитанное из build + справочников
+    // derived layer: everything computed from build + reference data
     const character = $derived(
         build ? new Character(build, ref, state?.equipped ?? null) : null,
     );
 
-    // экипировка: смена предмета в слоте
+    // equipment: changing the item in a slot
     function onEquip(slot, e) {
         state.equipped = equip(character.equipped, slot, e.currentTarget.value, character.inventory);
     }
-    // вторая рука занята двуручным оружием
+    // the other hand is taken by a two-handed weapon
     const handBlocked = (slot) => {
         if (slot === "armor") return false;
         const other = character.loadout[slot === "main" ? "off" : "main"];
@@ -82,15 +82,15 @@
     };
     const KIND_ORDER = { armor: 0, shield: 1, weapon: 2, item: 3 };
 
-    // надетый доспех и щит в руке — для строки «Доспех» в экипировке
+    // worn armor and held shield — for the “Armor” row in equipment
     const worn = $derived(character?.loadout.armor ?? null);
     const heldShield = $derived(
         [character?.loadout.main, character?.loadout.off].find((x) => x?.kind === "shield") ?? null,
     );
     const weaponInv = (id) => character?.inventory.find((x) => x.kind === "weapon" && x.ref?.id === id);
-    const SLOT_TAG = { main: "в правой руке", off: "в левой руке", armor: "надет" };
+    const SLOT_TAG = { main: "in main hand", off: "in off hand", armor: "worn" };
 
-    // короткие имена для шаблона
+    // short names for the template
     const race = $derived(character?.race);
     const subrace = $derived(character?.subrace);
     const cls = $derived(character?.cls);
@@ -104,19 +104,19 @@
 
     const hpNow = $derived(state && character ? state.currentHp(character) : 0);
 
-    // --- игровое состояние (хиты, ресурсы, ячейки, экипировка, заметки) ---
-    // Сохраняется кнопкой «Сохранить» (или Ctrl/Cmd+S), а также автоматически
-    // через пару секунд после изменения и при уходе со страницы.
+    // --- game state (Hit Points, resources, slots, equipment, notes) ---
+    // Saved by the “Save” button (or Ctrl/Cmd+S), and also automatically
+    // a couple of seconds after a change and when leaving the page.
     let saveTimer;
     let stateError = $state(null);
-    let savedJson = $state(null); // что сейчас лежит в БД
+    let savedJson = $state(null); // what is currently in the DB
     let saving = $state(false);
-    let savedAt = $state(null);   // время последнего сохранения
+    let savedAt = $state(null);   // time of the last save
 
-    const stateJson = $derived(state ? JSON.stringify(state) : null); // читает все поля → подписка
+    const stateJson = $derived(state ? JSON.stringify(state) : null); // reads all fields → subscription
     const dirty = $derived(stateJson != null && savedJson != null && stateJson !== savedJson);
 
-    // первое значение — то, что загрузили: оно уже сохранено
+    // the first value is what was loaded: it is already saved
     $effect(() => {
         if (stateJson != null && savedJson == null) savedJson = stateJson;
     });
@@ -139,7 +139,7 @@
         }
     }
 
-    // автосохранение — страховка, если забыли нажать кнопку
+    // autosave — a safety net in case the button wasn't pressed
     $effect(() => {
         if (!dirty) return;
         clearTimeout(saveTimer);
@@ -147,7 +147,7 @@
         return () => clearTimeout(saveTimer);
     });
 
-    // уходим со страницы — сначала сохранить
+    // leaving the page — save first
     const leave = (fn) => async (...args) => {
         await saveNow();
         fn?.(...args);
@@ -161,16 +161,16 @@
     }
 
     /**
-     * Поле растёт по высоте вместе с текстом — без внутренней прокрутки.
-     * Параметр — текущий текст: при смене (загрузка, ввод) пересчитываем высоту.
+     * The field grows in height with its text — no inner scrolling.
+     * Parameter — the current text: on change (load, input) recompute the height.
      */
     function autosize(el, _value) {
         const fit = () => {
             el.style.height = "auto";
-            el.style.height = `${el.scrollHeight + 2}px`; // +2 — рамка
+            el.style.height = `${el.scrollHeight + 2}px`; // +2 — border
         };
         fit();
-        // ширина колонки изменилась — строки переносятся иначе (на свою высоту не реагируем)
+        // column width changed — lines wrap differently (we ignore our own height changes)
         let width = el.clientWidth;
         const ro = new ResizeObserver(() => {
             if (el.clientWidth !== width) {
@@ -186,24 +186,24 @@
 
     let hpAmount = $state(1);
 
-    // кнопки хитов (иконки: assets/icons/hpDamage|hpHeal|hpTemp.svg)
+    // Hit Point buttons (icons: assets/icons/hpDamage|hpHeal|hpTemp.svg)
     const HP_ACTIONS = [
-        { id: "dmg", icon: "hpDamage", short: "−", label: "Урон", run: () => state.damage(hpAmount, character) },
-        { id: "heal", icon: "hpHeal", short: "+", label: "Лечение", run: () => state.heal(hpAmount, character) },
-        { id: "temp", icon: "hpTemp", short: "В", label: "Временные хиты", run: () => state.setTempHp(hpAmount) },
+        { id: "dmg", icon: "hpDamage", short: "−", label: "Damage", run: () => state.damage(hpAmount, character) },
+        { id: "heal", icon: "hpHeal", short: "+", label: "Heal", run: () => state.heal(hpAmount, character) },
+        { id: "temp", icon: "hpTemp", short: "T", label: "Temp HP", run: () => state.setTempHp(hpAmount) },
     ];
 
-    const ft = (n) => `${n} фт.`;
+    const ft = (n) => `${n} ft.`;
 </script>
 
-<!-- картинка предмета (или буква-заглушка) -->
+<!-- item image (or a placeholder letter) -->
 {#snippet thumb(it, size = "lg")}
     <span class="thumb {size}" class:empty={!it}>
         {#if it?.ref?.image}<img src={it.ref.image} alt="" />{:else if it}<span>{it.name.slice(0, 1)}</span>{/if}
     </span>
 {/snippet}
 
-<!-- подсказка к предмету рюкзака / экипировки -->
+<!-- tooltip for a backpack / equipment item -->
 {#snippet itemTip(it)}
     {@const info = describeItem(it, { damageShort })}
     <div class="tip">
@@ -224,44 +224,44 @@
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={leave(onBack)}>← К персонажам</button>
+        <button class="ghost" onclick={leave(onBack)}>← Characters</button>
         {#if build}
             <span class="spacer"></span>
             {#if state}
                 <span class="save-status" class:dirty class:err={stateError}>
-                    {#if stateError}Не сохранено
-                    {:else if saving}Сохранение…
-                    {:else if dirty}Есть несохранённые изменения
-                    {:else if savedAt}Сохранено в {hhmm(savedAt)}
-                    {:else}Всё сохранено
+                    {#if stateError}Not saved
+                    {:else if saving}Saving…
+                    {:else if dirty}Unsaved changes
+                    {:else if savedAt}Saved at {hhmm(savedAt)}
+                    {:else}All saved
                     {/if}
                 </span>
-                <button class="save" onclick={saveNow} disabled={saving || !dirty} title="Сохранить состояние (Ctrl/Cmd+S)">
-                    Сохранить
+                <button class="save" onclick={saveNow} disabled={saving || !dirty} title="Save state (Ctrl/Cmd+S)">
+                    Save
                 </button>
             {/if}
-            <button class="ghost" onclick={leave(onGiveItem)}>＋ Дать предмет</button>
+            <button class="ghost" onclick={leave(onGiveItem)}>＋ Give Item</button>
             {#if build.level < 20}
-                <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Повысить уровень</button>
+                <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Level Up</button>
             {/if}
             <button class="ghost" onclick={leave(() => onEdit(raw))}
-                >Редактировать</button
+                >Edit</button
             >
         {/if}
     </header>
 
     {#if loading}
-        <p class="muted">Загрузка…</p>
+        <p class="muted">Loading…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить персонажа: {error}</p>
+        <p class="error">Failed to load character: {error}</p>
     {:else if build && sheet}
-        <!-- ================= верх: 2 / 4 ================= -->
+        <!-- ================= top: 2 / 4 ================= -->
         <div class="row row-title">
             <section>
                 <h1>{build.name}</h1>
                 <p class="class-line">
                     {cls?.name ?? build.classId}
-                    <span class="lvl">{build.level} уровень</span>
+                    <span class="lvl">Level {build.level}</span>
                 </p>
                 <p class="sub-line">
                     {race?.name ?? build.raceId}{subrace
@@ -272,48 +272,48 @@
             </section>
         </div>
         <div class="row row-top">
-            <!-- портрет + имя -->
+            <!-- portrait + name -->
             <section class="identity">
                 <div class="portrait">
                     {#if build.portrait}
-                        <img src={build.portrait} alt="Портрет" />
+                        <img src={build.portrait} alt="Portrait" />
                     {:else}
-                        <span class="img-empty">нет портрета</span>
+                        <span class="img-empty">no portrait</span>
                     {/if}
                 </div>
             </section>
 
-            <!-- атрибуты -->
+            <!-- attributes -->
             <section class="stats">
                 <div class="combat">
                     <div class="stat shield">
-                        <span class="stat-label">КД</span>
+                        <span class="stat-label">AC</span>
                         <span class="stat-value">{sheet.ac}</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">Инициатива</span>
+                        <span class="stat-label">Initiative</span>
                         <span class="stat-value"
                             >{formatModifier(sheet.initiative)}</span
                         >
                     </div>
                     <div class="stat">
-                        <span class="stat-label">Скорость</span>
+                        <span class="stat-label">Speed</span>
                         <span class="stat-value">{ft(sheet.speed)}</span>
                     </div>
                     <div class="stat hp">
-                        <span class="stat-label">Хиты</span>
+                        <span class="stat-label">Hit Points</span>
                         <span class="stat-value"
                             >{hpNow}<small>/{character.maxHp}</small></span
                         >
                     </div>
                     <div class="stat">
-                        <span class="stat-label">Кость хитов</span>
+                        <span class="stat-label">Hit Dice</span>
                         <span class="stat-value"
                             >{build.level}d{sheet.hitDie}</span
                         >
                     </div>
                     <div class="stat">
-                        <span class="stat-label">Мастерство</span>
+                        <span class="stat-label">Proficiency</span>
                         <span class="stat-value"
                             >{formatModifier(sheet.prof)}</span
                         >
@@ -335,7 +335,7 @@
                 </div>
 
                 <div class="saves">
-                    <h3>Спасброски</h3>
+                    <h3>Saving Throws</h3>
                     <ul class="checklist cols-3">
                         {#each sheet.saves as s}
                             <li class:prof={s.proficient}>
@@ -350,7 +350,7 @@
                 </div>
 
                 <div class="saves">
-                    <h3>Навыки</h3>
+                    <h3>Skills</h3>
                     <ul class="checklist cols-3">
                         {#each sheet.skills as s (s.id)}
                             <li class:prof={s.proficient} class:expert={s.expertise}>
@@ -361,16 +361,16 @@
                         {/each}
                     </ul>
                     <p class="passive">
-                        Пассивная Внимательность: <b>{sheet.passivePerception}</b>
-                        {#if sheet.darkvision}· Тёмное зрение: <b>{ft(sheet.darkvision)}</b>{/if}
+                        Passive Perception: <b>{sheet.passivePerception}</b>
+                        {#if sheet.darkvision}· Darkvision: <b>{ft(sheet.darkvision)}</b>{/if}
                     </p>
                 </div>
             </section>
         </div>
 
-        <!-- ================= низ: 3 / 7 ================= -->
+        <!-- ================= bottom: 3 / 7 ================= -->
         <div class="row row-bottom">
-            <!-- Внешность, Личность — одной колонкой -->
+            <!-- Appearance, Personality — in one column -->
             <div class="col">
                 {#each BIO_GROUPS as group}
                     <section class="card">
@@ -385,7 +385,7 @@
                 {/each}
 
                 <section class="card">
-                    <h2>Рюкзак</h2>
+                    <h2>Backpack</h2>
                     {#if character.inventory.length}
                         <ul class="inventory">
                             {#each [...character.inventory].sort((a, b) => KIND_ORDER[a.kind] - KIND_ORDER[b.kind]) as it (it.key)}
@@ -397,18 +397,18 @@
                                             {#snippet tip()}{@render itemTip(it)}{/snippet}
                                         </Tooltip>
                                         {#if where}<small class="tag">{SLOT_TAG[where]}</small>{/if}
-                                        {#if it.given}<small class="tag">выдано</small>{/if}
+                                        {#if it.given}<small class="tag">given</small>{/if}
                                     </span>
                                     <span class="qty">× {it.qty}</span>
                                 </li>
                             {/each}
                         </ul>
                     {:else}
-                        <p class="muted">Пусто.</p>
+                        <p class="muted">Empty.</p>
                     {/if}
                 </section>
                 <section class="card">
-                    <h2>Черты и умения</h2>
+                    <h2>Features & traits</h2>
                     {#each features as g}
                         <h3>{g.title}</h3>
                         <ul class="features">
@@ -416,7 +416,7 @@
                                 <li>
                                     <b
                                         >{f.name}{#if f.level}<small>
-                                                · {f.level} ур.</small
+                                                · Level {f.level}</small
                                             >{/if}</b
                                     >
                                     <span>{f.desc}</span>
@@ -424,34 +424,34 @@
                             {/each}
                         </ul>
                     {:else}
-                        <p class="muted">Нет данных.</p>
+                        <p class="muted">No data.</p>
                     {/each}
                 </section>
             </div>
 
-            <!-- экипировка, навыки и прочее -->
+            <!-- equipment, skills and more -->
             <div class="col">
-                <!-- игровое состояние -->
+                <!-- game state -->
                 <section class="card play">
-                    <h2>Состояние</h2>
-                    {#if stateError}<p class="error">Не сохранено: {stateError}</p>{/if}
+                    <h2>Status</h2>
+                    {#if stateError}<p class="error">Not saved: {stateError}</p>{/if}
 
                     <div class="hp-row">
                         <div class="hp-big" class:down={hpNow === 0}>
                             <span class="hp-now">{hpNow}</span>
                             <span class="hp-max">/ {character.maxHp}</span>
-                            {#if state.tempHp}<span class="hp-temp">+{state.tempHp} врем.</span>{/if}
+                            {#if state.tempHp}<span class="hp-temp">+{state.tempHp} temp</span>{/if}
                         </div>
-                        <!-- число и столбик действий: урон / лечение / временные хиты -->
+                        <!-- number and action column: damage / heal / Temp HP -->
                         <div class="hp-ctl">
-                            <input class="hp-input" type="number" min="1" bind:value={hpAmount} aria-label="Сколько хитов" />
+                            <input class="hp-input" type="number" min="1" bind:value={hpAmount} aria-label="Hit Points amount" />
                             <div class="hp-actions">
                                 {#each HP_ACTIONS as act (act.id)}
                                     <Tooltip delay={150}>
                                         <button class="hp-btn {act.id}" onclick={() => act.run()} aria-label={act.label}>
                                             <Icon name={act.icon} label={act.label} short={act.short} native={false} />
                                         </button>
-                                        {#snippet tip()}<b>{act.label}</b> на {hpAmount || 0}{/snippet}
+                                        {#snippet tip()}<b>{act.label}</b> by {hpAmount || 0}{/snippet}
                                     </Tooltip>
                                 {/each}
                             </div>
@@ -459,7 +459,7 @@
                     </div>
 
                     {#if character.resources.length}
-                        <h3>Ресурсы</h3>
+                        <h3>Resources</h3>
                         <ul class="pools">
                             {#each character.resources as r (r.id)}
                                 {@const left = state.resourceLeft(r)}
@@ -468,19 +468,19 @@
                                         <small><IconLabel
                                             name={r.recharge === "short" ? "shortRest" : "longRest"}
                                             kind="rest"
-                                            label={r.recharge === "short" ? "Восстанавливается на коротком отдыхе" : "Восстанавливается на долгом отдыхе"}
-                                            text={r.recharge === "short" ? "кор. отдых" : "долг. отдых"}
+                                            label={r.recharge === "short" ? "Recharges on a Short Rest" : "Recharges on a Long Rest"}
+                                            text={r.recharge === "short" ? "Short Rest" : "Long Rest"}
                                         /></small></span>
                                     <span class="pips">
                                         {#if r.max > 10}
-                                            <button class="ghost step" onclick={() => state.spend(r)} disabled={left === 0} aria-label="Потратить">−</button>
-                                            <button class="ghost step" onclick={() => state.restore(r)} disabled={left === r.max} aria-label="Вернуть">+</button>
+                                            <button class="ghost step" onclick={() => state.spend(r)} disabled={left === 0} aria-label="Spend">−</button>
+                                            <button class="ghost step" onclick={() => state.restore(r)} disabled={left === r.max} aria-label="Restore">+</button>
                                         {:else}
                                         {#each Array(r.max) as _, i}
                                             <button
                                                 class="pip"
                                                 class:full={i < left}
-                                                title={i < left ? "Потратить" : "Вернуть"}
+                                                title={i < left ? "Spend" : "Restore"}
                                                 aria-label={r.name}
                                                 onclick={() => (i < left ? state.spend(r) : state.restore(r))}
                                             ></button>
@@ -495,8 +495,8 @@
 
                     {#if character.spellSlots.length}
                         <h3>
-                            Ячейки заклинаний
-                            <small class="sc-meta"><IconLabel name="dc" kind="meta" label="Сложность спасброска от ваших заклинаний" text="Сл" /> {character.spellcasting.saveDC} · атака {formatModifier(character.spellcasting.attack)}</small>
+                            Spell Slots
+                            <small class="sc-meta"><IconLabel name="dc" kind="meta" label="Your spell save DC" text="DC" /> {character.spellcasting.saveDC} · attack {formatModifier(character.spellcasting.attack)}</small>
                         </h3>
                         <ul class="pools">
                             {#each character.spellSlots as slot (state.slotKey(slot))}
@@ -506,10 +506,10 @@
                                         <IconLabel
                                             name={slot.pact ? "pact" : "slot"}
                                             kind="meta"
-                                            label={slot.pact ? "Ячейка договора — восстанавливается на коротком отдыхе" : "Ячейка заклинаний"}
+                                            label={slot.pact ? "Pact slot — recharges on a Short Rest" : "Spell slot"}
                                             text=""
                                         />
-                                        {slot.level} круг{#if slot.pact && !hasIcon("pact")} <small>договор</small>{/if}
+                                        Level {slot.level}{#if slot.pact && !hasIcon("pact")} <small>pact</small>{/if}
                                     </span>
                                     <span class="pips">
                                         {#each Array(slot.max) as _, i}
@@ -517,7 +517,7 @@
                                                 class="pip slot"
                                                 class:pact={slot.pact}
                                                 class:full={i < left}
-                                                aria-label="Ячейка {slot.level} круга"
+                                                aria-label="Level {slot.level} slot"
                                                 onclick={() => state.useSlot(slot, i < left ? 1 : -1)}
                                             ></button>
                                         {/each}
@@ -529,15 +529,15 @@
                     {/if}
 
                     <div class="rests">
-                        <button class="ghost" onclick={() => state.shortRest(character)}>Короткий отдых</button>
-                        <button class="ghost" onclick={() => state.longRest(character)}>Долгий отдых</button>
+                        <button class="ghost" onclick={() => state.shortRest(character)}>Short Rest</button>
+                        <button class="ghost" onclick={() => state.longRest(character)}>Long Rest</button>
                     </div>
                 </section>
 
-                <!-- пассивные эффекты: действуют всегда -->
+                <!-- passive effects: always active -->
                 {#if passives.effects.length || passives.abilities.length}
                     <section class="card passives">
-                        <h2>Пассивные эффекты</h2>
+                        <h2>Passive effects</h2>
                         {#if passives.effects.length}
                             <dl class="fx">
                                 {#each passives.effects as g (g.id)}
@@ -568,7 +568,7 @@
                             </dl>
                         {/if}
                         {#if passives.abilities.length}
-                            <h3>Умения</h3>
+                            <h3>Features</h3>
                             <ul class="pa">
                                 {#each passives.abilities as a (a.source + a.name)}
                                     <li>
@@ -578,7 +578,7 @@
                                                 <div class="tip">
                                                     <div class="tip-head">
                                                         <b>{a.name}</b>
-                                                        <span class="tip-tag">{a.source}{a.level ? ` · ${a.level} ур.` : ""}</span>
+                                                        <span class="tip-tag">{a.source}{a.level ? ` · Level ${a.level}` : ""}</span>
                                                     </div>
                                                     {#if a.desc}<p class="tip-desc">{a.desc}</p>{/if}
                                                 </div>
@@ -594,7 +594,7 @@
                 {/if}
 
                 <section class="card">
-                    <h2>Экипировка и атаки</h2>
+                    <h2>Equipment & attacks</h2>
                     <div class="slots">
                         {#each SLOTS as slot (slot.id)}
                             {@const blocked = handBlocked(slot.id)}
@@ -614,13 +614,13 @@
                                     disabled={blocked}
                                     onchange={(e) => onEquip(slot.id, e)}
                                 >
-                                    <option value="">{blocked ? "— занята (двуручное) —" : "— пусто —"}</option>
+                                    <option value="">{blocked ? "— occupied (two-handed) —" : "— empty —"}</option>
                                     {#each slotOptions(slot.id, character.inventory) as it (it.key)}
                                         <option value={it.key}>
                                             {it.name}{isTwoHanded(it)
-                                                ? " (двуручное)"
+                                                ? " (two-handed)"
                                                 : (it.ref?.data?.properties ?? []).includes("light")
-                                                  ? " (лёгкое)"
+                                                  ? " (light)"
                                                   : ""}
                                         </option>
                                     {/each}
@@ -630,16 +630,16 @@
                     </div>
 
                     <div class="armor-line">
-                        <span class="al-label">Доспех</span>
+                        <span class="al-label">Armor</span>
                         {#if worn}
                             <Tooltip>
                                 <b class="al-name">{worn.name}</b>
                                 {#snippet tip()}{@render itemTip(worn)}{/snippet}
                             </Tooltip>
-                            <span class="al-meta">{ARMOR_CAT[worn.ref.category] ?? ""} · КД {acText(worn.ref)}{worn.ref.data?.acBonus ? ` +${worn.ref.data.acBonus}` : ""}</span>
-                            {#if worn.ref.data?.stealthDisadvantage}<span class="al-warn">помеха Скрытности</span>{/if}
+                            <span class="al-meta">{ARMOR_CAT[worn.ref.category] ?? ""} · AC {acText(worn.ref)}{worn.ref.data?.acBonus ? ` +${worn.ref.data.acBonus}` : ""}</span>
+                            {#if worn.ref.data?.stealthDisadvantage}<span class="al-warn">Stealth Disadvantage</span>{/if}
                         {:else}
-                            <span class="al-meta">без доспеха</span>
+                            <span class="al-meta">no armor</span>
                         {/if}
                         {#if heldShield}
                             <span class="al-sep">+</span>
@@ -647,19 +647,19 @@
                                 <b class="al-name">{heldShield.name}</b>
                                 {#snippet tip()}{@render itemTip(heldShield)}{/snippet}
                             </Tooltip>
-                            <span class="al-meta">+{heldShield.ref.data?.acBonus ?? 2} КД</span>
+                            <span class="al-meta">+{heldShield.ref.data?.acBonus ?? 2} AC</span>
                         {/if}
-                        <span class="al-total">Итого КД <b>{sheet.ac}</b></span>
+                        <span class="al-total">Total AC <b>{sheet.ac}</b></span>
                     </div>
 
                     <table class="attacks">
                         <thead>
-                            <tr><th>Рука</th><th>Оружие</th><th>Действие</th><th>Бонус</th><th>Урон / вид</th></tr>
+                            <tr><th>Hand</th><th>Weapon</th><th>Action</th><th>Bonus</th><th>Damage / type</th></tr>
                         </thead>
                         <tbody>
                             {#each sheet.attacks as a (a.hand + a.id)}
                                 <tr>
-                                    <td class="hand">{a.hand === "off" ? "левая" : "правая"}</td>
+                                    <td class="hand">{a.hand === "off" ? "off" : "main"}</td>
                                     <td>
                                         {#if weaponInv(a.id)}
                                             <Tooltip>
@@ -670,7 +670,7 @@
                                         {#if a.magic}<small class="magic">★</small>{/if}
                                     </td>
                                     <td class="act" class:bonus={a.action === "bonus"}>
-                                        {a.action === "bonus" ? "бонусное" : "атака"}
+                                        {a.action === "bonus" ? "bonus" : "attack"}
                                     </td>
                                     <td class="num">{formatModifier(a.toHit)}</td>
                                     <td>
@@ -690,10 +690,10 @@
                 {#if character.actionGroups.length}
                     <section class="card">
                         <h2>
-                            Действия и заклинания
+                            Actions & spells
                             {#if character.spellcasting}
                                 <small class="h2-sub">
-                                    Сл {character.spellcasting.saveDC} · атака {formatModifier(character.spellcasting.attack)}
+                                    DC {character.spellcasting.saveDC} · attack {formatModifier(character.spellcasting.attack)}
                                 </small>
                             {/if}
                         </h2>
@@ -714,18 +714,18 @@
                     </section>
                 {/if}
 
-                <!-- заметки игрока: хранятся в состоянии персонажа -->
+                <!-- player notes: stored in the character state -->
                 {#if state}
                     <section class="card notes">
                         <h2>
-                            Заметки
-                            {#if dirty}<small class="h2-sub">не сохранено</small>{/if}
+                            Notes
+                            {#if dirty}<small class="h2-sub">not saved</small>{/if}
                         </h2>
                         <textarea
                             bind:value={state.notes}
                             use:autosize={state.notes}
                             rows="6"
-                            placeholder="Квесты, имена NPC, долги, найденные подсказки…"
+                            placeholder="Quests, NPC names, debts, clues found…"
                         ></textarea>
                     </section>
                 {/if}
@@ -815,8 +815,8 @@
         font-family: var(--font-lore);
         font-size: 15px;
         line-height: 1.5;
-        resize: none;       /* высоту задаёт текст (autosize) */
-        overflow: hidden;   /* без внутренней прокрутки */
+        resize: none;       /* height is set by the text (autosize) */
+        overflow: hidden;   /* no inner scrolling */
         outline: none;
     }
 
@@ -844,7 +844,7 @@
         color: var(--color-success);
     }
 
-    /* ---------- состояние ---------- */
+    /* ---------- status ---------- */
     .hp-row {
         display: flex;
         flex-wrap: wrap;
@@ -887,7 +887,7 @@
         gap: 6px;
     }
 
-    /* поле числа — высотой со столбик кнопок */
+    /* number field — as tall as the button column */
     .hp-input {
         width: 76px;
         padding: 0 8px;
@@ -1008,7 +1008,7 @@
         background: var(--color-slot);
     }
 
-    /* ячейки договора колдуна */
+    /* warlock pact slots */
     .pip.slot.pact {
         border-color: var(--color-slot-pact);
     }
@@ -1041,7 +1041,7 @@
         color: var(--color-gold-hover);
     }
 
-    /* ---------- сетки ---------- */
+    /* ---------- grids ---------- */
     .row {
         display: grid;
         gap: 20px;
@@ -1108,7 +1108,7 @@
         margin-top: 0;
     }
 
-    /* ---------- портрет + имя ---------- */
+    /* ---------- portrait + name ---------- */
     .identity {
         display: flex;
         flex-direction: column;
@@ -1176,7 +1176,7 @@
         color: var(--color-text-secondary);
     }
 
-    /* ---------- атрибуты ---------- */
+    /* ---------- attributes ---------- */
     .stats {
         display: flex;
         flex-direction: column;
@@ -1226,7 +1226,7 @@
         white-space: nowrap;
     }
 
-    /* классический блок характеристики: название, крупный модификатор, значение в овале */
+    /* classic ability block: name, large modifier, score in an oval */
     .abilities {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -1293,7 +1293,7 @@
         color: var(--color-gold);
     }
 
-    /* список с «кружком владения», как на листе */
+    /* list with a “proficiency circle”, as on the sheet */
     .checklist {
         margin: 0;
         padding: 0;
@@ -1358,7 +1358,7 @@
         color: var(--color-text-primary);
     }
 
-    /* ---------- тексты ---------- */
+    /* ---------- texts ---------- */
     dl {
         margin: 0;
         display: grid;
@@ -1381,7 +1381,7 @@
         word-break: break-word;
     }
 
-    /* ---------- атаки ---------- */
+    /* ---------- attacks ---------- */
     .attacks {
         width: 100%;
         border-collapse: collapse;
@@ -1419,7 +1419,7 @@
         color: var(--color-text-secondary);
     }
 
-    /* ---------- экипировка ---------- */
+    /* ---------- equipment ---------- */
     .slots {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1447,7 +1447,7 @@
         color: var(--color-text-muted);
     }
 
-    /* картинка предмета */
+    /* item image */
     .thumb {
         display: inline-grid;
         place-items: center;
@@ -1470,7 +1470,7 @@
         color: var(--color-text-muted);
     }
 
-    /* фиксированный квадрат по центру слота; в узкой колонке ужимается, не обрезаясь */
+    /* fixed square centered in the slot; shrinks in a narrow column without cropping */
     .thumb.lg {
         width: min(150px, 100%);
         aspect-ratio: 1;
@@ -1478,7 +1478,7 @@
         border-radius: 8px;
     }
 
-    /* картинка целиком, без обрезки */
+    /* whole image, no cropping */
     .thumb.lg img {
         object-fit: contain;
     }
@@ -1551,7 +1551,7 @@
         color: var(--color-text-muted);
     }
 
-    /* ---------- инвентарь ---------- */
+    /* ---------- inventory ---------- */
     .inventory {
         margin: 12px 0 0;
         padding: 8px 0 0;
@@ -1574,7 +1574,7 @@
         color: var(--color-gold);
     }
 
-    /* ---------- черты ---------- */
+    /* ---------- features ---------- */
     .features {
         margin: 0;
         padding: 0;
@@ -1617,14 +1617,14 @@
         color: var(--color-danger);
     }
 
-    /* рюкзак — отдельной карточкой, без верхнего разделителя */
+    /* backpack — a separate card, no top divider */
     .card > .inventory {
         margin: 0;
         padding: 0;
         border-top: none;
     }
 
-    /* ---------- заклинания ---------- */
+    /* ---------- spells ---------- */
     .spells {
         margin: 0;
         padding: 0;
@@ -1667,7 +1667,7 @@
         color: var(--color-text-secondary);
     }
 
-    /* ---------- карточки действий ---------- */
+    /* ---------- action cards ---------- */
     .cards {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -1684,12 +1684,12 @@
         color: var(--color-text-secondary);
     }
 
-    /* компетентность: кружок с обводкой */
+    /* expertise: outlined circle */
     .checklist li.expert .dot {
         box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-gold);
     }
 
-    /* ---------- подсказки ---------- */
+    /* ---------- tooltips ---------- */
     .tip {
         display: flex;
         flex-direction: column;
@@ -1734,7 +1734,7 @@
         color: var(--color-text-primary);
     }
 
-    /* ---------- надетый доспех ---------- */
+    /* ---------- worn armor ---------- */
     .armor-line {
         display: flex;
         flex-wrap: wrap;
@@ -1796,7 +1796,7 @@
     .inventory :global(.anchor) {
         border-bottom: 1px dotted var(--color-text-muted);
     }
-    /* --- пассивные эффекты --- */
+    /* --- passive effects --- */
     .fx {
         display: grid;
         grid-template-columns: max-content 1fr;

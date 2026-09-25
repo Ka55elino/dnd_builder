@@ -1,6 +1,6 @@
 {
   "id": "healingWord",
-  "name": "Лечащее слово",
+  "name": "Healing Word",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -10,5 +10,5 @@
     "cleric",
     "druid"
   ],
-  "desc": "Бонусным действием лечите существо в 18 м на 2d4 + модификатор заклинателя."
+  "desc": "As a Bonus Action, you heal a creature within 60 feet for 2d4 + your spellcasting ability modifier."
 }

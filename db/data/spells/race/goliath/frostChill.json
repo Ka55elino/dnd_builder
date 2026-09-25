@@ -1,11 +1,39 @@
 {
   "id": "frostChill",
-  "name": "Морозный холод",
+  "name": "Frost's Chill",
   "kind": "action",
-  "source": "Голиаф (Мороз)",
+  "source": "Goliath (Frost)",
   "level": 1,
   "action": "free",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Когда вы попадаете по цели атакой, можете нанести ей доп. 1d6 урона холодом и уменьшить её скорость на 3 м до начала вашего следующего хода. Число применений равно вашему бонусу мастерства (на длинный отдых).",
-  "damage": { "dice": "1d6", "type": "cold" }
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "When you hit a target with an attack, you can deal an extra 1d6 Cold damage to it and reduce its Speed by 10 feet until the start of your next turn. Number of uses equals your Proficiency Bonus (per Long Rest).",
+  "damage": {
+    "dice": "1d6",
+    "type": "cold"
+  }
 }

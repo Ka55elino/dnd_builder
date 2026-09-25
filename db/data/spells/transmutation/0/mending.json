@@ -1,6 +1,6 @@
 {
   "id": "mending",
-  "name": "Починка",
+  "name": "Mending",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -12,5 +12,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "За минуту чините единичный разрыв или пролом в предмете."
+  "desc": "Over 1 minute, you repair a single break or tear in an object."
 }

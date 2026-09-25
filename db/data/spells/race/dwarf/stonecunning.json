@@ -1,11 +1,11 @@
 {
   "id": "stonecunning",
-  "name": "Знание камня",
+  "name": "Stonecunning",
   "kind": "action",
-  "source": "Дварф",
+  "source": "Dwarf",
   "level": 1,
   "action": "bonus",
-  "desc": "Бонусным действием получаете чувство вибрации 18 м на 10 минут. Число применений равно бонусу мастерства (восстанавливается на длинном отдыхе).",
+  "desc": "As a Bonus Action, you gain Tremorsense with a range of 60 feet for 10 minutes. Number of uses equals your Proficiency Bonus (regained on a Long Rest).",
   "uses": {
     "pb": true,
     "per": "longRest"

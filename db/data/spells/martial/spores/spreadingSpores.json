@@ -1,11 +1,11 @@
 {
   "id": "spreadingSpores",
-  "name": "Распространение спор",
+  "name": "Spreading Spores",
   "kind": "martial",
   "subclass": "spores",
   "level": 10,
   "action": "bonus",
-  "desc": "Пока активна Симбиотическая сущность: бонусным действием бросаете облако спор (куб 3 м) в 9 м на 1 минуту. Существа, начавшие ход в облаке, получают урон Ореола спор.",
+  "desc": "While Symbiotic Entity is active: as a Bonus Action, you hurl a cloud of spores (10-foot Cube) within 30 feet for 1 minute. Creatures that start their turn in the cloud take your Halo of Spores damage.",
   "scaleDie": [
     [
       3,

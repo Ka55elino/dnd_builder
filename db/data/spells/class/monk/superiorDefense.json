@@ -1,9 +1,11 @@
 {
   "id": "superiorDefense",
-  "name": "Высшая оборона",
+  "name": "Superior Defense",
   "kind": "class",
   "level": 18,
-  "classes": ["monk"],
+  "classes": [
+    "monk"
+  ],
   "action": "bonus",
-  "desc": "Стоимость 3 очка ци. На 1 минуту получаете сопротивление всем типам урона, кроме силового."
+  "desc": "Cost: 3 Focus Points. For 1 minute, you have Resistance to all damage types except Force."
 }

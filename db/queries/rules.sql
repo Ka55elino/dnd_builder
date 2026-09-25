@@ -1,8 +1,8 @@
--- Справочники правил: предыстории, черты (+ боевые стили, метамагия, воззвания),
--- заклинания и классовые/расовые способности.
--- Каждый запрос начинается со строки «-- name: ИмяЗапроса» (см. queries.go).
+-- Rules reference data: backgrounds, feats (plus fighting styles, metamagic, invocations),
+-- spells and class/species abilities.
+-- Each query starts with a "-- name: QueryName" line (see queries.go).
 
--- ---------- предыстории ----------
+-- ---------- backgrounds ----------
 
 -- name: CountBackgrounds
 SELECT COUNT(*) FROM backgrounds;
@@ -13,7 +13,7 @@ INSERT INTO backgrounds (id, name, feat, data_json) VALUES (?, ?, ?, ?);
 -- name: GetAllBackgrounds
 SELECT id, name, feat, data_json FROM backgrounds ORDER BY name COLLATE NOCASE;
 
--- ---------- черты ----------
+-- ---------- feats ----------
 -- category: origin | general | boon | fightingStyle | metamagic | invocation
 
 -- name: CountFeats
@@ -27,7 +27,7 @@ SELECT id, name, category, level, description, data_json
 FROM feats
 ORDER BY category, name COLLATE NOCASE;
 
--- ---------- заклинания и способности ----------
+-- ---------- spells and abilities ----------
 -- kind: spell | class | martial | action
 
 -- name: CountSpells

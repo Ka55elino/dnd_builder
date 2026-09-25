@@ -1,6 +1,6 @@
 package enums
 
-// SpellSchool — школа магии D&D.
+// SpellSchool is a D&D school of magic.
 type SpellSchool string
 type SpellLevel int16
 
@@ -28,7 +28,7 @@ const (
 	Level9  SpellLevel = 9
 )
 
-// SpellSchoolsEnum — все допустимые школы магии.
+// SpellSchoolsEnum lists all valid schools of magic.
 var SpellSchoolsEnum = []SpellSchool{
 	SchoolAbjuration,
 	SchoolConjuration,
@@ -40,7 +40,7 @@ var SpellSchoolsEnum = []SpellSchool{
 	SchoolTransmutation,
 }
 
-// IsValid сообщает, входит ли значение в список школ магии.
+// IsValid reports whether the value is a valid school of magic.
 func (s SpellSchool) IsValid() bool {
 	for _, v := range SpellSchoolsEnum {
 		if v == s {

@@ -1,6 +1,6 @@
 {
   "id": "healSpell",
-  "name": "Исцеление",
+  "name": "Heal",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -9,5 +9,5 @@
     "cleric",
     "druid"
   ],
-  "desc": "Касанием восстанавливаете 70 хитов и снимаете слепоту, глухоту и болезни."
+  "desc": "You touch a creature to restore 70 Hit Points and end the Blinded and Deafened conditions and any diseases."
 }

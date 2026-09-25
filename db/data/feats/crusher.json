@@ -1,11 +1,11 @@
 {
   "id": "crusher",
-  "name": "Крушитель",
+  "name": "Crusher",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "con"
   ],
-  "desc": "+1 Сила или Тел; дробящий урон толкает; крит даёт преимущество атакующим."
+  "desc": "+1 Strength or Constitution; Bludgeoning damage pushes; a Critical Hit grants Advantage to attackers."
 }

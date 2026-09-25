@@ -1,6 +1,6 @@
 {
   "id": "jump",
-  "name": "Прыжок",
+  "name": "Jump",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Касанием утраиваете дистанцию прыжка существа на 1 минуту."
+  "desc": "With a touch, you triple a creature's jump distance for 1 minute."
 }

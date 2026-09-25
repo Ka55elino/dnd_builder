@@ -1,6 +1,6 @@
 {
   "id": "disguiseSelf",
-  "name": "Маскировка",
+  "name": "Disguise Self",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Меняете свою внешность (иллюзия) на 1 час."
+  "desc": "You change your appearance (an illusion) for 1 hour."
 }

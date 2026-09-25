@@ -1,9 +1,9 @@
 {
   "id": "fleetStep",
-  "name": "Тихий шаг",
+  "name": "Fleet Step",
   "kind": "martial",
   "subclass": "openHand",
   "level": 11,
   "action": "bonus",
-  "desc": "Бонусным действием с преимуществом совершаете Засаду (Hide), если рядом нет ярко освещённых участков."
+  "desc": "As a Bonus Action, you take the Hide action with Advantage if there are no brightly lit areas nearby."
 }

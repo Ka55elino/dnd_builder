@@ -1,10 +1,10 @@
 {
   "id": "rally",
-  "name": "Сплочение",
+  "name": "Rally",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Бонусным действием союзник получает временные хиты = кость превосходства + мод. вашей хар-ки.",
+  "desc": "As a Bonus Action, an ally gains Temporary Hit Points equal to a Superiority Die + the modifier of your chosen ability.",
   "action": "bonus",
   "pool": "maneuver"
 }

@@ -1,10 +1,15 @@
 {
   "id": "divineSmite",
-  "name": "Божественная кара",
+  "name": "Divine Smite",
   "kind": "class",
   "level": 2,
-  "classes": ["paladin"],
+  "classes": [
+    "paladin"
+  ],
   "action": "bonus",
-  "desc": "Попав атакой в ближнем бою, тратите ячейку заклинания: доп. 2d8 урона излучением, +1d8 за каждый круг ячейки выше 1 (макс. 5d8), и ещё +1d8 против нежити и исчадий.",
-  "damage": { "dice": "2d8", "type": "radiant" }
+  "desc": "When you hit with a melee attack, you expend a spell slot: an extra 2d8 Radiant damage, +1d8 for each slot level above 1 (max 5d8), and another +1d8 against Undead and Fiends.",
+  "damage": {
+    "dice": "2d8",
+    "type": "radiant"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "id": "controlWeather",
-  "name": "Управление погодой",
+  "name": "Control Weather",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -10,5 +10,5 @@
     "druid",
     "wizard"
   ],
-  "desc": "Меняете погоду в радиусе 8 км на протяжении концентрации."
+  "desc": "You change the weather within 5 miles for as long as you maintain Concentration."
 }

@@ -1,13 +1,13 @@
 {
   "id": "protection",
-  "name": "Защитник",
+  "name": "Protection",
   "category": "fightingStyle",
   "level": 1,
-  "desc": "Реакцией со щитом даёте помеху существу, атакующему союзника в пределах 1,5 м.",
+  "desc": "As a Reaction while holding a Shield, you impose Disadvantage on a creature attacking an ally within 5 feet.",
   "effects": [
     {
       "kind": "feature",
-      "note": "Реакция (нужен щит): помеха атакующему союзника рядом."
+      "note": "Reaction (requires a Shield): impose Disadvantage on an attacker targeting an ally near you"
     }
   ]
 }

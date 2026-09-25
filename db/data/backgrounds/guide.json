@@ -1,6 +1,6 @@
 {
   "id": "guide",
-  "name": "Проводник",
+  "name": "Guide",
   "abilities": {
     "options": [
       "dex",
@@ -13,5 +13,5 @@
     "stealth",
     "survival"
   ],
-  "tool": "Инструменты картографа"
+  "tool": "Cartographer's Tools"
 }

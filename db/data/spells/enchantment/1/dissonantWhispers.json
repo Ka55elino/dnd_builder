@@ -1,6 +1,6 @@
 {
   "id": "dissonantWhispers",
-  "name": "Диссонирующий шёпот",
+  "name": "Dissonant Whispers",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "bard"
   ],
-  "desc": "Шёпот боли в разум цели (спасбросок Мудрости): урон психикой; при провале использует реакцию, чтобы убежать.",
+  "desc": "You whisper pain into the target's mind (Wisdom saving throw): Psychic damage; on a failed save, it uses its Reaction to flee.",
   "damage": {
     "dice": "3d6",
     "type": "psychic"

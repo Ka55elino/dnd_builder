@@ -1,8 +1,10 @@
 {
   "id": "csDaze",
-  "name": "Хитрый удар: Ошеломление",
+  "name": "Cunning Strike: Daze",
   "kind": "class",
   "level": 14,
-  "classes": ["rogue"],
-  "desc": "Стоимость 2 кости Скрытой атаки. Спасбросок Телосложения; при провале в свой следующий ход цель может либо перемещаться, либо совершить действие/бонусное действие (но не всё сразу)."
+  "classes": [
+    "rogue"
+  ],
+  "desc": "Cost: 2 Sneak Attack dice. Constitution saving throw; on a failed save, on its next turn the target can either move or take an action or Bonus Action (but not all of them)."
 }

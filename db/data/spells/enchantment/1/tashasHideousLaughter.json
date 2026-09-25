@@ -1,6 +1,6 @@
 {
   "id": "tashasHideousLaughter",
-  "name": "Смех Таши",
+  "name": "Tasha's Hideous Laughter",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -8,5 +8,5 @@
   "classes": [
     "bard"
   ],
-  "desc": "Существо (спасбросок Мудрости) падает в приступе хохота: недееспособно, лежит ничком. Концентрация."
+  "desc": "A creature (Wisdom saving throw) collapses in a fit of laughter: it has the Incapacitated and Prone conditions. Concentration."
 }

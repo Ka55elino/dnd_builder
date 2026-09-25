@@ -1,14 +1,14 @@
 <script>
     /**
-     * Всплывающая подсказка при наведении (и фокусе с клавиатуры).
+     * Tooltip shown on hover (and keyboard focus).
      *
      *   <Tooltip>
-     *       Кольчуга                       ← то, на что наводим (children)
-     *       {#snippet tip()}…{/snippet}    ← содержимое подсказки
+     *       Chain Mail                     ← the hovered element (children)
+     *       {#snippet tip()}…{/snippet}    ← tooltip content
      *   </Tooltip>
      *
-     * Панель позиционируется fixed относительно экрана, поэтому не обрезается
-     * карточками с overflow и сама уходит вверх/влево у края окна.
+     * The panel is position: fixed relative to the viewport, so it isn't clipped
+     * by cards with overflow and flips up/left near the window edge.
      */
     let { children, tip, delay = 250 } = $props();
 
@@ -31,7 +31,7 @@
         open = false;
     }
 
-    // под элементом; если не помещается — над ним; по горизонтали не выходит за окно
+    // below the element; if it doesn't fit — above it; horizontally stays within the window
     function place() {
         if (!anchor || !panel) return;
         const a = anchor.getBoundingClientRect();

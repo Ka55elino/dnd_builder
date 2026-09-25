@@ -1,9 +1,9 @@
 {
   "id": "protectiveField",
-  "name": "Защитная сила",
+  "name": "Protective Field",
   "kind": "martial",
   "subclass": "psiWarrior",
   "level": 10,
   "action": "reaction",
-  "desc": "Реакцией, когда вы или существо в 9 м получаете урон, тратите кость энергии и снижаете урон на бросок кости + модификатор Интеллекта."
+  "desc": "As a Reaction, when you or a creature within 30 feet takes damage, you expend a Psionic Energy Die and reduce the damage by the roll + your Intelligence modifier."
 }

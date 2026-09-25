@@ -1,6 +1,6 @@
 {
   "id": "farmer",
-  "name": "Фермер",
+  "name": "Farmer",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "animal",
     "nature"
   ],
-  "tool": "Инструменты плотника"
+  "tool": "Carpenter's Tools"
 }

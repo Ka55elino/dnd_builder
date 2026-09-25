@@ -1,9 +1,9 @@
 {
   "id": "mantleOfInspiration",
-  "name": "Мантия вдохновения",
+  "name": "Mantle of Inspiration",
   "kind": "martial",
   "subclass": "glamour",
   "level": 3,
   "action": "bonus",
-  "desc": "Тратя Кость вдохновения, даёте до (мод. Харизмы) видимым существам временные хиты, равные выпавшему на кости; каждый может реакцией переместиться на свою скорость, не провоцируя атак."
+  "desc": "By expending a Bardic Inspiration die, you give up to (Charisma modifier) creatures you can see Temporary Hit Points equal to the number rolled; each can use its Reaction to move up to its Speed without provoking Opportunity Attacks."
 }

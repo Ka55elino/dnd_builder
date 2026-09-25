@@ -1,9 +1,9 @@
 {
   "id": "impostor",
-  "name": "Мастер маскировки",
+  "name": "Impostor",
   "kind": "martial",
   "subclass": "assassin",
   "level": 9,
   "action": "action",
-  "desc": "Действием безупречно подражаете речи, почерку и манерам знакомого существа (преимущество на обман); можете носить готовые фальшивые личности."
+  "desc": "As an action, you flawlessly mimic the speech, handwriting, and mannerisms of a creature you know (Advantage on Deception); you can maintain ready-made false identities."
 }

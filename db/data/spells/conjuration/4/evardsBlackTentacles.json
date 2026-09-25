@@ -1,6 +1,6 @@
 {
   "id": "evardsBlackTentacles",
-  "name": "Чёрные щупальца",
+  "name": "Evard's Black Tentacles",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -8,7 +8,7 @@
   "classes": [
     "wizard"
   ],
-  "desc": "Область 6 м прорастает щупальцами: спасбросок Ловкости или «Опутано» и урон. Концентрация.",
+  "desc": "Tentacles sprout in a 20-foot area: Dexterity saving throw or Restrained and damage. Concentration.",
   "damage": {
     "dice": "3d6",
     "type": "bludgeoning"

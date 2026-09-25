@@ -1,6 +1,6 @@
 {
   "id": "hypnoticPattern",
-  "name": "Гипнотический узор",
+  "name": "Hypnotic Pattern",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Мерцающий узор: существа в кубе 9 м — спасбросок Мудрости или зачарованы и недееспособны. Концентрация."
+  "desc": "A shimmering pattern: creatures in a 30-foot Cube make a Wisdom saving throw or are Charmed and Incapacitated. Concentration."
 }

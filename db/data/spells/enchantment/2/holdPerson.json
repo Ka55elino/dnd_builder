@@ -1,6 +1,6 @@
 {
   "id": "holdPerson",
-  "name": "Удержание личности",
+  "name": "Hold Person",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -13,11 +13,11 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Гуманоид проходит спасбросок Мудрости или парализован; повторный спасбросок в конце каждого своего хода. Концентрация.",
+  "desc": "A Humanoid makes a Wisdom saving throw or is Paralyzed; it repeats the save at the end of each of its turns. Concentration.",
   "casting": {
-    "time": "1 действие",
-    "range": "18 м",
-    "components": "В, С, М",
-    "duration": "Концентрация, до 1 минуты"
+    "time": "1 action",
+    "range": "60 feet",
+    "components": "V, S, M",
+    "duration": "Concentration, up to 1 minute"
   }
 }

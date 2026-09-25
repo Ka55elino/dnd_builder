@@ -1,13 +1,13 @@
 {
   "id": "wsBlackBear",
-  "name": "Форма: Чёрный медведь",
+  "name": "Form: Black Bear",
   "kind": "class",
   "level": 4,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1/2. Хиты 19, КЗ 11, скорость 12 м, лазание 9 м. Мультиатака: укус (1d6 кол.) и когти (2d4 руб.).",
+  "desc": "CR 1/2. HP 19, AC 11, Speed 40 ft., Climb 30 ft. Multiattack: Bite (1d6 Piercing) and Claws (2d4 Slashing).",
   "damage": {
     "dice": "1d6",
     "type": "piercing"

@@ -1,7 +1,7 @@
 {
   "id": "musician",
-  "name": "Музыкант",
+  "name": "Musician",
   "category": "origin",
   "level": 1,
-  "desc": "Владение тремя музыкальными инструментами; после отдыха даёте героическое вдохновение союзникам (число = бонус мастерства)."
+  "desc": "Proficiency with three Musical Instruments; after a rest, you give Heroic Inspiration to allies (number = Proficiency Bonus)."
 }

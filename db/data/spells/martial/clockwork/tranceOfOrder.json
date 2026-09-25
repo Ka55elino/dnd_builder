@@ -1,9 +1,9 @@
 {
   "id": "tranceOfOrder",
-  "name": "Транс порядка",
+  "name": "Trance of Order",
   "kind": "martial",
   "subclass": "clockwork",
   "level": 14,
   "action": "bonus",
-  "desc": "Бонусным действием на 1 минуту: атаки по вам не могут иметь преимущества, а ваши броски атаки, проверки и спасброски с d20 ≤ 9 считаются как выпавшие 10."
+  "desc": "As a Bonus Action, for 1 minute: attack rolls against you can't have Advantage, and whenever you roll a 9 or lower on the d20 for an attack roll, ability check, or saving throw, you treat the roll as a 10."
 }

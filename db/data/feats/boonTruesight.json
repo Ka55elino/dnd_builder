@@ -1,7 +1,7 @@
 {
   "id": "boonTruesight",
-  "name": "Дар истинного зрения",
+  "name": "Boon of Truesight",
   "category": "boon",
   "level": 19,
-  "desc": "Истинное зрение 18 м."
+  "desc": "True Sight 60 feet."
 }

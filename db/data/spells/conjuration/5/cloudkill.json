@@ -1,6 +1,6 @@
 {
   "id": "cloudkill",
-  "name": "Смертельное облако",
+  "name": "Cloudkill",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -11,7 +11,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Облако ядовитого тумана движется от вас: урон ядом (спасбросок Тел. за половину). Концентрация.",
+  "desc": "A cloud of poisonous fog rolls away from you: Poison damage (Constitution saving throw for half). Concentration.",
   "damage": {
     "dice": "5d8",
     "type": "poison"

@@ -1,6 +1,6 @@
 {
   "id": "vengeance",
-  "name": "Клятва Мести",
+  "name": "Oath of Vengeance",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "paladin",
   "domainSpells": {
@@ -24,23 +24,23 @@
   "features": [
     {
       "level": 3,
-      "name": "Клятва вражды",
-      "desc": "Бонусным действием и Божественным каналом даёте себе преимущество на атаки по одному существу на 1 минуту."
+      "name": "Vow of Enmity",
+      "desc": "As a Bonus Action, using Channel Divinity, you give yourself Advantage on attack rolls against one creature for 1 minute."
     },
     {
       "level": 7,
-      "name": "Неотступный мститель",
-      "desc": "Совершив атаку по возможности, можете переместиться до половины скорости (провокации по цели прекращаются)."
+      "name": "Relentless Avenger",
+      "desc": "After you make an Opportunity Attack, you can move up to half your Speed (the target's Opportunity Attacks against you end)."
     },
     {
       "level": 15,
-      "name": "Душа мести",
-      "desc": "Когда цель вашей Клятвы вражды атакует, реакцией совершаете по ней ближнюю атаку."
+      "name": "Soul of Vengeance",
+      "desc": "When the target of your Vow of Enmity makes an attack, you make a melee attack against it as a Reaction."
     },
     {
       "level": 20,
-      "name": "Ангел-мститель",
-      "desc": "Действием на 1 минуту отращиваете крылья (полёт 18 м) и испускаете ауру страха 9 м."
+      "name": "Avenging Angel",
+      "desc": "As an action, for 1 minute, you sprout wings (Fly Speed 60 feet) and emit a 30-foot aura of fear."
     }
   ]
 }

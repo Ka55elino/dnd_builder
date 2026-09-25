@@ -1,11 +1,11 @@
 {
   "id": "arcaneShot",
-  "name": "Магический выстрел",
+  "name": "Arcane Shot",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "level": 3,
   "action": "free",
-  "desc": "Раз в ход при попадании стрелой из лука применяете один из известных магических выстрелов. Восстанавливается на коротком или долгом отдыхе.",
+  "desc": "Once per turn, when you hit with an arrow fired from a bow, you apply one of your known Arcane Shot options. Regained on a Short or Long Rest.",
   "uses": {
     "count": 2,
     "per": "shortRest"

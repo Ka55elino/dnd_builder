@@ -1,7 +1,7 @@
 {
   "id": "heightenedSpell",
-  "name": "Усиленное заклинание",
+  "name": "Heightened Spell",
   "category": "metamagic",
   "cost": "2",
-  "desc": "Одна цель заклинания совершает первый спасбросок против него с помехой."
+  "desc": "One target of the spell makes its first saving throw against it with Disadvantage."
 }

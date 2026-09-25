@@ -1,10 +1,13 @@
 {
   "id": "breathWeapon",
-  "name": "Оружие дыхания",
+  "name": "Breath Weapon",
   "kind": "action",
-  "source": "Драконорождённый",
+  "source": "Dragonborn",
   "level": 1,
   "action": "action",
-  "damage": { "dice": "1d10", "scaling": "cantrip" },
-  "desc": "Заменяя одну атаку, выдыхаете урон в конусе 4,5 м или линии 9 м (тип — по драконьему наследию). Спасбросок Ловкости; урон растёт с уровнем."
+  "damage": {
+    "dice": "1d10",
+    "scaling": "cantrip"
+  },
+  "desc": "Replacing one attack, you exhale damage in a 15-foot Cone or a 30-foot Line (damage type determined by your Draconic Ancestry). Dexterity saving throw; the damage increases with level."
 }

@@ -1,26 +1,26 @@
 /**
- * CharacterState — ИГРОВОЕ состояние (то, что меняется за столом).
- * Хранится отдельно от build: колонка characters.state_json.
+ * CharacterState — IN-PLAY state (what changes at the table).
+ * Stored separately from build: the characters.state_json column.
  *
- * Хранит только «сколько потрачено», а максимумы берёт из Character —
- * так повышение уровня или смена снаряжения не ломают состояние.
+ * Stores only "how much is spent"; maximums come from Character —
+ * so leveling up or changing equipment doesn't break the state.
  *
- * Реактивный (Svelte 5), файл обязан быть .svelte.js.
+ * Reactive (Svelte 5); the file must be .svelte.js.
  */
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 export class CharacterState {
-    hpLost = $state(0);          // сколько хитов потеряно (текущие = max - hpLost)
-    tempHp = $state(0);          // временные хиты
-    resourcesUsed = $state({});  // { [resourceId]: потрачено }
-    slotsUsed = $state({});      // { [круг]: потрачено }, ячейки договора — ключ 'pact'
+    hpLost = $state(0);          // Hit Points lost (current = max - hpLost)
+    tempHp = $state(0);          // Temporary Hit Points
+    resourcesUsed = $state({});  // { [resourceId]: spent }
+    slotsUsed = $state({});      // { [spell level]: spent }, Pact Magic slots — key 'pact'
     hitDiceUsed = $state(0);
     deathSaves = $state({ success: 0, fail: 0 });
     conditions = $state([]);     // ['poisoned', ...]
     inspiration = $state(false);
-    equipped = $state(null);     // { main, off, armor } — ключи предметов рюкзака, см. rules/loadout.js
-    notes = $state('');          // заметки игрока (свободный текст)
+    equipped = $state(null);     // { main, off, armor } — backpack item keys, see rules/loadout.js
+    notes = $state('');          // player notes (free text)
 
     constructor(data = {}) {
         this.hpLost = Math.max(0, data.hpLost ?? 0);
@@ -35,13 +35,13 @@ export class CharacterState {
         this.notes = typeof data.notes === 'string' ? data.notes : '';
     }
 
-    // ---------- хиты ----------
+    // ---------- Hit Points ----------
 
     currentHp(ch) {
         return clamp(ch.maxHp - this.hpLost, 0, ch.maxHp);
     }
 
-    /** Урон: сначала снимаются временные хиты. */
+    /** Damage: Temporary Hit Points are removed first. */
     damage(n, ch) {
         n = Math.max(0, Math.floor(n));
         const fromTemp = Math.min(this.tempHp, n);
@@ -58,7 +58,7 @@ export class CharacterState {
         this.tempHp = Math.max(0, Math.floor(n) || 0);
     }
 
-    // ---------- ресурсы ----------
+    // ---------- resources ----------
 
     resourceLeft(res) {
         return clamp(res.max - (this.resourcesUsed[res.id] ?? 0), 0, res.max);
@@ -72,7 +72,7 @@ export class CharacterState {
         this.resourcesUsed[res.id] = clamp((this.resourcesUsed[res.id] ?? 0) - n, 0, res.max);
     }
 
-    // ---------- ячейки ----------
+    // ---------- spell slots ----------
 
     slotKey = (slot) => (slot.pact ? 'pact' : String(slot.level));
 
@@ -85,9 +85,9 @@ export class CharacterState {
         this.slotsUsed[k] = clamp((this.slotsUsed[k] ?? 0) + n, 0, slot.max);
     }
 
-    // ---------- отдых ----------
+    // ---------- rest ----------
 
-    /** Короткий отдых: ресурсы 'short' целиком, shortRestRegain — частично, ячейки договора. */
+    /** Short Rest: 'short' resources fully, shortRestRegain partially, Pact Magic slots. */
     shortRest(ch) {
         for (const r of ch.resources) {
             if (r.recharge === 'short') this.resourcesUsed[r.id] = 0;
@@ -96,7 +96,7 @@ export class CharacterState {
         if (this.slotsUsed.pact) this.slotsUsed.pact = 0;
     }
 
-    /** Долгий отдых: всё восстанавливается, кости хитов — половина. */
+    /** Long Rest: everything is restored, Hit Point Dice — half. */
     longRest(ch) {
         this.hpLost = 0;
         this.tempHp = 0;
@@ -106,7 +106,7 @@ export class CharacterState {
         this.deathSaves = { success: 0, fail: 0 };
     }
 
-    // ---------- сериализация ----------
+    // ---------- serialization ----------
 
     toJSON() {
         return $state.snapshot({

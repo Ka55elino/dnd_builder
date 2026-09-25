@@ -1,7 +1,7 @@
 {
   "id": "twinnedSpell",
-  "name": "Сдвоенное заклинание",
+  "name": "Twinned Spell",
   "category": "metamagic",
-  "cost": "= кругу (заговор — 1)",
-  "desc": "Заклинание, нацеленное на одно существо, нацеливаете и на второе в пределах дальности."
+  "cost": "= spell level (cantrip — 1)",
+  "desc": "When you cast a spell that targets one creature, you also target a second creature within range."
 }

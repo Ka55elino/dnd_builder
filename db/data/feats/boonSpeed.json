@@ -1,9 +1,9 @@
 {
   "id": "boonSpeed",
-  "name": "Дар скорости",
+  "name": "Boon of Speed",
   "category": "boon",
   "level": 19,
-  "desc": "+9 м скорости; бонусным действием Отход.",
+  "desc": "+30 feet of Speed; Disengage as a Bonus Action.",
   "effects": [
     {
       "kind": "bonus",

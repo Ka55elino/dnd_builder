@@ -1,7 +1,7 @@
 {
   "id": "otherworldlyLeap",
-  "name": "Потусторонний прыжок",
+  "name": "Otherworldly Leap",
   "category": "invocation",
   "level": 5,
-  "desc": "По желанию творите «Прыжок» на себя без ячейки."
+  "desc": "You can cast Jump on yourself at will, without a spell slot."
 }

@@ -1,8 +1,10 @@
 {
   "id": "stunningStrike",
-  "name": "Оглушающий удар",
+  "name": "Stunning Strike",
   "kind": "class",
   "level": 5,
-  "classes": ["monk"],
-  "desc": "Стоимость 1 очко ци. Попав ближней атакой, цель проходит спасбросок Телосложения (Сл {monkDc} = 8 + бонус мастерства + мод. Мудрости) или получает «Оглушение» до начала вашего следующего хода (при успехе — скорость 0 до конца её следующего хода)."
+  "classes": [
+    "monk"
+  ],
+  "desc": "Cost: 1 Focus Point. When you hit with a melee attack, the target makes a Constitution saving throw (DC {monkDc} = 8 + Proficiency Bonus + Wisdom modifier) or has the Stunned condition until the start of your next turn (on a success, its Speed is 0 until the end of its next turn)."
 }

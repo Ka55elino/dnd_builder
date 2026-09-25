@@ -1,6 +1,6 @@
 {
   "id": "delayedBlastFireball",
-  "name": "Отложенный огненный шар",
+  "name": "Delayed Blast Fireball",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Пульсирующая сфера копит силу; при взрыве — спасбросок Ловкости за половину.",
+  "desc": "A pulsing sphere builds up power; when it bursts, Dexterity saving throw for half damage.",
   "damage": {
     "dice": "12d6",
     "type": "fire"

@@ -1,9 +1,11 @@
 {
   "id": "deflectAttacks",
-  "name": "Отражение атак",
+  "name": "Deflect Attacks",
   "kind": "class",
   "level": 3,
-  "classes": ["monk"],
+  "classes": [
+    "monk"
+  ],
   "action": "reaction",
-  "desc": "Реакцией уменьшаете дробящий/колющий/рубящий урон от атаки по вам на 1d10 {dexMod} (Лов) +{level} (ур. монаха). Если урон снижен до 0, за 1 очко ци перенаправляете его в существо в 1,5 м (спасбросок Ловкости, урон = 2 кости боевых искусств + Лов)."
+  "desc": "As a Reaction, you reduce Bludgeoning, Piercing, or Slashing damage from an attack against you by 1d10 {dexMod} (Dex) +{level} (Monk level). If the damage is reduced to 0, you can spend 1 Focus Point to redirect it at a creature within 5 feet (Dexterity saving throw, damage = 2 Martial Arts dice + Dex)."
 }

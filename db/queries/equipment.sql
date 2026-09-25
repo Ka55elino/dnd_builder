@@ -1,7 +1,7 @@
--- Запросы к таблицам снаряжения: weapons, armor, items, packs, pack_items.
--- Каждый запрос начинается со строки «-- name: ИмяЗапроса» (см. queries.go).
+-- Queries for the equipment tables: weapons, armor, items, packs, pack_items.
+-- Each query starts with a "-- name: QueryName" line (see queries.go).
 
--- ---------- оружие ----------
+-- ---------- weapons ----------
 
 -- name: CountWeapons
 SELECT COUNT(*) FROM weapons;
@@ -11,19 +11,19 @@ INSERT INTO weapons (id, name, image, category, damage, damage_type, is_default,
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 -- name: GetDefaultWeapons
--- Только оружие с is_default = 1 — для билдера.
+-- Only weapons with is_default = 1, for the builder.
 SELECT id, name, image, category, damage, damage_type, data_json, is_default
 FROM weapons
 WHERE is_default = 1
 ORDER BY category = 'martial', name COLLATE NOCASE;
 
 -- name: GetAllWeapons
--- Всё оружие, включая именное/магическое (для выдачи предметов).
+-- All weapons, including named/magic ones (for handing out items).
 SELECT id, name, image, category, damage, damage_type, data_json, is_default
 FROM weapons
 ORDER BY is_default DESC, category = 'martial', name COLLATE NOCASE;
 
--- ---------- доспехи ----------
+-- ---------- armor ----------
 
 -- name: CountArmor
 SELECT COUNT(*) FROM armor;
@@ -33,7 +33,7 @@ INSERT INTO armor (id, name, image, category, base_ac, is_default, data_json)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 -- name: GetDefaultArmor
--- Только доспехи с is_default = 1; лёгкие → средние → тяжёлые → щиты.
+-- Only armor with is_default = 1; light → medium → heavy → shields.
 SELECT id, name, image, category, base_ac, data_json, is_default
 FROM armor
 WHERE is_default = 1
@@ -52,7 +52,7 @@ ORDER BY is_default DESC,
          CASE category WHEN 'light' THEN 1 WHEN 'medium' THEN 2 WHEN 'heavy' THEN 3 ELSE 4 END,
          name COLLATE NOCASE;
 
--- ---------- предметы ----------
+-- ---------- items ----------
 
 -- name: CountItems
 SELECT COUNT(*) FROM items;
@@ -72,7 +72,7 @@ SELECT id, name, image, weight, cost, description, data_json
 FROM items
 ORDER BY name COLLATE NOCASE;
 
--- ---------- наборы ----------
+-- ---------- packs ----------
 
 -- name: CountPacks
 SELECT COUNT(*) FROM packs;
@@ -92,7 +92,7 @@ WHERE is_default = 1
 ORDER BY name COLLATE NOCASE;
 
 -- name: GetPackItems
--- Содержимое всех наборов (JOIN через промежуточную таблицу).
+-- Contents of all packs (JOIN via the junction table).
 SELECT pi.pack_id, pi.quantity,
        i.id, i.name, i.image, i.weight, i.cost, i.description, i.data_json
 FROM pack_items pi

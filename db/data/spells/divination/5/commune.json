@@ -1,6 +1,6 @@
 {
   "id": "commune",
-  "name": "Общение с божеством",
+  "name": "Commune",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Задаёте божеству 3 вопроса «да/нет»."
+  "desc": "You ask a deity 3 yes-or-no questions."
 }

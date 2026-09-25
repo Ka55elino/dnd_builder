@@ -1,6 +1,6 @@
 {
   "id": "scribe",
-  "name": "Писец",
+  "name": "Scribe",
   "abilities": {
     "options": [
       "dex",
@@ -13,5 +13,5 @@
     "investigation",
     "perception"
   ],
-  "tool": "Каллиграфические принадлежности"
+  "tool": "Calligrapher's Supplies"
 }

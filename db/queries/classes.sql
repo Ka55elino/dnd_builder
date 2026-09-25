@@ -1,5 +1,5 @@
--- Запросы к таблицам classes и subclasses.
--- Каждый запрос начинается со строки «-- name: ИмяЗапроса» (см. queries.go).
+-- Queries for the classes and subclasses tables.
+-- Each query starts with a "-- name: QueryName" line (see queries.go).
 
 -- name: CountClasses
 SELECT COUNT(*) FROM classes;

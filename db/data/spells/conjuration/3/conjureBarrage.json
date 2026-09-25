@@ -1,6 +1,6 @@
 {
   "id": "conjureBarrage",
-  "name": "Шквал снарядов",
+  "name": "Conjure Barrage",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -8,12 +8,12 @@
   "classes": [
     "ranger"
   ],
-  "desc": "Метаете оружие/боеприпас, создавая конус 18 м из снарядов: 3d8 урона (тип оружия), спасбросок Ловкости за половину.",
+  "desc": "You throw a weapon or fire a piece of ammunition, creating a 60-foot Cone of projectiles: 3d8 damage (the weapon's damage type), Dexterity saving throw for half.",
   "casting": {
-    "time": "1 действие",
-    "range": "На себя (конус 18 м)",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "Self (60-foot Cone)",
+    "components": "V, S",
+    "duration": "Instantaneous"
   },
   "damage": {
     "dice": "3d8"

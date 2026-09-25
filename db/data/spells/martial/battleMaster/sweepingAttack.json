@@ -1,9 +1,9 @@
 {
   "id": "sweepingAttack",
-  "name": "Размашистая атака",
+  "name": "Sweeping Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При попадании по цели наносите второй цели рядом урон = кость превосходства (того же типа).",
+  "desc": "When you hit a target, you deal damage equal to a Superiority Die (of the same type) to a second target next to it.",
   "pool": "maneuver"
 }

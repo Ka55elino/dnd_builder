@@ -1,6 +1,6 @@
 {
   "id": "druid",
-  "name": "Друид",
+  "name": "Druid",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 8,
   "primaryAbility": [
@@ -131,55 +131,55 @@
   "features": [
     {
       "level": 1,
-      "name": "Заклинательство",
-      "desc": "Творите заклинания из списка Друида, используя Мудрость (полный заклинатель, готовите заклинания). Друидический фокус вместо материальных компонентов."
+      "name": "Spellcasting",
+      "desc": "You cast spells from the Druid spell list, using Wisdom (full caster, prepared spells). You can use a Druidic Focus instead of Material components."
     },
     {
       "level": 1,
-      "name": "Друидический язык",
-      "desc": "Знаете тайный язык друидов и можете оставлять/читать скрытые послания."
+      "name": "Druidic",
+      "desc": "You know Druidic, the secret language of druids, and can leave and read hidden messages."
     },
     {
       "level": 1,
-      "name": "Первобытный орден",
-      "desc": "Выбираете призвание: «Маг» — дополнительный заговор Друида и добавляете мод. Мудрости к проверкам Тайных знаний/Природы; или «Страж» — владение воинским оружием и средними доспехами.",
+      "name": "Primal Order",
+      "desc": "You choose a Primal Order: Magician — an extra Druid cantrip and you add your Wisdom modifier to Intelligence (Arcana or Nature) checks; or Warden — proficiency with Martial weapons and Medium armor.",
       "choice": {
         "type": "generic",
         "pick": 1,
         "options": [
           {
             "id": "magician",
-            "name": "Маг",
-            "desc": "Дополнительный заговор друида; +мод. Мудрости к проверкам Магии и Природы."
+            "name": "Magician",
+            "desc": "An extra Druid cantrip; add your Wisdom modifier to Arcana and Nature checks."
           },
           {
             "id": "warden",
-            "name": "Страж",
-            "desc": "Владение воинским оружием и средними доспехами."
+            "name": "Warden",
+            "desc": "Proficiency with Martial weapons and Medium armor."
           }
         ]
       }
     },
     {
       "level": 2,
-      "name": "Дикий облик",
-      "desc": "Действием превращаетесь в зверя, которого видели (формы — как отдельные действия ниже). Ограничение по ПО и типу движения растёт с уровнем. 2 применения (3 на 6 ур., 4 на 17 ур.), восстановление на коротком/длинном отдыхе."
+      "name": "Wild Shape",
+      "desc": "As an action, you transform into a Beast you have seen (forms are listed as separate actions below). The CR and movement type limits increase with level. 2 uses (3 at level 6, 4 at level 17), regained on a Short or Long Rest."
     },
     {
       "level": 2,
-      "name": "Дикий спутник",
-      "desc": "Тратя применение Дикого облика, творите «Поиск фамильяра» (дух-зверь) без ритуала.",
+      "name": "Wild Companion",
+      "desc": "By expending a use of Wild Shape, you cast Find Familiar (a beast spirit) without a ritual.",
       "passive": false
     },
     {
       "level": 5,
-      "name": "Дикое возрождение",
-      "desc": "Раз в ход бонусным действием тратите ячейку заклинания, чтобы вернуть применение Дикого облика; можете тратить неиспользованный Дикий облик как ячейку 1 круга."
+      "name": "Wild Resurgence",
+      "desc": "Once per turn as a Bonus Action, you can expend a spell slot to regain a use of Wild Shape; you can expend an unused Wild Shape as a level 1 spell slot."
     },
     {
       "level": 7,
-      "name": "Стихийная ярость",
-      "desc": "Действуют оба: раз в ход атаки оружием и в облике зверя наносят доп. 1d8 стихийного урона (2d8 с 15 ур.), И к урону ваших заговоров прибавляется модификатор Мудрости.",
+      "name": "Elemental Fury",
+      "desc": "Both apply: once per turn, your weapon attacks and attacks in Beast form deal an extra 1d8 elemental damage (2d8 from level 15), AND you add your Wisdom modifier to the damage of your cantrips.",
       "grants": [
         {
           "type": "effect",
@@ -197,7 +197,7 @@
               ]
             ],
             "type": "thunder",
-            "note": "стихийный"
+            "note": "elemental"
           }
         },
         {
@@ -211,18 +211,18 @@
     },
     {
       "level": 15,
-      "name": "Улучшенная стихийная ярость",
-      "desc": "Первобытный удар растёт до 2d8; Мощное заклинательство действует на второе существо в цели заговора."
+      "name": "Improved Elemental Fury",
+      "desc": "Primal Strike increases to 2d8; Potent Spellcasting affects a second creature targeted by the cantrip."
     },
     {
       "level": 18,
-      "name": "Звериные заклинания",
-      "desc": "Можете творить заклинания, находясь в Диком облике."
+      "name": "Beast Spells",
+      "desc": "You can cast spells while in Wild Shape."
     },
     {
       "level": 20,
-      "name": "Архидруид",
-      "desc": "Неограниченный Дикий облик; игнорируете вербальные/соматические компоненты и материальные без стоимости. Замедляете старение."
+      "name": "Archdruid",
+      "desc": "Unlimited Wild Shape; you ignore Verbal and Somatic components, and Material components that have no cost. You age more slowly."
     }
   ]
 }

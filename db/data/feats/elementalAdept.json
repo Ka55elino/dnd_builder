@@ -1,6 +1,6 @@
 {
   "id": "elementalAdept",
-  "name": "Мастер стихий",
+  "name": "Elemental Adept",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,5 +8,5 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; игнор сопротивления к выбранной стихии."
+  "desc": "+1 Int/Wis/Cha; ignore Resistance to a chosen element."
 }

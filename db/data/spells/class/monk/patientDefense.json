@@ -1,9 +1,11 @@
 {
   "id": "patientDefense",
-  "name": "Терпеливая оборона",
+  "name": "Patient Defense",
   "kind": "class",
   "level": 2,
-  "classes": ["monk"],
+  "classes": [
+    "monk"
+  ],
   "action": "bonus",
-  "desc": "Бонусным действием совершаете Отход бесплатно; потратив 1 очко ци, дополнительно совершаете Уклонение (с 10 ур. — получаете временные хиты по кости боевых искусств)."
+  "desc": "As a Bonus Action, you take the Disengage action for free; by spending 1 Focus Point, you also take the Dodge action (starting at level 10, you also gain Temporary Hit Points equal to a roll of your Martial Arts die)."
 }

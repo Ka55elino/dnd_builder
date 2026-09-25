@@ -1,11 +1,11 @@
 {
   "id": "bendLuck",
-  "name": "Изгиб удачи",
+  "name": "Bend Luck",
   "kind": "martial",
   "subclass": "wildMagic",
   "level": 6,
   "action": "reaction",
-  "desc": "Стоимость 2 очка чародейства. Реакцией, когда существо совершает бросок атаки, проверку или спасбросок, прибавляете или вычитаете 1d4 из результата.",
+  "desc": "Costs 2 Sorcery Points. As a Reaction, when a creature makes an attack roll, ability check, or saving throw, you add 1d4 to or subtract it from the result.",
   "damage": {
     "dice": "1d4",
     "type": "force"

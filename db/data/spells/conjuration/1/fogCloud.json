@@ -1,6 +1,6 @@
 {
   "id": "fogCloud",
-  "name": "Туманное облако",
+  "name": "Fog Cloud",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -12,12 +12,12 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Создаёте сферу тумана радиусом 6 м, сильно заслоняющую обзор. Концентрация до 1 часа.",
+  "desc": "You create a 20-foot-radius Sphere of fog that is Heavily Obscured. Concentration, up to 1 hour.",
   "casting": {
-    "time": "1 действие",
-    "range": "36 м",
-    "components": "В, С",
-    "duration": "Конц., 1 час",
+    "time": "1 action",
+    "range": "120 feet",
+    "components": "V, S",
+    "duration": "Conc., 1 hour",
     "concentration": true
   }
 }

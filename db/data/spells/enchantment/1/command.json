@@ -1,6 +1,6 @@
 {
   "id": "command",
-  "name": "Приказ",
+  "name": "Command",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Существо: спасбросок Мудрости или выполняет односложный приказ в свой следующий ход."
+  "desc": "A creature makes a Wisdom saving throw or follows a one-word command on its next turn."
 }

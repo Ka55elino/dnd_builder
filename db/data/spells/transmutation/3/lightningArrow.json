@@ -1,6 +1,6 @@
 {
   "id": "lightningArrow",
-  "name": "Молниеносная стрела",
+  "name": "Lightning Arrow",
   "kind": "spell",
   "action": "bonus",
   "level": 3,
@@ -8,12 +8,12 @@
   "classes": [
     "ranger"
   ],
-  "desc": "Следующая дальнобойная атака превращается в молнию: 4d8 урона электричеством при попадании (половина при промахе); все в 3 м от цели — 2d8 (спасбросок Ловкости за половину). Концентрация до 1 минуты.",
+  "desc": "Your next ranged attack turns into lightning: 4d8 Lightning damage on a hit (half on a miss); everyone within 10 feet of the target takes 2d8 (Dexterity saving throw for half). Concentration, up to 1 minute.",
   "casting": {
-    "time": "1 бонусное действие",
-    "range": "На себя",
-    "components": "В",
-    "duration": "Конц., 1 мин",
+    "time": "1 bonus action",
+    "range": "Self",
+    "components": "V",
+    "duration": "Conc., 1 min",
     "concentration": true
   },
   "damage": {

@@ -1,9 +1,11 @@
 {
   "id": "flurryOfBlows",
-  "name": "Шквал ударов",
+  "name": "Flurry of Blows",
   "kind": "class",
   "level": 2,
-  "classes": ["monk"],
+  "classes": [
+    "monk"
+  ],
   "action": "bonus",
-  "desc": "Стоимость 1 очко ци. Бонусным действием совершаете 2 безоружных удара (3 с 10 ур.)."
+  "desc": "Cost: 1 Focus Point. As a Bonus Action, you make 2 Unarmed Strikes (3 starting at level 10)."
 }

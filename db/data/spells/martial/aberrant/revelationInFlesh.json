@@ -1,9 +1,9 @@
 {
   "id": "revelationInFlesh",
-  "name": "Откровение во плоти",
+  "name": "Revelation in Flesh",
   "kind": "martial",
   "subclass": "aberrant",
   "level": 14,
   "action": "bonus",
-  "desc": "Стоимость 1+ очко чародейства. Бонусным действием на 10 минут получаете (по 1 очку за свойство): скорость полёта, скорость плавания и дыхание под водой, зрение сквозь невидимость 18 м или способность протискиваться в узкие места."
+  "desc": "Costs 1+ Sorcery Points. As a Bonus Action, for 10 minutes you gain (1 point per property): a Fly Speed, a Swim Speed and water breathing, the ability to see Invisible creatures within 60 feet, or the ability to squeeze through narrow spaces."
 }

@@ -1,6 +1,6 @@
 {
   "id": "fly",
-  "name": "Полёт",
+  "name": "Fly",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Касанием даёте существу скорость полёта 18 м. Концентрация до 10 минут."
+  "desc": "With a touch, you give a creature a Fly Speed of 60 feet. Concentration, up to 10 minutes."
 }

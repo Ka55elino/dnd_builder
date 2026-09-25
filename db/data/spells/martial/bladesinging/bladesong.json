@@ -1,11 +1,11 @@
 {
   "id": "bladesong",
-  "name": "Клинковая песнь",
+  "name": "Bladesong",
   "kind": "martial",
   "subclass": "bladesinging",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием на 1 минуту (пока без средних/тяжёлых доспехов и щита): КЗ +мод. Интеллекта, скорость +3 м, преимущество на Акробатику и бонус к спасброскам концентрации. Число раз = бонусу мастерства.",
+  "desc": "As a Bonus Action, for 1 minute (while wearing no Medium or Heavy armor or Shield): AC + your Intelligence modifier, +10 feet Speed, Advantage on Acrobatics checks, and a bonus to Concentration saving throws. Number of uses = Proficiency Bonus.",
   "uses": {
     "count": 2,
     "per": "longRest",

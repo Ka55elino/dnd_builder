@@ -1,9 +1,9 @@
 {
   "id": "shapechangerWiz",
-  "name": "Меняющий форму",
+  "name": "Shapechanger",
   "kind": "martial",
   "subclass": "transmutation",
   "level": 10,
   "action": "action",
-  "desc": "По желанию, не тратя ячейку, творите «Превращение» на себя, обращаясь в зверя с ПО не выше 1."
+  "desc": "You can cast Polymorph on yourself at will, without expending a spell slot, turning into a Beast with a CR no higher than 1."
 }

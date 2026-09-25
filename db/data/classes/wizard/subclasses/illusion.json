@@ -1,33 +1,33 @@
 {
   "id": "illusion",
-  "name": "Школа Иллюзий",
+  "name": "School of Illusion",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "wizard",
   "features": [
     {
       "level": 3,
-      "name": "Знаток иллюзий",
-      "desc": "Копируете заклинания Иллюзий за половину времени и золота."
+      "name": "Illusion Savant",
+      "desc": "You copy Illusion spells in half the time and for half the gold."
     },
     {
       "level": 3,
-      "name": "Улучшенная малая иллюзия",
-      "desc": "Знаете «Малую иллюзию» и создаёте ею и звук, и образ одновременно."
+      "name": "Improved Minor Illusion",
+      "desc": "You know Minor Illusion and can create both a sound and an image with it at the same time."
     },
     {
       "level": 6,
-      "name": "Податливые иллюзии",
-      "desc": "Действием меняете природу своих действующих иллюзий (длительностью от 1 минуты)."
+      "name": "Malleable Illusions",
+      "desc": "As an action, you change the nature of your active illusions (with a duration of 1 minute or longer)."
     },
     {
       "level": 10,
-      "name": "Иллюзорное «я»",
-      "desc": "Реакцией создаёте двойника — атака по вам промахивается."
+      "name": "Illusory Self",
+      "desc": "As a Reaction, you create a duplicate of yourself, causing an attack against you to miss."
     },
     {
       "level": 14,
-      "name": "Иллюзорная реальность",
-      "desc": "Делаете один неживой предмет иллюзии реальным на 1 минуту."
+      "name": "Illusory Reality",
+      "desc": "You make one nonliving object from an illusion real for 1 minute."
     }
   ]
 }

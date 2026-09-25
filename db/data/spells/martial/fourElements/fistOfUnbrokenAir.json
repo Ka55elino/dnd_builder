@@ -1,10 +1,13 @@
 {
   "id": "fistOfUnbrokenAir",
-  "name": "Дисциплина: Кулак несокрушимого воздуха",
+  "name": "Discipline: Fist of Unbroken Air",
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 2 очка ци. Сжатый воздух бьёт существо в 9 м: 3d10 дробящего урона (спасбросок Силы за половину); при провале отталкиваете на 6 м или сбиваете с ног.",
-  "damage": { "dice": "3d10", "type": "bludgeoning" }
+  "desc": "Costs 2 Focus Points. A blast of compressed air strikes a creature within 30 feet: 3d10 Bludgeoning damage (Strength saving throw for half); on a failed save, you push it 20 feet or knock it Prone.",
+  "damage": {
+    "dice": "3d10",
+    "type": "bludgeoning"
+  }
 }

@@ -1,11 +1,11 @@
 {
   "id": "formOfDread",
-  "name": "Облик ужаса",
+  "name": "Form of Dread",
   "kind": "martial",
   "subclass": "undead",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием на 1 минуту принимаете Облик ужаса: получаете временные хиты (мод. Тел.? — по покровителю), невосприимчивы к «Испугу», и раз в ход при попадании цель — спасбросок Мудрости или испуг до конца вашего следующего хода.",
+  "desc": "As a Bonus Action, you assume your Form of Dread for 1 minute: you gain Temporary Hit Points (Con modifier, per your patron), you are immune to the Frightened condition, and once per turn when you hit, the target must succeed on a Wisdom saving throw or have the Frightened condition until the end of your next turn.",
   "uses": {
     "count": 1,
     "per": "longRest",

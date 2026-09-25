@@ -1,13 +1,13 @@
 {
   "id": "wsWaterElemental",
-  "name": "Форма: Водяной элементаль",
+  "name": "Form: Water Elemental",
   "kind": "class",
   "level": 10,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 5. Хиты 114, КЗ 14, скорость 9 м, плавание 27 м. ТОЛЬКО Круг луны (10 ур.). Захлёстывание и захват; форма воды.",
+  "desc": "CR 5. HP 114, AC 14, Speed 30 ft., Swim 90 ft. Circle of the Moon ONLY (level 10). Engulf and grapple; Water Form.",
   "damage": {
     "dice": "2d8",
     "type": "bludgeoning"

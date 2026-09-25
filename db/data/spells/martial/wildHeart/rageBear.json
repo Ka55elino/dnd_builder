@@ -1,8 +1,8 @@
 {
   "id": "whRageBear",
-  "name": "Ярость: Медведь",
+  "name": "Rage: Bear",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 3,
-  "desc": "Вариант «Ярости дикой природы». Пока вы в ярости, получаете сопротивление всем типам урона, кроме силового и психического."
+  "desc": "Rage of the Wilds variant. While your Rage is active, you have Resistance to all damage types except Force and Psychic."
 }

@@ -1,6 +1,6 @@
 {
   "id": "disintegrate",
-  "name": "Дезинтеграция",
+  "name": "Disintegrate",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Зелёный луч (спасбросок Ловкости): огромный силовой урон; при 0 хитов цель рассыпается в прах.",
+  "desc": "A green ray (Dexterity saving throw): massive Force damage; a target reduced to 0 Hit Points is disintegrated into dust.",
   "damage": {
     "dice": "10d6",
     "type": "force"

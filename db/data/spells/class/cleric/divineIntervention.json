@@ -1,13 +1,13 @@
 {
   "id": "divineIntervention",
-  "name": "Божественное вмешательство",
+  "name": "Divine Intervention",
   "kind": "class",
   "level": 10,
   "classes": [
     "cleric"
   ],
   "action": "action",
-  "desc": "Действием призываете помощь божества: немедленно творите любое заклинание Жреца 5 круга и ниже без затрат ячейки и компонентов. Раз на длинный отдых.",
+  "desc": "As a Magic action, you call on your deity for aid: you immediately cast any Cleric spell of level 5 or lower without expending a spell slot or needing components. Once per Long Rest.",
   "uses": {
     "count": 1,
     "per": "longRest"

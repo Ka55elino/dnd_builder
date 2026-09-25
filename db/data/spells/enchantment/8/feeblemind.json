@@ -1,6 +1,6 @@
 {
   "id": "feeblemind",
-  "name": "Слабоумие",
+  "name": "Feeblemind",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -11,7 +11,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Раздираете разум цели (спасбросок Интеллекта): Инт и Хар падают до 1.",
+  "desc": "You shatter the target's mind (Intelligence saving throw): its Intelligence and Charisma scores drop to 1.",
   "damage": {
     "dice": "4d6",
     "type": "psychic"

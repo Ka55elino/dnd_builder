@@ -1,9 +1,12 @@
 {
   "id": "cleaverAcid",
-  "name": "Стихийный резак: Кислота",
+  "name": "Elemental Cleaver: Acid",
   "kind": "martial",
   "subclass": "pathOfGiants",
   "level": 6,
-  "desc": "Вариант Стихийного резака. Пока вы в ярости, оружие ближнего боя наносит доп. 1d6 урона кислотой и получает «Метательное» (6/18 м, возвращается к вам).",
-  "damage": { "dice": "1d6", "type": "acid" }
+  "desc": "Elemental Cleaver variant. While your Rage is active, your melee weapon deals an extra 1d6 Acid damage and gains the Thrown property (20/60 feet, returns to you).",
+  "damage": {
+    "dice": "1d6",
+    "type": "acid"
+  }
 }

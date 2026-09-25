@@ -1,12 +1,12 @@
 <script>
     /**
-     * Форма своего снаряжения: предмет, доспех или оружие.
-     * Результат — объект в формате db/data (как в JSON сидов),
-     * сохраняется через SaveCustomEquipment.
+     * Custom equipment form: item, armor or weapon.
+     * The result is an object in db/data format (as in the seed JSON),
+     * saved via SaveCustomEquipment.
      *
      * kind     — 'item' | 'armor' | 'weapon'
-     * initial  — запись каталога для правки (или основа для копии), null — новое
-     * copy     — true: initial — только основа, сохраняем как новую запись
+     * initial  — catalog record to edit (or the base for a copy), null — new
+     * copy     — true: initial is only a base, save as a new record
      * onSaved(id, kind) / onCancel()
      */
     import { SaveCustomEquipment } from "../../wailsjs/go/main/App.js";
@@ -16,27 +16,27 @@
 
     let { kind, initial = null, copy = false, onSaved, onCancel } = $props();
 
-    const NEW_TITLE = { item: "Новый предмет", armor: "Новый доспех", weapon: "Новое оружие" };
-    const EDIT_TITLE = { item: "Изменить предмет", armor: "Изменить доспех", weapon: "Изменить оружие" };
-    const MASTERIES = ["Досада", "Замедление", "Засечка", "Опрокидывание", "Ослабление", "Отталкивание", "Рассекание", "Царапанье"];
-    // тип урона оружия: физические первыми
+    const NEW_TITLE = { item: "New item", armor: "New armor", weapon: "New weapon" };
+    const EDIT_TITLE = { item: "Edit item", armor: "Edit armor", weapon: "Edit weapon" };
+    const MASTERIES = ["Cleave", "Graze", "Nick", "Push", "Sap", "Slow", "Topple", "Vex"];
+    // weapon damage type: physical first
     const DMG = Object.entries(DAMAGE_TYPES).filter(([k]) => k !== "physical" && k !== "weapon");
     const IMAGE_MAX = 256;
 
     const num = (v) => (v === "" || v == null || Number.isNaN(Number(v)) ? null : Number(v));
 
-    // --- состояние формы: снимок initial при открытии (форма пересоздаётся через {#key}) ---
+    // --- form state: snapshot of initial on open (the form is recreated via {#key}) ---
     let f = $state(untrack(() => formFrom(initial, copy)));
 
     function formFrom(initial, copy) {
         const d = initial?.data ?? {};
         return {
-        name: initial ? (copy ? `${initial.name} (копия)` : initial.name) : "",
+        name: initial ? (copy ? `${initial.name} (copy)` : initial.name) : "",
         image: initial?.image ?? null,
         desc: initial?.desc ?? d.desc ?? "",
         weight: initial?.weight ?? d.weight ?? "",
         cost: initial?.cost ?? d.cost ?? "",
-        // оружие
+        // weapon
         wCategory: initial?.category ?? "simple",
         damage: initial?.damage ?? "1d6",
         damageType: initial?.damageType ?? "slashing",
@@ -45,7 +45,7 @@
         attackBonus: d.attackBonus ?? "",
         damageBonus: d.damageBonus ?? "",
         extraDamage: (d.extraDamage ?? []).map((x) => ({ ...x })),
-        // доспех
+        // armor
         aCategory: initial?.category ?? "light",
         baseAC: initial?.baseAC ?? 11,
         maxDex: d.maxDex ?? 2,
@@ -60,7 +60,7 @@
 
     const isShield = $derived(f.aCategory === "shield");
 
-    // --- картинка ---
+    // --- image ---
     let fileInput;
     function pickImage(e) {
         const file = e.currentTarget.files?.[0];
@@ -86,12 +86,12 @@
         else f.properties.push(p);
     }
 
-    // --- сборка объекта в формате db/data ---
+    // --- build the object in db/data format ---
     const DICE = /^\d+(d\d+)?$/i;
 
     function build() {
         const name = f.name.trim();
-        if (!name) throw new Error("Укажите название.");
+        if (!name) throw new Error("Enter a name.");
         const base = {
             ...(initial && !copy ? { id: initial.id } : {}),
             name,
@@ -108,11 +108,11 @@
 
         if (kind === "weapon") {
             const damage = f.damage.trim().toLowerCase();
-            if (!DICE.test(damage)) throw new Error("Урон — кость вида 1d8 или число.");
+            if (!DICE.test(damage)) throw new Error("Damage must be a die like 1d8 or a number.");
             const extraDamage = f.extraDamage
                 .map((x) => ({ dice: String(x.dice).trim().toLowerCase(), type: x.type }))
                 .filter((x) => x.dice);
-            if (extraDamage.some((x) => !DICE.test(x.dice))) throw new Error("Доп. урон — кость вида 1d6.");
+            if (extraDamage.some((x) => !DICE.test(x.dice))) throw new Error("Extra damage must be a die like 1d6.");
             return {
                 ...base,
                 category: f.wCategory,
@@ -127,12 +127,12 @@
             };
         }
 
-        // доспех: Ловкость — по категории (лёгкий: полностью, средний: до maxDex, тяжёлый: нет)
+        // armor: Dexterity by category (light: full, medium: up to maxDex, heavy: none)
         if (isShield) {
             return { ...base, category: "shield", acBonus: num(f.acBonus) ?? 2, ...extra };
         }
         const baseAC = num(f.baseAC);
-        if (baseAC == null || baseAC < 1) throw new Error("Укажите базовый КД.");
+        if (baseAC == null || baseAC < 1) throw new Error("Enter the base AC.");
         const dex =
             f.aCategory === "light"
                 ? { addDex: true }
@@ -165,7 +165,7 @@
             const id = await SaveCustomEquipment(kind, JSON.stringify(obj));
             onSaved?.(id, kind);
         } catch (e) {
-            error = "Не удалось сохранить: " + (e?.message ?? e);
+            error = "Failed to save: " + (e?.message ?? e);
         } finally {
             saving = false;
         }
@@ -180,60 +180,60 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 <div class="backdrop" onclick={(e) => e.target === e.currentTarget && onCancel?.()}>
-    <div class="dialog" role="dialog" aria-modal="true" aria-label="Своё снаряжение">
+    <div class="dialog" role="dialog" aria-modal="true" aria-label="Custom equipment">
         <h2>{initial && !copy ? EDIT_TITLE[kind] : NEW_TITLE[kind]}</h2>
 
         <div class="head">
-            <button class="image" onclick={() => fileInput.click()} title="Выбрать картинку">
-                {#if f.image}<img src={f.image} alt="" />{:else}<span>+ картинка</span>{/if}
+            <button class="image" onclick={() => fileInput.click()} title="Choose image">
+                {#if f.image}<img src={f.image} alt="" />{:else}<span>+ image</span>{/if}
             </button>
             <input bind:this={fileInput} type="file" accept="image/*" hidden onchange={pickImage} />
             <div class="head-fields">
                 <label class="field">
-                    <span>Название *</span>
-                    <input type="text" bind:value={f.name} placeholder="Например, Пылающий клинок" />
+                    <span>Name *</span>
+                    <input type="text" bind:value={f.name} placeholder="E.g. Flame Tongue" />
                 </label>
-                {#if f.image}<button class="link" onclick={() => (f.image = null)}>Убрать картинку</button>{/if}
+                {#if f.image}<button class="link" onclick={() => (f.image = null)}>Remove image</button>{/if}
             </div>
         </div>
 
         {#if kind === "weapon"}
             <div class="grid">
                 <label class="field">
-                    <span>Категория</span>
+                    <span>Category</span>
                     <select bind:value={f.wCategory}>
                         {#each Object.entries(WEAPON_CAT) as [k, v]}<option value={k}>{v}</option>{/each}
                     </select>
                 </label>
                 <label class="field">
-                    <span>Урон</span>
+                    <span>Damage</span>
                     <input type="text" bind:value={f.damage} placeholder="1d8" />
                 </label>
                 <label class="field">
-                    <span>Тип урона</span>
+                    <span>Damage type</span>
                     <select bind:value={f.damageType}>
                         {#each DMG as [k, v]}<option value={k}>{v.short}</option>{/each}
                     </select>
                 </label>
                 <label class="field">
-                    <span>Мастерство</span>
+                    <span>Mastery</span>
                     <select bind:value={f.mastery}>
                         <option value="">—</option>
                         {#each MASTERIES as m}<option value={m}>{m}</option>{/each}
                     </select>
                 </label>
                 <label class="field">
-                    <span>Бонус к попаданию</span>
+                    <span>Attack bonus</span>
                     <input type="number" bind:value={f.attackBonus} placeholder="0" />
                 </label>
                 <label class="field">
-                    <span>Бонус к урону</span>
+                    <span>Damage bonus</span>
                     <input type="number" bind:value={f.damageBonus} placeholder="0" />
                 </label>
             </div>
 
             <div class="field">
-                <span>Свойства</span>
+                <span>Properties</span>
                 <div class="chips">
                     {#each Object.entries(WEAPON_PROPS) as [k, v]}
                         <button class="chip" class:on={f.properties.includes(k)} onclick={() => toggleProp(k)}>{v}</button>
@@ -242,82 +242,82 @@
             </div>
 
             <div class="field">
-                <span>Дополнительный урон</span>
+                <span>Extra damage</span>
                 {#each f.extraDamage as x, i}
                     <div class="extra-row">
                         <input type="text" bind:value={x.dice} placeholder="1d6" />
                         <select bind:value={x.type}>
                             {#each DMG as [k, v]}<option value={k}>{v.short}</option>{/each}
                         </select>
-                        <button class="ghost small" onclick={() => f.extraDamage.splice(i, 1)} aria-label="Убрать">×</button>
+                        <button class="ghost small" onclick={() => f.extraDamage.splice(i, 1)} aria-label="Remove">×</button>
                     </div>
                 {/each}
-                <button class="link" onclick={() => f.extraDamage.push({ dice: "1d6", type: "fire" })}>+ добавить урон</button>
+                <button class="link" onclick={() => f.extraDamage.push({ dice: "1d6", type: "fire" })}>+ add damage</button>
             </div>
         {:else if kind === "armor"}
             <div class="grid">
                 <label class="field">
-                    <span>Категория</span>
+                    <span>Category</span>
                     <select bind:value={f.aCategory}>
                         {#each Object.entries(ARMOR_CAT) as [k, v]}<option value={k}>{v}</option>{/each}
                     </select>
                 </label>
                 {#if !isShield}
                     <label class="field">
-                        <span>Базовый КД</span>
+                        <span>Base AC</span>
                         <input type="number" min="1" bind:value={f.baseAC} />
                     </label>
                     {#if f.aCategory === "medium"}
                         <label class="field">
-                            <span>Макс. бонус Лов</span>
+                            <span>Max Dex bonus</span>
                             <input type="number" min="0" bind:value={f.maxDex} />
                         </label>
                     {/if}
                 {/if}
                 <label class="field">
-                    <span>{isShield ? "Бонус КД щита" : "Магический бонус КД"}</span>
+                    <span>{isShield ? "Shield AC bonus" : "Magic AC bonus"}</span>
                     <input type="number" bind:value={f.acBonus} placeholder={isShield ? "2" : "0"} />
                 </label>
                 {#if !isShield}
                     <label class="field">
-                        <span>Требует Силу</span>
+                        <span>Strength required</span>
                         <input type="number" min="0" bind:value={f.strengthReq} placeholder="—" />
                     </label>
                     <label class="check">
                         <input type="checkbox" bind:checked={f.stealthDisadvantage} />
-                        <span>Помеха Скрытности</span>
+                        <span>Stealth Disadvantage</span>
                     </label>
                 {/if}
             </div>
             <p class="hint">
-                {#if f.aCategory === "light"}Лёгкий: КД = база + Лов.
-                {:else if f.aCategory === "medium"}Средний: КД = база + Лов (не больше макс. бонуса).
-                {:else if f.aCategory === "heavy"}Тяжёлый: Ловкость не добавляется.
-                {:else}Щит: прибавляется к КД, занимает руку.{/if}
+                {#if f.aCategory === "light"}Light: AC = base + Dex.
+                {:else if f.aCategory === "medium"}Medium: AC = base + Dex (up to the max bonus).
+                {:else if f.aCategory === "heavy"}Heavy: Dexterity is not added.
+                {:else}Shield: adds to AC, occupies a hand.{/if}
             </p>
         {/if}
 
         <div class="grid">
             <label class="field">
-                <span>Вес, фнт.</span>
+                <span>Weight, lb.</span>
                 <input type="number" min="0" step="0.1" bind:value={f.weight} placeholder="—" />
             </label>
             <label class="field">
-                <span>Цена</span>
-                <input type="text" bind:value={f.cost} placeholder="10 зм" />
+                <span>Cost</span>
+                <input type="text" bind:value={f.cost} placeholder="10 GP" />
             </label>
         </div>
 
         <label class="field">
-            <span>Описание</span>
-            <textarea rows="4" bind:value={f.desc} placeholder="Свойства, история, особые эффекты…"></textarea>
+            <span>Description</span>
+            <textarea rows="4" bind:value={f.desc} placeholder="Properties, history, special effects…"></textarea>
         </label>
 
         {#if error}<p class="error">{error}</p>{/if}
 
         <div class="actions">
-            <button class="ghost" onclick={onCancel}>Отмена</button>
-            <button class="primary" onclick={save} disabled={saving}>{saving ? "Сохранение…" : "Сохранить"}</button>
+            <button class="ghost" onclick={onCancel}>Cancel</button>
+            <button class="primary" onclick={save} disabled={saving}>{saving ? "Saving…" : "Save"}</button>
         </div>
     </div>
 </div>

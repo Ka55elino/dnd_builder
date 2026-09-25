@@ -1,9 +1,9 @@
 {
   "id": "menacingAttack",
-  "name": "Угрожающая атака",
+  "name": "Menacing Attack",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "При попадании доп. урон = кость; цель испугана до конца вашего следующего хода (спасбросок Мудрости).",
+  "desc": "On a hit, extra damage equal to the die; the target has the Frightened condition until the end of your next turn (Wisdom saving throw).",
   "pool": "maneuver"
 }

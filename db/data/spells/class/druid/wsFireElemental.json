@@ -1,13 +1,13 @@
 {
   "id": "wsFireElemental",
-  "name": "Форма: Огненный элементаль",
+  "name": "Form: Fire Elemental",
   "kind": "class",
   "level": 10,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 5. Хиты 102, КЗ 13, скорость 15 м. ТОЛЬКО Круг луны (10 ур.). Прикосновение поджигает; форма огня наносит урон при контакте.",
+  "desc": "CR 5. HP 102, AC 13, Speed 50 ft. Circle of the Moon ONLY (level 10). Its touch ignites; Fire Form deals damage on contact.",
   "damage": {
     "dice": "2d6",
     "type": "fire"

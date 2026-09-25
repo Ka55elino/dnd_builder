@@ -1,6 +1,6 @@
 {
   "id": "timeStop",
-  "name": "Остановка времени",
+  "name": "Time Stop",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,5 +9,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Совершаете 1d4+1 ходов подряд, пока остальные застыли (нельзя вредить другим)."
+  "desc": "You take 1d4+1 turns in a row while everyone else is frozen in time (you can't affect others)."
 }

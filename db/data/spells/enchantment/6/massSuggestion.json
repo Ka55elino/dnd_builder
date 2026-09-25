@@ -1,6 +1,6 @@
 {
   "id": "massSuggestion",
-  "name": "Массовое внушение",
+  "name": "Mass Suggestion",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "До 12 существ (спасбросок Мудрости) следуют разумному внушению."
+  "desc": "Up to 12 creatures (Wisdom saving throw) follow a reasonable suggestion."
 }

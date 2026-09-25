@@ -1,6 +1,6 @@
 {
   "id": "prayerOfHealing",
-  "name": "Молитва лечения",
+  "name": "Prayer of Healing",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -8,5 +8,5 @@
   "classes": [
     "cleric"
   ],
-  "desc": "До 6 существ восстанавливают 2d8 + мод. заклинателя хитов (время накладывания 10 минут)."
+  "desc": "Up to 6 creatures regain 2d8 + your spellcasting ability modifier Hit Points (casting time 10 minutes)."
 }

@@ -1,9 +1,9 @@
 {
   "id": "adjustDensity",
-  "name": "Настройка плотности",
+  "name": "Adjust Density",
   "kind": "martial",
   "subclass": "graviturgy",
   "level": 3,
   "action": "action",
-  "desc": "Действием на 1 минуту удваиваете или уменьшаете вдвое вес и скорость существа или предмета (Большого или меньше) в 9 м; враждебные — спасбросок Телосложения."
+  "desc": "As an action, for 1 minute you double or halve the weight and Speed of a creature or object (Large or smaller) within 30 feet; a hostile creature makes a Constitution saving throw."
 }

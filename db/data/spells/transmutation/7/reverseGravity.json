@@ -1,6 +1,6 @@
 {
   "id": "reverseGravity",
-  "name": "Обратная гравитация",
+  "name": "Reverse Gravity",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "В цилиндре 15 м гравитация переворачивается — всё падает вверх. Концентрация."
+  "desc": "Gravity reverses in a 50-foot Cylinder — everything falls upward. Concentration."
 }

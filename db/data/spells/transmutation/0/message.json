@@ -1,6 +1,6 @@
 {
   "id": "message",
-  "name": "Послание",
+  "name": "Message",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Шёпотом передаёте сообщение существу в 36 м, которое слышите только вы двое."
+  "desc": "You whisper a message to a creature within 120 feet that only the two of you can hear."
 }

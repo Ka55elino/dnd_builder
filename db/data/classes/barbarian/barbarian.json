@@ -1,6 +1,6 @@
 {
   "id": "barbarian",
-  "name": "Варвар",
+  "name": "Barbarian",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 12,
   "primaryAbility": [
@@ -44,43 +44,43 @@
   "features": [
     {
       "level": 1,
-      "name": "Ярость",
-      "desc": "Бонусным действием входите в ярость: сопротивление дроб./кол./руб. урону, бонус к урону ближней атакой Силой — +2 (ур. 1–8), +3 (ур. 9–15), +4 (ур. 16+), преимущество на проверки и спасброски Силы. Нельзя концентрироваться и колдовать. Длится 10 минут."
+      "name": "Rage",
+      "desc": "As a Bonus Action, you enter a Rage: Resistance to Bludgeoning, Piercing, and Slashing damage; a bonus to damage with Strength-based melee attacks — +2 (levels 1–8), +3 (levels 9–15), +4 (levels 16+); Advantage on Strength checks and saving throws. You can't maintain Concentration or cast spells. Lasts 10 minutes."
     },
     {
       "level": 1,
-      "name": "Защита без доспехов",
-      "desc": "Без брони КЗ = 10 + модификатор Ловкости + модификатор Телосложения (можно со щитом)."
+      "name": "Unarmored Defense",
+      "desc": "While you aren't wearing armor, your AC equals 10 + your Dexterity modifier + your Constitution modifier (a Shield is allowed)."
     },
     {
       "level": 1,
-      "name": "Мастерство оружия",
-      "desc": "Используете свойства мастерства 2 видов оружия (растёт с уровнем)."
+      "name": "Weapon Mastery",
+      "desc": "You can use the mastery properties of 2 kinds of weapons (increases with level)."
     },
     {
       "level": 2,
-      "name": "Чувство опасности",
-      "desc": "Преимущество на спасброски Ловкости против видимых эффектов (ловушки, заклинания)."
+      "name": "Danger Sense",
+      "desc": "You have Advantage on Dexterity saving throws against effects you can see (traps, spells)."
     },
     {
       "level": 2,
-      "name": "Безрассудная атака",
-      "desc": "Преимущество на ближние атаки Силой в свой ход, но атаки по вам тоже с преимуществом до вашего следующего хода."
+      "name": "Reckless Attack",
+      "desc": "You have Advantage on Strength-based melee attack rolls on your turn, but attack rolls against you also have Advantage until your next turn."
     },
     {
       "level": 3,
-      "name": "Первобытное знание",
-      "desc": "Дополнительный навык; в ярости определённые проверки характеристик можно совершать через Силу."
+      "name": "Primal Knowledge",
+      "desc": "An extra skill; while raging, you can make certain ability checks using Strength."
     },
     {
       "level": 5,
-      "name": "Дополнительная атака",
-      "desc": "Две атаки за действие Атаки."
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
     },
     {
       "level": 5,
-      "name": "Быстрое передвижение",
-      "desc": "Скорость +3 м, пока вы без тяжёлой брони.",
+      "name": "Fast Movement",
+      "desc": "Your Speed increases by 10 feet while you aren't wearing Heavy armor.",
       "grants": [
         {
           "type": "effect",
@@ -94,43 +94,43 @@
     },
     {
       "level": 7,
-      "name": "Чувство инстинкта",
-      "desc": "Преимущество на Инициативу."
+      "name": "Instinctive Pounce",
+      "desc": "Advantage on Initiative rolls."
     },
     {
       "level": 7,
-      "name": "Инстинктивный бросок",
-      "desc": "При входе в ярость бонусным действием перемещаетесь на половину скорости."
+      "name": "Instinctive Pounce",
+      "desc": "When you enter a Rage as a Bonus Action, you can move up to half your Speed."
     },
     {
       "level": 9,
-      "name": "Жестокий удар",
-      "desc": "Отказавшись от Безрассудной атаки, при попадании наносите +1 кость урона и накладываете эффект (толчок/замедление)."
+      "name": "Brutal Strike",
+      "desc": "When you forgo Advantage from Reckless Attack, on a hit you deal +1 damage die and apply an effect (push or slow)."
     },
     {
       "level": 11,
-      "name": "Неустанная ярость",
-      "desc": "Опустившись до 0 хитов в ярости (не убитым), проходите спасбросок Телосложения и остаётесь на 1 хите."
+      "name": "Relentless Rage",
+      "desc": "If you drop to 0 Hit Points while raging (and aren't killed), you make a Constitution saving throw and drop to 1 Hit Point instead."
     },
     {
       "level": 13,
-      "name": "Улучшенный жестокий удар",
-      "desc": "Дополнительный эффект и +кость к Жестокому удару."
+      "name": "Improved Brutal Strike",
+      "desc": "An extra effect and +1 die for Brutal Strike."
     },
     {
       "level": 15,
-      "name": "Стойкая ярость",
-      "desc": "Ярость длится до вашего беспамятства или добровольного прекращения; бонусным действием возвращаете себе временные хиты."
+      "name": "Persistent Rage",
+      "desc": "Your Rage lasts until you fall Unconscious or end it voluntarily; as a Bonus Action, you can regain Temporary Hit Points."
     },
     {
       "level": 18,
-      "name": "Неукротимая мощь",
-      "desc": "Если бросок Силы (проверка/спасбросок) меньше вашей Силы — используете значение Силы."
+      "name": "Indomitable Might",
+      "desc": "If the total of a Strength check or saving throw is less than your Strength score, you can use that score instead."
     },
     {
       "level": 20,
-      "name": "Первобытный чемпион",
-      "desc": "Сила и Телосложение +4 (максимум 25).",
+      "name": "Primal Champion",
+      "desc": "Your Strength and Constitution scores increase by 4 (maximum 25).",
       "grants": [
         {
           "type": "effect",

@@ -1,6 +1,6 @@
 {
   "id": "prismaticWall",
-  "name": "Призматическая стена",
+  "name": "Prismatic Wall",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,7 +9,7 @@
     "bard",
     "wizard"
   ],
-  "desc": "Многослойная стена света: каждый слой наносит урон или накладывает эффект при прорыве.",
+  "desc": "A multi-layered wall of light: each layer deals damage or imposes an effect when passed through.",
   "damage": {
     "dice": "10d6",
     "type": "fire"

@@ -1,6 +1,6 @@
 {
   "id": "callLightning",
-  "name": "Вызов молнии",
+  "name": "Call Lightning",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -9,7 +9,7 @@
     "cleric",
     "druid"
   ],
-  "desc": "Грозовая туча: действием бьёте молнией (спасбросок Ловкости за половину). Концентрация.",
+  "desc": "A storm cloud: as an action, you call down lightning (Dexterity saving throw for half). Concentration.",
   "damage": {
     "dice": "3d10",
     "type": "lightning"

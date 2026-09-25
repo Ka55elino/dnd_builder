@@ -1,12 +1,12 @@
 {
   "id": "mediumArmorMaster",
-  "name": "Мастер средних доспехов",
+  "name": "Medium Armor Master",
   "category": "general",
   "level": 4,
   "asi": [
     "dex"
   ],
-  "desc": "+1 Ловкость; в средней броне потолок бонуса Ловкости к КЗ повышается с +2 до +3.",
+  "desc": "+1 Dexterity; in Medium armor, the maximum Dexterity bonus to AC increases from +2 to +3.",
   "effects": [
     {
       "kind": "set",

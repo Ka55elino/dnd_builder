@@ -1,6 +1,6 @@
 {
   "id": "psychicScream",
-  "name": "Психический вопль",
+  "name": "Psychic Scream",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -11,7 +11,7 @@
     "warlock",
     "wizard"
   ],
-  "desc": "До 10 существ (спасбросок Интеллекта): психический урон и оглушение; при гибели — череп взрывается.",
+  "desc": "Up to 10 creatures (Intelligence saving throw): Psychic damage and Stunned; if a creature dies, its skull explodes.",
   "damage": {
     "dice": "14d6",
     "type": "psychic"

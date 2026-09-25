@@ -1,9 +1,9 @@
 {
   "id": "benignTransposition",
-  "name": "Благотворное перемещение",
+  "name": "Benign Transposition",
   "kind": "martial",
   "subclass": "conjuration",
   "level": 6,
   "action": "bonus",
-  "desc": "Бонусным действием телепортируетесь в свободное место до 9 м или меняетесь местами с согласным существом того же размера."
+  "desc": "As a Bonus Action, you teleport to an unoccupied space within 30 feet or swap places with a willing creature of the same size."
 }

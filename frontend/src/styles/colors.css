@@ -1,36 +1,36 @@
-/* Основная палитра */
+/* Main palette */
 
 :root {
-    /* --- Поверхности --- */
-    --color-bg:            #111014;  /* фон приложения */
-    --color-sidebar:       #17151B;  /* сайдбар */
-    --color-card:          #1D1A21;  /* карточка */
-    --color-card-elevated: #25212A;  /* приподнятая карточка */
-    --color-border:        #38323D;  /* границы */
+    /* --- Surfaces --- */
+    --color-bg:            #111014;  /* app background */
+    --color-sidebar:       #17151B;  /* sidebar */
+    --color-card:          #1D1A21;  /* card */
+    --color-card-elevated: #25212A;  /* elevated card */
+    --color-border:        #38323D;  /* borders */
 
-    /* --- Текст --- */
+    /* --- Text --- */
     --color-text-primary:   #E8E1D5;
     --color-text-secondary: #A9A19A;
     --color-text-muted:     #706A68;
-    --color-text-accent:    #D6BD8C;  /* подзаголовки, акцентный текст — бледное золото */
+    --color-text-accent:    #D6BD8C;  /* subheadings, accent text — pale gold */
 
-    /* --- Акценты --- */
+    /* --- Accents --- */
     --color-gold:              #C8A45D;
     --color-gold-hover:        #E0BD70;
     --color-magic-purple:      #8E6BB5;
     --color-magic-purple-dark: #49365F;
 
-    /* --- Состояния --- */
+    /* --- States --- */
     --color-danger:  #9B4545;  /* danger / necromancy */
     --color-success: #668C62;  /* success / nature */
 
-    /* --- Типы действий (иконки и чипы) --- */
-    --color-act-action:   #6FB35F;  /* действие — зелёный */
-    --color-act-bonus:    #E08A3C;  /* бонусное — оранжевый */
-    --color-act-reaction: #A07AD6;  /* реакция — фиолетовый */
-    --color-act-free:     #A9A19A;  /* свободное — нейтральный */
+    /* --- Action types (icons and chips) --- */
+    --color-act-action:   #6FB35F;  /* action — green */
+    --color-act-bonus:    #E08A3C;  /* bonus action — orange */
+    --color-act-reaction: #A07AD6;  /* reaction — purple */
+    --color-act-free:     #A9A19A;  /* free — neutral */
 
-    /* --- Типы урона --- */
+    /* --- Damage types --- */
     --color-dmg-bludgeoning: #A9A19A;
     --color-dmg-piercing:    #B8A07A;
     --color-dmg-slashing:    #C28E6A;
@@ -47,16 +47,16 @@
     --color-dmg-physical:    #A9A19A;
     --color-dmg-weapon:      #A9A19A;
 
-    /* --- Ячейки заклинаний --- */
-    --color-slot:      #3D8BFF;                  /* обычные ячейки — ярко-синий */
-    --color-slot-pact: var(--color-magic-purple); /* ячейки договора колдуна — фиолетовый */
+    /* --- Spell slots --- */
+    --color-slot:      #3D8BFF;                  /* regular slots — bright blue */
+    --color-slot-pact: var(--color-magic-purple); /* Warlock Pact Magic slots — purple */
 
-    /* --- Отдых --- */
+    /* --- Rest --- */
     --color-rest-shortRest: #5D8FB8;
     --color-rest-longRest:  #D6BD8C;
     --color-rest-day:       #D6B56A;
 
-    /* --- Свойства заклинаний и ячейки (иконки kind="meta") --- */
+    /* --- Spell properties and slots (kind="meta" icons) --- */
     --color-meta-concentration: #A889C8;
     --color-meta-ritual:        #D6B56A;
     --color-meta-dc:            #D99A5B;
@@ -65,7 +65,7 @@
     --color-meta-slot:          var(--color-slot);
     --color-meta-pact:          var(--color-slot-pact);
 
-    /* --- Школы магии (иконки kind="school") --- */
+    /* --- Schools of magic (kind="school" icons) --- */
     --color-school-abjuration:    #6FA8DC;
     --color-school-conjuration:   #B58AD0;
     --color-school-divination:    #D6B56A;

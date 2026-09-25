@@ -1,8 +1,8 @@
 {
   "id": "deathStrike",
-  "name": "Смертельный удар",
+  "name": "Death Strike",
   "kind": "martial",
   "subclass": "assassin",
   "level": 17,
-  "desc": "Попав по застигнутому врасплох существу, вынуждаете его на спасбросок Телосложения (Сл 8 + Лов + бонус мастерства); при провале урон этой атаки удваивается."
+  "desc": "When you hit a Surprised creature, you force it to make a Constitution saving throw (DC 8 + Dex + Proficiency Bonus); on a failed save, the attack's damage is doubled."
 }

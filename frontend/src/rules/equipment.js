@@ -1,37 +1,37 @@
 /**
- * Подписи и расчёты для снаряжения (оружие, доспехи).
- * Общие для вкладки «Снаряжение» билдера и страницы «Дать предмет».
+ * Labels and calculations for equipment (weapons, armor).
+ * Shared by the builder's "Equipment" tab and the "Give Item" page.
  */
 
-export const ARMOR_CAT = { light: 'Лёгкий', medium: 'Средний', heavy: 'Тяжёлый', shield: 'Щит' };
-export const WEAPON_CAT = { simple: 'Простое', martial: 'Воинское' };
+export const ARMOR_CAT = { light: 'Light', medium: 'Medium', heavy: 'Heavy', shield: 'Shield' };
+export const WEAPON_CAT = { simple: 'Simple', martial: 'Martial' };
 
 export const WEAPON_PROPS = {
-    finesse: 'фехтовальное',
-    light: 'лёгкое',
-    thrown: 'метательное',
-    versatile: 'универсальное',
-    ranged: 'дальнобойное',
-    twoHanded: 'двуручное',
-    heavy: 'тяжёлое',
-    reach: 'досягаемость',
-    loading: 'перезарядка',
-    ammunition: 'боеприпасы',
+    finesse: 'finesse',
+    light: 'light',
+    thrown: 'thrown',
+    versatile: 'versatile',
+    ranged: 'ranged',
+    twoHanded: 'two-handed',
+    heavy: 'heavy',
+    reach: 'reach',
+    loading: 'loading',
+    ammunition: 'ammunition',
 };
 
-/** КД доспеха текстом: «13 + Лов (макс. 2)», для щита «+2». */
+/** Armor AC as text: "13 + Dex (max 2)", for a shield "+2". */
 export function acText(a) {
     const d = a.data ?? {};
     if (a.category === 'shield') return `+${d.acBonus ?? 2}`;
     if (!d.addDex) return `${a.baseAC}`;
-    return d.maxDex != null ? `${a.baseAC} + Лов (макс. ${d.maxDex})` : `${a.baseAC} + Лов`;
+    return d.maxDex != null ? `${a.baseAC} + Dex (max ${d.maxDex})` : `${a.baseAC} + Dex`;
 }
 
 const fmtBonus = (n) => (n > 0 ? `+${n}` : `${n}`);
 
 /**
- * Описание предмета для подсказки: { title, tag, lines: [строки характеристик], desc }.
- * item — запись рюкзака (Character.inventory): { kind: 'weapon'|'armor'|'shield'|'item', ref, qty }
+ * Item description for a tooltip: { title, tag, lines: [stat lines], desc }.
+ * item — a backpack entry (Character.inventory): { kind: 'weapon'|'armor'|'shield'|'item', ref, qty }
  */
 export function describeItem(item, { damageShort = (t) => t } = {}) {
     const r = item.ref ?? {};
@@ -40,31 +40,31 @@ export function describeItem(item, { damageShort = (t) => t } = {}) {
 
     if (item.kind === 'weapon') {
         lines.push(WEAPON_CAT[r.category] ?? r.category ?? '');
-        lines.push(['Урон:', r.damage, damageShort(r.damageType)].filter(Boolean).join(' '));
+        lines.push(['Damage:', r.damage, damageShort(r.damageType)].filter(Boolean).join(' '));
         if (d.attackBonus || d.damageBonus) {
             lines.push(
-                [d.attackBonus ? `${fmtBonus(d.attackBonus)} к попаданию` : '', d.damageBonus ? `${fmtBonus(d.damageBonus)} к урону` : '']
+                [d.attackBonus ? `${fmtBonus(d.attackBonus)} to hit` : '', d.damageBonus ? `${fmtBonus(d.damageBonus)} to damage` : '']
                     .filter(Boolean)
                     .join(', '),
             );
         }
-        for (const x of d.extraDamage ?? []) lines.push(`Доп. урон: ${x.dice} ${damageShort(x.type)}`);
-        if (d.mastery) lines.push(`Мастерство: ${d.mastery}`);
+        for (const x of d.extraDamage ?? []) lines.push(`Extra damage: ${x.dice} ${damageShort(x.type)}`);
+        if (d.mastery) lines.push(`Mastery: ${d.mastery}`);
         if (d.properties?.length) lines.push(d.properties.map((p) => WEAPON_PROPS[p] ?? p).join(', '));
     } else if (item.kind === 'armor' || item.kind === 'shield') {
         lines.push(ARMOR_CAT[r.category] ?? r.category ?? '');
-        lines.push(`КД: ${acText(r)}${d.acBonus && r.category !== 'shield' ? ` ${fmtBonus(d.acBonus)}` : ''}`);
-        if (d.strengthReq) lines.push(`Требует Силу ${d.strengthReq}`);
-        if (d.stealthDisadvantage) lines.push('Помеха на Скрытность');
+        lines.push(`AC: ${acText(r)}${d.acBonus && r.category !== 'shield' ? ` ${fmtBonus(d.acBonus)}` : ''}`);
+        if (d.strengthReq) lines.push(`Requires Strength ${d.strengthReq}`);
+        if (d.stealthDisadvantage) lines.push('Disadvantage on Stealth');
     } else {
-        if (r.weight) lines.push(`Вес: ${r.weight} фнт.`);
-        if (r.cost) lines.push(`Цена: ${r.cost}`);
+        if (r.weight) lines.push(`Weight: ${r.weight} lb.`);
+        if (r.cost) lines.push(`Cost: ${r.cost}`);
     }
-    if (item.qty > 1) lines.push(`Количество: ${item.qty}`);
+    if (item.qty > 1) lines.push(`Quantity: ${item.qty}`);
 
     return {
         title: r.name ?? item.name,
-        tag: d.custom ? 'своё' : r.isDefault === false ? 'именное' : '',
+        tag: d.custom ? 'custom' : r.isDefault === false ? 'named' : '',
         lines: lines.filter(Boolean),
         desc: r.desc ?? d.desc ?? '',
     };

@@ -1,6 +1,6 @@
 {
   "id": "aid",
-  "name": "Помощь",
+  "name": "Aid",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "До 3 существ: макс. и текущие хиты +5 на 8 часов."
+  "desc": "Up to 3 creatures: their Hit Point maximum and current Hit Points increase by 5 for 8 hours."
 }

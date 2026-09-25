@@ -1,11 +1,11 @@
 {
   "id": "darkOnesOwnLuck",
-  "name": "Удача Тёмного",
+  "name": "Dark One's Own Luck",
   "kind": "martial",
   "subclass": "fiend",
   "level": 6,
   "action": "free",
-  "desc": "Прибавляете 1d10 к своей проверке характеристики или спасброску (после броска, до результата).",
+  "desc": "You add 1d10 to your ability check or saving throw (after the roll, before the result).",
   "uses": {
     "count": 1,
     "per": "longRest",

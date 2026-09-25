@@ -1,11 +1,40 @@
 {
   "id": "tireless",
-  "name": "Неутомимый",
+  "name": "Tireless",
   "kind": "class",
   "level": 10,
-  "classes": ["ranger"],
+  "classes": [
+    "ranger"
+  ],
   "action": "action",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Действием даёте себе временные хиты: 1d8 + модификатор Мудрости. Число применений равно бонусу мастерства (на длинный отдых).",
-  "damage": { "dice": "1d8" }
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "As a Magic action, you gain Temporary Hit Points equal to 1d8 + your Wisdom modifier. Number of uses equals your Proficiency Bonus (per Long Rest).",
+  "damage": {
+    "dice": "1d8"
+  }
 }

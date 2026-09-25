@@ -1,6 +1,6 @@
 {
   "id": "passWithoutTrace",
-  "name": "Бесследное передвижение",
+  "name": "Pass without Trace",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -10,12 +10,12 @@
     "druid",
     "ranger"
   ],
-  "desc": "Вы и союзники в 9 м получаете +10 к проверкам Скрытности и не оставляют следов. Концентрация до 1 часа.",
+  "desc": "You and allies within 30 feet gain +10 to Stealth checks and leave no tracks. Concentration, up to 1 hour.",
   "casting": {
-    "time": "1 действие",
-    "range": "На себя (9 м)",
-    "components": "В, С, М",
-    "duration": "Конц., 1 час",
+    "time": "1 action",
+    "range": "Self (30 feet)",
+    "components": "V, S, M",
+    "duration": "Conc., 1 hour",
     "concentration": true
   }
 }

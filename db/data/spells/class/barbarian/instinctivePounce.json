@@ -1,11 +1,11 @@
 {
   "id": "instinctivePounce",
-  "name": "Инстинктивный бросок",
+  "name": "Instinctive Pounce",
   "kind": "class",
   "level": 7,
   "classes": [
     "barbarian"
   ],
   "action": "bonus",
-  "desc": "При входе в ярость бонусным действием перемещаетесь на расстояние до половины своей скорости."
+  "desc": "When you enter your Rage as a Bonus Action, you can move up to half your Speed."
 }

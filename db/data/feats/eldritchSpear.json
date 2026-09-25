@@ -1,9 +1,9 @@
 {
   "id": "eldritchSpear",
-  "name": "Мистическое копьё",
+  "name": "Eldritch Spear",
   "category": "invocation",
   "level": 1,
-  "desc": "Дальность «Мистического взрыва» увеличивается до 90 м.",
+  "desc": "The range of Eldritch Blast increases to 300 feet.",
   "prereq": {
     "blast": true
   }

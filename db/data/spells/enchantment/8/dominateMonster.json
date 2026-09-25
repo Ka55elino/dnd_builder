@@ -1,6 +1,6 @@
 {
   "id": "dominateMonster",
-  "name": "Доминирование над чудовищем",
+  "name": "Dominate Monster",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Любое существо (спасбросок Мудрости) под вашим контролем. Концентрация."
+  "desc": "Any creature (Wisdom saving throw) falls under your control. Concentration."
 }

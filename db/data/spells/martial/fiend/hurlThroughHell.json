@@ -1,11 +1,11 @@
 {
   "id": "hurlThroughHell",
-  "name": "Швырнуть в Ад",
+  "name": "Hurl Through Hell",
   "kind": "martial",
   "subclass": "fiend",
   "level": 14,
   "action": "free",
-  "desc": "Раз на длинный отдых: попав атакой по существу (не исчадию), отправляете его сквозь нижние планы; в начале вашего следующего хода оно возвращается и получает 8d10 психического урона.",
+  "desc": "Once per Long Rest: when you hit a creature (other than a Fiend) with an attack, you send it through the Lower Planes; at the start of your next turn, it returns and takes 8d10 Psychic damage.",
   "uses": {
     "count": 1,
     "per": "longRest"

@@ -1,11 +1,11 @@
 {
   "id": "slasher",
-  "name": "Рубящий",
+  "name": "Slasher",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; снижение скорости цели, помеха при крите."
+  "desc": "+1 Strength or Dexterity; reduce the target's Speed, Disadvantage on a Critical Hit."
 }

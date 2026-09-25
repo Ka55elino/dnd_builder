@@ -1,6 +1,6 @@
 {
   "id": "feyTouched",
-  "name": "Прикосновение фей",
+  "name": "Fey-Touched",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,7 +8,7 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; Мерцающий шаг и заклинание 1 круга (прорицание/очарование).",
+  "desc": "+1 Int/Wis/Cha; Misty Step and one level 1 spell (Divination or Enchantment).",
   "spells": {
     "fixed": [
       "mistyStep"

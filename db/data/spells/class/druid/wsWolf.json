@@ -1,13 +1,13 @@
 {
   "id": "wsWolf",
-  "name": "Форма: Волк",
+  "name": "Form: Wolf",
   "kind": "class",
   "level": 2,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1/4. Хиты 11, КЗ 13, скорость 12 м. При попадании цель размером не больше Среднего — спасбросок Силы или сбита с ног.",
+  "desc": "CR 1/4. HP 11, AC 13, Speed 40 ft. On a hit, a Medium or smaller target makes a Strength saving throw or is knocked Prone.",
   "damage": {
     "dice": "2d4",
     "type": "piercing"

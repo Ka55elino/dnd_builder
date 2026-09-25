@@ -1,6 +1,6 @@
 {
   "id": "calmEmotions",
-  "name": "Успокоение эмоций",
+  "name": "Calm Emotions",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,5 +9,5 @@
     "bard",
     "cleric"
   ],
-  "desc": "Существа в сфере 6 м — спасбросок Харизмы: снимаете очарование/испуг или гасите враждебность. Концентрация."
+  "desc": "Creatures in a 20-foot Sphere make a Charisma saving throw: you end the Charmed or Frightened condition on them or suppress their hostility. Concentration."
 }

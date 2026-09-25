@@ -1,29 +1,29 @@
 /**
- * Прогрессия по уровням: что даёт уровень и что на нём нужно выбрать.
+ * Level progression: what a level grants and what must be chosen at it.
  *
  *   levelPlan(build, level, refs) → { level, gains, choices, hp, ... }
- *     gains   — информация: новые умения класса/подкласса/расы/происхождения
- *     choices — что игрок должен выбрать на этом уровне
+ *     gains   — info: new class/subclass/race/background features
+ *     choices — what the player must choose at this level
  *
- *   summarizeChoices(build, refs) → что уже выбрано на всех уровнях
- *     (навыки, компетентность, черты, заклинания…) — для листа персонажа.
+ *   summarizeChoices(build, refs) → what has been chosen across all levels
+ *     (skills, expertise, feats, spells…) — for the character sheet.
  *
- * Выбор хранится в build.choices[key] = { kind, ids: [...], asi?: {...} }.
- * Ключ начинается с уровня: `L<уровень>:<источник>:<что>` — так при
- * повышении уровня видно, что относится к какому уровню.
+ * A choice is stored in build.choices[key] = { kind, ids: [...], asi?: {...} }.
+ * The key starts with the level: `L<level>:<source>:<what>` — so on
+ * level-up it is clear what belongs to which level.
  *
- * Виды выбора (kind):
- *   skills | skill       — навыки (класс на 1 уровне, раса, черта «Умелый»)
- *   expertise            — компетентность (удвоенный бонус мастерства)
- *   feat                 — черта (раса, повышение характеристик)
- *   asi                  — +к характеристикам (у черты с полем asi)
- *   fightingStyle        — боевой стиль
- *   cantrips | spells    — заговоры / подготовленные заклинания
- *   metamagic | invocations — метамагия чародея / воззвания колдуна
- *   subclass             — подкласс
- *   option               — прочее (Божественный / Первобытный орден)
- *   pool                 — «выбери N» из пула подкласса (приёмы Мастера боя,
- *                          магические выстрелы) — поле subclass.optionPools
+ * Choice kinds (kind):
+ *   skills | skill       — skills (class at level 1, race, the "Skilled" feat)
+ *   expertise            — expertise (doubled proficiency bonus)
+ *   feat                 — feat (race, Ability Score Improvement)
+ *   asi                  — +to abilities (for a feat with an asi field)
+ *   fightingStyle        — fighting style
+ *   cantrips | spells    — cantrips / prepared spells
+ *   metamagic | invocations — sorcerer metamagic / warlock invocations
+ *   subclass             — subclass
+ *   option               — other (Divine Order / Primal Order)
+ *   pool                 — "choose N" from a subclass pool (Battle Master maneuvers,
+ *                          arcane shots) — the subclass.optionPools field
  */
 import { SKILLS } from './skills.js';
 import { ABILITY_KEYS, ABILITIES, modifier } from './abilities.js';
@@ -36,19 +36,19 @@ const SKILL_BY_ID = Object.fromEntries(SKILLS.map((s) => [s.id, s]));
 const skillOption = (id) => ({ id, name: SKILL_BY_ID[id]?.name ?? id });
 const lvlOf = (x) => x?.level ?? 1;
 
-/** Короткая ссылка на объект справочника → вариант выбора. */
-// ref — исходная запись (для карточки с описанием, уроном, типом действия)
+/** Short reference to a reference-data object → choice option. */
+// ref — the source record (for a card with description, damage, action type)
 const asOption = (x, meta) => ({ id: x.id, name: x.name, desc: x.desc ?? x.data?.desc ?? '', meta, ref: x });
 const spellOption = (sp) =>
-    asOption(sp, [sp.level === 0 ? 'заговор' : `${sp.level} круг`, SCHOOLS[sp.school]].filter(Boolean).join(' · '));
+    asOption(sp, [sp.level === 0 ? 'cantrip' : `Level ${sp.level}`, SCHOOLS[sp.school]].filter(Boolean).join(' · '));
 
 // ---------------------------------------------------------------------------
-// справочные выборки
+// reference-data queries
 
 const featsBy = (refs, category, level = 20) =>
     (refs.feats ?? []).filter((f) => f.category === category && lvlOf(f) <= level);
 
-/** Заклинания списка класса (или другого списка), круг ≤ maxLevel. */
+/** Spells on the class list (or another list), spell level ≤ maxLevel. */
 function spellList(refs, list, { minLevel = 0, maxLevel = 9 } = {}) {
     return (refs.spells ?? []).filter(
         (sp) =>
@@ -65,27 +65,27 @@ const findBg = (build, refs) => (refs.backgrounds ?? []).find((b) => b.id === bu
 const findFeat = (refs, id) => (refs.feats ?? []).find((f) => f.id === id) ?? null;
 
 // ---------------------------------------------------------------------------
-// что уже выбрано (по всем уровням ≤ upTo)
+// what has been chosen (across all levels ≤ upTo)
 
 export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
     const out = {
         skills: new Set(),
         expertise: new Set(),
-        feats: [],          // id черт (включая черту предыстории)
+        feats: [],          // feat ids (including the background feat)
         fightingStyles: [],
         metamagic: [],
         invocations: [],
         cantrips: [],
         spells: [],
         options: [],
-        pool: [],           // выбранное из пулов подкласса (приёмы, выстрелы)
+        pool: [],           // picks from subclass pools (maneuvers, shots)
     };
 
     const bg = findBg(build, refs);
     for (const s of bg?.data?.skills ?? []) out.skills.add(s);
     if (bg?.feat) out.feats.push(bg.feat);
 
-    // по уровням; внутри уровня «забыть» раньше «выучить» (замена воззвания)
+    // by level; within a level "forget" before "learn" (invocation replacement)
     const lvlKey = (k) => Number(/^L(\d+):/.exec(k)?.[1] ?? 0);
     const entries = Object.entries(build.choices ?? {}).sort(
         ([a, ca], [b, cb]) =>
@@ -94,7 +94,7 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
     for (const [key, c] of entries) {
         const m = /^L(\d+):/.exec(key);
         if (m && Number(m[1]) > upTo) continue;
-        // новое воззвание по замене считается, только если старое забыто
+        // a replacement invocation counts only if the old one was forgotten
         if (key.endsWith(':invocationSwap') && !build.choices[key.replace(/Swap$/, 'Forget')]?.ids?.length) continue;
         const ids = c?.ids ?? [];
         switch (c?.kind) {
@@ -135,7 +135,7 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
         }
     }
 
-    // фиксированные навыки расы
+    // fixed race skills
     const race = findRace(build, refs);
     const sub = race?.subraces?.find((s) => s.id === build.subraceId);
     for (const t of [...(race?.data?.traits ?? []), ...(sub?.data?.traits ?? [])]) {
@@ -146,7 +146,7 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
 }
 
 // ---------------------------------------------------------------------------
-// план уровня
+// level plan
 
 /**
  * @returns {{
@@ -171,18 +171,18 @@ export function levelPlan(build, level, refs) {
     const add = (c) => choices.push({ ...c, value: value(c.key) });
     const addGain = (title, items) => items.length && gains.push({ title, items });
 
-    // --- хиты и мастерство ---
+    // --- hit points and proficiency ---
     const con = modifier(build.totalAbilities?.con ?? build.abilities?.con) ?? 0;
     const die = cls?.hitDie ?? 8;
     const hp =
         level === 1
-            ? { gain: Math.max(1, die + con), formula: `d${die} (максимум) ${fmt(con)} Тел` }
-            : { gain: Math.max(1, Math.floor(die / 2) + 1 + con), formula: `${Math.floor(die / 2) + 1} (среднее d${die}) ${fmt(con)} Тел` };
+            ? { gain: Math.max(1, die + con), formula: `d${die} (max) ${fmt(con)} Con` }
+            : { gain: Math.max(1, Math.floor(die / 2) + 1 + con), formula: `${Math.floor(die / 2) + 1} (average d${die}) ${fmt(con)} Con` };
     const prof = proficiencyBonus(level);
     const profChanged = level === 1 || prof !== proficiencyBonus(level - 1);
 
-    // --- ячейки ---
-    // заклинательство класса или подкласса (Мистический рыцарь / ловкач — с 3 уровня)
+    // --- slots ---
+    // class or subclass spellcasting (Eldritch Knight / Arcane Trickster — from level 3)
     const sc = spellcastingOf(cls, subclass);
     const scOwner = cls?.data?.spellcasting ? cls : subclass;
     const progression = sc?.progression ?? cls?.caster ?? 'none';
@@ -191,20 +191,20 @@ export function levelPlan(build, level, refs) {
     const prevSlots = level > 1 && scOn(level - 1) ? spellSlots(progression, level - 1) : [];
     const slotsChanged = JSON.stringify(slots) !== JSON.stringify(prevSlots);
 
-    // ================= класс =================
+    // ================= class =================
     const clsFeatures = (cls?.data?.features ?? []).filter((f) => lvlOf(f) === level);
     addGain(
-        cls ? `${cls.name} · ${level} уровень` : 'Класс',
+        cls ? `${cls.name} · Level ${level}` : 'Class',
         clsFeatures.map((f) => ({ name: f.name, desc: f.desc })),
     );
 
-    // навыки класса — на 1 уровне
+    // class skills — at level 1
     if (level === 1 && cls?.data?.skills?.length) {
         add({
             key: 'L1:class:skills',
             kind: 'skills',
-            title: `Навыки класса (${cls.name})`,
-            desc: `Выберите ${cls.data.skillCount ?? 2} из списка класса.`,
+            title: `Class Skills (${cls.name})`,
+            desc: `Choose ${cls.data.skillCount ?? 2} from the class list.`,
             pick: cls.data.skillCount ?? 2,
             options: cls.data.skills.filter((s) => !done.skills.has(s)).map(skillOption),
         });
@@ -212,25 +212,25 @@ export function levelPlan(build, level, refs) {
 
     for (const f of clsFeatures) featureChoices(f, 'class', level, done, refs, add);
 
-    // подкласс
+    // subclass
     if (cls && level === (cls.subclassLevel ?? 3) && cls.subclasses?.length) {
         choices.push({
             key: `L${level}:class:subclass`,
             kind: 'subclass',
-            title: `Подкласс (${cls.name})`,
+            title: `Subclass (${cls.name})`,
             pick: 1,
             options: cls.subclasses.map((s) => asOption(s)),
             value: build.subclassId ? { kind: 'subclass', ids: [build.subclassId] } : null,
         });
     }
 
-    // умения подкласса
+    // subclass features
     if (subclass) {
         const subFeatures = (subclass.data?.features ?? []).filter((f) => lvlOf(f) === level);
         addGain(subclass.name, subFeatures.map((f) => ({ name: f.name, desc: f.desc })));
         for (const f of subFeatures) featureChoices(f, 'subclass', level, done, refs, add);
 
-        // пулы «выбери N»: приёмы Мастера боя, магические выстрелы…
+        // "choose N" pools: Battle Master maneuvers, arcane shots…
         for (const pool of subclass.data?.optionPools ?? []) {
             const n = byLevelPairs(pool.known, level) - (level > 1 ? byLevelPairs(pool.known, level - 1) : 0);
             if (n <= 0) continue;
@@ -247,47 +247,47 @@ export function levelPlan(build, level, refs) {
         }
     }
 
-    // способности класса (из таблицы spells) — то, что открывается на уровне
+    // class abilities (from the spells table) — what unlocks at this level
     const powers = (refs.spells ?? []).filter((sp) => {
         if (sp.kind === 'spell' || sp.level !== level) return false;
         const d = sp.data ?? {};
-        if (d.pool) return false; // варианты пула выбираются отдельно
+        if (d.pool) return false; // pool options are chosen separately
         if (d.subclass) return !!subclass && d.subclass === subclass.id;
         return sp.kind === 'class' && (d.classes ?? []).includes(cls?.id);
     });
-    // то, что уже описано умением класса/подкласса с тем же названием, не дублируем
+    // don't duplicate what a class/subclass feature with the same name already describes
     const shown = new Set(gains.flatMap((g) => g.items.map((it) => norm(it.name))));
     addGain(
-        'Способности',
+        'Abilities',
         powers
             .filter((sp) => !shown.has(norm(sp.name)))
             .map((sp) => ({ name: sp.name, desc: sp.desc, ref: sp })),
     );
 
-    // повышение характеристик / черта
+    // Ability Score Improvement / feat
     if ((cls?.data?.asiLevels ?? []).includes(level)) {
         const key = `L${level}:class:feat`;
         add({
             key,
             kind: 'feat',
-            title: 'Повышение характеристик или черта',
-            desc: 'Черта «Повышение характеристик» даёт +2 к одной или +1 к двум характеристикам.',
+            title: 'Ability Score Improvement or Feat',
+            desc: 'The Ability Score Improvement feat grants +2 to one ability or +1 to two abilities.',
             pick: 1,
             options: featsBy(refs, 'general', level)
                 .filter((f) => f.data?.repeatable || !done.feats.includes(f.id))
-                .map((f) => asOption(f, f.data?.asi ? 'с повышением характеристик' : '')),
+                .map((f) => asOption(f, f.data?.asi ? 'with ability score increase' : '')),
         });
         featFollowUps(value(key)?.ids?.[0], key, level, done, refs, add);
     }
 
-    // метамагия / воззвания — сколько новых на этом уровне
+    // metamagic / invocations — how many new at this level
     const newCount = (table) => byLevelPairs(table ?? [], level) - (level > 1 ? byLevelPairs(table ?? [], level - 1) : 0);
     const mmNew = newCount(cls?.data?.metamagicKnown);
     if (mmNew > 0) {
         add({
             key: `L${level}:class:metamagic`,
             kind: 'metamagic',
-            title: 'Метамагия',
+            title: 'Metamagic',
             pick: mmNew,
             options: featsBy(refs, 'metamagic').filter((f) => !done.metamagic.includes(f.id)).map((f) => asOption(f)),
         });
@@ -297,20 +297,20 @@ export function levelPlan(build, level, refs) {
         add({
             key: `L${level}:class:invocations`,
             kind: 'invocations',
-            title: 'Таинственные воззвания',
+            title: 'Eldritch Invocations',
             pick: invNew,
             options: featsBy(refs, 'invocation', level).filter((f) => !done.invocations.includes(f.id)).map((f) => asOption(f)),
         });
     }
-    // PHB 2024: при каждом повышении уровня колдун может заменить одно известное воззвание
+    // PHB 2024: on each level-up a warlock may replace one known invocation
     if (level > 1 && cls?.data?.invocationsKnown?.length && done.invocations.length) {
         const forgetKey = `L${level}:class:invocationForget`;
         const forgotten = value(forgetKey)?.ids ?? [];
         add({
             key: forgetKey,
             kind: 'invocationForget',
-            title: 'Заменить воззвание — забыть',
-            desc: 'По желанию: выберите известное воззвание, которое хотите заменить другим.',
+            title: 'Replace an invocation — forget',
+            desc: 'Optional: choose a known invocation you want to replace with another.',
             pick: 1,
             optional: true,
             options: featsBy(refs, 'invocation').filter((f) => done.invocations.includes(f.id)).map((f) => asOption(f)),
@@ -319,7 +319,7 @@ export function levelPlan(build, level, refs) {
             add({
                 key: `L${level}:class:invocationSwap`,
                 kind: 'invocations',
-                title: 'Заменить воззвание — новое',
+                title: 'Replace an invocation — new',
                 pick: 1,
                 options: featsBy(refs, 'invocation', level)
                     .filter((f) => !done.invocations.includes(f.id))
@@ -328,7 +328,7 @@ export function levelPlan(build, level, refs) {
         }
     }
 
-    // заклинания класса (или подкласса)
+    // class (or subclass) spells
     if (scOn(level)) {
         const list = sc.list ?? cls.id;
         const who = scOwner?.name ?? cls.name;
@@ -339,7 +339,7 @@ export function levelPlan(build, level, refs) {
             add({
                 key: `L${level}:class:cantrips`,
                 kind: 'cantrips',
-                title: `Заговоры (${who})`,
+                title: `Cantrips (${who})`,
                 pick: cNew,
                 options: spellList(refs, list, { maxLevel: 0 }).filter((sp) => !done.cantrips.includes(sp.id)).map(spellOption),
             });
@@ -348,8 +348,8 @@ export function levelPlan(build, level, refs) {
             add({
                 key: `L${level}:class:spells`,
                 kind: 'spells',
-                title: `Заклинания (${who})`,
-                desc: `Круг — до ${maxCircle}.`,
+                title: `Spells (${who})`,
+                desc: `Spell level — up to ${maxCircle}.`,
                 pick: pNew,
                 options: spellList(refs, list, { minLevel: 1, maxLevel: maxCircle })
                     .filter((sp) => !done.spells.includes(sp.id))
@@ -358,7 +358,7 @@ export function levelPlan(build, level, refs) {
         }
     }
 
-    // ================= раса =================
+    // ================= race =================
     const raceTraits = [
         ...(race?.data?.traits ?? []).map((t) => ({ t, src: 'race', title: race.name })),
         ...(sub?.data?.traits ?? []).map((t) => ({ t, src: 'subrace', title: sub.name })),
@@ -373,19 +373,19 @@ export function levelPlan(build, level, refs) {
             const key = `L${level}:${src}:${g.type}:${t.name}`;
             if (g.type === 'skill') {
                 add({
-                    key, kind: 'skill', title: `${t.name}: навык`, pick: g.choose,
+                    key, kind: 'skill', title: `${t.name}: skill`, pick: g.choose,
                     options: (g.options ?? SKILLS.map((s) => s.id)).filter((s) => !done.skills.has(s)).map(skillOption),
                 });
             } else if (g.type === 'feat') {
                 add({
-                    key, kind: 'feat', title: `${t.name}: черта происхождения`, pick: g.choose,
+                    key, kind: 'feat', title: `${t.name}: origin feat`, pick: g.choose,
                     options: featsBy(refs, 'origin').filter((f) => !done.feats.includes(f.id)).map((f) => asOption(f)),
                 });
                 featFollowUps(value(key)?.ids?.[0], key, level, done, refs, add);
             } else if (g.type === 'spell') {
                 add({
                     key, kind: g.level === 0 ? 'cantrips' : 'spells',
-                    title: `${t.name}: ${g.level === 0 ? 'заговор' : 'заклинание'}`,
+                    title: `${t.name}: ${g.level === 0 ? 'cantrip' : 'spell'}`,
                     pick: g.choose,
                     options: spellList(refs, g.from, { minLevel: g.level ?? 0, maxLevel: g.level ?? 0 })
                         .filter((sp) => !done.cantrips.includes(sp.id))
@@ -395,13 +395,13 @@ export function levelPlan(build, level, refs) {
         }
     }
 
-    // ================= происхождение (1 уровень) =================
+    // ================= background (level 1) =================
     if (level === 1 && bg) {
         const feat = findFeat(refs, bg.feat);
-        addGain(`Происхождение: ${bg.name}`, [
-            { name: 'Навыки', desc: (bg.data?.skills ?? []).map((s) => SKILL_BY_ID[s]?.name ?? s).join(', ') },
-            ...(bg.data?.tool ? [{ name: 'Инструменты', desc: bg.data.tool }] : []),
-            ...(feat ? [{ name: `Черта: ${feat.name}`, desc: feat.desc }] : []),
+        addGain(`Background: ${bg.name}`, [
+            { name: 'Skills', desc: (bg.data?.skills ?? []).map((s) => SKILL_BY_ID[s]?.name ?? s).join(', ') },
+            ...(bg.data?.tool ? [{ name: 'Tools', desc: bg.data.tool }] : []),
+            ...(feat ? [{ name: `Feat: ${feat.name}`, desc: feat.desc }] : []),
         ]);
         featFollowUps(bg.feat, 'L1:background:feat', level, done, refs, add);
     }
@@ -409,17 +409,17 @@ export function levelPlan(build, level, refs) {
     return { level, prof, profChanged, hp, slots, slotsChanged, gains, choices };
 }
 
-/** Заклинательство класса, иначе подкласса. */
+/** The class's spellcasting, otherwise the subclass's. */
 export const spellcastingOf = (cls, subclass) =>
     cls?.data?.spellcasting ?? subclass?.data?.spellcasting ?? null;
 
-/** Выборы умения: поле choice (один) или choices (несколько). */
+/** Feature choices: the choice field (one) or choices (several). */
 function featureChoices(f, src, level, done, refs, add) {
     const list = f.choices ?? (f.choice ? [f.choice] : []);
     list.forEach((ch, i) => classChoice(f, ch, list.length > 1 ? i : null, src, level, done, refs, add));
 }
 
-/** Один выбор умения класса/подкласса. */
+/** A single class/subclass feature choice. */
 function classChoice(f, ch, idx, src, level, done, refs, add) {
     const key = `L${level}:${src}:${ch.type}:${f.name}` + (idx != null ? `:${idx}` : '');
     if (ch.type === 'fightingStyle') {
@@ -429,9 +429,9 @@ function classChoice(f, ch, idx, src, level, done, refs, add) {
         });
     } else if (ch.type === 'expertise') {
         add({
-            key, kind: 'expertise', title: f.name, desc: 'Выберите навыки, которыми вы владеете: бонус мастерства удваивается.',
+            key, kind: 'expertise', title: f.name, desc: 'Choose skills you are proficient in: your proficiency bonus is doubled.',
             pick: ch.pick ?? 1,
-            // владение на этом же уровне (навыки класса 1 уровня) тоже считается
+            // proficiency gained at this same level (level 1 class skills) also counts
             options: SKILLS.map((s) => s.id).filter((s) => !done.expertise.has(s)).map(skillOption),
             needsProficiency: true,
         });
@@ -441,10 +441,10 @@ function classChoice(f, ch, idx, src, level, done, refs, add) {
             options: (ch.options ?? SKILLS.map((s) => s.id)).filter((s) => !done.skills.has(s)).map(skillOption),
         });
     } else if (ch.type === 'cantrip' || ch.type === 'spell') {
-        // конкретный список заклинаний по id (напр. «Фокусы» или «Искусство друидов»)
+        // a specific list of spells by id (e.g. "Prestidigitation" or "Druidcraft")
         const byId = new Map((refs.spells ?? []).map((sp) => [sp.id, sp]));
         add({
-            key, kind: ch.type === 'cantrip' ? 'cantrips' : 'spells', title: `${f.name}: ${ch.type === 'cantrip' ? 'заговор' : 'заклинание'}`,
+            key, kind: ch.type === 'cantrip' ? 'cantrips' : 'spells', title: `${f.name}: ${ch.type === 'cantrip' ? 'cantrip' : 'spell'}`,
             pick: ch.pick ?? 1,
             options: (ch.options ?? []).map((id) => byId.get(id)).filter(Boolean)
                 .filter((sp) => !done.cantrips.includes(sp.id) && !done.spells.includes(sp.id))
@@ -458,13 +458,13 @@ function classChoice(f, ch, idx, src, level, done, refs, add) {
     }
 }
 
-/** Выборы, которые требует сама черта: +характеристики, навыки, заклинания. */
+/** Choices the feat itself requires: +abilities, skills, spells. */
 function featFollowUps(featId, key, level, done, refs, add) {
     const feat = featId ? findFeat(refs, featId) : null;
     if (!feat) return;
     const d = feat.data ?? {};
 
-    // +к характеристикам
+    // +to abilities
     if (d.asi) {
         const opts = Array.isArray(d.asi) ? d.asi : d.asi.options ?? ABILITY_KEYS;
         const amount = Array.isArray(d.asi) ? 1 : d.asi.amount ?? 1;
@@ -472,51 +472,51 @@ function featFollowUps(featId, key, level, done, refs, add) {
         add({
             key: `${key}:asi`,
             kind: 'asi',
-            title: `${feat.name}: +${amount} к характеристике`,
-            desc: pick > 1 ? `Распределите +${pick * amount}: одной +${pick * amount} или нескольким по +${amount}.` : '',
+            title: `${feat.name}: +${amount} to an ability`,
+            desc: pick > 1 ? `Assign +${pick * amount}: +${pick * amount} to one or +${amount} to several.` : '',
             pick,
             amount,
-            repeatable: pick > 1, // можно выбрать одну характеристику дважды
+            repeatable: pick > 1, // the same ability may be chosen twice
             options: opts.map((k) => ({ id: k, name: ABILITIES[k]?.name ?? k })),
         });
     }
-    // навыки («Умелый»)
+    // skills ("Skilled")
     if (d.skillChoice) {
         add({
             key: `${key}:skills`,
             kind: 'skills',
-            title: `${feat.name}: навыки`,
+            title: `${feat.name}: skills`,
             pick: d.skillChoice.choose ?? 1,
             options: SKILLS.map((s) => s.id).filter((s) => !done.skills.has(s)).map(skillOption),
         });
     }
-    // «Посвящённый в магию» — 2 заговора и 1 заклинание 1 круга из списка
+    // "Magic Initiate" — 2 cantrips and 1 level 1 spell from a list
     const mi = /^magicInitiate(\w+)$/.exec(feat.id);
     if (mi) {
         const list = mi[1].toLowerCase();
         add({
-            key: `${key}:cantrips`, kind: 'cantrips', title: `${feat.name}: заговоры`, pick: 2,
+            key: `${key}:cantrips`, kind: 'cantrips', title: `${feat.name}: cantrips`, pick: 2,
             options: spellList(refs, list, { maxLevel: 0 }).filter((sp) => !done.cantrips.includes(sp.id)).map(spellOption),
         });
         add({
-            key: `${key}:spells`, kind: 'spells', title: `${feat.name}: заклинание 1 круга`, pick: 1,
+            key: `${key}:spells`, kind: 'spells', title: `${feat.name}: level 1 spell`, pick: 1,
             options: spellList(refs, list, { minLevel: 1, maxLevel: 1 }).filter((sp) => !done.spells.includes(sp.id)).map(spellOption),
         });
     }
 }
 
 // ---------------------------------------------------------------------------
-// оценка плана: что видно, что выбрано корректно, всё ли сделано
+// plan evaluation: what is visible, what is validly chosen, whether everything is done
 
-// один и тот же навык/заклинание нельзя выбрать в двух выборах одного уровня
+// the same skill/spell cannot be picked in two choices of the same level
 const FAMILY = { skills: 'skill', skill: 'skill', cantrips: 'cantrip', spells: 'spell', pool: 'pool', invocations: 'invocation' };
 
 /**
- * Дополняет выборы плана:
- *   visible — варианты, которые сейчас можно выбрать
- *   valid   — выбранное, которое допустимо (остальное не считается)
+ * Augments the plan's choices:
+ *   visible — options that can be chosen now
+ *   valid   — chosen items that are allowed (the rest don't count)
  *   count / need / done
- * и возвращает { choices, complete }.
+ * and returns { choices, complete }.
  */
 export function evaluatePlan(plan, build, refs) {
     const proficient = summarizeChoices(build, refs, plan.level).skills;
@@ -543,12 +543,12 @@ export function evaluatePlan(plan, build, refs) {
     return { choices, complete: choices.every((c) => c.done) };
 }
 
-/** Все ли выборы плана сделаны. */
+/** Whether all of the plan's choices are made. */
 export function planComplete(plan) {
     return plan.choices.every((c) => c.optional || choiceCount(c) >= Math.min(c.pick, c.options.length || c.pick));
 }
 
-/** Сколько выбрано в выборе. */
+/** How many are chosen in a choice. */
 export function choiceCount(c) {
     if (c.kind === 'asi') return Object.values(c.value?.asi ?? {}).reduce((s, v) => s + v, 0) / (c.amount ?? 1);
     return c.value?.ids?.length ?? 0;
@@ -556,4 +556,4 @@ export function choiceCount(c) {
 
 const norm = (s) => String(s ?? '').toLowerCase().replace(/\s*\(.*?\)\s*/g, '').trim();
 const fmt = (n) => (n >= 0 ? `+ ${n}` : `− ${-n}`);
-const actionTag = (a) => ({ action: 'действие', bonus: 'бонусное', reaction: 'реакция', free: 'свободное' })[a] ?? '';
+const actionTag = (a) => ({ action: 'action', bonus: 'bonus', reaction: 'reaction', free: 'free' })[a] ?? '';

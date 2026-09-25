@@ -1,6 +1,6 @@
 {
   "id": "bless",
-  "name": "Благословение",
+  "name": "Bless",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,5 +9,5 @@
     "cleric",
     "paladin"
   ],
-  "desc": "До 3 существ получают +1d4 к броскам атаки и спасброскам. Концентрация до 1 минуты."
+  "desc": "Up to 3 creatures add 1d4 to attack rolls and saving throws. Concentration, up to 1 minute."
 }

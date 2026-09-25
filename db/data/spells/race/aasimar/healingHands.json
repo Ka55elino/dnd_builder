@@ -1,10 +1,13 @@
 {
   "id": "healingHands",
-  "name": "Целительные руки",
+  "name": "Healing Hands",
   "kind": "action",
-  "source": "Аасимар",
+  "source": "Aasimar",
   "level": 1,
   "action": "action",
-  "uses": { "count": 1, "per": "longRest" },
-  "desc": "Действием касанием восстанавливаете хиты (сумма d4 по вашему уровню). Раз на длинный отдых."
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "As a Magic action, you restore Hit Points with a touch (roll a number of d4s equal to your level). Once per Long Rest."
 }

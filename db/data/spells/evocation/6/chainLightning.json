@@ -1,6 +1,6 @@
 {
   "id": "chainLightning",
-  "name": "Цепная молния",
+  "name": "Chain Lightning",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Молния бьёт цель и перескакивает на 3 других: спасбросок Ловкости за половину.",
+  "desc": "Lightning strikes a target and leaps to 3 others: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "10d8",
     "type": "lightning"

@@ -1,9 +1,9 @@
 <script>
     /**
-     * Повышение уровня: тот же экран уровня, что и в билдере,
-     * но для уровня (текущий + 1). Сохранение — в тот же персонаж.
+     * Level up: the same level screen as in the builder,
+     * but for level (current + 1). Saves into the same character.
      *
-     * id — персонаж; onDone(id) — сохранено; onCancel() — отмена
+     * id — character; onDone(id) — saved; onCancel() — cancel
      */
     import { onMount } from "svelte";
     import { GetCharacter, SaveCharacter } from "../../wailsjs/go/main/App.js";
@@ -27,7 +27,7 @@
             refs = r;
             const b = CharacterBuild.fromJSON(data);
             fromLevel = b.level;
-            b.dropChoicesAbove(b.level); // хвосты прошлых незавершённых повышений
+            b.dropChoicesAbove(b.level); // leftovers from previous unfinished level-ups
             b.setLevel(Math.min(MAX_LEVEL, b.level + 1));
             build = b;
         } catch (e) {
@@ -54,26 +54,26 @@
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={onCancel}>← Отмена</button>
+        <button class="ghost" onclick={onCancel}>← Cancel</button>
         <h1>
-            Повышение уровня
+            Level Up
             {#if build}<span>{build.name}: {fromLevel} → {build.level}</span>{/if}
         </h1>
         {#if build}
             <button class="save" onclick={save} disabled={saving || !complete}
-                title={complete ? "" : "Сделайте все выборы уровня"}>
-                {saving ? "Сохранение…" : "Сохранить"}
+                title={complete ? "" : "Make all level choices"}>
+                {saving ? "Saving…" : "Save"}
             </button>
         {/if}
     </header>
 
-    {#if error}<p class="error">Ошибка: {error}</p>{/if}
+    {#if error}<p class="error">Error: {error}</p>{/if}
 
     <section class="content">
         {#if loading}
-            <p class="muted">Загрузка…</p>
+            <p class="muted">Loading…</p>
         {:else if build && fromLevel >= MAX_LEVEL}
-            <p class="muted">Персонаж уже на максимальном уровне.</p>
+            <p class="muted">The character is already at maximum level.</p>
         {:else if build}
             <LevelScreen {build} level={build.level} {refs} bind:complete />
         {/if}

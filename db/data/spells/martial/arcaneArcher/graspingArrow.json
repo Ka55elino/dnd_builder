@@ -1,12 +1,12 @@
 {
   "id": "graspingArrow",
-  "name": "Хватающая стрела",
+  "name": "Grasping Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "+2d6 урона ядом; скорость цели −3 м, а при каждом перемещении она получает 2d6 рубящего урона (1 минута или пока не вытащит стрелу действием).",
+  "desc": "+2d6 Poison damage; the target's Speed is reduced by 10 feet, and each time it moves it takes 2d6 Slashing damage (for 1 minute or until it pulls out the arrow as an action).",
   "damage": {
     "dice": "2d6",
     "type": "poison",

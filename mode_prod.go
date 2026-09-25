@@ -2,5 +2,5 @@
 
 package main
 
-// devMode — false в `wails build`: БД сохраняется между запусками.
+// devMode is false under `wails build`: the database persists between launches.
 const devMode = false

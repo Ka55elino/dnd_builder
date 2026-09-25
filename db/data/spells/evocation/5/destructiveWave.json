@@ -1,6 +1,6 @@
 {
   "id": "destructiveWave",
-  "name": "Разрушительная волна",
+  "name": "Destructive Wave",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -9,7 +9,7 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Волна энергии от вас: спасбросок Тел., дробящий + излуч./некрот. урон, сбивание с ног.",
+  "desc": "A wave of energy radiates from you: Constitution saving throw, Bludgeoning plus Radiant or Necrotic damage, and knocked Prone.",
   "damage": {
     "dice": "5d6",
     "type": "radiant"

@@ -1,6 +1,6 @@
 {
   "id": "brandingSmite",
-  "name": "Клеймящая кара",
+  "name": "Branding Smite",
   "kind": "spell",
   "action": "bonus",
   "level": 2,
@@ -8,7 +8,7 @@
   "classes": [
     "paladin"
   ],
-  "desc": "Бонусным действием: следующее попадание наносит доп. 2d6 излучением, цель светится и не может стать невидимой. Концентрация.",
+  "desc": "As a Bonus Action: your next hit deals an extra 2d6 Radiant damage, and the target sheds light and can't become Invisible. Concentration.",
   "damage": {
     "dice": "2d6",
     "type": "radiant"

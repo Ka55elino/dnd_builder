@@ -1,7 +1,7 @@
 {
   "id": "magicInitiateDruid",
-  "name": "Посвящённый в магию (друид)",
+  "name": "Magic Initiate (Druid)",
   "category": "origin",
   "level": 1,
-  "desc": "Два заговора и одно заклинание 1 круга из списка друида; заклинание раз в долгий отдых бесплатно."
+  "desc": "Two cantrips and one level 1 spell from the Druid list; cast the spell once per Long Rest for free."
 }

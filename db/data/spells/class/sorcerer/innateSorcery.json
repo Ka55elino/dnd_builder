@@ -1,10 +1,41 @@
 {
   "id": "innateSorcery",
-  "name": "Врождённое чародейство",
+  "name": "Innate Sorcery",
   "kind": "class",
   "level": 1,
-  "classes": ["sorcerer"],
+  "classes": [
+    "sorcerer"
+  ],
   "action": "bonus",
-  "uses": { "count": 1, "per": "longRest", "scale": [[1,1],[5,2],[9,3],[13,4],[17,5],[18,6]] },
-  "desc": "Бонусным действием на 1 минуту: +1 к Сл ваших заклинаний ({saveDc} → {saveDc}+1) и преимущество на броски атаки заклинаниями. Число раз равно бонусу мастерства (на длинный отдых)."
+  "uses": {
+    "count": 1,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        9,
+        3
+      ],
+      [
+        13,
+        4
+      ],
+      [
+        17,
+        5
+      ],
+      [
+        18,
+        6
+      ]
+    ]
+  },
+  "desc": "As a Bonus Action, for 1 minute: +1 to your spell save DC ({saveDc} → {saveDc}+1) and Advantage on spell attack rolls. Number of uses equals your Proficiency Bonus (per Long Rest)."
 }

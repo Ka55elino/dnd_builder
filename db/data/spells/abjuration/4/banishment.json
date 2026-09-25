@@ -1,6 +1,6 @@
 {
   "id": "banishment",
-  "name": "Изгнание",
+  "name": "Banishment",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -13,5 +13,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существо (спасбросок Харизмы) отправляется в иной план на время концентрации; иномировое — навсегда."
+  "desc": "A creature (Charisma saving throw) is sent to another plane for the duration of Concentration; an extraplanar creature is banished permanently."
 }

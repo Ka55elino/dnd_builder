@@ -1,9 +1,11 @@
 {
   "id": "dreadAmbusher",
-  "name": "Жуткая засада",
+  "name": "Dread Ambusher",
   "kind": "martial",
   "subclass": "gloomStalker",
   "level": 3,
-  "desc": "В первый ход боя совершаете одну доп. атаку действием Атаки; при попадании она наносит доп. 2d6 урона. В этот ход ваша скорость +3 м. К инициативе прибавляете модификатор Мудрости.",
-  "damage": { "dice": "2d6" }
+  "desc": "On your first turn of combat, you make one extra attack with the Attack action; on a hit, it deals an extra 2d6 damage. Your Speed increases by 10 feet that turn. You add your Wisdom modifier to Initiative.",
+  "damage": {
+    "dice": "2d6"
+  }
 }

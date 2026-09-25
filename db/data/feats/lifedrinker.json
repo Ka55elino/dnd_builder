@@ -1,9 +1,9 @@
 {
   "id": "lifedrinker",
-  "name": "Испивающий жизнь",
+  "name": "Lifedrinker",
   "category": "invocation",
   "level": 9,
-  "desc": "Требуется Договор клинка. При попадании договорным оружием наносите доп. некротический урон, равный модификатору Харизмы (мин. 1); лечите себя на столько же раз в ход.",
+  "desc": "Requires Pact of the Blade. When you hit with your pact weapon, you deal extra Necrotic damage equal to your Charisma modifier (minimum 1) and heal yourself for the same amount, once per turn.",
   "prereq": {
     "boon": "pactOfTheBlade"
   },
@@ -11,7 +11,7 @@
     {
       "kind": "bonus",
       "target": "note",
-      "note": "договорное оружие: +мод. Харизмы некротического урона при попадании"
+      "note": "pact weapon: + your Charisma modifier Necrotic damage on a hit"
     }
   ]
 }

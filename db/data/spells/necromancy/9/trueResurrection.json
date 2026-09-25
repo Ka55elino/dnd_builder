@@ -1,6 +1,6 @@
 {
   "id": "trueResurrection",
-  "name": "Истинное воскрешение",
+  "name": "True Resurrection",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,5 +9,5 @@
     "cleric",
     "druid"
   ],
-  "desc": "Полностью возвращаете к жизни существо, мёртвое не более 200 лет, создавая новое тело при нужде."
+  "desc": "You fully restore to life a creature that has been dead no longer than 200 years, creating a new body if necessary."
 }

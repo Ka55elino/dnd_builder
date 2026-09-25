@@ -1,6 +1,6 @@
 {
   "id": "sleep",
-  "name": "Усыпление",
+  "name": "Sleep",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -10,5 +10,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Существа в 6 м засыпают, пока сумма их хитов не исчерпает 5d8 (начиная с наименьших). Концентрация."
+  "desc": "Creatures within 20 feet fall asleep until 5d8 is exhausted by their combined Hit Points (starting with the lowest). Concentration."
 }

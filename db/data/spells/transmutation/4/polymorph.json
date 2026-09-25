@@ -1,6 +1,6 @@
 {
   "id": "polymorph",
-  "name": "Превращение",
+  "name": "Polymorph",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -12,5 +12,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Превращаете существо в зверя (спасбросок Мудрости). Концентрация до 1 часа."
+  "desc": "You transform a creature into a Beast (Wisdom saving throw). Concentration, up to 1 hour."
 }

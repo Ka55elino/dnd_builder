@@ -1,28 +1,28 @@
 {
   "id": "psiWarrior",
-  "name": "Псионический воин",
+  "name": "Psi Warrior",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "warrior",
   "features": [
     {
       "level": 3,
-      "name": "Псионическая сила",
-      "desc": "Получаете Кости энергии псионики (тратятся на защиту, дополнительный урон и телекинетический бросок). Восстанавливаются на отдыхе."
+      "name": "Psionic Power",
+      "desc": "You gain Psionic Energy Dice (expended on protection, extra damage, and Telekinetic Movement). Regained on a rest."
     },
     {
       "level": 7,
-      "name": "Телекинетический адепт",
-      "desc": "Телекинетический рывок (толчок/притяжение существа) и усиленный телекинетический бросок."
+      "name": "Telekinetic Adept",
+      "desc": "Telekinetic Thrust (push or pull a creature) and an empowered Telekinetic Movement."
     },
     {
       "level": 10,
-      "name": "Защитная сила",
-      "desc": "Реакцией тратите Кость энергии, снижая урон себе или союзнику рядом."
+      "name": "Protective Field",
+      "desc": "As a Reaction, you expend a Psionic Energy Die to reduce the damage taken by you or an ally near you."
     },
     {
       "level": 15,
-      "name": "Телекинетический мастер",
-      "desc": "Можете постоянно поддерживать заклинание «Телекинез»; бонусным действием совершаете им атаку или толчок."
+      "name": "Telekinetic Master",
+      "desc": "You can maintain the Telekinesis spell indefinitely; as a Bonus Action, you use it to make an attack or a shove."
     }
   ]
 }

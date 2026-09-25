@@ -1,7 +1,7 @@
 {
   "id": "transmutedSpell",
-  "name": "Преобразованное заклинание",
+  "name": "Transmuted Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Меняете тип урона заклинания на кислоту, холод, огонь, электричество, яд или звук."
+  "desc": "You change a spell's damage type to Acid, Cold, Fire, Lightning, Poison, or Thunder."
 }

@@ -1,6 +1,6 @@
 {
   "id": "fireBolt",
-  "name": "Огненный снаряд",
+  "name": "Fire Bolt",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -9,12 +9,12 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Метаете сгусток огня; дальнобойная атака заклинанием, урон огнём (растёт с уровнем). Поджигает горючие незакреплённые предметы.",
+  "desc": "You hurl a mote of fire: ranged spell attack, Fire damage (increases with level). It ignites flammable objects that aren't being worn or carried.",
   "casting": {
-    "time": "1 действие",
-    "range": "36 м",
-    "components": "В, С",
-    "duration": "Мгновенно"
+    "time": "1 action",
+    "range": "120 feet",
+    "components": "V, S",
+    "duration": "Instantaneous"
   },
   "damage": {
     "dice": "1d10",

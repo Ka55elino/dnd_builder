@@ -1,10 +1,10 @@
 {
   "id": "commandersStrike",
-  "name": "Удар по команде",
+  "name": "Commander's Strike",
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
-  "desc": "Отказавшись от одной атаки, командуете союзнику: он реакцией совершает атаку с доп. уроном = кость превосходства.",
+  "desc": "Forgoing one of your attacks, you command an ally: it uses its Reaction to make an attack with extra damage equal to a Superiority Die.",
   "action": "reaction",
   "pool": "maneuver"
 }

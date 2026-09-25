@@ -1,6 +1,6 @@
 {
   "id": "shapechange",
-  "name": "Смена облика",
+  "name": "Shapechange",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -9,5 +9,5 @@
     "druid",
     "wizard"
   ],
-  "desc": "Превращаетесь в любое существо с ПО не выше вашего уровня, сохраняя разум. Концентрация."
+  "desc": "You transform into any creature with a CR no higher than your level, keeping your mind. Concentration."
 }

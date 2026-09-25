@@ -1,6 +1,6 @@
 {
   "id": "blindnessDeafness",
-  "name": "Слепота/глухота",
+  "name": "Blindness/Deafness",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Существо: спасбросок Тел. или «Слепота»/«Глухота» на 1 минуту."
+  "desc": "A creature makes a Constitution saving throw or is Blinded or Deafened for 1 minute."
 }

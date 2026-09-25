@@ -1,6 +1,6 @@
 {
   "id": "regenerate",
-  "name": "Регенерация",
+  "name": "Regenerate",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -10,5 +10,5 @@
     "cleric",
     "druid"
   ],
-  "desc": "Цель лечится и восстанавливает конечности; регенерирует хиты каждый ход 1 час."
+  "desc": "The target is healed and regrows lost limbs; it regains Hit Points every turn for 1 hour."
 }

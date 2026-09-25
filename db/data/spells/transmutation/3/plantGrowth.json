@@ -1,6 +1,6 @@
 {
   "id": "plantGrowth",
-  "name": "Рост растений",
+  "name": "Plant Growth",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -10,5 +10,5 @@
     "bard",
     "ranger"
   ],
-  "desc": "Обогащаете растения на территории или превращаете область в труднопроходимые заросли."
+  "desc": "You enrich plants in an area or turn the area into overgrown Difficult Terrain."
 }

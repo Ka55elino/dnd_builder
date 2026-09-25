@@ -1,6 +1,6 @@
 {
   "id": "mageArmor",
-  "name": "Доспехи мага",
+  "name": "Mage Armor",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,5 +9,5 @@
     "wizard",
     "sorcerer"
   ],
-  "desc": "Касанием даёте существу без доспехов базовый КЗ 13 + мод. Ловкости на 8 часов."
+  "desc": "You touch a creature not wearing armor to give it a base AC of 13 + its Dexterity modifier for 8 hours."
 }

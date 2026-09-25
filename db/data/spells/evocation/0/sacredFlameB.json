@@ -1,6 +1,6 @@
 {
   "id": "sacredFlameB",
-  "name": "Пламя веры",
+  "name": "Sacred Flame",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Существо — спасбросок Ловкости или урон излучением (без укрытия).",
+  "desc": "A creature makes a Dexterity saving throw or takes Radiant damage (no benefit from Cover).",
   "damage": {
     "dice": "1d8",
     "type": "radiant",

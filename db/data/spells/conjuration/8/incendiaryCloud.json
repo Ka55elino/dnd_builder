@@ -1,6 +1,6 @@
 {
   "id": "incendiaryCloud",
-  "name": "Зажигательное облако",
+  "name": "Incendiary Cloud",
   "kind": "spell",
   "action": "action",
   "level": 8,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Облако дыма и огня движется, нанося урон в начале ходов (спасбросок Ловкости). Концентрация.",
+  "desc": "A cloud of smoke and embers moves, dealing damage at the start of turns (Dexterity saving throw). Concentration.",
   "damage": {
     "dice": "10d8",
     "type": "fire"

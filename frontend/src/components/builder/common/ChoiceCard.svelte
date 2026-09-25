@@ -1,12 +1,12 @@
 <script>
     /**
-     * Выбранная карточка: картинка слева, описание справа, × — отменить выбор.
+     * Selected card: image on the left, description on the right, × — clear the selection.
      * item     — { name, image }
-     * badge    — подпись над названием ('Раса', 'Класс'...)
-     * sub      — вариант для под-выбора (подраса/подкласс): фиолетовая рамка
-     * compact  — маленькая картинка (для списков: оружие, предметы)
+     * badge    — label above the name ('Species', 'Class'...)
+     * sub      — variant for a sub-choice (subspecies/subclass): purple border
+     * compact  — small image (for lists: weapons, items)
      * onclear()
-     * children — содержимое описания
+     * children — description content
      */
     let { item, badge = "", sub = false, compact = false, onclear, children } = $props();
 </script>
@@ -15,8 +15,8 @@
     <button
         class="clear"
         onclick={onclear}
-        title="Отменить выбор"
-        aria-label="Отменить выбор">×</button
+        title="Clear selection"
+        aria-label="Clear selection">×</button
     >
 
     <div class="active-img">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="active-body">
-        <span class="badge">{badge} · выбрано</span>
+        <span class="badge">{badge} · selected</span>
         <h3>{item.name}</h3>
         {@render children?.()}
     </div>

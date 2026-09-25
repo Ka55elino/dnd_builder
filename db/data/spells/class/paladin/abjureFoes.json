@@ -1,10 +1,37 @@
 {
   "id": "abjureFoes",
-  "name": "Отвержение врагов",
+  "name": "Abjure Foes",
   "kind": "class",
   "level": 9,
-  "classes": ["paladin"],
+  "classes": [
+    "paladin"
+  ],
   "action": "action",
-  "uses": { "count": 2, "per": "longRest", "scale": [[1,2],[5,3],[9,4],[13,5],[17,6]] },
-  "desc": "Действием до (мод. Харизмы) существ в 9 м проходят спасбросок Мудрости: при провале их скорость 0 и они с помехой на атаки/проверки до конца вашего следующего хода."
+  "uses": {
+    "count": 2,
+    "per": "longRest",
+    "scale": [
+      [
+        1,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        13,
+        5
+      ],
+      [
+        17,
+        6
+      ]
+    ]
+  },
+  "desc": "As a Magic action, up to (your Charisma modifier) creatures within 30 feet make a Wisdom saving throw: on a failed save, their Speed is 0 and they have Disadvantage on attack rolls and ability checks until the end of your next turn."
 }

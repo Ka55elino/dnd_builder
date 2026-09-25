@@ -1,6 +1,6 @@
 {
   "id": "sailor",
-  "name": "Моряк",
+  "name": "Sailor",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "acrobatics",
     "perception"
   ],
-  "tool": "Инструменты навигатора"
+  "tool": "Navigator's Tools"
 }

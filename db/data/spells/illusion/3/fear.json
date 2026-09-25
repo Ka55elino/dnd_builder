@@ -1,6 +1,6 @@
 {
   "id": "fear",
-  "name": "Страх",
+  "name": "Fear",
   "kind": "spell",
   "action": "action",
   "level": 3,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Существа в конусе 9 м: спасбросок Мудрости или роняют предметы и убегают в испуге. Концентрация."
+  "desc": "Creatures in a 30-foot Cone make a Wisdom saving throw or drop what they're holding and flee in fear. Concentration."
 }

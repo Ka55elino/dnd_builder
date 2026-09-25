@@ -1,6 +1,6 @@
 {
   "id": "expeditiousRetreat",
-  "name": "Скорое отступление",
+  "name": "Expeditious Retreat",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -10,5 +10,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Бонусным действием совершаете Рывок; далее каждый ход бонусным действием. Концентрация."
+  "desc": "As a Bonus Action, you take the Dash action; you can do so again as a Bonus Action on each of your later turns. Concentration."
 }

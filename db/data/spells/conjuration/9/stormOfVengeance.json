@@ -1,6 +1,6 @@
 {
   "id": "stormOfVengeance",
-  "name": "Шторм возмездия",
+  "name": "Storm of Vengeance",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -8,7 +8,7 @@
   "classes": [
     "druid"
   ],
-  "desc": "Гигантская буря: гром, молнии, град и ветер терзают всех под ней раунд за раундом. Концентрация.",
+  "desc": "A colossal storm: thunder, lightning, hail, and wind batter everyone beneath it round after round. Concentration.",
   "damage": {
     "dice": "2d6",
     "type": "thunder"

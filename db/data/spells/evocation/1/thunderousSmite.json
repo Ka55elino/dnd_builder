@@ -1,6 +1,6 @@
 {
   "id": "thunderousSmite",
-  "name": "Громовая кара",
+  "name": "Thunderous Smite",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -8,7 +8,7 @@
   "classes": [
     "paladin"
   ],
-  "desc": "Бонусным действием: следующее попадание наносит доп. 2d6 звуком; цель — спасбросок Силы или сбита с ног и отброшена на 3 м.",
+  "desc": "As a Bonus Action: your next hit deals an extra 2d6 Thunder damage; the target makes a Strength saving throw or is knocked Prone and pushed 10 feet away.",
   "damage": {
     "dice": "2d6",
     "type": "thunder"

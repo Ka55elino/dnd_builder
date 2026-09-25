@@ -1,6 +1,6 @@
 {
   "id": "wallOfForce",
-  "name": "Силовая стена",
+  "name": "Wall of Force",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -8,5 +8,5 @@
   "classes": [
     "wizard"
   ],
-  "desc": "Невидимая непробиваемая стена силы на 10 минут. Концентрация."
+  "desc": "An invisible, impenetrable wall of force for 10 minutes. Concentration."
 }

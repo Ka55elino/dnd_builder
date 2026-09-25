@@ -1,9 +1,9 @@
 {
   "id": "peerlessAthlete",
-  "name": "Непревзойдённый атлет",
+  "name": "Peerless Athlete",
   "kind": "martial",
   "subclass": "glory",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. На 10 минут: преимущество на Атлетику и Акробатику, дистанция прыжка +3 м, переносимый вес удвоен."
+  "desc": "Cost: 1 use of Channel Divinity. For 10 minutes: Advantage on Athletics and Acrobatics checks, your jump distance increases by 10 feet, and your carrying capacity is doubled."
 }

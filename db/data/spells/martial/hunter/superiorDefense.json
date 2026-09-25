@@ -1,10 +1,12 @@
 {
   "id": "superiorHuntersDefense",
-  "name": "Высшая оборона охотника",
+  "name": "Superior Hunter's Defense",
   "kind": "martial",
   "subclass": "hunter",
   "level": 15,
   "action": "reaction",
-  "desc": "Реакцией на получаемый урон уменьшаете его на 1d8 + уровень Следопыта и получаете сопротивление этому типу урона до начала вашего следующего хода.",
-  "damage": { "dice": "1d8" }
+  "desc": "As a Reaction when you take damage, you reduce it by 1d8 + your Ranger level and gain Resistance to that damage type until the start of your next turn.",
+  "damage": {
+    "dice": "1d8"
+  }
 }

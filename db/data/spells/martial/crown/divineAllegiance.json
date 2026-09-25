@@ -1,9 +1,9 @@
 {
   "id": "divineAllegiance",
-  "name": "Божественная верность",
+  "name": "Divine Allegiance",
   "kind": "martial",
   "subclass": "crown",
   "level": 7,
   "action": "reaction",
-  "desc": "Реакцией, когда существо в 1,5 м получает урон, вы принимаете этот урон на себя вместо него. Урон нельзя уменьшить сопротивлением или иммунитетом."
+  "desc": "As a Reaction, when a creature within 5 feet takes damage, you take that damage instead of it. The damage can't be reduced by Resistance or Immunity."
 }

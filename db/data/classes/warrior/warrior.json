@@ -1,6 +1,6 @@
 {
   "id": "warrior",
-  "name": "Воин",
+  "name": "Fighter",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 10,
   "primaryAbility": [
@@ -47,8 +47,8 @@
   "features": [
     {
       "level": 1,
-      "name": "Боевой стиль",
-      "desc": "Черта боевого стиля на выбор (например, Защита, Стрельба, Дуэлянт).",
+      "name": "Fighting Style",
+      "desc": "A Fighting Style feat of your choice (e.g., Defense, Archery, Dueling).",
       "choice": {
         "type": "fightingStyle",
         "pick": 1,
@@ -57,59 +57,59 @@
     },
     {
       "level": 1,
-      "name": "Второе дыхание",
-      "desc": "Бонусным действием восстанавливаете 1d10 + уровень воина хитов. Ограниченное число раз (восстанавливается на отдыхе)."
+      "name": "Second Wind",
+      "desc": "As a Bonus Action, you regain Hit Points equal to 1d10 + your Fighter level. Limited number of uses (regained on a rest)."
     },
     {
       "level": 1,
-      "name": "Мастерство оружия",
-      "desc": "Используете свойства мастерства у 3 видов оружия (число растёт с уровнем)."
+      "name": "Weapon Mastery",
+      "desc": "You can use the mastery properties of 3 kinds of weapons (the number increases with level)."
     },
     {
       "level": 2,
-      "name": "Всплеск действий",
-      "desc": "В свой ход совершаете одно дополнительное действие (кроме Магии). 1 применение (с 17 ур. — 2)."
+      "name": "Action Surge",
+      "desc": "On your turn, you can take one additional action (except the Magic action). 1 use (2 from level 17)."
     },
     {
       "level": 2,
-      "name": "Тактический ум",
-      "desc": "Провал проверки характеристики можно улучшить, потратив использование Второго дыхания (+1d10), не тратя хиты при неудаче.",
+      "name": "Tactical Mind",
+      "desc": "When you fail an ability check, you can expend a use of Second Wind to add 1d10 to it; the use isn't expended if the check still fails.",
       "passive": false
     },
     {
       "level": 5,
-      "name": "Дополнительная атака",
-      "desc": "Две атаки за действие Атаки."
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
     },
     {
       "level": 5,
-      "name": "Тактический сдвиг",
-      "desc": "При использовании Второго дыхания перемещаетесь на половину скорости, не провоцируя атак."
+      "name": "Tactical Shift",
+      "desc": "When you use Second Wind, you can move up to half your Speed without provoking Opportunity Attacks."
     },
     {
       "level": 9,
-      "name": "Несокрушимость",
-      "desc": "Перебрасываете проваленный спасбросок (+ уровень воина к результату). Больше применений на 13 и 17 ур."
+      "name": "Indomitable",
+      "desc": "You can reroll a failed saving throw (adding your Fighter level to the result). More uses at levels 13 and 17."
     },
     {
       "level": 9,
-      "name": "Тактический мастер",
-      "desc": "При атаке оружием можете заменить его свойство мастерства на Отталкивание, Подсечку или Замедление."
+      "name": "Tactical Master",
+      "desc": "When you attack with a weapon, you can replace its mastery property with Push, Topple, or Slow."
     },
     {
       "level": 11,
-      "name": "Две дополнительные атаки",
-      "desc": "Три атаки за действие Атаки."
+      "name": "Two Extra Attacks",
+      "desc": "You can attack three times when you take the Attack action."
     },
     {
       "level": 13,
-      "name": "Изученные атаки",
-      "desc": "Промахнувшись по существу, получаете преимущество на следующую атаку по нему до конца текущего хода."
+      "name": "Studied Attacks",
+      "desc": "When you miss a creature, you have Advantage on your next attack roll against it before the end of the current turn."
     },
     {
       "level": 20,
-      "name": "Три дополнительные атаки",
-      "desc": "Четыре атаки за действие Атаки."
+      "name": "Three Extra Attacks",
+      "desc": "You can attack four times when you take the Attack action."
     }
   ]
 }

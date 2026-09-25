@@ -1,11 +1,11 @@
 {
   "id": "poisoner",
-  "name": "Отравитель",
+  "name": "Poisoner",
   "category": "general",
   "level": 4,
   "asi": [
     "dex",
     "int"
   ],
-  "desc": "+1 Лов или Инт; мощные яды, игнор сопротивления яду."
+  "desc": "+1 Dex or Int; potent poisons, ignore Resistance to Poison damage."
 }

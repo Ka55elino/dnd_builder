@@ -1,6 +1,6 @@
 {
   "id": "darkvisionSpell",
-  "name": "Тёмное зрение (закл.)",
+  "name": "Darkvision (Spell)",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Касанием даёте существу тёмное зрение 18 м на 8 часов."
+  "desc": "You touch a creature to give it Darkvision with a range of 60 feet for 8 hours."
 }

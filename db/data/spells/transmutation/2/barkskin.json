@@ -1,6 +1,6 @@
 {
   "id": "barkskin",
-  "name": "Кора",
+  "name": "Barkskin",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,5 +9,5 @@
     "druid",
     "ranger"
   ],
-  "desc": "КЗ цели не может быть ниже 16 на время концентрации (до 1 часа)."
+  "desc": "The target's AC can't be lower than 16 for the duration (Concentration, up to 1 hour)."
 }

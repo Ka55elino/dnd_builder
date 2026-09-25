@@ -1,9 +1,28 @@
 {
   "id": "martialArts",
-  "name": "Боевые искусства (кость)",
+  "name": "Martial Arts (Die)",
   "kind": "class",
   "level": 1,
-  "classes": ["monk"],
-  "desc": "Кость безоружного удара и монашеского оружия. Растёт с уровнем монаха. Даёт безоружный удар бонусным действием (без траты ци).",
-  "scaleDie": [[1, "d6"], [5, "d8"], [11, "d10"], [17, "d12"]]
+  "classes": [
+    "monk"
+  ],
+  "desc": "The die for your Unarmed Strikes and Monk weapons. It increases with your Monk level. Lets you make an Unarmed Strike as a Bonus Action (no Focus Points required).",
+  "scaleDie": [
+    [
+      1,
+      "d6"
+    ],
+    [
+      5,
+      "d8"
+    ],
+    [
+      11,
+      "d10"
+    ],
+    [
+      17,
+      "d12"
+    ]
+  ]
 }

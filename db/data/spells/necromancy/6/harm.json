@@ -1,6 +1,6 @@
 {
   "id": "harm",
-  "name": "Вред",
+  "name": "Harm",
   "kind": "spell",
   "action": "action",
   "level": 6,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Насылаете болезнь (спасбросок Тел.): огромный некротический урон, максимум хитов снижен.",
+  "desc": "You afflict a creature with disease (Constitution saving throw): massive Necrotic damage, and its Hit Point maximum is reduced.",
   "damage": {
     "dice": "14d6",
     "type": "necrotic"

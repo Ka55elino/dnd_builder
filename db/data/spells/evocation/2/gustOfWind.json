@@ -1,6 +1,6 @@
 {
   "id": "gustOfWind",
-  "name": "Порыв ветра",
+  "name": "Gust of Wind",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -11,5 +11,5 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Линия ветра 18 м отталкивает существ и рассеивает газы. Концентрация."
+  "desc": "A 60-foot Line of wind pushes creatures away and disperses gases. Concentration."
 }

@@ -1,9 +1,9 @@
 {
   "id": "bastionOfLaw",
-  "name": "Бастион закона",
+  "name": "Bastion of Law",
   "kind": "martial",
   "subclass": "clockwork",
   "level": 6,
   "action": "action",
-  "desc": "Стоимость 1–5 очков чародейства. Действием окружаете себя или существо в 9 м щитом из стольких же костей d8; получая урон, цель тратит кости, уменьшая урон на выпавшее."
+  "desc": "Costs 1–5 Sorcery Points. As an action, you surround yourself or a creature within 30 feet with a shield of that many d8s; when the target takes damage, it expends dice to reduce the damage by the total rolled."
 }

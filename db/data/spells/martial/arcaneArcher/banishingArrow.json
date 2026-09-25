@@ -1,12 +1,12 @@
 {
   "id": "banishingArrow",
-  "name": "Изгоняющая стрела",
+  "name": "Banishing Arrow",
   "kind": "martial",
   "subclass": "arcaneArcher",
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
-  "desc": "При попадании цель совершает спасбросок Харизмы или изгоняется в Страну фей до конца своего следующего хода. С 18 уровня — ещё 2d6 урона силовым полем.",
+  "desc": "On a hit, the target must succeed on a Charisma saving throw or be banished to the Feywild until the end of its next turn. Starting at level 18, it also takes 2d6 Force damage.",
   "damage": {
     "type": "force",
     "scaling": {

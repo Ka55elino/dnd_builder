@@ -1,11 +1,11 @@
 {
   "id": "grappler",
-  "name": "Борец",
+  "name": "Grappler",
   "category": "general",
   "level": 4,
   "asi": [
     "str",
     "dex"
   ],
-  "desc": "+1 Сила или Ловкость; преимущество на атаки по схваченному, доп. эффекты."
+  "desc": "+1 Strength or Dexterity; Advantage on attacks against a creature you have Grappled, extra effects."
 }

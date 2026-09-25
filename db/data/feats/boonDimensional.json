@@ -1,7 +1,7 @@
 {
   "id": "boonDimensional",
-  "name": "Дар межпространства",
+  "name": "Boon of Dimensional Travel",
   "category": "boon",
   "level": 19,
-  "desc": "Телепортация 9 м как часть перемещения."
+  "desc": "Teleport 30 feet as part of your movement."
 }

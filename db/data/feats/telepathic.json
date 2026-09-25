@@ -1,6 +1,6 @@
 {
   "id": "telepathic",
-  "name": "Телепат",
+  "name": "Telepathic",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,7 +8,7 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; телепатия, Обнаружение мыслей раз в день.",
+  "desc": "+1 Int/Wis/Cha; telepathy, Detect Thoughts once per day.",
   "spells": {
     "fixed": [
       "detectThoughts"

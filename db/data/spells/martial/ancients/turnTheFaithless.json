@@ -1,9 +1,9 @@
 {
   "id": "turnTheFaithless",
-  "name": "Изгнание неверных",
+  "name": "Turn the Faithless",
   "kind": "martial",
   "subclass": "ancients",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Феи и исчадия в 9 м — спасбросок Мудрости или изгнаны на 1 минуту (как Изгнание нежити)."
+  "desc": "Costs 1 use of Channel Divinity. Fey and Fiends within 30 feet must succeed on a Wisdom saving throw or be turned for 1 minute (like Turn Undead)."
 }

@@ -1,9 +1,11 @@
 {
   "id": "cunningAction",
-  "name": "Хитрое действие",
+  "name": "Cunning Action",
   "kind": "class",
   "level": 2,
-  "classes": ["rogue"],
+  "classes": [
+    "rogue"
+  ],
   "action": "bonus",
-  "desc": "Бонусным действием совершаете Рывок, Отход или Засаду (Hide)."
+  "desc": "As a Bonus Action, you take the Dash, Disengage, or Hide action."
 }

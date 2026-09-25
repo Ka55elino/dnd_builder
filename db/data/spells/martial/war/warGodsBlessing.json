@@ -1,9 +1,9 @@
 {
   "id": "warGodsBlessing",
-  "name": "Благословение бога войны",
+  "name": "War God's Blessing",
   "kind": "martial",
   "subclass": "war",
   "level": 6,
   "action": "reaction",
-  "desc": "Стоимость 1 использование Божественного канала. Реакцией даёте +10 к броску атаки себе или союзнику в 9 м (после броска, до результата)."
+  "desc": "Costs 1 use of Channel Divinity. As a Reaction, you grant a +10 bonus to an attack roll for yourself or an ally within 30 feet (after the roll, before the result)."
 }

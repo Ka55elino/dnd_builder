@@ -1,10 +1,17 @@
 {
   "id": "divineSense",
-  "name": "Божественное чувство",
+  "name": "Divine Sense",
   "kind": "class",
   "level": 1,
-  "classes": ["paladin"],
+  "classes": [
+    "paladin"
+  ],
   "action": "bonus",
-  "uses": { "ability": "cha", "bonus": 1, "min": 1, "per": "longRest" },
-  "desc": "Бонусным действием до конца следующего хода чувствуете небожителей, исчадий и нежить в 18 м, а также освящённые/осквернённые места. Число применений = 1 + модификатор Харизмы."
+  "uses": {
+    "ability": "cha",
+    "bonus": 1,
+    "min": 1,
+    "per": "longRest"
+  },
+  "desc": "As a Bonus Action, until the end of your next turn you sense Celestials, Fiends, and Undead within 60 feet, as well as consecrated or desecrated places. Number of uses = 1 + your Charisma modifier."
 }

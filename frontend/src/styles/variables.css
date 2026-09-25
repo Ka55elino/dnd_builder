@@ -1,9 +1,9 @@
-/* Константы шрифтов.
- * Cinzel, Crimson Pro и Uncial Antiqua не содержат кириллицы, поэтому
- * русский текст в них будет браться из следующего шрифта в стеке. */
+/* Font constants.
+ * Cinzel, Crimson Pro and Uncial Antiqua have no Cyrillic glyphs, so
+ * Cyrillic text falls back to the next font in the stack. */
 
 :root {
-    /* --- Базовые семейства --- */
+    /* --- Base families --- */
     --font-cinzel:         'Cinzel', 'Alegreya', Georgia, serif;
     --font-eb-garamond:    'EB Garamond', Georgia, 'Times New Roman', serif;
     --font-inter:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -12,16 +12,16 @@
     --font-crimson-pro:    'Crimson Pro', 'EB Garamond', Georgia, serif;
     --font-uncial-antiqua: 'Uncial Antiqua', 'Cinzel', 'Alegreya', serif;
 
-    /* --- Роли (использовать в компонентах) --- */
-    --font-heading:    var(--font-cinzel);          /* заголовки, названия классов/рас */
-    --font-heading-alt: var(--font-alegreya);       /* заголовки + художественный текст */
-    --font-lore:       var(--font-eb-garamond);     /* крупные описания, lore */
-    --font-spell:      var(--font-crimson-pro);     /* описания, заклинания */
-    --font-ui:         var(--font-inter);           /* весь UI, кнопки, таблицы */
-    --font-form:       var(--font-source-sans);     /* формы, настройки */
-    --font-decorative: var(--font-uncial-antiqua);  /* только декоративные элементы */
+    /* --- Roles (use in components) --- */
+    --font-heading:    var(--font-cinzel);          /* headings, class/species names */
+    --font-heading-alt: var(--font-alegreya);       /* headings + flavor text */
+    --font-lore:       var(--font-eb-garamond);     /* long descriptions, lore */
+    --font-spell:      var(--font-crimson-pro);     /* descriptions, spells */
+    --font-ui:         var(--font-inter);           /* all UI, buttons, tables */
+    --font-form:       var(--font-source-sans);     /* forms, settings */
+    --font-decorative: var(--font-uncial-antiqua);  /* decorative elements only */
 
-    /* --- Начертания --- */
+    /* --- Weights --- */
     --font-weight-light:    300;
     --font-weight-regular:  400;
     --font-weight-medium:   500;

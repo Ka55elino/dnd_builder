@@ -1,9 +1,9 @@
 {
   "id": "knowledgeOfTheAges",
-  "name": "Знание веков",
+  "name": "Knowledge of the Ages",
   "kind": "martial",
   "subclass": "knowledge",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. На 10 минут получаете владение любым навыком или инструментом на выбор."
+  "desc": "Costs 1 use of Channel Divinity. For 10 minutes, you gain proficiency in any skill or tool of your choice."
 }

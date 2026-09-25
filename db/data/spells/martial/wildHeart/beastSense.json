@@ -1,9 +1,9 @@
 {
   "id": "whBeastSense",
-  "name": "Чувство зверя (ритуал)",
+  "name": "Beast Sense (Ritual)",
   "kind": "martial",
   "subclass": "wildHeart",
   "level": 3,
   "action": "action",
-  "desc": "Ритуалом (концентрация, до 1 часа) вселяете чувства в согласного зверя: видите и слышите его органами чувств, пока сами ослеплены и оглушены к собственным."
+  "desc": "As a Ritual (Concentration, up to 1 hour), you inhabit the senses of a willing Beast: you see and hear through its senses, while you have the Blinded and Deafened conditions with regard to your own."
 }

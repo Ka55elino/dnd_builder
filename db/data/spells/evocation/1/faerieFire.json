@@ -1,6 +1,6 @@
 {
   "id": "faerieFire",
-  "name": "Огонь фей",
+  "name": "Faerie Fire",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,5 +9,5 @@
     "bard",
     "druid"
   ],
-  "desc": "Существа в кубе 6 м: спасбросок Ловкости или обведены светом — атаки по ним с преимуществом. Концентрация."
+  "desc": "Creatures in a 20-foot Cube: Dexterity saving throw or they are outlined in light, and attack rolls against them have Advantage. Concentration."
 }

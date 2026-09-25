@@ -1,26 +1,26 @@
 <script module>
-    // сырой SVG-текст всех иконок папки (Vite)
+    // raw SVG text of all icons in the folder (Vite)
     const ICONS = Object.fromEntries(
         Object.entries(
             import.meta.glob("../../assets/icons/*.svg", { eager: true, query: "?raw", import: "default" }),
         ).map(([path, svg]) => [path.split("/").pop().replace(/\.svg$/, ""), svg]),
     );
 
-    /** Есть ли SVG для id — чтобы решать, показывать иконку или текст. */
+    /** Whether an SVG exists for the id — to decide between showing the icon or text. */
     export const hasIcon = (name) => !!name && name in ICONS;
 </script>
 
 <script>
     /**
-     * Иконка по id: src/assets/icons/<name>.svg (подхватывается автоматически).
-     * Нет файла — буквенный бейдж (short) того же цвета.
+     * Icon by id: src/assets/icons/<name>.svg (picked up automatically).
+     * No file — a letter badge (short) in the same color.
      *
      * name  — id: 'bonus', 'fire', 'longRest'…
-     * kind  — 'act' | 'dmg' | 'rest' | 'meta' | 'school' — задаёт цвет (--color-<kind>-<name>)
-     * label — подсказка при наведении (и aria-label)
-     * short — текст бейджа, пока нет SVG
-     * fallback — показывать бейдж, пока нет SVG (false — ничего, если рядом есть текст)
-     * native — системная подсказка title (false — когда подсказку даёт Tooltip снаружи)
+     * kind  — 'act' | 'dmg' | 'rest' | 'meta' | 'school' — sets the color (--color-<kind>-<name>)
+     * label — hover tooltip (and aria-label)
+     * short — badge text while there's no SVG
+     * fallback — show the badge while there's no SVG (false — nothing, if there's text next to it)
+     * native — native title tooltip (false — when an outer Tooltip provides it)
      */
     let { name, kind = "act", label = "", short = "", fallback = true, native = true } = $props();
 
@@ -60,7 +60,7 @@
         height: 100%;
     }
 
-    /* заглушка, пока нет SVG */
+    /* placeholder while there's no SVG */
     .badge {
         border: 1px solid var(--icon-color);
         border-radius: 50%;

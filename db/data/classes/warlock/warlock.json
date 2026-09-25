@@ -1,6 +1,6 @@
 {
   "id": "warlock",
-  "name": "Колдун",
+  "name": "Warlock",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "hitDie": 8,
   "primaryAbility": [
@@ -150,54 +150,54 @@
   "features": [
     {
       "level": 1,
-      "name": "Магия договора",
-      "desc": "Творите заклинания из списка Колдуна, используя Харизму. Ячейки договора немногочисленны, все одного (наивысшего доступного) круга и восстанавливаются на коротком отдыхе."
+      "name": "Pact Magic",
+      "desc": "You cast spells from the Warlock spell list using Charisma. Your Pact Magic slots are few, all of the same (highest available) level, and you regain them when you finish a Short Rest."
     },
     {
       "level": 1,
-      "name": "Мистические инвокации",
-      "desc": "Изучаете мистические инвокации — постоянные магические усиления. Число известных растёт с уровнем; часть требует определённого уровня, дара договора или заговора."
+      "name": "Eldritch Invocations",
+      "desc": "You learn Eldritch Invocations, permanent magical enhancements. The number you know increases with level; some require a certain level, a Pact Boon, or a cantrip."
     },
     {
       "level": 1,
-      "name": "Дар договора",
-      "desc": "Выбираете дар договора как инвокацию: Договор клинка (оружие + атака Харизмой), Договор цепи (фамильяр), Договор книги (заговоры и ритуалы) или Договор талисмана."
+      "name": "Pact Boon",
+      "desc": "You choose a Pact Boon as an invocation: Pact of the Blade (weapon + attacks using Charisma), Pact of the Chain (familiar), Pact of the Tome (cantrips and rituals), or Pact of the Talisman."
     },
     {
       "level": 2,
-      "name": "Магическая хитрость",
-      "desc": "Совершив минутный обряд, восстанавливаете часть потраченных ячеек договора. Раз на длинный отдых."
+      "name": "Magical Cunning",
+      "desc": "By performing a 1-minute rite, you regain some of your expended Pact Magic spell slots. Once per Long Rest."
     },
     {
       "level": 9,
-      "name": "Связь с покровителем",
-      "desc": "Можете творить «Контакт с иным планом» без ячейки (обращаясь к покровителю) и не рискуете безумием.",
+      "name": "Contact Patron",
+      "desc": "You can cast Contact Other Plane without a spell slot (reaching out to your patron) and without risking insanity.",
       "passive": false
     },
     {
       "level": 11,
-      "name": "Мистический арканум (6 круг)",
-      "desc": "Выбираете одно заклинание 6 круга как арканум — творите его раз на длинный отдых без ячейки."
+      "name": "Mystic Arcanum (Level 6)",
+      "desc": "You choose one level 6 spell as your arcanum; you can cast it once per Long Rest without a spell slot."
     },
     {
       "level": 13,
-      "name": "Мистический арканум (7 круг)",
-      "desc": "Дополнительное заклинание 7 круга как арканум (раз на длинный отдых)."
+      "name": "Mystic Arcanum (Level 7)",
+      "desc": "An additional level 7 spell as an arcanum (once per Long Rest)."
     },
     {
       "level": 15,
-      "name": "Мистический арканум (8 круг)",
-      "desc": "Дополнительное заклинание 8 круга как арканум (раз на длинный отдых)."
+      "name": "Mystic Arcanum (Level 8)",
+      "desc": "An additional level 8 spell as an arcanum (once per Long Rest)."
     },
     {
       "level": 17,
-      "name": "Мистический арканум (9 круг)",
-      "desc": "Дополнительное заклинание 9 круга как арканум (раз на длинный отдых)."
+      "name": "Mystic Arcanum (Level 9)",
+      "desc": "An additional level 9 spell as an arcanum (once per Long Rest)."
     },
     {
       "level": 20,
-      "name": "Мистический мастер",
-      "desc": "Раз на длинный отдых минутным обрядом восстанавливаете все потраченные ячейки договора."
+      "name": "Eldritch Master",
+      "desc": "Once per Long Rest, with a 1-minute rite, you regain all expended Pact Magic spell slots."
     }
   ]
 }

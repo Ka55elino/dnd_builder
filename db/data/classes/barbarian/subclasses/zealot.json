@@ -1,40 +1,40 @@
 {
   "id": "zealot",
-  "name": "Путь ревнителя",
+  "name": "Path of the Zealot",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "barbarian",
   "features": [
     {
       "level": 3,
-      "name": "Божественная ярость",
-      "desc": "В ярости первая цель, поражённая вами за ход, получает доп. урон: 1d6 + половина уровня варвара (округл. вниз). Тип на выбор — некротический или излучающий.",
+      "name": "Divine Fury",
+      "desc": "While raging, the first target you hit on each turn takes extra damage: 1d6 + half your Barbarian level (round down). Choose the type — Necrotic or Radiant.",
       "grants": [
         {
           "type": "passive",
           "target": "damage",
-          "note": "+1d6+{halfLevel} некрот./излуч. урона первой цели за ход (в ярости)"
+          "note": "+1d6+{halfLevel} Necrotic/Radiant damage to the first target each turn (while raging)"
         }
       ]
     },
     {
       "level": 3,
-      "name": "Воин богов",
-      "desc": "Заклинание, возвращающее вас к жизни, не требует материального компонента."
+      "name": "Warrior of the Gods",
+      "desc": "A spell that returns you to life doesn't require a Material component."
     },
     {
       "level": 6,
-      "name": "Фанатичный фокус",
-      "desc": "Раз за ярость можете перебросить проваленный спасбросок."
+      "name": "Zealous Presence",
+      "desc": "Once per Rage, you can reroll a failed saving throw."
     },
     {
       "level": 10,
-      "name": "Ревностное присутствие",
-      "desc": "Бонусным действием даёте до 10 существам преимущество на атаки и спасброски на 1 ход."
+      "name": "Zealous Presence",
+      "desc": "As a Bonus Action, you give up to 10 creatures Advantage on attack rolls and saving throws for 1 turn."
     },
     {
       "level": 14,
-      "name": "Ярость за пределами смерти",
-      "desc": "В ярости не теряете сознание при 0 хитов (кроме мгновенной смерти); держитесь до конца ярости."
+      "name": "Rage Beyond Death",
+      "desc": "While raging, you don't fall Unconscious at 0 Hit Points (unless killed outright); you keep fighting until your Rage ends."
     }
   ]
 }

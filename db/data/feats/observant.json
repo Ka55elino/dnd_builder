@@ -1,11 +1,11 @@
 {
   "id": "observant",
-  "name": "Наблюдательный",
+  "name": "Observant",
   "category": "general",
   "level": 4,
   "asi": [
     "int",
     "wis"
   ],
-  "desc": "+1 Инт или Мдр; бонус к пассивным проверкам, чтение по губам."
+  "desc": "+1 Intelligence or Wisdom; bonus to Passive checks, lip reading."
 }

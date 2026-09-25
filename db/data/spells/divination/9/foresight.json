@@ -1,6 +1,6 @@
 {
   "id": "foresight",
-  "name": "Предвидение",
+  "name": "Foresight",
   "kind": "spell",
   "action": "action",
   "level": 9,
@@ -11,5 +11,5 @@
     "warlock",
     "wizard"
   ],
-  "desc": "Цель 8 часов имеет преимущество на всё и не может быть застигнута врасплох; атаки по ней с помехой."
+  "desc": "For 8 hours, the target has Advantage on everything and can't be Surprised; attack rolls against it have Disadvantage."
 }

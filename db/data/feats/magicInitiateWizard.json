@@ -1,7 +1,7 @@
 {
   "id": "magicInitiateWizard",
-  "name": "Посвящённый в магию (волшебник)",
+  "name": "Magic Initiate (Wizard)",
   "category": "origin",
   "level": 1,
-  "desc": "Два заговора и одно заклинание 1 круга из списка волшебника; заклинание раз в долгий отдых бесплатно."
+  "desc": "Two cantrips and one level 1 spell from the Wizard spell list; the spell can be cast once per Long Rest for free."
 }

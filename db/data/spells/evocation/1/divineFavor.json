@@ -1,6 +1,6 @@
 {
   "id": "divineFavor",
-  "name": "Божественная милость",
+  "name": "Divine Favor",
   "kind": "spell",
   "action": "bonus",
   "level": 1,
@@ -9,7 +9,7 @@
     "cleric",
     "paladin"
   ],
-  "desc": "Ваши оружейные атаки наносят доп. 1d4 излучением. Концентрация до 1 минуты.",
+  "desc": "Your weapon attacks deal an extra 1d4 Radiant damage. Concentration, up to 1 minute.",
   "damage": {
     "dice": "1d4",
     "type": "radiant"

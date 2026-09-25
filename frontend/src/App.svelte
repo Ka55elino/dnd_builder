@@ -9,16 +9,16 @@
     import GiveItem from './components/GiveItem.svelte';
 
     /**
-     * Экраны:
-     *   'menu'       — главное меню (старт)
-     *   'characters' — список персонажей
-     *   'spells'     — справочник заклинаний
-     *   'items'      — справочник предметов
-     *   'builder' | 'character' | 'levelup' | 'give' — работа с персонажем
+     * Screens:
+     *   'menu'       — main menu (start)
+     *   'characters' — character list
+     *   'spells'     — spell reference
+     *   'items'      — item reference
+     *   'builder' | 'character' | 'levelup' | 'give' — working with a character
      */
     let screen = $state('menu');
-    let characterId = $state(null); // для 'character' / 'levelup' / 'give'
-    let editData = $state(null);    // для 'builder': null — новый, иначе данные персонажа
+    let characterId = $state(null); // for 'character' / 'levelup' / 'give'
+    let editData = $state(null);    // for 'builder': null — new, otherwise the character data
 
     const showMenu = () => {
         screen = 'menu';

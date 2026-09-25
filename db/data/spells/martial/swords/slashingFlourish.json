@@ -1,11 +1,11 @@
 {
   "id": "slashingFlourish",
-  "name": "Росчерк: Рубящий",
+  "name": "Slashing Flourish",
   "kind": "martial",
   "subclass": "swords",
   "level": 3,
   "action": "free",
-  "desc": "Тратя Кость вдохновения при попадании: доп. урон = кости цели и ещё одному существу в 1,5 м от вас.",
+  "desc": "Expending a Bardic Inspiration die on a hit: extra damage equal to the die to the target and to one other creature within 5 feet of you.",
   "damage": {
     "dice": "1d6",
     "type": "slashing"

@@ -1,6 +1,6 @@
 {
   "id": "shadowTouched",
-  "name": "Прикосновение тени",
+  "name": "Shadow-Touched",
   "category": "general",
   "level": 4,
   "asi": [
@@ -8,7 +8,7 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Инт/Мдр/Хар; Невидимость и заклинание 1 круга (некромантия/иллюзия).",
+  "desc": "+1 Int, Wis, or Cha; Invisibility and a level 1 spell (Necromancy or Illusion).",
   "spells": {
     "fixed": [
       "invisibility"

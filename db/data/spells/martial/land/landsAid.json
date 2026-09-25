@@ -1,11 +1,11 @@
 {
   "id": "landsAid",
-  "name": "Помощь земли",
+  "name": "Land's Aid",
   "kind": "martial",
   "subclass": "land",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием (тратя применение Дикого облика) выбираете точку в 18 м: существо там лечится или получает некротический урон (спасбросок Тел. за половину). Кость растёт с уровнем.",
+  "desc": "As a Bonus Action (expending a use of Wild Shape), you choose a point within 60 feet: a creature there is healed or takes Necrotic damage (Constitution saving throw for half). The die increases with your level.",
   "damage": {
     "dice": "2d6",
     "type": "necrotic"

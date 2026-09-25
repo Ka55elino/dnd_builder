@@ -1,9 +1,9 @@
 {
   "id": "weaponBond",
-  "name": "Связь с оружием",
+  "name": "Weapon Bond",
   "kind": "martial",
   "subclass": "eldritchKnight",
   "level": 3,
   "action": "bonus",
-  "desc": "Бонусным действием призываете связанное оружие в свободную руку (телепорт из любого места на том же плане). Можно связать до двух видов оружия ритуалом."
+  "desc": "As a Bonus Action, you summon a bonded weapon into your free hand (teleporting it from anywhere on the same plane). You can bond up to two weapons with a ritual."
 }

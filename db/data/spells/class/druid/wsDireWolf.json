@@ -1,13 +1,13 @@
 {
   "id": "wsDireWolf",
-  "name": "Форма: Лютый волк",
+  "name": "Form: Dire Wolf",
   "kind": "class",
   "level": 8,
   "classes": [
     "druid"
   ],
   "action": "action",
-  "desc": "ПО 1. Хиты 37, КЗ 14, скорость 15 м. При попадании цель не больше Большого — спасбросок Силы или сбита с ног. Стайная тактика.",
+  "desc": "CR 1. HP 37, AC 14, Speed 50 ft. On a hit, a Large or smaller target makes a Strength saving throw or is knocked Prone. Pack Tactics.",
   "damage": {
     "dice": "2d6",
     "type": "piercing"

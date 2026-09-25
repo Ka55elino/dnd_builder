@@ -12,7 +12,7 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
-// Иконка окна для Linux (на macOS/Windows иконка берётся из build/ при сборке).
+// Window icon for Linux (on macOS/Windows the icon is taken from build/ at build time).
 //
 //go:embed build/appicon.png
 var appIcon []byte

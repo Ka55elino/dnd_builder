@@ -1,9 +1,9 @@
 {
   "id": "vowOfEnmity",
-  "name": "Клятва вражды",
+  "name": "Vow of Enmity",
   "kind": "martial",
   "subclass": "vengeance",
   "level": 3,
   "action": "bonus",
-  "desc": "Стоимость 1 использование Божественного канала. Бонусным действием выбираете существо в 3 м: получаете преимущество на броски атаки по нему на 1 минуту (переносится при его гибели)."
+  "desc": "Costs 1 use of Channel Divinity. As a Bonus Action, you choose a creature within 10 feet: you gain Advantage on attack rolls against it for 1 minute (it transfers if the creature dies)."
 }

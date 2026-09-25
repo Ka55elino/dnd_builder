@@ -1,9 +1,9 @@
 {
   "id": "projectedWard",
-  "name": "Спроецированный щит",
+  "name": "Projected Ward",
   "kind": "martial",
   "subclass": "abjuration",
   "level": 6,
   "action": "reaction",
-  "desc": "Реакцией, когда существо в 9 м получает урон, поглощаете этот урон Тайным щитом."
+  "desc": "As a Reaction when a creature within 30 feet takes damage, your Arcane Ward absorbs that damage."
 }

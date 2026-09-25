@@ -1,11 +1,11 @@
 {
   "id": "wrathOfTheStorm",
-  "name": "Гнев бури",
+  "name": "Wrath of the Storm",
   "kind": "martial",
   "subclass": "tempest",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией, когда видимое существо попадает по вам в пределах 1,5 м, наносите ему 2d8 урона звуком или электричеством (спасбросок Тел. за половину). Число раз равно бонусу мастерства (на длинный отдых).",
+  "desc": "As a Reaction, when a creature you can see within 5 feet hits you, you deal 2d8 Thunder or Lightning damage to it (Constitution saving throw for half). Number of uses equals your Proficiency Bonus (per Long Rest).",
   "uses": {
     "count": 2,
     "per": "longRest",

@@ -1,13 +1,13 @@
 <script>
     import { damageShort } from "../../rules/labels.js";
     /**
-     * Вкладка «Снаряжение» — по схеме рас/классов.
-     *   Доспех — один:     сетка → выбранная карточка (×).
-     *   Оружие — несколько: выбранные карточки (× у каждой) + сетка остальных.
-     *   Набор  — один:     сетка → карточка с содержимым (×).
-     *   Отдельные предметы в билдере не выводятся (только внутри наборов).
-     * В сетке только записи с is_default = 1 (фильтрует бэкенд).
-     * Выбор пишется в build.equipment.
+     * "Equipment" tab — same pattern as species/classes.
+     *   Armor   — one:     grid → selected card (×).
+     *   Weapons — several: selected cards (× on each) + grid of the rest.
+     *   Pack    — one:     grid → card with its contents (×).
+     *   Individual items are not shown in the builder (only inside packs).
+     * The grid shows only records with is_default = 1 (filtered by the backend).
+     * The choice is written to build.equipment.
      */
     import { onMount } from "svelte";
     import { GetEquipment } from "../../../wailsjs/go/main/App.js";
@@ -23,7 +23,7 @@
 
     const eqState = $derived(build.equipment);
 
-    // щит — не доспех, а отдельный флаг equipment.shield
+    // the shield is not armor but a separate flag equipment.shield
     const bodyArmor = $derived(eq.armor.filter((a) => a.category !== "shield"));
     const shieldItem = $derived(eq.armor.find((a) => a.category === "shield") ?? null);
     const armor = $derived(bodyArmor.find((a) => a.id === eqState.armorId) ?? null);
@@ -32,11 +32,11 @@
     const pickedWeapons = $derived(eq.weapons.filter((w) => eqState.weaponIds.includes(w.id)));
     const freeWeapons = $derived(eq.weapons.filter((w) => !eqState.weaponIds.includes(w.id)));
 
-    // --- подписи (общие — rules/equipment.js) ---
+    // --- captions (shared ones — rules/equipment.js) ---
     const PROPS = WEAPON_PROPS;
-    const armorCaption = (a) => `${ARMOR_CAT[a.category] ?? a.category} · КД ${acText(a)}`;
+    const armorCaption = (a) => `${ARMOR_CAT[a.category] ?? a.category} · AC ${acText(a)}`;
     const weaponCaption = (w) => `${w.damage} ${damageShort(w.damageType)}`.trim();
-    const packCaption = (p) => `${p.items.length} предм. · ${p.cost || "—"}`;
+    const packCaption = (p) => `${p.items.length} items · ${p.cost || "—"}`;
 
     onMount(async () => {
         try {
@@ -51,30 +51,30 @@
 
 <div class="tab">
     {#if loading}
-        <p class="muted">Загрузка снаряжения…</p>
+        <p class="muted">Loading equipment…</p>
     {:else if error}
-        <p class="error">Не удалось загрузить снаряжение: {error}</p>
+        <p class="error">Failed to load equipment: {error}</p>
     {:else}
-        <!-- ===== Доспех ===== -->
+        <!-- ===== Armor ===== -->
         <section>
-            <h4>Доспех</h4>
+            <h4>Armor</h4>
             {#if armor}
-                <ChoiceCard item={armor} badge="Доспех" onclear={() => build.setArmor(null)}>
+                <ChoiceCard item={armor} badge="Armor" onclear={() => build.setArmor(null)}>
                     <div class="stats">
-                        <span>Тип: <b>{ARMOR_CAT[armor.category] ?? armor.category}</b></span>
-                        <span>КД: <b>{acText(armor)}</b></span>
+                        <span>Type: <b>{ARMOR_CAT[armor.category] ?? armor.category}</b></span>
+                        <span>AC: <b>{acText(armor)}</b></span>
                         {#if armor.data.strengthReq}
-                            <span>Требует Силу: <b>{armor.data.strengthReq}</b></span>
+                            <span>Strength required: <b>{armor.data.strengthReq}</b></span>
                         {/if}
                         {#if armor.data.stealthDisadvantage}
-                            <span class="warn">Помеха на Скрытность</span>
+                            <span class="warn">Stealth Disadvantage</span>
                         {/if}
                     </div>
                 </ChoiceCard>
             {:else if bodyArmor.length}
                 <ChoiceGrid items={bodyArmor} caption={armorCaption} onpick={(id) => build.setArmor(id)} />
             {:else}
-                <p class="muted">Доспехов нет.</p>
+                <p class="muted">No armor.</p>
             {/if}
 
             {#if shieldItem}
@@ -85,23 +85,23 @@
                     aria-pressed={eqState.shield}
                 >
                     <img src={shieldItem.image} alt="" />
-                    <span>{shieldItem.name} <small>+{shieldItem.data.acBonus ?? 2} КД</small></span>
-                    <b>{eqState.shield ? "✓ взят" : "взять"}</b>
+                    <span>{shieldItem.name} <small>+{shieldItem.data.acBonus ?? 2} AC</small></span>
+                    <b>{eqState.shield ? "✓ taken" : "take"}</b>
                 </button>
             {/if}
         </section>
 
-        <!-- ===== Оружие ===== -->
+        <!-- ===== Weapons ===== -->
         <section>
-            <h4>Оружие</h4>
+            <h4>Weapons</h4>
             {#if pickedWeapons.length}
                 <div class="picked">
                     {#each pickedWeapons as w (w.id)}
-                        <ChoiceCard item={w} badge="Оружие" compact onclear={() => build.toggleWeapon(w.id)}>
+                        <ChoiceCard item={w} badge="Weapon" compact onclear={() => build.toggleWeapon(w.id)}>
                             <div class="stats">
                                 <span>{WEAPON_CAT[w.category] ?? w.category}</span>
-                                <span>Урон: <b>{weaponCaption(w)}</b></span>
-                                {#if w.data.mastery}<span>Мастерство: <b>{w.data.mastery}</b></span>{/if}
+                                <span>Damage: <b>{weaponCaption(w)}</b></span>
+                                {#if w.data.mastery}<span>Mastery: <b>{w.data.mastery}</b></span>{/if}
                             </div>
                             {#if w.data.properties?.length}
                                 <div class="tags">
@@ -117,13 +117,13 @@
             {/if}
         </section>
 
-        <!-- ===== Набор ===== -->
+        <!-- ===== Pack ===== -->
         <section>
-            <h4>Набор снаряжения</h4>
+            <h4>Equipment pack</h4>
             {#if pack}
-                <ChoiceCard item={pack} badge="Набор" onclear={() => build.setPack(null)}>
+                <ChoiceCard item={pack} badge="Pack" onclear={() => build.setPack(null)}>
                     {#if pack.desc}<p class="desc">{pack.desc}</p>{/if}
-                    <div class="stats"><span>Стоимость: <b>{pack.cost || "—"}</b></span></div>
+                    <div class="stats"><span>Cost: <b>{pack.cost || "—"}</b></span></div>
                     <ul class="contents">
                         {#each pack.items as pi (pi.item.id)}
                             <li>
@@ -137,7 +137,7 @@
             {:else if eq.packs.length}
                 <ChoiceGrid items={eq.packs} caption={packCaption} onpick={(id) => build.setPack(id)} />
             {:else}
-                <p class="muted">Наборов нет.</p>
+                <p class="muted">No packs.</p>
             {/if}
         </section>
     {/if}

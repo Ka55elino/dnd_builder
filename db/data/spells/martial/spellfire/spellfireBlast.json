@@ -1,11 +1,11 @@
 {
   "id": "spellfireBlast",
-  "name": "Взрыв чароплам",
+  "name": "Spellfire Burst",
   "kind": "martial",
   "subclass": "spellfire",
   "level": 6,
   "action": "bonus",
-  "desc": "Бонусным действием тратите заряды чароплам, выпуская луч по цели в 18 м (атака заклинанием): излучающий или огненный урон (растёт с потраченными зарядами).",
+  "desc": "As a Bonus Action, you expend Spellfire charges to fire a beam at a target within 60 feet (spell attack): Radiant or Fire damage (increases with the charges expended).",
   "damage": {
     "dice": "2d6",
     "type": "radiant"

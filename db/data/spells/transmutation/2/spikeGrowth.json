@@ -1,6 +1,6 @@
 {
   "id": "spikeGrowth",
-  "name": "Шипы",
+  "name": "Spike Growth",
   "kind": "spell",
   "action": "action",
   "level": 2,
@@ -9,12 +9,12 @@
     "ranger",
     "druid"
   ],
-  "desc": "Область радиусом 6 м становится труднопроходимой; за каждые 1,5 м движения существо получает 2d4 колющего урона. Концентрация до 10 минут.",
+  "desc": "A 20-foot-radius area becomes Difficult Terrain; a creature takes 2d4 Piercing damage for every 5 feet it moves there. Concentration, up to 10 minutes.",
   "casting": {
-    "time": "1 действие",
-    "range": "45 м",
-    "components": "В, С, М",
-    "duration": "Конц., 10 мин",
+    "time": "1 action",
+    "range": "150 feet",
+    "components": "V, S, M",
+    "duration": "Conc., 10 min",
     "concentration": true
   },
   "damage": {

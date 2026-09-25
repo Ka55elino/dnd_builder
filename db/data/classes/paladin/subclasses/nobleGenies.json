@@ -1,6 +1,6 @@
 {
   "id": "nobleGenies",
-  "name": "Клятва Благородных джиннов",
+  "name": "Oath of the Noble Genies",
   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgcng9IjEyIiBmaWxsPSIjMUQxQTIxIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIHJ4PSIxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzhBNDVEIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjYgNSIvPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M4QTQ1RCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzNiIgeT0iMzAiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0MiIgcng9IjQiLz48cGF0aCBkPSJNNDAgNjhsMTYtMTggMTIgMTIgOC04IDEyIDE0Ii8+PC9nPjxjaXJjbGUgY3g9Ijc4IiBjeT0iNDIiIHI9IjUiIGZpbGw9IiNDOEE0NUQiLz48dGV4dCB4PSI2NCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjQTlBMTlBIj5pbWFnZTwvdGV4dD48dGV4dCB4PSI2NCIgeT0iMTA5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0E5QTE5QSI+aW4gcHJvZ3Jlc3M8L3RleHQ+PC9zdmc+",
   "class": "paladin",
   "domainSpells": {
@@ -24,23 +24,23 @@
   "features": [
     {
       "level": 3,
-      "name": "Гнев джинна / Сосуд стихий",
-      "desc": "Божественным каналом наделяете удары стихийным уроном (огонь/холод/гром/электричество) или укрываетесь в стихийном сосуде."
+      "name": "Genie's Wrath / Elemental Vessel",
+      "desc": "With Channel Divinity, you imbue your strikes with elemental damage (Fire, Cold, Thunder, or Lightning) or take refuge in an elemental vessel."
     },
     {
       "level": 7,
-      "name": "Аура джинна",
-      "desc": "Вы и союзники в 3 м получаете сопротивление выбранному стихийному типу урона."
+      "name": "Genie's Aura",
+      "desc": "You and allies within 10 feet gain Resistance to a chosen elemental damage type."
     },
     {
       "level": 15,
-      "name": "Стихийная погибель",
-      "desc": "Раз в ход ваш стихийный урон игнорирует сопротивление и наносит доп. кость."
+      "name": "Elemental Smite",
+      "desc": "Once per turn, your elemental damage ignores Resistance and deals an extra die."
     },
     {
       "level": 20,
-      "name": "Величие джинна",
-      "desc": "Действием на 1 минуту паритe (скорость полёта), увеличиваетесь в размере и наносите стихийный урон врагам вокруг."
+      "name": "Genie's Splendor",
+      "desc": "As an action, for 1 minute, you hover (Fly Speed), grow in size, and deal elemental damage to enemies around you."
     }
   ]
 }

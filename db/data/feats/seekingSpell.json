@@ -1,7 +1,7 @@
 {
   "id": "seekingSpell",
-  "name": "Ищущее заклинание",
+  "name": "Seeking Spell",
   "category": "metamagic",
   "cost": "1",
-  "desc": "Промахнувшись атакой заклинания, перебрасываете d20 (используете новый результат)."
+  "desc": "When you miss with a spell attack, you reroll the d20 (and use the new roll)."
 }

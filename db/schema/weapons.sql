@@ -1,8 +1,8 @@
--- Оружие (справочник). Структура — как в JSON dndbuilder-v2.
--- is_default = 1 — показывается в билдере; 0 — скрыто (напр. именное/магическое).
+-- Weapons (reference data). Structure matches the dndbuilder-v2 JSON.
+-- is_default = 1: shown in the builder; 0: hidden (e.g. named/magic).
 CREATE TABLE IF NOT EXISTS weapons (
     id          TEXT PRIMARY KEY,                -- 'longsword'
-    name        TEXT NOT NULL,                   -- 'Длинный меч'
+    name        TEXT NOT NULL,                   -- 'Longsword'
     image       TEXT,                            -- data URL (base64) | NULL
     category    TEXT NOT NULL,                   -- simple | martial
     damage      TEXT,                            -- '1d8'

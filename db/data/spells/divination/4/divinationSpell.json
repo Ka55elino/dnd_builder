@@ -1,6 +1,6 @@
 {
   "id": "divinationSpell",
-  "name": "Прорицание",
+  "name": "Divination",
   "kind": "spell",
   "action": "action",
   "level": 4,
@@ -9,5 +9,5 @@
     "cleric",
     "wizard"
   ],
-  "desc": "Задаёте божеству вопрос о событии в пределах 7 дней и получаете правдивый знак (ритуал)."
+  "desc": "You ask a deity about an event within the next 7 days and receive a truthful omen (ritual)."
 }

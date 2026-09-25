@@ -1,6 +1,6 @@
 {
   "id": "falseLife",
-  "name": "Ложная жизнь",
+  "name": "False Life",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,11 +9,11 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Получаете 2d4+4 временных хитов на 1 час.",
+  "desc": "You gain 2d4+4 Temporary Hit Points for 1 hour.",
   "casting": {
-    "time": "1 действие",
-    "range": "На себя",
-    "components": "В, С, М",
-    "duration": "1 час"
+    "time": "1 action",
+    "range": "Self",
+    "components": "V, S, M",
+    "duration": "1 hour"
   }
 }

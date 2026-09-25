@@ -1,6 +1,6 @@
 {
   "id": "burningHands",
-  "name": "Горящие руки",
+  "name": "Burning Hands",
   "kind": "spell",
   "action": "action",
   "level": 1,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Конус огня 4,5 м: спасбросок Ловкости за половину.",
+  "desc": "A 15-foot Cone of fire: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "3d6",
     "type": "fire"

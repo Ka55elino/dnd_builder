@@ -1,6 +1,6 @@
 {
   "id": "sacredFlame",
-  "name": "Священное пламя",
+  "name": "Sacred Flame",
   "kind": "spell",
   "action": "action",
   "level": 0,
@@ -8,7 +8,7 @@
   "classes": [
     "cleric"
   ],
-  "desc": "Пламя нисходит на существо в 18 м: спасбросок Ловкости или урон излучением. Не даёт укрытия.",
+  "desc": "Flame descends on a creature within 60 feet: Dexterity saving throw or Radiant damage. The target gains no benefit from Cover.",
   "damage": {
     "dice": "1d8",
     "type": "radiant",

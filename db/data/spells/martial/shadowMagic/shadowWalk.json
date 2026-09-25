@@ -1,9 +1,9 @@
 {
   "id": "shadowWalk",
-  "name": "Прогулка в тенях",
+  "name": "Shadow Walk",
   "kind": "martial",
   "subclass": "shadowMagic",
   "level": 14,
   "action": "bonus",
-  "desc": "Находясь в тусклом свете или темноте, бонусным действием телепортируетесь до 36 м в другое место тусклого света/темноты."
+  "desc": "While in Dim Light or Darkness, as a Bonus Action you teleport up to 120 feet to another area of Dim Light or Darkness."
 }

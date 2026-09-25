@@ -1,7 +1,7 @@
 {
   "id": "quickenedSpell",
-  "name": "Ускоренное заклинание",
+  "name": "Quickened Spell",
   "category": "metamagic",
   "cost": "2",
-  "desc": "Заклинание с временем накладывания «1 действие» творите бонусным действием."
+  "desc": "You cast a spell with a casting time of an action as a Bonus Action instead."
 }

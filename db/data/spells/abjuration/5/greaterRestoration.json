@@ -1,6 +1,6 @@
 {
   "id": "greaterRestoration",
-  "name": "Высшее восстановление",
+  "name": "Greater Restoration",
   "kind": "spell",
   "action": "action",
   "level": 5,
@@ -12,5 +12,5 @@
     "paladin",
     "ranger"
   ],
-  "desc": "Снимаете истощение, очарование, окаменение или снижение характеристики/хитов."
+  "desc": "You end Exhaustion, Charmed, Petrified, or a reduction to an ability score or Hit Point maximum."
 }

@@ -1,11 +1,11 @@
 {
   "id": "chronalShift",
-  "name": "Хрональный сдвиг",
+  "name": "Chronal Shift",
   "kind": "martial",
   "subclass": "chronurgy",
   "level": 3,
   "action": "reaction",
-  "desc": "Реакцией заставляете существо в 9 м перебросить только что совершённый бросок атаки, проверку характеристики или спасбросок (вы решаете после броска). Дважды на длинный отдых.",
+  "desc": "As a Reaction, you force a creature within 30 feet to reroll an attack roll, ability check, or saving throw it just made (you decide after the roll). Twice per Long Rest.",
   "uses": {
     "count": 2,
     "per": "longRest"

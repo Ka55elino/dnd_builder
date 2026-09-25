@@ -1,6 +1,6 @@
 {
   "id": "prismaticSpray",
-  "name": "Призматический спрей",
+  "name": "Prismatic Spray",
   "kind": "spell",
   "action": "action",
   "level": 7,
@@ -9,7 +9,7 @@
     "sorcerer",
     "wizard"
   ],
-  "desc": "Восемь разноцветных лучей случайных эффектов и стихийного урона (спасбросок Ловкости).",
+  "desc": "Eight multicolored rays with random effects and elemental damage (Dexterity saving throw).",
   "damage": {
     "dice": "10d6",
     "type": "fire"

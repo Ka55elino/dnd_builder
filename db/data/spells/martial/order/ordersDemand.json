@@ -1,9 +1,9 @@
 {
   "id": "ordersDemand",
-  "name": "Веление порядка",
+  "name": "Order's Demand",
   "kind": "martial",
   "subclass": "order",
   "level": 3,
   "action": "action",
-  "desc": "Стоимость 1 использование Божественного канала. Существа на выбор в 9 м: спасбросок Мудрости (Сл {saveDc}) или «Очарование» вами до конца вашего следующего хода (можно заставить пасть ниц или уронить предмет)."
+  "desc": "Costs 1 use of Channel Divinity. Creatures of your choice within 30 feet must succeed on a Wisdom saving throw (DC {saveDc}) or have the Charmed condition from you until the end of your next turn (you can make them fall Prone or drop an item)."
 }

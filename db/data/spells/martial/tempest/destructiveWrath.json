@@ -1,9 +1,9 @@
 {
   "id": "destructiveWrath",
-  "name": "Разрушительная ярость",
+  "name": "Destructive Wrath",
   "kind": "martial",
   "subclass": "tempest",
   "level": 3,
   "action": "free",
-  "desc": "Стоимость 1 использование Божественного канала. Вместо броска урона звуком или электричеством наносите максимальный урон."
+  "desc": "Costs 1 use of Channel Divinity. Instead of rolling Thunder or Lightning damage, you deal maximum damage."
 }

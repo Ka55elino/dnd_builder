@@ -1,6 +1,6 @@
 {
   "id": "soldier",
-  "name": "Солдат",
+  "name": "Soldier",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "athletics",
     "intimidation"
   ],
-  "tool": "Игровой набор"
+  "tool": "Gaming Set"
 }

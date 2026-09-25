@@ -1,6 +1,6 @@
 {
   "id": "noble",
-  "name": "Дворянин",
+  "name": "Noble",
   "abilities": {
     "options": [
       "str",
@@ -13,5 +13,5 @@
     "history",
     "persuasion"
   ],
-  "tool": "Игровой набор"
+  "tool": "Gaming Set"
 }
