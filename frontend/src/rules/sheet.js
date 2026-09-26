@@ -11,9 +11,12 @@ import { SKILLS } from './skills.js';
 /** Proficiency bonus by level: +2 at 1–4, +3 at 5–8 … +6 at 17–20. */
 export const proficiencyBonus = (level) => 2 + Math.floor((Math.max(1, level) - 1) / 4);
 
-/** All race and subrace trait grants (flat). */
-const traitGrants = (...sources) =>
-    sources.flatMap((s) => s?.data?.traits ?? []).flatMap((t) => t.grants ?? []);
+/** Race and subrace trait grants (flat), only from traits available at this level. */
+const traitGrants = (level, ...sources) =>
+    sources
+        .flatMap((s) => s?.data?.traits ?? [])
+        .filter((t) => (t.level ?? 1) <= level)
+        .flatMap((t) => t.grants ?? []);
 
 /**
  * Computes everything for the sheet.
@@ -40,7 +43,7 @@ export function computeSheet(
     const scores = build.totalAbilities ?? build.abilities ?? {};
     const mods = Object.fromEntries(ABILITY_KEYS.map((k) => [k, modifier(scores[k]) ?? 0]));
 
-    const grants = traitGrants(race, subrace);
+    const grants = traitGrants(level, race, subrace);
     const effects = grants.filter((g) => g.type === 'effect').map((g) => g.effect);
 
     // --- saving throws ---

@@ -382,6 +382,14 @@ export function levelPlan(build, level, refs) {
                     options: featsBy(refs, 'origin').filter((f) => !done.feats.includes(f.id)).map((f) => asOption(f)),
                 });
                 featFollowUps(value(key)?.ids?.[0], key, level, done, refs, add);
+            } else if (g.type === 'pool') {
+                // "choose N" from an option pool granted by the species (e.g. Battle Master maneuvers)
+                add({
+                    key, kind: 'pool', title: `${t.name}: ${g.pool === 'maneuver' ? 'maneuvers' : g.pool}`, pick: g.choose,
+                    options: (refs.spells ?? [])
+                        .filter((sp) => sp.data?.pool === g.pool && !done.pool.includes(sp.id))
+                        .map((sp) => asOption(sp)),
+                });
             } else if (g.type === 'spell') {
                 add({
                     key, kind: g.level === 0 ? 'cantrips' : 'spells',
@@ -392,6 +400,25 @@ export function levelPlan(build, level, refs) {
                         .map(spellOption),
                 });
             }
+        }
+    }
+
+    // spellcasting ability for species spells: chosen once at level 1 if the species
+    // (or subspecies) grants spells at any level and doesn't fix the ability (data.spellAbility)
+    if (level === 1) {
+        const allTraits = [...(race?.data?.traits ?? []), ...(sub?.data?.traits ?? [])];
+        const hasSpells = allTraits.some((t) => (t.grants ?? []).some((g) => g.type === 'spell'));
+        const def = sub?.data?.spellAbility ?? race?.data?.spellAbility;
+        if (hasSpells && typeof def !== 'string') {
+            const from = Array.isArray(def) && def.length ? def : ['int', 'wis', 'cha'];
+            add({
+                key: 'L1:race:spellAbility',
+                kind: 'spellAbility',
+                title: `${sub?.name ?? race?.name}: spellcasting ability`,
+                desc: 'Used for the spells your species grants (spell save DC and attack).',
+                pick: 1,
+                options: from.map((id) => ({ id, name: ABILITIES[id]?.name ?? id })),
+            });
         }
     }
 

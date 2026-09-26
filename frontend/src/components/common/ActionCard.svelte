@@ -13,6 +13,7 @@
      * level     — character level (for damage scaling)
      * source    — top-right label ('Class', 'Level 1', 'Elf'…)
      * uses      — { max, per } — how many times and when it recharges
+     * note      — extra line under the description (e.g. species spell: ability, DC, free cast)
      * saveDC    — saving throw DC (shown if the description mentions a saving throw)
      * selectable / selected / onclick — selection mode (level screen)
      */
@@ -29,6 +30,7 @@
         source = "",
         uses = null,
         saveDC = null,
+        note = "",
         selectable = false,
         selected = false,
         onclick = null,
@@ -59,6 +61,7 @@
     </header>
 
     {#if desc}<p class="desc">{desc}</p>{/if}
+    {#if note}<p class="note">{note}</p>{/if}
 
     <!-- if the label has an SVG, show the icon and move the text into the tooltip (IconLabel) -->
     <div class="meta">
@@ -225,5 +228,11 @@
 
     .chip.school {
         color: var(--color-text-muted);
+    }
+    .note {
+        margin: 0;
+        font-family: var(--font-ui);
+        font-size: 11px;
+        color: var(--color-text-accent);
     }
 </style>

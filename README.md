@@ -85,20 +85,53 @@ The output goes to `frontend/dist/`.
 
 ```
 dnd-builder-v3/
-├── main.go            # entry point: window, webview, frontend embed, Go method bindings
-├── app.go             # Go methods called from the frontend (SaveCharacter, LoadAll, …)
-├── wails.json         # Wails config: name, frontend build/dev commands
-├── go.mod / go.sum    # Go dependencies
-├── frontend/          # Vite project (frontend)
+├── main.go                # entry point: window, webview, embedded frontend, Go bindings, Linux icon
+├── app.go                 # Go methods called from the frontend (GetRaces, SaveCharacter, SaveCustomSpell, …)
+├── constants.go           # APP_NAME, APP_VERSION (the version is part of the DB file name)
+├── mode_dev.go            # devMode = true  (`wails dev`: the DB is recreated on every start)
+├── mode_prod.go           # devMode = false (`wails build`: the DB persists)
+├── db.go                  # opening SQLite, schema, migrations; DB file: dnd[-dev]-v<version>.db
+├── seed.go                # fills empty tables from db/data/*.json on startup
+├── queries.go             # loads named SQL queries from db/queries (Q("Name"))
+├── races.go, classes.go   # races/subraces, classes/subclasses
+├── equipment.go           # weapons, armor, items, packs, catalog
+├── rules.go               # backgrounds, feats, spells and class/species abilities
+├── characters.go          # saving/loading characters and their play state
+├── custom_equipment.go    # user-created items, armor, weapons and spells
+├── enums/                 # shared Go enums (action types, spell schools/levels)
+├── db/
+│   ├── schema/            # CREATE TABLE … for every table (*.sql, embedded)
+│   ├── queries/           # named queries: "-- name: QueryName" + SQL
+│   └── data/              # reference data in JSON (seeded into empty tables)
+│       ├── races/         #   <race>/<race>.json + subraces/*.json (images as base64)
+│       ├── classes/       #   <class>/<class>.json + subclasses/*.json
+│       ├── spells/        #   spells by school/level, class/subclass/species abilities
+│       ├── feats/  backgrounds/
+│       ├── weapons/  armor/  items/  packs/
+│       └── characters/    #   sample characters (seeded in dev mode only)
+├── tools/
+│   └── img2b64.py         # image → PNG → base64 for the "image" field (optional background removal)
+├── frontend/              # Svelte 5 + Vite
 │   ├── index.html
 │   ├── package.json
-│   ├── src/           # UI source code
-│   └── wailsjs/       # auto-generated wrappers for calling Go from JS
+│   ├── wailsjs/           # auto-generated JS wrappers for the Go methods (don't edit)
+│   └── src/
+│       ├── main.js, App.svelte      # entry point and screen switching
+│       ├── components/              # screens: menu, characters, character sheet, level up,
+│       │   │                        #   spells and items reference, editors, "Give item"
+│       │   ├── builder/             #   character builder tabs (Basics, Abilities, Species, Class, Equipment)
+│       │   └── common/              #   ActionCard, CatalogList, Icon, IconLabel, Tooltip
+│       ├── models/                  # CharacterBuild (player choices), Character (derived sheet),
+│       │                            #   CharacterState (HP, resources, slots, notes)
+│       ├── rules/                   # game rules: progression, sheet, passives, spellcasting, labels…
+│       ├── data/refs.js             # loads and caches reference data from Go
+│       ├── styles/                  # colors, fonts, CSS variables
+│       └── assets/                  # fonts and SVG icons (assets/icons/README.md)
 └── build/
-    ├── appicon.png    # app icon
-    ├── darwin/        # Info.plist etc. for macOS
-    ├── windows/       # Windows resources
-    └── bin/           # the app is built HERE (in .gitignore)
+    ├── appicon.png        # app icon source (1024×1024); .icns/.ico are generated from it
+    ├── darwin/            # Info.plist for macOS
+    ├── windows/           # icon.ico, manifest, installer
+    └── bin/               # build output (in .gitignore)
 ```
 
 ## How the frontend talks to Go
@@ -106,10 +139,10 @@ dnd-builder-v3/
 The built app has **no HTTP server**. The frontend and Go live in the same process; the webview is the system one (WebKit on macOS). Go methods bound in `main.go` (`Bind`) are automatically turned by Wails into JS functions in `frontend/wailsjs/go/...`. Calling them from JS looks like a regular `await`:
 
 ```js
-import { SaveCharacter, LoadAll } from '../wailsjs/go/main/App';
+import { SaveCharacter, ListCharacters } from '../wailsjs/go/main/App';
 
 const id = await SaveCharacter(JSON.stringify(build));
-const list = await LoadAll();
+const list = await ListCharacters();
 ```
 
 Under the hood, the arguments are serialized to JSON, passed to Go through the webview's native bridge, the method runs (writing to SQLite), and the result is sent back and resolves the promise. A Go error (`error`) arrives as a `reject`.

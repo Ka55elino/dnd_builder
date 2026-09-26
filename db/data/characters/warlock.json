@@ -63,7 +63,7 @@
     "cha": 17
   },
   "raceId": "human",
-  "subraceId": null,
+  "subraceId": "imperial",
   "classId": "warlock",
   "subclassId": null,
   "equipment": {
@@ -127,6 +127,12 @@
       "kind": "spells",
       "ids": [
         "armsOfHadar"
+      ]
+    },
+    "L2:subrace:skill:Imperial Schooling": {
+      "kind": "skill",
+      "ids": [
+        "history"
       ]
     }
   }

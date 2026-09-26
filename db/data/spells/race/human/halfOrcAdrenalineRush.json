@@ -1,0 +1,13 @@
+{
+  "id": "halfOrcAdrenalineRush",
+  "name": "Adrenaline Rush",
+  "kind": "action",
+  "source": "Half-Orc",
+  "level": 1,
+  "action": "bonus",
+  "desc": "As a Bonus Action, you take the Dash action and gain Temporary Hit Points equal to your Proficiency Bonus. Uses equal to your Proficiency Bonus (regained on a Long Rest).",
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  }
+}

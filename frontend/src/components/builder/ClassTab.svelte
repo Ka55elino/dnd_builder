@@ -45,6 +45,18 @@
             loading = false;
         }
     });
+
+    // class features + Ability Score Improvement levels (asiLevels), sorted by level;
+    // Fighter and Rogue get extra ones (e.g. Fighter 6 and 14, Rogue 10)
+    const classFeatures = $derived.by(() => {
+        if (!cls) return [];
+        const asi = (cls.data.asiLevels ?? []).map((level) => ({
+            level,
+            name: "Ability Score Improvement",
+            desc: "Choose the Ability Score Improvement feat or another feat you qualify for.",
+        }));
+        return [...(cls.data.features ?? []), ...asi].sort((a, b) => (a.level ?? 0) - (b.level ?? 0));
+    });
 </script>
 
 <div class="tab">
@@ -68,7 +80,7 @@
                 <span>Weapons: <b>{mapList(cls.data.weaponProficiencies, WEAPONS)}</b></span>
                 <span>Spellcaster: <b>{CASTER[cls.caster] ?? cls.caster ?? "—"}</b></span>
             </div>
-            <FeatureList items={cls.data.features} />
+            <FeatureList items={classFeatures} />
         </ChoiceCard>
 
         {#if cls.subclasses.length}

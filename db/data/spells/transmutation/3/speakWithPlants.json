@@ -1,0 +1,20 @@
+{
+  "id": "speakWithPlants",
+  "name": "Speak with Plants",
+  "kind": "spell",
+  "action": "action",
+  "level": 3,
+  "school": "transmutation",
+  "classes": [
+    "bard",
+    "druid",
+    "ranger"
+  ],
+  "casting": {
+    "time": "1 action",
+    "range": "Self",
+    "components": "V, S",
+    "duration": "10 minutes"
+  },
+  "desc": "Plants within 30 feet of you gain limited sentience and animation for the duration, letting you communicate with them and they can follow simple commands. You can question them about events in the area within the past day. Difficult Terrain made of plants can become ordinary terrain for the duration, or vice versa."
+}

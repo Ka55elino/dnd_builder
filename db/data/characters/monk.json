@@ -63,7 +63,7 @@
     "cha": 8
   },
   "raceId": "human",
-  "subraceId": null,
+  "subraceId": "imperial",
   "classId": "monk",
   "subclassId": "openHand",
   "equipment": {
@@ -94,6 +94,12 @@
       "kind": "feat",
       "ids": [
         "alert"
+      ]
+    },
+    "L2:subrace:skill:Imperial Schooling": {
+      "kind": "skill",
+      "ids": [
+        "history"
       ]
     }
   }

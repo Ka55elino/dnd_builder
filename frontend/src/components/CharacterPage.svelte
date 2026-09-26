@@ -464,7 +464,7 @@
                             {#each character.resources as r (r.id)}
                                 {@const left = state.resourceLeft(r)}
                                 <li>
-                                    <span class="pool-name">{r.name}
+                                    <span class="pool-name">{r.name}{#if r.die} <b class="pool-die">{r.die}</b>{/if}
                                         <small><IconLabel
                                             name={r.recharge === "short" ? "shortRest" : "longRest"}
                                             kind="rest"
@@ -706,7 +706,8 @@
                                         level={character.level}
                                         source={c.source}
                                         uses={c.uses}
-                                        saveDC={g.spells ? character.spellcasting?.saveDC ?? null : null}
+                                        saveDC={g.spells ? c.saveDC ?? null : null}
+                                        note={c.note ?? ""}
                                     />
                                 {/each}
                             </div>
@@ -1872,4 +1873,10 @@
         color: var(--color-text-accent);
     }
 
+    .pool-die {
+        margin-left: 4px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-text-accent);
+    }
 </style>

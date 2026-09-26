@@ -45,7 +45,7 @@ CUT_PRESETS = {
 }
 
 
-def remove_background(im, threshold=30, close=14, work=1024):
+def remove_background(im, threshold=30, close=14, holes=0.0, work=1024):
     """
     Removes a solid or smoothly varying dark background around a figure.
 
@@ -53,7 +53,10 @@ def remove_background(im, threshold=30, close=14, work=1024):
        close to the background (estimated locally, so gradients work too);
     2. transparency is smooth at the figure's edge and the background tint is
        removed (unmultiply), so glow does not turn into a dark halo;
-    3. close > 0: narrow gaps and enclosed dark spots inside the figure count as the figure.
+    3. close > 0: narrow gaps and enclosed dark spots inside the figure count as the figure;
+    4. holes > 0: enclosed background areas (not touching the border) larger than
+       this share of the image (e.g. 0.005 = 0.5%) become transparent too — for
+       background seen through an arch or between antlers.
     """
     try:
         import numpy as np
@@ -123,6 +126,32 @@ def remove_background(im, threshold=30, close=14, work=1024):
         closed = blur(dil.astype(np.float32), close) > 0.98
         seen = flood(seen & ~closed)  # gaps and enclosed spots inside the figure are not background
 
+    if holes > 0:
+        # large enclosed areas of almost exactly the background color → background as well
+        # (a stricter color test than the edge flood, so dark shadows inside the figure survive)
+        cand = (dist <= 12) & ~seen
+        H, W = cand.shape
+        lab = np.zeros((H, W), np.int32)
+        n = 0
+        min_area = holes * H * W
+        for sy, sx in zip(*np.nonzero(cand)):
+            if lab[sy, sx]:
+                continue
+            n += 1
+            lab[sy, sx] = n
+            comp = [(sy, sx)]
+            q = deque(comp)
+            while q:
+                y, x = q.popleft()
+                for ny, nx in ((y + 1, x), (y - 1, x), (y, x + 1), (y, x - 1)):
+                    if 0 <= ny < H and 0 <= nx < W and cand[ny, nx] and not lab[ny, nx]:
+                        lab[ny, nx] = n
+                        q.append((ny, nx))
+                        comp.append((ny, nx))
+            if len(comp) >= min_area:
+                ys, xs = zip(*comp)
+                seen[list(ys), list(xs)] = True
+
     alpha = np.ones(dist.shape, np.float32)
     ramp = np.clip((dist - T * 0.3) / (T * 0.7), 0, 1)
     alpha[seen] = ramp[seen]
@@ -175,16 +204,20 @@ def main():
                    help="remove a dark background: solid (default) for figures; glow for glow/fire")
     p.add_argument("--cut-threshold", type=float, help="background similarity threshold (30 = strict, 55 = for glow)")
     p.add_argument("--cut-close", type=float, help="closing of gaps inside the figure, px (0 = off)")
+    p.add_argument("--cut-holes", type=float, default=0.0,
+                   help="also clear enclosed background areas larger than this share of the image "
+                        "(e.g. 0.005 = 0.5%%; 0 = off). Don't use for medallions/frames with a dark inside")
     args = p.parse_args()
 
     if args.into and len(args.files) != 1:
         sys.exit("--into works with a single input file")
 
     cut = None
-    if args.cut or args.cut_threshold is not None or args.cut_close is not None:
+    if args.cut or args.cut_threshold is not None or args.cut_close is not None or args.cut_holes:
         t, c = CUT_PRESETS[args.cut or "solid"]
         cut = (args.cut_threshold if args.cut_threshold is not None else t,
-               args.cut_close if args.cut_close is not None else c)
+               args.cut_close if args.cut_close is not None else c,
+               args.cut_holes)
 
     results = {}
     for f in args.files:

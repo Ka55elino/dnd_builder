@@ -65,5 +65,6 @@
       "name": "Celestial Revelation",
       "desc": "Starting at level 3, you gain a transformation determined by your chosen lineage (subrace)."
     }
-  ]
+  ],
+  "spellAbility": "cha"
 }

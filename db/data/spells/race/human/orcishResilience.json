@@ -1,0 +1,13 @@
+{
+  "id": "orcishResilience",
+  "name": "Orcish Resilience",
+  "kind": "action",
+  "source": "Half-Orc",
+  "level": 1,
+  "action": "free",
+  "desc": "When you would be reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit Point instead. Once per Long Rest.",
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "orcSuperiorityDice",
+  "name": "Superiority Dice",
+  "kind": "action",
+  "source": "Warrior Orc Heritage",
+  "level": 5,
+  "desc": "Fuel for your Battle Master Maneuvers. You have two Superiority Dice (four from level 12), regained when you finish a Short or Long Rest. The die is a d8, a d10 from level 10 and a d12 from level 18.",
+  "uses": {
+    "count": 2,
+    "per": "shortRest",
+    "scale": [
+      [
+        5,
+        2
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        12,
+        4
+      ]
+    ]
+  },
+  "scaleDie": [
+    [
+      5,
+      "d8"
+    ],
+    [
+      10,
+      "d10"
+    ],
+    [
+      18,
+      "d12"
+    ]
+  ],
+  "resource": "superiorityDice"
+}

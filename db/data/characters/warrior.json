@@ -89,6 +89,12 @@
       "ids": [
         "archery"
       ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "wis"
+      ]
     }
   }
 }

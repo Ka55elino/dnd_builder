@@ -1,0 +1,22 @@
+{
+  "id": "speakWithAnimals",
+  "name": "Speak with Animals",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "divination",
+  "classes": [
+    "bard",
+    "druid",
+    "ranger",
+    "warlock"
+  ],
+  "casting": {
+    "time": "1 action",
+    "range": "Self",
+    "components": "V, S",
+    "duration": "10 minutes",
+    "ritual": true
+  },
+  "desc": "For the duration, you can comprehend and verbally communicate with Beasts, and you can use any of the Influence action's skill options with them. Most Beasts have little to say about topics that don't pertain to survival or companionship."
+}
