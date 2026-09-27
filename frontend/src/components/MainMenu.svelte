@@ -1,48 +1,71 @@
 <script>
     /**
-     * Main menu (start page): Characters · Spells · Items.
-     * onNavigate(screen) — 'characters' | 'spells' | 'items'
+     * Main menu (start screen) — a plain game-style vertical menu.
+     * onNavigate(screen) — 'game' | 'join' | 'characters' | 'spells' | 'items'
+     * While in a game (hosting or joined), Start/Join are replaced by
+     * "Return to Game" leading to the matching screen.
+     * An item with `stub: true` only shows "coming soon".
      */
     import { onMount } from "svelte";
-    import { ListCharacters } from "../api.js";
-    import { loadRefs } from "../data/refs.js";
+    import { server } from "../server.svelte.js";
 
     let { onNavigate } = $props();
 
-    let counts = $state({ characters: null, spells: null, items: null });
-
-    onMount(async () => {
-        try {
-            const [chars, refs] = await Promise.all([ListCharacters(), loadRefs()]);
-            const c = refs.catalog ?? {};
-            counts = {
-                characters: chars.length,
-                spells: refs.spells.filter((s) => s.kind === "spell").length,
-                items: (c.items?.length ?? 0) + (c.armor?.length ?? 0) + (c.weapons?.length ?? 0),
-            };
-        } catch (e) {
-            console.error("[menu]", e);
-        }
-    });
-
-    const SECTIONS = [
-        { id: "characters", title: "Characters", sub: "Creation, sheets and leveling up", glyph: "⚔" },
-        { id: "spells", title: "Spells", sub: "Spell reference by level and class", glyph: "✦" },
-        { id: "items", title: "Items", sub: "Weapons, armor and gear", glyph: "⚜" },
+    const REFERENCE = [
+        { id: "characters", title: "Characters", divider: true },
+        { id: "spells", title: "Spells" },
+        { id: "items", title: "Items" },
     ];
 
-    const plural = (n, one, few, many) => {
-        if (n === 1) return one;
-        return many;
+    let ITEMS = $derived.by(() => {
+        if (server.role === "host") return [{ id: "game", title: "Return to Game" }, ...REFERENCE];
+        if (server.role === "player") return [{ id: "join", title: "Return to Game" }, ...REFERENCE];
+        return [{ id: "game", title: "Start Game" }, { id: "join", title: "Join Game" }, ...REFERENCE];
+    });
+
+    // the list can shrink/grow while the menu is open — keep the cursor in range
+    $effect(() => {
+        if (active >= ITEMS.length) active = ITEMS.length - 1;
+    });
+
+    let active = $state(0);
+    let notice = $state("");
+    let noticeTimer;
+    let buttons = [];
+
+    const choose = (item) => {
+        if (item.stub) {
+            // TODO: wire up game sessions
+            notice = `${item.title} — coming soon`;
+            clearTimeout(noticeTimer);
+            noticeTimer = setTimeout(() => (notice = ""), 2000);
+            return;
+        }
+        onNavigate(item.id);
     };
-    const countText = (id) => {
-        const n = counts[id];
-        if (n == null) return "";
-        if (id === "characters") return `${n} ${plural(n, "character", "characters", "characters")}`;
-        if (id === "spells") return `${n} ${plural(n, "spell", "spells", "spells")}`;
-        return `${n} ${plural(n, "item", "items", "items")}`;
+
+    const focus = (i) => {
+        active = (i + ITEMS.length) % ITEMS.length;
+        buttons[active]?.focus();
     };
+
+    const onKey = (e) => {
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            focus(active + 1);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            focus(active - 1);
+        }
+    };
+
+    onMount(() => {
+        buttons[0]?.focus();
+        return () => clearTimeout(noticeTimer);
+    });
 </script>
+
+<svelte:window onkeydown={onKey} />
 
 <main class="menu">
     <header>
@@ -50,16 +73,22 @@
         <p class="tagline">2024 Edition</p>
     </header>
 
-    <nav class="sections">
-        {#each SECTIONS as s (s.id)}
-            <button class="section" onclick={() => onNavigate(s.id)}>
-                <span class="glyph" aria-hidden="true">{s.glyph}</span>
-                <span class="title">{s.title}</span>
-                <span class="sub">{s.sub}</span>
-                <span class="count">{countText(s.id)}</span>
+    <nav>
+        {#each ITEMS as item, i (item.id)}
+            {#if item.divider}<hr />{/if}
+            <button
+                bind:this={buttons[i]}
+                class:active={active === i}
+                onmouseenter={() => (active = i)}
+                onfocus={() => (active = i)}
+                onclick={() => choose(item)}
+            >
+                {item.title}
             </button>
         {/each}
     </nav>
+
+    <p class="notice" aria-live="polite">{notice}</p>
 </main>
 
 <style>
@@ -69,7 +98,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 48px;
+        justify-content: center;
+        gap: 56px;
     }
 
     header {
@@ -79,7 +109,7 @@
     h1 {
         margin: 0;
         font-family: var(--font-heading);
-        font-size: 48px;
+        font-size: 56px;
         font-weight: var(--font-weight-bold);
         letter-spacing: 0.04em;
         color: var(--color-gold);
@@ -92,68 +122,70 @@
         color: var(--color-text-secondary);
     }
 
-    .sections {
-        width: 100%;
-        max-width: 960px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
-    }
-
-    .section {
-        min-height: 220px;
-        padding: 28px 24px;
+    nav {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: var(--color-card);
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        color: var(--color-text-primary);
-        text-align: center;
-        cursor: pointer;
-        transition:
-            border-color 0.15s,
-            background 0.15s,
-            transform 0.15s;
+        gap: 4px;
     }
 
-    .section:hover {
-        background: var(--color-card-elevated);
-        border-color: var(--color-gold);
-        transform: translateY(-2px);
+    hr {
+        width: 120px;
+        margin: 12px 0;
+        border: none;
+        border-top: 1px solid var(--color-border);
     }
 
-    .section:focus-visible {
-        outline: 2px solid var(--color-gold);
-        outline-offset: 3px;
-    }
-
-    .glyph {
-        font-size: 40px;
-        line-height: 1;
-        color: var(--color-gold);
-    }
-
-    .title {
+    button {
+        position: relative;
+        padding: 8px 40px;
+        background: none;
+        border: none;
         font-family: var(--font-heading);
-        font-size: 24px;
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
+        font-size: 26px;
+        font-weight: var(--font-weight-semibold);
+        letter-spacing: 0.06em;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: color 0.15s;
     }
 
-    .sub {
+    button::before,
+    button::after {
+        position: absolute;
+        top: 50%;
+        font-size: 16px;
+        color: var(--color-gold);
+        opacity: 0;
+        transform: translateY(-50%);
+        transition: opacity 0.15s;
+    }
+    button::before {
+        content: "◆";
+        left: 12px;
+    }
+    button::after {
+        content: "◆";
+        right: 12px;
+    }
+
+    button.active {
+        color: var(--color-gold-hover);
+    }
+    button.active::before,
+    button.active::after {
+        opacity: 1;
+    }
+
+    button:focus-visible {
+        outline: none;
+    }
+
+    .notice {
+        min-height: 20px;
+        margin: 0;
         font-family: var(--font-ui);
         font-size: 13px;
-        color: var(--color-text-secondary);
-    }
-
-    .count {
-        min-height: 16px;
-        font-family: var(--font-ui);
-        font-size: 12px;
         color: var(--color-text-muted);
     }
 </style>

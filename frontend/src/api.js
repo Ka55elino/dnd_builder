@@ -12,7 +12,15 @@ import * as App from '../bindings/dnd-builder-v3/app.js';
 import { track } from './loader.svelte.js';
 
 // no overlay: Ready waits behind the startup loader, state autosave has its own indicator
-const SILENT = new Set(['Ready', 'SaveCharacterState']);
+// Network: status/discovery/events are frequent and instant; HostGame/JoinGame keep the overlay.
+const SILENT = new Set([
+    'Ready',
+    'SaveCharacterState',
+    'NetStatus',
+    'StartDiscovery',
+    'StopDiscovery',
+    'SendGameEvent',
+]);
 
 const api = {};
 for (const [name, fn] of Object.entries(App)) {
@@ -38,6 +46,16 @@ export const {
     SaveCharacterState,
     SaveCustomEquipment,
     SaveCustomSpell,
+    // local-network game (net.go)
+    NetStatus,
+    HostGame,
+    StopGame,
+    StartDiscovery,
+    StopDiscovery,
+    JoinGame,
+    LeaveGame,
+    SendGameEvent,
+    GetPlayerCharacter,
 } = api;
 
 export default api;

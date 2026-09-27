@@ -8,10 +8,15 @@
     import LevelUp from './components/LevelUp.svelte';
     import GiveItem from './components/GiveItem.svelte';
     import QueryLoader from './components/common/QueryLoader.svelte';
+    import StatusBar from './components/StatusBar.svelte';
+    import GamePage from './components/GamePage.svelte';
+    import JoinPage from './components/JoinPage.svelte';
 
     /**
      * Screens:
      *   'menu'       — main menu (start)
+     *   'game'       — Start Game (DM: host a game on the local network)
+     *   'join'       — Join Game (player: find a game, pick a character)
      *   'characters' — character list
      *   'spells'     — spell reference
      *   'items'      — item reference
@@ -42,6 +47,9 @@
     };
 </script>
 
+<StatusBar />
+
+<div class="screen">
 {#if screen === 'builder'}
     {#key editData}
         <Builder initial={editData} onExit={showCharacters} onSaved={showCharacter} />
@@ -70,8 +78,25 @@
     <SpellsPage onBack={showMenu} />
 {:else if screen === 'items'}
     <ItemsPage onBack={showMenu} />
+{:else if screen === 'game'}
+    <GamePage onBack={showMenu} />
+{:else if screen === 'join'}
+    <JoinPage onBack={showMenu} />
 {:else}
     <MainMenu onNavigate={(s) => (screen = s)} />
 {/if}
+</div>
 
 <QueryLoader />
+
+<style>
+    /* #app is a grid: global StatusBar on top, the current screen fills the rest */
+    :global(#app) {
+        display: grid;
+        grid-template-rows: auto 1fr;
+    }
+    .screen {
+        min-height: 0;
+        overflow: auto;
+    }
+</style>

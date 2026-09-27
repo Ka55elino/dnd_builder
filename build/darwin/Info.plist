@@ -24,5 +24,11 @@
 		<string>true</string>
 		<key>NSHumanReadableCopyright</key>
 		<string>(c) 2026, Ka55elino</string>
+		<key>NSLocalNetworkUsageDescription</key>
+		<string>DnD Builder finds and hosts games on your local network.</string>
+		<key>NSBonjourServices</key>
+		<array>
+			<string>_dndbuilder._tcp</string>
+		</array>
 	</dict>
 </plist>

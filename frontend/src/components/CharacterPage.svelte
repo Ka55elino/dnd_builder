@@ -14,6 +14,11 @@
      *  └─────────────────────┴─────────────────────────────────────────────────┘
      *
      * id — character id in the DB; onBack(); onEdit(data)
+     * onLevelUp / onGiveItem / onEdit — the matching header button is shown
+     *   only when the handler is passed (in a game they are left out)
+     * backLabel — text of the back button
+     * actions(leave) — optional snippet at the right of the header (e.g. "Leave game");
+     *   wrap handlers in leave(fn) so unsaved state is saved first
      */
     import { onMount } from "svelte";
     import {
@@ -38,7 +43,7 @@
         formatModifier,
     } from "../rules/abilities.js";
 
-    let { id, onBack, onEdit, onLevelUp, onGiveItem } = $props();
+    let { id, onBack, onEdit, onLevelUp, onGiveItem, backLabel = "← Characters", actions } = $props();
 
     let raw = $state(null); // as loaded from the DB — for editing
     let build = $state(null);
@@ -224,7 +229,7 @@
 
 <div class="page">
     <header class="top">
-        <button class="ghost" onclick={leave(onBack)}>← Characters</button>
+        <button class="ghost" onclick={leave(onBack)}>{backLabel}</button>
         {#if build}
             <span class="spacer"></span>
             {#if state}
@@ -240,13 +245,21 @@
                     Save
                 </button>
             {/if}
-            <button class="ghost" onclick={leave(onGiveItem)}>＋ Give Item</button>
-            {#if build.level < 20}
+            {#if onGiveItem}
+                <button class="ghost" onclick={leave(onGiveItem)}>＋ Give Item</button>
+            {/if}
+            {#if onLevelUp && build.level < 20}
                 <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Level Up</button>
             {/if}
-            <button class="ghost" onclick={leave(() => onEdit(raw))}
-                >Edit</button
-            >
+            {#if onEdit}
+                <button class="ghost" onclick={leave(() => onEdit(raw))}
+                    >Edit</button
+                >
+            {/if}
+        {/if}
+        {#if actions}
+            {#if !build}<span class="spacer"></span>{/if}
+            {@render actions(leave)}
         {/if}
     </header>
 

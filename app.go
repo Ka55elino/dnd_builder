@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 
+	"dnd-builder-v3/lan"
+
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -16,11 +18,12 @@ type App struct {
 	db      *sql.DB
 	ready   chan struct{} // closed once the DB is open and seeded (or failed to open)
 	initErr error
+	net     *lan.Manager // local-network game (net.go)
 }
 
 // NewApp creates the backend service.
 func NewApp() *App {
-	return &App{ready: make(chan struct{})}
+	return &App{ready: make(chan struct{}), net: lan.NewManager(emitEvent)}
 }
 
 // ServiceStartup (called by Wails before the window loads) opens the database
@@ -55,6 +58,7 @@ func (a *App) initDB() {
 
 // ServiceShutdown (called by Wails on exit) closes the database.
 func (a *App) ServiceShutdown() error {
+	a.net.Close()
 	select {
 	case <-a.ready:
 		if a.db != nil {

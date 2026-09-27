@@ -7,6 +7,7 @@ import { mount } from 'svelte';
 import App from './App.svelte';
 import { Ready } from './api.js';
 import { loadRefs } from './data/refs.js';
+import { initNet } from './server.svelte.js';
 
 const boot = document.getElementById('boot');
 const bootText = boot?.querySelector('.boot-text');
@@ -24,7 +25,7 @@ async function start() {
         say('Opening the database…');
         await Ready();
         say('Loading reference data…');
-        await Promise.all([loadRefs(), document.fonts?.ready]);
+        await Promise.all([loadRefs(), document.fonts?.ready, initNet()]);
     } catch (e) {
         boot?.classList.add('failed');
         say(`Could not start: ${e?.message ?? e}`);

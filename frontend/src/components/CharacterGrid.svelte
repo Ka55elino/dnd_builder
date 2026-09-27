@@ -3,14 +3,17 @@
         characters = [],
         onCreate = () => console.log("[create]"),
         onOpen = (id) => console.log("[open]", id),
+        showCreate = true, // false: pick-only grid (Join Game)
     } = $props();
 </script>
 
 <div class="grid">
-    <button class="cell create" onclick={onCreate} title="Create character">
-        <span class="plus">+</span>
-        <span class="label">Create</span>
-    </button>
+    {#if showCreate}
+        <button class="cell create" onclick={onCreate} title="Create character">
+            <span class="plus">+</span>
+            <span class="label">Create</span>
+        </button>
+    {/if}
 
     {#each characters as c (c.id)}
         <button
