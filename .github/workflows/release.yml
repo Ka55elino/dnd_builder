@@ -89,7 +89,13 @@ jobs:
 
       - name: NSIS (Windows installer)
         if: runner.os == 'Windows'
-        run: choco install nsis -y --no-progress
+        run: |
+          choco install nsis -y --no-progress
+          # choco doesn't put makensis on PATH for the next steps; without it `wails build -nsis` silently skips the installer
+          echo "C:\Program Files (x86)\NSIS" >> "$GITHUB_PATH"
+      - name: Check makensis
+        if: runner.os == 'Windows'
+        run: makensis -VERSION
 
       - name: Install Wails
         run: go install github.com/wailsapp/wails/v2/cmd/wails@${WAILS_VERSION}
@@ -122,7 +128,9 @@ jobs:
               ditto -c -k --keepParent "$APP.app" "../../dist/$APP-$VERSION-macos-universal.zip" ;;
             Windows)
               7z a "../../dist/$APP-$VERSION-windows-amd64.zip" "$APP.exe"
-              mv ./*installer.exe "../../dist/$APP-$VERSION-windows-amd64-installer.exe" ;;
+              inst=$(find . -iname "*installer*.exe" | head -1)
+              if [ -z "$inst" ]; then echo "::error::NSIS installer not found in build/bin:"; find . -type f; exit 1; fi
+              mv "$inst" "../../dist/$APP-$VERSION-windows-amd64-installer.exe" ;;
             Linux)
               tar -czf "../../dist/$APP-$VERSION-linux-amd64.tar.gz" "$APP" ;;
           esac
