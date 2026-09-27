@@ -71,6 +71,30 @@ wails build -nsis                        # Windows: build an installer
 
 A build for a given OS must be done **on that OS** (the webview is native and cannot be cross-compiled). To build for all three platforms at once, use CI (GitHub Actions with a macOS/Windows/Linux matrix).
 
+## Releases (CI)
+
+`.github/workflows/release.yml` builds the app on GitHub Actions and publishes a GitHub Release:
+
+1. Bump `APP_VERSION` in `constants.go` (e.g. `"0.2.0"`) and commit.
+2. Push a matching tag:
+
+   ```bash
+   git tag v0.2.0
+   git push origin v0.2.0
+   ```
+
+The workflow checks that the tag matches `APP_VERSION` (the version is part of the DB file name) and builds:
+
+| Platform | Runner | Files |
+|---|---|---|
+| macOS (Intel + Apple Silicon) | `macos-latest` | `dnd-builder-v3-<ver>-macos-universal.zip` (the .app) |
+| Windows x64 | `windows-latest` | `…-windows-amd64.zip` (the .exe) and `…-windows-amd64-installer.exe` (NSIS) |
+| Linux x64 | `ubuntu-24.04` | `…-linux-amd64.tar.gz` (needs `libgtk-3-0` and `libwebkit2gtk-4.1-0`) |
+
+Then it creates the release with these files and auto-generated notes. A tag with a suffix (`v0.2.0-beta.1`) becomes a pre-release. **Actions → Release → Run workflow** builds without releasing (the files are in the run's artifacts).
+
+The builds are not code-signed: on macOS open the app the first time with right-click → Open (or `xattr -dr com.apple.quarantine "dnd-builder-v3.app"`); on Windows SmartScreen asks for confirmation.
+
 ## Web version (no desktop)
 
 The same frontend can be built into a single self-contained `index.html` that runs from `file://` (storage is IndexedDB instead of SQLite):

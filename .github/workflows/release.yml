@@ -1,0 +1,153 @@
+# Release builds: push a tag vX.Y.Z → builds for macOS, Windows and Linux →
+# a GitHub Release with the files attached.
+#
+#   1. bump APP_VERSION in constants.go (e.g. "0.2.0") and commit
+#   2. git tag v0.2.0 && git push origin v0.2.0
+#
+# The tag must match APP_VERSION (it is part of the DB file name), otherwise the run fails.
+# A tag with a suffix (v0.2.0-beta.1) creates a pre-release.
+# Run manually (Actions → Release → Run workflow) to only build and download the artifacts, without a release.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  WAILS_VERSION: v2.15.0 # the same as github.com/wailsapp/wails/v2 in go.mod
+  NODE_VERSION: "22"
+
+jobs:
+  version:
+    name: Check version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          app=$(sed -n 's/^const APP_VERSION = "\(.*\)"/\1/p' constants.go)
+          if [ -z "$app" ]; then echo "::error::APP_VERSION not found in constants.go"; exit 1; fi
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            tag="${GITHUB_REF_NAME#v}"
+            if [ "${tag%%-*}" != "$app" ]; then
+              echo "::error::tag ${GITHUB_REF_NAME} does not match APP_VERSION \"$app\" in constants.go"
+              exit 1
+            fi
+            echo "version=$tag" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=$app-dev.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    name: Build (${{ matrix.name }})
+    needs: version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macos
+            os: macos-latest
+            platform: darwin/universal
+          - name: windows
+            os: windows-latest
+            platform: windows/amd64
+          - name: linux
+            os: ubuntu-24.04
+            platform: linux/amd64
+    runs-on: ${{ matrix.os }}
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+      APP: dnd-builder-v3
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Linux dependencies (GTK, WebKitGTK)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
+
+      - name: NSIS (Windows installer)
+        if: runner.os == 'Windows'
+        run: choco install nsis -y --no-progress
+
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@${WAILS_VERSION}
+
+      # the version goes into Info.plist (macOS) and the file properties (Windows)
+      - name: Set product version
+        run: |
+          node -e '
+            const fs = require("fs");
+            const w = JSON.parse(fs.readFileSync("wails.json", "utf8"));
+            w.info = { ...(w.info || {}), productVersion: process.env.VERSION.split("-")[0] };
+            fs.writeFileSync("wails.json", JSON.stringify(w, null, 2));
+          '
+
+      - name: Build
+        run: |
+          flags="-platform ${{ matrix.platform }} -clean -trimpath -ldflags=-s"
+          case "${{ runner.os }}" in
+            Linux)   flags="$flags -tags webkit2_41" ;;   # Ubuntu 24.04 ships WebKitGTK 4.1
+            Windows) flags="$flags -nsis" ;;
+          esac
+          wails build $flags
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cd build/bin
+          case "${{ runner.os }}" in
+            macOS)
+              ditto -c -k --keepParent "$APP.app" "../../dist/$APP-$VERSION-macos-universal.zip" ;;
+            Windows)
+              7z a "../../dist/$APP-$VERSION-windows-amd64.zip" "$APP.exe"
+              mv ./*installer.exe "../../dist/$APP-$VERSION-windows-amd64-installer.exe" ;;
+            Linux)
+              tar -czf "../../dist/$APP-$VERSION-linux-amd64.tar.gz" "$APP" ;;
+          esac
+          ls -la ../../dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APP }}-${{ matrix.name }}
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    name: GitHub Release
+    needs: [version, build]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: D&D Builder ${{ github.ref_name }}
+          files: dist/*
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
