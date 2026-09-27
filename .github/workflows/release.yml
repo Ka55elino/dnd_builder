@@ -151,7 +151,7 @@ jobs:
   android:
     name: Build (android)
     needs: version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # has libwebkitgtk-6.0 for the wails3 CLI
     continue-on-error: true # Wails v3 mobile support is experimental
     env:
       VERSION: ${{ needs.version.outputs.version }}
@@ -178,6 +178,12 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+
+      # the wails3 CLI itself links against GTK4/WebKitGTK on Linux (even for Android builds)
+      - name: Linux dependencies for the Wails CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libgtk-4-dev libwebkitgtk-6.0-dev
 
       # the Android SDK and NDK are preinstalled on ubuntu-latest
       - name: Android NDK
