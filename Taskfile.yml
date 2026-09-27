@@ -35,6 +35,23 @@ tasks:
     cmds:
       - task: "{{.GOOS}}:run"
 
+  version:
+    summary: Shows the app version and checks every file carries it (APP_VERSION in constants.go is the source)
+    cmds:
+      - go run ./tools/version
+
+  version:set:
+    summary: "Sets the app version everywhere: wails3 task version:set VERSION=0.3.1"
+    requires:
+      vars: [VERSION]
+    cmds:
+      - go run ./tools/version {{.VERSION}}
+
+  version:sync:
+    summary: Copies APP_VERSION from constants.go to build/config.yml and the platform files in build/
+    cmds:
+      - go run ./tools/version -sync
+
   dev:
     summary: Runs the application in development mode
     cmds:

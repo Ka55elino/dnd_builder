@@ -2,11 +2,12 @@
 # a GitHub Release with the files attached.
 # Mobile builds are experimental in Wails v3: if they fail, the desktop release is still published.
 #
-#   1. bump APP_VERSION in constants.go and info.version in build/config.yml (e.g. "0.2.0"), commit
+#   1. wails3 task version:set VERSION=0.2.0   (or: go run ./tools/version 0.2.0) — sets APP_VERSION
+#      in constants.go and the version in every build/ file, commit
 #   2. git tag v0.2.0 && git push origin v0.2.0
 #
-# The tag must match APP_VERSION (it is part of the DB file name) and info.version in
-# build/config.yml, otherwise the run fails.
+# The tag must match APP_VERSION (it is part of the DB file name), and all build/ files must
+# carry the same version (tools/version checks it), otherwise the run fails.
 # A tag with a suffix (v0.2.0-beta.1) creates a pre-release.
 # Run manually (Actions → Release → Run workflow) to only build and download the artifacts, without a release.
 
@@ -31,6 +32,12 @@ jobs:
       version: ${{ steps.v.outputs.version }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: All files carry APP_VERSION
+        run: go run ./tools/version
       - id: v
         run: |
           app=$(sed -n 's/^const APP_VERSION = "\(.*\)"/\1/p' constants.go)

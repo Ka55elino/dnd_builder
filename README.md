@@ -34,6 +34,81 @@ What the command does (configured in `build/config.yml` → `dev_mode`):
 
 `wails3 task --list` shows all tasks (build, package, per-platform tasks).
 
+## Testing the LAN game without a second device
+
+Two console tools stand in for the other side of a game (`tools/fakeplayer`, `tools/fakegame`).
+Run them **from the project root** in a separate terminal while the app is running (`wails3 dev`).
+Both use the real network code (`lan/`), so they talk to the app exactly like another copy of it would.
+
+Don't start a second copy of the app on the same Mac instead: in dev mode it recreates the database on start.
+
+### `fakeplayer` — fake players for the DM screen ("Start Game")
+
+1. In the app: **Start Game** → enter a name → Submit.
+2. In a terminal:
+
+   ```bash
+   go run ./tools/fakeplayer                        # 1 player → 127.0.0.1:47800
+   go run ./tools/fakeplayer -n 3                   # 3 players with different characters
+   go run ./tools/fakeplayer -character rogue       # a specific character (id or part of the name)
+   go run ./tools/fakeplayer -name Bruenor          # rename the character (-n 3 → Bruenor 1, 2, 3)
+   go run ./tools/fakeplayer -list                  # which characters are available and where from
+   go run ./tools/fakeplayer -addr 192.168.1.42:47800   # a DM on another machine
+   go run ./tools/fakeplayer -discover              # only list the games found on the network (mDNS)
+   ```
+
+Each fake player joins with a **real character**: a random one from the app's database (the newest
+`dnd-*.db` in `~/Library/Application Support/DnD-builder-v3/`, override with `-db <file>`), or from
+the seed files in `assets/data/characters/` if there is no database (`-seeds <dir>`). So the DM sees full
+character cards in the party.
+
+It behaves like the player's app: it applies the DM's Damage / Heal / Temp HP and reports the new state
+back (the card updates), and prints whispers and gifts from the DM in the console (gifts are not stored —
+it has no database of its own). Leaving (`quit` or Ctrl+C) removes its card from the DM's screen.
+
+Console commands, after joining:
+
+| Command | What it does |
+|---|---|
+| `roll {"d":20,"value":17}` | sends an event `roll` with that JSON to the DM, from every fake player |
+| `ping` | an event without data |
+| `quit` | leave the game (Ctrl+C works too) |
+
+### `fakegame` — a fake DM for the player screen ("Join Game")
+
+1. In a terminal:
+
+   ```bash
+   go run ./tools/fakegame                     # "Test Game" on port 47800 (or the next free one)
+   go run ./tools/fakegame -name "Lost Mine"
+   ```
+
+2. In the app: **Join Game** → the game shows up in the list (mDNS); if it doesn't, connect by address
+   `127.0.0.1:47800` → pick a character. The app must not be hosting a game itself (the port is taken).
+
+It prints who joins and leaves and every event the players send (their character state after each change).
+Console commands — the same actions as the buttons on the DM's player card:
+
+| Command | What it does |
+|---|---|
+| `players` | list the players: id, name, class, level |
+| `w grom You hear a click behind you.` | whisper: a popup only that player sees, until they close it |
+| `dmg grom 5` · `heal grom 3` · `temp grom 4` | Damage / Heal / set Temp HP |
+| `items` | the named items that can be given (from `assets/data`, or `-data <dir>`) |
+| `give grom dawnbringer` · `give grom elven chain 2` | give an item (id or part of its name) and a quantity: it lands in the character's backpack |
+| `start {"round":1}` | any event with JSON, to all players |
+| `@grom hp {"op":"damage","amount":5}` | any event to one player |
+| `quit` | end the game (Ctrl+C works too): players see "The DM ended the game" |
+
+`<player>` is the full name, its first word (`grom` for "Grom Stonejaw") or the start of the player id
+(see `players`); case doesn't matter.
+
+### Both at once, and the network part
+
+- `fakegame` + `fakeplayer` also work together without the app — handy to watch the protocol in the console.
+- To check that a game is visible on the network at all (without our code): `dns-sd -B _dndbuilder._tcp` (macOS).
+- The network layer has its own tests: `go test -race ./lan` (host + player, events, leave/rejoin, reconnect).
+
 ## Building
 
 ```bash
@@ -49,23 +124,49 @@ wails3 task windows:package            # Windows: .exe + NSIS installer (needs m
 wails3 task linux:build                # Linux binary
 ```
 
-Build configuration: `Taskfile.yml` (root) + `build/config.yml` (name, identifier, version) + generated platform files in `build/<platform>/`. After changing `info` in `build/config.yml`, regenerate them: `wails3 task common:update:build-assets`. Icons for all platforms are generated from `build/appicon.png`.
+Build configuration: `Taskfile.yml` (root) + `build/config.yml` (name, identifier, version) + generated platform files in `build/<platform>/`. After changing `info` in `build/config.yml` (other than the version — see [Version](#version)), regenerate them: `wails3 task common:update:build-assets` (this overwrites manual edits in those files). Icons for all platforms are generated from `build/appicon.png`.
 
 A build for a given OS must be done **on that OS** (or in the Docker cross-build image, see `wails3 task setup:docker`). CI builds all three platforms, see below.
+
+## Version
+
+The version lives in one place — `APP_VERSION` in `constants.go`. Every other file that carries it
+(`build/config.yml`, `Info.plist` for macOS/iOS, the Windows, Linux and Android packaging files) is
+updated from it by `tools/version`, which changes only the version strings, so manual edits in those
+files are kept (unlike `wails3 task common:update:build-assets`, which regenerates them):
+
+```bash
+wails3 task version                      # show the version and check every file carries it
+wails3 task version:set VERSION=0.3.1    # set a new version everywhere
+wails3 task version:sync                 # APP_VERSION was edited by hand: copy it to the other files
+```
+
+Without the Taskfile: `go run ./tools/version`, `go run ./tools/version 0.3.1`, `go run ./tools/version -sync`.
+
+The version is part of the database file name (`dnd-v<version>.db`), so a new version starts with its
+own fresh database.
 
 ## Releases (CI)
 
 `.github/workflows/release.yml` builds the app on GitHub Actions and publishes a GitHub Release:
 
-1. Bump `APP_VERSION` in `constants.go` and `info.version` in `build/config.yml` (e.g. `"0.2.0"`) and commit.
+1. Set the version and commit:
+
+   ```bash
+   wails3 task version:set VERSION=0.3.1
+   git add -A
+   git commit -m "Release 0.3.1"
+   ```
+
 2. Push a matching tag:
 
    ```bash
-   git tag v0.2.0
-   git push origin v0.2.0
+   git tag -a v0.3.1 -m "v0.3.1"
+   git push origin master
+   git push origin v0.3.1
    ```
 
-The workflow checks that the tag matches `APP_VERSION` (the version is part of the DB file name) and `build/config.yml`, then builds with `wails3 task …`:
+The workflow checks that every file carries `APP_VERSION` (`go run ./tools/version`) and that the tag matches it, then builds with `wails3 task …`:
 
 | Platform | Runner | Files |
 |---|---|---|
@@ -97,7 +198,7 @@ The output goes to `frontend/dist/`.
 dnd-builder-v3/
 ├── main.go                # entry point: application, window, embedded frontend, App service, /img/ middleware
 ├── app.go                 # Go methods called from the frontend (GetRaces, SaveCharacter, SaveCustomSpell, …)
-├── constants.go           # APP_NAME, APP_VERSION (the version is part of the DB file name)
+├── constants.go           # APP_NAME, APP_VERSION — the single source of the version (part of the DB file name)
 ├── mode_dev.go            # devMode = true  (no `production` tag, `wails3 dev`: the DB is recreated on every start)
 ├── mode_prod.go           # devMode = false (`production` tag, `wails3 build`: the DB persists)
 ├── Taskfile.yml           # Wails v3 build tasks (includes build/<platform>/Taskfile.yml)
@@ -124,8 +225,10 @@ dnd-builder-v3/
 │   │   └── characters/    #   sample characters (seeded in dev mode only)
 │   └── images/            # built-in images, same paths as assets/data (served as /img/…)
 ├── tools/
-│   ├── imagegen.py        # local image generation (Stable Diffusion via diffusers; prompt from an assets/data record)
-│   └── img2b64.py         # image → PNG (optional background removal); --into puts it into assets/images + sets the JSON "image" path
+│   ├── img2b64.py         # image → PNG (optional background removal); --into puts it into assets/images + sets the JSON "image" path
+│   ├── fakeplayer/        # fake players for testing the DM screen (see "Testing the LAN game")
+│   ├── fakegame/          # a fake DM for testing the player screen
+│   └── version/           # sets/checks the app version in every file from APP_VERSION (see "Version")
 ├── frontend/              # Svelte 5 + Vite
 │   ├── index.html
 │   ├── package.json
@@ -193,62 +296,3 @@ python3 tools/img2b64.py drow.jpeg --cut --size 512 --into assets/data/races/elf
 | `--png out.png` | also save the resulting PNG, e.g. to compare the presets |
 
 Restart `wails3 dev` afterwards: in dev mode the DB is recreated and reseeded on every start.
-
-### Generating images locally — `tools/imagegen.py`
-
-Generates images with a local Stable Diffusion model through 🤗 diffusers: no API, no key, works offline after the first download. It runs on Apple Silicon (MPS), NVIDIA (CUDA) or, slowly, on the CPU.
-
-```bash
-pip3 install torch torchvision diffusers transformers accelerate safetensors pillow numpy
-```
-
-On the first run the model is downloaded from Hugging Face (~7 GB, cached in `~/.cache/huggingface`). For SDXL on a Mac, 16 GB of RAM or more is recommended.
-
-**Models** (`--model`):
-
-| Preset | Model | Size | Steps | Use for |
-|---|---|---|---|---|
-| `sdxl` (default) | `stabilityai/stable-diffusion-xl-base-1.0` | 1024 px | 30 | final images |
-| `sdxl-turbo` | `stabilityai/sdxl-turbo` | 512 px | 4 | fast drafts |
-| any Hugging Face id | a text-to-image pipeline | — | 30 | experiments |
-
-**Prompts.** With `--from` the prompt is built from an `assets/data` record:
-
-- species and classes become an **emblem**: name, parent class or species, and up to 3 feature names as symbols;
-- equipment (weapons, armor, items, packs) becomes an **inventory icon** of the object itself.
-
-A short house style and a negative prompt (no text, frames, people, clutter) are appended. The background is always plain black, so `img2b64.py --cut` removes it cleanly. Check the prompts without loading a model:
-
-```bash
-python3 tools/imagegen.py --from "assets/data/armor/heavy/*.json" --dry-run
-```
-
-**Typical workflow:**
-
-```bash
-# 1. fast drafts: 4 variants per record → tools/out/<id>-1.png … <id>-4.png (each with its seed)
-python3 tools/imagegen.py --from "assets/data/armor/heavy/*.json" --model sdxl-turbo -n 4
-
-# 2. final quality (or re-render a draft you liked: --seed <its seed> -n 1)
-python3 tools/imagegen.py --from assets/data/armor/heavy/plate.json -n 4
-
-# 3. put the chosen variant into the app
-python3 tools/img2b64.py tools/out/plate-3.png --cut --size 512 --into assets/data/armor/heavy/plate.json
-```
-
-Or in one go (the first variant goes into the app): `--into`, with `--cut glow` for glowing subjects.
-
-**Other options:**
-
-| Option | What it does |
-|---|---|
-| `"text"` (positional) | a free-form prompt; with `--from` it is added to the record's prompt, e.g. `"gold trim, lion motif"` |
-| `-n N` | number of variants (seeds `seed`, `seed+1`, …) |
-| `--seed N` | fixed seed: the same seed and prompt give the same image |
-| `--steps N`, `--guidance X`, `--size PX` | override the preset |
-| `--refs N` | use N sibling icons (the parent and neighbours) as style references — IP-Adapter, SDXL only, ~3 GB extra download on first use |
-| `--ref file.png`, `--ref-scale 0.5` | your own style reference and how strongly it steers the result (0–1) |
-| `--no-style`, `--negative "…"` | drop the house style / replace the negative prompt |
-| `--force` | with a glob: also records that already have a PNG image (by default they are skipped) |
-| `--out DIR` | output folder (default `tools/out/`, git-ignored) |
-
