@@ -32,6 +32,10 @@ const (
 	MsgError   = "error"   // DM → player: request rejected
 )
 
+// EventKindState is the game event a player sends with its current character
+// state ({"state": {...}}); the host keeps the latest one in the snapshot.
+const EventKindState = "state"
+
 // Envelope is the wire format of every message.
 type Envelope struct {
 	Type    string          `json:"type"`

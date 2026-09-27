@@ -11,6 +11,9 @@
      * `state` may be a plain object or a CharacterState; updating it updates the card.
      * fallback — { className, level } shown if the build can't be computed (e.g. a lobby row);
      * note — the line under it.
+     * onHp(op, amount) — show an amount input + Damage / Heal / Temp HP buttons.
+     * onWhisper(text) — show a "whisper" button: a dialog to send the player a private message.
+     * onGive(kind, item) — show a "give item" button: a dialog with the named items of the catalog.
      */
     import { GetCharacter, GetCharacterState } from "../api.js";
     import { loadRefs, EMPTY_REFS } from "../data/refs.js";
@@ -18,8 +21,39 @@
     import { CharacterBuild, BIO_GROUPS } from "../models/CharacterBuild.svelte.js";
     import { CharacterState } from "../models/CharacterState.svelte.js";
     import { ABILITIES, ABILITY_KEYS, formatModifier } from "../rules/abilities.js";
+    import Icon from "./common/Icon.svelte";
+    import WhisperDialog from "./WhisperDialog.svelte";
+    import GiveItemDialog from "./GiveItemDialog.svelte";
 
-    let { id = null, build: buildData = null, state: stateData = null, fallback = null, note = "Character sheet unavailable" } = $props();
+    let { id = null, build: buildData = null, state: stateData = null, fallback = null, note = "Character sheet unavailable", onHp = null, onWhisper = null, onGive = null } = $props();
+
+    let whisperOpen = $state(false);
+    let giveOpen = $state(false);
+
+    // Hit Points controls (shown when onHp is passed, e.g. the DM's card):
+    // onHp(op, amount) — op: 'damage' | 'heal' | 'temp'; may return a promise
+    let hpAmount = $state(1);
+    let hpBusy = $state(false);
+    let hpError = $state("");
+    const HP_ACTIONS = [
+        { id: "damage", cls: "dmg", icon: "hpDamage", short: "−", label: "Damage" },
+        { id: "heal", cls: "heal", icon: "hpHeal", short: "+", label: "Heal" },
+        { id: "temp", cls: "temp", icon: "hpTemp", short: "T", label: "Temp HP" },
+    ];
+
+    async function hpAction(op) {
+        const n = Math.floor(Number(hpAmount));
+        if (!onHp || !Number.isFinite(n) || n < 0 || (n === 0 && op !== "temp")) return;
+        hpBusy = true;
+        hpError = "";
+        try {
+            await onHp(op, n);
+        } catch (e) {
+            hpError = e?.message ?? String(e);
+        } finally {
+            hpBusy = false;
+        }
+    }
 
     let ref = $state(EMPTY_REFS);
     let loaded = $state(null); // { build, state } from the DB when `id` is given
@@ -145,6 +179,49 @@
             <div class="bar" role="meter" aria-valuenow={hp} aria-valuemin="0" aria-valuemax={maxHp} aria-label="Hit Points">
                 <span class="fill" style:width="{hpPct}%"></span>
             </div>
+            {#if onHp || onWhisper || onGive}
+                <div class="dm-ctl">
+                {#if onHp}
+                    <div class="hp-ctl" class:busy={hpBusy}>
+                        <input class="hp-input" type="number" min="0" bind:value={hpAmount} aria-label="Hit Points amount" />
+                        <div class="hp-btns">
+                            {#each HP_ACTIONS as act (act.id)}
+                                <button
+                                    class="hp-btn {act.cls}"
+                                    onclick={() => hpAction(act.id)}
+                                    aria-label={act.label}
+                                    title="{act.label} {act.id === 'temp' ? 'set to' : 'by'} {hpAmount || 0}"
+                                    disabled={hpBusy}
+                                >
+                                    <Icon name={act.icon} label={act.label} short={act.short} native={false} />
+                                </button>
+                            {/each}
+                        </div>
+                        {#if hpError}<span class="hp-error" title={hpError}>{hpError}</span>{/if}
+                    </div>
+                {/if}
+                {#if onWhisper}
+                    <button
+                        class="side-btn whisper-btn"
+                        onclick={() => (whisperOpen = true)}
+                        title="Whisper to {build.name}"
+                        aria-label="Whisper to {build.name}"
+                    >
+                        <Icon name="whisper" label="Whisper" short="…" native={false} />
+                    </button>
+                {/if}
+                {#if onGive}
+                    <button
+                        class="side-btn give-btn"
+                        onclick={() => (giveOpen = true)}
+                        title="Give {build.name} an item"
+                        aria-label="Give {build.name} an item"
+                    >
+                        <Icon name="gift" label="Give item" short="+" native={false} />
+                    </button>
+                {/if}
+                </div>
+            {/if}
             {#if hp <= 0 && health.key !== "dead"}
                 <div class="death">
                     Death saves
@@ -240,6 +317,14 @@
         {/if}
     {/if}
 </article>
+
+{#if giveOpen && onGive}
+    <GiveItemDialog to={build?.name ?? ""} {onGive} onClose={() => (giveOpen = false)} />
+{/if}
+
+{#if whisperOpen && onWhisper}
+    <WhisperDialog to={build?.name ?? ""} onSend={onWhisper} onClose={() => (whisperOpen = false)} />
+{/if}
 
 <style>
     .brief {
@@ -394,6 +479,131 @@
         background: var(--hp-color);
         border-radius: inherit;
         transition: width 0.3s ease, background 0.3s;
+    }
+
+    /* Hit Points controls: amount + Damage / Heal / Temp HP */
+    /* DM controls: Hit Points block + whisper button, side by side */
+    .dm-ctl {
+        --btn: 34px;
+        --gap: 6px;
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        margin-top: 2px;
+    }
+
+    /* amount on top, the three buttons under it, same width */
+    .hp-ctl {
+        width: calc(3 * var(--btn) + 2 * var(--gap));
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--gap);
+    }
+
+    .hp-btns {
+        display: flex;
+        gap: var(--gap);
+    }
+
+    .hp-ctl.busy {
+        opacity: 0.6;
+    }
+
+    .hp-input {
+        width: 100%;
+        box-sizing: border-box;
+        height: 30px;
+        padding: 0 6px;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        font-family: var(--font-heading);
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .hp-input:focus {
+        outline: none;
+        border-color: var(--color-gold);
+    }
+
+    .hp-btn {
+        --c: var(--color-text-secondary);
+        width: var(--btn);
+        height: 30px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--c);
+        cursor: pointer;
+    }
+
+    .hp-btn :global(.icon) {
+        width: 16px;
+        height: 16px;
+        color: var(--c);
+    }
+
+    .hp-btn.dmg { --c: var(--color-danger); }
+    .hp-btn.heal { --c: var(--color-success); }
+    .hp-btn.temp { --c: var(--color-text-accent); }
+
+    .hp-btn:not(:disabled):hover {
+        border-color: var(--c);
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+    }
+
+    /* whisper / give item: as tall as the Hit Points block */
+    .side-btn {
+        --c: var(--color-text-secondary);
+        --c-border: var(--color-border);
+        width: 44px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .side-btn :global(.icon) {
+        width: 20px;
+        height: 20px;
+        color: var(--c);
+    }
+
+    .side-btn:hover {
+        border-color: var(--c-border);
+        background: color-mix(in srgb, var(--c-border) 15%, transparent);
+    }
+
+    .whisper-btn {
+        --c: var(--color-meta-concentration);
+        --c-border: var(--color-magic-purple);
+    }
+
+    .give-btn {
+        --c: var(--color-gold);
+        --c-border: var(--color-gold);
+    }
+
+    .hp-btn:disabled {
+        cursor: default;
+    }
+
+    .hp-error {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 11px;
+        color: var(--color-danger);
     }
 
     .death {

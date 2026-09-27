@@ -87,7 +87,7 @@
 
 {#if joined && server.characterId}
     {#key server.characterId}
-        <CharacterPage id={server.characterId} onBack={onBack} backLabel="← Menu" actions={gameActions} />
+        <CharacterPage id={server.characterId} onBack={onBack} backLabel="← Menu" actions={gameActions} inGame />
     {/key}
 {:else}
 <div class="page">

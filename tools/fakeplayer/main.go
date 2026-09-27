@@ -5,7 +5,9 @@
 // Each fake player joins with a real character — picked at random from the
 // app's database (the newest dnd-*.db in the app data folder), or from the
 // seed files in assets/data/characters if there is no database — so the DM
-// sees a full character card.
+// sees a full character card. Like the real app, it applies the DM's "hp"
+// events (Damage / Heal / Temp HP) and reports the new state back, and prints
+// the DM's whispers and gifts (it doesn't store gifts — it has no database of its own).
 //
 //	go run ./tools/fakeplayer                        # 1 random character → 127.0.0.1:47800
 //	go run ./tools/fakeplayer -n 3                   # 3 different characters
@@ -80,11 +82,21 @@ func main() {
 			}
 			c = c.withName(nm)
 		}
-		m := lan.NewManager(printer(c.info.Name))
+		hp := newHPState(c.snap.State)
+		var m *lan.Manager
+		logEvent := printer(c.info.Name)
+		m = lan.NewManager(func(name string, data any) {
+			logEvent(name, data)
+			// act like the real app: apply the DM's "hp" and report the new state
+			if ev, ok := data.(lan.Event); ok && ev.Kind == "hp" && hp.apply(ev.Data) {
+				hp.send(m, c.info.Name)
+			}
+		})
 		st, err := m.Join(*addr, c.info, c.snap)
 		if err != nil {
 			log.Fatalf("%s: %v", c.info.Name, err)
 		}
+		hp.send(m, c.info.Name) // like the app does right after opening the sheet
 		log.Printf("%s (%s, level %d) joined “%s” as %s", c.info.Name, c.info.ClassName, c.info.Level, st.Game.Name, st.PlayerID)
 		players = append(players, m)
 	}
@@ -156,6 +168,31 @@ func printer(who string) func(string, any) {
 			}
 			log.Printf("[%s] %s · lobby: %s", who, v.State, strings.Join(names, ", "))
 		case lan.Event:
+			if v.Kind == "give" { // the app stores it in the backpack and shows a popup
+				var g struct {
+					Name string `json:"name"`
+					ID   string `json:"id"`
+					Kind string `json:"kind"`
+					Qty  int    `json:"qty"`
+				}
+				_ = json.Unmarshal(v.Data, &g)
+				log.Printf("[%s] ┌─ The DM gives you ────────────", who)
+				log.Printf("[%s] │ %s ×%d  (%s %s)", who, g.Name, max(g.Qty, 1), g.Kind, g.ID)
+				log.Printf("[%s] └───────────────────────────────", who)
+				return
+			}
+			if v.Kind == "whisper" { // what the app shows as a popup
+				var w struct {
+					Text string `json:"text"`
+				}
+				_ = json.Unmarshal(v.Data, &w)
+				log.Printf("[%s] ┌─ The DM whispers ─────────────", who)
+				for _, line := range strings.Split(w.Text, "\n") {
+					log.Printf("[%s] │ %s", who, line)
+				}
+				log.Printf("[%s] └───────────────────────────────", who)
+				return
+			}
 			to := "all"
 			if v.To != "" {
 				to = "me"

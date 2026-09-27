@@ -11,6 +11,7 @@
     import StatusBar from './components/StatusBar.svelte';
     import GamePage from './components/GamePage.svelte';
     import JoinPage from './components/JoinPage.svelte';
+    import WhisperPopups from './components/WhisperPopups.svelte';
 
     /**
      * Screens:
@@ -87,6 +88,7 @@
 {/if}
 </div>
 
+<WhisperPopups />
 <QueryLoader />
 
 <style>

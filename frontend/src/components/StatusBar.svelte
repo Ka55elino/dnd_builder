@@ -3,9 +3,37 @@
      * Global status header, shown on every screen:
      * the game server status (host / player / not connected) and, while
      * hosting, the "ip:port" to share — click copies it to the clipboard.
+     * While in a game, ✕ ends it (DM) or leaves it (player); the first click
+     * asks, the second confirms (in-app, no OS dialog — works the same on every platform).
      */
     import { Clipboard } from '@wailsio/runtime';
+    import { StopGame, LeaveGame } from '../api.js';
     import { server, STATUS_LABELS, gameAddress } from '../server.svelte.js';
+
+    let inGame = $derived(!!server.role && !!server.game);
+    let confirming = $state(false);
+    let confirmTimer;
+
+    function askClose() {
+        confirming = true;
+        clearTimeout(confirmTimer);
+        confirmTimer = setTimeout(() => (confirming = false), 4000); // forget if not confirmed
+    }
+
+    async function close() {
+        clearTimeout(confirmTimer);
+        confirming = false;
+        try {
+            await (server.role === 'host' ? StopGame() : LeaveGame());
+        } catch (e) {
+            console.error('[status-bar]', e);
+        }
+    }
+
+    // a new game shouldn't start in the "confirm" state
+    $effect(() => {
+        if (!inGame) confirming = false;
+    });
 
     let address = $derived(server.role === 'host' && server.game ? gameAddress(server.game) : '');
     let copied = $state(false);
@@ -50,6 +78,23 @@
         <button class="ip" class:copied onclick={copy} title="Click to copy — players type this address in “Join Game”">
             {copied ? 'Copied!' : address}
         </button>
+    {/if}
+
+    {#if inGame}
+        {#if confirming}
+            <span class="confirm">
+                {server.role === 'host' ? 'End the game for everyone?' : 'Leave the game?'}
+                <button class="yes" onclick={close}>{server.role === 'host' ? 'End' : 'Leave'}</button>
+                <button class="no" onclick={() => (confirming = false)}>Cancel</button>
+            </span>
+        {:else}
+            <button
+                class="close"
+                onclick={askClose}
+                title={server.role === 'host' ? 'End the game' : 'Leave the game'}
+                aria-label={server.role === 'host' ? 'End the game' : 'Leave the game'}>✕</button
+            >
+        {/if}
     {/if}
 </header>
 
@@ -97,6 +142,58 @@
     .ip.copied {
         border-color: var(--color-success);
         color: var(--color-success);
+    }
+
+    .close {
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: var(--color-text-muted);
+        font-size: 12px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    .confirm {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--color-text-secondary);
+    }
+
+    .confirm button {
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .confirm .yes {
+        background: var(--color-danger);
+        border: 1px solid var(--color-danger);
+        color: var(--color-text-primary);
+    }
+
+    .confirm .no {
+        background: transparent;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+    }
+
+    .confirm .no:hover {
+        border-color: var(--color-gold);
+        color: var(--color-gold-hover);
     }
 
     .server {

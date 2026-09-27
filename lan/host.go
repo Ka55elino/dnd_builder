@@ -227,9 +227,26 @@ func (h *host) readLoop(s *seat, p *peer) {
 			}
 			ev.From = s.info.ID // never trust the sender
 			ev.To = ""
+			if ev.Kind == EventKindState {
+				h.updateState(s, ev.Data)
+			}
 			h.m.emit(EventGameEvent, ev)
 		}
 	}
+}
+
+// updateState keeps the player's latest state in the snapshot, so the DM's
+// screen shows current Hit Points even when it is opened later.
+func (h *host) updateState(s *seat, data json.RawMessage) {
+	var body struct {
+		State map[string]any `json:"state"`
+	}
+	if json.Unmarshal(data, &body) != nil || body.State == nil {
+		return
+	}
+	h.mu.Lock()
+	s.snap.State = body.State
+	h.mu.Unlock()
 }
 
 // changed rebroadcasts the lobby, updates the mDNS player count and the UI.

@@ -17,10 +17,14 @@
      * onLevelUp / onGiveItem / onEdit — the matching header button is shown
      *   only when the handler is passed (in a game they are left out)
      * backLabel — text of the back button
+     * inGame — the sheet of a player in a LAN game: applies the DM's "hp" events,
+     *   shows items the DM gives, and reports every state change to the DM (see game.js)
      * actions(leave) — optional snippet at the right of the header (e.g. "Leave game");
      *   wrap handlers in leave(fn) so unsaved state is saved first
      */
     import { onMount } from "svelte";
+    import { onGameEvent } from "../server.svelte.js";
+    import { EV, applyHp, sendState, findItem } from "../game.js";
     import {
         GetCharacter,
         GetCharacterState,
@@ -43,7 +47,7 @@
         formatModifier,
     } from "../rules/abilities.js";
 
-    let { id, onBack, onEdit, onLevelUp, onGiveItem, backLabel = "← Characters", actions } = $props();
+    let { id, onBack, onEdit, onLevelUp, onGiveItem, backLabel = "← Characters", actions, inGame = false } = $props();
 
     let raw = $state(null); // as loaded from the DB — for editing
     let build = $state(null);
@@ -120,6 +124,29 @@
 
     const stateJson = $derived(state ? JSON.stringify(state) : null); // reads all fields → subscription
     const dirty = $derived(stateJson != null && savedJson != null && stateJson !== savedJson);
+
+    // --- LAN game: the DM changes Hit Points, the DM's card follows our state ---
+    $effect(() => {
+        if (!inGame) return;
+        return onGameEvent((ev) => {
+            if (ev?.kind === EV.HP) applyHp(state, character, ev.data); // autosave picks it up
+            // a gift is stored in the DB by WhisperPopups; here it only shows up in the backpack
+            if (ev?.kind === EV.GIVE && build && findItem(ref.catalog, ev.data?.kind, ev.data?.id)) {
+                build.addToBag(ev.data.kind, ev.data.id, Math.max(1, Math.floor(Number(ev.data.qty) || 1)));
+            }
+        });
+    });
+
+    let syncTimer;
+    $effect(() => {
+        if (!inGame || stateJson == null) return;
+        const json = stateJson; // on load and after every change
+        clearTimeout(syncTimer);
+        syncTimer = setTimeout(() => {
+            sendState(JSON.parse(json)).catch((e) => console.warn("[game] state not sent:", e));
+        }, 250);
+        return () => clearTimeout(syncTimer);
+    });
 
     // the first value is what was loaded: it is already saved
     $effect(() => {

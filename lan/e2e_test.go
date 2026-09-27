@@ -78,6 +78,15 @@ func TestE2E(t *testing.T) {
 		t.Fatal(err)
 	}
 	wait(t, "event at DM", func() bool { return hr.has(`net:event {"kind":"roll","from":"` + pid + `"`) })
+	// player's state updates are kept in the snapshot
+	if err := pl.Send(EventKindState, "", json.RawMessage(`{"state":{"hpLost":4}}`)); err != nil {
+		t.Fatal(err)
+	}
+	wait(t, "state kept", func() bool {
+		s, _ := dm.PlayerCharacter(pid)
+		return s.State != nil && s.State["hpLost"] == float64(4)
+	})
+
 	// DM → player (direct and broadcast)
 	if err := dm.Send("hp", pid, json.RawMessage(`{"hp":-5}`)); err != nil {
 		t.Fatal(err)

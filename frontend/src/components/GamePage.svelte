@@ -9,7 +9,8 @@
      */
     import { untrack } from 'svelte';
     import { HostGame, StopGame, GetPlayerCharacter } from '../api.js';
-    import { server, applyStatus } from '../server.svelte.js';
+    import { server, applyStatus, onGameEvent } from '../server.svelte.js';
+    import { EV, sendHp, sendWhisper, sendGive } from '../game.js';
     import CharacterBrief from './CharacterBrief.svelte';
 
     let { onBack } = $props();
@@ -23,12 +24,23 @@
 
     // player id → character snapshot { build, state } | { error }
     let snaps = $state({});
+    // player id → latest state reported by the player (newer than snaps[id].state)
+    let live = $state({});
+
+    // players report their state after every change — keep the cards current
+    $effect(() =>
+        onGameEvent((ev) => {
+            if (ev?.kind !== EV.STATE || !ev.from || !ev.data?.state) return;
+            live[ev.from] = ev.data.state; // may arrive before the snapshot is fetched
+        }),
+    );
 
     // fetch snapshots of new players, drop those who left
     $effect(() => {
         const ids = new Set(server.players.map((p) => p.id));
         untrack(() => {
             for (const id of Object.keys(snaps)) if (!ids.has(id)) delete snaps[id];
+            for (const id of Object.keys(live)) if (!ids.has(id)) delete live[id];
             for (const id of ids) {
                 if (id in snaps) continue;
                 snaps[id] = null; // loading
@@ -68,6 +80,16 @@
     <header class="top">
         <button class="ghost" onclick={onBack}>← Menu</button>
         <h1>{hosting ? server.game.name : 'New Game'}</h1>
+        {#if hosting}
+            <span class="spacer"></span>
+            {#if confirmStop}
+                <span class="ask">End the game for everyone?</span>
+                <button class="danger" onclick={stop}>End game</button>
+                <button class="ghost" onclick={() => (confirmStop = false)}>Cancel</button>
+            {:else}
+                <button class="ghost stop" onclick={() => (confirmStop = true)}>Stop game</button>
+            {/if}
+        {/if}
     </header>
 
     {#if hosting}
@@ -80,7 +102,14 @@
                     {#each server.players as p (p.id)}
                         {@const snap = snaps[p.id]}
                         {#if snap?.build}
-                            <CharacterBrief build={snap.build} state={snap.state} fallback={p} />
+                            <CharacterBrief
+                                build={snap.build}
+                                state={live[p.id] ?? snap.state}
+                                fallback={p}
+                                onHp={(op, n) => sendHp(p.id, op, n)}
+                                onWhisper={(text) => sendWhisper(p.id, text)}
+                                onGive={(kind, item) => sendGive(p.id, kind, item)}
+                            />
                         {:else}
                             <!-- loading or unavailable: what the lobby row knows -->
                             <CharacterBrief
@@ -94,15 +123,6 @@
             {/if}
         </section>
 
-        <footer>
-            {#if confirmStop}
-                <span class="ask">End the game for everyone?</span>
-                <button class="danger" onclick={stop}>End game</button>
-                <button class="ghost" onclick={() => (confirmStop = false)}>Cancel</button>
-            {:else}
-                <button class="ghost" onclick={() => (confirmStop = true)}>Stop game</button>
-            {/if}
-        </footer>
     {:else}
         <form class="create" onsubmit={submit}>
             <label for="game-name">Game name</label>
@@ -210,10 +230,13 @@
         color: var(--color-text-muted);
     }
 
-    footer {
-        display: flex;
-        align-items: center;
-        gap: 12px;
+    .spacer {
+        flex: 1;
+    }
+
+    .ghost.stop:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
     }
 
     .ask {
