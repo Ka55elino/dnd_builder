@@ -39,3 +39,69 @@ body {
         transform: rotate(360deg);
     }
 }
+
+/* ---------- printing (Print button, see print.js) ----------
+ * Paper-friendly light colors, the app's chrome hidden, and the page unrolled:
+ * the app normally scrolls inside .screen, and only what is in the document flow
+ * gets printed — so heights and overflow are released here. */
+@media print {
+    @page {
+        margin: 12mm;
+    }
+
+    :root {
+        --color-bg: #ffffff;
+        --color-sidebar: #ffffff;
+        --color-card: #ffffff;
+        --color-card-elevated: #f5f1ea;
+        --color-border: #c8bfb2;
+        --color-text-primary: #1d1a17;
+        --color-text-secondary: #4a443d;
+        --color-text-muted: #7a7268;
+        --color-text-accent: #7a5c24;
+        --color-gold: #8f6a2a;
+        --color-gold-hover: #8f6a2a;
+        --color-magic-purple-dark: #e7ddf3;
+    }
+
+    html,
+    body,
+    #app,
+    #app > .screen {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
+
+    #app {
+        display: block !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        /* keep proficiency dots, chips and bars */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* the app's chrome */
+    .status-bar,
+    .query-loader,
+    .whispers,
+    .no-print {
+        display: none !important;
+    }
+
+    /* don't cut small blocks in half between pages */
+    .card,
+    .stat,
+    .ability,
+    .saves,
+    li {
+        break-inside: avoid;
+    }
+
+    * {
+        box-shadow: none !important;
+    }
+}

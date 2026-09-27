@@ -25,6 +25,7 @@
     import { onMount } from "svelte";
     import { onGameEvent } from "../server.svelte.js";
     import { EV, applyHp, sendState, findItem } from "../game.js";
+    import { printPage } from "../print.js";
     import {
         GetCharacter,
         GetCharacterState,
@@ -180,6 +181,10 @@
     });
 
     // leaving the page — save first
+    // Print / Save as PDF: the whole sheet, named after the character (see print.js and style.css)
+    const printSheet = () =>
+        printPage([build?.name, cls?.name && `${cls.name} ${build.level}`].filter(Boolean).join(" — "));
+
     const leave = (fn) => async (...args) => {
         await saveNow();
         fn?.(...args);
@@ -255,7 +260,7 @@
 <svelte:window onkeydown={onKey} />
 
 <div class="page">
-    <header class="top">
+    <header class="top no-print">
         <button class="ghost" onclick={leave(onBack)}>{backLabel}</button>
         {#if build}
             <span class="spacer"></span>
@@ -278,6 +283,7 @@
             {#if onLevelUp && build.level < 20}
                 <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Level Up</button>
             {/if}
+            <button class="ghost" onclick={leave(printSheet)} title="Print the whole sheet or save it as a PDF">Print</button>
             {#if onEdit}
                 <button class="ghost" onclick={leave(() => onEdit(raw))}
                     >Edit</button
