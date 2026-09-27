@@ -1,7 +1,7 @@
 {
   "id": "heavyCrossbow",
   "name": "Heavy Crossbow",
-  "image": "/img/weapons/martial/heavyCrossbow.svg",
+  "image": "/img/weapons/martial/heavyCrossbow.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d10",

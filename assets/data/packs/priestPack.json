@@ -1,7 +1,7 @@
 {
   "id": "priestPack",
   "name": "Priest's Pack",
-  "image": "/img/packs/priestPack.svg",
+  "image": "/img/packs/priestPack.png",
   "isDefault": true,
   "cost": "33 GP",
   "weight": 29,

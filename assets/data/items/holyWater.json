@@ -1,7 +1,7 @@
 {
   "id": "holyWater",
   "name": "Holy Water (Flask)",
-  "image": "/img/items/holyWater.svg",
+  "image": "/img/items/holyWater.png",
   "isDefault": true,
   "weight": 1,
   "cost": "25 GP",

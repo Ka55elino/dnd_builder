@@ -1,7 +1,7 @@
 {
   "id": "scaleMail",
   "name": "Scale Mail",
-  "image": "/img/armor/medium/scaleMail.svg",
+  "image": "/img/armor/medium/scaleMail.png",
   "isDefault": true,
   "category": "medium",
   "baseAC": 14,

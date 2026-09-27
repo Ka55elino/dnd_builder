@@ -1,7 +1,7 @@
 {
   "id": "shortbow",
   "name": "Shortbow",
-  "image": "/img/weapons/simple/shortbow.svg",
+  "image": "/img/weapons/simple/shortbow.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

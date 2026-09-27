@@ -1,7 +1,7 @@
 {
   "id": "breastplate",
   "name": "Breastplate",
-  "image": "/img/armor/medium/breastplate.svg",
+  "image": "/img/armor/medium/breastplate.png",
   "isDefault": true,
   "category": "medium",
   "baseAC": 14,

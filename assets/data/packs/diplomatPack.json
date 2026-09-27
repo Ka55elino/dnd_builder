@@ -1,7 +1,7 @@
 {
   "id": "diplomatPack",
   "name": "Diplomat's Pack",
-  "image": "/img/packs/diplomatPack.svg",
+  "image": "/img/packs/diplomatPack.png",
   "isDefault": true,
   "cost": "39 GP",
   "weight": 39,

@@ -1,7 +1,7 @@
 {
   "id": "chainShirt",
   "name": "Chain Shirt",
-  "image": "/img/armor/medium/chainShirt.svg",
+  "image": "/img/armor/medium/chainShirt.png",
   "isDefault": true,
   "category": "medium",
   "baseAC": 13,

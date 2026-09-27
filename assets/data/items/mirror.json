@@ -1,7 +1,7 @@
 {
   "id": "mirror",
   "name": "Mirror",
-  "image": "/img/items/mirror.svg",
+  "image": "/img/items/mirror.png",
   "isDefault": true,
   "weight": 0.5,
   "cost": "5 GP",

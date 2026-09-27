@@ -1,7 +1,7 @@
 {
   "id": "quarterstaff",
   "name": "Quarterstaff",
-  "image": "/img/weapons/simple/quarterstaff.svg",
+  "image": "/img/weapons/simple/quarterstaff.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

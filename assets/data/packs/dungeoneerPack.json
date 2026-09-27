@@ -1,7 +1,7 @@
 {
   "id": "dungeoneerPack",
   "name": "Dungeoneer's Pack",
-  "image": "/img/packs/dungeoneerPack.svg",
+  "image": "/img/packs/dungeoneerPack.png",
   "isDefault": true,
   "cost": "12 GP",
   "weight": 55,

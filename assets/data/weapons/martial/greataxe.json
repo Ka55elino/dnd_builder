@@ -1,7 +1,7 @@
 {
   "id": "greataxe",
   "name": "Greataxe",
-  "image": "/img/weapons/martial/greataxe.svg",
+  "image": "/img/weapons/martial/greataxe.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d12",

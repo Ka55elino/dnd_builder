@@ -1,7 +1,7 @@
 {
   "id": "whip",
   "name": "Whip",
-  "image": "/img/weapons/martial/whip.svg",
+  "image": "/img/weapons/martial/whip.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d4",

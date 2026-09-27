@@ -1,7 +1,7 @@
 {
   "id": "backpack",
   "name": "Backpack",
-  "image": "/img/items/backpack.svg",
+  "image": "/img/items/backpack.png",
   "isDefault": true,
   "weight": 5,
   "cost": "2 GP",

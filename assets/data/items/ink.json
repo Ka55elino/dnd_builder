@@ -1,7 +1,7 @@
 {
   "id": "ink",
   "name": "Ink",
-  "image": "/img/items/ink.svg",
+  "image": "/img/items/ink.png",
   "isDefault": true,
   "cost": "10 GP",
   "desc": "A 1-ounce bottle, enough for about 500 pages."

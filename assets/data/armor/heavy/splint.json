@@ -1,7 +1,7 @@
 {
   "id": "splint",
   "name": "Splint Armor",
-  "image": "/img/armor/heavy/splint.svg",
+  "image": "/img/armor/heavy/splint.png",
   "isDefault": true,
   "category": "heavy",
   "baseAC": 17,

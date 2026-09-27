@@ -1,7 +1,7 @@
 {
   "id": "perfume",
   "name": "Perfume",
-  "image": "/img/items/perfume.svg",
+  "image": "/img/items/perfume.png",
   "isDefault": true,
   "cost": "5 GP",
   "desc": "A 4-ounce vial. For 1 hour after applying it, you have Advantage on Charisma (Persuasion) checks made to influence an Indifferent Humanoid within 5 feet."

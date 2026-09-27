@@ -1,7 +1,7 @@
 {
   "id": "book",
   "name": "Book",
-  "image": "/img/items/book.svg",
+  "image": "/img/items/book.png",
   "isDefault": true,
   "weight": 5,
   "cost": "25 GP",

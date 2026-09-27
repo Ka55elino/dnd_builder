@@ -1,7 +1,7 @@
 {
   "id": "lightHammer",
   "name": "Light Hammer",
-  "image": "/img/weapons/simple/lightHammer.svg",
+  "image": "/img/weapons/simple/lightHammer.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",

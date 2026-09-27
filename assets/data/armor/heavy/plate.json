@@ -1,7 +1,7 @@
 {
   "id": "plate",
   "name": "Plate Armor",
-  "image": "/img/armor/heavy/plate.svg",
+  "image": "/img/armor/heavy/plate.png",
   "isDefault": true,
   "category": "heavy",
   "baseAC": 18,

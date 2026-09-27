@@ -1,7 +1,7 @@
 {
   "id": "oil",
   "name": "Oil (Flask)",
-  "image": "/img/items/oil.svg",
+  "image": "/img/items/oil.png",
   "isDefault": true,
   "weight": 1,
   "cost": "1 SP",

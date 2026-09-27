@@ -1,7 +1,7 @@
 {
   "id": "maul",
   "name": "Maul",
-  "image": "/img/weapons/martial/maul.svg",
+  "image": "/img/weapons/martial/maul.png",
   "isDefault": true,
   "category": "martial",
   "damage": "2d6",

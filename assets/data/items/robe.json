@@ -1,7 +1,7 @@
 {
   "id": "robe",
   "name": "Robe",
-  "image": "/img/items/robe.svg",
+  "image": "/img/items/robe.png",
   "isDefault": true,
   "weight": 4,
   "cost": "1 GP",

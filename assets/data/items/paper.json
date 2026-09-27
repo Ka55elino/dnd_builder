@@ -1,7 +1,7 @@
 {
   "id": "paper",
   "name": "Paper (Sheet)",
-  "image": "/img/items/paper.svg",
+  "image": "/img/items/paper.png",
   "isDefault": true,
   "cost": "2 SP",
   "desc": "A sheet can hold about 250 handwritten words."

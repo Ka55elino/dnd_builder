@@ -1,7 +1,7 @@
 {
   "id": "javelin",
   "name": "Javelin",
-  "image": "/img/weapons/simple/javelin.svg",
+  "image": "/img/weapons/simple/javelin.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

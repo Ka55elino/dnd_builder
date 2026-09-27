@@ -1,7 +1,7 @@
 {
   "id": "halfPlate",
   "name": "Half Plate Armor",
-  "image": "/img/armor/medium/halfPlate.svg",
+  "image": "/img/armor/medium/halfPlate.png",
   "isDefault": true,
   "category": "medium",
   "baseAC": 15,

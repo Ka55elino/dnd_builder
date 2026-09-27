@@ -1,7 +1,7 @@
 {
   "id": "caltrops",
   "name": "Caltrops (Bag)",
-  "image": "/img/items/caltrops.svg",
+  "image": "/img/items/caltrops.png",
   "isDefault": true,
   "weight": 2,
   "cost": "1 GP",

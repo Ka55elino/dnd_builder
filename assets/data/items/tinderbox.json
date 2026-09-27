@@ -1,7 +1,7 @@
 {
   "id": "tinderbox",
   "name": "Tinderbox",
-  "image": "/img/items/tinderbox.svg",
+  "image": "/img/items/tinderbox.png",
   "isDefault": true,
   "weight": 1,
   "cost": "5 SP",

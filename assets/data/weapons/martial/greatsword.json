@@ -1,7 +1,7 @@
 {
   "id": "greatsword",
   "name": "Greatsword",
-  "image": "/img/weapons/martial/greatsword.svg",
+  "image": "/img/weapons/martial/greatsword.png",
   "isDefault": true,
   "category": "martial",
   "damage": "2d6",

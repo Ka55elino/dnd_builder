@@ -1,7 +1,7 @@
 {
   "id": "bell",
   "name": "Bell",
-  "image": "/img/items/bell.svg",
+  "image": "/img/items/bell.png",
   "isDefault": true,
   "cost": "1 GP",
   "desc": "As a Utilize action, you can ring the bell, producing a sound that can be heard up to 60 feet away."

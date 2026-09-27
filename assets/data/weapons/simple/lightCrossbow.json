@@ -1,7 +1,7 @@
 {
   "id": "lightCrossbow",
   "name": "Light Crossbow",
-  "image": "/img/weapons/simple/lightCrossbow.svg",
+  "image": "/img/weapons/simple/lightCrossbow.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d8",

@@ -1,7 +1,7 @@
 {
   "id": "pike",
   "name": "Pike",
-  "image": "/img/weapons/martial/pike.svg",
+  "image": "/img/weapons/martial/pike.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d10",

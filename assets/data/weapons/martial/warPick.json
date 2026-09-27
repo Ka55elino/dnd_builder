@@ -1,7 +1,7 @@
 {
   "id": "warPick",
   "name": "War Pick",
-  "image": "/img/weapons/martial/warPick.svg",
+  "image": "/img/weapons/martial/warPick.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

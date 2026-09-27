@@ -1,7 +1,7 @@
 {
   "id": "rapier",
   "name": "Rapier",
-  "image": "/img/weapons/martial/rapier.svg",
+  "image": "/img/weapons/martial/rapier.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

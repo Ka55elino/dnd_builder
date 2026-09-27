@@ -1,7 +1,7 @@
 {
   "id": "sling",
   "name": "Sling",
-  "image": "/img/weapons/simple/sling.svg",
+  "image": "/img/weapons/simple/sling.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",

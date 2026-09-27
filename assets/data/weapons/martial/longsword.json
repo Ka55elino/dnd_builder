@@ -1,7 +1,7 @@
 {
   "id": "longsword",
   "name": "Longsword",
-  "image": "/img/weapons/martial/longsword.svg",
+  "image": "/img/weapons/martial/longsword.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

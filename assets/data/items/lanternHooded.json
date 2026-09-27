@@ -1,7 +1,7 @@
 {
   "id": "lanternHooded",
   "name": "Hooded Lantern",
-  "image": "/img/items/lanternHooded.svg",
+  "image": "/img/items/lanternHooded.png",
   "isDefault": true,
   "weight": 2,
   "cost": "5 GP",

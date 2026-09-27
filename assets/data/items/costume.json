@@ -1,7 +1,7 @@
 {
   "id": "costume",
   "name": "Costume",
-  "image": "/img/items/costume.svg",
+  "image": "/img/items/costume.png",
   "isDefault": true,
   "weight": 4,
   "cost": "5 GP",

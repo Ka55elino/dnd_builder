@@ -1,7 +1,7 @@
 {
   "id": "ballBearings",
   "name": "Ball Bearings",
-  "image": "/img/items/ballBearings.svg",
+  "image": "/img/items/ballBearings.png",
   "isDefault": true,
   "weight": 2,
   "cost": "1 GP",

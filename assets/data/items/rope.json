@@ -1,7 +1,7 @@
 {
   "id": "rope",
   "name": "Rope (50 feet)",
-  "image": "/img/items/rope.svg",
+  "image": "/img/items/rope.png",
   "isDefault": true,
   "weight": 5,
   "cost": "1 GP",

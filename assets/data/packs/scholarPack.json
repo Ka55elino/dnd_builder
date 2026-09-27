@@ -1,7 +1,7 @@
 {
   "id": "scholarPack",
   "name": "Scholar's Pack",
-  "image": "/img/packs/scholarPack.svg",
+  "image": "/img/packs/scholarPack.png",
   "isDefault": true,
   "cost": "40 GP",
   "weight": 22,

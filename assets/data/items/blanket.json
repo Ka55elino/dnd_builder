@@ -1,7 +1,7 @@
 {
   "id": "blanket",
   "name": "Blanket",
-  "image": "/img/items/blanket.svg",
+  "image": "/img/items/blanket.png",
   "isDefault": true,
   "weight": 3,
   "cost": "5 SP",

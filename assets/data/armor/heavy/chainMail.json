@@ -1,7 +1,7 @@
 {
   "id": "chainMail",
   "name": "Chain Mail",
-  "image": "/img/armor/heavy/chainMail.svg",
+  "image": "/img/armor/heavy/chainMail.png",
   "isDefault": true,
   "category": "heavy",
   "baseAC": 16,

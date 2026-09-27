@@ -1,7 +1,7 @@
 {
   "id": "burglarPack",
   "name": "Burglar's Pack",
-  "image": "/img/packs/burglarPack.svg",
+  "image": "/img/packs/burglarPack.png",
   "isDefault": true,
   "cost": "16 GP",
   "weight": 42,

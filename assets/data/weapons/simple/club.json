@@ -1,7 +1,7 @@
 {
   "id": "club",
   "name": "Club",
-  "image": "/img/weapons/simple/club.svg",
+  "image": "/img/weapons/simple/club.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",

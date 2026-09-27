@@ -1,7 +1,7 @@
 {
   "id": "sickle",
   "name": "Sickle",
-  "image": "/img/weapons/simple/sickle.svg",
+  "image": "/img/weapons/simple/sickle.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",

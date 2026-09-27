@@ -1,7 +1,7 @@
 {
   "id": "dagger",
   "name": "Dagger",
-  "image": "/img/weapons/simple/dagger.svg",
+  "image": "/img/weapons/simple/dagger.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",

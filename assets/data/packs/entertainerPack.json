@@ -1,7 +1,7 @@
 {
   "id": "entertainerPack",
   "name": "Entertainer's Pack",
-  "image": "/img/packs/entertainerPack.svg",
+  "image": "/img/packs/entertainerPack.png",
   "isDefault": true,
   "cost": "40 GP",
   "weight": 58.5,

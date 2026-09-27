@@ -1,7 +1,7 @@
 {
   "id": "lanternBullseye",
   "name": "Bullseye Lantern",
-  "image": "/img/items/lanternBullseye.svg",
+  "image": "/img/items/lanternBullseye.png",
   "isDefault": true,
   "weight": 2,
   "cost": "10 GP",

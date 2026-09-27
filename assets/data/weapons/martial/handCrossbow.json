@@ -1,7 +1,7 @@
 {
   "id": "handCrossbow",
   "name": "Hand Crossbow",
-  "image": "/img/weapons/martial/handCrossbow.svg",
+  "image": "/img/weapons/martial/handCrossbow.png",
   "isDefault": true,
   "category": "martial",
   "damage": "1d6",

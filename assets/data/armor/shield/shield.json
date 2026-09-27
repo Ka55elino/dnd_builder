@@ -1,7 +1,7 @@
 {
   "id": "shield",
   "name": "Shield",
-  "image": "/img/armor/shield/shield.svg",
+  "image": "/img/armor/shield/shield.png",
   "isDefault": true,
   "category": "shield",
   "acBonus": 2

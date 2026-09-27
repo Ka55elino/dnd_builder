@@ -1,7 +1,7 @@
 {
   "id": "clothesFine",
   "name": "Fine Clothes",
-  "image": "/img/items/clothesFine.svg",
+  "image": "/img/items/clothesFine.png",
   "isDefault": true,
   "weight": 6,
   "cost": "15 GP",

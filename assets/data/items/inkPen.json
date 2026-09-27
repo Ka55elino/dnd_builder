@@ -1,7 +1,7 @@
 {
   "id": "inkPen",
   "name": "Ink Pen",
-  "image": "/img/items/inkPen.svg",
+  "image": "/img/items/inkPen.png",
   "isDefault": true,
   "cost": "2 CP",
   "desc": "For writing and drawing in ink."

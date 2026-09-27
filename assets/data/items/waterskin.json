@@ -1,7 +1,7 @@
 {
   "id": "waterskin",
   "name": "Waterskin",
-  "image": "/img/items/waterskin.svg",
+  "image": "/img/items/waterskin.png",
   "isDefault": true,
   "weight": 5,
   "cost": "2 SP",

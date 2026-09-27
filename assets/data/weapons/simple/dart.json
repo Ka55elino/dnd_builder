@@ -1,7 +1,7 @@
 {
   "id": "dart",
   "name": "Dart",
-  "image": "/img/weapons/simple/dart.svg",
+  "image": "/img/weapons/simple/dart.png",
   "isDefault": true,
   "category": "simple",
   "damage": "1d4",
