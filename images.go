@@ -40,7 +40,7 @@ var builtinImages = func() http.Handler {
 	return http.StripPrefix(imgPrefix, http.FileServer(http.FS(sub)))
 }()
 
-// imageMiddleware serves /img/… before the frontend assets (and the Vite dev server in `wails dev`).
+// imageMiddleware serves /img/… before the frontend assets (and the Vite dev server in `wails3 dev`).
 func (a *App) imageMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !strings.HasPrefix(r.URL.Path, imgPrefix) {
@@ -51,7 +51,7 @@ func (a *App) imageMiddleware(next http.Handler) http.Handler {
 			a.serveDBImage(w, id)
 			return
 		}
-		// built-in files may be replaced between `wails dev` restarts: revalidate
+		// built-in files may be replaced between `wails3 dev` restarts: revalidate
 		w.Header().Set("Cache-Control", "no-cache")
 		builtinImages.ServeHTTP(w, r)
 	})

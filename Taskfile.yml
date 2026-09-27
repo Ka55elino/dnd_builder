@@ -1,0 +1,41 @@
+version: '3'
+
+# Wails v3 build orchestration (https://taskfile.dev). Run tasks with `wails3 task <name>`,
+# `wails3 task --list` shows them all. Platform tasks live in build/<platform>/Taskfile.yml.
+
+vars:
+  APP_NAME: "dnd-builder-v3"
+  BIN_DIR: "bin"
+  PACKAGE_MANAGER: '{{.PACKAGE_MANAGER | default "npm"}}'
+  VITE_PORT: '{{.WAILS_VITE_PORT | default 9245}}'
+  # Target OS for build/package/run: the host OS unless `wails3 build GOOS=...` (or the GOOS env var) is set.
+  GOOS: '{{.GOOS | default OS}}'
+
+includes:
+  common: ./build/Taskfile.yml
+  windows: ./build/windows/Taskfile.yml
+  darwin: ./build/darwin/Taskfile.yml
+  linux: ./build/linux/Taskfile.yml
+  ios: ./build/ios/Taskfile.yml
+  android: ./build/android/Taskfile.yml
+
+tasks:
+  build:
+    summary: Builds the application
+    cmds:
+      - task: "{{.GOOS}}:build"
+
+  package:
+    summary: Packages a production build of the application
+    cmds:
+      - task: "{{.GOOS}}:package"
+
+  run:
+    summary: Runs the application
+    cmds:
+      - task: "{{.GOOS}}:run"
+
+  dev:
+    summary: Runs the application in development mode
+    cmds:
+      - wails3 dev -config ./build/config.yml -port {{.VITE_PORT}}

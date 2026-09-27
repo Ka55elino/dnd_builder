@@ -1,15 +1,15 @@
 {
 	"fixed": {
-		"file_version": "{{.Info.ProductVersion}}"
+		"file_version": "0.1.1"
 	},
 	"info": {
 		"0000": {
-			"ProductVersion": "{{.Info.ProductVersion}}",
-			"CompanyName": "{{.Info.CompanyName}}",
-			"FileDescription": "{{.Info.ProductName}}",
-			"LegalCopyright": "{{.Info.Copyright}}",
-			"ProductName": "{{.Info.ProductName}}",
-			"Comments": "{{.Info.Comments}}"
+			"ProductVersion": "0.1.1",
+			"CompanyName": "Ka55elino",
+			"FileDescription": "DnD 2024 character builder",
+			"LegalCopyright": "(c) 2026, Ka55elino",
+			"ProductName": "DnD Builder",
+			"Comments": "Character builder for Dungeons and Dragons 2024"
 		}
 	}
 }

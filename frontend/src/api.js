@@ -1,13 +1,14 @@
 /**
  * Backend calls (Wails bindings) with the query loader.
  *
- * Import backend methods from here, not from wailsjs directly:
+ * Import backend methods from here, not from the generated bindings directly:
  *   import { GetRaces } from '../api.js';
  * Every call shows the loader overlay while the SQL query runs.
- * New methods are picked up automatically after `wails dev` regenerates the bindings;
- * only add their name to the export list below.
+ * The bindings (frontend/bindings) are generated from the Go App service by
+ * `wails3 dev` / `wails3 build` (or `wails3 generate bindings`). New methods are
+ * picked up automatically; only add their name to the export list below.
  */
-import * as App from '../wailsjs/go/main/App.js';
+import * as App from '../bindings/dnd-builder-v3/app.js';
 import { track } from './loader.svelte.js';
 
 // no overlay: Ready waits behind the startup loader, state autosave has its own indicator
@@ -15,6 +16,7 @@ const SILENT = new Set(['Ready', 'SaveCharacterState']);
 
 const api = {};
 for (const [name, fn] of Object.entries(App)) {
+    if (typeof fn !== 'function') continue;
     api[name] = SILENT.has(name) ? fn : (...args) => track(fn(...args));
 }
 

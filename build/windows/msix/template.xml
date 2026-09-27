@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MsixPackagingToolTemplate
+    xmlns="http://schemas.microsoft.com/msix/packaging/msixpackagingtool/template/2022">
+    <Settings
+        AllowTelemetry="false"
+        ApplyACLsToPackageFiles="true"
+        GenerateCommandLineFile="true"
+        AllowPromptForPassword="false">
+    </Settings>
+    <Installer
+        Path="dnd-builder-v3"
+        Arguments=""
+        InstallLocation="C:\Program Files\Ka55elino\DnD Builder">
+    </Installer>
+    <PackageInformation
+        PackageName="DnD Builder"
+        PackageDisplayName="DnD Builder"
+        PublisherName="CN=Ka55elino"
+        PublisherDisplayName="Ka55elino"
+        Version="0.1.1.0"
+        PackageDescription="My Product Description">
+        <Capabilities>
+            <Capability Name="runFullTrust" />
+            
+        </Capabilities>
+        <Applications>
+            <Application
+                Id="com.ka55elino.dndbuilder"
+                Description="My Product Description"
+                DisplayName="DnD Builder"
+                ExecutableName="dnd-builder-v3"
+                EntryPoint="Windows.FullTrustApplication">
+                
+            </Application>
+        </Applications>
+        <Resources>
+            <Resource Language="en-us" />
+        </Resources>
+        <Dependencies>
+            <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+        </Dependencies>
+        <Properties>
+            <Framework>false</Framework>
+            <DisplayName>DnD Builder</DisplayName>
+            <PublisherDisplayName>Ka55elino</PublisherDisplayName>
+            <Description>My Product Description</Description>
+            <Logo>Assets\AppIcon.png</Logo>
+        </Properties>
+    </PackageInformation>
+    <SaveLocation PackagePath="dnd-builder-v3.msix" />
+    <PackageIntegrity>
+        <CertificatePath></CertificatePath>
+    </PackageIntegrity>
+</MsixPackagingToolTemplate>

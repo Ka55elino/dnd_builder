@@ -23,7 +23,7 @@ type seeder struct {
 	match func(path string) bool             // which files to take (nil: all *.json)
 	count string                             // name of the COUNT(*) query
 	row   func(tx *sql.Tx, raw []byte) error // inserts one file
-	dev   bool                               // dev mode only (wails dev)
+	dev   bool                               // dev mode only (wails3 dev)
 }
 
 // Order matters: classes before subclasses (class_id foreign key).

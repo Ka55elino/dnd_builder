@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=DnD Builder
+Comment=DnD 2024 character builder
+# The Exec line includes %u to pass the URL to the application
+Exec=/usr/local/bin/dnd-builder-v3 %u
+Terminal=false
+Type=Application
+Icon=dnd-builder-v3
+Categories=Utility;
+StartupWMClass=dnd-builder-v3
+
+ 

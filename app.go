@@ -5,9 +5,12 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
+	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
-// App struct
+// App is the backend service: its exported methods are bound to the frontend
+// (see main.go and frontend/src/api.js).
 type App struct {
 	ctx     context.Context
 	db      *sql.DB
@@ -15,16 +18,18 @@ type App struct {
 	initErr error
 }
 
-// NewApp creates a new App application struct
+// NewApp creates the backend service.
 func NewApp() *App {
 	return &App{ready: make(chan struct{})}
 }
 
-// startup opens the database in the background: the window and the frontend
-// loader show up immediately, and bound methods wait for the DB to be ready.
-func (a *App) startup(ctx context.Context) {
+// ServiceStartup (called by Wails before the window loads) opens the database
+// in the background: the window and the frontend loader show up immediately,
+// and bound methods wait for the DB to be ready.
+func (a *App) ServiceStartup(ctx context.Context, _ application.ServiceOptions) error {
 	a.ctx = ctx
 	go a.initDB()
+	return nil
 }
 
 // initDB opens the database, creates the tables and seeds the reference
@@ -48,7 +53,8 @@ func (a *App) initDB() {
 	a.db = db
 }
 
-func (a *App) shutdown(ctx context.Context) {
+// ServiceShutdown (called by Wails on exit) closes the database.
+func (a *App) ServiceShutdown() error {
 	select {
 	case <-a.ready:
 		if a.db != nil {
@@ -56,6 +62,7 @@ func (a *App) shutdown(ctx context.Context) {
 		}
 	default: // still seeding — the process is exiting anyway
 	}
+	return nil
 }
 
 // conn waits until the DB is ready and returns it.

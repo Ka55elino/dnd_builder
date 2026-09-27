@@ -1,10 +1,11 @@
 # Release builds: push a tag vX.Y.Z → builds for macOS, Windows and Linux →
 # a GitHub Release with the files attached.
 #
-#   1. bump APP_VERSION in constants.go (e.g. "0.2.0") and commit
+#   1. bump APP_VERSION in constants.go and info.version in build/config.yml (e.g. "0.2.0"), commit
 #   2. git tag v0.2.0 && git push origin v0.2.0
 #
-# The tag must match APP_VERSION (it is part of the DB file name), otherwise the run fails.
+# The tag must match APP_VERSION (it is part of the DB file name) and info.version in
+# build/config.yml, otherwise the run fails.
 # A tag with a suffix (v0.2.0-beta.1) creates a pre-release.
 # Run manually (Actions → Release → Run workflow) to only build and download the artifacts, without a release.
 
@@ -19,7 +20,6 @@ permissions:
   contents: write
 
 env:
-  WAILS_VERSION: v2.15.0 # the same as github.com/wailsapp/wails/v2 in go.mod
   NODE_VERSION: "22"
 
 jobs:
@@ -34,6 +34,11 @@ jobs:
         run: |
           app=$(sed -n 's/^const APP_VERSION = "\(.*\)"/\1/p' constants.go)
           if [ -z "$app" ]; then echo "::error::APP_VERSION not found in constants.go"; exit 1; fi
+          cfg=$(sed -n 's/^  version: "\([^"]*\)".*/\1/p' build/config.yml)
+          if [ "$cfg" != "$app" ]; then
+            echo "::error::build/config.yml info.version \"$cfg\" differs from APP_VERSION \"$app\""
+            exit 1
+          fi
           if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
             tag="${GITHUB_REF_NAME#v}"
             if [ "${tag%%-*}" != "$app" ]; then
@@ -54,13 +59,13 @@ jobs:
         include:
           - name: macos
             os: macos-latest
-            platform: darwin/universal
+            task: darwin:package:universal # universal .app (Intel + Apple Silicon) in bin/
           - name: windows
             os: windows-latest
-            platform: windows/amd64
+            task: windows:package # .exe + NSIS installer in bin/
           - name: linux
             os: ubuntu-24.04
-            platform: linux/amd64
+            task: linux:build # binary in bin/
     runs-on: ${{ matrix.os }}
     env:
       VERSION: ${{ needs.version.outputs.version }}
@@ -81,60 +86,60 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Linux dependencies (GTK, WebKitGTK)
+      - name: Linux dependencies (GTK4, WebKitGTK 6.0 — the Wails v3 default)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev
+          sudo apt-get install -y build-essential pkg-config libgtk-4-dev libwebkitgtk-6.0-dev
 
       - name: NSIS (Windows installer)
         if: runner.os == 'Windows'
         run: |
           choco install nsis -y --no-progress
-          # choco doesn't put makensis on PATH for the next steps; without it `wails build -nsis` silently skips the installer
+          # choco doesn't put makensis on PATH for the next steps
           echo "C:\Program Files (x86)\NSIS" >> "$GITHUB_PATH"
       - name: Check makensis
         if: runner.os == 'Windows'
         run: makensis -VERSION
 
-      - name: Install Wails
-        run: go install github.com/wailsapp/wails/v2/cmd/wails@${WAILS_VERSION}
+      # the same Wails version as github.com/wailsapp/wails/v3 in go.mod
+      - name: Install Wails CLI
+        run: |
+          v=$(go list -m -f '{{.Version}}' github.com/wailsapp/wails/v3)
+          echo "Wails $v"
+          go install "github.com/wailsapp/wails/v3/cmd/wails3@$v"
+          wails3 version
 
-      # the version goes into Info.plist (macOS) and the file properties (Windows)
+      # a pre-release tag (v0.2.0-beta.1) → version 0.2.0 in Info.plist / file properties
       - name: Set product version
         run: |
-          node -e '
-            const fs = require("fs");
-            const w = JSON.parse(fs.readFileSync("wails.json", "utf8"));
-            w.info = { ...(w.info || {}), productVersion: process.env.VERSION.split("-")[0] };
-            fs.writeFileSync("wails.json", JSON.stringify(w, null, 2));
-          '
+          v="${VERSION%%-*}"
+          sed -i.bak -E "s/^(  version: )\"[^\"]*\"/\1\"$v\"/" build/config.yml && rm build/config.yml.bak
+          grep -n '^  version:' build/config.yml
+          wails3 task common:update:build-assets
 
       - name: Build
-        run: |
-          flags="-platform ${{ matrix.platform }} -clean -trimpath -ldflags=-s"
-          case "${{ runner.os }}" in
-            Linux)   flags="$flags -tags webkit2_41" ;;   # Ubuntu 24.04 ships WebKitGTK 4.1
-            Windows) flags="$flags -nsis" ;;
-          esac
-          wails build $flags
+        run: wails3 task ${{ matrix.task }}
 
       - name: Package
         run: |
           mkdir -p dist
-          cd build/bin
+          ls -la bin
+          cd bin
           case "${{ runner.os }}" in
             macOS)
-              ditto -c -k --keepParent "$APP.app" "../../dist/$APP-$VERSION-macos-universal.zip" ;;
+              app=$(find . -maxdepth 1 -name "*.app" | head -1)
+              if [ -z "$app" ]; then echo "::error::.app not found in bin/"; exit 1; fi
+              ditto -c -k --keepParent "$app" "../dist/$APP-$VERSION-macos-universal.zip" ;;
             Windows)
-              7z a "../../dist/$APP-$VERSION-windows-amd64.zip" "$APP.exe"
+              7z a "../dist/$APP-$VERSION-windows-amd64.zip" "$APP.exe"
               inst=$(find . -iname "*installer*.exe" | head -1)
-              if [ -z "$inst" ]; then echo "::error::NSIS installer not found in build/bin:"; find . -type f; exit 1; fi
-              mv "$inst" "../../dist/$APP-$VERSION-windows-amd64-installer.exe" ;;
+              if [ -z "$inst" ]; then echo "::error::NSIS installer not found in bin/:"; find . -type f; exit 1; fi
+              cp "$inst" "../dist/$APP-$VERSION-windows-amd64-installer.exe" ;;
             Linux)
-              tar -czf "../../dist/$APP-$VERSION-linux-amd64.tar.gz" "$APP" ;;
+              tar -czf "../dist/$APP-$VERSION-linux-amd64.tar.gz" "$APP" ;;
           esac
-          ls -la ../../dist
+          ls -la ../dist
 
       - uses: actions/upload-artifact@v4
         with:

@@ -2,80 +2,62 @@
 
 A desktop D&D character builder built with **Wails** (Go + webview), with a **Svelte 5 + Vite** frontend and **SQLite** storage. A web version (a single `index.html` that runs from `file://`, with IndexedDB storage) is built separately from the same frontend.
 
-Stack: **Go** (backend, database) + **Wails v2** (desktop shell, JS↔Go bridge) + **Svelte 5 + Vite** (frontend) + **SQLite** (`modernc.org/sqlite`, pure Go, no CGO).
+Stack: **Go** (backend, database) + **Wails v3** (desktop shell, JS↔Go bridge; currently in beta) + **Svelte 5 + Vite** (frontend) + **SQLite** (`modernc.org/sqlite`, pure Go, no CGO).
 
 ## Requirements
 
-- **Go** 1.21+ (the project uses 1.25)
+- **Go** 1.25+
 - **Node.js** 20.19+ or 22.12+ and npm
-- **Wails CLI** v2
+- **Wails CLI** v3 (`wails3`)
 - **macOS:** Xcode Command Line Tools (`xcode-select --install`)
+- **Linux:** GTK4 + WebKitGTK 6.0 dev packages (Ubuntu 24.04: `libgtk-4-dev libwebkitgtk-6.0-dev`)
 
-Install the Wails CLI (it is compiled into `~/go/bin`, which must be on your `PATH`):
-
-```bash
-go install github.com/wailsapp/wails/v2/cmd/wails@latest
-```
-
-Check your environment (Go, compilers, webview dependencies, npm):
+Install the Wails CLI (it is compiled into `~/go/bin`, which must be on your `PATH`), use the same version as `github.com/wailsapp/wails/v3` in `go.mod`:
 
 ```bash
-wails doctor
-```
-
-## Installing dependencies
-
-Go dependencies are fetched automatically on the first build. Frontend dependencies:
-
-```bash
-cd frontend && npm install && cd ..
-```
-
-Or all at once through Wails (it uses `frontend:install` from `wails.json`):
-
-```bash
-wails build   # the first run installs the frontend dependencies itself
+go install github.com/wailsapp/wails/v3/cmd/wails3@latest
+wails3 doctor   # checks Go, compilers, webview dependencies, npm
 ```
 
 ## Development
 
 ```bash
-wails dev
+wails3 dev
 ```
 
-What the command does:
+What the command does (configured in `build/config.yml` → `dev_mode`):
 
-- starts the Vite dev server with hot module replacement (HMR), so changes in `frontend/src` show up instantly;
-- compiles the Go code and opens the native app window with a webview;
-- keeps the JS↔Go bridge alive, so calls to Go methods from the frontend work just like in production;
-- additionally serves `http://localhost:34115`: open it in Chrome to debug the frontend in the familiar DevTools with access to the Go methods.
+- generates the JS bindings for the Go `App` service into `frontend/bindings/` (git-ignored);
+- starts the Vite dev server (port 9245) with hot module replacement, so changes in `frontend/src` show up instantly;
+- builds the Go code without the `production` tag (dev mode: the DB is recreated on every start, sample characters are seeded) and opens the app window;
+- rebuilds and restarts the app when `.go`, `.json` (assets/data) or `.sql` files change.
 
-This is the main way to work on the app. `localhost` here is only a development tool; the built app has no server.
+`wails3 task --list` shows all tasks (build, package, per-platform tasks).
 
 ## Building
 
 ```bash
-wails build
+wails3 build     # binary for the current OS → bin/dnd-builder-v3
+wails3 package   # packaged app: .app (macOS), NSIS installer (Windows), AppImage/deb/rpm (Linux) → bin/
 ```
 
-Builds the frontend (`npm run build`), embeds it into the Go binary via `//go:embed` and compiles the native app into **`build/bin/`**.
-
-Useful flags:
+Release builds use the `production` build tag: the database persists between launches (`mode_prod.go`). Plain `go build` / `go run` without it is a dev build. Useful platform tasks:
 
 ```bash
-wails build -platform darwin/universal   # macOS: Intel + Apple Silicon in a single .app
-wails build -clean                       # clean rebuild
-wails build -upx                         # compress the binary (requires upx)
-wails build -nsis                        # Windows: build an installer
+wails3 task darwin:package:universal   # macOS: Intel + Apple Silicon in one .app
+wails3 task windows:package            # Windows: .exe + NSIS installer (needs makensis)
+wails3 task linux:build                # Linux binary
 ```
 
-A build for a given OS must be done **on that OS** (the webview is native and cannot be cross-compiled). To build for all three platforms at once, use CI (GitHub Actions with a macOS/Windows/Linux matrix).
+Build configuration: `Taskfile.yml` (root) + `build/config.yml` (name, identifier, version) + generated platform files in `build/<platform>/`. After changing `info` in `build/config.yml`, regenerate them: `wails3 task common:update:build-assets`. Icons for all platforms are generated from `build/appicon.png`.
+
+A build for a given OS must be done **on that OS** (or in the Docker cross-build image, see `wails3 task setup:docker`). CI builds all three platforms, see below.
 
 ## Releases (CI)
 
 `.github/workflows/release.yml` builds the app on GitHub Actions and publishes a GitHub Release:
 
-1. Bump `APP_VERSION` in `constants.go` (e.g. `"0.2.0"`) and commit.
+1. Bump `APP_VERSION` in `constants.go` and `info.version` in `build/config.yml` (e.g. `"0.2.0"`) and commit.
 2. Push a matching tag:
 
    ```bash
@@ -83,13 +65,13 @@ A build for a given OS must be done **on that OS** (the webview is native and ca
    git push origin v0.2.0
    ```
 
-The workflow checks that the tag matches `APP_VERSION` (the version is part of the DB file name) and builds:
+The workflow checks that the tag matches `APP_VERSION` (the version is part of the DB file name) and `build/config.yml`, then builds with `wails3 task …`:
 
 | Platform | Runner | Files |
 |---|---|---|
 | macOS (Intel + Apple Silicon) | `macos-latest` | `dnd-builder-v3-<ver>-macos-universal.zip` (the .app) |
 | Windows x64 | `windows-latest` | `…-windows-amd64.zip` (the .exe) and `…-windows-amd64-installer.exe` (NSIS) |
-| Linux x64 | `ubuntu-24.04` | `…-linux-amd64.tar.gz` (needs `libgtk-3-0` and `libwebkit2gtk-4.1-0`) |
+| Linux x64 | `ubuntu-24.04` | `…-linux-amd64.tar.gz` (needs GTK4 and WebKitGTK 6.0: `libgtk-4-1 libwebkitgtk-6.0-4`) |
 
 Then it creates the release with these files and auto-generated notes. A tag with a suffix (`v0.2.0-beta.1`) becomes a pre-release. **Actions → Release → Run workflow** builds without releasing (the files are in the run's artifacts).
 
@@ -109,11 +91,12 @@ The output goes to `frontend/dist/`.
 
 ```
 dnd-builder-v3/
-├── main.go                # entry point: window, webview, embedded frontend, Go bindings, Linux icon
+├── main.go                # entry point: application, window, embedded frontend, App service, /img/ middleware
 ├── app.go                 # Go methods called from the frontend (GetRaces, SaveCharacter, SaveCustomSpell, …)
 ├── constants.go           # APP_NAME, APP_VERSION (the version is part of the DB file name)
-├── mode_dev.go            # devMode = true  (`wails dev`: the DB is recreated on every start)
-├── mode_prod.go           # devMode = false (`wails build`: the DB persists)
+├── mode_dev.go            # devMode = true  (no `production` tag, `wails3 dev`: the DB is recreated on every start)
+├── mode_prod.go           # devMode = false (`production` tag, `wails3 build`: the DB persists)
+├── Taskfile.yml           # Wails v3 build tasks (includes build/<platform>/Taskfile.yml)
 ├── db.go                  # opening SQLite, schema, migrations; DB file: dnd[-dev]-v<version>.db
 ├── seed.go                # fills empty tables from assets/data/*.json on startup
 ├── queries.go             # loads named SQL queries from db/queries (Q("Name"))
@@ -142,7 +125,7 @@ dnd-builder-v3/
 ├── frontend/              # Svelte 5 + Vite
 │   ├── index.html
 │   ├── package.json
-│   ├── wailsjs/           # auto-generated JS wrappers for the Go methods (don't edit)
+│   ├── bindings/          # generated JS bindings for the Go App service (git-ignored, don't edit)
 │   └── src/
 │       ├── main.js, App.svelte      # entry point and screen switching
 │       ├── components/              # screens: menu, characters, character sheet, level up,
@@ -155,19 +138,20 @@ dnd-builder-v3/
 │       ├── data/refs.js             # loads and caches reference data from Go
 │       ├── styles/                  # colors, fonts, CSS variables
 │       └── assets/                  # fonts and SVG icons (assets/icons/README.md)
-└── build/
-    ├── appicon.png        # app icon source (1024×1024); .icns/.ico are generated from it
-    ├── darwin/            # Info.plist for macOS
-    ├── windows/           # icon.ico, manifest, installer
-    └── bin/               # build output (in .gitignore)
+├── build/
+│   ├── config.yml         # Wails v3 project config: product info/version, dev mode
+│   ├── appicon.png        # app icon source (1024×1024); platform icons are generated from it
+│   ├── Taskfile.yml       # common tasks (bindings, frontend build) — generated
+│   └── darwin/ windows/ linux/ ios/ android/   # platform tasks and packaging files — generated
+└── bin/                   # build output (in .gitignore)
 ```
 
 ## How the frontend talks to Go
 
-The built app has **no HTTP server**. The frontend and Go live in the same process; the webview is the system one (WebKit on macOS). Go methods bound in `main.go` (`Bind`) are automatically turned by Wails into JS functions in `frontend/wailsjs/go/...`. Calling them from JS looks like a regular `await`:
+The built app has **no HTTP server**. The frontend and Go live in the same process; the webview is the system one (WebKit on macOS). The exported methods of the `App` service (registered in `main.go`) are turned by the Wails binding generator into JS functions in `frontend/bindings/dnd-builder-v3/app.js`; the frontend calls them through `frontend/src/api.js`. Calling them from JS looks like a regular `await`:
 
 ```js
-import { SaveCharacter, ListCharacters } from './api.js'; // the wailsjs bindings + the query loader
+import { SaveCharacter, ListCharacters } from './api.js'; // the generated bindings + the query loader
 
 const id = await SaveCharacter(JSON.stringify(build));
 const list = await ListCharacters();
@@ -204,7 +188,7 @@ python3 tools/img2b64.py drow.jpeg --cut --size 512 --into assets/data/races/elf
 | `--cut-bg 247,243,235` | set the background color when the object covers most of the border and it is detected wrong |
 | `--png out.png` | also save the resulting PNG, e.g. to compare the presets |
 
-Restart `wails dev` afterwards: in dev mode the DB is recreated and reseeded on every start.
+Restart `wails3 dev` afterwards: in dev mode the DB is recreated and reseeded on every start.
 
 ### Generating images locally — `tools/imagegen.py`
 
