@@ -10,6 +10,8 @@
  *   DM → player   "give"   { kind: 'item' | 'armor' | 'weapon', id, name, qty }
  *                          a named item from the catalog: the player's app adds it to
  *                          the backpack (build.equipment.bag) and saves it in its DB
+ *   DM → all      "encounter" { active, name, line: [{ id, kind, name, image, type, playerId }] }
+ *                          the initiative line (names, icons, order — no HP), see combat.svelte.js
  *   player → DM   "state"  { state: CharacterState JSON }
  *                          sent on join and after every state change (from the DM
  *                          or the player's own sheet), so the DM's card stays current

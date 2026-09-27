@@ -3,7 +3,8 @@
      * "Join Game" — player screen.
      *   1. games found on the local network (mDNS) or an address typed by hand
      *   2. pick a character
-     *   3. joined: the character's sheet (CharacterPage) with "Leave game" in its header
+     *   3. joined: the character's sheet (CharacterPage) with "Leave game" in its header;
+     *      during an encounter the DM's initiative line is shown above it (LineupPlayer)
      * Leaving the screen keeps the connection (the header shows it).
      * onBack() — to the menu
      */
@@ -12,6 +13,8 @@
     import { server, discovered, applyStatus, gameAddress } from '../server.svelte.js';
     import CharacterGrid from './CharacterGrid.svelte';
     import CharacterPage from './CharacterPage.svelte';
+    import LineupPlayer from './combat/LineupPlayer.svelte';
+    import { resetSeen } from '../combat.svelte.js';
 
     let { onBack } = $props();
 
@@ -62,6 +65,7 @@
         busy = true;
         error = '';
         try {
+            resetSeen(); // a line from a previous game must not linger
             applyStatus(await JoinGame(target.address, characterId));
             target = null;
         } catch (err) {
@@ -86,6 +90,7 @@
 {/snippet}
 
 {#if joined && server.characterId}
+    <LineupPlayer />
     {#key server.characterId}
         <CharacterPage id={server.characterId} onBack={onBack} backLabel="← Menu" actions={gameActions} inGame />
     {/key}

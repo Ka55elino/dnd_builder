@@ -96,6 +96,10 @@ Console commands — the same actions as the buttons on the DM's player card:
 | `dmg grom 5` · `heal grom 3` · `temp grom 4` | Damage / Heal / set Temp HP |
 | `items` | the named items that can be given (from `assets/data`, or `-data <dir>`) |
 | `give grom dawnbringer` · `give grom elven chain 2` | give an item (id or part of its name) and a quantity: it lands in the character's backpack |
+| `monsters` | the monsters that can be used (from `assets/data/monsters`) |
+| `enc goblin 3, ogre` | start an encounter: the players + 3 Goblin Warriors + an Ogre (monster id or part of its name) — the player sees the initiative line above the sheet |
+| `enc` · `enc move 3 1` · `enc end` | show the line · move the 3rd combatant to place 1 · end the encounter |
+| `enc turn 2` · `enc next` | mark whose turn it is: the 2nd · the next one (the player sees a check on that icon) |
 | `start {"round":1}` | any event with JSON, to all players |
 | `@grom hp {"op":"damage","amount":5}` | any event to one player |
 | `quit` | end the game (Ctrl+C works too): players see "The DM ended the game" |

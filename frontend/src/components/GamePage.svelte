@@ -3,7 +3,8 @@
      * "Start Game" — Dungeon Master screen.
      * Not hosting: game name + Submit → Go starts the WebSocket server and announces it over mDNS.
      * Hosting: party — a CharacterBrief card per player from the snapshot they
-     *   joined with; Stop (the address to share is in the header).
+     *   joined with; Start / End encounter — the initiative line above the party
+     *   (LineupDM, combat.svelte.js); Stop (the address to share is in the header).
      * Leaving the screen keeps the game running (the header shows it).
      * onBack() — to the menu
      */
@@ -12,6 +13,10 @@
     import { server, applyStatus, onGameEvent } from '../server.svelte.js';
     import { EV, sendHp, sendWhisper, sendGive } from '../game.js';
     import CharacterBrief from './CharacterBrief.svelte';
+    import StartEncounterDialog from './combat/StartEncounterDialog.svelte';
+    import LineupDM from './combat/LineupDM.svelte';
+    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, playerSheet } from '../combat.svelte.js';
+    import { loadRefs } from '../data/refs.js';
 
     let { onBack } = $props();
 
@@ -19,6 +24,35 @@
     let error = $state('');
     let busy = $state(false);
     let confirmStop = $state(false);
+
+    // ---------- encounter: the initiative line (combat.svelte.js) ----------
+    let pickOpen = $state(false);
+    let refs = $state(null); // for the players' AC / HP in the line
+    loadRefs()
+        .then((r) => {
+            refs = r;
+        })
+        .catch(() => {});
+
+    function begin(opts) {
+        pickOpen = false;
+        startEncounter({ ...opts, players: server.players });
+    }
+
+    // a player's numbers for the line, from their latest state
+    const sheetOf = (pid) => playerSheet(snaps[pid], live[pid], refs);
+
+    // lobby changes: add/drop players in the line; newcomers get the current line
+    // (or "no encounter", which also clears what they saw in a previous game)
+    let lastIds = null;
+    $effect(() => {
+        const key = server.players.map((p) => p.id).join(',');
+        if (!hosting || key === lastIds) return; // only when somebody joined or left
+        lastIds = key;
+        untrack(() => {
+            if (!syncPlayers(server.players)) broadcast();
+        });
+    });
 
     let hosting = $derived(server.role === 'host' && server.game);
 
@@ -45,8 +79,12 @@
                 if (id in snaps) continue;
                 snaps[id] = null; // loading
                 GetPlayerCharacter(id)
-                    .then((s) => (snaps[id] = s))
-                    .catch((e) => (snaps[id] = { error: e?.message ?? String(e) }));
+                    .then((s) => {
+                        snaps[id] = s;
+                    })
+                    .catch((e) => {
+                        snaps[id] = { error: e?.message ?? String(e) };
+                    });
             }
         });
     });
@@ -68,6 +106,7 @@
 
     async function stop() {
         confirmStop = false;
+        if (combat.active) endEncounter();
         try {
             await StopGame();
         } catch (err) {
@@ -82,6 +121,13 @@
         <h1>{hosting ? server.game.name : 'New Game'}</h1>
         {#if hosting}
             <span class="spacer"></span>
+            {#if !confirmStop}
+                {#if combat.active}
+                    <button class="primary start end" onclick={endEncounter}>End encounter</button>
+                {:else}
+                    <button class="primary start" onclick={() => (pickOpen = true)}>Start encounter</button>
+                {/if}
+            {/if}
             {#if confirmStop}
                 <span class="ask">End the game for everyone?</span>
                 <button class="danger" onclick={stop}>End game</button>
@@ -93,6 +139,9 @@
     </header>
 
     {#if hosting}
+        {#if combat.active}
+            <LineupDM {sheetOf} onPlayerHp={(pid, op, n) => sendHp(pid, op, n)} />
+        {/if}
         <section>
             <h2>Party <span class="count">{server.players.length}</span></h2>
             {#if server.players.length === 0}
@@ -148,6 +197,10 @@
         </form>
     {/if}
 </div>
+
+{#if pickOpen}
+    <StartEncounterDialog onStart={begin} onClose={() => (pickOpen = false)} />
+{/if}
 
 <style>
     .page {
@@ -232,6 +285,18 @@
 
     .spacer {
         flex: 1;
+    }
+
+    .primary.start {
+        align-self: auto;
+        padding: 6px 16px;
+    }
+
+    .primary.start.end,
+    .primary.start.end:not(:disabled):hover {
+        background: var(--color-danger);
+        border-color: var(--color-danger);
+        color: var(--color-text-primary);
     }
 
     .ghost.stop:hover {

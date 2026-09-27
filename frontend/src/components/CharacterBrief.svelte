@@ -55,7 +55,7 @@
         }
     }
 
-    let ref = $state(EMPTY_REFS);
+    let ref = $state.raw(EMPTY_REFS); // raw: compared with EMPTY_REFS below, and it's big read-only data
     let loaded = $state(null); // { build, state } from the DB when `id` is given
     let error = $state(null);
     let brokenImg = $state(false);

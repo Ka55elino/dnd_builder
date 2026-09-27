@@ -17,6 +17,10 @@
 //	                                         → Hit Points, like the buttons on the DM's card
 //	items                                   → named items the DM can give
 //	give Bruenor dawnbringer [2]             → give an item (id or part of its name), like the card's button
+//	monsters                                → monsters from assets/data/monsters
+//	enc goblin 3, ogre                      → start an encounter: the players + 3 Goblin Warriors + an Ogre
+//	enc · enc move 3 1 · enc end             → show the line · move 3rd to place 1 · end it
+//	enc turn 2 · enc next                   → whose turn: the 2nd · the next one
 //	players                                 → list players
 //	quit                                    → end the game (Ctrl+C works too)
 //
@@ -41,9 +45,10 @@ import (
 
 func main() {
 	name := flag.String("name", "Test Game", "game name")
-	data := flag.String("data", "assets/data", "seed data folder (for the named items list)")
+	data := flag.String("data", "assets/data", "seed data folder (named items and monsters)")
 	flag.Parse()
 	items = loadNamedItems(*data)
+	monsters = loadMonsters(*data)
 	log.SetFlags(log.Ltime)
 
 	var dm *lan.Manager
@@ -55,8 +60,13 @@ func main() {
 		switch v := data.(type) {
 		case lan.Status:
 			mu.Lock()
+			before := ids(last)
 			last = diffPlayers(last, v.Players)
+			changed := before != ids(last)
 			mu.Unlock()
+			if changed { // somebody joined or left: update the line, catch newcomers up
+				go encounterPlayersChanged(dm, v.Players)
+			}
 		case lan.Event:
 			log.Printf("← %s: %q %s", playerName(dm, v.From), v.Kind, string(v.Data))
 		}
@@ -101,6 +111,14 @@ func diffPlayers(old, cur []lan.PlayerInfo) []lan.PlayerInfo {
 	return append([]lan.PlayerInfo(nil), cur...)
 }
 
+func ids(list []lan.PlayerInfo) string {
+	var b strings.Builder
+	for _, p := range list {
+		b.WriteString(p.ID + ",")
+	}
+	return b.String()
+}
+
 func playerName(dm *lan.Manager, id string) string {
 	for _, p := range dm.Status().Players {
 		if p.ID == id {
@@ -140,7 +158,7 @@ func findPlayer(dm *lan.Manager, q string) (lan.PlayerInfo, bool) {
 
 func console(dm *lan.Manager, done chan struct{}) {
 	defer close(done)
-	fmt.Println(`type: w <player> <text>  ·  dmg|heal|temp <player> <n>  ·  give <player> <item> [n]  ·  items  ·  <kind> [json]  ·  @<player> <kind> [json]  ·  players  ·  quit`)
+	fmt.Println(`type: enc <monster> [n], … · enc · enc move <from> <to> · enc turn <n> · enc next · enc end · monsters  ·  w <player> <text>  ·  dmg|heal|temp <player> <n>  ·  give <player> <item> [n]  ·  items  ·  <kind> [json]  ·  @<player> <kind> [json]  ·  players  ·  quit`)
 	sc := bufio.NewScanner(os.Stdin)
 	for sc.Scan() {
 		line := strings.TrimSpace(sc.Text())
@@ -165,6 +183,11 @@ func console(dm *lan.Manager, done chan struct{}) {
 			for _, p := range list {
 				fmt.Printf("  %s  %s (%s, level %d)\n", p.ID, p.Name, p.ClassName, p.Level)
 			}
+			continue
+		}
+
+		// encounter: enc … / monsters (encounter.go)
+		if encounterCommand(dm, line) {
 			continue
 		}
 
