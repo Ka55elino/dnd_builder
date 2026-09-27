@@ -1,0 +1,103 @@
+{
+  "id": "shamblingMound",
+  "name": "Shambling Mound",
+  "type": "plant",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 5,
+  "ac": 15,
+  "acNote": "natural armor",
+  "hp": 110,
+  "hpFormula": "13d10+39",
+  "initiative": -1,
+  "speed": {
+    "walk": 30,
+    "swim": 20
+  },
+  "abilities": {
+    "str": 18,
+    "dex": 8,
+    "con": 16,
+    "int": 5,
+    "wis": 10,
+    "cha": 5
+  },
+  "skills": {
+    "stealth": 3
+  },
+  "resistances": [
+    "cold",
+    "fire"
+  ],
+  "immunities": [
+    "lightning"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "deafened",
+    "exhaustion"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [
+    "forest",
+    "swamp"
+  ],
+  "traits": [
+    {
+      "name": "Lightning Absorption",
+      "desc": "Lightning damage heals the mound instead of harming it."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The mound makes three Charged Tendril attacks. It can replace one with Engulf."
+    },
+    {
+      "name": "Charged Tendril",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "1d6+4",
+          "type": "bludgeoning"
+        },
+        {
+          "avg": 5,
+          "dice": "2d4",
+          "type": "lightning"
+        }
+      ],
+      "desc": "If the target is Medium or smaller, it is pulled 5 feet toward the mound."
+    },
+    {
+      "name": "Engulf",
+      "desc": "A Medium or smaller creature within 5 feet makes a DC 15 Strength save or is engulfed: Blinded, Restrained, and takes 9 (2d8) Lightning damage at the start of each of the mound's turns.",
+      "save": {
+        "ability": "str",
+        "dc": 15
+      },
+      "damage": [
+        {
+          "avg": 9,
+          "dice": "2d8",
+          "type": "lightning"
+        }
+      ]
+    }
+  ],
+  "desc": "A walking heap of rotting vegetation, drawn to storms and to anything warm.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "bonusActions": [],
+  "reactions": []
+}

@@ -1,0 +1,95 @@
+{
+  "id": "fleshGolem",
+  "name": "Flesh Golem",
+  "type": "construct",
+  "size": "medium",
+  "alignment": "neutral",
+  "cr": 5,
+  "ac": 9,
+  "hp": 127,
+  "hpFormula": "15d8+60",
+  "initiative": -1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "str": 19,
+    "dex": 9,
+    "con": 18,
+    "int": 6,
+    "wis": 10,
+    "cha": 5
+  },
+  "immunities": [
+    "lightning",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "frightened",
+    "paralyzed",
+    "petrified",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "understands the languages of its creator but can't speak",
+  "habitats": [
+    "urban"
+  ],
+  "traits": [
+    {
+      "name": "Aversion to Fire",
+      "desc": "After taking Fire damage, the golem has Disadvantage on attack rolls and ability checks until the end of its next turn."
+    },
+    {
+      "name": "Berserk",
+      "desc": "When the golem starts its turn Bloodied, it may go berserk and attack the nearest creature it can see."
+    },
+    {
+      "name": "Lightning Absorption",
+      "desc": "Lightning damage heals the golem instead of harming it."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "Advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The golem makes two Slam attacks."
+    },
+    {
+      "name": "Slam",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 13,
+          "dice": "2d8+4",
+          "type": "bludgeoning"
+        },
+        {
+          "avg": 4,
+          "dice": "1d8",
+          "type": "lightning"
+        }
+      ]
+    }
+  ],
+  "desc": "Stitched together from the dead and woken by lightning. It remembers nothing, except pain and fire.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "bonusActions": [],
+  "reactions": []
+}

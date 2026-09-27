@@ -1,0 +1,103 @@
+{
+  "id": "deva",
+  "name": "Deva",
+  "type": "celestial",
+  "size": "medium",
+  "alignment": "lawful good",
+  "cr": 10,
+  "ac": 17,
+  "hp": 229,
+  "hpFormula": "17d8+153",
+  "initiative": 4,
+  "speed": {
+    "walk": 30,
+    "fly": 90,
+    "hover": true
+  },
+  "abilities": {
+    "str": 18,
+    "dex": 18,
+    "con": 18,
+    "int": 17,
+    "wis": 20,
+    "cha": 20
+  },
+  "saves": {
+    "wis": 9,
+    "cha": 9
+  },
+  "skills": {
+    "insight": 9,
+    "perception": 9
+  },
+  "resistances": [
+    "radiant"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "frightened"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 19,
+  "languages": "all, telepathy 120 ft.",
+  "habitats": [
+    "planar"
+  ],
+  "traits": [
+    {
+      "name": "Exalted Restoration",
+      "desc": "If the deva dies outside Mount Celestia, its body disappears and it gains a new body 1d6 days later."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "Advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The deva makes two Holy Mace attacks."
+    },
+    {
+      "name": "Holy Mace",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "1d6+4",
+          "type": "bludgeoning"
+        },
+        {
+          "avg": 18,
+          "dice": "4d8",
+          "type": "radiant"
+        }
+      ]
+    },
+    {
+      "name": "Divine Aid",
+      "desc": "The deva casts Cure Wounds, Lesser Restoration or Remove Curse without components.",
+      "uses": {
+        "perDay": 2
+      }
+    }
+  ],
+  "bonusActions": [
+    {
+      "name": "Change Shape",
+      "desc": "The deva becomes a humanoid or beast of CR 10 or lower, or returns to its true form."
+    }
+  ],
+  "desc": "An angelic messenger sent to mortals: calm, radiant and absolutely certain of its purpose.",
+  "subtypes": [],
+  "vulnerabilities": [],
+  "immunities": [],
+  "reactions": []
+}

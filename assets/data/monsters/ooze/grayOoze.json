@@ -1,0 +1,86 @@
+{
+  "id": "grayOoze",
+  "name": "Gray Ooze",
+  "type": "ooze",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 9,
+  "hp": 22,
+  "hpFormula": "3d8+9",
+  "initiative": -2,
+  "speed": {
+    "walk": 10,
+    "climb": 10
+  },
+  "abilities": {
+    "str": 12,
+    "dex": 6,
+    "con": 16,
+    "int": 1,
+    "wis": 6,
+    "cha": 2
+  },
+  "skills": {
+    "stealth": 2
+  },
+  "resistances": [
+    "acid",
+    "cold",
+    "fire"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "exhaustion",
+    "frightened",
+    "grappled",
+    "prone",
+    "restrained"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [
+    "underdark",
+    "swamp"
+  ],
+  "traits": [
+    {
+      "name": "Amorphous",
+      "desc": "Can move through a space as narrow as 1 inch."
+    },
+    {
+      "name": "Corrode Metal",
+      "desc": "A nonmagical metal weapon that hits the ooze takes a cumulative −1 penalty to damage rolls; armor that it hits loses 1 AC."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Pseudopod",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 8,
+          "dice": "2d6+1",
+          "type": "acid"
+        }
+      ],
+      "desc": "Nonmagical metal armor worn by the target takes a −1 penalty to the AC it offers."
+    }
+  ],
+  "desc": "Looks like wet stone until it moves. It eats metal first.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "immunities": [],
+  "bonusActions": [],
+  "reactions": []
+}

@@ -1,0 +1,91 @@
+{
+  "id": "gelatinousCube",
+  "name": "Gelatinous Cube",
+  "type": "ooze",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2,
+  "ac": 6,
+  "hp": 63,
+  "hpFormula": "6d10+30",
+  "initiative": -4,
+  "speed": {
+    "walk": 15
+  },
+  "abilities": {
+    "str": 14,
+    "dex": 3,
+    "con": 20,
+    "int": 1,
+    "wis": 6,
+    "cha": 1
+  },
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "exhaustion",
+    "frightened",
+    "prone"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [
+    "underdark"
+  ],
+  "traits": [
+    {
+      "name": "Ooze Cube",
+      "desc": "The cube fills its space; other creatures can enter it but are then engulfed. Inside, they take 10 (3d6) Acid damage at the start of each of the cube's turns."
+    },
+    {
+      "name": "Transparent",
+      "desc": "While motionless, a DC 15 Perception check is needed to notice the cube."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Pseudopod",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 12,
+          "dice": "3d6+2",
+          "type": "acid"
+        }
+      ]
+    },
+    {
+      "name": "Engulf",
+      "desc": "The cube moves up to its Speed; creatures in its path make a DC 12 Dexterity save or are engulfed (Restrained, 10 (3d6) Acid damage).",
+      "save": {
+        "ability": "dex",
+        "dc": 12
+      },
+      "damage": [
+        {
+          "avg": 10,
+          "dice": "3d6",
+          "type": "acid"
+        }
+      ]
+    }
+  ],
+  "desc": "A clear block of jelly that keeps dungeon corridors spotless — and full of undigested gear.",
+  "treasure": "Coins, weapons and other indigestible items floating inside.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "bonusActions": [],
+  "reactions": []
+}

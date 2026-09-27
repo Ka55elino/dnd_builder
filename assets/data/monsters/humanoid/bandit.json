@@ -1,0 +1,73 @@
+{
+  "id": "bandit",
+  "name": "Bandit",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "neutral",
+  "cr": 0.125,
+  "ac": 12,
+  "acNote": "leather armor",
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "str": 11,
+    "dex": 12,
+    "con": 12,
+    "int": 10,
+    "wis": 10,
+    "cha": 10
+  },
+  "passivePerception": 10,
+  "languages": "Common, Thieves' Cant",
+  "habitats": [
+    "any"
+  ],
+  "actions": [
+    {
+      "name": "Scimitar",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 4,
+          "dice": "1d6+1",
+          "type": "slashing"
+        }
+      ]
+    },
+    {
+      "name": "Light Crossbow",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "range": "80/320"
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d8+1",
+          "type": "piercing"
+        }
+      ]
+    }
+  ],
+  "desc": "Robs travelers on lonely roads. Most of them would rather be paid than fight.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": [],
+  "senses": {}
+}

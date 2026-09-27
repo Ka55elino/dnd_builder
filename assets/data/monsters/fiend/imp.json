@@ -1,0 +1,96 @@
+{
+  "id": "imp",
+  "name": "Imp",
+  "type": "fiend",
+  "subtypes": [
+    "devil"
+  ],
+  "size": "tiny",
+  "alignment": "lawful evil",
+  "cr": 1,
+  "ac": 13,
+  "hp": 21,
+  "hpFormula": "6d4+6",
+  "initiative": 3,
+  "speed": {
+    "walk": 20,
+    "fly": 40
+  },
+  "abilities": {
+    "str": 6,
+    "dex": 17,
+    "con": 13,
+    "int": 11,
+    "wis": 12,
+    "cha": 14
+  },
+  "skills": {
+    "deception": 4,
+    "insight": 3,
+    "stealth": 5
+  },
+  "resistances": [
+    "cold"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 11,
+  "languages": "Common, Infernal",
+  "habitats": [
+    "planar"
+  ],
+  "traits": [
+    {
+      "name": "Devil's Sight",
+      "desc": "Magical Darkness doesn't impede the imp's Darkvision."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "Advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Sting",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 6,
+          "dice": "1d6+3",
+          "type": "piercing"
+        },
+        {
+          "avg": 7,
+          "dice": "2d6",
+          "type": "poison"
+        }
+      ]
+    },
+    {
+      "name": "Invisibility",
+      "desc": "The imp casts Invisibility on itself, no components."
+    }
+  ],
+  "bonusActions": [
+    {
+      "name": "Shape-Shift",
+      "desc": "The imp turns into a rat, raven or spider, or back into its true form."
+    }
+  ],
+  "desc": "A tiny devil that bargains, flatters and lies — and reports everything to its master.",
+  "saves": {},
+  "vulnerabilities": [],
+  "reactions": []
+}

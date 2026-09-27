@@ -1,0 +1,84 @@
+{
+  "id": "gibberingMouther",
+  "name": "Gibbering Mouther",
+  "type": "aberration",
+  "size": "medium",
+  "alignment": "chaotic neutral",
+  "cr": 2,
+  "ac": 9,
+  "hp": 52,
+  "hpFormula": "7d8+21",
+  "initiative": -1,
+  "speed": {
+    "walk": 20,
+    "swim": 20
+  },
+  "abilities": {
+    "str": 10,
+    "dex": 8,
+    "con": 16,
+    "int": 3,
+    "wis": 10,
+    "cha": 6
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "—",
+  "conditionImmunities": [
+    "prone"
+  ],
+  "habitats": [
+    "underdark",
+    "swamp"
+  ],
+  "traits": [
+    {
+      "name": "Aberrant Ground",
+      "desc": "The ground within 10 feet of the mouther is Difficult Terrain. A creature that starts its turn there makes a DC 10 Strength save or has Speed 0 until the start of its next turn."
+    },
+    {
+      "name": "Gibbering",
+      "desc": "While the mouther can see, creatures within 20 feet that can hear it can't take Reactions and act erratically on a failed DC 10 Wisdom save."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "2d6",
+          "type": "piercing"
+        }
+      ],
+      "desc": "If the target is Medium or smaller, it has the Prone condition."
+    },
+    {
+      "name": "Blinding Spittle",
+      "desc": "The mouther spits at a point within 15 feet; creatures within 5 feet of it make a DC 13 Dexterity save or are Blinded until the end of the mouther's next turn.",
+      "uses": {
+        "recharge": "5-6"
+      },
+      "save": {
+        "ability": "dex",
+        "dc": 13
+      }
+    }
+  ],
+  "desc": "A shapeless heap of eyes and mouths that never stop muttering. Its voices pull at the mind; the ground around it turns to sucking mud.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "bonusActions": [],
+  "reactions": []
+}

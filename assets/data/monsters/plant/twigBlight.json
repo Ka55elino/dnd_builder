@@ -1,0 +1,72 @@
+{
+  "id": "twigBlight",
+  "name": "Twig Blight",
+  "type": "plant",
+  "size": "small",
+  "alignment": "neutral evil",
+  "cr": 0.125,
+  "ac": 13,
+  "acNote": "natural armor",
+  "hp": 7,
+  "hpFormula": "2d6",
+  "initiative": 1,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "str": 6,
+    "dex": 13,
+    "con": 12,
+    "int": 4,
+    "wis": 8,
+    "cha": 3
+  },
+  "skills": {
+    "stealth": 3
+  },
+  "vulnerabilities": [
+    "fire"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "deafened"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 9,
+  "languages": "understands Common but can't speak",
+  "habitats": [
+    "forest"
+  ],
+  "traits": [
+    {
+      "name": "False Appearance",
+      "desc": "While motionless, it looks like a dead shrub."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Claws",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 3,
+          "dice": "1d4+1",
+          "type": "piercing"
+        }
+      ]
+    }
+  ],
+  "desc": "Dry twigs bound by an evil will. They gather at night around the tree that made them.",
+  "subtypes": [],
+  "saves": {},
+  "resistances": [],
+  "immunities": [],
+  "bonusActions": [],
+  "reactions": []
+}

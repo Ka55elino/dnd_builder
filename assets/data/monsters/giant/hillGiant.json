@@ -1,0 +1,82 @@
+{
+  "id": "hillGiant",
+  "name": "Hill Giant",
+  "type": "giant",
+  "size": "huge",
+  "alignment": "chaotic evil",
+  "cr": 5,
+  "ac": 13,
+  "acNote": "natural armor",
+  "hp": 105,
+  "hpFormula": "10d12+40",
+  "initiative": -1,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "str": 21,
+    "dex": 8,
+    "con": 19,
+    "int": 5,
+    "wis": 9,
+    "cha": 6
+  },
+  "skills": {
+    "perception": 2
+  },
+  "passivePerception": 12,
+  "languages": "Giant",
+  "habitats": [
+    "hill",
+    "grassland"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The giant makes two attacks, using Tree Club or Trash Lob in any combination."
+    },
+    {
+      "name": "Tree Club",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "avg": 18,
+          "dice": "3d8+5",
+          "type": "bludgeoning"
+        }
+      ],
+      "desc": "If the target is Large or smaller, it has the Prone condition."
+    },
+    {
+      "name": "Trash Lob",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 8,
+        "range": "60/240"
+      },
+      "damage": [
+        {
+          "avg": 16,
+          "dice": "2d10+5",
+          "type": "bludgeoning"
+        }
+      ],
+      "desc": "The target has the Poisoned condition until the end of its next turn."
+    }
+  ],
+  "desc": "Eats anything, including things that argue. Its lair smells of it.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": [],
+  "senses": {}
+}

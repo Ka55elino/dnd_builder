@@ -1,0 +1,77 @@
+{
+  "id": "basilisk",
+  "name": "Basilisk",
+  "type": "monstrosity",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3,
+  "ac": 15,
+  "acNote": "natural armor",
+  "hp": 52,
+  "hpFormula": "8d8+16",
+  "initiative": -1,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "str": 16,
+    "dex": 8,
+    "con": 15,
+    "int": 2,
+    "wis": 8,
+    "cha": 7
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [
+    "mountain",
+    "underdark"
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 10,
+          "dice": "2d6+3",
+          "type": "piercing"
+        },
+        {
+          "avg": 7,
+          "dice": "2d6",
+          "type": "poison"
+        }
+      ]
+    },
+    {
+      "name": "Petrifying Gaze",
+      "desc": "30-foot Cone. Constitution save DC 12: the target starts turning to stone (Restrained), and is Petrified if it fails again at the end of its next turn.",
+      "uses": {
+        "recharge": "4-6"
+      },
+      "save": {
+        "ability": "con",
+        "dc": 12
+      }
+    }
+  ],
+  "desc": "A squat, many-legged lizard whose lair is full of very lifelike statues.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

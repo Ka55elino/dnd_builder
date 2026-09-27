@@ -1,0 +1,84 @@
+{
+  "id": "brownBear",
+  "name": "Brown Bear",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 1,
+  "ac": 11,
+  "hp": 22,
+  "hpFormula": "3d10+6",
+  "initiative": 1,
+  "speed": {
+    "walk": 40,
+    "climb": 30
+  },
+  "abilities": {
+    "str": 17,
+    "dex": 12,
+    "con": 15,
+    "int": 2,
+    "wis": 13,
+    "cha": 7
+  },
+  "skills": {
+    "perception": 3
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [
+    "forest",
+    "hill",
+    "arctic"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The bear makes one Bite attack and one Claw attack."
+    },
+    {
+      "name": "Bite",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "1d8+3",
+          "type": "piercing"
+        }
+      ]
+    },
+    {
+      "name": "Claw",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d4+3",
+          "type": "slashing"
+        }
+      ],
+      "desc": "If the target is Large or smaller, it has the Prone condition."
+    }
+  ],
+  "desc": "Territorial and fearless; it defends its den and its dinner with equal fury.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

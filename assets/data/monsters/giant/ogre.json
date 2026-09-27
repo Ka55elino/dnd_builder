@@ -1,0 +1,78 @@
+{
+  "id": "ogre",
+  "name": "Ogre",
+  "type": "giant",
+  "size": "large",
+  "alignment": "chaotic evil",
+  "cr": 2,
+  "ac": 11,
+  "acNote": "hide armor",
+  "hp": 68,
+  "hpFormula": "8d10+24",
+  "initiative": -1,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "str": 19,
+    "dex": 8,
+    "con": 16,
+    "int": 5,
+    "wis": 7,
+    "cha": 7
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 8,
+  "languages": "Common, Giant",
+  "habitats": [
+    "forest",
+    "hill",
+    "mountain",
+    "swamp"
+  ],
+  "actions": [
+    {
+      "name": "Greatclub",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 13,
+          "dice": "2d8+4",
+          "type": "bludgeoning"
+        }
+      ]
+    },
+    {
+      "name": "Javelin",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 6,
+        "range": "30/120"
+      },
+      "damage": [
+        {
+          "avg": 11,
+          "dice": "2d6+4",
+          "type": "piercing"
+        }
+      ]
+    }
+  ],
+  "desc": "Big, hungry and easily bored. It solves problems by hitting them.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

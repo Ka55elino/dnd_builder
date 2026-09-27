@@ -46,6 +46,13 @@ export const {
     SaveCharacterState,
     SaveCustomEquipment,
     SaveCustomSpell,
+    // bestiary (bestiary.go)
+    GetMonsters,
+    SaveCustomMonster,
+    DeleteCustomMonster,
+    GetEncounters,
+    SaveEncounter,
+    DeleteEncounter,
     // local-network game (net.go)
     NetStatus,
     HostGame,

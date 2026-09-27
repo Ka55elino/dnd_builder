@@ -43,6 +43,9 @@ var seeders = []seeder{
 	{table: "feats", dir: "assets/data/feats", count: "CountFeats", row: insertFeatJSON},
 	{table: "spells", dir: "assets/data/spells", count: "CountSpells", row: insertSpellJSON},
 
+	// bestiary
+	{table: "monsters", dir: "assets/data/monsters", count: "CountMonsters", row: insertMonsterJSON},
+
 	// sample characters: dev mode only, and only if there are no characters yet
 	{table: "characters", dir: "assets/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
 }

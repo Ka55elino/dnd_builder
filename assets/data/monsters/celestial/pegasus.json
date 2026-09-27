@@ -1,0 +1,71 @@
+{
+  "id": "pegasus",
+  "name": "Pegasus",
+  "type": "celestial",
+  "size": "large",
+  "alignment": "chaotic good",
+  "cr": 2,
+  "ac": 12,
+  "hp": 59,
+  "hpFormula": "7d10+21",
+  "initiative": 2,
+  "speed": {
+    "walk": 60,
+    "fly": 90
+  },
+  "abilities": {
+    "str": 18,
+    "dex": 15,
+    "con": 16,
+    "int": 10,
+    "wis": 15,
+    "cha": 13
+  },
+  "saves": {
+    "dex": 4,
+    "wis": 4,
+    "cha": 3
+  },
+  "skills": {
+    "perception": 6
+  },
+  "passivePerception": 16,
+  "languages": "understands Celestial, Common, Elvish and Sylvan but can't speak",
+  "habitats": [
+    "grassland",
+    "hill",
+    "planar"
+  ],
+  "actions": [
+    {
+      "name": "Hooves",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "1d6+4",
+          "type": "bludgeoning"
+        },
+        {
+          "avg": 5,
+          "dice": "2d4",
+          "type": "radiant"
+        }
+      ]
+    }
+  ],
+  "desc": "A winged horse that chooses its rider and serves only those whose cause it believes in.",
+  "subtypes": [],
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": [],
+  "senses": {}
+}

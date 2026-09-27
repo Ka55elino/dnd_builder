@@ -1,0 +1,95 @@
+{
+  "id": "redDragonWyrmling",
+  "name": "Red Dragon Wyrmling",
+  "type": "dragon",
+  "subtypes": [
+    "chromatic"
+  ],
+  "size": "medium",
+  "alignment": "chaotic evil",
+  "cr": 4,
+  "ac": 17,
+  "hp": 75,
+  "hpFormula": "10d8+30",
+  "initiative": 2,
+  "speed": {
+    "walk": 30,
+    "climb": 30,
+    "fly": 60
+  },
+  "abilities": {
+    "str": 19,
+    "dex": 10,
+    "con": 17,
+    "int": 12,
+    "wis": 11,
+    "cha": 15
+  },
+  "saves": {
+    "dex": 2,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 2
+  },
+  "immunities": [
+    "fire"
+  ],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [
+    "mountain",
+    "hill"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The dragon makes two Rend attacks."
+    },
+    {
+      "name": "Rend",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 9,
+          "dice": "1d10+4",
+          "type": "slashing"
+        }
+      ]
+    },
+    {
+      "name": "Fire Breath",
+      "desc": "15-foot Cone. Dexterity save DC 13: 24 (7d6) Fire damage on a failure, half on a success.",
+      "uses": {
+        "recharge": "5-6"
+      },
+      "save": {
+        "ability": "dex",
+        "dc": 13
+      },
+      "damage": [
+        {
+          "avg": 24,
+          "dice": "7d6",
+          "type": "fire"
+        }
+      ]
+    }
+  ],
+  "desc": "Already greedy, already cruel. It keeps a small hoard and counts it every night.",
+  "vulnerabilities": [],
+  "resistances": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

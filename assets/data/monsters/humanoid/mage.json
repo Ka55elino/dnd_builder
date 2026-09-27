@@ -1,0 +1,90 @@
+{
+  "id": "mage",
+  "name": "Mage",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "neutral",
+  "cr": 6,
+  "ac": 15,
+  "acNote": "with Mage Armor",
+  "hp": 81,
+  "hpFormula": "18d8",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "str": 9,
+    "dex": 14,
+    "con": 11,
+    "int": 17,
+    "wis": 12,
+    "cha": 11
+  },
+  "saves": {
+    "int": 6,
+    "wis": 4
+  },
+  "skills": {
+    "arcana": 6,
+    "history": 6,
+    "perception": 4
+  },
+  "passivePerception": 14,
+  "languages": "Common and any three languages",
+  "habitats": [
+    "urban",
+    "any"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The mage makes three Arcane Burst attacks."
+    },
+    {
+      "name": "Arcane Burst",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 6,
+        "range": 120
+      },
+      "damage": [
+        {
+          "avg": 16,
+          "dice": "3d8+3",
+          "type": "force"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "Intelligence (spell save DC 14). At will: Detect Magic, Light, Mage Armor, Mage Hand. 2/day each: Fireball, Invisibility. 1/day: Cone of Cold."
+    }
+  ],
+  "bonusActions": [
+    {
+      "name": "Misty Step",
+      "desc": "The mage casts Misty Step (2/day).",
+      "uses": {
+        "perDay": 2
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "name": "Protective Magic",
+      "desc": "The mage casts Counterspell or Shield in response to the spell's trigger (3/day).",
+      "uses": {
+        "perDay": 3
+      }
+    }
+  ],
+  "desc": "A scholar of the arcane who has learned that the best argument is a well-placed fireball.",
+  "subtypes": [],
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "senses": {}
+}

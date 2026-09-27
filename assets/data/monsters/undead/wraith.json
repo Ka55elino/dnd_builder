@@ -1,0 +1,97 @@
+{
+  "id": "wraith",
+  "name": "Wraith",
+  "type": "undead",
+  "size": "medium",
+  "alignment": "neutral evil",
+  "cr": 5,
+  "ac": 13,
+  "hp": 67,
+  "hpFormula": "9d8+27",
+  "initiative": 3,
+  "speed": {
+    "walk": 5,
+    "fly": 60,
+    "hover": true
+  },
+  "abilities": {
+    "str": 6,
+    "dex": 16,
+    "con": 16,
+    "int": 12,
+    "wis": 14,
+    "cha": 15
+  },
+  "resistances": [
+    "acid",
+    "bludgeoning",
+    "cold",
+    "fire",
+    "piercing",
+    "slashing",
+    "thunder"
+  ],
+  "immunities": [
+    "necrotic",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "poisoned",
+    "prone",
+    "restrained"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "the languages it knew in life",
+  "habitats": [
+    "underdark",
+    "urban",
+    "any"
+  ],
+  "traits": [
+    {
+      "name": "Incorporeal Movement",
+      "desc": "Can move through creatures and objects like Difficult Terrain; takes 5 (1d10) Force damage if it ends its turn inside an object."
+    },
+    {
+      "name": "Sunlight Sensitivity",
+      "desc": "Disadvantage on attack rolls and Perception checks while in sunlight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Life Drain",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 21,
+          "dice": "4d8+3",
+          "type": "necrotic"
+        }
+      ],
+      "desc": "If the target is a creature, its Hit Point maximum decreases by the same amount."
+    },
+    {
+      "name": "Create Specter",
+      "desc": "The wraith raises the spirit of a Humanoid that died violently within the last minute as a Specter under its control (up to seven at once)."
+    }
+  ],
+  "desc": "Pure malice left behind when a wicked soul refused to die. Its touch drains life itself.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "bonusActions": [],
+  "reactions": []
+}

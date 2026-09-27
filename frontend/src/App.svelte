@@ -12,6 +12,7 @@
     import GamePage from './components/GamePage.svelte';
     import JoinPage from './components/JoinPage.svelte';
     import WhisperPopups from './components/WhisperPopups.svelte';
+    import BestiaryPage from './components/bestiary/BestiaryPage.svelte';
 
     /**
      * Screens:
@@ -21,6 +22,7 @@
      *   'characters' — character list
      *   'spells'     — spell reference
      *   'items'      — item reference
+     *   'bestiary'   — monsters and encounter presets (DM)
      *   'builder' | 'character' | 'levelup' | 'give' — working with a character
      */
     let screen = $state('menu');
@@ -79,6 +81,8 @@
     <SpellsPage onBack={showMenu} />
 {:else if screen === 'items'}
     <ItemsPage onBack={showMenu} />
+{:else if screen === 'bestiary'}
+    <BestiaryPage onBack={showMenu} />
 {:else if screen === 'game'}
     <GamePage onBack={showMenu} />
 {:else if screen === 'join'}

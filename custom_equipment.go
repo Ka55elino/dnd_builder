@@ -10,7 +10,7 @@ import (
 )
 
 // User-defined reference records: items, armor and weapons
-// (the "Items" page) and spells (the "Spells" page).
+// (the "Items" page), spells (the "Spells" page) and monsters (the "Bestiary" page).
 // They are stored in the same tables as the built-in records, with is_custom = 1
 // and "custom": true in data (so the frontend can tell them apart).
 // Built-in records (is_custom = 0) are never modified or deleted by these methods.
@@ -23,10 +23,11 @@ type customKind struct {
 }
 
 var customKinds = map[string]customKind{
-	"weapon": {table: "weapons", insert: insertWeaponJSON, equipment: true},
-	"armor":  {table: "armor", insert: insertArmorJSON, equipment: true},
-	"item":   {table: "items", insert: insertItemJSON, equipment: true},
-	"spell":  {table: "spells", insert: insertSpellJSON, children: []string{"spell_classes"}},
+	"weapon":  {table: "weapons", insert: insertWeaponJSON, equipment: true},
+	"armor":   {table: "armor", insert: insertArmorJSON, equipment: true},
+	"item":    {table: "items", insert: insertItemJSON, equipment: true},
+	"spell":   {table: "spells", insert: insertSpellJSON, children: []string{"spell_classes"}},
+	"monster": {table: "monsters", insert: insertMonsterJSON},
 }
 
 // deleteChildren deletes a record's rows in related tables (e.g. spell_classes).

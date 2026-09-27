@@ -1,0 +1,130 @@
+{
+  "id": "adultRedDragon",
+  "name": "Adult Red Dragon",
+  "type": "dragon",
+  "subtypes": [
+    "chromatic"
+  ],
+  "size": "huge",
+  "alignment": "chaotic evil",
+  "cr": 17,
+  "ac": 19,
+  "hp": 256,
+  "hpFormula": "19d12+133",
+  "initiative": 12,
+  "speed": {
+    "walk": 40,
+    "climb": 40,
+    "fly": 80
+  },
+  "abilities": {
+    "str": 27,
+    "dex": 10,
+    "con": 25,
+    "int": 16,
+    "wis": 13,
+    "cha": 23
+  },
+  "saves": {
+    "dex": 6,
+    "wis": 7
+  },
+  "skills": {
+    "perception": 13,
+    "stealth": 6
+  },
+  "immunities": [
+    "fire"
+  ],
+  "senses": {
+    "blindsight": 60,
+    "darkvision": 120
+  },
+  "passivePerception": 23,
+  "languages": "Common, Draconic",
+  "habitats": [
+    "mountain",
+    "hill"
+  ],
+  "traits": [
+    {
+      "name": "Legendary Resistance",
+      "desc": "If the dragon fails a saving throw, it can choose to succeed instead.",
+      "uses": {
+        "perDay": 3
+      }
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The dragon makes three Rend attacks. It can replace one attack with a use of Spellcasting to cast Scorching Ray."
+    },
+    {
+      "name": "Rend",
+      "attack": {
+        "kind": "melee",
+        "bonus": 14,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "avg": 13,
+          "dice": "1d10+8",
+          "type": "slashing"
+        },
+        {
+          "avg": 7,
+          "dice": "2d6",
+          "type": "fire"
+        }
+      ]
+    },
+    {
+      "name": "Fire Breath",
+      "desc": "60-foot Cone. Dexterity save DC 21: 59 (17d6) Fire damage on a failure, half on a success.",
+      "uses": {
+        "recharge": "5-6"
+      },
+      "save": {
+        "ability": "dex",
+        "dc": 21
+      },
+      "damage": [
+        {
+          "avg": 59,
+          "dice": "17d6",
+          "type": "fire"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "Charisma (spell save DC 20). At will: Command, Detect Magic, Scorching Ray. 1/day: Fireball."
+    }
+  ],
+  "legendary": {
+    "perRound": 3,
+    "actions": [
+      {
+        "name": "Commanding Presence",
+        "desc": "The dragon uses Spellcasting to cast Command. It can't take this action again until the start of its next turn."
+      },
+      {
+        "name": "Fiery Rays",
+        "desc": "The dragon uses Spellcasting to cast Scorching Ray. It can't take this action again until the start of its next turn."
+      },
+      {
+        "name": "Pounce",
+        "desc": "The dragon moves up to half its Speed and makes one Rend attack."
+      }
+    ]
+  },
+  "desc": "A tyrant of the peaks. It demands tribute from every valley it can see and burns the ones that forget.",
+  "treasure": "Hoard: coins, gems, art objects and at least one magic item.",
+  "vulnerabilities": [],
+  "resistances": [],
+  "conditionImmunities": [],
+  "bonusActions": [],
+  "reactions": []
+}

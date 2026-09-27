@@ -1,0 +1,75 @@
+{
+  "id": "animatedArmor",
+  "name": "Animated Armor",
+  "type": "construct",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 1,
+  "ac": 18,
+  "hp": 33,
+  "hpFormula": "6d8+6",
+  "initiative": 2,
+  "speed": {
+    "walk": 25
+  },
+  "abilities": {
+    "str": 14,
+    "dex": 11,
+    "con": 13,
+    "int": 1,
+    "wis": 3,
+    "cha": 1
+  },
+  "immunities": [
+    "poison",
+    "psychic"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "exhaustion",
+    "frightened",
+    "paralyzed",
+    "petrified",
+    "poisoned"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 6,
+  "languages": "—",
+  "habitats": [
+    "urban"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The armor makes two Slam attacks."
+    },
+    {
+      "name": "Slam",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d6+2",
+          "type": "bludgeoning"
+        }
+      ]
+    }
+  ],
+  "desc": "An empty suit of plate that stands guard in a hall until someone steps where they shouldn't.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

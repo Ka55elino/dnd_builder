@@ -1,0 +1,67 @@
+{
+  "id": "owlbear",
+  "name": "Owlbear",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 3,
+  "ac": 13,
+  "acNote": "natural armor",
+  "hp": 59,
+  "hpFormula": "7d10+21",
+  "initiative": 1,
+  "speed": {
+    "walk": 40,
+    "climb": 40
+  },
+  "abilities": {
+    "str": 20,
+    "dex": 12,
+    "con": 17,
+    "int": 3,
+    "wis": 12,
+    "cha": 7
+  },
+  "skills": {
+    "perception": 5
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 15,
+  "languages": "—",
+  "habitats": [
+    "forest"
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The owlbear makes two Rend attacks."
+    },
+    {
+      "name": "Rend",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 14,
+          "dice": "2d8+5",
+          "type": "slashing"
+        }
+      ]
+    }
+  ],
+  "desc": "Half owl, half bear, entirely bad-tempered. Its screech carries for miles through the forest.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "bonusActions": [],
+  "reactions": []
+}

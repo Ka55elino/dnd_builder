@@ -1,0 +1,93 @@
+{
+  "id": "fireElemental",
+  "name": "Fire Elemental",
+  "type": "elemental",
+  "size": "large",
+  "alignment": "neutral",
+  "cr": 5,
+  "ac": 13,
+  "hp": 93,
+  "hpFormula": "11d10+33",
+  "initiative": 3,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "str": 10,
+    "dex": 17,
+    "con": 16,
+    "int": 6,
+    "wis": 10,
+    "cha": 7
+  },
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "poisoned",
+    "prone",
+    "restrained",
+    "unconscious"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Primordial (Ignan)",
+  "habitats": [
+    "planar"
+  ],
+  "traits": [
+    {
+      "name": "Fire Aura",
+      "desc": "At the end of each of its turns, the elemental deals 5 (1d10) Fire damage to every creature in a 10-foot Emanation and sets flammable objects alight."
+    },
+    {
+      "name": "Illumination",
+      "desc": "Bright Light in a 30-foot radius and Dim Light for an additional 30 feet."
+    },
+    {
+      "name": "Water Susceptibility",
+      "desc": "Takes 3 (1d6) Cold damage for every 5 feet it moves in water or for every gallon of water splashed on it."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The elemental makes two Burn attacks."
+    },
+    {
+      "name": "Burn",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 10,
+          "dice": "2d6+3",
+          "type": "fire"
+        }
+      ],
+      "desc": "If the target is a creature or a flammable object, it starts burning."
+    }
+  ],
+  "desc": "A living bonfire that wants only to spread. It leaves ash where it walks.",
+  "subtypes": [],
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "bonusActions": [],
+  "reactions": []
+}

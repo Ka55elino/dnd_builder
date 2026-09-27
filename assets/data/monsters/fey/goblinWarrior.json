@@ -1,0 +1,89 @@
+{
+  "id": "goblinWarrior",
+  "name": "Goblin Warrior",
+  "type": "fey",
+  "subtypes": [
+    "goblinoid"
+  ],
+  "size": "small",
+  "alignment": "chaotic neutral",
+  "cr": 0.25,
+  "ac": 15,
+  "acNote": "leather armor, shield",
+  "hp": 10,
+  "hpFormula": "3d6",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 15,
+    "con": 10,
+    "int": 10,
+    "wis": 8,
+    "cha": 8
+  },
+  "skills": {
+    "stealth": 6
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "Common, Goblin",
+  "habitats": [
+    "forest",
+    "underdark",
+    "grassland",
+    "hill"
+  ],
+  "actions": [
+    {
+      "name": "Scimitar",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d6+2",
+          "type": "slashing"
+        }
+      ],
+      "desc": "Plus 2 (1d4) Slashing damage if the goblin had Advantage on the roll."
+    },
+    {
+      "name": "Shortbow",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "range": "80/320"
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d6+2",
+          "type": "piercing"
+        }
+      ],
+      "desc": "Plus 2 (1d4) Piercing damage if the goblin had Advantage on the roll."
+    }
+  ],
+  "bonusActions": [
+    {
+      "name": "Nimble Escape",
+      "desc": "The goblin takes the Disengage or Hide action."
+    }
+  ],
+  "desc": "Quick, loud and petty. Alone a goblin runs; in a crowd it gets brave.",
+  "saves": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "traits": [],
+  "reactions": []
+}

@@ -1,0 +1,101 @@
+{
+  "id": "dryad",
+  "name": "Dryad",
+  "type": "fey",
+  "size": "medium",
+  "alignment": "neutral",
+  "cr": 1,
+  "ac": 16,
+  "acNote": "natural armor",
+  "hp": 22,
+  "hpFormula": "5d8",
+  "initiative": 1,
+  "speed": {
+    "walk": 30,
+    "climb": 30
+  },
+  "abilities": {
+    "str": 10,
+    "dex": 12,
+    "con": 11,
+    "int": 14,
+    "wis": 15,
+    "cha": 18
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 5
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Elvish, Sylvan",
+  "habitats": [
+    "forest"
+  ],
+  "traits": [
+    {
+      "name": "Magic Resistance",
+      "desc": "Advantage on saving throws against spells and other magical effects."
+    },
+    {
+      "name": "Speak with Beasts and Plants",
+      "desc": "The dryad can communicate with Beasts and Plants as if they shared a language."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The dryad makes one Vine Lash or Thorn Burst attack, then uses Spellcasting if able."
+    },
+    {
+      "name": "Vine Lash",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "avg": 8,
+          "dice": "1d8+4",
+          "type": "slashing"
+        }
+      ]
+    },
+    {
+      "name": "Thorn Burst",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 6,
+        "range": 60
+      },
+      "damage": [
+        {
+          "avg": 7,
+          "dice": "1d6+4",
+          "type": "piercing"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "Charisma (spell save DC 14). At will: Animal Friendship, Charm Monster, Druidcraft. 1/day each: Entangle, Pass without Trace."
+    }
+  ],
+  "bonusActions": [
+    {
+      "name": "Tree Stride",
+      "desc": "The dryad steps into a living tree and out of another within 60 feet."
+    }
+  ],
+  "desc": "The spirit of an old tree. Kind to those who respect the grove; the rest get lost and are never quite found.",
+  "subtypes": [],
+  "saves": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "reactions": []
+}

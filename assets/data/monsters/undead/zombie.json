@@ -1,0 +1,71 @@
+{
+  "id": "zombie",
+  "name": "Zombie",
+  "type": "undead",
+  "size": "medium",
+  "alignment": "neutral evil",
+  "cr": 0.25,
+  "ac": 8,
+  "hp": 15,
+  "hpFormula": "2d8+6",
+  "initiative": -2,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "str": 13,
+    "dex": 6,
+    "con": 16,
+    "int": 3,
+    "wis": 6,
+    "cha": 5
+  },
+  "saves": {
+    "wis": 0
+  },
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 8,
+  "languages": "understands the languages it knew in life but can't speak",
+  "habitats": [
+    "any"
+  ],
+  "traits": [
+    {
+      "name": "Undead Fortitude",
+      "desc": "If damage reduces the zombie to 0 Hit Points, it makes a Constitution save (DC 5 + the damage taken) unless the damage is Radiant or from a Critical Hit. On a success, it drops to 1 Hit Point instead."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Slam",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "avg": 5,
+          "dice": "1d8+1",
+          "type": "bludgeoning"
+        }
+      ]
+    }
+  ],
+  "desc": "Slow, relentless and very hard to put down for good.",
+  "subtypes": [],
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "bonusActions": [],
+  "reactions": []
+}
