@@ -116,6 +116,7 @@ func parseEntry(e *zeroconf.ServiceEntry) (GameInfo, bool) {
 	}
 	g.Players, _ = strconv.Atoi(txt["players"])
 	g.Protocol, _ = strconv.Atoi(txt["v"])
+	g.Version = txt["app"]
 	return g, true
 }
 
@@ -151,7 +152,7 @@ func (d *discovery) report() {
 
 	var sig strings.Builder
 	for _, g := range list {
-		sig.WriteString(g.ID + "|" + g.Name + "|" + g.Host + ":" + strconv.Itoa(g.Port) + "|" + strconv.Itoa(g.Players) + ";")
+		sig.WriteString(g.ID + "|" + g.Name + "|" + g.Host + ":" + strconv.Itoa(g.Port) + "|" + strconv.Itoa(g.Players) + "|" + g.Version + ";")
 	}
 	if d.reported && sig.String() == d.last {
 		return

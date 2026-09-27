@@ -3,8 +3,9 @@
      * Player side: messages from the DM, shown as popups in the corner on any
      * screen (see game.js). A popup stays until the player closes it with ✕.
      *   "whisper" — a private message;
-     *   "give"    — a named item: stored in the character's backpack in the local
-     *               DB right away (even if the sheet is not open), then announced.
+     *   "give"    — a named or the DM's own item: stored in the character's backpack in the
+     *               local DB right away (even if the sheet is not open), then announced;
+     *               the DM's own item is first saved as a custom record here (game.js).
      * Mounted once in App.svelte.
      */
     import { fly } from "svelte/transition";
@@ -22,7 +23,8 @@
         try {
             const { catalog } = await loadRefs();
             const { item, qty } = await storeGift(characterId, data, catalog);
-            push("gift", "The DM gives you", `${item.name}${qty > 1 ? ` ×${qty}` : ""} — added to your backpack.`);
+            const own = data?.def ? " It's the DM's own item — now it's in your items too." : "";
+            push("gift", "The DM gives you", `${item.name}${qty > 1 ? ` ×${qty}` : ""} — added to your backpack.${own}`);
         } catch (e) {
             push("error", "An item from the DM was lost", e?.message ?? String(e));
         }

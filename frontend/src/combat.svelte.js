@@ -21,6 +21,7 @@ import { onGameEvent } from './server.svelte.js';
 import { Character } from './models/Character.js';
 import { CharacterBuild } from './models/CharacterBuild.svelte.js';
 import { CharacterState } from './models/CharacterState.svelte.js';
+import { isSummary } from './rules/summary.js';
 
 export const EV_ENCOUNTER = 'encounter';
 
@@ -168,8 +169,13 @@ export function broadcast() {
     SendGameEvent(EV_ENCOUNTER, '', JSON.stringify(data)).catch(() => {}); // not hosting — nothing to do
 }
 
-/** A player's numbers for the DM's line, from their snapshot / latest state. */
-export function playerSheet(snap, state, refs) {
+/**
+ * A player's numbers for the DM's line: from the summary the player's app sent
+ * (rules/summary.js), or — for older players / test tools — computed here from
+ * their snapshot and latest state.
+ */
+export function playerSheet(snap, state, refs, summary = null) {
+    if (isSummary(summary)) return { hp: summary.hp, maxHp: summary.maxHp, temp: summary.temp ?? 0, ac: summary.ac };
     try {
         if (!snap?.build?.classId || !refs) return null;
         const build = CharacterBuild.fromJSON(snap.build);

@@ -33,6 +33,9 @@ type client struct {
 	playerID string
 	players  []PlayerInfo
 	peer     *peer
+	// the latest "state" event sent: re-sent after a reconnect, so the DM's
+	// card is current again without waiting for the next change
+	lastState *Event
 }
 
 // startClient connects and waits for the DM's welcome; on success the
@@ -144,6 +147,12 @@ func (c *client) run(p *peer) {
 			}
 			return
 		}
+		c.m.mu.Lock()
+		last := c.lastState
+		c.m.mu.Unlock()
+		if last != nil {
+			_ = p.Send(MsgEvent, *last) // the seat was new: bring the DM's card up to date
+		}
 		c.m.notify()
 	}
 }
@@ -199,6 +208,12 @@ func (c *client) send(ev Event) error {
 		return errString("not connected to the DM")
 	}
 	ev.From, ev.To = "", ""
+	if ev.Kind == EventKindState {
+		c.m.mu.Lock()
+		keep := ev
+		c.lastState = &keep
+		c.m.mu.Unlock()
+	}
 	return p.Send(MsgEvent, ev)
 }
 

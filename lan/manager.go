@@ -39,23 +39,40 @@ type Status struct {
 	PlayerID    string       `json:"playerId"`    // player: own id in the game
 	CharacterID string       `json:"characterId"` // player: the character joined with
 	Players     []PlayerInfo `json:"players"`
-	Error       string       `json:"error"` // why the last session ended, if not by the user
+	Error       string       `json:"error"`      // why the last session ended, if not by the user
+	AppVersion  string       `json:"appVersion"` // this app's version (for the footer)
 }
 
 // Manager owns the single network role of the app: host, player or nothing.
 type Manager struct {
 	emitFn func(name string, data any)
 
-	mu      sync.Mutex
-	host    *host
-	client  *client
-	disc    *discovery
-	localIP string
-	lastErr string
-	done    chan struct{}
+	mu         sync.Mutex
+	host       *host
+	client     *client
+	disc       *discovery
+	localIP    string
+	lastErr    string
+	done       chan struct{}
+	appVersion string // APP_VERSION of this app (see SetAppVersion)
 }
 
 // NewManager creates the manager; emit sends an event to the frontend.
+// SetAppVersion sets this app's version: players send it on join, and the DM
+// refuses players with a different one ("" on either side — not checked).
+// Call before hosting or joining.
+func (m *Manager) SetAppVersion(v string) {
+	m.mu.Lock()
+	m.appVersion = v
+	m.mu.Unlock()
+}
+
+func (m *Manager) version() string {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.appVersion
+}
+
 func NewManager(emit func(name string, data any)) *Manager {
 	m := &Manager{emitFn: emit, localIP: LocalIP(), done: make(chan struct{})}
 	go m.watchIP()
@@ -93,7 +110,8 @@ func (m *Manager) watchIP() {
 func (m *Manager) Status() Status {
 	m.mu.Lock()
 	h, c := m.host, m.client
-	st := Status{Role: RoleNone, State: StateDisconnected, LocalIP: m.localIP, Error: m.lastErr, Players: []PlayerInfo{}}
+	st := Status{Role: RoleNone, State: StateDisconnected, LocalIP: m.localIP, Error: m.lastErr,
+		Players: []PlayerInfo{}, AppVersion: m.appVersion}
 	if c != nil {
 		st.Role = RolePlayer
 		st.State = c.state
@@ -199,7 +217,7 @@ func (m *Manager) Join(address string, player PlayerInfo, snap Snapshot) (Status
 	m.mu.Unlock()
 
 	player.Online = true
-	c, err := startClient(m, addr, Hello{Protocol: ProtocolVersion, Player: player, Character: snap})
+	c, err := startClient(m, addr, Hello{Protocol: ProtocolVersion, AppVersion: m.version(), Player: player, Character: snap})
 	if err != nil {
 		return m.Status(), err
 	}

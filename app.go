@@ -23,7 +23,9 @@ type App struct {
 
 // NewApp creates the backend service.
 func NewApp() *App {
-	return &App{ready: make(chan struct{}), net: lan.NewManager(emitEvent)}
+	net := lan.NewManager(emitEvent)
+	net.SetAppVersion(APP_VERSION) // players and the DM must run the same version
+	return &App{ready: make(chan struct{}), net: net}
 }
 
 // ServiceStartup (called by Wails before the window loads) opens the database

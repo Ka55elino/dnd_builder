@@ -54,6 +54,7 @@ func startHost(m *Manager, name string) (*host, error) {
 			Host:     LocalIP(),
 			Port:     port,
 			Protocol: ProtocolVersion,
+			Version:  m.version(),
 		},
 		ln:      ln,
 		ctx:     ctx,
@@ -99,6 +100,7 @@ func (h *host) txt() []string {
 		"id=" + h.info.ID,
 		"ip=" + LocalIP(), // the address the DM sees in the header; preferred over A records (VPN, Docker…)
 		"v=" + strconv.Itoa(ProtocolVersion),
+		"app=" + h.m.version(),
 		"players=" + strconv.Itoa(h.onlineCount()),
 	}
 }
@@ -121,7 +123,7 @@ func (h *host) handleWS(w http.ResponseWriter, r *http.Request) {
 	}
 	conn.SetReadLimit(readLimit)
 
-	hello, err := readHello(h.ctx, conn)
+	hello, err := readHello(h.ctx, conn, h.m.version())
 	if err != nil {
 		reject(conn, err.Error())
 		return
@@ -145,7 +147,7 @@ func (h *host) handleWS(w http.ResponseWriter, r *http.Request) {
 	h.changed()
 }
 
-func readHello(ctx context.Context, conn *websocket.Conn) (Hello, error) {
+func readHello(ctx context.Context, conn *websocket.Conn, appVersion string) (Hello, error) {
 	var hello Hello
 	ctx, cancel := context.WithTimeout(ctx, helloTimeout)
 	defer cancel()
@@ -161,7 +163,10 @@ func readHello(ctx context.Context, conn *websocket.Conn) (Hello, error) {
 		return hello, errString("bad hello")
 	}
 	if hello.Protocol != ProtocolVersion {
-		return hello, fmt.Errorf("app version mismatch (DM protocol %d, yours %d) — update the app", ProtocolVersion, hello.Protocol)
+		return hello, fmt.Errorf("the DM's app is a different version — install the same version of DnD Builder as the DM (network protocol %d, yours %d)", ProtocolVersion, hello.Protocol)
+	}
+	if appVersion != "" && hello.AppVersion != "" && hello.AppVersion != appVersion {
+		return hello, fmt.Errorf("version mismatch: the DM has DnD Builder %s, you have %s — both need the same version", appVersion, hello.AppVersion)
 	}
 	return hello, nil
 }
@@ -239,13 +244,17 @@ func (h *host) readLoop(s *seat, p *peer) {
 // screen shows current Hit Points even when it is opened later.
 func (h *host) updateState(s *seat, data json.RawMessage) {
 	var body struct {
-		State map[string]any `json:"state"`
+		State   map[string]any `json:"state"`
+		Summary map[string]any `json:"summary"`
 	}
 	if json.Unmarshal(data, &body) != nil || body.State == nil {
 		return
 	}
 	h.mu.Lock()
 	s.snap.State = body.State
+	if body.Summary != nil {
+		s.snap.Summary = body.Summary
+	}
 	h.mu.Unlock()
 }
 

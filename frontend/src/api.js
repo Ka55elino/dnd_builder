@@ -20,6 +20,8 @@ const SILENT = new Set([
     'StartDiscovery',
     'StopDiscovery',
     'SendGameEvent',
+    'SaveTextFile', // system dialogs: the user takes their time, no loader over them
+    'OpenTextFile',
 ]);
 
 const api = {};
@@ -46,6 +48,9 @@ export const {
     SaveCharacterState,
     SaveCustomEquipment,
     SaveCustomSpell,
+    // files: save / open through the system dialogs (files.go)
+    SaveTextFile,
+    OpenTextFile,
     // bestiary (bestiary.go)
     GetMonsters,
     SaveCustomMonster,

@@ -1,6 +1,8 @@
 <script>
     /**
-     * Modal for the DM: give a player a named item from the catalog
+     * Modal for the DM: give a player a named item from the catalog, or one of the
+     * DM's own (custom) items — those go with their full definition and picture, and the
+     * player's app saves them as its own record (see game.js)
      * (Items / Armor / Weapons tabs + search — the same list as the "Give Item" page).
      *
      * to              — player name (title)
@@ -8,7 +10,7 @@
      * onClose()
      */
     import { loadRefs } from "../data/refs.js";
-    import { namedCatalog } from "../game.js";
+    import { giftCatalog } from "../game.js";
     import CatalogList from "./common/CatalogList.svelte";
 
     let { to = "", onGive, onClose } = $props();
@@ -24,8 +26,8 @@
     $effect(() => {
         loadRefs()
             .then((r) => {
-                catalog = namedCatalog(r.catalog);
-                // open on the first tab that has something (gear has no named items)
+                catalog = giftCatalog(r.catalog);
+                // open on the first tab that has something (gear has only custom items)
                 tab = catalog.weapons.length ? "weapon" : catalog.armor.length ? "armor" : "item";
             })
             .catch((e) => (error = e?.message ?? String(e)))
@@ -80,7 +82,7 @@
             {:else if error}
                 <p class="error">Failed to load: {error}</p>
             {:else if empty}
-                <p class="muted">There are no named items in the catalog.</p>
+                <p class="muted">There are no named or custom items in the catalog.</p>
             {:else}
                 <CatalogList {catalog} bind:tab {actions} marked={(x, kind) => !!given[`${kind}:${x.id}`]} />
             {/if}

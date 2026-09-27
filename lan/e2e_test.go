@@ -3,6 +3,7 @@ package lan
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -162,6 +163,26 @@ func TestReconnect(t *testing.T) {
 		return np != nil && np != old && s.State == StateConnected && s.PlayerID == id && len(d) == 1 && d[0].Online
 	})
 	t.Log("reconnected with same id", id)
+
+	// the latest state + summary is re-sent after a reconnect and kept by the host
+	if err := pl.Send(EventKindState, "", json.RawMessage(`{"state":{"hpLost":2},"summary":{"v":1,"hp":8,"maxHp":10}}`)); err != nil {
+		t.Fatal(err)
+	}
+	wait(t, "summary kept", func() bool {
+		s, _ := dm.PlayerCharacter(id)
+		return s.Summary != nil && s.Summary["hp"] == float64(8)
+	})
+	pl.mu.Lock()
+	old2 := pl.client.peer
+	pl.mu.Unlock()
+	old2.conn.CloseNow()
+	wait(t, "summary after reconnect", func() bool {
+		pl.mu.Lock()
+		np := pl.client.peer
+		pl.mu.Unlock()
+		s, err := dm.PlayerCharacter(id)
+		return np != nil && np != old2 && err == nil && s.Summary != nil && s.Summary["hp"] == float64(8) && s.State["hpLost"] == float64(2)
+	})
 	dm.Close()
 	pl.Close()
 }
@@ -173,4 +194,40 @@ func TestNormalize(t *testing.T) {
 		}
 	}
 	t.Log("LocalIP:", LocalIP())
+}
+
+func TestAppVersion(t *testing.T) {
+	dm := NewManager(nil)
+	dm.SetAppVersion("0.3.1")
+	st, err := dm.Host("V")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer dm.Close()
+	if st.Game.Version != "0.3.1" || st.AppVersion != "0.3.1" {
+		t.Fatalf("game/app version: %+v", st)
+	}
+	addr := fmt.Sprintf("127.0.0.1:%d", st.Game.Port)
+
+	old := NewManager(nil)
+	old.SetAppVersion("0.3.0")
+	_, err = old.Join(addr, PlayerInfo{Name: "Old"}, Snapshot{})
+	if err == nil || !strings.Contains(err.Error(), "0.3.1") || !strings.Contains(err.Error(), "0.3.0") {
+		t.Fatalf("want a version mismatch error, got %v", err)
+	}
+	t.Log("rejected:", err)
+	if s := old.Status(); s.Role != RoleNone {
+		t.Fatal("rejected player is in a game")
+	}
+	if len(dm.Status().Players) != 0 {
+		t.Fatal("rejected player got a seat")
+	}
+
+	same := NewManager(nil)
+	same.SetAppVersion("0.3.1")
+	if _, err := same.Join(addr, PlayerInfo{Name: "Same"}, Snapshot{}); err != nil {
+		t.Fatal(err)
+	}
+	same.Close()
+	old.Close()
 }

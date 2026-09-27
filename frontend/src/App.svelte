@@ -13,6 +13,8 @@
     import JoinPage from './components/JoinPage.svelte';
     import WhisperPopups from './components/WhisperPopups.svelte';
     import BestiaryPage from './components/bestiary/BestiaryPage.svelte';
+    import HomebrewPage from './components/HomebrewPage.svelte';
+    import AppFooter from './components/AppFooter.svelte';
 
     /**
      * Screens:
@@ -83,6 +85,8 @@
     <ItemsPage onBack={showMenu} />
 {:else if screen === 'bestiary'}
     <BestiaryPage onBack={showMenu} />
+{:else if screen === 'homebrew'}
+    <HomebrewPage onBack={showMenu} />
 {:else if screen === 'game'}
     <GamePage onBack={showMenu} />
 {:else if screen === 'join'}
@@ -92,14 +96,16 @@
 {/if}
 </div>
 
+<AppFooter />
+
 <WhisperPopups />
 <QueryLoader />
 
 <style>
-    /* #app is a grid: global StatusBar on top, the current screen fills the rest */
+    /* #app is a grid: global StatusBar on top, the current screen, the footer (version) */
     :global(#app) {
         display: grid;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto 1fr auto;
     }
     .screen {
         min-height: 0;

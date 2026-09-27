@@ -131,12 +131,18 @@
             {:else}
                 <ul class="games">
                     {#each discovered.games as g (g.id)}
+                        {@const other = !!(g.version && server.appVersion && g.version !== server.appVersion)}
                         <li>
-                            <button class="game" onclick={() => pickGame(g)}>
+                            <button class="game" class:other onclick={() => pickGame(g)} disabled={other}
+                                title={other ? `The DM has version ${g.version}, you have ${server.appVersion}` : ''}>
                                 <span class="name">{g.name}</span>
                                 <span class="meta">
                                     {g.players} {g.players === 1 ? 'player' : 'players'} · {gameAddress(g)}
+                                    {#if g.version}· v{g.version}{/if}
                                 </span>
+                                {#if other}
+                                    <span class="mismatch">Different version: the DM has {g.version}, you have {server.appVersion}. Both need the same version.</span>
+                                {/if}
                             </button>
                         </li>
                     {/each}
@@ -243,7 +249,22 @@
         transition: border-color 0.15s, background 0.15s;
     }
 
-    .game:hover {
+    .game:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .game.other {
+        border-color: color-mix(in srgb, var(--color-danger) 50%, var(--color-border));
+    }
+
+    .mismatch {
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-danger);
+    }
+
+    .game:not(:disabled):hover {
         background: var(--color-card-elevated);
         border-color: var(--color-gold);
     }

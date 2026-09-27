@@ -4,6 +4,7 @@
 //
 //	go run ./tools/fakegame                     # "Test Game" on port 47800 (or the next free one)
 //	go run ./tools/fakegame -name "Lost Mine"
+//	go run ./tools/fakegame -version 0.2.0      # pretend to be another version (players get "version mismatch")
 //
 // The app and fakegame can both run on one Mac: if the app is not hosting,
 // "Join Game" finds fakegame via mDNS, or connect by address 127.0.0.1:47800.
@@ -46,6 +47,7 @@ import (
 func main() {
 	name := flag.String("name", "Test Game", "game name")
 	data := flag.String("data", "assets/data", "seed data folder (named items and monsters)")
+	version := flag.String("version", lan.ReadAppVersion("constants.go"), "app version players must have (default: APP_VERSION from constants.go)")
 	flag.Parse()
 	items = loadNamedItems(*data)
 	monsters = loadMonsters(*data)
@@ -72,11 +74,12 @@ func main() {
 		}
 	})
 
+	dm.SetAppVersion(*version)
 	st, err := dm.Host(*name)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("hosting “%s” at %s:%d (also 127.0.0.1:%d)", st.Game.Name, st.LocalIP, st.Game.Port, st.Game.Port)
+	log.Printf("hosting “%s” at %s:%d (also 127.0.0.1:%d) · version %s", st.Game.Name, st.LocalIP, st.Game.Port, st.Game.Port, orNone(*version))
 
 	done := make(chan struct{})
 	go console(dm, done)
@@ -109,6 +112,13 @@ func diffPlayers(old, cur []lan.PlayerInfo) []lan.PlayerInfo {
 		}
 	}
 	return append([]lan.PlayerInfo(nil), cur...)
+}
+
+func orNone(v string) string {
+	if v == "" {
+		return "not checked"
+	}
+	return v
 }
 
 func ids(list []lan.PlayerInfo) string {

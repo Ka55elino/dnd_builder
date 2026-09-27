@@ -16,6 +16,7 @@
 //	go run ./tools/fakeplayer -list                  # show available characters
 //	go run ./tools/fakeplayer -addr 192.168.1.229:47800
 //	go run ./tools/fakeplayer -discover              # only list games found via mDNS
+//	go run ./tools/fakeplayer -version 0.2.0         # join as another version (the DM refuses it)
 //
 // Console, after joining:
 //
@@ -48,6 +49,7 @@ func main() {
 	seeds := flag.String("seeds", "assets/data/characters", "seed characters, used when there is no database")
 	list := flag.Bool("list", false, "list available characters and exit")
 	discover := flag.Bool("discover", false, "only list games found on the network (mDNS) and exit")
+	version := flag.String("version", lan.ReadAppVersion("constants.go"), "app version to join with (default: APP_VERSION from constants.go)")
 	flag.Parse()
 	log.SetFlags(log.Ltime)
 
@@ -92,6 +94,7 @@ func main() {
 				hp.send(m, c.info.Name)
 			}
 		})
+		m.SetAppVersion(*version)
 		st, err := m.Join(*addr, c.info, c.snap)
 		if err != nil {
 			log.Fatalf("%s: %v", c.info.Name, err)
@@ -252,7 +255,7 @@ func runDiscover() {
 				log.Print("no games found")
 			}
 			for _, g := range last.Games {
-				log.Printf("“%s” at %s:%d · %d players", g.Name, g.Host, g.Port, g.Players)
+				log.Printf("“%s” at %s:%d · %d players · version %s", g.Name, g.Host, g.Port, g.Players, g.Version)
 			}
 			return
 		}

@@ -24,8 +24,10 @@
      */
     import { onMount } from "svelte";
     import { onGameEvent } from "../server.svelte.js";
-    import { EV, applyHp, sendState, findItem } from "../game.js";
+    import { EV, applyHp, sendState, findItem, giftEvents } from "../game.js";
     import { printPage } from "../print.js";
+    import { exportCharacter } from "../transfer.js";
+    import { buildSummary } from "../rules/summary.js";
     import {
         GetCharacter,
         GetCharacterState,
@@ -131,20 +133,41 @@
         if (!inGame) return;
         return onGameEvent((ev) => {
             if (ev?.kind === EV.HP) applyHp(state, character, ev.data); // autosave picks it up
-            // a gift is stored in the DB by WhisperPopups; here it only shows up in the backpack
-            if (ev?.kind === EV.GIVE && build && findItem(ref.catalog, ev.data?.kind, ev.data?.id)) {
-                build.addToBag(ev.data.kind, ev.data.id, Math.max(1, Math.floor(Number(ev.data.qty) || 1)));
-            }
         });
+    });
+
+    // a gift is stored in the DB by WhisperPopups (a custom item is saved to the catalog
+    // first); once it is, show it in the open sheet's backpack too — this page never saves the build
+    $effect(() => {
+        if (!inGame) return;
+        const onStored = async (e) => {
+            const { kind, id, qty } = e.detail ?? {};
+            ref = { ...(await loadRefs()) }; // the catalog may have a new custom item
+            if (build && findItem(ref.catalog, kind, id)) build.addToBag(kind, id, qty);
+        };
+        giftEvents.addEventListener("stored", onStored);
+        return () => giftEvents.removeEventListener("stored", onStored);
+    });
+
+    // what the DM's card shows, computed here with this app's data (rules/summary.js)
+    const summaryJson = $derived.by(() => {
+        if (!inGame || !character || !build || !state) return null;
+        try {
+            return JSON.stringify(buildSummary(build, character, state));
+        } catch (e) {
+            console.warn("[game] summary:", e);
+            return null;
+        }
     });
 
     let syncTimer;
     $effect(() => {
         if (!inGame || stateJson == null) return;
-        const json = stateJson; // on load and after every change
+        const json = stateJson; // on load and after every change (state or build — e.g. a gift)
+        const sum = summaryJson;
         clearTimeout(syncTimer);
         syncTimer = setTimeout(() => {
-            sendState(JSON.parse(json)).catch((e) => console.warn("[game] state not sent:", e));
+            sendState(JSON.parse(json), sum ? JSON.parse(sum) : null).catch((e) => console.warn("[game] state not sent:", e));
         }, 250);
         return () => clearTimeout(syncTimer);
     });
@@ -181,6 +204,30 @@
     });
 
     // leaving the page — save first
+    // Export to a .json file (transfer.js): build + state + portrait + the custom records it uses
+    let exporting = $state(false);
+    let exportNote = $state("");
+    let exportError = $state("");
+    let exportTimer;
+    async function exportSheet() {
+        exporting = true;
+        exportError = "";
+        try {
+            const path = await exportCharacter(id);
+            if (path) {
+                exportNote = `Saved to ${path}`;
+                clearTimeout(exportTimer);
+                exportTimer = setTimeout(() => (exportNote = ""), 4000);
+            }
+        } catch (e) {
+            exportError = e?.message ?? String(e);
+            clearTimeout(exportTimer);
+            exportTimer = setTimeout(() => (exportError = ""), 6000);
+        } finally {
+            exporting = false;
+        }
+    }
+
     // Print / Save as PDF: the whole sheet, named after the character (see print.js and style.css)
     const printSheet = () =>
         printPage([build?.name, cls?.name && `${cls.name} ${build.level}`].filter(Boolean).join(" — "));
@@ -284,6 +331,10 @@
                 <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Level Up</button>
             {/if}
             <button class="ghost" onclick={leave(printSheet)} title="Print the whole sheet or save it as a PDF">Print</button>
+            <button class="ghost" class:bad={!!exportError} onclick={leave(exportSheet)} disabled={exporting}
+                title={exportError || exportNote || "Save the character as a .json file (to move it to another computer or share it)"}>
+                {exporting ? "Exporting…" : exportError ? "Export failed" : exportNote ? "Exported ✓" : "Export"}
+            </button>
             {#if onEdit}
                 <button class="ghost" onclick={leave(() => onEdit(raw))}
                     >Edit</button
@@ -812,6 +863,11 @@
 
     .top {
         align-items: center;
+    }
+
+    .ghost.bad {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
     }
 
     .save-status {

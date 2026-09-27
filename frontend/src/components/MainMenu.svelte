@@ -1,7 +1,7 @@
 <script>
     /**
      * Main menu (start screen) — a plain game-style vertical menu.
-     * onNavigate(screen) — 'game' | 'join' | 'characters' | 'spells' | 'items' | 'bestiary'
+     * onNavigate(screen) — 'game' | 'join' | 'characters' | 'spells' | 'items' | 'bestiary' | 'homebrew'
      * While in a game (hosting or joined), Start/Join are replaced by
      * "Return to Game" leading to the matching screen.
      * An item with `stub: true` only shows "coming soon".
@@ -16,6 +16,7 @@
         { id: "spells", title: "Spells" },
         { id: "items", title: "Items" },
         { id: "bestiary", title: "Bestiary" },
+        { id: "homebrew", title: "Homebrew" },
     ];
 
     let ITEMS = $derived.by(() => {

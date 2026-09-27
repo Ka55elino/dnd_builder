@@ -42,6 +42,11 @@ Both use the real network code (`lan/`), so they talk to the app exactly like an
 
 Don't start a second copy of the app on the same Mac instead: in dev mode it recreates the database on start.
 
+The DM and the players must run **the same app version** (shown at the bottom of the window): the DM refuses a
+player with another version ("version mismatch: the DM has DnD Builder 0.3.1, you have 0.3.0"), and "Join Game"
+marks such games as incompatible. Both tools take the version from `constants.go` (run them from the project root);
+`-version` overrides it.
+
 ### `fakeplayer` — fake players for the DM screen ("Start Game")
 
 1. In the app: **Start Game** → enter a name → Submit.
@@ -55,6 +60,7 @@ Don't start a second copy of the app on the same Mac instead: in dev mode it rec
    go run ./tools/fakeplayer -list                  # which characters are available and where from
    go run ./tools/fakeplayer -addr 192.168.1.42:47800   # a DM on another machine
    go run ./tools/fakeplayer -discover              # only list the games found on the network (mDNS)
+   go run ./tools/fakeplayer -version 0.2.0         # join as another app version (the DM refuses it)
    ```
 
 Each fake player joins with a **real character**: a random one from the app's database (the newest
@@ -81,6 +87,7 @@ Console commands, after joining:
    ```bash
    go run ./tools/fakegame                     # "Test Game" on port 47800 (or the next free one)
    go run ./tools/fakegame -name "Lost Mine"
+   go run ./tools/fakegame -version 0.2.0      # pretend to be another app version: "Join Game" shows it as incompatible
    ```
 
 2. In the app: **Join Game** → the game shows up in the list (mDNS); if it doesn't, connect by address
@@ -112,6 +119,20 @@ Console commands — the same actions as the buttons on the DM's player card:
 - `fakegame` + `fakeplayer` also work together without the app — handy to watch the protocol in the console.
 - To check that a game is visible on the network at all (without our code): `dns-sd -B _dndbuilder._tcp` (macOS).
 - The network layer has its own tests: `go test -race ./lan` (host + player, events, leave/rejoin, reconnect).
+
+## Moving data between computers (JSON files)
+
+- **A character** — *Export* on the character page, *Import* on the Characters page
+  (`frontend/src/transfer.js`, format `dnd-builder-character`). The file carries the build, the
+  current state, an uploaded portrait and the custom items/spells the character uses. Importing a
+  character that already exists makes a copy "(imported)".
+- **Homebrew** — main menu → *Homebrew* (`frontend/src/homebrew.js`, format `dnd-builder-homebrew`):
+  the custom items, spells and monsters, all or the ticked ones, pictures included. Import shows a
+  preview first: *new* records are added, *already here* ones are skipped, the ones that *differ from
+  yours* are replaced only if you tick them. Records keep their `custom_…` ids, so the same file twice
+  never duplicates anything; built-in records are never overwritten.
+
+The native Save/Open dialogs are in `files.go` (`SaveTextFile`, `OpenTextFile`).
 
 ## Building
 

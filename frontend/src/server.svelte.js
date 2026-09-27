@@ -10,6 +10,8 @@
  *   characterId: the character the player joined with (player)
  *   players:  [{ id, characterId, name, className, level, portrait, online }]
  *   error:    why the last session ended, if not by the user
+ *   appVersion: this app's version (APP_VERSION) — shown in the footer;
+ *             players and the DM must have the same one
  *
  * `discovered.games` is the list of games found on the network ("net:games"),
  * filled while StartDiscovery() is running.
@@ -26,6 +28,7 @@ export const server = $state({
     characterId: '',
     players: [],
     error: '',
+    appVersion: '',
 });
 
 export const discovered = $state({ games: [] });
@@ -47,6 +50,7 @@ export function applyStatus(st) {
     server.characterId = st.characterId || '';
     server.players = st.players ?? [];
     server.error = st.error || '';
+    server.appVersion = st.appVersion || server.appVersion;
 }
 
 /** Address to dictate / type: "ip:port". */

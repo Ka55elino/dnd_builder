@@ -11,7 +11,8 @@ const (
 	// ServiceDomain is the mDNS domain.
 	ServiceDomain = "local."
 	// ProtocolVersion is bumped on incompatible protocol changes.
-	ProtocolVersion = 1
+	// 2: Hello carries the app version, and the DM refuses a different one.
+	ProtocolVersion = 2
 	// DefaultPort is tried first (then the next few), so the firewall
 	// rule the DM allowed once keeps working.
 	DefaultPort = 47800
@@ -33,7 +34,8 @@ const (
 )
 
 // EventKindState is the game event a player sends with its current character
-// state ({"state": {...}}); the host keeps the latest one in the snapshot.
+// state and sheet summary ({"state": {...}, "summary": {...}}); the host keeps the
+// latest ones in the snapshot, and the player's client re-sends it after a reconnect.
 const EventKindState = "state"
 
 // Envelope is the wire format of every message.
@@ -54,6 +56,9 @@ func encode(msgType string, payload any) ([]byte, error) {
 type Snapshot struct {
 	Build map[string]any `json:"build"`
 	State map[string]any `json:"state,omitempty"`
+	// Summary is the sheet as the player's app computed it (frontend rules/summary.js),
+	// kept from the player's latest "state" event; the DM shows it as is.
+	Summary map[string]any `json:"summary,omitempty"`
 }
 
 // PlayerInfo is a lobby row.
@@ -75,14 +80,16 @@ type GameInfo struct {
 	Port     int    `json:"port"`
 	Players  int    `json:"players"`
 	Protocol int    `json:"protocol"`
+	Version  string `json:"version"` // the DM's app version ("" — unknown)
 }
 
 // Hello is the first message from a player.
 type Hello struct {
-	Protocol  int        `json:"protocol"`
-	PlayerID  string     `json:"playerId,omitempty"` // set on reconnect to keep the seat
-	Player    PlayerInfo `json:"player"`
-	Character Snapshot   `json:"character"`
+	Protocol   int        `json:"protocol"`
+	AppVersion string     `json:"appVersion"`         // the player's app version (APP_VERSION)
+	PlayerID   string     `json:"playerId,omitempty"` // set on reconnect to keep the seat
+	Player     PlayerInfo `json:"player"`
+	Character  Snapshot   `json:"character"`
 }
 
 // Welcome is the DM's answer to Hello.

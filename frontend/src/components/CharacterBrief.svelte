@@ -9,6 +9,9 @@
      *   id                — a character in the local DB, or
      *   build (+ state)   — raw build / state objects, e.g. a snapshot a player sent to the DM.
      * `state` may be a plain object or a CharacterState; updating it updates the card.
+     * summary — what the player's own app computed (rules/summary.js): when given, it is
+     *   shown as is and nothing is recomputed here — so the DM sees the right numbers
+     *   even without the player's custom items or with other reference data.
      * fallback — { className, level } shown if the build can't be computed (e.g. a lobby row);
      * note — the line under it.
      * onHp(op, amount) — show an amount input + Damage / Heal / Temp HP buttons.
@@ -21,11 +24,12 @@
     import { CharacterBuild, BIO_GROUPS } from "../models/CharacterBuild.svelte.js";
     import { CharacterState } from "../models/CharacterState.svelte.js";
     import { ABILITIES, ABILITY_KEYS, formatModifier } from "../rules/abilities.js";
+    import { buildSummary, isSummary } from "../rules/summary.js";
     import Icon from "./common/Icon.svelte";
     import WhisperDialog from "./WhisperDialog.svelte";
     import GiveItemDialog from "./GiveItemDialog.svelte";
 
-    let { id = null, build: buildData = null, state: stateData = null, fallback = null, note = "Character sheet unavailable", onHp = null, onWhisper = null, onGive = null } = $props();
+    let { id = null, build: buildData = null, state: stateData = null, summary = null, fallback = null, note = "Character sheet unavailable", onHp = null, onWhisper = null, onGive = null } = $props();
 
     let whisperOpen = $state(false);
     let giveOpen = $state(false);
@@ -89,6 +93,7 @@
     });
     // a snapshot from another app version (or a test tool) may not compute — show what we can
     const calc = $derived.by(() => {
+        if (isSummary(summary)) return { ch: null, err: null }; // the player's app already did it
         if (!build || ref === EMPTY_REFS) return { ch: null, err: null };
         if (!build.classId) return { ch: null, err: "no class" };
         try {
@@ -100,20 +105,31 @@
     });
     const ch = $derived(calc.ch);
 
-    // icon: portrait → subspecies/species image → first letter
-    const icon = $derived(
-        brokenImg ? "" : build?.portrait || ch?.subrace?.image || ch?.race?.image || "",
-    );
+    // what the card shows: the player's own summary if we have one, otherwise computed here
+    const v = $derived.by(() => {
+        if (isSummary(summary)) return summary;
+        if (!ch || !build) return null;
+        try {
+            return buildSummary(build, ch, state);
+        } catch (e) {
+            console.warn("[brief]", e);
+            return null;
+        }
+    });
 
-    const hp = $derived(ch ? state.currentHp(ch) : 0);
-    const maxHp = $derived(ch?.maxHp ?? 0);
+    // icon: portrait → subspecies/species image → first letter
+    const icon = $derived(brokenImg ? "" : v?.icon || "");
+    const displayName = $derived(v?.name || build?.name || "Unknown");
+
+    const hp = $derived(v?.hp ?? 0);
+    const maxHp = $derived(v?.maxHp ?? 0);
     const hpPct = $derived(maxHp ? Math.round((hp / maxHp) * 100) : 0);
 
     // HP condition, like a DM would say it
     const health = $derived.by(() => {
-        if (!ch) return null;
+        if (!v) return null;
         if (hp <= 0) {
-            const ds = state.deathSaves ?? {};
+            const ds = v.deathSaves ?? {};
             if (ds.fail >= 3) return { key: "dead", label: "Dead" };
             if (ds.success >= 3) return { key: "down", label: "Stable" };
             return { key: "down", label: "Dying" };
@@ -130,7 +146,7 @@
 <article class="brief">
     {#if error}
         <p class="error">Failed to load: {error}</p>
-    {:else if build && calc.err}
+    {:else if build && calc.err && !v}
         <header>
             <div class="icon"><span>{build.name?.[0] ?? "?"}</span></div>
             <div class="who">
@@ -144,7 +160,7 @@
                 <p class="sub-line">{note}</p>
             </div>
         </header>
-    {:else if !build || !ch}
+    {:else if !v}
         <p class="muted">Loading…</p>
     {:else}
         <header>
@@ -152,17 +168,17 @@
                 {#if icon}
                     <img src={icon} alt="" onerror={() => (brokenImg = true)} />
                 {:else}
-                    <span>{build.name?.[0] ?? "?"}</span>
+                    <span>{displayName[0] ?? "?"}</span>
                 {/if}
             </div>
             <div class="who">
-                <h3>{build.name}</h3>
+                <h3>{displayName}</h3>
                 <p class="class-line">
-                    {ch.cls?.name ?? build.classId}{ch.subclass ? ` · ${ch.subclass.name}` : ""}
-                    <span class="lvl">Level {build.level}</span>
+                    {v.className}{v.subclassName ? ` · ${v.subclassName}` : ""}
+                    <span class="lvl">Level {v.level}</span>
                 </p>
                 <p class="sub-line">
-                    {ch.race?.name ?? build.raceId}{ch.subrace ? ` · ${ch.subrace.name}` : ""}
+                    {v.raceName}{v.subraceName ? ` · ${v.subraceName}` : ""}
                 </p>
             </div>
         </header>
@@ -173,7 +189,7 @@
                 <span class="hp-label">{health.label}</span>
                 <span class="hp-num">
                     {hp}<small>/{maxHp}</small>
-                    {#if state.tempHp > 0}<span class="temp">+{state.tempHp} temp</span>{/if}
+                    {#if v.temp > 0}<span class="temp">+{v.temp} temp</span>{/if}
                 </span>
             </div>
             <div class="bar" role="meter" aria-valuenow={hp} aria-valuemin="0" aria-valuemax={maxHp} aria-label="Hit Points">
@@ -204,8 +220,8 @@
                     <button
                         class="side-btn whisper-btn"
                         onclick={() => (whisperOpen = true)}
-                        title="Whisper to {build.name}"
-                        aria-label="Whisper to {build.name}"
+                        title="Whisper to {displayName}"
+                        aria-label="Whisper to {displayName}"
                     >
                         <Icon name="whisper" label="Whisper" short="…" native={false} />
                     </button>
@@ -214,8 +230,8 @@
                     <button
                         class="side-btn give-btn"
                         onclick={() => (giveOpen = true)}
-                        title="Give {build.name} an item"
-                        aria-label="Give {build.name} an item"
+                        title="Give {displayName} an item"
+                        aria-label="Give {displayName} an item"
                     >
                         <Icon name="gift" label="Give item" short="+" native={false} />
                     </button>
@@ -225,14 +241,14 @@
             {#if hp <= 0 && health.key !== "dead"}
                 <div class="death">
                     Death saves
-                    <span class="ds ok">{"●".repeat(state.deathSaves?.success ?? 0)}{"○".repeat(3 - (state.deathSaves?.success ?? 0))}</span>
-                    <span class="ds bad">{"●".repeat(state.deathSaves?.fail ?? 0)}{"○".repeat(3 - (state.deathSaves?.fail ?? 0))}</span>
+                    <span class="ds ok">{"●".repeat(v.deathSaves?.success ?? 0)}{"○".repeat(3 - (v.deathSaves?.success ?? 0))}</span>
+                    <span class="ds bad">{"●".repeat(v.deathSaves?.fail ?? 0)}{"○".repeat(3 - (v.deathSaves?.fail ?? 0))}</span>
                 </div>
             {/if}
-            {#if state.conditions?.length || state.inspiration}
+            {#if v.conditions?.length || v.inspiration}
                 <ul class="chips">
-                    {#if state.inspiration}<li class="insp">Inspiration</li>{/if}
-                    {#each state.conditions as c (c)}<li>{cap(c)}</li>{/each}
+                    {#if v.inspiration}<li class="insp">Inspiration</li>{/if}
+                    {#each v.conditions as c (c)}<li>{cap(c)}</li>{/each}
                 </ul>
             {/if}
         </section>
@@ -252,18 +268,18 @@
         {#if tab === "stats"}
             <!-- main stats -->
             <section class="combat">
-                <div class="stat ac"><span class="k">AC</span><span class="v">{ch.ac}</span></div>
-                <div class="stat"><span class="k">Init</span><span class="v">{formatModifier(ch.initiative)}</span></div>
-                <div class="stat"><span class="k">Speed</span><span class="v">{ch.speed}<small> ft</small></span></div>
-                <div class="stat"><span class="k">Prof</span><span class="v">{formatModifier(ch.prof)}</span></div>
+                <div class="stat ac"><span class="k">AC</span><span class="v">{v.ac}</span></div>
+                <div class="stat"><span class="k">Init</span><span class="v">{formatModifier(v.initiative)}</span></div>
+                <div class="stat"><span class="k">Speed</span><span class="v">{v.speed}<small> ft</small></span></div>
+                <div class="stat"><span class="k">Prof</span><span class="v">{formatModifier(v.prof)}</span></div>
             </section>
 
             <section class="abilities">
                 {#each ABILITY_KEYS as k}
                     <div class="ability" title={ABILITIES[k].name}>
                         <span class="k">{ABILITIES[k].short}</span>
-                        <span class="v">{formatModifier(ch.mods[k])}</span>
-                        <span class="score">{build.totalAbilities[k] ?? "—"}</span>
+                        <span class="v">{formatModifier(v.mods?.[k])}</span>
+                        <span class="score">{v.scores?.[k] ?? "—"}</span>
                     </div>
                 {/each}
             </section>
@@ -271,11 +287,11 @@
             <section class="block" role="tabpanel">
                 <h4>Saving Throws</h4>
                 <ul class="checklist">
-                    {#each ch.saves as sv (sv.key)}
+                    {#each v.saves as sv (sv.key)}
                         <li class:prof={sv.proficient}>
                             <span class="dot"></span>
                             <span class="val">{formatModifier(sv.value)}</span>
-                            <span>{ABILITIES[sv.key].name}</span>
+                            <span>{ABILITIES[sv.key]?.name ?? sv.key}</span>
                         </li>
                     {/each}
                 </ul>
@@ -284,29 +300,30 @@
             <section class="block" role="tabpanel">
                 <h4>Skills</h4>
                 <ul class="checklist">
-                    {#each ch.skills as sk (sk.id)}
+                    {#each v.skills as sk (sk.id)}
                         <li class:prof={sk.proficient} class:expert={sk.expertise}>
                             <span class="dot"></span>
                             <span class="val">{formatModifier(sk.value)}</span>
-                            <span>{sk.name} <small>{ABILITIES[sk.ability].short}</small></span>
+                            <span>{sk.name} <small>{ABILITIES[sk.ability]?.short ?? ""}</small></span>
                         </li>
                     {/each}
                 </ul>
                 <p class="passive">
-                    Passive Perception <b>{ch.passivePerception}</b>
-                    {#if ch.darkvision}· Darkvision <b>{ch.darkvision} ft</b>{/if}
+                    Passive Perception <b>{v.passivePerception}</b>
+                    {#if v.darkvision}· Darkvision <b>{v.darkvision} ft</b>{/if}
                 </p>
             </section>
         {:else}
             {#each BIO_GROUPS as g (g.title)}
-                {@const filled = g.fields.filter((f) => build.bio?.[f.key])}
+                {@const bio = v.bio ?? build?.bio ?? {}}
+                {@const filled = g.fields.filter((f) => bio[f.key])}
                 <section class="block" role="tabpanel">
                     <h4>{g.title}</h4>
                     {#if filled.length}
                         <dl class:wide={g.fields.some((f) => f.wide)}>
                             {#each filled as f (f.key)}
                                 <dt>{f.label}</dt>
-                                <dd>{build.bio[f.key]}</dd>
+                                <dd>{bio[f.key]}</dd>
                             {/each}
                         </dl>
                     {:else}
@@ -319,11 +336,11 @@
 </article>
 
 {#if giveOpen && onGive}
-    <GiveItemDialog to={build?.name ?? ""} {onGive} onClose={() => (giveOpen = false)} />
+    <GiveItemDialog to={displayName} {onGive} onClose={() => (giveOpen = false)} />
 {/if}
 
 {#if whisperOpen && onWhisper}
-    <WhisperDialog to={build?.name ?? ""} onSend={onWhisper} onClose={() => (whisperOpen = false)} />
+    <WhisperDialog to={displayName} onSend={onWhisper} onClose={() => (whisperOpen = false)} />
 {/if}
 
 <style>

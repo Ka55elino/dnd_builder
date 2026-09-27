@@ -40,7 +40,9 @@
     }
 
     // a player's numbers for the line, from their latest state
-    const sheetOf = (pid) => playerSheet(snaps[pid], live[pid], refs);
+    const sheetOf = (pid) => playerSheet(snaps[pid], live[pid], refs, summaryOf(pid));
+    // the player's own summary: the latest event, or the one the host kept with the snapshot
+    const summaryOf = (pid) => liveSummary[pid] ?? snaps[pid]?.summary ?? null;
 
     // lobby changes: add/drop players in the line; newcomers get the current line
     // (or "no encounter", which also clears what they saw in a previous game)
@@ -60,12 +62,15 @@
     let snaps = $state({});
     // player id → latest state reported by the player (newer than snaps[id].state)
     let live = $state({});
+    // player id → the sheet summary the player's app computed (shown as is)
+    let liveSummary = $state({});
 
     // players report their state after every change — keep the cards current
     $effect(() =>
         onGameEvent((ev) => {
             if (ev?.kind !== EV.STATE || !ev.from || !ev.data?.state) return;
             live[ev.from] = ev.data.state; // may arrive before the snapshot is fetched
+            if (ev.data.summary) liveSummary[ev.from] = ev.data.summary;
         }),
     );
 
@@ -75,6 +80,7 @@
         untrack(() => {
             for (const id of Object.keys(snaps)) if (!ids.has(id)) delete snaps[id];
             for (const id of Object.keys(live)) if (!ids.has(id)) delete live[id];
+            for (const id of Object.keys(liveSummary)) if (!ids.has(id)) delete liveSummary[id];
             for (const id of ids) {
                 if (id in snaps) continue;
                 snaps[id] = null; // loading
@@ -154,6 +160,7 @@
                             <CharacterBrief
                                 build={snap.build}
                                 state={live[p.id] ?? snap.state}
+                                summary={summaryOf(p.id)}
                                 fallback={p}
                                 onHp={(op, n) => sendHp(p.id, op, n)}
                                 onWhisper={(text) => sendWhisper(p.id, text)}
