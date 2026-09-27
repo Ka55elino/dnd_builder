@@ -1,0 +1,112 @@
+{
+  "id": "seed-sorcerer",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.576Z",
+  "name": "Veyrin the Fiery",
+  "portrait": "/img/characters/sorcerer.svg",
+  "bio": {
+    "gender": "Female",
+    "identity": "Woman",
+    "attraction": "—",
+    "age": "19",
+    "height": "5'7\"",
+    "weight": "205 lb",
+    "eyes": "Golden",
+    "skin": "Fair",
+    "hair": "Gray",
+    "alignment": "Chaotic Good",
+    "trait": "When she's nervous, she smells of smoke.",
+    "ideal": "Power of Blood. I didn't choose this magic, but I've mastered it.",
+    "bond": "Searching for his draconic ancestor.",
+    "flaw": "She's hot-tempered, and so is her magic.",
+    "weakness": "Cold."
+  },
+  "level": 1,
+  "backgroundId": "charlatan",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "cha": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 2,
+    "con": 1,
+    "int": 4,
+    "wis": 3,
+    "cha": 0
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 15
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 15,
+    "int": 10,
+    "wis": 12,
+    "cha": 17
+  },
+  "raceId": "dragonborn",
+  "subraceId": "red",
+  "classId": "sorcerer",
+  "subclassId": null,
+  "equipment": {
+    "armorId": null,
+    "shield": false,
+    "weaponIds": [
+      "dagger",
+      "lightCrossbow"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "insight",
+        "arcana"
+      ]
+    },
+    "L1:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "bladeWard",
+        "acidSplash",
+        "mageHand",
+        "poisonSpray"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "mageArmor",
+        "shield"
+      ]
+    },
+    "L1:background:feat:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "animal",
+        "athletics"
+      ]
+    }
+  }
+}

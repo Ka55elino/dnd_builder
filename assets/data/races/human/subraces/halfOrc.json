@@ -1,0 +1,43 @@
+{
+  "id": "halfOrc",
+  "name": "Half-Orc",
+  "race": "human",
+  "image": "/img/races/human/subraces/halfOrc.png",
+  "desc": "Humans with orc blood: tough, relentless and quick to throw themselves into a fight.",
+  "traits": [
+    {
+      "name": "Orcish Darkvision",
+      "desc": "You have Darkvision with a range of 60 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 60
+          }
+        }
+      ]
+    },
+    {
+      "name": "Adrenaline Rush",
+      "desc": "You can take the Dash action as a Bonus Action. When you do so, you gain Temporary Hit Points equal to your Proficiency Bonus. You can use this trait a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "halfOrcAdrenalineRush"
+        }
+      ]
+    },
+    {
+      "name": "Orcish Resilience",
+      "desc": "When you would be reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit Point instead. Once you use this trait, you can't use it again until you finish a Long Rest.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "orcishResilience"
+        }
+      ]
+    }
+  ]
+}

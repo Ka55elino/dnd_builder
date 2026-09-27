@@ -1,0 +1,14 @@
+{
+  "id": "handaxe",
+  "name": "Handaxe",
+  "image": "/img/weapons/simple/handaxe.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "slashing",
+  "mastery": "Vex",
+  "properties": [
+    "light",
+    "thrown"
+  ]
+}

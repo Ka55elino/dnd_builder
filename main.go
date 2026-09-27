@@ -27,7 +27,8 @@ func main() {
 		Width:  1024,
 		Height: 768,
 		AssetServer: &assetserver.Options{
-			Assets: assets,
+			Assets:     assets,
+			Middleware: app.imageMiddleware, // /img/… — built-in and uploaded images (images.go)
 		},
 		BackgroundColour: &options.RGBA{R: 17, G: 16, B: 20, A: 1}, // --color-bg #111014
 		OnStartup:        app.startup,

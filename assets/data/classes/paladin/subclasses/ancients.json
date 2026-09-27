@@ -1,0 +1,46 @@
+{
+  "id": "ancients",
+  "name": "Oath of the Ancients",
+  "image": "/img/classes/paladin/subclasses/ancients.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "faerieFire",
+      "ensnaringStrike"
+    ],
+    "9": [
+      "plantGrowth",
+      "dispelMagic"
+    ],
+    "13": [
+      "iceStorm",
+      "stoneskin"
+    ],
+    "17": [
+      "greaterRestoration",
+      "insectPlague"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Nature's Wrath / Turn the Faithless",
+      "desc": "With Channel Divinity, you ensnare enemies with vines or turn Fey and Fiends (as with Turn Undead)."
+    },
+    {
+      "level": 7,
+      "name": "Aura of Warding",
+      "desc": "You and allies within 10 feet gain Resistance to damage from spells."
+    },
+    {
+      "level": 15,
+      "name": "Undying Sentinel",
+      "desc": "When you drop to 0 Hit Points (and aren't killed), you drop to 1 Hit Point instead (once per Long Rest)."
+    },
+    {
+      "level": 20,
+      "name": "Elder Champion",
+      "desc": "As an action, for 1 minute: regeneration, Advantage for you and Disadvantage for enemies, and you can cast level 1-2 Paladin spells as a Bonus Action."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "aasimar",
+  "name": "Aasimar",
+  "image": "/img/races/aasimar/aasimar.png",
+  "size": "Medium",
+  "speed": 30,
+  "subraceLevel": 1,
+  "traits": [
+    {
+      "name": "Darkvision",
+      "desc": "You have Darkvision with a range of 60 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 60
+          }
+        }
+      ]
+    },
+    {
+      "name": "Celestial Resistance",
+      "desc": "You have Resistance to Necrotic damage and Radiant damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "necrotic"
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "radiant"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Healing Hands",
+      "desc": "As an action, you touch a creature to restore Hit Points (a number of d4s equal to your level). Once per Long Rest.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "healingHands"
+        }
+      ]
+    },
+    {
+      "name": "Light",
+      "desc": "You know the Light cantrip.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "light",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Celestial Revelation",
+      "desc": "Starting at level 3, you gain a transformation determined by your chosen lineage (subrace)."
+    }
+  ],
+  "spellAbility": "cha"
+}

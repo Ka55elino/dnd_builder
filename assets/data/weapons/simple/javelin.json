@@ -1,0 +1,13 @@
+{
+  "id": "javelin",
+  "name": "Javelin",
+  "image": "/img/weapons/simple/javelin.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Slow",
+  "properties": [
+    "thrown"
+  ]
+}

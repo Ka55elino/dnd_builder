@@ -1,0 +1,83 @@
+{
+  "id": "duergar",
+  "name": "Duergar (Gray Dwarf)",
+  "image": "/img/races/dwarf/subraces/duergar.png",
+  "race": "dwarf",
+  "traits": [
+    {
+      "name": "Duergar Resilience",
+      "desc": "You have Advantage on saving throws against being Charmed or Paralyzed.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "charmed"
+            }
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "paralyzed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Duergar Magic: Enlarge",
+      "desc": "Starting at level 3, you can cast Enlarge/Reduce (on yourself only) once per Long Rest.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "enlargeReduce"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Duergar Magic: Invisibility",
+      "desc": "Starting at level 5, you can cast Invisibility (on yourself only) once per Long Rest.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "invisibility"
+        }
+      ]
+    },
+    {
+      "name": "Sunlight Sensitivity",
+      "desc": "You have Disadvantage on attack rolls and Wisdom (Perception) checks while in direct sunlight.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "disadvantage",
+            "target": "attackRoll",
+            "when": {
+              "in": "sunlight"
+            }
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "disadvantage",
+            "target": "skillCheck",
+            "when": {
+              "in": "sunlight",
+              "skill": "perception"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

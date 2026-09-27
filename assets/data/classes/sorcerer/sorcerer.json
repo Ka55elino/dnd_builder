@@ -1,0 +1,176 @@
+{
+  "id": "sorcerer",
+  "name": "Sorcerer",
+  "image": "/img/classes/sorcerer/sorcerer.png",
+  "hitDie": 6,
+  "primaryAbility": [
+    "cha"
+  ],
+  "savingThrows": [
+    "con",
+    "cha"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "deception",
+    "insight",
+    "intimidation",
+    "persuasion",
+    "religion"
+  ],
+  "caster": "full",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "sorcerer",
+    "progression": "full",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        10,
+        6
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        17,
+        19
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        19,
+        21
+      ],
+      [
+        20,
+        22
+      ]
+    ]
+  },
+  "metamagicKnown": [
+    [
+      2,
+      2
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      17,
+      4
+    ]
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Spellcasting",
+      "desc": "You cast spells from the Sorcerer spell list, using Charisma (full caster, prepared spells). Your magic is innate."
+    },
+    {
+      "level": 1,
+      "name": "Innate Sorcery",
+      "desc": "As a Bonus Action, you empower your magic for 1 minute: +1 to your spell save DC and Advantage on spell attack rolls. Number of uses equals your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 2,
+      "name": "Font of Magic (Sorcery Points)",
+      "desc": "You gain Sorcery Points equal to your Sorcerer level. As a Bonus Action, you convert points into spell slots and vice versa; you spend them on Metamagic."
+    },
+    {
+      "level": 2,
+      "name": "Metamagic",
+      "desc": "You learn Metamagic options that modify your spells for Sorcery Points. The number you know increases (2 → 3 at level 10 → 4 at level 17)."
+    },
+    {
+      "level": 5,
+      "name": "Sorcerous Restoration",
+      "desc": "Once per day during a Short Rest, you regain Sorcery Points equal to half your Sorcerer level."
+    },
+    {
+      "level": 7,
+      "name": "Sorcery Incarnate",
+      "desc": "When you activate Innate Sorcery, you can also spend Sorcery Points to apply Metamagic to one spell without the usual limits."
+    },
+    {
+      "level": 20,
+      "name": "Arcane Apotheosis",
+      "desc": "While Innate Sorcery is active, you can use one Metamagic option per turn without spending Sorcery Points."
+    }
+  ]
+}

@@ -10,7 +10,7 @@
      * The choice is written to build.equipment.
      */
     import { onMount } from "svelte";
-    import { GetEquipment } from "../../../wailsjs/go/main/App.js";
+    import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
     import ChoiceGrid from "./common/ChoiceGrid.svelte";
     import ChoiceCard from "./common/ChoiceCard.svelte";
     import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, acText } from "../../rules/equipment.js";
@@ -40,7 +40,7 @@
 
     onMount(async () => {
         try {
-            eq = await GetEquipment();
+            eq = (await loadRefs()).eq;
         } catch (e) {
             error = e?.message ?? String(e);
         } finally {

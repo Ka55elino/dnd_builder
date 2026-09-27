@@ -1,0 +1,33 @@
+{
+  "id": "imperial",
+  "name": "Imperial",
+  "race": "human",
+  "image": "/img/races/human/subraces/imperial.png",
+  "desc": "Humans raised in the heart of an empire: schooled, disciplined and used to learning whatever the realm needs of them.",
+  "traits": [
+    {
+      "level": 2,
+      "name": "Imperial Schooling",
+      "desc": "Starting at level 2, you gain proficiency in one additional skill of your choice.",
+      "grants": [
+        {
+          "type": "skill",
+          "choose": 1,
+          "from": "skills"
+        }
+      ]
+    },
+    {
+      "level": 10,
+      "name": "Imperial Versatility",
+      "desc": "Starting at level 10, you gain an additional Origin feat of your choice.",
+      "grants": [
+        {
+          "type": "feat",
+          "choose": 1,
+          "from": "originFeats"
+        }
+      ]
+    }
+  ]
+}

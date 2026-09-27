@@ -1,0 +1,33 @@
+{
+  "id": "enchantment",
+  "name": "School of Enchantment",
+  "image": "/img/classes/wizard/subclasses/enchantment.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Enchantment Savant",
+      "desc": "You copy Enchantment spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Hypnotic Gaze",
+      "desc": "As an action, you charm a creature within 5 feet (Wisdom saving throw): it is Dazed as long as you maintain your gaze, using an action each turn."
+    },
+    {
+      "level": 6,
+      "name": "Instinctive Charm",
+      "desc": "As a Reaction when a creature within 30 feet attacks you, you redirect the attack to another creature (Wisdom saving throw)."
+    },
+    {
+      "level": 10,
+      "name": "Split Enchantment",
+      "desc": "You can target two creatures with Enchantment spells that normally target one."
+    },
+    {
+      "level": 14,
+      "name": "Alter Memories",
+      "desc": "When you end a charm, you can erase the target's memory of the time it spent charmed."
+    }
+  ]
+}

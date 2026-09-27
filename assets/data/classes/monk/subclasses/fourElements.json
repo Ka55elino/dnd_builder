@@ -1,0 +1,28 @@
+{
+  "id": "fourElements",
+  "name": "Warrior of the Elements",
+  "image": "/img/classes/monk/subclasses/fourElements.png",
+  "class": "monk",
+  "features": [
+    {
+      "level": 3,
+      "name": "Elemental Attunement",
+      "desc": "You learn the Elementalism cantrip and master Elemental Disciplines, techniques that cost Focus Points (Dexterity/Wisdom determine the DC). You master 2 disciplines, and more later."
+    },
+    {
+      "level": 6,
+      "name": "Elemental Burst",
+      "desc": "When you spend Focus Points on an Elemental Discipline, you can spend up to 2 additional Focus Points: each adds +1d10 to the discipline's damage (or expands the area by 5 feet / adds a target)."
+    },
+    {
+      "level": 11,
+      "name": "Elemental Burst",
+      "desc": "Once per turn, when you hit with an Unarmed Strike, you can spend 1 Focus Point for an extra elemental effect: extra elemental damage or pushing/pulling the target."
+    },
+    {
+      "level": 17,
+      "name": "Master of Elements",
+      "desc": "You master all Elemental Disciplines; you can spend up to 5 Focus Points on them per technique."
+    }
+  ]
+}

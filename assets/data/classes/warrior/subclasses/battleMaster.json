@@ -1,0 +1,62 @@
+{
+  "id": "battleMaster",
+  "name": "Battle Master",
+  "image": "/img/classes/warrior/subclasses/battleMaster.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Combat Superiority",
+      "desc": "You learn Maneuvers fueled by Superiority Dice (initially 4d8; their number and size increase). Expended and regained on a rest."
+    },
+    {
+      "level": 3,
+      "name": "Student of War",
+      "desc": "Proficiency with one type of Artisan's Tools of your choice and one additional skill."
+    },
+    {
+      "level": 7,
+      "name": "Know Your Enemy",
+      "desc": "By expending a Superiority Die (as a Bonus Action), you learn a creature's immunities, resistances, and vulnerabilities."
+    },
+    {
+      "level": 10,
+      "name": "Improved Combat Superiority",
+      "desc": "Your Superiority Dice become d10s."
+    },
+    {
+      "level": 15,
+      "name": "Relentless",
+      "desc": "Once on each of your turns, you can use a maneuver without expending a Superiority Die (treat it as if you expended a d8)."
+    },
+    {
+      "level": 18,
+      "name": "Ultimate Combat Superiority",
+      "desc": "Your Superiority Dice become d12s."
+    }
+  ],
+  "optionPools": [
+    {
+      "id": "maneuver",
+      "name": "Maneuvers",
+      "known": [
+        [
+          3,
+          3
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          15,
+          9
+        ]
+      ]
+    }
+  ]
+}

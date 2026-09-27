@@ -1,0 +1,33 @@
+{
+  "id": "swashbuckler",
+  "name": "Dueling",
+  "image": "/img/classes/rogue/subclasses/swashbuckler.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Elegant Maneuver",
+      "desc": "When you make a melee attack against a creature, it can't make Opportunity Attacks against you until the end of the turn."
+    },
+    {
+      "level": 3,
+      "name": "Rakish Audacity",
+      "desc": "You add your Charisma modifier to your Initiative. You can apply Sneak Attack without Advantage if the target is within 5 feet of you, no other creatures are next to it, and you don't have Disadvantage."
+    },
+    {
+      "level": 9,
+      "name": "Panache",
+      "desc": "As an action, you make a Charisma (Persuasion) check contested by the target's Wisdom (Insight): on a success, an enemy has Disadvantage on attacks against others and can't make Opportunity Attacks against them, while a non-hostile creature is Charmed for 1 minute."
+    },
+    {
+      "level": 13,
+      "name": "Elegant Maneuver",
+      "desc": "As a Bonus Action, you give yourself Advantage on your next Dexterity (Acrobatics) or Strength (Athletics) check this turn."
+    },
+    {
+      "level": 17,
+      "name": "Master Duelist",
+      "desc": "When you miss with an attack, you can reroll it with Advantage. Once per Short or Long Rest."
+    }
+  ]
+}

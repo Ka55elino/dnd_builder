@@ -1,0 +1,16 @@
+{
+  "id": "viperFang",
+  "name": "Viper Fang",
+  "image": "/img/weapons/named/viperFang.svg",
+  "isDefault": false,
+  "base": "shortsword",
+  "desc": "A light blade forged in the shape of a serpent's fang. Inherits the shortsword's statistics (damage type and mastery), but leaves a burning mark on a hit, per the DM's description.",
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "finesse",
+    "light"
+  ]
+}

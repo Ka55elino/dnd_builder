@@ -1,0 +1,9 @@
+{
+  "id": "chest",
+  "name": "Chest",
+  "image": "/img/items/chest.svg",
+  "isDefault": true,
+  "weight": 25,
+  "cost": "5 GP",
+  "desc": "Holds up to 12 cubic feet."
+}

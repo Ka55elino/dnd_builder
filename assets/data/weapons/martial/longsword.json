@@ -1,0 +1,13 @@
+{
+  "id": "longsword",
+  "name": "Longsword",
+  "image": "/img/weapons/martial/longsword.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "slashing",
+  "mastery": "Sap",
+  "properties": [
+    "versatile"
+  ]
+}

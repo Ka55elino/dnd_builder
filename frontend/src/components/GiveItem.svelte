@@ -7,7 +7,7 @@
      * id — character; onBack() — back to the character page
      */
     import { onMount } from "svelte";
-    import { GetCharacter, SaveCharacter } from "../../wailsjs/go/main/App.js";
+    import { GetCharacter, SaveCharacter } from "../api.js";
     import { CharacterBuild } from "../models/CharacterBuild.svelte.js";
     import { loadRefs } from "../data/refs.js";
     import CatalogList from "./common/CatalogList.svelte";

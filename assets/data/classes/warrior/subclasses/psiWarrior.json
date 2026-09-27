@@ -1,0 +1,28 @@
+{
+  "id": "psiWarrior",
+  "name": "Psi Warrior",
+  "image": "/img/classes/warrior/subclasses/psiWarrior.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Psionic Power",
+      "desc": "You gain Psionic Energy Dice (expended on protection, extra damage, and Telekinetic Movement). Regained on a rest."
+    },
+    {
+      "level": 7,
+      "name": "Telekinetic Adept",
+      "desc": "Telekinetic Thrust (push or pull a creature) and an empowered Telekinetic Movement."
+    },
+    {
+      "level": 10,
+      "name": "Protective Field",
+      "desc": "As a Reaction, you expend a Psionic Energy Die to reduce the damage taken by you or an ally near you."
+    },
+    {
+      "level": 15,
+      "name": "Telekinetic Master",
+      "desc": "You can maintain the Telekinesis spell indefinitely; as a Bonus Action, you use it to make an attack or a shove."
+    }
+  ]
+}

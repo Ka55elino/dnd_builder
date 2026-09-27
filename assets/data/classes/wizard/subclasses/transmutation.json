@@ -1,0 +1,33 @@
+{
+  "id": "transmutation",
+  "name": "School of Transmutation",
+  "image": "/img/classes/wizard/subclasses/transmutation.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Transmutation Savant",
+      "desc": "You copy Transmutation spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Minor Alchemy",
+      "desc": "Over 10 minutes, you transform one nonmagical material into another (wood to stone and the like)."
+    },
+    {
+      "level": 6,
+      "name": "Transmuter's Stone",
+      "desc": "You create a stone that grants its bearer one benefit (Darkvision, +10 feet of Speed, proficiency in Con saving throws, or Resistance to an elemental damage type)."
+    },
+    {
+      "level": 10,
+      "name": "Shapechanger",
+      "desc": "You can cast Polymorph on yourself at will (into a beast of CR 1 or lower) without a spell slot."
+    },
+    {
+      "level": 14,
+      "name": "Master Transmuter",
+      "desc": "You expend your Transmuter's Stone for a powerful effect: removing effects, restoring youth, or a major transformation."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "cavalier",
+  "name": "Cavalier",
+  "image": "/img/classes/warrior/subclasses/cavalier.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Bonus Proficiencies",
+      "desc": "You gain proficiency in one skill (Performance, History, Insight, Persuasion, or Animal Handling) or one language of your choice."
+    },
+    {
+      "level": 3,
+      "name": "Unwavering Mark",
+      "desc": "When you hit with a melee attack, you mark the target: while it is near you, it has Disadvantage on attacks against others, and you can make a special attack against it as a Bonus Action with Advantage and extra damage (a number of times equal to your Strength modifier)."
+    },
+    {
+      "level": 3,
+      "name": "Born to the Saddle",
+      "desc": "You have Advantage on saving throws to avoid falling off your mount; if you fall 10 feet or less, you land on your feet; mounting and dismounting costs only 5 feet of movement."
+    },
+    {
+      "level": 7,
+      "name": "Warding Maneuver",
+      "desc": "As a Reaction, you add 1d8 to the AC of yourself or a creature within 5 feet against an attack; if the attack hits, the target has Resistance to its damage (a number of times equal to your Constitution modifier)."
+    },
+    {
+      "level": 10,
+      "name": "Hold the Line",
+      "desc": "You make an Opportunity Attack against an enemy that moves 5 feet or more while within your reach; on a hit, its Speed becomes 0 until the end of the turn."
+    },
+    {
+      "level": 15,
+      "name": "Ferocious Charger",
+      "desc": "If you move at least 10 feet in a straight line before an attack, on a hit you force the target to make a Strength saving throw or have the Prone condition (once per turn)."
+    },
+    {
+      "level": 18,
+      "name": "Vigilant Defender",
+      "desc": "You gain a special Reaction for Opportunity Attacks, usable once on each creature's turn other than yours; it can't be combined with your normal Reaction on the same turn."
+    }
+  ]
+}

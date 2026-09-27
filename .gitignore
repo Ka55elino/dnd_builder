@@ -2,7 +2,7 @@ build/bin
 node_modules
 frontend/dist
 
-# SQLite (если файл БД попадёт в проект при отладке)
+# SQLite (in case a DB file ends up in the project while debugging)
 *.db
 *.db-shm
 *.db-wal
@@ -17,3 +17,10 @@ frontend/dist
 
 # logs
 *.log
+# local settings and secrets
+.env
+.env.*
+
+
+# local image generator drafts (tools/imagegen.py)
+tools/out/

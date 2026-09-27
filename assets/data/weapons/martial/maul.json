@@ -1,0 +1,13 @@
+{
+  "id": "maul",
+  "name": "Maul",
+  "image": "/img/weapons/martial/maul.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "2d6",
+  "damageType": "bludgeoning",
+  "mastery": "Topple",
+  "properties": [
+    "twoHanded"
+  ]
+}

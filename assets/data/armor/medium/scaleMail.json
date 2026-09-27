@@ -1,0 +1,11 @@
+{
+  "id": "scaleMail",
+  "name": "Scale Mail",
+  "image": "/img/armor/medium/scaleMail.svg",
+  "isDefault": true,
+  "category": "medium",
+  "baseAC": 14,
+  "addDex": true,
+  "maxDex": 2,
+  "stealthDisadvantage": true
+}

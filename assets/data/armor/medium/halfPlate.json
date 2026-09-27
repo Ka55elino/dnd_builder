@@ -1,0 +1,11 @@
+{
+  "id": "halfPlate",
+  "name": "Half Plate Armor",
+  "image": "/img/armor/medium/halfPlate.svg",
+  "isDefault": true,
+  "category": "medium",
+  "baseAC": 15,
+  "addDex": true,
+  "maxDex": 2,
+  "stealthDisadvantage": true
+}

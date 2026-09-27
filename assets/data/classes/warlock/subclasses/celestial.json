@@ -1,0 +1,46 @@
+{
+  "id": "celestial",
+  "name": "Celestial",
+  "image": "/img/classes/warlock/subclasses/celestial.png",
+  "class": "warlock",
+  "domainSpells": {
+    "3": [
+      "cureWounds",
+      "lesserRestoration"
+    ],
+    "5": [
+      "revivify",
+      "dispelMagic"
+    ],
+    "7": [
+      "guardianOfFaith",
+      "deathWard"
+    ],
+    "9": [
+      "flameStrike",
+      "greaterRestoration"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Healing Light",
+      "desc": "A pool of d6s equal to 1 + your Warlock level. As a Bonus Action, you expend up to (Cha modifier) dice to heal a creature within 60 feet. You regain the pool when you finish a Long Rest."
+    },
+    {
+      "level": 6,
+      "name": "Radiant Soul",
+      "desc": "Resistance to Radiant damage; once per turn, you add your Cha modifier to the damage of a Fire or Radiant spell."
+    },
+    {
+      "level": 10,
+      "name": "Celestial Resilience",
+      "desc": "At the end of a rest, you and your allies gain Temporary Hit Points."
+    },
+    {
+      "level": 14,
+      "name": "Searing Vengeance",
+      "desc": "When you drop to 0 Hit Points (and aren't killed), you stay on your feet with a burst of radiant energy against enemies around you."
+    }
+  ]
+}

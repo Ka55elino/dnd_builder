@@ -1,0 +1,53 @@
+{
+  "id": "gloomStalker",
+  "name": "Gloom Stalker",
+  "image": "/img/classes/ranger/subclasses/gloomStalker.png",
+  "class": "ranger",
+  "features": [
+    {
+      "level": 3,
+      "name": "Dread Ambusher",
+      "desc": "You add your Wisdom modifier to your Initiative rolls. On your first turn of combat, your Speed increases by 10 feet, and you make one extra attack that deals an extra 2d6 damage on a hit.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "initiative",
+            "ability": "wis"
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Umbral Sight",
+      "desc": "You gain Darkvision with a range of 90 feet (or +90 feet to the range you already have). In darkness, creatures relying on Darkvision can't see you.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 90
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Iron Mind",
+      "desc": "You gain proficiency in Wisdom saving throws."
+    },
+    {
+      "level": 11,
+      "name": "Stalker's Flurry",
+      "desc": "Once per turn, when you miss with a weapon attack, you can make another attack with the same weapon against any target within reach."
+    },
+    {
+      "level": 15,
+      "name": "Shadowy Dodge",
+      "desc": "As a Reaction when a creature attacks you, you impose Disadvantage on that attack roll (unless you are Incapacitated)."
+    }
+  ]
+}

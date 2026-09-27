@@ -1,0 +1,43 @@
+{
+  "id": "runeKnight",
+  "name": "Rune Knight",
+  "image": "/img/classes/warrior/subclasses/runeKnight.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Bonus Proficiencies",
+      "desc": "You gain proficiency with Smith's Tools, and you learn to speak, read, and write Giant."
+    },
+    {
+      "level": 3,
+      "name": "Rune Carver",
+      "desc": "You learn runes (2 at level 3, up to 5 at level 15) and inscribe them on your gear during a rest. Runes grant passive benefits and an activated effect (as a Reaction or Bonus Action)."
+    },
+    {
+      "level": 3,
+      "name": "Giant's Might",
+      "desc": "As a Bonus Action, you become Large for 1 minute, have Advantage on Strength checks and saving throws, and once per turn deal extra damage (1d6/1d8/1d10). Number of uses equals your Proficiency Bonus."
+    },
+    {
+      "level": 7,
+      "name": "Runic Shield",
+      "desc": "As a Reaction, you force a creature attacking an ally within 60 feet to reroll the d20 (a number of times equal to your Proficiency Bonus)."
+    },
+    {
+      "level": 10,
+      "name": "Great Stature",
+      "desc": "You grow 3d4 inches taller; the extra damage from Giant's Might increases to 1d8."
+    },
+    {
+      "level": 15,
+      "name": "Master of Runes",
+      "desc": "You can invoke each rune you know twice, regaining its invocations on a rest."
+    },
+    {
+      "level": 18,
+      "name": "Runic Juggernaut",
+      "desc": "The extra damage from Giant's Might increases to 1d10; when you use it, you can become Huge, increasing your reach by 5 feet."
+    }
+  ]
+}

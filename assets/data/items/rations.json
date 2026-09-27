@@ -1,0 +1,9 @@
+{
+  "id": "rations",
+  "name": "Rations (1 Day)",
+  "image": "/img/items/rations.svg",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "5 SP",
+  "desc": "Travel food for one day: jerky, dried fruit, hardtack, and nuts."
+}

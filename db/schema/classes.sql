@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS classes (
     id             TEXT PRIMARY KEY,             -- 'ranger'
     name           TEXT NOT NULL,                -- 'Ranger'
-    image          TEXT,                         -- image, data URL (base64) | NULL
+    image          TEXT,                         -- image, "/img/…" URL (see images.go) | NULL
     hit_die        INTEGER,                      -- 10
     caster         TEXT,                         -- full | half | third | none
     subclass_level INTEGER,                      -- level at which the subclass is chosen

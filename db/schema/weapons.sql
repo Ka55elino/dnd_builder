@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS weapons (
     id          TEXT PRIMARY KEY,                -- 'longsword'
     name        TEXT NOT NULL,                   -- 'Longsword'
-    image       TEXT,                            -- data URL (base64) | NULL
+    image       TEXT,                            -- "/img/…" URL (see images.go) | NULL
     category    TEXT NOT NULL,                   -- simple | martial
     damage      TEXT,                            -- '1d8'
     damage_type TEXT,                            -- bludgeoning | piercing | slashing

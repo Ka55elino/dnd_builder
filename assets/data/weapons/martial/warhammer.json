@@ -1,0 +1,13 @@
+{
+  "id": "warhammer",
+  "name": "Warhammer",
+  "image": "/img/weapons/martial/warhammer.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "mastery": "Push",
+  "properties": [
+    "versatile"
+  ]
+}

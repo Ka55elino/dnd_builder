@@ -1,0 +1,9 @@
+{
+  "id": "studded",
+  "name": "Studded Leather",
+  "image": "/img/armor/light/studded.svg",
+  "isDefault": true,
+  "category": "light",
+  "baseAC": 12,
+  "addDex": true
+}

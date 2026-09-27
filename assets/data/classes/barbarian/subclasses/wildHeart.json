@@ -1,0 +1,33 @@
+{
+  "id": "wildHeart",
+  "name": "Path of the Wild Heart",
+  "image": "/img/classes/barbarian/subclasses/wildHeart.png",
+  "class": "barbarian",
+  "features": [
+    {
+      "level": 3,
+      "name": "Animal Speaker",
+      "desc": "You can cast Speak with Animals and Beast Sense as Rituals (without expending a spell slot)."
+    },
+    {
+      "level": 3,
+      "name": "Rage of the Wilds",
+      "desc": "When you enter a Rage, you choose an animal aspect: Bear (Resistance to every damage type except Force and Psychic), Eagle (Dash and Disengage as a Bonus Action; Opportunity Attacks against you have Disadvantage), or Wolf (allies have Advantage on melee attack rolls against enemies within 5 feet of you). You can change the aspect each time you enter a Rage."
+    },
+    {
+      "level": 6,
+      "name": "Aspect of the Wilds",
+      "desc": "A constant sense or movement benefit outside combat (can be changed after a rest): Owl (Darkvision 120 feet), Panther (Climb Speed equal to your Speed), Salmon (Swim Speed equal to your Speed), or Chameleon (Advantage on Stealth checks; you can change your skin color)."
+    },
+    {
+      "level": 10,
+      "name": "Nature Speaker",
+      "desc": "You can cast Commune with Nature as a Ritual."
+    },
+    {
+      "level": 14,
+      "name": "Power of the Wilds",
+      "desc": "Expands your aspect choices when you enter a Rage: Falcon (Fly Speed equal to your Speed while not wearing Heavy armor), Lion (enemies within 5 feet of you have Disadvantage on attack rolls against targets other than you), or Ram (when you hit with a melee attack, you can knock a target of Large size or smaller Prone)."
+    }
+  ]
+}

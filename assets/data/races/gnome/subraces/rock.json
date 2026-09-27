@@ -1,0 +1,16 @@
+{
+  "id": "rock",
+  "name": "Rock Gnome",
+  "image": "/img/races/gnome/subraces/rock.png",
+  "race": "gnome",
+  "traits": [
+    {
+      "name": "Artificer's Lore",
+      "desc": "When you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you add twice your Proficiency Bonus."
+    },
+    {
+      "name": "Tinker",
+      "desc": "You have proficiency with Artisan's Tools; with 1 hour and some small materials, you can build a Tiny clockwork device (a toy, fire starter, or music box)."
+    }
+  ]
+}

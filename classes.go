@@ -10,7 +10,7 @@ import (
 type Class struct {
 	ID            string         `json:"id"`
 	Name          string         `json:"name"`
-	Image         string         `json:"image"` // data URL (base64) or ""
+	Image         string         `json:"image"` // "/img/…" URL (see images.go) or ""
 	HitDie        int            `json:"hitDie"`
 	Caster        string         `json:"caster"` // full | half | third | none
 	SubclassLevel int            `json:"subclassLevel"`

@@ -1,0 +1,46 @@
+{
+  "id": "greatOldOne",
+  "name": "Great Old One",
+  "image": "/img/classes/warlock/subclasses/greatOldOne.png",
+  "class": "warlock",
+  "domainSpells": {
+    "3": [
+      "armsOfHadar",
+      "blindnessDeafness"
+    ],
+    "5": [
+      "fear",
+      "hungerOfHadar"
+    ],
+    "7": [
+      "confusion",
+      "arcaneEye"
+    ],
+    "9": [
+      "dominatePerson",
+      "scrying"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Awakened Mind",
+      "desc": "You communicate telepathically with creatures within 30 feet in a language you know."
+    },
+    {
+      "level": 6,
+      "name": "Clairvoyant Combatant",
+      "desc": "You form a psychic bond with a creature (Wisdom saving throw): it has Disadvantage on attacks against you, and you have Advantage against it. A number of times equal to your Proficiency Bonus."
+    },
+    {
+      "level": 10,
+      "name": "Thought Shield",
+      "desc": "Resistance to Psychic damage; a creature that attacks you with psionics takes the same amount back."
+    },
+    {
+      "level": 14,
+      "name": "Create Thrall",
+      "desc": "With a touch, you charm an Incapacitated creature into an indefinite servant (Wisdom saving throw)."
+    }
+  ]
+}

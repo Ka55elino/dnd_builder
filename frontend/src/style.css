@@ -23,3 +23,19 @@ body {
 #app {
     height: 100%;
 }
+
+/* Spinner — query loader (QueryLoader.svelte); the startup loader has its own copy in index.html */
+.spinner {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-gold);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

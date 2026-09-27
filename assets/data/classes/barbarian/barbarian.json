@@ -1,0 +1,156 @@
+{
+  "id": "barbarian",
+  "name": "Barbarian",
+  "image": "/img/classes/barbarian/barbarian.png",
+  "hitDie": 12,
+  "primaryAbility": [
+    "str"
+  ],
+  "savingThrows": [
+    "str",
+    "con"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "animal",
+    "athletics",
+    "intimidation",
+    "nature",
+    "perception",
+    "survival"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "unarmoredDefense": [
+    "dex",
+    "con"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Rage",
+      "desc": "As a Bonus Action, you enter a Rage: Resistance to Bludgeoning, Piercing, and Slashing damage; a bonus to damage with Strength-based melee attacks — +2 (levels 1–8), +3 (levels 9–15), +4 (levels 16+); Advantage on Strength checks and saving throws. You can't maintain Concentration or cast spells. Lasts 10 minutes."
+    },
+    {
+      "level": 1,
+      "name": "Unarmored Defense",
+      "desc": "While you aren't wearing armor, your AC equals 10 + your Dexterity modifier + your Constitution modifier (a Shield is allowed)."
+    },
+    {
+      "level": 1,
+      "name": "Weapon Mastery",
+      "desc": "You can use the mastery properties of 2 kinds of weapons (increases with level)."
+    },
+    {
+      "level": 2,
+      "name": "Danger Sense",
+      "desc": "You have Advantage on Dexterity saving throws against effects you can see (traps, spells)."
+    },
+    {
+      "level": 2,
+      "name": "Reckless Attack",
+      "desc": "You have Advantage on Strength-based melee attack rolls on your turn, but attack rolls against you also have Advantage until your next turn."
+    },
+    {
+      "level": 3,
+      "name": "Primal Knowledge",
+      "desc": "An extra skill; while raging, you can make certain ability checks using Strength."
+    },
+    {
+      "level": 5,
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
+    },
+    {
+      "level": 5,
+      "name": "Fast Movement",
+      "desc": "Your Speed increases by 10 feet while you aren't wearing Heavy armor.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Instinctive Pounce",
+      "desc": "Advantage on Initiative rolls."
+    },
+    {
+      "level": 7,
+      "name": "Instinctive Pounce",
+      "desc": "When you enter a Rage as a Bonus Action, you can move up to half your Speed."
+    },
+    {
+      "level": 9,
+      "name": "Brutal Strike",
+      "desc": "When you forgo Advantage from Reckless Attack, on a hit you deal +1 damage die and apply an effect (push or slow)."
+    },
+    {
+      "level": 11,
+      "name": "Relentless Rage",
+      "desc": "If you drop to 0 Hit Points while raging (and aren't killed), you make a Constitution saving throw and drop to 1 Hit Point instead."
+    },
+    {
+      "level": 13,
+      "name": "Improved Brutal Strike",
+      "desc": "An extra effect and +1 die for Brutal Strike."
+    },
+    {
+      "level": 15,
+      "name": "Persistent Rage",
+      "desc": "Your Rage lasts until you fall Unconscious or end it voluntarily; as a Bonus Action, you can regain Temporary Hit Points."
+    },
+    {
+      "level": 18,
+      "name": "Indomitable Might",
+      "desc": "If the total of a Strength check or saving throw is less than your Strength score, you can use that score instead."
+    },
+    {
+      "level": 20,
+      "name": "Primal Champion",
+      "desc": "Your Strength and Constitution scores increase by 4 (maximum 25).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "str",
+            "value": 4,
+            "max": 25
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "con",
+            "value": 4,
+            "max": 25
+          }
+        }
+      ]
+    }
+  ]
+}

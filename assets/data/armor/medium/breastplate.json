@@ -1,0 +1,10 @@
+{
+  "id": "breastplate",
+  "name": "Breastplate",
+  "image": "/img/armor/medium/breastplate.svg",
+  "isDefault": true,
+  "category": "medium",
+  "baseAC": 14,
+  "addDex": true,
+  "maxDex": 2
+}

@@ -1,0 +1,46 @@
+{
+  "id": "archfey",
+  "name": "Archfey",
+  "image": "/img/classes/warlock/subclasses/archfey.png",
+  "class": "warlock",
+  "domainSpells": {
+    "3": [
+      "faerieFire",
+      "holdPerson"
+    ],
+    "5": [
+      "hypnoticPattern",
+      "blink"
+    ],
+    "7": [
+      "confusion",
+      "polymorph"
+    ],
+    "9": [
+      "holdMonster",
+      "dominatePerson"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Steps of the Fey",
+      "desc": "As a Bonus Action, you teleport up to 30 feet; you choose a Joyful (frightens a nearby target) or Mournful (Disadvantage on attacks against you) effect. A number of times equal to your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 6,
+      "name": "Misty Escape",
+      "desc": "As a Reaction when you take damage, you become Invisible and teleport up to 60 feet."
+    },
+    {
+      "level": 10,
+      "name": "Beguiling Defenses",
+      "desc": "You are immune to the Charmed condition; you can turn an attempt to charm you back on the charmer."
+    },
+    {
+      "level": 14,
+      "name": "Beguiling Magic",
+      "desc": "After you cast an Enchantment or Illusion spell of level 1 or higher, you can teleport as a Bonus Action (as with Misty Step)."
+    }
+  ]
+}

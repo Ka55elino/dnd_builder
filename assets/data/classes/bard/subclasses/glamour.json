@@ -1,0 +1,28 @@
+{
+  "id": "glamour",
+  "name": "College of Glamour",
+  "image": "/img/classes/bard/subclasses/glamour.png",
+  "class": "bard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Mantle of Inspiration",
+      "desc": "As a Bonus Action, you expend a Bardic Inspiration die: up to (Cha modifier) creatures gain Temporary Hit Points (equal to the roll) and can use their Reaction to move up to their Speed."
+    },
+    {
+      "level": 3,
+      "name": "Enthralling Performance",
+      "desc": "With 1 minute of performance, you charm your audience (Wisdom saving throw)."
+    },
+    {
+      "level": 6,
+      "name": "Mantle of Majesty",
+      "desc": "As a Bonus Action, you surround yourself with an aura for 1 minute: as a Bonus Action, you can cast Command without a spell slot on Charmed creatures."
+    },
+    {
+      "level": 14,
+      "name": "Unbreakable Majesty",
+      "desc": "As a Bonus Action, for 1 minute: a creature that attacks you must succeed on a Charisma saving throw or it can't (its turn is wasted)."
+    }
+  ]
+}

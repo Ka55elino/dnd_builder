@@ -11,7 +11,7 @@ type Race struct {
 	ID         string         `json:"id"`
 	Name       string         `json:"name"`
 	ParentRace string         `json:"parentRace,omitempty"`
-	Image      string         `json:"image"` // data URL (base64) or ""
+	Image      string         `json:"image"` // "/img/…" URL (see images.go) or ""
 	IsCustom   bool           `json:"isCustom"`
 	Data       map[string]any `json:"data"`
 	Subraces   []Race         `json:"subraces"`

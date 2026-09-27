@@ -1,0 +1,9 @@
+{
+  "id": "book",
+  "name": "Book",
+  "image": "/img/items/book.svg",
+  "isDefault": true,
+  "weight": 5,
+  "cost": "25 GP",
+  "desc": "Fiction or nonfiction. When you consult an accurate nonfiction book, you gain a +5 bonus to Intelligence (Arcana, History, Nature, or Religion) checks about its topic."
+}

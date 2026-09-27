@@ -1,0 +1,28 @@
+{
+  "id": "stars",
+  "name": "Circle of the Stars",
+  "image": "/img/classes/druid/subclasses/stars.png",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Star Map",
+      "desc": "You carry a star map; you know Guidance and always have Guiding Bolt prepared, which you can cast without a spell slot a number of times equal to your Proficiency Bonus."
+    },
+    {
+      "level": 6,
+      "name": "Cosmic Omen",
+      "desc": "At the start of your turn, you roll a d6: an even (Weal) or odd (Woe) omen. As a Reaction, you add or subtract the d6 to an attack roll, saving throw, or ability check of a creature near you. Uses equal your Proficiency Bonus."
+    },
+    {
+      "level": 10,
+      "name": "Twinkling Constellations",
+      "desc": "Your constellations grow stronger; in Dragon form, you gain a Fly Speed."
+    },
+    {
+      "level": 14,
+      "name": "Full of Stars",
+      "desc": "In your Starry Form, you have Resistance to Bludgeoning, Piercing, and Slashing damage."
+    }
+  ]
+}

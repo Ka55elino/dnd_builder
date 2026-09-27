@@ -1,7 +1,7 @@
 <script>
     /**
-     * Custom spell form. The result is an object in db/data/spells format,
-     * saved via SaveCustomSpell. On the right is a live card preview.
+     * Custom spell form. The result is an object in assets/data/spells format,
+     * saved via saveCustomSpell. On the right is a live card preview.
      *
      * initial — reference record to edit (or the base for a copy), null — new
      * copy    — true: initial is only a base, save as a new record
@@ -9,7 +9,7 @@
      * onSaved(id) / onCancel()
      */
     import { untrack } from "svelte";
-    import { SaveCustomSpell } from "../../wailsjs/go/main/App.js";
+    import { saveCustomSpell } from "../data/refs.js"; // also reloads the spell cache
     import { ACTION_TYPES, DAMAGE_TYPES, SCHOOLS } from "../rules/labels.js";
     import ActionCard from "./common/ActionCard.svelte";
 
@@ -78,7 +78,7 @@
         [f.v && "V", f.s && "S", f.m && (f.material.trim() ? `M (${f.material.trim()})` : "M")].filter(Boolean).join(", "),
     );
 
-    /** Object in db/data/spells format (no validation — for the preview). */
+    /** Object in assets/data/spells format (no validation — for the preview). */
     function toSpell() {
         const level = Number(f.level) || 0;
         const casting = {
@@ -139,7 +139,7 @@
         if (f.hasDamage && !DICE.test(sp.damage.dice)) return (error = "Damage must be a die like 2d6 or a number.");
         saving = true;
         try {
-            const id = await SaveCustomSpell(JSON.stringify(sp));
+            const id = await saveCustomSpell(JSON.stringify(sp));
             onSaved?.(id);
         } catch (e) {
             error = "Failed to save: " + (e?.message ?? e);

@@ -1,0 +1,15 @@
+{
+  "id": "dagger",
+  "name": "Dagger",
+  "image": "/img/weapons/simple/dagger.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "piercing",
+  "mastery": "Nick",
+  "properties": [
+    "finesse",
+    "light",
+    "thrown"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "whip",
+  "name": "Whip",
+  "image": "/img/weapons/martial/whip.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d4",
+  "damageType": "slashing",
+  "mastery": "Slow",
+  "properties": [
+    "finesse"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "glory",
+  "name": "Oath of Glory",
+  "image": "/img/classes/paladin/subclasses/glory.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "guidingBolt",
+      "aid"
+    ],
+    "9": [
+      "crusadersMantle",
+      "dispelMagic"
+    ],
+    "13": [
+      "freedomOfMovement",
+      "compulsion"
+    ],
+    "17": [
+      "flameStrike",
+      "greaterRestoration"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Peerless Athlete / Inspiring Smite",
+      "desc": "With Channel Divinity, you empower yourself (Athletics/Acrobatics, jumping) or, after a Divine Smite, you grant Temporary Hit Points to your allies."
+    },
+    {
+      "level": 7,
+      "name": "Aura of Alacrity",
+      "desc": "Your Speed increases by 10 feet; allies within 10 feet gain +10 feet of Speed when they move."
+    },
+    {
+      "level": 15,
+      "name": "Glorious Defense",
+      "desc": "As a Reaction, you give yourself or an ally a bonus to AC against an attack; if it misses, you make a retaliatory attack."
+    },
+    {
+      "level": 20,
+      "name": "Living Legend",
+      "desc": "As an action, for 1 minute: Advantage on Charisma checks, once per turn you can turn a miss into a hit, and once per turn you can reroll a saving throw."
+    }
+  ]
+}

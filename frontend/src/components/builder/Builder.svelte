@@ -6,7 +6,7 @@
     import ClassTab from "./ClassTab.svelte";
     import EquipmentTab from "./EquipmentTab.svelte";
     import { onMount, untrack } from "svelte";
-    import { SaveCharacter } from "../../../wailsjs/go/main/App.js";
+    import { SaveCharacter } from "../../api.js";
     import { validateBuild, BUILDER_TABS } from "../../rules/validation.js";
     import { loadRefs, EMPTY_REFS } from "../../data/refs.js";
     import LevelScreen from "../LevelScreen.svelte";

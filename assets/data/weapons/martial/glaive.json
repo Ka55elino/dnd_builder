@@ -1,0 +1,13 @@
+{
+  "id": "glaive",
+  "name": "Glaive",
+  "image": "/img/weapons/martial/glaive.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d10",
+  "damageType": "slashing",
+  "mastery": "Graze",
+  "properties": [
+    "twoHanded"
+  ]
+}

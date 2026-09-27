@@ -1,0 +1,43 @@
+{
+  "id": "war",
+  "name": "War",
+  "image": "/img/classes/cleric/subclasses/war.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "divineFavor",
+      "shieldOfFaith",
+      "magicWeapon",
+      "spiritualWeapon"
+    ],
+    "5": [
+      "crusadersMantle",
+      "spiritGuardians"
+    ],
+    "7": [
+      "freedomOfMovement",
+      "stoneskin"
+    ],
+    "9": [
+      "flameStrike",
+      "holdMonster"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "War Priest",
+      "desc": "As a Bonus Action, you grant yourself or a creature within 30 feet one weapon attack. A number of times equal to your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 6,
+      "name": "War God's Blessing",
+      "desc": "As a Reaction, you give +10 to an attack roll made by you or an ally within 30 feet (expends Channel Divinity)."
+    },
+    {
+      "level": 17,
+      "name": "Avatar of Battle",
+      "desc": "You gain Resistance to nonmagical Bludgeoning, Piercing, and Slashing damage."
+    }
+  ]
+}

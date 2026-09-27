@@ -1,0 +1,38 @@
+{
+  "id": "echoKnight",
+  "name": "Echo Knight",
+  "image": "/img/classes/warrior/subclasses/echoKnight.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Manifest Echo",
+      "desc": "As a Bonus Action, you create an echo of yourself within 15 feet (AC 14 + your Proficiency Bonus, 1 Hit Point). You can attack from its position, swap places with it for 15 feet of movement, and make Opportunity Attacks from it."
+    },
+    {
+      "level": 3,
+      "name": "Unleash Incarnation",
+      "desc": "When you take the Attack action, you can make one extra melee attack from the echo's position (a number of times equal to your Constitution modifier)."
+    },
+    {
+      "level": 7,
+      "name": "Echo Avatar",
+      "desc": "As an action, you project your consciousness into the echo, seeing and hearing through its senses (while you are Deafened and Blinded); the echo can move up to 1,000 feet away, for up to 10 minutes."
+    },
+    {
+      "level": 10,
+      "name": "Echo Avatar",
+      "desc": "As a Reaction, you teleport the echo into the path of an attack aimed at another creature; the attack targets the echo instead. Once per Short or Long Rest."
+    },
+    {
+      "level": 15,
+      "name": "Reclaim Potential",
+      "desc": "When the echo is destroyed by damage, you gain Temporary Hit Points equal to 2d6 + your Constitution modifier (a number of times equal to your Constitution modifier)."
+    },
+    {
+      "level": 18,
+      "name": "Legion of One",
+      "desc": "You can have two echoes at once; when you roll Initiative and have no uses of Unleash Incarnation left, you regain one."
+    }
+  ]
+}

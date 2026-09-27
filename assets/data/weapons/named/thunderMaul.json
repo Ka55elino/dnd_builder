@@ -1,0 +1,15 @@
+{
+  "id": "thunderMaul",
+  "name": "Thunder Maul",
+  "image": "/img/weapons/named/thunderMaul.svg",
+  "isDefault": false,
+  "base": "maul",
+  "desc": "A heavy hammer that resounds with a peal of thunder on impact. Inherits the hammer's statistics (Bludgeoning damage and mastery), with a custom effect description.",
+  "category": "martial",
+  "damage": "2d6",
+  "damageType": "bludgeoning",
+  "mastery": "Topple",
+  "properties": [
+    "twoHanded"
+  ]
+}

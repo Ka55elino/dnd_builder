@@ -1,0 +1,51 @@
+{
+  "id": "entertainerPack",
+  "name": "Entertainer's Pack",
+  "image": "/img/packs/entertainerPack.svg",
+  "isDefault": true,
+  "cost": "40 GP",
+  "weight": 58.5,
+  "desc": "Costumes, light, and supplies for traveling performances.",
+  "items": [
+    {
+      "id": "backpack",
+      "qty": 1
+    },
+    {
+      "id": "bedroll",
+      "qty": 1
+    },
+    {
+      "id": "bell",
+      "qty": 1
+    },
+    {
+      "id": "lanternBullseye",
+      "qty": 1
+    },
+    {
+      "id": "costume",
+      "qty": 3
+    },
+    {
+      "id": "mirror",
+      "qty": 1
+    },
+    {
+      "id": "oil",
+      "qty": 8
+    },
+    {
+      "id": "rations",
+      "qty": 9
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    },
+    {
+      "id": "waterskin",
+      "qty": 1
+    }
+  ]
+}

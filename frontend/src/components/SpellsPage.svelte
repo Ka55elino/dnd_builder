@@ -9,8 +9,7 @@
      * onBack() — to the menu
      */
     import { onMount } from "svelte";
-    import { loadRefs, refreshSpells } from "../data/refs.js";
-    import { DeleteCustomSpell } from "../../wailsjs/go/main/App.js";
+    import { loadRefs, deleteCustomSpell } from "../data/refs.js";
     import SpellEditor from "./SpellEditor.svelte";
     import { SCHOOLS } from "../rules/labels.js";
     import ActionCard from "./common/ActionCard.svelte";
@@ -42,8 +41,9 @@
         setTimeout(() => (status = ""), 2500);
     }
 
+    // save/delete already reloaded the cache — take the fresh spells from it
     async function reload() {
-        const all = await refreshSpells();
+        const all = (await loadRefs()).spells;
         spells = all.filter((s) => s.kind === "spell");
         abilities = all.filter((s) => s.kind !== "spell");
     }
@@ -61,7 +61,7 @@
     async function remove(sp) {
         confirmDelete = null;
         try {
-            await DeleteCustomSpell(sp.id);
+            await deleteCustomSpell(sp.id);
             await reload();
             flash(`“${sp.name}” deleted`);
         } catch (e) {

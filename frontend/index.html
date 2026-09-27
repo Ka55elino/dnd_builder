@@ -4,8 +4,34 @@
     <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>dnd-builder-v3</title>
+    <!-- Startup loader: inline styles so it paints before the app's CSS and JS load -->
+    <style>
+        html, body { margin: 0; height: 100%; background: #111014; }
+        #boot {
+            position: fixed; inset: 0; z-index: 1000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+            background: #111014; color: #A9A19A;
+            font: 15px/1.4 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            transition: opacity 0.3s ease;
+        }
+        #boot.hidden { opacity: 0; pointer-events: none; }
+        #boot .boot-title { font: 600 26px Georgia, serif; letter-spacing: 0.12em; color: #D6BD8C; }
+        #boot .boot-ring {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 3px solid #38323D; border-top-color: #C8A45D;
+            animation: boot-spin 0.9s linear infinite;
+        }
+        #boot.failed .boot-ring { display: none; }
+        #boot.failed .boot-text { color: #C46A6A; max-width: 520px; text-align: center; }
+        @keyframes boot-spin { to { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
+<div id="boot" role="status" aria-live="polite">
+    <div class="boot-title">D&amp;D BUILDER</div>
+    <div class="boot-ring"></div>
+    <div class="boot-text">Loading…</div>
+</div>
 <div id="app"></div>
 <script src="./src/main.js" type="module"></script>
 </body>

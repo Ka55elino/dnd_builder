@@ -1,0 +1,38 @@
+{
+  "id": "scribes",
+  "name": "Order of Scribes",
+  "image": "/img/classes/wizard/subclasses/scribes.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Wizardly Quill",
+      "desc": "You create a magical quill; you copy spells into your spellbook faster and more cheaply."
+    },
+    {
+      "level": 3,
+      "name": "Awakened Spellbook",
+      "desc": "Once when you cast a spell, you can change its damage type to another from your spellbook; you can cast any spell that uses a spell slot as a Ritual."
+    },
+    {
+      "level": 3,
+      "name": "Manifest Mind",
+      "desc": "As a Bonus Action, you summon a spectral mind (10-foot light); you can cast spells through it and use it to protect yourself from damage."
+    },
+    {
+      "level": 6,
+      "name": "Master Scrivener",
+      "desc": "You create a Spell Scroll from your spellbook for a reduced cost."
+    },
+    {
+      "level": 10,
+      "name": "One with the Word",
+      "desc": "When you would be reduced to 0 Hit Points, you erase part of your spellbook to drop to 1 Hit Point instead (once per Long Rest)."
+    },
+    {
+      "level": 14,
+      "name": "One with the Word",
+      "desc": "As an action, you turn a scroll into a spell slot or vice versa."
+    }
+  ]
+}

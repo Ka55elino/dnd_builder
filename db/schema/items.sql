@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS items (
     id          TEXT PRIMARY KEY,                -- 'rope'
     name        TEXT NOT NULL,                   -- 'Rope (50 feet)'
-    image       TEXT,                            -- data URL (base64) | NULL
+    image       TEXT,                            -- "/img/…" URL (see images.go) | NULL
     weight      REAL,                            -- pounds
     cost        TEXT,                            -- '1 GP'
     description TEXT,                            -- the 'desc' field from JSON

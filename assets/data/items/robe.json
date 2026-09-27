@@ -1,0 +1,9 @@
+{
+  "id": "robe",
+  "name": "Robe",
+  "image": "/img/items/robe.svg",
+  "isDefault": true,
+  "weight": 4,
+  "cost": "1 GP",
+  "desc": "Vestments of a vocational or ceremonial nature. Some rites and locations admit only those wearing robes of certain colors or symbols."
+}

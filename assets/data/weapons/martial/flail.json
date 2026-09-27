@@ -1,0 +1,10 @@
+{
+  "id": "flail",
+  "name": "Flail",
+  "image": "/img/weapons/martial/flail.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "mastery": "Sap"
+}

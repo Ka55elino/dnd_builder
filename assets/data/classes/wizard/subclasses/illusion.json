@@ -1,0 +1,33 @@
+{
+  "id": "illusion",
+  "name": "School of Illusion",
+  "image": "/img/classes/wizard/subclasses/illusion.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Illusion Savant",
+      "desc": "You copy Illusion spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Improved Minor Illusion",
+      "desc": "You know Minor Illusion and can create both a sound and an image with it at the same time."
+    },
+    {
+      "level": 6,
+      "name": "Malleable Illusions",
+      "desc": "As an action, you change the nature of your active illusions (with a duration of 1 minute or longer)."
+    },
+    {
+      "level": 10,
+      "name": "Illusory Self",
+      "desc": "As a Reaction, you create a duplicate of yourself, causing an attack against you to miss."
+    },
+    {
+      "level": 14,
+      "name": "Illusory Reality",
+      "desc": "You make one nonliving object from an illusion real for 1 minute."
+    }
+  ]
+}

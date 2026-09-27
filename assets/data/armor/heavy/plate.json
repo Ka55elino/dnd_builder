@@ -1,0 +1,12 @@
+{
+  "id": "plate",
+  "name": "Plate Armor",
+  "image": "/img/armor/heavy/plate.svg",
+  "isDefault": true,
+  "category": "heavy",
+  "baseAC": 18,
+  "addDex": false,
+  "maxDex": 0,
+  "stealthDisadvantage": true,
+  "strengthReq": 15
+}

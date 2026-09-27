@@ -1,0 +1,36 @@
+{
+  "id": "mountain",
+  "name": "Mountain Dwarf",
+  "image": "/img/races/dwarf/subraces/mountain.png",
+  "race": "dwarf",
+  "traits": [
+    {
+      "name": "Mountain's Strength",
+      "desc": "+2 to Strength.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "str",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dwarven Armor Training",
+      "desc": "You have proficiency with Light and Medium armor.",
+      "grants": [
+        {
+          "type": "armor",
+          "id": "light"
+        },
+        {
+          "type": "armor",
+          "id": "medium"
+        }
+      ]
+    }
+  ]
+}

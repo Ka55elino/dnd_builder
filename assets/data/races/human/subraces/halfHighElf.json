@@ -1,0 +1,64 @@
+{
+  "id": "halfHighElf",
+  "name": "Half-High Elf",
+  "race": "human",
+  "image": "/img/races/human/subraces/halfHighElf.png",
+  "desc": "Humans with high elf blood: keen-eyed in the dark and born with a spark of arcane talent.",
+  "traits": [
+    {
+      "name": "Fey Ancestry",
+      "desc": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "charmed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "High Elf Darkvision",
+      "desc": "You have Darkvision with a range of 60 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 60
+          }
+        }
+      ]
+    },
+    {
+      "name": "High Elf Magic",
+      "desc": "You know one Wizard cantrip of your choice. Intelligence is your spellcasting ability for it.",
+      "grants": [
+        {
+          "type": "spell",
+          "choose": 1,
+          "level": 0,
+          "from": "wizard"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Arcane Heritage",
+      "desc": "You always have Detect Magic prepared. You can cast it once without a spell slot, and you regain the ability to cast it in this way when you finish a Long Rest. You can also cast the spell using any spell slots you have.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "detectMagic",
+          "level": 1
+        }
+      ]
+    }
+  ],
+  "spellAbility": "int"
+}

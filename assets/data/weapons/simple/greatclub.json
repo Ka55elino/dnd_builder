@@ -1,0 +1,13 @@
+{
+  "id": "greatclub",
+  "name": "Greatclub",
+  "image": "/img/weapons/simple/greatclub.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "mastery": "Push",
+  "properties": [
+    "twoHanded"
+  ]
+}

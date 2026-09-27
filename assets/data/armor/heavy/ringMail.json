@@ -1,0 +1,11 @@
+{
+  "id": "ringMail",
+  "name": "Ring Mail",
+  "image": "/img/armor/heavy/ringMail.svg",
+  "isDefault": true,
+  "category": "heavy",
+  "baseAC": 14,
+  "addDex": false,
+  "maxDex": 0,
+  "stealthDisadvantage": true
+}

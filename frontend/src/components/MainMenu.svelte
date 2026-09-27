@@ -4,7 +4,7 @@
      * onNavigate(screen) — 'characters' | 'spells' | 'items'
      */
     import { onMount } from "svelte";
-    import { ListCharacters } from "../../wailsjs/go/main/App.js";
+    import { ListCharacters } from "../api.js";
     import { loadRefs } from "../data/refs.js";
 
     let { onNavigate } = $props();

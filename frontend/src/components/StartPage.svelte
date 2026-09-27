@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { ListCharacters } from "../../wailsjs/go/main/App.js";
+    import { ListCharacters } from "../api.js";
     import CharacterGrid from "./CharacterGrid.svelte";
 
     let { onCreate, onOpen, onBack } = $props();

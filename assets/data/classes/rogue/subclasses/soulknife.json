@@ -1,0 +1,33 @@
+{
+  "id": "soulknife",
+  "name": "Soulknife",
+  "image": "/img/classes/rogue/subclasses/soulknife.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Psionic Power",
+      "desc": "A pool of Psionic Energy Dice (equal to twice your Proficiency Bonus; the die increases up to d12). It fuels Psi-Bolstered Knack (add to a check) and Psychic Whispers (telepathy). Regained on a rest."
+    },
+    {
+      "level": 3,
+      "name": "Psychic Blades",
+      "desc": "When you take the Attack action, you manifest a Finesse, Thrown psychic blade (range 60 feet) that deals 1d6 + modifier damage; as a Bonus Action, a second blade (1d4 + modifier). Doesn't expend energy dice."
+    },
+    {
+      "level": 9,
+      "name": "Soul Blades",
+      "desc": "By expending energy dice: Homing Strikes (add to a miss) and Psychic Teleportation (throw a blade and teleport up to 10 × the result in feet)."
+    },
+    {
+      "level": 13,
+      "name": "Psychic Veil",
+      "desc": "As an action, you become Invisible for 1 hour; the effect ends when you deal damage or force a creature to make a saving throw. Regained on a Long Rest or by expending an energy die."
+    },
+    {
+      "level": 17,
+      "name": "Rend Mind",
+      "desc": "When you deal Sneak Attack damage with your Psychic Blades, you force the target to make a Wisdom saving throw or have the Stunned condition for 1 minute. Can be used again for 3 energy dice."
+    }
+  ]
+}

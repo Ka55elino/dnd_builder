@@ -7,7 +7,7 @@
      * The choice is written straight to build (CharacterBuild.raceId / subraceId).
      */
     import { onMount } from "svelte";
-    import { GetRaces } from "../../../wailsjs/go/main/App.js";
+    import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
     import ChoiceGrid from "./common/ChoiceGrid.svelte";
     import ChoiceCard from "./common/ChoiceCard.svelte";
     import FeatureList from "./common/FeatureList.svelte";
@@ -25,7 +25,7 @@
 
     onMount(async () => {
         try {
-            races = await GetRaces();
+            races = (await loadRefs()).races;
         } catch (e) {
             error = e?.message ?? String(e);
         } finally {

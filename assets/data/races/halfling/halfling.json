@@ -1,0 +1,34 @@
+{
+  "id": "halfling",
+  "name": "Halfling",
+  "image": "/img/races/halfling/halfling.png",
+  "size": "Small",
+  "speed": 30,
+  "subraceLevel": 1,
+  "traits": [
+    {
+      "name": "Brave",
+      "desc": "You have Advantage on saving throws against being Frightened.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "frightened"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Halfling Nimbleness",
+      "desc": "You can move through the space of any creature that is a size larger than you."
+    },
+    {
+      "name": "Luck",
+      "desc": "When you roll a 1 on the d20, you can reroll the die, and you must use the new roll."
+    }
+  ]
+}

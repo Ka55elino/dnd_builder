@@ -1,0 +1,43 @@
+{
+  "id": "order",
+  "name": "Order",
+  "image": "/img/classes/cleric/subclasses/order.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "command",
+      "heroism",
+      "holdPerson",
+      "zoneOfTruth"
+    ],
+    "5": [
+      "massHealingWord",
+      "slow"
+    ],
+    "7": [
+      "compulsion",
+      "locateCreature"
+    ],
+    "9": [
+      "commune",
+      "dominatePerson"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Voice of Authority",
+      "desc": "When you cast a spell of level 1+ on an ally, that ally can use its Reaction to make one weapon attack."
+    },
+    {
+      "level": 6,
+      "name": "Embodiment of the Law",
+      "desc": "You can cast Enchantment spells of level 1+ as a Bonus Action (once per turn)."
+    },
+    {
+      "level": 17,
+      "name": "Order's Wrath",
+      "desc": "A target hit by your Divine Smite takes an extra 2d8 Psychic damage."
+    }
+  ]
+}

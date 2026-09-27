@@ -1,0 +1,9 @@
+{
+  "id": "rope",
+  "name": "Rope (50 feet)",
+  "image": "/img/items/rope.svg",
+  "isDefault": true,
+  "weight": 5,
+  "cost": "1 GP",
+  "desc": "50 feet of hempen rope. As a Utilize action, you can tie a knot (DC 10 Dexterity (Sleight of Hand) check). Bursting it requires a DC 20 Strength (Athletics) check. You can bind only a creature that is Grappled, Incapacitated, or Restrained; escaping requires a DC 15 Dexterity (Acrobatics) check."
+}

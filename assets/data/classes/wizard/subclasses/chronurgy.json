@@ -1,0 +1,43 @@
+{
+  "id": "chronurgy",
+  "name": "Chronurgy Magic",
+  "image": "/img/classes/wizard/subclasses/chronurgy.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Temporal Awareness",
+      "desc": "You add your Intelligence modifier to your Initiative.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "initiative",
+            "ability": "int"
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Chronal Shift",
+      "desc": "As a Reaction (twice per Long Rest), you force a creature within 30 feet to reroll an attack roll, ability check, or saving throw it just made."
+    },
+    {
+      "level": 6,
+      "name": "Momentary Stasis",
+      "desc": "As an action (Con saving throw), you put a creature within 30 feet into stasis: it is Incapacitated and can't move until the end of your next turn."
+    },
+    {
+      "level": 10,
+      "name": "Arcane Abeyance",
+      "desc": "You store a spell of level 4 or lower in a tiny sphere to cast it later."
+    },
+    {
+      "level": 14,
+      "name": "Convergent Future",
+      "desc": "Instead of rolling a d20 (yours or another creature's), you declare a result of 1 or 20, paying for it with Exhaustion."
+    }
+  ]
+}

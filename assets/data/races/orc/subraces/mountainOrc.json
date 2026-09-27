@@ -1,0 +1,37 @@
+{
+  "id": "mountainOrc",
+  "name": "Mountain Orc",
+  "race": "orc",
+  "image": "/img/races/orc/subraces/mountainOrc.png",
+  "desc": "Orcs of the high peaks: hardened by thin air, rock and endless cold.",
+  "traits": [
+    {
+      "name": "Mountain Training",
+      "desc": "You gain proficiency in either the Athletics or Survival skill.",
+      "grants": [
+        {
+          "type": "skill",
+          "choose": 1,
+          "options": [
+            "athletics",
+            "survival"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Mountain Resilience",
+      "desc": "You have Resistance to Cold damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "cold"
+          }
+        }
+      ]
+    }
+  ]
+}

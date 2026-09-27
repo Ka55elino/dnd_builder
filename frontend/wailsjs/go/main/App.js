@@ -50,6 +50,10 @@ export function ListCharacters() {
   return window['go']['main']['App']['ListCharacters']();
 }
 
+export function Ready() {
+  return window['go']['main']['App']['Ready']();
+}
+
 export function SaveCharacter(arg1) {
   return window['go']['main']['App']['SaveCharacter'](arg1);
 }

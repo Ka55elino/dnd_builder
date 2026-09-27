@@ -1,0 +1,9 @@
+{
+  "id": "oil",
+  "name": "Oil (Flask)",
+  "image": "/img/items/oil.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "1 SP",
+  "desc": "Douse: In place of one attack, you can throw the flask at a creature or object within 20 feet (Dexterity saving throw, DC 8 + your Dexterity modifier + Proficiency Bonus). If the doused target takes Fire damage before the oil dries (1 minute), it takes an extra 5 Fire damage. Spill: As a Utilize action, you can cover a 5-foot square; ignited oil deals 5 Fire damage for 2 rounds. Fuel: 6 hours of burning in a lamp or lantern."
+}

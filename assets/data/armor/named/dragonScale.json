@@ -1,0 +1,13 @@
+{
+  "id": "dragonScale",
+  "name": "Dragon Scale",
+  "image": "/img/armor/named/dragonScale.svg",
+  "isDefault": false,
+  "base": "halfPlate",
+  "baseAC": 16,
+  "desc": "Armor made of dragon scales. Inherits Half Plate Armor (Medium armor, Dexterity cap +2), but with an enhanced base AC of 16 and Resistance to the ancestor's element; custom description.",
+  "category": "medium",
+  "addDex": true,
+  "maxDex": 2,
+  "stealthDisadvantage": true
+}

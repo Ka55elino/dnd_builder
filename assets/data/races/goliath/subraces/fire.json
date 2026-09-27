@@ -1,0 +1,18 @@
+{
+  "id": "fire",
+  "name": "Fire Giant Ancestry",
+  "image": "/img/races/goliath/subraces/fire.png",
+  "race": "goliath",
+  "traits": [
+    {
+      "name": "Fire's Burn",
+      "desc": "When you hit, you deal an extra 1d10 Fire damage (a number of times equal to your Proficiency Bonus per Long Rest).",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "fireBurn"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "explorerPack",
+  "name": "Explorer's Pack",
+  "image": "/img/packs/explorerPack.svg",
+  "isDefault": true,
+  "cost": "10 GP",
+  "weight": 55,
+  "desc": "Basic gear for a long journey.",
+  "items": [
+    {
+      "id": "backpack",
+      "qty": 1
+    },
+    {
+      "id": "bedroll",
+      "qty": 1
+    },
+    {
+      "id": "oil",
+      "qty": 2
+    },
+    {
+      "id": "rations",
+      "qty": 10
+    },
+    {
+      "id": "rope",
+      "qty": 1
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    },
+    {
+      "id": "torch",
+      "qty": 10
+    },
+    {
+      "id": "waterskin",
+      "qty": 1
+    }
+  ]
+}

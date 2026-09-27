@@ -1,0 +1,43 @@
+{
+  "id": "trickery",
+  "name": "Trickery",
+  "image": "/img/classes/cleric/subclasses/trickery.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "charmPerson",
+      "disguiseSelf",
+      "mirrorImage",
+      "passWithoutTrace"
+    ],
+    "5": [
+      "blink",
+      "dispelMagic"
+    ],
+    "7": [
+      "dimensionDoor",
+      "polymorph"
+    ],
+    "9": [
+      "dominatePerson",
+      "modifyMemory"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Blessing of the Trickster",
+      "desc": "As an action, you give a creature Advantage on Dexterity (Stealth) checks for 1 hour."
+    },
+    {
+      "level": 6,
+      "name": "Cloak of Shadows",
+      "desc": "As an action, you become Invisible until the end of your next turn."
+    },
+    {
+      "level": 17,
+      "name": "Improved Duplicity",
+      "desc": "You create up to four copies with Invoke Duplicity."
+    }
+  ]
+}

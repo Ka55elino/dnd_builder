@@ -1,0 +1,9 @@
+{
+  "id": "caseMapScroll",
+  "name": "Map or Scroll Case",
+  "image": "/img/items/caseMapScroll.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "1 GP",
+  "desc": "Holds up to 10 sheets of paper or 5 sheets of parchment."
+}

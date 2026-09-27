@@ -1,0 +1,28 @@
+{
+  "id": "openHand",
+  "name": "Warrior of the Open Hand",
+  "image": "/img/classes/monk/subclasses/openHand.png",
+  "class": "monk",
+  "features": [
+    {
+      "level": 3,
+      "name": "Open Hand Technique",
+      "desc": "When you hit with a strike from Flurry of Blows, you impose one effect (without spending extra Focus Points): knock the target Prone (Dexterity saving throw), push it 15 feet away (Strength saving throw), or deny it Reactions until its next turn."
+    },
+    {
+      "level": 6,
+      "name": "Wholeness of Body",
+      "desc": "As a Bonus Action, you heal yourself for 3 × your Monk level Hit Points. The number of uses equals your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 11,
+      "name": "Fleet Step",
+      "desc": "As a Bonus Action, you hide with Advantage if there are no brightly lit areas nearby; you gain Advantage on Initiative."
+    },
+    {
+      "level": 17,
+      "name": "Quivering Palm",
+      "desc": "When you hit with an Unarmed Strike, you can spend 4 Focus Points to start imperceptible vibrations (lasting up to 1 month). As an action, you end them: the target must succeed on a Constitution saving throw or drop to 0 Hit Points (on a success, it takes 10d12 Force damage). One target at a time."
+    }
+  ]
+}

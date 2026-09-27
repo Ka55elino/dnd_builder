@@ -1,0 +1,55 @@
+{
+  "id": "burglarPack",
+  "name": "Burglar's Pack",
+  "image": "/img/packs/burglarPack.svg",
+  "isDefault": true,
+  "cost": "16 GP",
+  "weight": 42,
+  "desc": "For those who enter uninvited.",
+  "items": [
+    {
+      "id": "backpack",
+      "qty": 1
+    },
+    {
+      "id": "ballBearings",
+      "qty": 1
+    },
+    {
+      "id": "bell",
+      "qty": 1
+    },
+    {
+      "id": "candle",
+      "qty": 10
+    },
+    {
+      "id": "crowbar",
+      "qty": 1
+    },
+    {
+      "id": "lanternHooded",
+      "qty": 1
+    },
+    {
+      "id": "oil",
+      "qty": 7
+    },
+    {
+      "id": "rations",
+      "qty": 5
+    },
+    {
+      "id": "rope",
+      "qty": 1
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    },
+    {
+      "id": "waterskin",
+      "qty": 1
+    }
+  ]
+}

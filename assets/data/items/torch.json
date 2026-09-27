@@ -1,0 +1,9 @@
+{
+  "id": "torch",
+  "name": "Torch",
+  "image": "/img/items/torch.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "1 CP",
+  "desc": "Burns for 1 hour: Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. You can attack with it as a Simple Melee weapon, dealing 1 Fire damage."
+}

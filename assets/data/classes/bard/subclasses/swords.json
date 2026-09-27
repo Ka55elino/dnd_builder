@@ -1,0 +1,38 @@
+{
+  "id": "swords",
+  "name": "College of Swords",
+  "image": "/img/classes/bard/subclasses/swords.png",
+  "class": "bard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Duelist Training",
+      "desc": "You gain proficiency with Medium armor and the Scimitar (and other Martial weapons); you can use it as a spellcasting focus.",
+      "grants": [
+        {
+          "type": "armor",
+          "id": "medium"
+        },
+        {
+          "type": "weapon",
+          "id": "martial"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Blade Flourish",
+      "desc": "When you take the Attack action, you can expend a Bardic Inspiration die on a flourish: Defensive (+AC), Slashing (extra damage to the target and a second creature), or Mobile (extra damage + movement without provoking)."
+    },
+    {
+      "level": 6,
+      "name": "Extra Attack",
+      "desc": "You can attack twice, instead of once, whenever you take the Attack action."
+    },
+    {
+      "level": 14,
+      "name": "Master's Flourish",
+      "desc": "You can use Blade Flourish without expending a Bardic Inspiration die (you roll a d6 instead)."
+    }
+  ]
+}

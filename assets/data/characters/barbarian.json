@@ -1,0 +1,88 @@
+{
+  "id": "seed-barbarian",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.964Z",
+  "name": "Grom Stonejaw",
+  "portrait": "/img/characters/barbarian.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "31",
+    "height": "3'9\"",
+    "weight": "154 lb",
+    "eyes": "Golden",
+    "skin": "Dark",
+    "hair": "Black, short",
+    "alignment": "Chaotic Neutral",
+    "trait": "Laughs loudly and gets angry just as loudly.",
+    "ideal": "Strength. The weak must grow stronger or get out of the way.",
+    "bond": "His clan perished in an avalanche; he's searching for whoever caused it.",
+    "flaw": "Rushes into battle before hearing the whole plan.",
+    "weakness": "Afraid of deep water."
+  },
+  "level": 3,
+  "backgroundId": "soldier",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "str": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 0,
+    "dex": 2,
+    "con": 1,
+    "int": 5,
+    "wis": 3,
+    "cha": 4
+  },
+  "abilities": {
+    "str": 15,
+    "dex": 13,
+    "con": 14,
+    "int": 8,
+    "wis": 12,
+    "cha": 10
+  },
+  "totalAbilities": {
+    "str": 17,
+    "dex": 13,
+    "con": 15,
+    "int": 8,
+    "wis": 12,
+    "cha": 10
+  },
+  "raceId": "goliath",
+  "subraceId": "stone",
+  "classId": "barbarian",
+  "subclassId": "berserker",
+  "equipment": {
+    "armorId": "hide",
+    "shield": false,
+    "weaponIds": [
+      "greataxe",
+      "handaxe"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "animal",
+        "nature"
+      ]
+    }
+  }
+}

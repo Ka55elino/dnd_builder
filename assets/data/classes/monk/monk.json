@@ -1,0 +1,213 @@
+{
+  "id": "monk",
+  "name": "Monk",
+  "image": "/img/classes/monk/monk.png",
+  "hitDie": 8,
+  "primaryAbility": [
+    "dex",
+    "wis"
+  ],
+  "savingThrows": [
+    "str",
+    "dex"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "acrobatics",
+    "athletics",
+    "history",
+    "insight",
+    "religion",
+    "stealth"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "unarmoredDefense": [
+    "dex",
+    "wis"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Martial Arts",
+      "desc": "Your Unarmed Strikes and Monk weapons use Dexterity, deal damage using your Martial Arts die (which increases with level: d6/d8/d10/d12), and let you make an Unarmed Strike as a Bonus Action."
+    },
+    {
+      "level": 1,
+      "name": "Unarmored Defense",
+      "desc": "Without armor or a Shield, your AC = 10 + Dexterity modifier + Wisdom modifier."
+    },
+    {
+      "level": 2,
+      "name": "Focus Points",
+      "desc": "You gain Focus Points equal to your Monk level. You spend them on special techniques; you regain them when you finish a Short or Long Rest."
+    },
+    {
+      "level": 2,
+      "name": "Unarmored Movement",
+      "desc": "Your Speed increases while you aren't wearing armor or wielding a Shield: +10 feet (increasing to +30 feet).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Heightened Metabolism",
+      "desc": "Once per Long Rest, when you start combat with 0 Focus Points, you regain 1 point and heal yourself for {monkHeal2} Hit Points (2 × Monk level)."
+    },
+    {
+      "level": 3,
+      "name": "Deflect Attacks",
+      "desc": "As a Reaction, you reduce Bludgeoning, Piercing, or Slashing damage from an attack by 1d10 {dexMod} (Dex) +{level} (level); by spending 1 Focus Point, you redirect the remaining damage to a creature within 5 feet (Dexterity saving throw)."
+    },
+    {
+      "level": 4,
+      "name": "Slow Fall",
+      "desc": "As a Reaction, you reduce falling damage by five times your Monk level."
+    },
+    {
+      "level": 5,
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
+    },
+    {
+      "level": 5,
+      "name": "Stunning Strike",
+      "desc": "When you hit with a melee attack, you can spend 1 Focus Point: the target must succeed on a Constitution saving throw or have the Stunned condition until the start of your next turn."
+    },
+    {
+      "level": 6,
+      "name": "Empowered Strikes",
+      "desc": "Your Unarmed Strikes can deal Force damage instead of their normal damage type."
+    },
+    {
+      "level": 6,
+      "name": "Unarmored Movement",
+      "desc": "Your Speed bonus increases to +15 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Evasion",
+      "desc": "When you make a Dexterity saving throw to take half damage: on a success, you take no damage; on a failure, you take half."
+    },
+    {
+      "level": 9,
+      "name": "Acrobatic Movement",
+      "desc": "While you aren't wearing armor or wielding a Shield, you can move along vertical surfaces and across liquids without falling."
+    },
+    {
+      "level": 10,
+      "name": "Heightened Focus",
+      "desc": "Flurry of Blows grants 3 strikes; Patient Defense grants Temporary Hit Points; Step of the Wind can also move an ally.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 10,
+      "name": "Self-Restoration",
+      "desc": "At the start of your turn, you can end one condition on yourself for free (Charmed, Frightened, or Poisoned); you don't need food or drink."
+    },
+    {
+      "level": 13,
+      "name": "Deflect Energy",
+      "desc": "Deflect Attacks can reduce damage of any type (Acid, Cold, Fire, Force, Lightning, Thunder, etc.)."
+    },
+    {
+      "level": 14,
+      "name": "Disciplined Survivor",
+      "desc": "You gain proficiency in all saving throws. By spending 1 Focus Point, you reroll a failed saving throw.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 15,
+      "name": "Perfect Focus",
+      "desc": "When you start combat with fewer than 4 Focus Points, you regain points until you have 4."
+    },
+    {
+      "level": 18,
+      "name": "Superior Defense",
+      "desc": "As a Bonus Action, you spend 3 Focus Points: for 1 minute, you have Resistance to all damage types except Force.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 20,
+      "name": "Body and Mind",
+      "desc": "Dexterity and Wisdom +4 (maximum 25).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "dex",
+            "value": 4,
+            "max": 25
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "wis",
+            "value": 4,
+            "max": 25
+          }
+        }
+      ]
+    }
+  ]
+}

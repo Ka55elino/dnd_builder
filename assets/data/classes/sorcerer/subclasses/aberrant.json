@@ -1,0 +1,46 @@
+{
+  "id": "aberrant",
+  "name": "Aberrant Sorcery",
+  "image": "/img/classes/sorcerer/subclasses/aberrant.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Telepathic Speech",
+      "desc": "As a Bonus Action, you establish a telepathic bond with a creature you can see for (Sorcerer level × 10) minutes."
+    },
+    {
+      "level": 6,
+      "name": "Psionic Sorcery",
+      "desc": "You can cast your subclass's Psionic spells by spending Sorcery Points instead of spell slots; subtly (without components)."
+    },
+    {
+      "level": 14,
+      "name": "Revelation in Flesh",
+      "desc": "As a Bonus Action and for Sorcery Points, you gain flight, swimming and underwater breathing, the ability to see Invisible creatures, or flexibility (squeezing through tight spaces)."
+    },
+    {
+      "level": 18,
+      "name": "Warping Implosion",
+      "desc": "For 5 Sorcery Points, as an action you teleport up to 120 feet; creatures near your departure point take Force damage."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "armsOfHadar",
+      "blindnessDeafness"
+    ],
+    "5": [
+      "fear",
+      "hungerOfHadar"
+    ],
+    "7": [
+      "confusion",
+      "arcaneEye"
+    ],
+    "9": [
+      "dominatePerson",
+      "cloudkill"
+    ]
+  }
+}

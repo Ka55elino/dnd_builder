@@ -1,0 +1,46 @@
+{
+  "id": "vengeance",
+  "name": "Oath of Vengeance",
+  "image": "/img/classes/paladin/subclasses/vengeance.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "bane",
+      "holdPerson"
+    ],
+    "9": [
+      "fear",
+      "dispelMagic"
+    ],
+    "13": [
+      "banishment",
+      "dimensionDoor"
+    ],
+    "17": [
+      "holdMonster",
+      "scrying"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Vow of Enmity",
+      "desc": "As a Bonus Action, using Channel Divinity, you give yourself Advantage on attack rolls against one creature for 1 minute."
+    },
+    {
+      "level": 7,
+      "name": "Relentless Avenger",
+      "desc": "After you make an Opportunity Attack, you can move up to half your Speed (the target's Opportunity Attacks against you end)."
+    },
+    {
+      "level": 15,
+      "name": "Soul of Vengeance",
+      "desc": "When the target of your Vow of Enmity makes an attack, you make a melee attack against it as a Reaction."
+    },
+    {
+      "level": 20,
+      "name": "Avenging Angel",
+      "desc": "As an action, for 1 minute, you sprout wings (Fly Speed 60 feet) and emit a 30-foot aura of fear."
+    }
+  ]
+}

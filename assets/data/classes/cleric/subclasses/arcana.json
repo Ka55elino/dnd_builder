@@ -1,0 +1,43 @@
+{
+  "id": "arcana",
+  "name": "Arcana",
+  "image": "/img/classes/cleric/subclasses/arcana.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "detectMagic",
+      "magicMissile",
+      "magicWeapon",
+      "mirrorImage"
+    ],
+    "5": [
+      "dispelMagic",
+      "magicCircle"
+    ],
+    "7": [
+      "arcaneEye",
+      "stoneskin"
+    ],
+    "9": [
+      "planarBinding",
+      "greaterRestoration"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Arcane Initiate",
+      "desc": "You learn two cantrips from the Wizard spell list (they count as Cleric cantrips for you)."
+    },
+    {
+      "level": 6,
+      "name": "Spell Breaker",
+      "desc": "When you restore Hit Points with a healing spell, you can also cast Dispel Magic on the target without expending a spell slot."
+    },
+    {
+      "level": 17,
+      "name": "Arcane Mastery",
+      "desc": "You gain Resistance to damage from spells."
+    }
+  ]
+}

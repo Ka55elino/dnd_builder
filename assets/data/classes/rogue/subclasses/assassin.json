@@ -1,0 +1,28 @@
+{
+  "id": "assassin",
+  "name": "Assassin",
+  "image": "/img/classes/rogue/subclasses/assassin.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Assassinate",
+      "desc": "You have proficiency with the Poisoner's Kit and the Disguise Kit. In the first round of combat, you have Advantage on attack rolls against creatures that haven't taken a turn yet. When you hit a Surprised creature with Sneak Attack, you deal extra damage equal to your Rogue level."
+    },
+    {
+      "level": 9,
+      "name": "Impostor",
+      "desc": "Over 7 days, you create a false identity (documents, acquaintances). As an action, you disguise yourself as another person with Advantage."
+    },
+    {
+      "level": 13,
+      "name": "Envenom Weapons",
+      "desc": "The Poison effect of Cunning Strike is enhanced: the target also takes extra Poison damage equal to the number of Sneak Attack dice expended."
+    },
+    {
+      "level": 17,
+      "name": "Death Strike",
+      "desc": "When you hit a Surprised creature, you force it to make a Constitution saving throw (DC 8 + Dex modifier + Proficiency Bonus); on a failure, the attack's damage is doubled."
+    }
+  ]
+}

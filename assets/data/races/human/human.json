@@ -1,0 +1,35 @@
+{
+  "id": "human",
+  "name": "Human",
+  "image": "/img/races/human/human.png",
+  "size": "Medium",
+  "speed": 30,
+  "traits": [
+    {
+      "name": "Resourceful",
+      "desc": "You gain Heroic Inspiration whenever you finish a Long Rest."
+    },
+    {
+      "name": "Skillful",
+      "desc": "You gain proficiency in one skill of your choice.",
+      "grants": [
+        {
+          "type": "skill",
+          "choose": 1,
+          "from": "skills"
+        }
+      ]
+    },
+    {
+      "name": "Versatile",
+      "desc": "You gain an Origin feat of your choice.",
+      "grants": [
+        {
+          "type": "feat",
+          "choose": 1,
+          "from": "originFeats"
+        }
+      ]
+    }
+  ]
+}

@@ -20,7 +20,7 @@
         GetCharacter,
         GetCharacterState,
         SaveCharacterState,
-    } from "../../wailsjs/go/main/App.js";
+    } from "../api.js";
     import { loadRefs, EMPTY_REFS } from "../data/refs.js";
     import { Character } from "../models/Character.js";
     import ActionCard from "./common/ActionCard.svelte";

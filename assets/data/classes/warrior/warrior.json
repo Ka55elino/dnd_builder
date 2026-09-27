@@ -1,0 +1,115 @@
+{
+  "id": "warrior",
+  "name": "Fighter",
+  "image": "/img/classes/warrior/warrior.png",
+  "hitDie": 10,
+  "primaryAbility": [
+    "str",
+    "dex"
+  ],
+  "savingThrows": [
+    "str",
+    "con"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "acrobatics",
+    "animal",
+    "athletics",
+    "history",
+    "insight",
+    "intimidation",
+    "perception",
+    "persuasion",
+    "survival"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    6,
+    8,
+    12,
+    14,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "heavy",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Fighting Style",
+      "desc": "A Fighting Style feat of your choice (e.g., Defense, Archery, Dueling).",
+      "choice": {
+        "type": "fightingStyle",
+        "pick": 1,
+        "from": "fightingStyles"
+      }
+    },
+    {
+      "level": 1,
+      "name": "Second Wind",
+      "desc": "As a Bonus Action, you regain Hit Points equal to 1d10 + your Fighter level. Limited number of uses (regained on a rest)."
+    },
+    {
+      "level": 1,
+      "name": "Weapon Mastery",
+      "desc": "You can use the mastery properties of 3 kinds of weapons (the number increases with level)."
+    },
+    {
+      "level": 2,
+      "name": "Action Surge",
+      "desc": "On your turn, you can take one additional action (except the Magic action). 1 use (2 from level 17)."
+    },
+    {
+      "level": 2,
+      "name": "Tactical Mind",
+      "desc": "When you fail an ability check, you can expend a use of Second Wind to add 1d10 to it; the use isn't expended if the check still fails.",
+      "passive": false
+    },
+    {
+      "level": 5,
+      "name": "Extra Attack",
+      "desc": "You make two attacks when you take the Attack action."
+    },
+    {
+      "level": 5,
+      "name": "Tactical Shift",
+      "desc": "When you use Second Wind, you can move up to half your Speed without provoking Opportunity Attacks."
+    },
+    {
+      "level": 9,
+      "name": "Indomitable",
+      "desc": "You can reroll a failed saving throw (adding your Fighter level to the result). More uses at levels 13 and 17."
+    },
+    {
+      "level": 9,
+      "name": "Tactical Master",
+      "desc": "When you attack with a weapon, you can replace its mastery property with Push, Topple, or Slow."
+    },
+    {
+      "level": 11,
+      "name": "Two Extra Attacks",
+      "desc": "You can attack three times when you take the Attack action."
+    },
+    {
+      "level": 13,
+      "name": "Studied Attacks",
+      "desc": "When you miss a creature, you have Advantage on your next attack roll against it before the end of the current turn."
+    },
+    {
+      "level": 20,
+      "name": "Three Extra Attacks",
+      "desc": "You can attack four times when you take the Attack action."
+    }
+  ]
+}

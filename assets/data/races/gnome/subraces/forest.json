@@ -1,0 +1,23 @@
+{
+  "id": "forest",
+  "name": "Forest Gnome",
+  "image": "/img/races/gnome/subraces/forest.png",
+  "race": "gnome",
+  "traits": [
+    {
+      "name": "Natural Illusionist",
+      "desc": "You know the Minor Illusion cantrip (Intelligence is your spellcasting ability for it).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "minorIllusion",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "name": "Speak with Small Beasts",
+      "desc": "You can communicate simple ideas to Small or smaller Beasts (through gestures and sounds)."
+    }
+  ]
+}

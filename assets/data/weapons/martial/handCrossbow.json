@@ -1,0 +1,14 @@
+{
+  "id": "handCrossbow",
+  "name": "Hand Crossbow",
+  "image": "/img/weapons/martial/handCrossbow.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "light",
+    "ranged"
+  ]
+}

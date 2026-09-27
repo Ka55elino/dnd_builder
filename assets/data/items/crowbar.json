@@ -1,0 +1,9 @@
+{
+  "id": "crowbar",
+  "name": "Crowbar",
+  "image": "/img/items/crowbar.svg",
+  "isDefault": true,
+  "weight": 5,
+  "cost": "2 GP",
+  "desc": "Grants Advantage on Strength checks where leverage can be applied."
+}

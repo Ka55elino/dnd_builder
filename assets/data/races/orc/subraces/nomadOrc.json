@@ -1,0 +1,52 @@
+{
+  "id": "nomadOrc",
+  "name": "Nomad Orc",
+  "race": "orc",
+  "image": "/img/races/orc/subraces/nomadOrc.png",
+  "desc": "Orcs of the open steppes and badlands: tireless travelers who live off the land.",
+  "traits": [
+    {
+      "name": "Nomadic Training",
+      "desc": "You gain proficiency in either the Animal Handling or Survival skill.",
+      "grants": [
+        {
+          "type": "skill",
+          "choose": 1,
+          "options": [
+            "animal",
+            "survival"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Nomadic Stride",
+      "desc": "Your Speed increases by 5 feet. In addition, nonmagical Difficult Terrain doesn't cost you extra movement.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Nomadic Resilience",
+      "desc": "You have Resistance to Poison damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "poison"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "devotion",
+  "name": "Oath of Devotion",
+  "image": "/img/classes/paladin/subclasses/devotion.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "shieldOfFaith",
+      "zoneOfTruth"
+    ],
+    "9": [
+      "beaconOfHope",
+      "dispelMagic"
+    ],
+    "13": [
+      "freedomOfMovement",
+      "guardianOfFaith"
+    ],
+    "17": [
+      "commune",
+      "flameStrike"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Sacred Weapon",
+      "desc": "With Channel Divinity, you imbue a weapon with light for 10 minutes: + Cha modifier to attack rolls, 20-foot light, and its damage becomes Radiant."
+    },
+    {
+      "level": 7,
+      "name": "Aura of Devotion",
+      "desc": "You and allies within 10 feet are immune to the Charmed condition."
+    },
+    {
+      "level": 15,
+      "name": "Smite of Protection",
+      "desc": "When you use Divine Smite, you grant allies within 10 feet Half Cover."
+    },
+    {
+      "level": 20,
+      "name": "Holy Nimbus",
+      "desc": "As an action, you emit radiance for 1 minute: enemies within 30 feet take Radiant damage, and you have Advantage on saving throws against spells cast by Fiends or Undead."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "fiend",
+  "name": "Fiend",
+  "image": "/img/classes/warlock/subclasses/fiend.png",
+  "class": "warlock",
+  "domainSpells": {
+    "3": [
+      "hellishRebuke",
+      "blindnessDeafness"
+    ],
+    "5": [
+      "hungerOfHadar",
+      "fear"
+    ],
+    "7": [
+      "blight",
+      "iceStorm"
+    ],
+    "9": [
+      "flameStrike",
+      "cloudkill"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Dark One's Blessing",
+      "desc": "When you reduce a hostile creature to 0 Hit Points, you gain Temporary Hit Points equal to your Cha modifier + Warlock level."
+    },
+    {
+      "level": 6,
+      "name": "Dark One's Own Luck",
+      "desc": "You add 1d10 to an ability check or saving throw (after the roll). A number of times equal to your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 10,
+      "name": "Fiendish Resilience",
+      "desc": "After a rest, you choose a damage type (other than Force); you gain Resistance to it."
+    },
+    {
+      "level": 14,
+      "name": "Hurl Through Hell",
+      "desc": "When you hit with an attack, you send the target (not a boss) to the Lower Planes for 1 turn, dealing Psychic damage when it returns."
+    }
+  ]
+}

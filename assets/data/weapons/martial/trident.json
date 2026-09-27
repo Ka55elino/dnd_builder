@@ -1,0 +1,14 @@
+{
+  "id": "trident",
+  "name": "Trident",
+  "image": "/img/weapons/martial/trident.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "mastery": "Topple",
+  "properties": [
+    "thrown",
+    "versatile"
+  ]
+}

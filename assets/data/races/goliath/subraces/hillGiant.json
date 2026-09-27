@@ -1,0 +1,18 @@
+{
+  "id": "hillGiant",
+  "name": "Hill Giant Ancestry",
+  "image": "/img/races/goliath/subraces/hillGiant.png",
+  "race": "goliath",
+  "traits": [
+    {
+      "name": "Hill's Tumble",
+      "desc": "When you hit, a Large or smaller target has the Prone condition (Strength saving throw; a number of times equal to your Proficiency Bonus per Long Rest).",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "hillsTumble"
+        }
+      ]
+    }
+  ]
+}

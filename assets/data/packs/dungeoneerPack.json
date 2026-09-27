@@ -1,0 +1,47 @@
+{
+  "id": "dungeoneerPack",
+  "name": "Dungeoneer's Pack",
+  "image": "/img/packs/dungeoneerPack.svg",
+  "isDefault": true,
+  "cost": "12 GP",
+  "weight": 55,
+  "desc": "Light, food, and tools for descending underground.",
+  "items": [
+    {
+      "id": "backpack",
+      "qty": 1
+    },
+    {
+      "id": "caltrops",
+      "qty": 1
+    },
+    {
+      "id": "crowbar",
+      "qty": 1
+    },
+    {
+      "id": "oil",
+      "qty": 2
+    },
+    {
+      "id": "rations",
+      "qty": 10
+    },
+    {
+      "id": "rope",
+      "qty": 1
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    },
+    {
+      "id": "torch",
+      "qty": 10
+    },
+    {
+      "id": "waterskin",
+      "qty": 1
+    }
+  ]
+}

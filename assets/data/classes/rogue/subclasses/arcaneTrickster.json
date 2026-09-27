@@ -1,0 +1,91 @@
+{
+  "id": "arcaneTrickster",
+  "name": "Arcane Trickster",
+  "image": "/img/classes/rogue/subclasses/arcaneTrickster.png",
+  "class": "rogue",
+  "spellcasting": {
+    "ability": "int",
+    "list": "wizard",
+    "progression": "third",
+    "cantripsKnown": [
+      [
+        3,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        6
+      ],
+      [
+        11,
+        7
+      ],
+      [
+        13,
+        8
+      ],
+      [
+        14,
+        9
+      ],
+      [
+        16,
+        10
+      ],
+      [
+        19,
+        11
+      ],
+      [
+        20,
+        13
+      ]
+    ],
+    "startLevel": 3
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Spellcasting",
+      "desc": "You learn and cast spells from the Wizard spell list (mostly Enchantment and Illusion), using Intelligence. One-third caster; one of your cantrips is Mage Hand."
+    },
+    {
+      "level": 3,
+      "name": "Mage Hand Legerdemain",
+      "desc": "Your Mage Hand is Invisible and can perform Sleight of Hand: plant or steal objects, pick locks, and disarm traps at a distance."
+    },
+    {
+      "level": 9,
+      "name": "Magical Ambush",
+      "desc": "If you are hidden when you cast a spell on a creature, it has Disadvantage on its saving throw against that spell."
+    },
+    {
+      "level": 13,
+      "name": "Versatile Trickster",
+      "desc": "As a Bonus Action, you use your Mage Hand to distract a creature within 5 feet of the hand, gaining Advantage on attack rolls against it until the end of the turn."
+    },
+    {
+      "level": 17,
+      "name": "Spell Thief",
+      "desc": "When you succeed on a saving throw against a spell (or its caster misses you with it), you can use your Reaction to steal the spell: the caster can't use it, and you can cast it until your next Long Rest. Once per Long Rest."
+    }
+  ]
+}

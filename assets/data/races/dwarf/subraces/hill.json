@@ -1,0 +1,22 @@
+{
+  "id": "hill",
+  "name": "Hill Dwarf",
+  "image": "/img/races/dwarf/subraces/hill.png",
+  "race": "dwarf",
+  "traits": [
+    {
+      "name": "Hill Wisdom",
+      "desc": "+1 to Wisdom.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "wis",
+            "value": 1
+          }
+        }
+      ]
+    }
+  ]
+}

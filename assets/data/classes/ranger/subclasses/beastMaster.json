@@ -1,0 +1,28 @@
+{
+  "id": "beastMaster",
+  "name": "Beast Master",
+  "image": "/img/classes/ranger/subclasses/beastMaster.png",
+  "class": "ranger",
+  "features": [
+    {
+      "level": 3,
+      "name": "Primal Companion",
+      "desc": "You summon a primal beast (Land, Sea, or Sky) as a companion with its own stat block. It acts on your turn; as a Bonus Action, you command it to attack or move. Its AC and Hit Points increase with your level; you summon it again after a rest or by expending a spell slot."
+    },
+    {
+      "level": 7,
+      "name": "Exceptional Training",
+      "desc": "When the companion doesn't attack, it can take the Dash, Disengage, Dodge, or Help action as a Bonus Action. Its attacks deal your choice of Bludgeoning, Piercing, Slashing, or Force damage."
+    },
+    {
+      "level": 11,
+      "name": "Bestial Fury",
+      "desc": "The companion makes two attacks when you command it to attack. If your Hunter's Mark is active, the companion adds its extra damage to its attacks."
+    },
+    {
+      "level": 15,
+      "name": "Share Spells",
+      "desc": "When you cast a spell with a range of Self, you can also have it affect your companion if it is within 30 feet."
+    }
+  ]
+}

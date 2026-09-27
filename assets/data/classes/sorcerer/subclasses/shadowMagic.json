@@ -1,0 +1,33 @@
+{
+  "id": "shadowMagic",
+  "name": "Shadow Magic",
+  "image": "/img/classes/sorcerer/subclasses/shadowMagic.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Eyes of the Dark",
+      "desc": "Darkvision 120 feet (you can see through magical Darkness). For 2 Sorcery Points, you cast Darkness, which you can see through."
+    },
+    {
+      "level": 3,
+      "name": "Strength of the Grave",
+      "desc": "If you drop to 0 Hit Points (and aren't killed), you can spend 1 Sorcery Point to drop to 1 Hit Point instead."
+    },
+    {
+      "level": 6,
+      "name": "Hound of Ill Omen",
+      "desc": "For 3 Sorcery Points, you summon a shadow hound for 5 rounds: it hunts its target, imposes Disadvantage, and can grapple it."
+    },
+    {
+      "level": 14,
+      "name": "Shadow Walk",
+      "desc": "While in Dim Light or Darkness, as a Bonus Action you teleport up to 120 feet to another shadow."
+    },
+    {
+      "level": 18,
+      "name": "Umbral Form",
+      "desc": "For 6 Sorcery Points, as an action you become a shadow for 1 minute: Resistance to all damage except Force, and you can move through objects."
+    }
+  ]
+}

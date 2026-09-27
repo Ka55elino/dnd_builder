@@ -1,0 +1,145 @@
+{
+  "id": "seed-paladin",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.982Z",
+  "name": "Sir Elric Dawnbringer",
+  "portrait": "/img/characters/paladin.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "56",
+    "height": "5'7\"",
+    "weight": "154 lb",
+    "eyes": "Brown",
+    "skin": "Fair",
+    "hair": "Black, short",
+    "alignment": "Lawful Good",
+    "trait": "Keeps his word, even if it costs him his life.",
+    "ideal": "Honor. My oath is all I have.",
+    "bond": "Swore to protect a princess he has never seen.",
+    "flaw": "Sees no shades of gray, only good and evil.",
+    "weakness": "Can't lie, not even to spare someone's feelings."
+  },
+  "level": 5,
+  "backgroundId": "noble",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "str": 2,
+    "cha": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 0,
+    "dex": 4,
+    "con": 2,
+    "int": 5,
+    "wis": 3,
+    "cha": 1
+  },
+  "abilities": {
+    "str": 15,
+    "dex": 10,
+    "con": 13,
+    "int": 8,
+    "wis": 12,
+    "cha": 14
+  },
+  "totalAbilities": {
+    "str": 19,
+    "dex": 10,
+    "con": 13,
+    "int": 8,
+    "wis": 12,
+    "cha": 15
+  },
+  "raceId": "aasimar",
+  "subraceId": "protector",
+  "classId": "paladin",
+  "subclassId": "devotion",
+  "equipment": {
+    "armorId": "chainMail",
+    "shield": true,
+    "weaponIds": [
+      "longsword",
+      "javelin"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "athletics",
+        "insight"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "cureWounds",
+        "protectionFromEvil"
+      ]
+    },
+    "L1:background:feat:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "animal",
+        "arcana"
+      ]
+    },
+    "L2:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "defense"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "shieldOfFaith"
+      ]
+    },
+    "L3:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "detectMagic"
+      ]
+    },
+    "L4:class:feat": {
+      "kind": "feat",
+      "ids": [
+        "abilityScoreImprovement"
+      ]
+    },
+    "L4:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "bless"
+      ]
+    },
+    "L4:class:feat:asi": {
+      "kind": "asi",
+      "asi": {
+        "str": 2
+      }
+    },
+    "L5:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "aid"
+      ]
+    }
+  }
+}

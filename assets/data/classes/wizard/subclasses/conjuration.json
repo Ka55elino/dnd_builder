@@ -1,0 +1,33 @@
+{
+  "id": "conjuration",
+  "name": "School of Conjuration",
+  "image": "/img/classes/wizard/subclasses/conjuration.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Conjuration Savant",
+      "desc": "You copy Conjuration spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Minor Conjuration",
+      "desc": "As an action, you create a nonliving object (up to 3 feet, 10 lb.) for 1 hour."
+    },
+    {
+      "level": 6,
+      "name": "Benign Transposition",
+      "desc": "As a Bonus Action, you teleport up to 30 feet or swap places with a willing creature."
+    },
+    {
+      "level": 10,
+      "name": "Focused Conjuration",
+      "desc": "Taking damage can't break your Concentration on Conjuration spells."
+    },
+    {
+      "level": 14,
+      "name": "Durable Summons",
+      "desc": "Creatures summoned by your Conjuration spells gain +30 to their Hit Point maximum."
+    }
+  ]
+}

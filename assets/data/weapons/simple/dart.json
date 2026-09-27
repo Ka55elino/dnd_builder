@@ -1,0 +1,15 @@
+{
+  "id": "dart",
+  "name": "Dart",
+  "image": "/img/weapons/simple/dart.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "finesse",
+    "thrown",
+    "ranged"
+  ]
+}

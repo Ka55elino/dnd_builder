@@ -10,7 +10,7 @@
      * this restriction is not enforced yet.
      */
     import { onMount } from "svelte";
-    import { GetClasses } from "../../../wailsjs/go/main/App.js";
+    import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
     import { ABILITIES } from "../../rules/abilities.js";
     import ChoiceGrid from "./common/ChoiceGrid.svelte";
     import ChoiceCard from "./common/ChoiceCard.svelte";
@@ -38,7 +38,7 @@
 
     onMount(async () => {
         try {
-            classes = await GetClasses();
+            classes = (await loadRefs()).classes;
         } catch (e) {
             error = e?.message ?? String(e);
         } finally {

@@ -1,0 +1,133 @@
+{
+  "id": "seed-ranger",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.572Z",
+  "name": "Sayra Windcatcher",
+  "portrait": "/img/characters/ranger.svg",
+  "bio": {
+    "gender": "Female",
+    "identity": "Woman",
+    "attraction": "—",
+    "age": "56",
+    "height": "6'8\"",
+    "weight": "82 lb",
+    "eyes": "Green",
+    "skin": "Pale",
+    "hair": "Red, braided",
+    "alignment": "Neutral Good",
+    "trait": "Always sits with his back to the wall.",
+    "ideal": "Protection. The edge of the forest is my border.",
+    "bond": "Hunts the monster that killed her family.",
+    "flaw": "Doesn't trust mages.",
+    "weakness": "Can't sleep indoors."
+  },
+  "level": 2,
+  "backgroundId": "guide",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "dex": 2,
+    "wis": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 3,
+    "dex": 0,
+    "con": 2,
+    "int": 4,
+    "wis": 1,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 12,
+    "dex": 15,
+    "con": 13,
+    "int": 10,
+    "wis": 14,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 12,
+    "dex": 17,
+    "con": 13,
+    "int": 10,
+    "wis": 15,
+    "cha": 8
+  },
+  "raceId": "elf",
+  "subraceId": "wood",
+  "classId": "ranger",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "studded",
+    "shield": false,
+    "weaponIds": [
+      "longbow",
+      "shortsword"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "animal",
+        "athletics",
+        "insight"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "ensnaringStrike",
+        "cureWounds"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "poisonSpray",
+        "produceFlame"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "healingWord"
+      ]
+    },
+    "L2:class:expertise:Deft Explorer": {
+      "kind": "expertise",
+      "ids": [
+        "animal"
+      ]
+    },
+    "L2:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "archery"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "fogCloud"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "wis"
+      ]
+    }
+  }
+}

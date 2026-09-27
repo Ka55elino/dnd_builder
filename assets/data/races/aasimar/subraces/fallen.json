@@ -1,0 +1,19 @@
+{
+  "id": "fallen",
+  "name": "Fallen Aasimar",
+  "image": "/img/races/aasimar/subraces/fallen.png",
+  "race": "aasimar",
+  "traits": [
+    {
+      "level": 3,
+      "name": "Necrotic Shroud",
+      "desc": "As a Bonus Action, you manifest spectral wings for 1 minute: when they appear, enemies within 10 feet are Frightened until the end of your next turn. Once per turn, you can add Necrotic damage equal to your Proficiency Bonus to one attack or spell.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "necroticShroud"
+        }
+      ]
+    }
+  ]
+}

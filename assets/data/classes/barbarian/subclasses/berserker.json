@@ -1,0 +1,35 @@
+{
+  "id": "≠",
+  "name": "Path of the Berserker",
+  "image": "/img/classes/barbarian/subclasses/berserker.png",
+  "class": "barbarian",
+  "features": [
+    {
+      "level": 3,
+      "name": "Frenzy",
+      "desc": "While raging, when you use Reckless Attack, the first target you hit on your turn takes extra damage: a number of d6s equal to your Rage Damage bonus (+2 → 2d6, +3 → 3d6, +4 → 4d6).",
+      "grants": [
+        {
+          "type": "passive",
+          "target": "damage",
+          "note": "+{rageBonus}d6 damage to the first target each turn (when using Reckless Attack while raging)"
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Mindless Rage",
+      "desc": "Immunity to the Charmed and Frightened conditions while you are raging."
+    },
+    {
+      "level": 10,
+      "name": "Intimidating Presence",
+      "desc": "As a Bonus Action, you frighten creatures within 30 feet (Wisdom saving throw)."
+    },
+    {
+      "level": 14,
+      "name": "Retaliation",
+      "desc": "As a Reaction, you attack a creature within 5 feet of you that dealt damage to you."
+    }
+  ]
+}

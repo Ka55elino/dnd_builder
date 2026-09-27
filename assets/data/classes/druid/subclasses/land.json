@@ -1,0 +1,51 @@
+{
+  "id": "land",
+  "name": "Circle of the Land",
+  "image": "/img/classes/druid/subclasses/land.png",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Circle Spells",
+      "desc": "You choose a land type (arid, polar, temperate, or tropical) — its associated spells are always prepared and don't count against your limit."
+    },
+    {
+      "level": 3,
+      "name": "Land's Aid",
+      "desc": "As a Bonus Action, you expend a use of Wild Shape: a creature within 60 feet regains Hit Points or takes 2d6 Necrotic damage (increases with level)."
+    },
+    {
+      "level": 6,
+      "name": "Natural Recovery",
+      "desc": "During a Short Rest, you recover expended spell slots with a combined level of up to half your Druid level."
+    },
+    {
+      "level": 10,
+      "name": "Nature's Ward",
+      "desc": "Immunity to poison and disease; Resistance to one elemental damage type of your choice."
+    },
+    {
+      "level": 14,
+      "name": "Nature's Sanctuary",
+      "desc": "As a Bonus Action, you create an area that enemies can't enter without succeeding on a Wisdom saving throw."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "spikeGrowth",
+      "gustOfWind"
+    ],
+    "5": [
+      "sleetStorm",
+      "callLightning"
+    ],
+    "7": [
+      "freedomOfMovement",
+      "iceStorm"
+    ],
+    "9": [
+      "insectPlague",
+      "greaterRestoration"
+    ]
+  }
+}

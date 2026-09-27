@@ -1,0 +1,46 @@
+{
+  "id": "spellfire",
+  "name": "Spellfire Sorcery",
+  "image": "/img/classes/sorcerer/subclasses/spellfire.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Absorb Spellfire",
+      "desc": "As a Reaction, when you are targeted by a spell, you absorb it: you gain Spellfire charges equal to the spell's level (the pool increases with level)."
+    },
+    {
+      "level": 6,
+      "name": "Spellfire Burst",
+      "desc": "As a Bonus Action, you expend charges to unleash a beam of Radiant or Fire flame at a target within 60 feet (damage increases with charges)."
+    },
+    {
+      "level": 14,
+      "name": "Spellfire Healing",
+      "desc": "As an action, you expend charges to heal a creature within 60 feet or end a condition on it."
+    },
+    {
+      "level": 18,
+      "name": "Spellfire Source",
+      "desc": "Your maximum charges increase; you gain Resistance to Fire and Radiant damage, and when your charges overflow, you release a burst against enemies around you."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "guidingBolt",
+      "cureWounds"
+    ],
+    "5": [
+      "dispelMagic",
+      "revivify"
+    ],
+    "7": [
+      "guardianOfFaith",
+      "deathWard"
+    ],
+    "9": [
+      "flameStrike",
+      "greaterRestoration"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "backpack",
+  "name": "Backpack",
+  "image": "/img/items/backpack.svg",
+  "isDefault": true,
+  "weight": 5,
+  "cost": "2 GP",
+  "desc": "Holds up to 30 pounds (1 cubic foot). Can serve as a saddlebag."
+}

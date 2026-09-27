@@ -1,0 +1,46 @@
+{
+  "id": "undead",
+  "name": "Undead",
+  "image": "/img/classes/warlock/subclasses/undead.png",
+  "class": "warlock",
+  "domainSpells": {
+    "3": [
+      "inflictWounds",
+      "rayOfEnfeeblement"
+    ],
+    "5": [
+      "vampiricTouch",
+      "animateDead"
+    ],
+    "7": [
+      "blight",
+      "deathWard"
+    ],
+    "9": [
+      "antilifeShell",
+      "cloudkill"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Form of Dread",
+      "desc": "As a Bonus Action, you assume a dreadful form for 1 minute: Temporary Hit Points, immunity to the Frightened condition; once per turn, a hit frightens the target and deals extra Necrotic damage."
+    },
+    {
+      "level": 6,
+      "name": "Grave Touched",
+      "desc": "Your attacks and spells can deal Necrotic damage instead of their normal type; you don't need food, water, or air."
+    },
+    {
+      "level": 10,
+      "name": "Necrotic Husk",
+      "desc": "Resistance to Necrotic damage (Immunity while in Form of Dread); when you are reduced to 0 Hit Points, you explode with necrotic energy."
+    },
+    {
+      "level": 14,
+      "name": "Spirit Projection",
+      "desc": "As an action, you project your spirit: you move incorporeally, and your attacks and spells can originate from both your body and your spirit."
+    }
+  ]
+}

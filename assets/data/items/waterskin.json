@@ -1,0 +1,9 @@
+{
+  "id": "waterskin",
+  "name": "Waterskin",
+  "image": "/img/items/waterskin.svg",
+  "isDefault": true,
+  "weight": 5,
+  "cost": "2 SP",
+  "desc": "Holds up to 4 pints of water. The listed weight is for a full waterskin."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "lanternHooded",
+  "name": "Hooded Lantern",
+  "image": "/img/items/lanternHooded.svg",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "5 GP",
+  "desc": "Burns oil: Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. As a Bonus Action, you can lower the hood, reducing the light to Dim Light in a 5-foot radius (or raise it again)."
+}

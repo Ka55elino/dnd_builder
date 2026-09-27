@@ -1,0 +1,14 @@
+{
+  "id": "spear",
+  "name": "Spear",
+  "image": "/img/weapons/simple/spear.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Sap",
+  "properties": [
+    "thrown",
+    "versatile"
+  ]
+}

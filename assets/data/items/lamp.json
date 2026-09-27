@@ -1,0 +1,9 @@
+{
+  "id": "lamp",
+  "name": "Lamp",
+  "image": "/img/items/lamp.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "5 SP",
+  "desc": "Burns oil: Bright Light in a 15-foot radius and Dim Light for an additional 30 feet."
+}

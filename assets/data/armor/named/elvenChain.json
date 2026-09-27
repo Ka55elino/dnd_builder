@@ -1,0 +1,12 @@
+{
+  "id": "elvenChain",
+  "name": "Elven Chain",
+  "image": "/img/armor/named/elvenChain.svg",
+  "isDefault": false,
+  "base": "chainShirt",
+  "desc": "A fine chain shirt of elven make. Inherits the chain shirt's statistics (Medium armor, base 13, Dexterity cap +2), but can be worn unnoticed and doesn't impose Disadvantage on Stealth, per the DM's description.",
+  "category": "medium",
+  "baseAC": 13,
+  "addDex": true,
+  "maxDex": 2
+}

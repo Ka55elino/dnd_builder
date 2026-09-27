@@ -1,0 +1,96 @@
+{
+  "id": "eldritchKnight",
+  "name": "Eldritch Knight",
+  "image": "/img/classes/warrior/subclasses/eldritchKnight.png",
+  "class": "warrior",
+  "spellcasting": {
+    "ability": "int",
+    "list": "wizard",
+    "progression": "third",
+    "cantripsKnown": [
+      [
+        3,
+        2
+      ],
+      [
+        10,
+        3
+      ]
+    ],
+    "preparedKnown": [
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        6
+      ],
+      [
+        11,
+        7
+      ],
+      [
+        13,
+        8
+      ],
+      [
+        14,
+        9
+      ],
+      [
+        16,
+        10
+      ],
+      [
+        19,
+        11
+      ],
+      [
+        20,
+        13
+      ]
+    ],
+    "startLevel": 3
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Spellcasting",
+      "desc": "You learn and cast spells from the Wizard spell list, using Intelligence (one-third caster)."
+    },
+    {
+      "level": 3,
+      "name": "Weapon Bond",
+      "desc": "Through a ritual, you bond with up to two weapons; you can summon a bonded weapon to your hand as a Bonus Action."
+    },
+    {
+      "level": 7,
+      "name": "War Magic",
+      "desc": "When you take the Attack action, you can replace one of the attacks with casting a cantrip."
+    },
+    {
+      "level": 10,
+      "name": "Eldritch Strike",
+      "desc": "When you hit a creature with a weapon, it has Disadvantage on its next saving throw against your spell before the end of your next turn."
+    },
+    {
+      "level": 15,
+      "name": "Arcane Charge",
+      "desc": "When you use Action Surge, you can teleport up to 30 feet before or after the action."
+    },
+    {
+      "level": 18,
+      "name": "Improved War Magic",
+      "desc": "When you take the Attack action, you can replace two of the attacks with casting a level 1 or 2 spell."
+    }
+  ]
+}

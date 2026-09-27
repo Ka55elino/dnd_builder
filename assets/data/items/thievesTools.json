@@ -1,0 +1,9 @@
+{
+  "id": "thievesTools",
+  "name": "Thieves' Tools",
+  "image": "/img/items/thievesTools.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "25 GP",
+  "desc": "Picks, a file, a small mirror on a handle, and tweezers. They let you pick locks and disarm traps."
+}

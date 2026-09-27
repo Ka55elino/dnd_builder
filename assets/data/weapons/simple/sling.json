@@ -1,0 +1,13 @@
+{
+  "id": "sling",
+  "name": "Sling",
+  "image": "/img/weapons/simple/sling.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "bludgeoning",
+  "mastery": "Slow",
+  "properties": [
+    "ranged"
+  ]
+}

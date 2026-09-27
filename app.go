@@ -3,170 +3,218 @@ package main
 import (
 	"context"
 	"database/sql"
-	"errors"
+	"fmt"
 	"log"
 )
 
 // App struct
 type App struct {
-	ctx context.Context
-	db  *sql.DB
+	ctx     context.Context
+	db      *sql.DB
+	ready   chan struct{} // closed once the DB is open and seeded (or failed to open)
+	initErr error
 }
 
 // NewApp creates a new App application struct
 func NewApp() *App {
-	return &App{}
+	return &App{ready: make(chan struct{})}
 }
 
-// startup opens the database, creates the tables and seeds the reference
-// data if it is empty.
+// startup opens the database in the background: the window and the frontend
+// loader show up immediately, and bound methods wait for the DB to be ready.
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
+	go a.initDB()
+}
+
+// initDB opens the database, creates the tables and seeds the reference
+// data if it is empty.
+func (a *App) initDB() {
+	defer close(a.ready)
 
 	db, err := openDB()
 	if err != nil {
 		log.Printf("open db: %v", err)
+		a.initErr = err
 		return
 	}
 	if err := seedAll(db); err != nil {
 		log.Printf("seed db: %v", err)
 	}
+	if err := migrateInlineImages(db); err != nil {
+		log.Printf("migrate images: %v", err)
+	}
+	deleteOrphanImages(db)
 	a.db = db
 }
 
 func (a *App) shutdown(ctx context.Context) {
-	if a.db != nil {
-		a.db.Close()
+	select {
+	case <-a.ready:
+		if a.db != nil {
+			a.db.Close()
+		}
+	default: // still seeding — the process is exiting anyway
 	}
 }
 
-var errNoDB = errors.New("database is not open")
+// conn waits until the DB is ready and returns it.
+func (a *App) conn() (*sql.DB, error) {
+	<-a.ready
+	if a.db == nil {
+		return nil, fmt.Errorf("database is not open: %v", a.initErr)
+	}
+	return a.db, nil
+}
+
+// Ready blocks until the database is open and seeded; the frontend waits for it
+// behind the startup loader.
+func (a *App) Ready() error {
+	_, err := a.conn()
+	return err
+}
 
 // GetRaces returns all races with their nested subraces.
 func (a *App) GetRaces() ([]Race, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getAllRaces(a.db)
+	return getAllRaces(db)
 }
 
 // GetClasses returns all classes with their nested subclasses.
 func (a *App) GetClasses() ([]Class, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getAllClasses(a.db)
+	return getAllClasses(db)
 }
 
 // GetEquipment returns weapons, armor, items and packs (is_default = 1 only).
 func (a *App) GetEquipment() (Equipment, error) {
-	if a.db == nil {
-		return Equipment{}, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return Equipment{}, err
 	}
-	return getEquipment(a.db)
+	return getEquipment(db)
 }
 
 // SaveCharacter saves a character (CharacterBuild JSON) and returns its id.
 func (a *App) SaveCharacter(buildJSON string) (string, error) {
-	if a.db == nil {
-		return "", errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return "", err
 	}
-	return saveCharacter(a.db, buildJSON)
+	return saveCharacter(db, buildJSON)
 }
 
 // GetCharacter returns a saved character by id (a CharacterBuild object).
 func (a *App) GetCharacter(id string) (map[string]any, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getCharacter(a.db, id)
+	return getCharacter(db, id)
 }
 
 // ListCharacters returns all saved characters (summary only).
 func (a *App) ListCharacters() ([]CharacterSummary, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return listCharacters(a.db)
+	return listCharacters(db)
 }
 
 // GetCharacterState returns the play state (hit points, resources); null if none has been saved yet.
 func (a *App) GetCharacterState(id string) (map[string]any, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getCharacterState(a.db, id)
+	return getCharacterState(db, id)
 }
 
 // SaveCharacterState saves the play state (CharacterState JSON).
 func (a *App) SaveCharacterState(id, stateJSON string) error {
-	if a.db == nil {
-		return errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return err
 	}
-	return saveCharacterState(a.db, id, stateJSON)
+	return saveCharacterState(db, id, stateJSON)
 }
 
 // GetBackgrounds returns backgrounds (origins).
 func (a *App) GetBackgrounds() ([]Background, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getBackgrounds(a.db)
+	return getBackgrounds(db)
 }
 
 // GetFeats returns feats, fighting styles, metamagic options and invocations (by category).
 func (a *App) GetFeats() ([]Feat, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getFeats(a.db)
+	return getFeats(db)
 }
 
 // GetSpells returns spells and class/species abilities.
 func (a *App) GetSpells() ([]Spell, error) {
-	if a.db == nil {
-		return nil, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
 	}
-	return getSpells(a.db)
+	return getSpells(db)
 }
 
 // GetCatalog returns all weapons, armor and items (including named ones), for handing out to characters.
 func (a *App) GetCatalog() (Catalog, error) {
-	if a.db == nil {
-		return Catalog{}, errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return Catalog{}, err
 	}
-	return getCatalog(a.db)
+	return getCatalog(db)
 }
 
 // SaveCustomEquipment creates or updates custom equipment.
-// kind: weapon | armor | item; itemJSON is an object in db/data format (without an id, a new one is created).
+// kind: weapon | armor | item; itemJSON is an object in assets/data format (without an id, a new one is created).
 func (a *App) SaveCustomEquipment(kind, itemJSON string) (string, error) {
-	if a.db == nil {
-		return "", errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return "", err
 	}
-	return saveCustomRecord(a.db, kind, itemJSON)
+	return saveCustomRecord(db, kind, itemJSON)
 }
 
-// SaveCustomSpell creates or updates a custom spell (db/data/spells format; without an id, a new one is created).
+// SaveCustomSpell creates or updates a custom spell (assets/data/spells format; without an id, a new one is created).
 func (a *App) SaveCustomSpell(spellJSON string) (string, error) {
-	if a.db == nil {
-		return "", errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return "", err
 	}
-	return saveCustomRecord(a.db, "spell", spellJSON)
+	return saveCustomRecord(db, "spell", spellJSON)
 }
 
 // DeleteCustomSpell deletes a custom spell (built-in spells cannot be deleted).
 func (a *App) DeleteCustomSpell(id string) error {
-	if a.db == nil {
-		return errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return err
 	}
-	return deleteCustomRecord(a.db, "spell", id)
+	return deleteCustomRecord(db, "spell", id)
 }
 
 // DeleteCustomEquipment deletes custom equipment (built-in equipment cannot be deleted).
 func (a *App) DeleteCustomEquipment(kind, id string) error {
-	if a.db == nil {
-		return errNoDB
+	db, err := a.conn()
+	if err != nil {
+		return err
 	}
-	return deleteCustomRecord(a.db, kind, id)
+	return deleteCustomRecord(db, kind, id)
 }

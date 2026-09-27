@@ -1,0 +1,12 @@
+{
+  "id": "chainMail",
+  "name": "Chain Mail",
+  "image": "/img/armor/heavy/chainMail.svg",
+  "isDefault": true,
+  "category": "heavy",
+  "baseAC": 16,
+  "addDex": false,
+  "maxDex": 0,
+  "stealthDisadvantage": true,
+  "strengthReq": 13
+}

@@ -1,0 +1,55 @@
+{
+  "id": "diplomatPack",
+  "name": "Diplomat's Pack",
+  "image": "/img/packs/diplomatPack.svg",
+  "isDefault": true,
+  "cost": "39 GP",
+  "weight": 39,
+  "desc": "Everything for negotiations, receptions, and correspondence.",
+  "items": [
+    {
+      "id": "chest",
+      "qty": 1
+    },
+    {
+      "id": "clothesFine",
+      "qty": 1
+    },
+    {
+      "id": "ink",
+      "qty": 1
+    },
+    {
+      "id": "inkPen",
+      "qty": 5
+    },
+    {
+      "id": "lamp",
+      "qty": 1
+    },
+    {
+      "id": "caseMapScroll",
+      "qty": 2
+    },
+    {
+      "id": "oil",
+      "qty": 4
+    },
+    {
+      "id": "paper",
+      "qty": 5
+    },
+    {
+      "id": "parchment",
+      "qty": 5
+    },
+    {
+      "id": "perfume",
+      "qty": 1
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    }
+  ]
+}

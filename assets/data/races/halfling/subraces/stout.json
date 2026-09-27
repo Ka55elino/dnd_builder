@@ -1,0 +1,31 @@
+{
+  "id": "stout",
+  "name": "Stout Halfling",
+  "image": "/img/races/halfling/subraces/stout.png",
+  "race": "halfling",
+  "traits": [
+    {
+      "name": "Stout Resilience",
+      "desc": "You have Advantage on saving throws against poison and Resistance to Poison damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "poison"
+            }
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "poison"
+          }
+        }
+      ]
+    }
+  ]
+}

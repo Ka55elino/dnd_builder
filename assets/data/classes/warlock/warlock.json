@@ -1,0 +1,203 @@
+{
+  "id": "warlock",
+  "name": "Warlock",
+  "image": "/img/classes/warlock/warlock.png",
+  "hitDie": 8,
+  "primaryAbility": [
+    "cha"
+  ],
+  "savingThrows": [
+    "wis",
+    "cha"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "deception",
+    "history",
+    "intimidation",
+    "investigation",
+    "nature",
+    "religion"
+  ],
+  "caster": "pact",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light"
+  ],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "warlock",
+    "progression": "pact",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        11,
+        11
+      ],
+      [
+        13,
+        12
+      ],
+      [
+        15,
+        13
+      ],
+      [
+        17,
+        14
+      ],
+      [
+        19,
+        15
+      ]
+    ]
+  },
+  "invocationsKnown": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      12,
+      8
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      18,
+      10
+    ]
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Pact Magic",
+      "desc": "You cast spells from the Warlock spell list using Charisma. Your Pact Magic slots are few, all of the same (highest available) level, and you regain them when you finish a Short Rest."
+    },
+    {
+      "level": 1,
+      "name": "Eldritch Invocations",
+      "desc": "You learn Eldritch Invocations, permanent magical enhancements. The number you know increases with level; some require a certain level, a Pact Boon, or a cantrip."
+    },
+    {
+      "level": 1,
+      "name": "Pact Boon",
+      "desc": "You choose a Pact Boon as an invocation: Pact of the Blade (weapon + attacks using Charisma), Pact of the Chain (familiar), Pact of the Tome (cantrips and rituals), or Pact of the Talisman."
+    },
+    {
+      "level": 2,
+      "name": "Magical Cunning",
+      "desc": "By performing a 1-minute rite, you regain some of your expended Pact Magic spell slots. Once per Long Rest."
+    },
+    {
+      "level": 9,
+      "name": "Contact Patron",
+      "desc": "You can cast Contact Other Plane without a spell slot (reaching out to your patron) and without risking insanity.",
+      "passive": false
+    },
+    {
+      "level": 11,
+      "name": "Mystic Arcanum (Level 6)",
+      "desc": "You choose one level 6 spell as your arcanum; you can cast it once per Long Rest without a spell slot."
+    },
+    {
+      "level": 13,
+      "name": "Mystic Arcanum (Level 7)",
+      "desc": "An additional level 7 spell as an arcanum (once per Long Rest)."
+    },
+    {
+      "level": 15,
+      "name": "Mystic Arcanum (Level 8)",
+      "desc": "An additional level 8 spell as an arcanum (once per Long Rest)."
+    },
+    {
+      "level": 17,
+      "name": "Mystic Arcanum (Level 9)",
+      "desc": "An additional level 9 spell as an arcanum (once per Long Rest)."
+    },
+    {
+      "level": 20,
+      "name": "Eldritch Master",
+      "desc": "Once per Long Rest, with a 1-minute rite, you regain all expended Pact Magic spell slots."
+    }
+  ]
+}

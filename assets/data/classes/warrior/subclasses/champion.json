@@ -1,0 +1,43 @@
+{
+  "id": "champion",
+  "name": "Champion",
+  "image": "/img/classes/warrior/subclasses/champion.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Improved Critical",
+      "desc": "Your weapon attacks score a Critical Hit on a roll of 19–20."
+    },
+    {
+      "level": 3,
+      "name": "Remarkable Athlete",
+      "desc": "You have Advantage on Initiative rolls and Strength (Athletics) checks; after you score a Critical Hit, you can move up to half your Speed."
+    },
+    {
+      "level": 7,
+      "name": "Additional Fighting Style",
+      "desc": "You gain another Fighting Style feat.",
+      "choice": {
+        "type": "fightingStyle",
+        "pick": 1,
+        "from": "fightingStyles"
+      }
+    },
+    {
+      "level": 10,
+      "name": "Heroic Warrior",
+      "desc": "At the start of each of your turns in combat, if you don't have Heroic Inspiration, you gain it."
+    },
+    {
+      "level": 15,
+      "name": "Superior Critical",
+      "desc": "Your weapon attacks score a Critical Hit on a roll of 18–20."
+    },
+    {
+      "level": 18,
+      "name": "Survivor",
+      "desc": "You have Advantage on Death Saving Throws; at the start of your turn, if you are Bloodied (but have more than 0 Hit Points), you regain Hit Points equal to 5 + your Constitution modifier."
+    }
+  ]
+}

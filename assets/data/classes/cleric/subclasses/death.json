@@ -1,0 +1,46 @@
+{
+  "id": "death",
+  "name": "Death Domain",
+  "image": "/img/classes/cleric/subclasses/death.png",
+  "class": "cleric",
+  "domainSpells": {
+    "0": [
+      "chillTouch"
+    ],
+    "3": [
+      "falseLife",
+      "rayOfSickness",
+      "blindnessDeafness",
+      "rayOfEnfeeblement"
+    ],
+    "5": [
+      "animateDead",
+      "vampiricTouch"
+    ],
+    "7": [
+      "blight",
+      "deathWard"
+    ],
+    "9": [
+      "antilifeShell",
+      "cloudkill"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Reaper",
+      "desc": "When you learn a single-target Necrotic cantrip, you can hit two targets within 5 feet of each other with it."
+    },
+    {
+      "level": 6,
+      "name": "Inescapable Destruction",
+      "desc": "Your Necrotic damage ignores Resistance."
+    },
+    {
+      "level": 17,
+      "name": "Master of Death",
+      "desc": "When you make a Necrotic attack, you add your Wis modifier to the damage."
+    }
+  ]
+}

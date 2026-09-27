@@ -1,0 +1,23 @@
+{
+  "id": "rapierOfKnowledge",
+  "name": "Rapier of Knowledge",
+  "image": "/img/weapons/named/rapierOfKnowledge.svg",
+  "isDefault": false,
+  "base": "rapier",
+  "damage": "3d8",
+  "desc": "An elegant blade whose edge whispers truths of the mind. Inherits the rapier's statistics (Piercing damage, Finesse property, Vex mastery), but its damage die is increased to 3d8. Per the DM's description: +10 to hit, +5 to damage, and an extra 1d6 Psychic damage on a hit.",
+  "category": "martial",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "finesse"
+  ],
+  "attackBonus": 10,
+  "damageBonus": 5,
+  "extraDamage": [
+    {
+      "dice": "1d6",
+      "type": "psychic"
+    }
+  ]
+}

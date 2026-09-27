@@ -1,0 +1,9 @@
+{
+  "id": "lanternBullseye",
+  "name": "Bullseye Lantern",
+  "image": "/img/items/lanternBullseye.svg",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "10 GP",
+  "desc": "Burns oil: Bright Light in a 60-foot Cone and Dim Light for an additional 60 feet."
+}

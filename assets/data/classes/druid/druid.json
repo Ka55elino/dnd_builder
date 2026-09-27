@@ -1,0 +1,228 @@
+{
+  "id": "druid",
+  "name": "Druid",
+  "image": "/img/classes/druid/druid.png",
+  "hitDie": 8,
+  "primaryAbility": [
+    "wis"
+  ],
+  "savingThrows": [
+    "int",
+    "wis"
+  ],
+  "skillCount": 2,
+  "skills": [
+    "arcana",
+    "animal",
+    "insight",
+    "medicine",
+    "nature",
+    "perception",
+    "religion",
+    "survival"
+  ],
+  "caster": "full",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light",
+    "medium",
+    "shield"
+  ],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "wis",
+    "list": "druid",
+    "progression": "full",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        17,
+        19
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        19,
+        21
+      ],
+      [
+        20,
+        22
+      ]
+    ]
+  },
+  "features": [
+    {
+      "level": 1,
+      "name": "Spellcasting",
+      "desc": "You cast spells from the Druid spell list, using Wisdom (full caster, prepared spells). You can use a Druidic Focus instead of Material components."
+    },
+    {
+      "level": 1,
+      "name": "Druidic",
+      "desc": "You know Druidic, the secret language of druids, and can leave and read hidden messages."
+    },
+    {
+      "level": 1,
+      "name": "Primal Order",
+      "desc": "You choose a Primal Order: Magician — an extra Druid cantrip and you add your Wisdom modifier to Intelligence (Arcana or Nature) checks; or Warden — proficiency with Martial weapons and Medium armor.",
+      "choice": {
+        "type": "generic",
+        "pick": 1,
+        "options": [
+          {
+            "id": "magician",
+            "name": "Magician",
+            "desc": "An extra Druid cantrip; add your Wisdom modifier to Arcana and Nature checks."
+          },
+          {
+            "id": "warden",
+            "name": "Warden",
+            "desc": "Proficiency with Martial weapons and Medium armor."
+          }
+        ]
+      }
+    },
+    {
+      "level": 2,
+      "name": "Wild Shape",
+      "desc": "As an action, you transform into a Beast you have seen (forms are listed as separate actions below). The CR and movement type limits increase with level. 2 uses (3 at level 6, 4 at level 17), regained on a Short or Long Rest."
+    },
+    {
+      "level": 2,
+      "name": "Wild Companion",
+      "desc": "By expending a use of Wild Shape, you cast Find Familiar (a beast spirit) without a ritual.",
+      "passive": false
+    },
+    {
+      "level": 5,
+      "name": "Wild Resurgence",
+      "desc": "Once per turn as a Bonus Action, you can expend a spell slot to regain a use of Wild Shape; you can expend an unused Wild Shape as a level 1 spell slot."
+    },
+    {
+      "level": 7,
+      "name": "Elemental Fury",
+      "desc": "Both apply: once per turn, your weapon attacks and attacks in Beast form deal an extra 1d8 elemental damage (2d8 from level 15), AND you add your Wisdom modifier to the damage of your cantrips.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "weaponDamageRider",
+            "dice": "1d8",
+            "scale": [
+              [
+                7,
+                "1d8"
+              ],
+              [
+                15,
+                "2d8"
+              ]
+            ],
+            "type": "thunder",
+            "note": "elemental"
+          }
+        },
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "cantripDamageBonus",
+            "ability": "wis"
+          }
+        }
+      ]
+    },
+    {
+      "level": 15,
+      "name": "Improved Elemental Fury",
+      "desc": "Primal Strike increases to 2d8; Potent Spellcasting affects a second creature targeted by the cantrip."
+    },
+    {
+      "level": 18,
+      "name": "Beast Spells",
+      "desc": "You can cast spells while in Wild Shape."
+    },
+    {
+      "level": 20,
+      "name": "Archdruid",
+      "desc": "Unlimited Wild Shape; you ignore Verbal and Somatic components, and Material components that have no cost. You age more slowly."
+    }
+  ]
+}

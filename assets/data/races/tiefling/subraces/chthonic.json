@@ -1,0 +1,56 @@
+{
+  "id": "chthonic",
+  "name": "Chthonic Legacy",
+  "image": "/img/races/tiefling/subraces/chthonic.png",
+  "race": "tiefling",
+  "traits": [
+    {
+      "name": "Resistance",
+      "desc": "You have Resistance to Necrotic damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "necrotic"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Legacy Cantrip",
+      "desc": "You know the Chill Touch cantrip (Charisma).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "chillTouch",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Level 1 Spell",
+      "desc": "Starting at level 3, you always have False Life prepared; you can cast it once per Long Rest without a spell slot (or with a slot).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "falseLife",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Level 2 Spell",
+      "desc": "Starting at level 5, you always have Ray of Enfeeblement prepared; you can cast it once per Long Rest without a spell slot (or with a slot).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "rayOfEnfeeblement",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

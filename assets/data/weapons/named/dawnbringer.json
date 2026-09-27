@@ -1,0 +1,15 @@
+{
+  "id": "dawnbringer",
+  "name": "Dawnbringer",
+  "image": "/img/weapons/named/dawnbringer.svg",
+  "isDefault": false,
+  "base": "longsword",
+  "damage": "1d10",
+  "desc": "A two-handed longsword whose blade glows with warm gold at dawn. Inherits the longsword's damage type and mastery; its damage die is enhanced like a named blade's.",
+  "category": "martial",
+  "damageType": "slashing",
+  "mastery": "Sap",
+  "properties": [
+    "versatile"
+  ]
+}

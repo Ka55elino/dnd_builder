@@ -1,0 +1,43 @@
+{
+  "id": "knowledge",
+  "name": "Knowledge",
+  "image": "/img/classes/cleric/subclasses/knowledge.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "command",
+      "identify",
+      "augury",
+      "suggestion"
+    ],
+    "5": [
+      "nondetection",
+      "speakWithDead"
+    ],
+    "7": [
+      "arcaneEye",
+      "confusion"
+    ],
+    "9": [
+      "legendLore",
+      "scrying"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Blessings of Knowledge",
+      "desc": "You learn 2 languages and gain Expertise in two skills from your domain's list."
+    },
+    {
+      "level": 6,
+      "name": "Read Thoughts",
+      "desc": "By expending a use of Channel Divinity, you read a creature's thoughts and can implant a command in its mind (Wisdom saving throw)."
+    },
+    {
+      "level": 17,
+      "name": "Visions of the Past",
+      "desc": "As an action, for 10 minutes you can see and hear a familiar location up to 1 mile away."
+    }
+  ]
+}

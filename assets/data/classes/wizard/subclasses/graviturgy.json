@@ -1,0 +1,28 @@
+{
+  "id": "graviturgy",
+  "name": "Graviturgy Magic",
+  "image": "/img/classes/wizard/subclasses/graviturgy.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Adjust Density",
+      "desc": "As an action, you double or halve the weight and Speed of a creature or object within 30 feet for 1 minute (hostile targets get a saving throw)."
+    },
+    {
+      "level": 6,
+      "name": "Gravity Well",
+      "desc": "When you hit a creature with a spell, you can move it 5 feet into an unoccupied space."
+    },
+    {
+      "level": 10,
+      "name": "Violent Attraction",
+      "desc": "As a Reaction when a creature within 60 feet hits with an attack, you add dice to the damage (+d10 or more)."
+    },
+    {
+      "level": 14,
+      "name": "Event Horizon",
+      "desc": "A 30-foot aura slows enemies and deals Force damage to those that enter it or start their turn there."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "ballBearings",
+  "name": "Ball Bearings",
+  "image": "/img/items/ballBearings.svg",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "1 GP",
+  "desc": "As a Utilize action, you can spill the ball bearings from their pouch to cover a level 10-foot square within 10 feet. A creature that enters the area for the first time on a turn must succeed on a DC 10 Dexterity saving throw or have the Prone condition. Collecting the ball bearings takes 10 minutes."
+}

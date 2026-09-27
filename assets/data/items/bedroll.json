@@ -1,0 +1,9 @@
+{
+  "id": "bedroll",
+  "name": "Bedroll",
+  "image": "/img/items/bedroll.svg",
+  "isDefault": true,
+  "weight": 7,
+  "cost": "1 GP",
+  "desc": "For a Small or Medium creature. While in the bedroll, you automatically succeed on saving throws against extreme cold."
+}

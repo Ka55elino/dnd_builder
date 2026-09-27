@@ -1,0 +1,14 @@
+{
+  "id": "lightHammer",
+  "name": "Light Hammer",
+  "image": "/img/weapons/simple/lightHammer.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "bludgeoning",
+  "mastery": "Nick",
+  "properties": [
+    "light",
+    "thrown"
+  ]
+}

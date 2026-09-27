@@ -7,6 +7,7 @@
     import CharacterPage from './components/CharacterPage.svelte';
     import LevelUp from './components/LevelUp.svelte';
     import GiveItem from './components/GiveItem.svelte';
+    import QueryLoader from './components/common/QueryLoader.svelte';
 
     /**
      * Screens:
@@ -72,3 +73,5 @@
 {:else}
     <MainMenu onNavigate={(s) => (screen = s)} />
 {/if}
+
+<QueryLoader />

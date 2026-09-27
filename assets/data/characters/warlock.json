@@ -1,0 +1,139 @@
+{
+  "id": "seed-warlock",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.989Z",
+  "name": "Morgan Shadowspeaker",
+  "portrait": "/img/characters/warlock.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "19",
+    "height": "5'5\"",
+    "weight": "245 lb",
+    "eyes": "Brown",
+    "skin": "Weathered",
+    "hair": "Black, short",
+    "alignment": "Neutral",
+    "trait": "Speaks in riddles and enjoys being misunderstood.",
+    "ideal": "Knowledge. Any price is acceptable for the truth.",
+    "bond": "Made a pact to save his sister, and now he serves.",
+    "flaw": "Says more about his patron than he should.",
+    "weakness": "Afraid of the dark, which is ironic given his gift."
+  },
+  "level": 2,
+  "backgroundId": "hermit",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "cha": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 2,
+    "con": 1,
+    "int": 4,
+    "wis": 3,
+    "cha": 0
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 15
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 15,
+    "int": 10,
+    "wis": 12,
+    "cha": 17
+  },
+  "raceId": "human",
+  "subraceId": "imperial",
+  "classId": "warlock",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "leather",
+    "shield": false,
+    "weaponIds": [
+      "dagger",
+      "lightCrossbow"
+    ],
+    "packId": "burglarPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "arcana",
+        "deception"
+      ]
+    },
+    "L1:class:invocations": {
+      "kind": "invocations",
+      "ids": [
+        "agonizingBlast"
+      ]
+    },
+    "L1:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "bladeWard",
+        "mageHand"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "armorOfAgathys",
+        "protectionFromEvil"
+      ]
+    },
+    "L1:race:skill:Skillful": {
+      "kind": "skill",
+      "ids": [
+        "acrobatics"
+      ]
+    },
+    "L1:race:feat:Versatile": {
+      "kind": "feat",
+      "ids": [
+        "alert"
+      ]
+    },
+    "L2:class:invocations": {
+      "kind": "invocations",
+      "ids": [
+        "armorOfShadows",
+        "bookOfAncientSecrets"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "armsOfHadar"
+      ]
+    },
+    "L2:subrace:skill:Imperial Schooling": {
+      "kind": "skill",
+      "ids": [
+        "history"
+      ]
+    }
+  }
+}

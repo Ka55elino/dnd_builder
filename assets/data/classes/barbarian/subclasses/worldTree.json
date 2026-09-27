@@ -1,0 +1,34 @@
+{
+  "id": "worldTree",
+  "name": "Path of the World Tree",
+  "image": "/img/classes/barbarian/subclasses/worldTree.png",
+  "class": "barbarian",
+  "features": [
+    {
+      "level": 3,
+      "name": "Vitality of the Tree",
+      "desc": "When you enter a Rage, you gain Temporary Hit Points equal to your Barbarian level. At the start of each of your turns while raging, one creature within 10 feet (which can be you) gains 1d6 Temporary Hit Points.",
+      "grants": [
+        {
+          "type": "passive",
+          "note": "Temporary Hit Points = {level} when you enter a Rage; an ally within 10 feet gains 1d6 Temporary Hit Points each turn"
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Branches of the Tree",
+      "desc": "As a Reaction, you teleport an enemy you can see within 30 feet to you and reduce its Speed to 0 for the turn."
+    },
+    {
+      "level": 10,
+      "name": "Battering Roots",
+      "desc": "+5 feet of reach with Heavy or Versatile weapons; a hit can push or pull the target."
+    },
+    {
+      "level": 14,
+      "name": "Travel Along the Tree",
+      "desc": "As a Bonus Action, you teleport up to 60 feet; you can take allies with you (once per Rage — up to 150 feet)."
+    }
+  ]
+}

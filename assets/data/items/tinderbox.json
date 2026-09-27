@@ -1,0 +1,9 @@
+{
+  "id": "tinderbox",
+  "name": "Tinderbox",
+  "image": "/img/items/tinderbox.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "5 SP",
+  "desc": "Flint, fire steel, and tinder. Lighting a candle, lamp, lantern, or torch takes a Bonus Action; lighting any other fire takes 1 minute."
+}

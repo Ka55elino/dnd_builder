@@ -1,0 +1,12 @@
+{
+  "id": "lightfoot",
+  "name": "Lightfoot Halfling",
+  "image": "/img/races/halfling/subraces/lightfoot.png",
+  "race": "halfling",
+  "traits": [
+    {
+      "name": "Naturally Stealthy",
+      "desc": "You can take the Hide action even when you are obscured only by a creature that is at least one size larger than you."
+    }
+  ]
+}

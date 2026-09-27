@@ -1,0 +1,28 @@
+{
+  "id": "hunter",
+  "name": "Hunter",
+  "image": "/img/classes/ranger/subclasses/hunter.png",
+  "class": "ranger",
+  "features": [
+    {
+      "level": 3,
+      "name": "Hunter's Prey",
+      "desc": "You choose a technique: Colossus Slayer (once per turn, +1d8 damage to a target missing any of its Hit Points) or Horde Breaker (once per turn, one of your attacks is repeated against another target within 5 feet of the first)."
+    },
+    {
+      "level": 7,
+      "name": "Defensive Tactics",
+      "desc": "You choose Escape the Horde (Opportunity Attacks against you have Disadvantage) or Multiattack Defense (after a creature hits you, it has Disadvantage on attacks against you until the end of the turn)."
+    },
+    {
+      "level": 11,
+      "name": "Superior Hunter's Prey",
+      "desc": "Your Hunter's Prey techniques improve: Colossus Slayer triggers on two different targets per turn; Horde Breaker repeats each attack against an adjacent target."
+    },
+    {
+      "level": 15,
+      "name": "Superior Hunter's Defense",
+      "desc": "As a Reaction when you take damage, you reduce it by 1d8 + your Ranger level and gain Resistance to that damage type until the start of your next turn."
+    }
+  ]
+}

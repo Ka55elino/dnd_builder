@@ -1,0 +1,51 @@
+{
+  "id": "halfDrow",
+  "name": "Half-Drow",
+  "race": "human",
+  "image": "/img/races/human/subraces/halfDrow.png",
+  "desc": "Humans with drow blood: sharp-eyed in the dark and touched by the Underdark's innate magic.",
+  "traits": [
+    {
+      "name": "Fey Ancestry",
+      "desc": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "charmed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Drow Darkvision",
+      "desc": "You have Darkvision with a range of 60 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 60
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Drow Magic",
+      "desc": "Starting at level 3, you always have Faerie Fire prepared. You can cast it once without a spell slot, and you regain the ability to cast it in this way when you finish a Long Rest. You can also cast the spell using any spell slots you have.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "faerieFire",
+          "level": 1
+        }
+      ]
+    }
+  ]
+}

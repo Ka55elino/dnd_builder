@@ -1,0 +1,199 @@
+{
+  "id": "bard",
+  "name": "Bard",
+  "image": "/img/classes/bard/bard.png",
+  "hitDie": 8,
+  "primaryAbility": [
+    "cha"
+  ],
+  "savingThrows": [
+    "dex",
+    "cha"
+  ],
+  "skillCount": 3,
+  "skills": [
+    "acrobatics",
+    "animal",
+    "arcana",
+    "athletics",
+    "deception",
+    "history",
+    "insight",
+    "intimidation",
+    "investigation",
+    "medicine",
+    "nature",
+    "perception",
+    "performance",
+    "persuasion",
+    "religion",
+    "sleight",
+    "stealth",
+    "survival"
+  ],
+  "caster": "full",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light"
+  ],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "list": "bard",
+    "progression": "full",
+    "startLevel": 1,
+    "cantripsKnown": [
+      [
+        1,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "preparedKnown": [
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        12
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        17,
+        19
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        19,
+        21
+      ],
+      [
+        20,
+        22
+      ]
+    ]
+  },
+  "features": [
+    {
+      "level": 1,
+      "name": "Spellcasting",
+      "desc": "You cast spells from the Bard spell list using Charisma (full caster, prepared spells). A Musical Instrument is your spellcasting focus."
+    },
+    {
+      "level": 1,
+      "name": "Bardic Inspiration",
+      "desc": "As a Bonus Action, you give a creature a Bardic Inspiration die (d6, increasing to d12). Within 10 minutes, it can add the die to one ability check, attack roll, or saving throw. You can do this a number of times equal to your Charisma modifier."
+    },
+    {
+      "level": 2,
+      "name": "Expertise",
+      "desc": "You double your Proficiency Bonus for two chosen skills you're proficient in.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 2,
+      "name": "Jack of All Trades",
+      "desc": "You add half your Proficiency Bonus (rounded down) to ability checks that don't use a proficiency you have."
+    },
+    {
+      "level": 5,
+      "name": "Font of Inspiration",
+      "desc": "You also regain Bardic Inspiration when you finish a Short Rest; you can expend a spell slot to regain a use."
+    },
+    {
+      "level": 7,
+      "name": "Countercharm",
+      "desc": "As an action, for 1 minute, you and allies within 30 feet have Advantage on saving throws to avoid or end the Frightened and Charmed conditions."
+    },
+    {
+      "level": 9,
+      "name": "Expertise",
+      "desc": "You double your Proficiency Bonus for two more chosen skills.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 10,
+      "name": "Magical Secrets",
+      "desc": "When you prepare spells, you can also choose them from the Druid, Cleric, and Wizard spell lists; they count as Bard spells for you."
+    },
+    {
+      "level": 18,
+      "name": "Superior Inspiration",
+      "desc": "If you have no Bardic Inspiration dice left when you roll Initiative, you gain one."
+    },
+    {
+      "level": 20,
+      "name": "Words of Creation",
+      "desc": "You always have Power Word Heal and Power Word Kill prepared; a single-target casting can extend its effect to a second creature nearby."
+    }
+  ]
+}

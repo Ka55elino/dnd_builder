@@ -1,0 +1,49 @@
+{
+  "id": "dragonborn",
+  "name": "Dragonborn",
+  "image": "/img/races/dragonborn/dragonborn.png",
+  "size": "Medium",
+  "speed": 30,
+  "subraceLevel": 1,
+  "traits": [
+    {
+      "name": "Draconic Ancestry",
+      "desc": "At level 1, you choose a type of draconic ancestor (subrace); it determines your Breath Weapon's damage type and your Resistance."
+    },
+    {
+      "name": "Darkvision",
+      "desc": "You have Darkvision with a range of 60 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 60
+          }
+        }
+      ]
+    },
+    {
+      "name": "Breath Weapon",
+      "desc": "In place of an attack, you exhale damage in a 15-foot Cone or a 30-foot Line (damage type determined by your draconic ancestry). Dexterity saving throw; the damage increases with level.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "breathWeapon"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Draconic Flight",
+      "desc": "Starting at level 5, as a Bonus Action you can gain a Fly Speed equal to your Speed for 10 minutes.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "draconicFlight"
+        }
+      ]
+    }
+  ]
+}

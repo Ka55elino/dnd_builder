@@ -1,0 +1,14 @@
+{
+  "id": "shortbow",
+  "name": "Shortbow",
+  "image": "/img/weapons/simple/shortbow.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "ranged",
+    "twoHanded"
+  ]
+}

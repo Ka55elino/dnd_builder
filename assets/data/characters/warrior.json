@@ -1,0 +1,100 @@
+{
+  "id": "seed-aelar",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.990Z",
+  "name": "Aelar Greenleaf",
+  "portrait": "/img/characters/warrior.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "124",
+    "height": "5'10\"",
+    "weight": "141 lb",
+    "eyes": "Green",
+    "skin": "Fair, with a golden sheen",
+    "hair": "Long, ash-blond",
+    "alignment": "Chaotic Good",
+    "trait": "Says little, but always to the point; notices what others miss.",
+    "ideal": "Freedom. The forest won't tolerate cages, and neither will I.",
+    "bond": "Swore to find those who burned his mentor's grove.",
+    "flaw": "Distrusts cities and their people, even when he should trust them.",
+    "weakness": "Can't walk past a wounded animal."
+  },
+  "level": 1,
+  "backgroundId": "soldier",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "str": 2,
+    "dex": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 2,
+    "dex": 0,
+    "con": 1,
+    "int": 4,
+    "wis": 3,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 13,
+    "dex": 15,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 15,
+    "dex": 16,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 8
+  },
+  "raceId": "elf",
+  "subraceId": "wood",
+  "classId": "warrior",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "chainMail",
+    "shield": false,
+    "weaponIds": [
+      "longbow",
+      "longsword"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "animal"
+      ]
+    },
+    "L1:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "archery"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "wis"
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "infernal",
+  "name": "Infernal Legacy",
+  "image": "/img/races/tiefling/subraces/infernal.png",
+  "race": "tiefling",
+  "traits": [
+    {
+      "name": "Resistance",
+      "desc": "You have Resistance to Fire damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "fire"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Legacy Cantrip",
+      "desc": "You know the Fire Bolt cantrip (Charisma).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "fireBolt",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Level 1 Spell",
+      "desc": "Starting at level 3, you always have Hellish Rebuke prepared; you can cast it once per Long Rest without a spell slot (or with a slot).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "hellishRebuke",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Level 2 Spell",
+      "desc": "Starting at level 5, you always have Darkness prepared; you can cast it once per Long Rest without a spell slot (or with a slot).",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "darkness",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

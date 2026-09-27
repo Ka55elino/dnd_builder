@@ -1,0 +1,21 @@
+{
+  "id": "bronze",
+  "name": "Bronze Dragon",
+  "image": "/img/races/dragonborn/subraces/bronze.png",
+  "race": "dragonborn",
+  "traits": [
+    {
+      "name": "Draconic Ancestry: Bronze",
+      "desc": "Your Breath Weapon deals Lightning damage; you have Resistance to that damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "lightning"
+          }
+        }
+      ]
+    }
+  ]
+}

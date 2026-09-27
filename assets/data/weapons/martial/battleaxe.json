@@ -1,0 +1,13 @@
+{
+  "id": "battleaxe",
+  "name": "Battleaxe",
+  "image": "/img/weapons/martial/battleaxe.png",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "slashing",
+  "mastery": "Topple",
+  "properties": [
+    "versatile"
+  ]
+}

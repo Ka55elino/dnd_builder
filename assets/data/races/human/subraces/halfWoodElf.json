@@ -1,0 +1,71 @@
+{
+  "id": "halfWoodElf",
+  "name": "Half-Wood Elf",
+  "race": "human",
+  "image": "/img/races/human/subraces/halfWoodElf.png",
+  "desc": "Humans with wood elf blood: light-footed, at home in the wilds and able to hear the voice of the forest.",
+  "traits": [
+    {
+      "name": "Fey Ancestry",
+      "desc": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "savingThrow",
+            "when": {
+              "against": "charmed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Woodland Speed",
+      "desc": "Your Speed increases to 35 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Woodland Training",
+      "desc": "You gain proficiency in either the Nature or Survival skill.",
+      "grants": [
+        {
+          "type": "skill",
+          "choose": 1,
+          "options": [
+            "nature",
+            "survival"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Voice of the Wild",
+      "desc": "You always have Speak with Animals and Speak with Plants prepared. You can cast each spell once without a spell slot, and you regain the ability to cast them in this way when you finish a Long Rest. You can also cast either spell using any spell slots you have.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "speakWithAnimals",
+          "level": 1
+        },
+        {
+          "type": "spell",
+          "id": "speakWithPlants",
+          "level": 3
+        }
+      ]
+    }
+  ]
+}

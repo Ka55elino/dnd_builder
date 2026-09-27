@@ -32,8 +32,10 @@
         --cell: 250px;
 
         display: grid;
-        grid-template-columns: repeat(auto-fill, var(--cell));
+        /* auto-fit collapses empty tracks, so a short row (few items) is centered too */
+        grid-template-columns: repeat(auto-fit, var(--cell));
         grid-auto-rows: var(--cell);
+        justify-content: center;
         gap: 16px;
     }
 

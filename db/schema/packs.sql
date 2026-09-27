@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS packs (
     id          TEXT PRIMARY KEY,                -- 'explorerPack'
     name        TEXT NOT NULL,                   -- 'Explorer''s Pack'
-    image       TEXT,                            -- data URL (base64) | NULL
+    image       TEXT,                            -- "/img/…" URL (see images.go) | NULL
     cost        TEXT,                            -- '10 GP'
     description TEXT,                            -- the 'desc' field from JSON
     is_default  INTEGER NOT NULL DEFAULT 0,      -- 0/1

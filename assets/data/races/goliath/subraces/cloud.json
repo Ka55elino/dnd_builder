@@ -1,0 +1,18 @@
+{
+  "id": "cloud",
+  "name": "Cloud Giant Ancestry",
+  "image": "/img/races/goliath/subraces/cloud.png",
+  "race": "goliath",
+  "traits": [
+    {
+      "name": "Cloud's Jaunt",
+      "desc": "As a Bonus Action, you teleport up to 30 feet (a number of times equal to your Proficiency Bonus per Long Rest).",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "cloudsJaunt"
+        }
+      ]
+    }
+  ]
+}

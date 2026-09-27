@@ -1,0 +1,39 @@
+{
+  "id": "priestPack",
+  "name": "Priest's Pack",
+  "image": "/img/packs/priestPack.svg",
+  "isDefault": true,
+  "cost": "33 GP",
+  "weight": 29,
+  "desc": "Vestments, holy water, and supplies for a servant of the faith.",
+  "items": [
+    {
+      "id": "backpack",
+      "qty": 1
+    },
+    {
+      "id": "blanket",
+      "qty": 1
+    },
+    {
+      "id": "holyWater",
+      "qty": 1
+    },
+    {
+      "id": "lamp",
+      "qty": 1
+    },
+    {
+      "id": "rations",
+      "qty": 7
+    },
+    {
+      "id": "robe",
+      "qty": 1
+    },
+    {
+      "id": "tinderbox",
+      "qty": 1
+    }
+  ]
+}

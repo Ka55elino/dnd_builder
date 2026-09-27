@@ -1,0 +1,9 @@
+{
+  "id": "mirror",
+  "name": "Mirror",
+  "image": "/img/items/mirror.svg",
+  "isDefault": true,
+  "weight": 0.5,
+  "cost": "5 GP",
+  "desc": "A handheld steel mirror: useful for makeup, peeking around corners, or reflecting light as a signal."
+}

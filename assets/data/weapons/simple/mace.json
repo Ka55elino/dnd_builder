@@ -1,0 +1,10 @@
+{
+  "id": "mace",
+  "name": "Mace",
+  "image": "/img/weapons/simple/mace.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "bludgeoning",
+  "mastery": "Sap"
+}

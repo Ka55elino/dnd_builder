@@ -1,0 +1,10 @@
+{
+  "id": "hide",
+  "name": "Hide Armor",
+  "image": "/img/armor/medium/hide.svg",
+  "isDefault": true,
+  "category": "medium",
+  "baseAC": 12,
+  "addDex": true,
+  "maxDex": 2
+}

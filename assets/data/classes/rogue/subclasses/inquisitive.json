@@ -1,0 +1,38 @@
+{
+  "id": "inquisitive",
+  "name": "Inquisitive",
+  "image": "/img/classes/rogue/subclasses/inquisitive.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Ear for Deceit",
+      "desc": "When you make a Wisdom (Insight) check to detect a lie, you can treat a d20 roll of 7 or lower as an 8."
+    },
+    {
+      "level": 3,
+      "name": "Eye for Detail",
+      "desc": "As a Bonus Action, you make a Wisdom (Perception) check (to spot a hidden creature or object) or an Intelligence (Investigation) check (to find clues)."
+    },
+    {
+      "level": 3,
+      "name": "Insightful Fighting",
+      "desc": "As a Bonus Action, you make a Wisdom (Insight) check contested by the target's Charisma (Deception); on a success, you can apply Sneak Attack against it without Advantage (for 1 minute or until you choose a new target)."
+    },
+    {
+      "level": 9,
+      "name": "Steady Eye",
+      "desc": "You have Advantage on Wisdom (Perception) and Intelligence (Investigation) checks if you have moved no more than half your Speed this turn."
+    },
+    {
+      "level": 13,
+      "name": "Unerring Eye",
+      "desc": "As an action, you sense illusions, shapechangers, and magic that deceives the senses within 30 feet. Number of uses equals your Wisdom modifier (minimum 1), regained on a Long Rest."
+    },
+    {
+      "level": 17,
+      "name": "Eye for Weakness",
+      "desc": "While Insightful Fighting is in effect against a creature, your Sneak Attack damage against it increases by 3d6."
+    }
+  ]
+}

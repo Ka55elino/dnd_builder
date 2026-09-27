@@ -1,0 +1,33 @@
+{
+  "id": "abjuration",
+  "name": "School of Abjuration",
+  "image": "/img/classes/wizard/subclasses/abjuration.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Abjuration Savant",
+      "desc": "You copy Abjuration spells into your spellbook in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Arcane Ward",
+      "desc": "When you cast an Abjuration spell of level 1 or higher, you create a magical ward with a Hit Point pool = 2 × Wizard level + Int modifier that absorbs damage dealt to you."
+    },
+    {
+      "level": 6,
+      "name": "Projected Ward",
+      "desc": "As a Reaction, you use your Arcane Ward to absorb damage dealt to a creature within 30 feet."
+    },
+    {
+      "level": 10,
+      "name": "Improved Abjuration",
+      "desc": "You add your Proficiency Bonus to the ability checks you make for Counterspell and Dispel Magic."
+    },
+    {
+      "level": 14,
+      "name": "Spell Resistance",
+      "desc": "Advantage on saving throws against spells and Resistance to their damage."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Image (JPEG, PNG, WebP…) → PNG → base64 (data URL) for the "image" field in db/data.
+Image (JPEG, PNG, WebP…) → PNG → base64 (data URL) for the "image" field in assets/data.
 
 Examples:
     python3 tools/img2b64.py sword.jpg                      # base64 to stdout
@@ -15,8 +15,10 @@ Remove a dark background (generator images on a black/dark-blue background):
         glow, fire, lightning (wide threshold near the edge, no dark ring around the glow)
     --cut-threshold N / --cut-close N: manual tuning (see --help)
 
-Write straight into a JSON file (the "image" field):
-    python3 tools/img2b64.py elf.jpeg --cut --size 512 --into db/data/races/elf/elf.json
+Put an image into a data record (the "image" field):
+    python3 tools/img2b64.py elf.jpeg --cut --size 512 --into assets/data/races/elf/elf.json
+        saves assets/images/races/elf/elf.png and writes "image": "/img/races/elf/elf.png"
+        (the app serves /img/… from assets/images, see images.go — no base64 in the JSON)
 
 Requires Pillow (pip3 install pillow); --cut also needs numpy (pip3 install numpy).
 """
@@ -45,7 +47,7 @@ CUT_PRESETS = {
 }
 
 
-def remove_background(im, threshold=30, close=14, holes=0.0, work=1024):
+def remove_background(im, threshold=30, close=14, holes=0.0, bg_color=None, work=1024):
     """
     Removes a solid or smoothly varying dark background around a figure.
 
@@ -56,7 +58,9 @@ def remove_background(im, threshold=30, close=14, holes=0.0, work=1024):
     3. close > 0: narrow gaps and enclosed dark spots inside the figure count as the figure;
     4. holes > 0: enclosed background areas (not touching the border) larger than
        this share of the image (e.g. 0.005 = 0.5%) become transparent too — for
-       background seen through an arch or between antlers.
+       background seen through an arch or between antlers;
+    5. bg_color (r, g, b): the background color, if the border median is wrong
+       (the object covers most of the border).
     """
     try:
         import numpy as np
@@ -107,7 +111,7 @@ def remove_background(im, threshold=30, close=14, holes=0.0, work=1024):
     T = float(threshold)
 
     border = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
-    med = np.median(border, axis=0)
+    med = np.array(bg_color, np.float32) if bg_color else np.median(border, axis=0)
     # rough background mask → local background color estimate (for gradients)
     m0 = flood(np.sqrt(((a - med) ** 2).sum(-1)) <= max(T, 35))
     w = blur(m0.astype(np.float32), 48) + 1e-4
@@ -182,13 +186,24 @@ def to_png_bytes(path, size, cut):
         return buf.getvalue()
 
 
-def write_into_json(path, url):
+def write_into_json(path, png):
+    """Saves the PNG to assets/images/<same path as the JSON under assets/data>.png and sets "image" to its /img/ URL."""
+    path = path.resolve()
+    parts = path.parts
+    if "data" not in parts or parts[parts.index("data") - 1] != "assets":
+        sys.exit(f"--into expects a JSON file under assets/data: {path}")
+    i = parts.index("data")
+    root, rel = Path(*parts[: i - 1]), Path(*parts[i + 1 :]).with_suffix(".png")
+    out = root / "assets" / "images" / rel
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_bytes(png)
+
     raw = path.read_text(encoding="utf-8")
     data = json.loads(raw)
-    data["image"] = url
+    data["image"] = "/img/" + rel.as_posix()
     indent = 2 if '\n  "' in raw else 4  # keep the file's indentation
     path.write_text(json.dumps(data, ensure_ascii=False, indent=indent) + "\n", encoding="utf-8")
-    print(f"image → {path} ({len(url) // 1024} KB)", file=sys.stderr)
+    print(f"image → {out} ({len(png) // 1024} KB), {path.name}: {data['image']}", file=sys.stderr)
 
 
 def main():
@@ -199,11 +214,13 @@ def main():
     p.add_argument("--raw", action="store_true", help="without the data:image/png;base64, prefix")
     p.add_argument("--json", action="store_true", help="output JSON {file name: base64}")
     p.add_argument("--copy", action="store_true", help="copy the result to the clipboard (macOS)")
-    p.add_argument("--into", type=Path, help="write into the \"image\" field of this JSON file (single input only)")
+    p.add_argument("--into", type=Path, help="assets/data JSON file: save the PNG to assets/images and set its \"image\" URL (single input only)")
     p.add_argument("--cut", nargs="?", const="solid", choices=sorted(CUT_PRESETS),
                    help="remove a dark background: solid (default) for figures; glow for glow/fire")
     p.add_argument("--cut-threshold", type=float, help="background similarity threshold (30 = strict, 55 = for glow)")
     p.add_argument("--cut-close", type=float, help="closing of gaps inside the figure, px (0 = off)")
+    p.add_argument("--cut-bg", help="background color R,G,B or #rrggbb, if the object covers most of the "
+                                     "border and the color is detected wrong (e.g. 247,243,235)")
     p.add_argument("--cut-holes", type=float, default=0.0,
                    help="also clear enclosed background areas larger than this share of the image "
                         "(e.g. 0.005 = 0.5%%; 0 = off). Don't use for medallions/frames with a dark inside")
@@ -213,17 +230,23 @@ def main():
         sys.exit("--into works with a single input file")
 
     cut = None
-    if args.cut or args.cut_threshold is not None or args.cut_close is not None or args.cut_holes:
+    if args.cut or args.cut_threshold is not None or args.cut_close is not None or args.cut_holes or args.cut_bg:
         t, c = CUT_PRESETS[args.cut or "solid"]
+        bg = None
+        if args.cut_bg:
+            v = args.cut_bg.strip().lstrip("#")
+            bg = tuple(int(v[i:i + 2], 16) for i in (0, 2, 4)) if "," not in v else tuple(int(x) for x in v.split(","))
         cut = (args.cut_threshold if args.cut_threshold is not None else t,
                args.cut_close if args.cut_close is not None else c,
-               args.cut_holes)
+               args.cut_holes, bg)
 
     results = {}
+    pngs = {}
     for f in args.files:
         if not f.is_file():
             sys.exit(f"File not found: {f}")
         png = to_png_bytes(f, args.size, cut)
+        pngs[f.name] = png
         b64 = base64.b64encode(png).decode("ascii")
         results[f.name] = b64 if args.raw else f"data:image/png;base64,{b64}"
 
@@ -234,8 +257,7 @@ def main():
             print(f"PNG: {out} ({len(png) // 1024} KB)", file=sys.stderr)
 
     if args.into:
-        url = next(iter(results.values()))
-        write_into_json(args.into, url if not args.raw else f"data:image/png;base64,{url}")
+        write_into_json(args.into, next(iter(pngs.values())))
         return
 
     text = json.dumps(results, ensure_ascii=False, indent=2) if args.json or len(results) > 1 \

@@ -1,0 +1,21 @@
+{
+  "id": "green",
+  "name": "Green Dragon",
+  "image": "/img/races/dragonborn/subraces/green.png",
+  "race": "dragonborn",
+  "traits": [
+    {
+      "name": "Draconic Ancestry: Green",
+      "desc": "Your Breath Weapon deals Poison damage; you have Resistance to that damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "poison"
+          }
+        }
+      ]
+    }
+  ]
+}

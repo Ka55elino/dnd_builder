@@ -1,0 +1,46 @@
+{
+  "id": "draconic",
+  "name": "Draconic Sorcery",
+  "image": "/img/classes/sorcerer/subclasses/draconic.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Draconic Resilience",
+      "desc": "Your Hit Point maximum increases by 1 for each Sorcerer level; while you aren't wearing armor, your AC equals 13 + your Dexterity modifier."
+    },
+    {
+      "level": 6,
+      "name": "Elemental Affinity",
+      "desc": "Once when you cast a spell that deals damage of your draconic type, you add your Charisma modifier to one damage roll; for 1 Sorcery Point, you gain Resistance to that damage type for 1 hour."
+    },
+    {
+      "level": 14,
+      "name": "Dragon Wings",
+      "desc": "As a Bonus Action, you sprout wings and gain a Fly Speed equal to twice your Speed."
+    },
+    {
+      "level": 18,
+      "name": "Draconic Presence",
+      "desc": "As an action and for 5 Sorcery Points, you create a 60-foot aura of awe or fear (Wisdom saving throw)."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "chromaticOrb",
+      "mistyStep"
+    ],
+    "5": [
+      "fear",
+      "fireBolt"
+    ],
+    "7": [
+      "iceStorm",
+      "polymorph"
+    ],
+    "9": [
+      "cloudkill",
+      "holdMonster"
+    ]
+  }
+}

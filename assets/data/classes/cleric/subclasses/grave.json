@@ -1,0 +1,43 @@
+{
+  "id": "grave",
+  "name": "Grave",
+  "image": "/img/classes/cleric/subclasses/grave.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "bane",
+      "falseLife",
+      "gentleRepose",
+      "rayOfEnfeeblement"
+    ],
+    "5": [
+      "revivify",
+      "vampiricTouch"
+    ],
+    "7": [
+      "blight",
+      "deathWard"
+    ],
+    "9": [
+      "antilifeShell",
+      "raiseDead"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Grave Domain",
+      "desc": "You sense living creatures on the verge of death and Undead within 30 feet. A target at full Hit Points can't regain Hit Points."
+    },
+    {
+      "level": 6,
+      "name": "Sentinel at Death's Door",
+      "desc": "As a Reaction, you halve the damage dealt to a creature within 30 feet. A number of times equal to your Proficiency Bonus (per Long Rest)."
+    },
+    {
+      "level": 17,
+      "name": "Keeper of Souls",
+      "desc": "When an enemy dies near you, you heal a wounded ally within 30 feet for 4d10 (once per turn)."
+    }
+  ]
+}

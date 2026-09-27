@@ -1,0 +1,55 @@
+{
+  "id": "drow",
+  "name": "Drow (Dark Elf)",
+  "image": "/img/races/elf/subraces/drow.png",
+  "race": "elf",
+  "traits": [
+    {
+      "name": "Superior Darkvision",
+      "desc": "You have Darkvision with a range of 120 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 120
+          }
+        }
+      ]
+    },
+    {
+      "name": "Drow Cantrip",
+      "desc": "You know the Dancing Lights cantrip.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "dancingLights",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Lineage: Faerie Fire",
+      "desc": "Starting at level 3, you always have Faerie Fire prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "faerieFire"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Lineage: Darkness",
+      "desc": "Starting at level 5, you always have Darkness prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "darkness"
+        }
+      ]
+    }
+  ]
+}

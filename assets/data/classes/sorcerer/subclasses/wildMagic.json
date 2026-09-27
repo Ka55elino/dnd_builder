@@ -1,0 +1,33 @@
+{
+  "id": "wildMagic",
+  "name": "Wild Magic",
+  "image": "/img/classes/sorcerer/subclasses/wildMagic.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Wild Magic Surge",
+      "desc": "When you cast a spell of level 1+, the DM can have you roll on the Wild Magic Surge table (a random effect)."
+    },
+    {
+      "level": 3,
+      "name": "Tides of Chaos",
+      "desc": "Once per Long Rest, you can give yourself Advantage on one attack roll, ability check, or saving throw; regained when a Wild Magic Surge occurs."
+    },
+    {
+      "level": 6,
+      "name": "Bend Luck",
+      "desc": "As a Reaction (2 Sorcery Points), you add or subtract 1d4 to any creature's attack roll, ability check, or saving throw."
+    },
+    {
+      "level": 14,
+      "name": "Controlled Chaos",
+      "desc": "When a Wild Magic Surge occurs, you roll on the table twice and choose the result."
+    },
+    {
+      "level": 18,
+      "name": "Spell Bombardment",
+      "desc": "Once per turn, when you roll the maximum on a spell's damage die, you roll one more such die and add it."
+    }
+  ]
+}

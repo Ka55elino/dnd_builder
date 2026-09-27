@@ -1,0 +1,9 @@
+{
+  "id": "blanket",
+  "name": "Blanket",
+  "image": "/img/items/blanket.svg",
+  "isDefault": true,
+  "weight": 3,
+  "cost": "5 SP",
+  "desc": "While wrapped in the blanket, you have Advantage on saving throws against extreme cold."
+}

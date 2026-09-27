@@ -77,16 +77,20 @@ func saveCustomRecord(db *sql.DB, kind, raw string) (string, error) {
 	if k.equipment {
 		obj["isDefault"] = false // custom equipment is not included in the builder's starting choices
 	}
-	b, err := json.Marshal(obj)
-	if err != nil {
-		return "", err
-	}
-
 	tx, err := db.Begin()
 	if err != nil {
 		return "", err
 	}
 	defer tx.Rollback()
+
+	// an uploaded image (data URL) goes to the images table, the record keeps its /img/db/ URL
+	if err := storeImageField(tx, obj, "image"); err != nil {
+		return "", err
+	}
+	b, err := json.Marshal(obj)
+	if err != nil {
+		return "", err
+	}
 
 	exists, custom, err := isCustomRow(tx, k.table, id)
 	if err != nil {

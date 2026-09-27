@@ -1,0 +1,28 @@
+{
+  "id": "pathOfGiants",
+  "name": "Path of the Giant",
+  "image": "/img/classes/barbarian/subclasses/pathOfGiants.png",
+  "class": "barbarian",
+  "features": [
+    {
+      "level": 3,
+      "name": "Giant's Power",
+      "desc": "While raging, you grow (like Enlarge/Reduce): increased reach, extra damage, and a crushing throw of objects or creatures."
+    },
+    {
+      "level": 6,
+      "name": "Elemental Cleaver",
+      "desc": "When you enter a Rage, you imbue your melee weapon with an element of your choice: it deals an extra 1d6 damage of that type (Acid, Cold, Fire, or Thunder) and gains the Thrown property with a range of 20/60 feet, returning to you after being thrown. You can change the type each time you enter a Rage."
+    },
+    {
+      "level": 10,
+      "name": "Mighty Impel",
+      "desc": "As a Bonus Action, you telekinetically push creatures around you."
+    },
+    {
+      "level": 14,
+      "name": "Demiurgic Colossus",
+      "desc": "You become even larger; Advantage on Strength saving throws and increased extra damage."
+    }
+  ]
+}

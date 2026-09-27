@@ -1,0 +1,33 @@
+{
+  "id": "dance",
+  "name": "College of Dance",
+  "image": "/img/classes/bard/subclasses/dance.png",
+  "class": "bard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Dazzling Footwork",
+      "desc": "Without armor or a Shield, your AC = 10 + Dex modifier + Cha modifier. Your Unarmed Strikes deal damage equal to your Bardic Inspiration die (Dexterity).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "note",
+            "target": "note",
+            "note": "AC without armor = 10 + Dex + Cha (Dazzling Footwork)"
+          }
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Leading Evasion",
+      "desc": "When you make a Dexterity saving throw to take half damage: on a success, you take no damage; you can use your Reaction to protect an ally, sharing the benefit of Evasion with them."
+    },
+    {
+      "level": 14,
+      "name": "Tandem Footwork",
+      "desc": "When you expend a Bardic Inspiration die as a Bonus Action, you move up to your Speed without provoking Opportunity Attacks and make an Unarmed Strike that deals extra damage."
+    }
+  ]
+}

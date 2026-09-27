@@ -1,0 +1,19 @@
+{
+  "id": "protector",
+  "name": "Protector Aasimar",
+  "image": "/img/races/aasimar/subraces/protector.png",
+  "race": "aasimar",
+  "traits": [
+    {
+      "level": 3,
+      "name": "Radiant Soul",
+      "desc": "As a Bonus Action, you sprout wings for 1 minute (Fly Speed equal to your Speed). Once per turn, you can add Radiant damage equal to your Proficiency Bonus to one attack or spell.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "radiantSoul"
+        }
+      ]
+    }
+  ]
+}

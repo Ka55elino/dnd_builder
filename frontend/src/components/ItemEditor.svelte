@@ -1,15 +1,15 @@
 <script>
     /**
      * Custom equipment form: item, armor or weapon.
-     * The result is an object in db/data format (as in the seed JSON),
-     * saved via SaveCustomEquipment.
+     * The result is an object in assets/data format (as in the seed JSON),
+     * saved via saveCustomEquipment.
      *
      * kind     — 'item' | 'armor' | 'weapon'
      * initial  — catalog record to edit (or the base for a copy), null — new
      * copy     — true: initial is only a base, save as a new record
      * onSaved(id, kind) / onCancel()
      */
-    import { SaveCustomEquipment } from "../../wailsjs/go/main/App.js";
+    import { saveCustomEquipment } from "../data/refs.js"; // also reloads the equipment cache
     import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS } from "../rules/equipment.js";
     import { DAMAGE_TYPES } from "../rules/labels.js";
     import { untrack } from "svelte";
@@ -86,7 +86,7 @@
         else f.properties.push(p);
     }
 
-    // --- build the object in db/data format ---
+    // --- build the object in assets/data format ---
     const DICE = /^\d+(d\d+)?$/i;
 
     function build() {
@@ -162,7 +162,7 @@
         }
         saving = true;
         try {
-            const id = await SaveCustomEquipment(kind, JSON.stringify(obj));
+            const id = await saveCustomEquipment(kind, JSON.stringify(obj));
             onSaved?.(id, kind);
         } catch (e) {
             error = "Failed to save: " + (e?.message ?? e);

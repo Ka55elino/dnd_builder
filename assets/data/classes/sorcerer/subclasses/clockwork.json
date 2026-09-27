@@ -1,0 +1,46 @@
+{
+  "id": "clockwork",
+  "name": "Clockwork Sorcery",
+  "image": "/img/classes/sorcerer/subclasses/clockwork.png",
+  "class": "sorcerer",
+  "features": [
+    {
+      "level": 3,
+      "name": "Restore Balance",
+      "desc": "As a Reaction, when a creature within 60 feet rolls with Advantage or Disadvantage, you cancel it (the roll has neither). Number of uses equals your Proficiency Bonus."
+    },
+    {
+      "level": 6,
+      "name": "Bastion of Law",
+      "desc": "For 1–5 Sorcery Points, you create a shield of d8s (one per point) for yourself or a creature within 30 feet; it absorbs damage by expending the dice."
+    },
+    {
+      "level": 14,
+      "name": "Trance of Order",
+      "desc": "As a Bonus Action, for 1 minute: attack rolls against you can't have Advantage, and when you roll a 9 or lower on the d20 for an attack roll, ability check, or saving throw, you can treat the roll as a 10."
+    },
+    {
+      "level": 18,
+      "name": "Clockwork Cavalcade",
+      "desc": "As an action (once per Long Rest), you summon clockwork spirits in a 30-foot Cube: they heal, repair objects, and end spells."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "command",
+      "holdPerson"
+    ],
+    "5": [
+      "dispelMagic",
+      "slow"
+    ],
+    "7": [
+      "freedomOfMovement",
+      "locateCreature"
+    ],
+    "9": [
+      "greaterRestoration",
+      "dominatePerson"
+    ]
+  }
+}

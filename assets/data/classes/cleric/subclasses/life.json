@@ -1,0 +1,43 @@
+{
+  "id": "life",
+  "name": "Life",
+  "image": "/img/classes/cleric/subclasses/life.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "bless",
+      "cureWounds",
+      "lesserRestoration",
+      "spiritualWeapon"
+    ],
+    "5": [
+      "beaconOfHope",
+      "revivify"
+    ],
+    "7": [
+      "deathWard",
+      "guardianOfFaith"
+    ],
+    "9": [
+      "massCureWounds",
+      "raiseDead"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Disciple of Life",
+      "desc": "Your healing spells restore an additional 2 + the spell's level Hit Points."
+    },
+    {
+      "level": 6,
+      "name": "Blessed Healer",
+      "desc": "When you heal another creature with a spell of level 1 or higher, you also regain 2 + the spell's level Hit Points."
+    },
+    {
+      "level": 17,
+      "name": "Supreme Healing",
+      "desc": "When you roll dice to heal with a spell, you treat them as rolling their maximum."
+    }
+  ]
+}

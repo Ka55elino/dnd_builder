@@ -1,0 +1,33 @@
+{
+  "id": "evocation",
+  "name": "School of Evocation",
+  "image": "/img/classes/wizard/subclasses/evocation.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Evocation Savant",
+      "desc": "You copy Evocation spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Sculpt Spells",
+      "desc": "When you cast an Evocation spell with an area, you protect 1 + the spell's level allies: they automatically succeed on the saving throw and take no damage."
+    },
+    {
+      "level": 6,
+      "name": "Potent Cantrip",
+      "desc": "A creature that succeeds on a saving throw against your cantrip still takes half damage."
+    },
+    {
+      "level": 10,
+      "name": "Empowered Evocation",
+      "desc": "You add your Int modifier to one damage roll of any Evocation spell."
+    },
+    {
+      "level": 14,
+      "name": "Overchannel",
+      "desc": "You cast a level 1-5 spell with maximum damage; after the first time per rest, you take increasing damage yourself."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mithralPlate",
+  "name": "Mithral Plate",
+  "image": "/img/armor/named/mithralPlate.svg",
+  "isDefault": false,
+  "base": "plate",
+  "strengthReq": 0,
+  "desc": "Plate made of light mithral. Inherits Plate Armor (Heavy, base 18), but has no Strength requirement and doesn't hinder Stealth.",
+  "category": "heavy",
+  "baseAC": 18,
+  "addDex": false,
+  "maxDex": 0,
+  "stealthDisadvantage": false
+}

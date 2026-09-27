@@ -1,0 +1,106 @@
+{
+  "id": "seed-monk",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.568Z",
+  "name": "Kai Quietstep",
+  "portrait": "/img/characters/monk.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "130",
+    "height": "5'6\"",
+    "weight": "77 lb",
+    "eyes": "Gray",
+    "skin": "Weathered",
+    "hair": "Black, short",
+    "alignment": "Lawful Neutral",
+    "trait": "Answers questions with questions.",
+    "ideal": "Self-Improvement. The true enemy lies within.",
+    "bond": "The monastery that raised him was burned; he is the last of its students.",
+    "flaw": "Considers emotions a weakness and suppresses them.",
+    "weakness": "Sweets."
+  },
+  "level": 3,
+  "backgroundId": "hermit",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "wis": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 3,
+    "dex": 0,
+    "con": 2,
+    "int": 4,
+    "wis": 1,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 12,
+    "dex": 15,
+    "con": 13,
+    "int": 10,
+    "wis": 14,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 12,
+    "dex": 15,
+    "con": 14,
+    "int": 10,
+    "wis": 16,
+    "cha": 8
+  },
+  "raceId": "human",
+  "subraceId": "imperial",
+  "classId": "monk",
+  "subclassId": "openHand",
+  "equipment": {
+    "armorId": null,
+    "shield": false,
+    "weaponIds": [
+      "quarterstaff",
+      "dart"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "athletics",
+        "acrobatics"
+      ]
+    },
+    "L1:race:skill:Skillful": {
+      "kind": "skill",
+      "ids": [
+        "animal"
+      ]
+    },
+    "L1:race:feat:Versatile": {
+      "kind": "feat",
+      "ids": [
+        "alert"
+      ]
+    },
+    "L2:subrace:skill:Imperial Schooling": {
+      "kind": "skill",
+      "ids": [
+        "history"
+      ]
+    }
+  }
+}

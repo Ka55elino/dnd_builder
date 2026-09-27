@@ -11,9 +11,9 @@ import (
 )
 
 // Reference data (JSON) embedded into the binary.
-// Layout: db/data/<table>/... with any nested folders, *.json files.
+// Layout: assets/data/<table>/... with any nested folders, *.json files.
 //
-//go:embed all:db/data
+//go:embed all:assets/data
 var dataFS embed.FS
 
 // seeder fills one table from a folder of JSON files if the table is empty.
@@ -28,23 +28,23 @@ type seeder struct {
 
 // Order matters: classes before subclasses (class_id foreign key).
 var seeders = []seeder{
-	{table: "races", dir: "db/data/races", count: "CountRaces", row: insertRaceJSON},
-	{table: "classes", dir: "db/data/classes", match: notInSubclasses, count: "CountClasses", row: insertClassJSON},
-	{table: "subclasses", dir: "db/data/classes", match: inSubclasses, count: "CountSubclasses", row: insertSubclassJSON},
+	{table: "races", dir: "assets/data/races", count: "CountRaces", row: insertRaceJSON},
+	{table: "classes", dir: "assets/data/classes", match: notInSubclasses, count: "CountClasses", row: insertClassJSON},
+	{table: "subclasses", dir: "assets/data/classes", match: inSubclasses, count: "CountSubclasses", row: insertSubclassJSON},
 
 	// equipment: items before packs (pack_items references both)
-	{table: "weapons", dir: "db/data/weapons", count: "CountWeapons", row: insertWeaponJSON},
-	{table: "armor", dir: "db/data/armor", count: "CountArmor", row: insertArmorJSON},
-	{table: "items", dir: "db/data/items", count: "CountItems", row: insertItemJSON},
-	{table: "packs", dir: "db/data/packs", count: "CountPacks", row: insertPackJSON},
+	{table: "weapons", dir: "assets/data/weapons", count: "CountWeapons", row: insertWeaponJSON},
+	{table: "armor", dir: "assets/data/armor", count: "CountArmor", row: insertArmorJSON},
+	{table: "items", dir: "assets/data/items", count: "CountItems", row: insertItemJSON},
+	{table: "packs", dir: "assets/data/packs", count: "CountPacks", row: insertPackJSON},
 
 	// rules: backgrounds, feats, spells and abilities
-	{table: "backgrounds", dir: "db/data/backgrounds", count: "CountBackgrounds", row: insertBackgroundJSON},
-	{table: "feats", dir: "db/data/feats", count: "CountFeats", row: insertFeatJSON},
-	{table: "spells", dir: "db/data/spells", count: "CountSpells", row: insertSpellJSON},
+	{table: "backgrounds", dir: "assets/data/backgrounds", count: "CountBackgrounds", row: insertBackgroundJSON},
+	{table: "feats", dir: "assets/data/feats", count: "CountFeats", row: insertFeatJSON},
+	{table: "spells", dir: "assets/data/spells", count: "CountSpells", row: insertSpellJSON},
 
 	// sample characters: dev mode only, and only if there are no characters yet
-	{table: "characters", dir: "db/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
+	{table: "characters", dir: "assets/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
 }
 
 func inSubclasses(path string) bool    { return strings.Contains(path, "/subclasses/") }

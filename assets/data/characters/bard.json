@@ -1,0 +1,118 @@
+{
+  "id": "seed-bard",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.969Z",
+  "name": "Liara Silverstring",
+  "portrait": "/img/characters/bard.svg",
+  "bio": {
+    "gender": "Female",
+    "identity": "Woman",
+    "attraction": "—",
+    "age": "130",
+    "height": "5'4\"",
+    "weight": "71 lb",
+    "eyes": "Green",
+    "skin": "Weathered",
+    "hair": "Black, short",
+    "alignment": "Chaotic Good",
+    "trait": "Turns any trouble into a joke.",
+    "ideal": "Art. A song will outlive both the king and the castle.",
+    "bond": "Searching for his teacher's lost manuscript.",
+    "flaw": "Can't keep other people's secrets if they'd make a good ballad.",
+    "weakness": "Gambling."
+  },
+  "level": 2,
+  "backgroundId": "entertainer",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "cha": 2,
+    "dex": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 1,
+    "con": 2,
+    "int": 4,
+    "wis": 3,
+    "cha": 0
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 14,
+    "con": 13,
+    "int": 10,
+    "wis": 12,
+    "cha": 15
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 15,
+    "con": 13,
+    "int": 10,
+    "wis": 12,
+    "cha": 17
+  },
+  "raceId": "halfling",
+  "subraceId": "lightfoot",
+  "classId": "bard",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "leather",
+    "shield": false,
+    "weaponIds": [
+      "rapier",
+      "dagger"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "animal",
+        "arcana",
+        "athletics"
+      ]
+    },
+    "L1:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "bladeWard",
+        "mageHand"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "cureWounds",
+        "healingWord",
+        "fogCloud",
+        "comprehendLanguages"
+      ]
+    },
+    "L2:class:expertise:Expertise": {
+      "kind": "expertise",
+      "ids": [
+        "acrobatics",
+        "animal"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "detectMagic"
+      ]
+    }
+  }
+}

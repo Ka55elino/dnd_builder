@@ -1,0 +1,33 @@
+{
+  "id": "necromancy",
+  "name": "School of Necromancy",
+  "image": "/img/classes/wizard/subclasses/necromancy.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Necromancy Savant",
+      "desc": "You copy Necromancy spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Grim Harvest",
+      "desc": "Once per turn, when you kill a creature with a spell, you regain Hit Points (2 × the spell's level, + the level again for Necromancy spells)."
+    },
+    {
+      "level": 6,
+      "name": "Undead Thralls",
+      "desc": "Animate Dead raises one additional Undead; your Undead servants gain extra Hit Points and extra damage (Proficiency Bonus)."
+    },
+    {
+      "level": 10,
+      "name": "Inured to Undeath",
+      "desc": "Resistance to Necrotic damage; your Hit Point maximum can't be reduced."
+    },
+    {
+      "level": 14,
+      "name": "Command Undead",
+      "desc": "As an action, you take control of an Undead within 60 feet (Charisma saving throw)."
+    }
+  ]
+}

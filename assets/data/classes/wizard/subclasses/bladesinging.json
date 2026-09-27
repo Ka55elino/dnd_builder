@@ -1,0 +1,43 @@
+{
+  "id": "bladesinging",
+  "name": "Bladesinging",
+  "image": "/img/classes/wizard/subclasses/bladesinging.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Training in War and Song",
+      "desc": "You gain proficiency with Light armor, one kind of Martial weapon, and the Performance skill.",
+      "grants": [
+        {
+          "type": "armor",
+          "id": "light"
+        },
+        {
+          "type": "weapon",
+          "id": "martial"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Bladesong",
+      "desc": "As a Bonus Action, for 1 minute: +AC (Int modifier), +10 feet of Speed, Advantage on Acrobatics checks, and a bonus to Concentration. A number of times equal to your Proficiency Bonus."
+    },
+    {
+      "level": 6,
+      "name": "Extra Attack",
+      "desc": "When you take the Attack action, you attack twice; you can replace one attack with casting a cantrip."
+    },
+    {
+      "level": 10,
+      "name": "Song of Defense",
+      "desc": "While your Bladesong is active, you can expend a spell slot to reduce damage you take by 5 × the slot's level."
+    },
+    {
+      "level": 14,
+      "name": "Song of Victory",
+      "desc": "While your Bladesong is active, you add your Int modifier to melee weapon damage."
+    }
+  ]
+}

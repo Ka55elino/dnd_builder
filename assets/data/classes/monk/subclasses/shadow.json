@@ -1,0 +1,28 @@
+{
+  "id": "shadow",
+  "name": "Warrior of Shadow",
+  "image": "/img/classes/monk/subclasses/shadow.png",
+  "class": "monk",
+  "features": [
+    {
+      "level": 3,
+      "name": "Shadow Arts",
+      "desc": "You learn the Minor Illusion cantrip. By spending 1 Focus Point, you can use an action to create Darkness for 10 minutes and see through it. You also master Shadow Step."
+    },
+    {
+      "level": 6,
+      "name": "Shadow Step",
+      "desc": "While in Dim Light or Darkness, as a Bonus Action, you teleport up to 60 feet to another area of Dim Light or Darkness; your next melee attack before the end of the turn has Advantage."
+    },
+    {
+      "level": 11,
+      "name": "Cloak of Shadows",
+      "desc": "As an action in Dim Light or Darkness, you become Invisible until you attack, cast a spell, or enter Bright Light."
+    },
+    {
+      "level": 17,
+      "name": "Imperceptible Form",
+      "desc": "As an action, by spending 3 Focus Points, you become undetectable by creatures and devices for 1 minute; attacks against you have Disadvantage, and your attacks against marked targets have Advantage."
+    }
+  ]
+}

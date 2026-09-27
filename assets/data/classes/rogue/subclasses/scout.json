@@ -1,0 +1,33 @@
+{
+  "id": "scout",
+  "name": "Scout",
+  "image": "/img/classes/rogue/subclasses/scout.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Skirmisher",
+      "desc": "As a Reaction, when an enemy ends its turn within 5 feet of you, you move up to half your Speed without provoking Opportunity Attacks."
+    },
+    {
+      "level": 3,
+      "name": "Survivalist",
+      "desc": "Proficiency in the Nature and Survival skills; your Proficiency Bonus is doubled for checks using these skills."
+    },
+    {
+      "level": 9,
+      "name": "Superior Mobility",
+      "desc": "Your walking Speed increases by 10 feet; your Climb and Swim Speeds (if any) also increase."
+    },
+    {
+      "level": 13,
+      "name": "Ambush Master",
+      "desc": "You have Advantage on Initiative rolls; the first target you hit in the first round has attack rolls made against it with Advantage until your next turn."
+    },
+    {
+      "level": 17,
+      "name": "Sudden Strike",
+      "desc": "When you take the Attack action, you can make one extra attack as a Bonus Action and apply Sneak Attack to it (not against the same target twice in one turn)."
+    }
+  ]
+}

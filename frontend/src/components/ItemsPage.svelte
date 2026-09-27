@@ -5,8 +5,7 @@
      * onBack() — to the menu
      */
     import { onMount } from "svelte";
-    import { DeleteCustomEquipment } from "../../wailsjs/go/main/App.js";
-    import { loadRefs, refreshCatalog } from "../data/refs.js";
+    import { loadRefs, deleteCustomEquipment } from "../data/refs.js";
     import CatalogList from "./common/CatalogList.svelte";
     import ItemEditor from "./ItemEditor.svelte";
 
@@ -35,8 +34,9 @@
         }
     });
 
+    // save/delete already reloaded the cache — take the fresh catalog from it
     async function reload() {
-        catalog = await refreshCatalog();
+        catalog = (await loadRefs()).catalog;
     }
 
     async function onSaved(id, kind) {
@@ -51,7 +51,7 @@
     async function remove(kind, x) {
         confirmDelete = null;
         try {
-            await DeleteCustomEquipment(kind, x.id);
+            await deleteCustomEquipment(kind, x.id);
             await reload();
             status = `“${x.name}” deleted`;
         } catch (e) {

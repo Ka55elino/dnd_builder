@@ -1,0 +1,13 @@
+{
+  "id": "quarterstaff",
+  "name": "Quarterstaff",
+  "image": "/img/weapons/simple/quarterstaff.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "bludgeoning",
+  "mastery": "Topple",
+  "properties": [
+    "versatile"
+  ]
+}

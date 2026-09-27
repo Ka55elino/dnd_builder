@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS races (
     id          TEXT PRIMARY KEY,                -- 'fallen'
     name        TEXT NOT NULL,                   -- 'Fallen Aasimar'
     parent_race TEXT,                            -- 'aasimar' | NULL (the 'race' field from JSON)
-    image       TEXT,                            -- image/icon, data URL (base64) | NULL
+    image       TEXT,                            -- image/icon, "/img/…" URL (see images.go) | NULL
     data_json   TEXT NOT NULL,                   -- traits and everything else
     is_custom   INTEGER NOT NULL DEFAULT 0,
     created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),

@@ -1,0 +1,134 @@
+{
+  "id": "rogue",
+  "name": "Rogue",
+  "image": "/img/classes/rogue/rogue.png",
+  "hitDie": 8,
+  "primaryAbility": [
+    "dex"
+  ],
+  "savingThrows": [
+    "dex",
+    "int"
+  ],
+  "skillCount": 4,
+  "skills": [
+    "acrobatics",
+    "athletics",
+    "deception",
+    "insight",
+    "intimidation",
+    "investigation",
+    "perception",
+    "performance",
+    "persuasion",
+    "sleight",
+    "stealth"
+  ],
+  "caster": "none",
+  "subclassLevel": 3,
+  "asiLevels": [
+    4,
+    8,
+    10,
+    12,
+    16,
+    19
+  ],
+  "armorTraining": [
+    "light"
+  ],
+  "weaponProficiencies": [
+    "simple",
+    "martial"
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Expertise",
+      "desc": "You double your Proficiency Bonus for two chosen skills you're proficient in.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 1,
+      "name": "Sneak Attack",
+      "desc": "Once per turn, when you hit with a weapon that has the Finesse or Ranged property, you deal extra damage if you have Advantage or an ally is next to the target. The dice increase with level (see Class Actions)."
+    },
+    {
+      "level": 1,
+      "name": "Thieves' Cant",
+      "desc": "A secret mix of dialect, signs, and jargon that lets you hide messages in ordinary conversation."
+    },
+    {
+      "level": 1,
+      "name": "Weapon Mastery",
+      "desc": "You can use the mastery properties of 2 kinds of weapons you're proficient with (you can change them after a rest)."
+    },
+    {
+      "level": 2,
+      "name": "Cunning Action",
+      "desc": "As a Bonus Action on each of your turns, you can take the Dash, Disengage, or Hide action."
+    },
+    {
+      "level": 3,
+      "name": "Steady Aim",
+      "desc": "As a Bonus Action, you give yourself Advantage on your next attack roll this turn, but your Speed becomes 0 until the end of the turn."
+    },
+    {
+      "level": 5,
+      "name": "Cunning Strike",
+      "desc": "By forgoing Sneak Attack dice, you add effects to a hit (poison, restrain, trip, distract, and so on)."
+    },
+    {
+      "level": 5,
+      "name": "Uncanny Dodge",
+      "desc": "As a Reaction, you halve the damage from one attack you can see that hits you."
+    },
+    {
+      "level": 6,
+      "name": "Expertise",
+      "desc": "You double your Proficiency Bonus for two more chosen skills you're proficient in.",
+      "choice": {
+        "type": "expertise",
+        "pick": 2
+      }
+    },
+    {
+      "level": 7,
+      "name": "Evasion",
+      "desc": "When you make a Dexterity saving throw to take half damage: on a success, you take no damage; on a failure, you take half."
+    },
+    {
+      "level": 7,
+      "name": "Reliable Talent",
+      "desc": "When you make an ability check that uses your Proficiency Bonus, you can treat a d20 roll of 9 or lower as a 10."
+    },
+    {
+      "level": 11,
+      "name": "Improved Cunning Strike",
+      "desc": "You can apply two different Cunning Strike effects to a single attack."
+    },
+    {
+      "level": 14,
+      "name": "Cunning Strike",
+      "desc": "When you apply Cunning Strike effects, you don't expend Sneak Attack dice on them (for some of the effects)."
+    },
+    {
+      "level": 15,
+      "name": "Slippery Mind",
+      "desc": "You gain proficiency in Wisdom and Charisma saving throws."
+    },
+    {
+      "level": 18,
+      "name": "Elusive",
+      "desc": "As long as you don't have the Incapacitated condition, no attack roll against you can have Advantage."
+    },
+    {
+      "level": 20,
+      "name": "Stroke of Luck",
+      "desc": "Once per Short or Long Rest: you turn a miss into a hit, or treat a failed ability check's d20 roll as a 20."
+    }
+  ]
+}

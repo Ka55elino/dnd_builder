@@ -1,0 +1,13 @@
+{
+  "id": "greataxe",
+  "name": "Greataxe",
+  "image": "/img/weapons/martial/greataxe.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d12",
+  "damageType": "slashing",
+  "mastery": "Cleave",
+  "properties": [
+    "twoHanded"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "spores",
+  "name": "Circle of Spores",
+  "image": "/img/classes/druid/subclasses/spores.png",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Halo of Spores",
+      "desc": "As a Reaction, when a creature is within 10 feet of you, you deal Necrotic damage to it (the die increases with level; no saving throw — it's automatic)."
+    },
+    {
+      "level": 3,
+      "name": "Symbiotic Entity",
+      "desc": "By expending a use of Wild Shape (instead of transforming), you gain Temporary Hit Points equal to 4 × your Druid level; your melee attacks deal an extra 1d6 Necrotic damage, and Halo of Spores damage is doubled."
+    },
+    {
+      "level": 6,
+      "name": "Fungal Infestation",
+      "desc": "As a Reaction, when a Beast or Humanoid dies within 10 feet of you, you raise it as a zombie (Proficiency Bonus uses per Long Rest)."
+    },
+    {
+      "level": 10,
+      "name": "Spreading Spores",
+      "desc": "As a Bonus Action (while Symbiotic Entity is active), you create a 10-foot cloud of spores for 1 minute: enemies inside take Halo of Spores damage."
+    },
+    {
+      "level": 14,
+      "name": "Fungal Body",
+      "desc": "You can't suffer Critical Hits and are immune to the Blinded, Deafened, Frightened, and Poisoned conditions."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "sickle",
+  "name": "Sickle",
+  "image": "/img/weapons/simple/sickle.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "slashing",
+  "mastery": "Nick",
+  "properties": [
+    "light"
+  ]
+}

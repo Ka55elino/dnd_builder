@@ -1,0 +1,8 @@
+{
+  "id": "parchment",
+  "name": "Parchment (Sheet)",
+  "image": "/img/items/parchment.svg",
+  "isDefault": true,
+  "cost": "1 SP",
+  "desc": "A sheet can hold about 250 handwritten words."
+}

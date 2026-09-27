@@ -1,0 +1,21 @@
+{
+  "id": "silver",
+  "name": "Silver Dragon",
+  "image": "/img/races/dragonborn/subraces/silver.png",
+  "race": "dragonborn",
+  "traits": [
+    {
+      "name": "Draconic Ancestry: Silver",
+      "desc": "Your Breath Weapon deals Cold damage; you have Resistance to that damage.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "resistance",
+            "value": "cold"
+          }
+        }
+      ]
+    }
+  ]
+}

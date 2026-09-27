@@ -1,0 +1,18 @@
+{
+  "id": "stone",
+  "name": "Stone Ancestry",
+  "image": "/img/races/goliath/subraces/stone.png",
+  "race": "goliath",
+  "traits": [
+    {
+      "name": "Stone's Endurance",
+      "desc": "As a Reaction, you reduce the damage you take by 1d12 + your Constitution modifier (a number of times equal to your Proficiency Bonus per Long Rest).",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "stonesEndurance"
+        }
+      ]
+    }
+  ]
+}

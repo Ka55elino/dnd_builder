@@ -6,7 +6,7 @@
      * id — character; onDone(id) — saved; onCancel() — cancel
      */
     import { onMount } from "svelte";
-    import { GetCharacter, SaveCharacter } from "../../wailsjs/go/main/App.js";
+    import { GetCharacter, SaveCharacter } from "../api.js";
     import { CharacterBuild, MAX_LEVEL } from "../models/CharacterBuild.svelte.js";
     import { loadRefs, EMPTY_REFS } from "../data/refs.js";
     import LevelScreen from "./LevelScreen.svelte";

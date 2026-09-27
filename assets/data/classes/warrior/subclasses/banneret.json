@@ -1,0 +1,28 @@
+{
+  "id": "banneret",
+  "name": "Purple Dragon Knight",
+  "image": "/img/classes/warrior/subclasses/banneret.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Rallying Cry",
+      "desc": "When you use Second Wind, you choose up to three allies within 60 feet: each one that can see and hear you regains Hit Points equal to your Fighter level."
+    },
+    {
+      "level": 7,
+      "name": "Royal Envoy",
+      "desc": "You gain proficiency in the Persuasion skill (or another skill of your choice if you already have it), and your Proficiency Bonus is doubled for Persuasion checks."
+    },
+    {
+      "level": 10,
+      "name": "Inspiring Surge",
+      "desc": "When you use Action Surge, you let an ally within 60 feet use its Reaction to make a weapon attack. From level 18, two allies."
+    },
+    {
+      "level": 15,
+      "name": "Bulwark",
+      "desc": "When you use Indomitable to reroll an Int, Wis, or Cha saving throw, you let an ally within 60 feet that failed the same saving throw reroll it too."
+    }
+  ]
+}

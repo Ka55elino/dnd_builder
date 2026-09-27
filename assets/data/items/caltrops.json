@@ -1,0 +1,9 @@
+{
+  "id": "caltrops",
+  "name": "Caltrops (Bag)",
+  "image": "/img/items/caltrops.svg",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "1 GP",
+  "desc": "As a Utilize action, you can spread them to cover a 5-foot square within 5 feet. A creature that enters the area for the first time on a turn must succeed on a DC 15 Dexterity saving throw or take 1 Piercing damage and have its Speed reduced to 0 until the start of its next turn. Collecting the caltrops takes 10 minutes."
+}

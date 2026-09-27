@@ -1,0 +1,13 @@
+{
+  "id": "halberd",
+  "name": "Halberd",
+  "image": "/img/weapons/martial/halberd.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d10",
+  "damageType": "slashing",
+  "mastery": "Cleave",
+  "properties": [
+    "twoHanded"
+  ]
+}

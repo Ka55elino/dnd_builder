@@ -1,0 +1,9 @@
+{
+  "id": "holyWater",
+  "name": "Holy Water (Flask)",
+  "image": "/img/items/holyWater.svg",
+  "isDefault": true,
+  "weight": 1,
+  "cost": "25 GP",
+  "desc": "In place of one attack, you can throw the flask at a creature within 20 feet (Dexterity saving throw, DC 8 + your Dexterity modifier + Proficiency Bonus). On a failed save, a Fiend or Undead takes 2d8 Radiant damage."
+}

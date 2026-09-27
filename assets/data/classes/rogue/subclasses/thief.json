@@ -1,0 +1,33 @@
+{
+  "id": "thief",
+  "name": "Thief",
+  "image": "/img/classes/rogue/subclasses/thief.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Fast Hands",
+      "desc": "As your Cunning Action (Bonus Action), you can also make a Dexterity (Sleight of Hand) check, use Thieves' Tools to disarm a trap or open a lock, or take the Utilize action."
+    },
+    {
+      "level": 3,
+      "name": "Second-Story Work",
+      "desc": "Climbing doesn't cost you extra movement; the distance of your running jumps increases by a number of feet equal to your Dexterity modifier."
+    },
+    {
+      "level": 9,
+      "name": "Supreme Sneak",
+      "desc": "While you are hidden, you can expend Sneak Attack dice: for each die expended, such an attack deals an extra 1d6 damage, and you remain hidden while moving."
+    },
+    {
+      "level": 13,
+      "name": "Use Magic Device",
+      "desc": "You can attune to 4 magic items; you can use Spell Scrolls (even of spells not on your list) and items with charges at less risk."
+    },
+    {
+      "level": 17,
+      "name": "Thief's Reflexes",
+      "desc": "In the first round of combat, you take two turns: your normal turn and a second one at your Initiative minus 10 (you can't do this if you are Surprised)."
+    }
+  ]
+}

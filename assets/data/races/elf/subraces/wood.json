@@ -1,0 +1,55 @@
+{
+  "id": "wood",
+  "name": "Wood Elf",
+  "image": "/img/races/elf/subraces/wood.png",
+  "race": "elf",
+  "traits": [
+    {
+      "name": "Fleet of Foot",
+      "desc": "Your Speed increases to 35 feet (+5 feet).",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Druid Cantrip",
+      "desc": "You know the Druidcraft cantrip.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "druidcraft",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Lineage: Longstrider",
+      "desc": "Starting at level 3, you always have Longstrider prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "longstrider"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Lineage: Pass without Trace",
+      "desc": "Starting at level 5, you always have Pass without Trace prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "passWithoutTrace"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "nobleGenies",
+  "name": "Oath of the Noble Genies",
+  "image": "/img/classes/paladin/subclasses/nobleGenies.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "thunderwave",
+      "fogCloud"
+    ],
+    "9": [
+      "callLightning",
+      "sleetStorm"
+    ],
+    "13": [
+      "iceStorm",
+      "controlWater"
+    ],
+    "17": [
+      "flameStrike",
+      "cloudkill"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Genie's Wrath / Elemental Vessel",
+      "desc": "With Channel Divinity, you imbue your strikes with elemental damage (Fire, Cold, Thunder, or Lightning) or take refuge in an elemental vessel."
+    },
+    {
+      "level": 7,
+      "name": "Genie's Aura",
+      "desc": "You and allies within 10 feet gain Resistance to a chosen elemental damage type."
+    },
+    {
+      "level": 15,
+      "name": "Elemental Smite",
+      "desc": "Once per turn, your elemental damage ignores Resistance and deals an extra die."
+    },
+    {
+      "level": 20,
+      "name": "Genie's Splendor",
+      "desc": "As an action, for 1 minute, you hover (Fly Speed), grow in size, and deal elemental damage to enemies around you."
+    }
+  ]
+}

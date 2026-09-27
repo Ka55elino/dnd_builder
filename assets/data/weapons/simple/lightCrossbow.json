@@ -1,0 +1,13 @@
+{
+  "id": "lightCrossbow",
+  "name": "Light Crossbow",
+  "image": "/img/weapons/simple/lightCrossbow.svg",
+  "isDefault": true,
+  "category": "simple",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "mastery": "Slow",
+  "properties": [
+    "ranged"
+  ]
+}

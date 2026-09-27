@@ -1,0 +1,129 @@
+{
+  "id": "seed-druid",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T21:23:52.566Z",
+  "name": "Isa Moss",
+  "portrait": "/img/characters/druid.svg",
+  "bio": {
+    "gender": "Female",
+    "identity": "Woman",
+    "attraction": "—",
+    "age": "19",
+    "height": "4'1\"",
+    "weight": "68 lb",
+    "eyes": "Blue",
+    "skin": "Pale",
+    "hair": "Black, short",
+    "alignment": "Neutral",
+    "trait": "Talks to trees more often than to people.",
+    "ideal": "Balance. Everything in nature must return to its proper course.",
+    "bond": "Guards an ancient stone circle deep in the woods.",
+    "flaw": "Despises city life and doesn't hide it.",
+    "weakness": "Gets lost in crowds."
+  },
+  "level": 1,
+  "backgroundId": "guide",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "wis": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 2,
+    "con": 1,
+    "int": 3,
+    "wis": 0,
+    "cha": 4
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 14,
+    "int": 12,
+    "wis": 15,
+    "cha": 10
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 13,
+    "con": 15,
+    "int": 12,
+    "wis": 17,
+    "cha": 10
+  },
+  "raceId": "elf",
+  "subraceId": "wood",
+  "classId": "druid",
+  "subclassId": null,
+  "equipment": {
+    "armorId": "leather",
+    "shield": true,
+    "weaponIds": [
+      "quarterstaff",
+      "sickle"
+    ],
+    "packId": "explorerPack",
+    "items": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "arcana",
+        "animal"
+      ]
+    },
+    "L1:class:generic:Primal Order": {
+      "kind": "option",
+      "ids": [
+        "magician"
+      ]
+    },
+    "L1:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "poisonSpray",
+        "produceFlame"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "healingWord",
+        "entangle",
+        "fogCloud",
+        "cureWounds"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "guidance",
+        "frostbite"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "goodberry"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "wis"
+      ]
+    }
+  }
+}

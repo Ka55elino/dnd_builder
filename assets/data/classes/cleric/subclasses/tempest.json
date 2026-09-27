@@ -1,0 +1,43 @@
+{
+  "id": "tempest",
+  "name": "Tempest",
+  "image": "/img/classes/cleric/subclasses/tempest.png",
+  "class": "cleric",
+  "domainSpells": {
+    "3": [
+      "fogCloud",
+      "thunderwave",
+      "gustOfWind",
+      "shatter"
+    ],
+    "5": [
+      "callLightning",
+      "sleetStorm"
+    ],
+    "7": [
+      "controlWater",
+      "iceStorm"
+    ],
+    "9": [
+      "destructiveWave",
+      "insectPlague"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Wrath of the Storm",
+      "desc": "As a Reaction when you are hit by an attacker within 5 feet, you deal 2d8 Thunder or Lightning damage to the attacker (Proficiency Bonus uses per Long Rest)."
+    },
+    {
+      "level": 6,
+      "name": "Thunderous Strike",
+      "desc": "When you deal Thunder or Lightning damage, you push a target of Large size or smaller 10 feet away."
+    },
+    {
+      "level": 17,
+      "name": "Stormborn",
+      "desc": "When you take damage, you can use your Reaction to fly up to 60 feet without provoking Opportunity Attacks."
+    }
+  ]
+}

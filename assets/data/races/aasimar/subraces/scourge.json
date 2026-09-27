@@ -1,0 +1,19 @@
+{
+  "id": "scourge",
+  "name": "Scourge Aasimar",
+  "image": "/img/races/aasimar/subraces/scourge.png",
+  "race": "aasimar",
+  "traits": [
+    {
+      "level": 3,
+      "name": "Radiant Consumption",
+      "desc": "As a Bonus Action, you emit searing light for 1 minute: at the start of each of your turns, you and every creature within 10 feet take Radiant damage equal to your Proficiency Bonus.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "radiantConsumption"
+        }
+      ]
+    }
+  ]
+}

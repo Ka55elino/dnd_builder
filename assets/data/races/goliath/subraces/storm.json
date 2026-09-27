@@ -1,0 +1,18 @@
+{
+  "id": "storm",
+  "name": "Storm Giant Ancestry",
+  "image": "/img/races/goliath/subraces/storm.png",
+  "race": "goliath",
+  "traits": [
+    {
+      "name": "Storm's Thunder",
+      "desc": "As a Reaction, you deal 1d8 Thunder damage to an attacker within 60 feet (a number of times equal to your Proficiency Bonus per Long Rest).",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "stormsThunder"
+        }
+      ]
+    }
+  ]
+}

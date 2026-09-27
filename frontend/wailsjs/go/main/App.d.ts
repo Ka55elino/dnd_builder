@@ -26,6 +26,8 @@ export function GetSpells():Promise<Array<main.Spell>>;
 
 export function ListCharacters():Promise<Array<main.CharacterSummary>>;
 
+export function Ready():Promise<void>;
+
 export function SaveCharacter(arg1:string):Promise<string>;
 
 export function SaveCharacterState(arg1:string,arg2:string):Promise<void>;

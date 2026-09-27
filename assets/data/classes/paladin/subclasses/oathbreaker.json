@@ -1,0 +1,46 @@
+{
+  "id": "oathbreaker",
+  "name": "Oathbreaker",
+  "image": "/img/classes/paladin/subclasses/oathbreaker.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "inflictWounds",
+      "rayOfEnfeeblement"
+    ],
+    "9": [
+      "animateDead",
+      "vampiricTouch"
+    ],
+    "13": [
+      "blight",
+      "deathWard"
+    ],
+    "17": [
+      "cloudkill",
+      "dominatePerson"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Control Undead / Dreadful Aspect",
+      "desc": "With Channel Divinity, you take control of Undead or emit a wave of fear."
+    },
+    {
+      "level": 7,
+      "name": "Aura of Hate",
+      "desc": "You, Undead, and Fiends within 10 feet add your Cha modifier to melee weapon damage."
+    },
+    {
+      "level": 15,
+      "name": "Supernatural Resistance",
+      "desc": "Resistance to nonmagical Bludgeoning, Piercing, and Slashing damage."
+    },
+    {
+      "level": 20,
+      "name": "Dread Lord",
+      "desc": "As an action, you shroud yourself in darkness for 1 minute: a 30-foot aura of fear, your shadow allies make extra attacks, and attacks against you have Disadvantage."
+    }
+  ]
+}

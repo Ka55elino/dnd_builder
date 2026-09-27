@@ -1,0 +1,46 @@
+{
+  "id": "sea",
+  "name": "Circle of the Sea",
+  "image": "/img/classes/druid/subclasses/sea.png",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Circle Spells",
+      "desc": "Your Circle of the Sea spells are always prepared and don't count against your limit."
+    },
+    {
+      "level": 6,
+      "name": "Aquatic Affinity",
+      "desc": "Your Wrath of the Sea aura grows; you gain a Swim Speed equal to your Speed and can breathe underwater."
+    },
+    {
+      "level": 10,
+      "name": "Stormborn",
+      "desc": "You gain a Fly Speed and Resistance to Cold, Lightning, and Thunder damage while you aren't underground."
+    },
+    {
+      "level": 14,
+      "name": "Oceanic Gift",
+      "desc": "You can extend Wrath of the Sea to an ally near you."
+    }
+  ],
+  "domainSpells": {
+    "3": [
+      "fogCloud",
+      "gustOfWind"
+    ],
+    "5": [
+      "callLightning",
+      "sleetStorm"
+    ],
+    "7": [
+      "controlWater",
+      "iceStorm"
+    ],
+    "9": [
+      "greaterRestoration",
+      "insectPlague"
+    ]
+  }
+}

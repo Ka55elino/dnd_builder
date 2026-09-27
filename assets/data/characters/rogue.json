@@ -1,0 +1,111 @@
+{
+  "id": "seed-rogue",
+  "createdAt": "2026-09-24T00:00:00.000Z",
+  "updatedAt": "2026-09-24T20:33:09.985Z",
+  "name": "Whisper",
+  "portrait": "/img/characters/rogue.svg",
+  "bio": {
+    "gender": "Non-binary",
+    "identity": "Non-binary person",
+    "attraction": "—",
+    "age": "56",
+    "height": "3'7\"",
+    "weight": "205 lb",
+    "eyes": "Green",
+    "skin": "Weathered",
+    "hair": "Red, braided",
+    "alignment": "Chaotic Neutral",
+    "trait": "Always knows where the exit is.",
+    "ideal": "Freedom. Locks exist to be opened.",
+    "bond": "Owes a large sum to the Lower City thieves' guild.",
+    "flaw": "Can't walk past a poorly guarded purse.",
+    "weakness": "Gold."
+  },
+  "level": 3,
+  "backgroundId": "criminal",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "dex": 2,
+    "int": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 5,
+    "dex": 0,
+    "con": 2,
+    "int": 1,
+    "wis": 4,
+    "cha": 3
+  },
+  "abilities": {
+    "str": 8,
+    "dex": 15,
+    "con": 13,
+    "int": 14,
+    "wis": 10,
+    "cha": 12
+  },
+  "totalAbilities": {
+    "str": 8,
+    "dex": 17,
+    "con": 13,
+    "int": 15,
+    "wis": 10,
+    "cha": 12
+  },
+  "raceId": "tiefling",
+  "subraceId": "infernal",
+  "classId": "rogue",
+  "subclassId": "thief",
+  "equipment": {
+    "armorId": "leather",
+    "shield": false,
+    "weaponIds": [
+      "rapier",
+      "shortbow",
+      "dagger"
+    ],
+    "packId": "burglarPack",
+    "items": [],
+    "bag": [
+      {
+        "kind": "item",
+        "id": "thievesTools",
+        "qty": 1
+      }
+    ]
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "acrobatics",
+        "athletics",
+        "deception",
+        "insight"
+      ]
+    },
+    "L1:class:expertise:Expertise": {
+      "kind": "expertise",
+      "ids": [
+        "acrobatics",
+        "athletics"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "int"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "divination",
+  "name": "School of Divination",
+  "image": "/img/classes/wizard/subclasses/divination.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Divination Savant",
+      "desc": "You copy Divination spells in half the time and for half the gold."
+    },
+    {
+      "level": 3,
+      "name": "Portent",
+      "desc": "When you finish a Long Rest, you roll two d20s and record the results; you can replace any d20 roll made by a creature you can see with one of them."
+    },
+    {
+      "level": 6,
+      "name": "Expert Divination",
+      "desc": "When you cast a Divination spell of level 2 or higher, you regain a spell slot of a lower level."
+    },
+    {
+      "level": 10,
+      "name": "The Third Eye",
+      "desc": "As an action, you gain one benefit: Darkvision, seeing into the Ethereal Plane, reading any language, or greater sight range."
+    },
+    {
+      "level": 14,
+      "name": "Greater Portent",
+      "desc": "Portent gives you three d20s instead of two."
+    }
+  ]
+}

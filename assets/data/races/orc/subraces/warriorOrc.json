@@ -1,0 +1,42 @@
+{
+  "id": "warriorOrc",
+  "name": "Warrior Orc Heritage",
+  "race": "orc",
+  "image": "/img/races/orc/subraces/warriorOrc.png",
+  "desc": "Orcs raised for war: drilled in the tricks and maneuvers of seasoned battle masters.",
+  "traits": [
+    {
+      "level": 5,
+      "name": "Combat Superiority",
+      "desc": "You gain two Superiority Dice, which are d8s. You can use these dice to fuel Maneuvers. You learn one Maneuver of your choice from the Battle Master Maneuvers list. You regain all expended Superiority Dice when you finish a Short or Long Rest. Your Superiority Dice increase in size as you gain levels: d10 at level 10 and d12 at level 18.",
+      "grants": [
+        {
+          "type": "ability",
+          "id": "orcSuperiorityDice"
+        },
+        {
+          "type": "pool",
+          "pool": "maneuver",
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "name": "Veteran Warrior",
+      "desc": "You learn one additional Maneuver of your choice from the Battle Master Maneuvers list.",
+      "grants": [
+        {
+          "type": "pool",
+          "pool": "maneuver",
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "level": 12,
+      "name": "Improved Combat Superiority",
+      "desc": "Your number of Superiority Dice increases to four."
+    }
+  ]
+}

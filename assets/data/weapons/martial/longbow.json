@@ -1,0 +1,14 @@
+{
+  "id": "longbow",
+  "name": "Longbow",
+  "image": "/img/weapons/martial/longbow.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "mastery": "Slow",
+  "properties": [
+    "ranged",
+    "twoHanded"
+  ]
+}

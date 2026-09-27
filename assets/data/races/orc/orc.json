@@ -1,0 +1,31 @@
+{
+  "id": "orc",
+  "name": "Orc",
+  "image": "/img/races/orc/orc.png",
+  "size": "Medium",
+  "speed": 30,
+  "traits": [
+    {
+      "name": "Darkvision",
+      "desc": "You have Darkvision with a range of 120 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 120
+          }
+        }
+      ]
+    },
+    {
+      "name": "Adrenaline Rush",
+      "desc": "As a Bonus Action, you take the Dash action and gain Temporary Hit Points equal to your Proficiency Bonus. Uses equal to your Proficiency Bonus (regained on a rest)."
+    },
+    {
+      "name": "Relentless Endurance",
+      "desc": "When you are reduced to 0 Hit Points but not killed outright, you drop to 1 Hit Point instead. Once per Long Rest."
+    }
+  ]
+}

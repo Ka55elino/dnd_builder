@@ -1,0 +1,43 @@
+{
+  "id": "high",
+  "name": "High Elf",
+  "image": "/img/races/elf/subraces/high.png",
+  "race": "elf",
+  "traits": [
+    {
+      "name": "Wizard Cantrip",
+      "desc": "You know the Prestidigitation cantrip. Whenever you finish a Long Rest, you can replace it with another cantrip from the Wizard spell list.",
+      "grants": [
+        {
+          "type": "spell",
+          "choose": 1,
+          "level": 0,
+          "from": "wizard",
+          "default": "prestidigitation"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Lineage: Detect Magic",
+      "desc": "Starting at level 3, you always have Detect Magic prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "detectMagic"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Lineage: Misty Step",
+      "desc": "Starting at level 5, you always have Misty Step prepared; you can cast it once per Long Rest without a spell slot.",
+      "grants": [
+        {
+          "type": "spell",
+          "id": "mistyStep"
+        }
+      ]
+    }
+  ]
+}

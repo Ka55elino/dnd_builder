@@ -1,0 +1,33 @@
+{
+  "id": "phantom",
+  "name": "Phantom",
+  "image": "/img/classes/rogue/subclasses/phantom.png",
+  "class": "rogue",
+  "features": [
+    {
+      "level": 3,
+      "name": "Whispers of the Dead",
+      "desc": "After each rest, you gain proficiency in one skill or tool of your choice (it changes when you use this again)."
+    },
+    {
+      "level": 3,
+      "name": "Wails from the Grave",
+      "desc": "When you deal Sneak Attack damage, you deal Necrotic damage to a second creature within 30 feet equal to half your Sneak Attack dice. Number of uses equals your Proficiency Bonus."
+    },
+    {
+      "level": 9,
+      "name": "Tokens of the Departed",
+      "desc": "When someone nearby dies, you can use your Reaction to create a trinket (up to your Proficiency Bonus): it grants Advantage on Death Saving Throws and Constitution saving throws, fuels Wails from the Grave, or lets you ask a spirit a question."
+    },
+    {
+      "level": 13,
+      "name": "Ghost Walk",
+      "desc": "As a Bonus Action, you take on a ghostly form for 10 minutes: Fly Speed 10 feet, attack rolls against you have Disadvantage, and you can move through creatures and objects."
+    },
+    {
+      "level": 17,
+      "name": "Death's Friend",
+      "desc": "Wails from the Grave now deals damage to both the first and the second target; at the end of a Long Rest, you gain a trinket if you have none left."
+    }
+  ]
+}

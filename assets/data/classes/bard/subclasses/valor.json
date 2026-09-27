@@ -1,0 +1,42 @@
+{
+  "id": "valor",
+  "name": "College of Valor",
+  "image": "/img/classes/bard/subclasses/valor.png",
+  "class": "bard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Martial Training",
+      "desc": "You gain proficiency with Medium armor, Shields, and Martial weapons.",
+      "grants": [
+        {
+          "type": "armor",
+          "id": "medium"
+        },
+        {
+          "type": "armor",
+          "id": "shield"
+        },
+        {
+          "type": "weapon",
+          "id": "martial"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Combat Inspiration",
+      "desc": "A creature with your Bardic Inspiration die can add it to a weapon damage roll or, as a Reaction, to its AC against one attack."
+    },
+    {
+      "level": 6,
+      "name": "Extra Attack",
+      "desc": "You can attack twice, instead of once, whenever you take the Attack action."
+    },
+    {
+      "level": 14,
+      "name": "War Magic",
+      "desc": "After you take the Attack action, you can cast one Bard spell as a Bonus Action."
+    }
+  ]
+}

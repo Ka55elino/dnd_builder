@@ -1,0 +1,79 @@
+{
+  "id": "arcaneArcher",
+  "name": "Arcane Archer",
+  "image": "/img/classes/warrior/subclasses/arcaneArcher.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Arcane Archer Lore",
+      "desc": "You gain proficiency in the Arcana or Nature skill, and you learn the Prestidigitation or Druidcraft cantrip.",
+      "choices": [
+        {
+          "type": "skill",
+          "pick": 1,
+          "options": [
+            "arcana",
+            "nature"
+          ]
+        },
+        {
+          "type": "cantrip",
+          "pick": 1,
+          "options": [
+            "prestidigitation",
+            "druidcraft"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Arcane Shot",
+      "desc": "You learn two Arcane Shot options; once per turn you can apply one of them to a shot from a bow (2 uses, regained on a rest). New options at levels 7, 10, 15, and 18."
+    },
+    {
+      "level": 7,
+      "name": "Arcane Shot",
+      "desc": "You make a nonmagical arrow magical to overcome resistance and immunity to nonmagical damage."
+    },
+    {
+      "level": 7,
+      "name": "Ever-Ready Shot",
+      "desc": "When you miss with a magic arrow, you can use a Bonus Action to reroll the attack against a different target within 60 feet of the original one."
+    },
+    {
+      "level": 15,
+      "name": "Ever-Ready Shot",
+      "desc": "If you have no uses of Arcane Shot left when you roll Initiative, you regain one use."
+    }
+  ],
+  "optionPools": [
+    {
+      "id": "arcaneShot",
+      "name": "Arcane Shots",
+      "known": [
+        [
+          3,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          18,
+          6
+        ]
+      ]
+    }
+  ]
+}

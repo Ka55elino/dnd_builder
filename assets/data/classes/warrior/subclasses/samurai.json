@@ -1,0 +1,38 @@
+{
+  "id": "samurai",
+  "name": "Samurai",
+  "image": "/img/classes/warrior/subclasses/samurai.png",
+  "class": "warrior",
+  "features": [
+    {
+      "level": 3,
+      "name": "Bonus Proficiencies",
+      "desc": "You gain proficiency in one skill (Performance, History, Insight, or Persuasion) or one language of your choice."
+    },
+    {
+      "level": 3,
+      "name": "Fighting Spirit",
+      "desc": "As a Bonus Action, you give yourself Advantage on weapon attack rolls until the end of the turn and gain Temporary Hit Points (5/10/15 at levels 3/10/15). 3 uses per rest."
+    },
+    {
+      "level": 7,
+      "name": "Elegant Courtier",
+      "desc": "You add your Wisdom modifier to Charisma (Persuasion) checks; you gain proficiency in Wisdom saving throws (or Int/Cha if you already have it)."
+    },
+    {
+      "level": 10,
+      "name": "Tireless Spirit",
+      "desc": "If you have no uses of Fighting Spirit left when you roll Initiative, you regain one use."
+    },
+    {
+      "level": 15,
+      "name": "Rapid Strike",
+      "desc": "When you have Advantage on an attack roll against a target as part of the Attack action, you can forgo it to make an additional weapon attack against the same target (once per turn)."
+    },
+    {
+      "level": 18,
+      "name": "Strength Before Death",
+      "desc": "If damage reduces you to 0 Hit Points but doesn't kill you, you can use your Reaction to delay falling Unconscious and take an extra turn, at the risk of failed Death Saving Throws. Once per Long Rest."
+    }
+  ]
+}

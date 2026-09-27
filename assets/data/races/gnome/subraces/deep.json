@@ -1,0 +1,38 @@
+{
+  "id": "deep",
+  "name": "Deep Gnome (Svirfneblin)",
+  "image": "/img/races/gnome/subraces/deep.png",
+  "race": "gnome",
+  "traits": [
+    {
+      "name": "Superior Darkvision",
+      "desc": "You have Darkvision with a range of 120 feet.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 120
+          }
+        }
+      ]
+    },
+    {
+      "name": "Svirfneblin Camouflage",
+      "desc": "You have Advantage on Dexterity (Stealth) checks made to hide in rocky terrain.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "advantage",
+            "target": "skillCheck",
+            "when": {
+              "skill": "stealth"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

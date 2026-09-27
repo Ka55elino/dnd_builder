@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS armor (
     id          TEXT PRIMARY KEY,                -- 'chainMail'
     name        TEXT NOT NULL,                   -- 'Chain Mail'
-    image       TEXT,                            -- data URL (base64) | NULL
+    image       TEXT,                            -- "/img/…" URL (see images.go) | NULL
     category    TEXT NOT NULL,                   -- light | medium | heavy | shield
     base_ac     INTEGER,                         -- 16 (NULL for a shield)
     is_default  INTEGER NOT NULL DEFAULT 0,      -- 0/1

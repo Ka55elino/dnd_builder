@@ -1,0 +1,46 @@
+{
+  "id": "crown",
+  "name": "Oath of the Crown",
+  "image": "/img/classes/paladin/subclasses/crown.png",
+  "class": "paladin",
+  "domainSpells": {
+    "3": [
+      "command",
+      "zoneOfTruth"
+    ],
+    "9": [
+      "crusadersMantle",
+      "spiritGuardians"
+    ],
+    "13": [
+      "banishment",
+      "guardianOfFaith"
+    ],
+    "17": [
+      "geasSpell",
+      "holdMonster"
+    ]
+  },
+  "features": [
+    {
+      "level": 3,
+      "name": "Champion Challenge / Turn the Tide",
+      "desc": "With Channel Divinity, you challenge the enemies around you (they can't move away from you) or turn the tide of battle by healing your allies."
+    },
+    {
+      "level": 7,
+      "name": "Divine Allegiance",
+      "desc": "As a Reaction when a creature within 5 feet takes damage, you take that damage instead (your Resistances and Immunities don't reduce it)."
+    },
+    {
+      "level": 15,
+      "name": "Unyielding Spirit",
+      "desc": "You have Advantage on saving throws to avoid or end the Paralyzed and Stunned conditions."
+    },
+    {
+      "level": 20,
+      "name": "Exalted Champion",
+      "desc": "As an action, for 1 hour: Resistance to nonmagical weapon damage; allies within 30 feet have Advantage on Wisdom saving throws and Death Saving Throws. When you drop to 0 Hit Points, you rise with 1 Hit Point (once per hour)."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "shortsword",
+  "name": "Shortsword",
+  "image": "/img/weapons/martial/shortsword.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "mastery": "Vex",
+  "properties": [
+    "finesse",
+    "light"
+  ]
+}

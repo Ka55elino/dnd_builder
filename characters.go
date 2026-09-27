@@ -58,7 +58,7 @@ type execer interface {
 	Exec(query string, args ...any) (sql.Result, error)
 }
 
-// insertCharacterJSON seeds a sample character from db/data/characters.
+// insertCharacterJSON seeds a sample character from assets/data/characters.
 func insertCharacterJSON(tx *sql.Tx, raw []byte) error {
 	raw, err := withRacePortrait(tx, raw)
 	if err != nil {
@@ -77,7 +77,7 @@ func withRacePortrait(tx *sql.Tx, raw []byte) ([]byte, error) {
 	if err := json.Unmarshal(raw, &obj); err != nil {
 		return nil, err
 	}
-	if p, _ := obj["portrait"].(string); p != "" && !strings.HasPrefix(p, "data:image/svg+xml") {
+	if p, _ := obj["portrait"].(string); p != "" && !isPlaceholderPortrait(p) {
 		return raw, nil
 	}
 	for _, key := range []string{"subraceId", "raceId"} {
@@ -98,8 +98,28 @@ func withRacePortrait(tx *sql.Tx, raw []byte) ([]byte, error) {
 	return raw, nil
 }
 
+// isPlaceholderPortrait: the SVG silhouette from the seeds ("/img/characters/….svg" or an SVG data URL).
+func isPlaceholderPortrait(p string) bool {
+	return strings.HasSuffix(p, ".svg") || strings.HasPrefix(p, "data:image/svg+xml")
+}
+
 // saveCharacter saves a build (CharacterBuild object JSON) and returns its id.
 func saveCharacter(db execer, buildJSON string) (string, error) {
+	// an uploaded portrait (data URL) goes to the images table, the build keeps its /img/db/ URL
+	if strings.Contains(buildJSON, `"portrait":"data:`) || strings.Contains(buildJSON, `"portrait": "data:`) {
+		var obj map[string]any
+		if err := json.Unmarshal([]byte(buildJSON), &obj); err != nil {
+			return "", fmt.Errorf("invalid character JSON: %w", err)
+		}
+		if err := storeImageField(db, obj, "portrait"); err != nil {
+			return "", err
+		}
+		b, err := json.Marshal(obj)
+		if err != nil {
+			return "", err
+		}
+		buildJSON = string(b)
+	}
 	var head buildHead
 	if err := json.Unmarshal([]byte(buildJSON), &head); err != nil {
 		return "", fmt.Errorf("invalid character JSON: %w", err)

@@ -1,0 +1,43 @@
+{
+  "id": "warMagic",
+  "name": "War Magic",
+  "image": "/img/classes/wizard/subclasses/warMagic.png",
+  "class": "wizard",
+  "features": [
+    {
+      "level": 3,
+      "name": "Tactical Wit",
+      "desc": "You add your Intelligence modifier to your Initiative.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "initiative",
+            "ability": "int"
+          }
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Arcane Deflection",
+      "desc": "As a Reaction when you make a saving throw or are targeted by an attack, you gain +2 to AC or +4 to saving throws until the end of the turn (you can't cast spells this turn)."
+    },
+    {
+      "level": 6,
+      "name": "Power Surge",
+      "desc": "You store surges of power (max = Int modifier): you expend one to add damage equal to half your Wizard level to one spell."
+    },
+    {
+      "level": 10,
+      "name": "Durable Magic",
+      "desc": "While you are concentrating on a spell, you gain +2 to AC and saving throws."
+    },
+    {
+      "level": 14,
+      "name": "Deflecting Shroud",
+      "desc": "After you use Arcane Deflection, you deal Force damage to a creature within 10 feet."
+    }
+  ]
+}

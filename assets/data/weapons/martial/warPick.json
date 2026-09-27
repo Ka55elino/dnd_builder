@@ -1,0 +1,10 @@
+{
+  "id": "warPick",
+  "name": "War Pick",
+  "image": "/img/weapons/martial/warPick.svg",
+  "isDefault": true,
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "mastery": "Sap"
+}

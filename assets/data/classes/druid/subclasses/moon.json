@@ -1,0 +1,33 @@
+{
+  "id": "moon",
+  "name": "Circle of the Moon",
+  "image": "/img/classes/druid/subclasses/moon.png",
+  "class": "druid",
+  "features": [
+    {
+      "level": 3,
+      "name": "Combat Wild Shape",
+      "desc": "You can use Wild Shape as a Bonus Action; in Beast form, you can expend a spell slot to heal 1d8 per level of the slot."
+    },
+    {
+      "level": 3,
+      "name": "Circle Forms",
+      "desc": "You transform into Beasts of CR up to 1 (increasing to your Druid level ÷ 3). Your AC in Beast form is at least 13 + your Wisdom modifier."
+    },
+    {
+      "level": 6,
+      "name": "Improved Circle Forms",
+      "desc": "Your attacks in Beast form count as magical; you can add your Wisdom modifier to their damage."
+    },
+    {
+      "level": 10,
+      "name": "Elemental Wild Shape",
+      "desc": "By expending 2 uses of Wild Shape, you transform into an elemental (see forms)."
+    },
+    {
+      "level": 14,
+      "name": "Thousand Forms",
+      "desc": "You can cast Alter Self at will (at no cost)."
+    }
+  ]
+}
