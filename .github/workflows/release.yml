@@ -1,5 +1,6 @@
-# Release builds: push a tag vX.Y.Z → builds for macOS, Windows and Linux →
+# Release builds: push a tag vX.Y.Z → builds for macOS, Windows, Linux, Android and iOS →
 # a GitHub Release with the files attached.
+# Mobile builds are experimental in Wails v3: if they fail, the desktop release is still published.
 #
 #   1. bump APP_VERSION in constants.go and info.version in build/config.yml (e.g. "0.2.0"), commit
 #   2. git tag v0.2.0 && git push origin v0.2.0
@@ -147,10 +148,136 @@ jobs:
           path: dist/*
           if-no-files-found: error
 
+  android:
+    name: Build (android)
+    needs: version
+    runs-on: ubuntu-latest
+    continue-on-error: true # Wails v3 mobile support is experimental
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+      APP: dnd-builder-v3
+      # optional release signing (Settings → Secrets): without them the APK is signed with the debug keystore
+      KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # the Android SDK and NDK are preinstalled on ubuntu-latest
+      - name: Android NDK
+        run: |
+          echo "ANDROID_NDK_HOME=${ANDROID_NDK_LATEST_HOME}" >> "$GITHUB_ENV"
+          echo "NDK: ${ANDROID_NDK_LATEST_HOME}"
+
+      - name: Install Wails CLI
+        run: |
+          v=$(go list -m -f '{{.Version}}' github.com/wailsapp/wails/v3)
+          go install "github.com/wailsapp/wails/v3/cmd/wails3@$v"
+          wails3 version
+
+      - name: Set version
+        run: |
+          v="${VERSION%%-*}"
+          IFS=. read -r major minor patch <<< "$v"
+          code=$((major * 10000 + minor * 100 + patch)) # 0.2.1 → 201: must grow with every release
+          sed -i -E "s/^(  version: )\"[^\"]*\"/\1\"$v\"/" build/config.yml
+          sed -i -E "s/versionCode [0-9]+/versionCode $code/; s/versionName \"[^\"]*\"/versionName \"$v\"/" build/android/app/build.gradle
+          grep -nE "versionCode|versionName" build/android/app/build.gradle
+
+      - name: Release keystore
+        if: env.KEYSTORE_BASE64 != ''
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          echo "ANDROID_KEYSTORE_FILE=$RUNNER_TEMP/release.keystore" >> "$GITHUB_ENV"
+
+      - name: Build APK (arm64 + x86_64)
+        run: wails3 task android:package:fat
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          ls -la bin
+          cp "bin/$APP.apk" "dist/$APP-$VERSION-android.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APP }}-android
+          path: dist/*
+          if-no-files-found: error
+
+  ios:
+    name: Build (ios)
+    needs: version
+    runs-on: macos-latest
+    continue-on-error: true # Wails v3 mobile support is experimental
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+      APP: dnd-builder-v3
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Wails CLI
+        run: |
+          v=$(go list -m -f '{{.Version}}' github.com/wailsapp/wails/v3)
+          go install "github.com/wailsapp/wails/v3/cmd/wails3@$v"
+          wails3 version
+
+      - name: Set version
+        run: |
+          v="${VERSION%%-*}"
+          sed -i '' -E "s/^(  version: )\"[^\"]*\"/\1\"$v\"/" build/config.yml
+          wails3 task common:update:build-assets
+
+      # Simulator build, ad-hoc signed. A device .ipa needs an Apple Developer certificate and
+      # provisioning profile: wails3 task ios:package:ipa IOS_PLATFORM=device CODESIGN_IDENTITY=… PROVISIONING_PROFILE=…
+      - name: Build (iOS Simulator)
+        run: wails3 task ios:package BUNDLE_ID=com.ka55elino.dndbuilder
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          ls -la bin
+          app=$(find bin -maxdepth 1 -name "*.app" | head -1)
+          if [ -z "$app" ]; then echo "::error::.app not found in bin/"; exit 1; fi
+          ditto -c -k --keepParent "$app" "dist/$APP-$VERSION-ios-simulator.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.APP }}-ios
+          path: dist/*
+          if-no-files-found: error
+
   release:
     name: GitHub Release
-    needs: [version, build]
-    if: github.ref_type == 'tag'
+    needs: [version, build, android, ios]
+    # the desktop builds are required; the mobile ones are attached when they succeeded
+    if: ${{ !cancelled() && github.ref_type == 'tag' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4

@@ -72,6 +72,10 @@ The workflow checks that the tag matches `APP_VERSION` (the version is part of t
 | macOS (Intel + Apple Silicon) | `macos-latest` | `dnd-builder-v3-<ver>-macos-universal.zip` (the .app) |
 | Windows x64 | `windows-latest` | `…-windows-amd64.zip` (the .exe) and `…-windows-amd64-installer.exe` (NSIS) |
 | Linux x64 | `ubuntu-24.04` | `…-linux-amd64.tar.gz` (needs GTK4 and WebKitGTK 6.0: `libgtk-4-1 libwebkitgtk-6.0-4`) |
+| Android (arm64 + x86_64) | `ubuntu-latest` | `…-android.apk` — signed with the debug keystore, or with your own if the `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD` secrets are set |
+| iOS Simulator | `macos-latest` | `…-ios-simulator.zip` (the .app; a device `.ipa` needs an Apple Developer certificate) |
+
+Mobile support in Wails v3 is experimental: the Android and iOS jobs may fail without blocking the release (the desktop files are published anyway).
 
 Then it creates the release with these files and auto-generated notes. A tag with a suffix (`v0.2.0-beta.1`) becomes a pre-release. **Actions → Release → Run workflow** builds without releasing (the files are in the run's artifacts).
 

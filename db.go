@@ -9,14 +9,31 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
+	"strings"
 
+	"github.com/wailsapp/wails/v3/pkg/application"
 	_ "modernc.org/sqlite"
 )
 
 //go:embed db/schema/*.sql
 var schemaFS embed.FS
 
+// appDataDir is the folder for the database:
+//   - iOS / Android: the app's private files directory (application.Mobile.StoragePath);
+//   - desktop: <user config dir>/<APP_NAME> (~/Library/Application Support/… on macOS,
+//     %AppData%\… on Windows, ~/.config/… on Linux).
 func appDataDir() (string, error) {
+	if p := application.Mobile.StoragePath(); p != "" { // "" on desktop
+		return p, os.MkdirAll(p, 0o755)
+	}
+	if runtime.GOOS == "android" {
+		// fallback: $HOME is not set for Android apps, so os.UserConfigDir fails
+		if p := androidFilesDir(); p != "" {
+			return p, os.MkdirAll(p, 0o755)
+		}
+	}
+
 	base, err := os.UserConfigDir()
 
 	if err != nil {
@@ -30,6 +47,19 @@ func appDataDir() (string, error) {
 	}
 
 	return dir, nil
+}
+
+// androidFilesDir: /data/data/<package>/files — the process name of an Android app is its package name.
+func androidFilesDir() string {
+	b, err := os.ReadFile("/proc/self/cmdline")
+	if err != nil {
+		return ""
+	}
+	pkg := strings.TrimRight(strings.SplitN(string(b), "\x00", 2)[0], "\x00")
+	if pkg == "" || strings.ContainsAny(pkg, "/ ") {
+		return ""
+	}
+	return filepath.Join("/data/data", pkg, "files")
 }
 
 // dbFileName returns the database file name including the app version: dnd-v0.1.0.db.

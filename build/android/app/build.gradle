@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.wails.app"
+        applicationId "com.ka55elino.dndbuilder" // the Java package (namespace) stays com.wails.app from the template
         minSdk 21
         targetSdk 35
         versionCode 1
