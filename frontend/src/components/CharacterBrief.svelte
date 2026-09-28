@@ -97,7 +97,7 @@
         if (!build || ref === EMPTY_REFS) return { ch: null, err: null };
         if (!build.classId) return { ch: null, err: "no class" };
         try {
-            return { ch: new Character(build, ref, state.equipped ?? null), err: null };
+            return { ch: new Character(build, ref, state.equipped ?? null, state.bagAdjust ?? null), err: null };
         } catch (e) {
             console.warn("[brief]", e);
             return { ch: null, err: e?.message ?? String(e) };

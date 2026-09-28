@@ -180,7 +180,7 @@ export function playerSheet(snap, state, refs, summary = null) {
         if (!snap?.build?.classId || !refs) return null;
         const build = CharacterBuild.fromJSON(snap.build);
         const st = CharacterState.fromJSON(state ?? snap.state ?? {});
-        const ch = new Character(build, refs, st.equipped ?? null);
+        const ch = new Character(build, refs, st.equipped ?? null, st.bagAdjust ?? null);
         return { hp: st.currentHp(ch), maxHp: ch.maxHp, temp: st.tempHp ?? 0, ac: ch.ac };
     } catch {
         return null;

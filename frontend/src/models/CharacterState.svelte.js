@@ -10,6 +10,9 @@
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
+/** Max quantity of one backpack row. */
+export const BAG_MAX = 1000;
+
 export class CharacterState {
     hpLost = $state(0);          // Hit Points lost (current = max - hpLost)
     tempHp = $state(0);          // Temporary Hit Points
@@ -21,6 +24,8 @@ export class CharacterState {
     inspiration = $state(false);
     equipped = $state(null);     // { main, off, armor } — backpack item keys, see rules/loadout.js
     notes = $state('');          // player notes (free text)
+    bagAdjust = $state({});      // { [backpack item key]: qty delta } — used up / found / thrown away;
+                                 // an item whose qty drops to 0 is removed (see Character)
 
     constructor(data = {}) {
         this.hpLost = Math.max(0, data.hpLost ?? 0);
@@ -33,6 +38,29 @@ export class CharacterState {
         this.inspiration = !!data.inspiration;
         this.equipped = data.equipped ? { ...data.equipped } : null;
         this.notes = typeof data.notes === 'string' ? data.notes : '';
+        this.bagAdjust = { ...(data.bagAdjust ?? {}) };
+    }
+
+    // ---------- backpack ----------
+
+    #shift(key, d) {
+        const v = (this.bagAdjust[key] ?? 0) + d;
+        if (v) this.bagAdjust[key] = v;
+        else delete this.bagAdjust[key];
+    }
+
+    /** Change a backpack row's quantity by n (it = a Character.inventory row), 1…BAG_MAX. */
+    changeQty(it, n) {
+        const next = clamp(it.qty + n, 1, BAG_MAX);
+        if (next !== it.qty) this.#shift(it.key, next - it.qty);
+    }
+
+    /** Throw the whole row out of the backpack. */
+    removeItem(it) {
+        this.#shift(it.key, -it.qty);
+        if (this.equipped) {
+            for (const s of ['main', 'off', 'armor']) if (this.equipped[s] === it.key) this.equipped[s] = null;
+        }
     }
 
     // ---------- Hit Points ----------
@@ -120,6 +148,7 @@ export class CharacterState {
             inspiration: this.inspiration,
             equipped: this.equipped,
             notes: this.notes,
+            bagAdjust: this.bagAdjust,
         });
     }
 

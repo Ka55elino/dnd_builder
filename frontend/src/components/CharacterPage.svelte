@@ -38,8 +38,17 @@
     import ActionCard from "./common/ActionCard.svelte";
     import Tooltip from "./common/Tooltip.svelte";
     import { describeItem, acText, ARMOR_CAT } from "../rules/equipment.js";
-    import { CharacterState } from "../models/CharacterState.svelte.js";
-    import { SLOTS, equip, slotOptions, slotOf, isTwoHanded } from "../rules/loadout.js";
+    import {
+        CharacterState,
+        BAG_MAX,
+    } from "../models/CharacterState.svelte.js";
+    import {
+        SLOTS,
+        equip,
+        slotOptions,
+        slotOf,
+        isTwoHanded,
+    } from "../rules/loadout.js";
     import {
         BIO_GROUPS,
         CharacterBuild,
@@ -50,7 +59,16 @@
         formatModifier,
     } from "../rules/abilities.js";
 
-    let { id, onBack, onEdit, onLevelUp, onGiveItem, backLabel = "← Characters", actions, inGame = false } = $props();
+    let {
+        id,
+        onBack,
+        onEdit,
+        onLevelUp,
+        onGiveItem,
+        backLabel = "← Characters",
+        actions,
+        inGame = false,
+    } = $props();
 
     let raw = $state(null); // as loaded from the DB — for editing
     let build = $state(null);
@@ -79,12 +97,24 @@
 
     // derived layer: everything computed from build + reference data
     const character = $derived(
-        build ? new Character(build, ref, state?.equipped ?? null) : null,
+        build
+            ? new Character(
+                  build,
+                  ref,
+                  state?.equipped ?? null,
+                  state?.bagAdjust ?? null,
+              )
+            : null,
     );
 
     // equipment: changing the item in a slot
     function onEquip(slot, e) {
-        state.equipped = equip(character.equipped, slot, e.currentTarget.value, character.inventory);
+        state.equipped = equip(
+            character.equipped,
+            slot,
+            e.currentTarget.value,
+            character.inventory,
+        );
     }
     // the other hand is taken by a two-handed weapon
     const handBlocked = (slot) => {
@@ -97,10 +127,19 @@
     // worn armor and held shield — for the “Armor” row in equipment
     const worn = $derived(character?.loadout.armor ?? null);
     const heldShield = $derived(
-        [character?.loadout.main, character?.loadout.off].find((x) => x?.kind === "shield") ?? null,
+        [character?.loadout.main, character?.loadout.off].find(
+            (x) => x?.kind === "shield",
+        ) ?? null,
     );
-    const weaponInv = (id) => character?.inventory.find((x) => x.kind === "weapon" && x.ref?.id === id);
-    const SLOT_TAG = { main: "in main hand", off: "in off hand", armor: "worn" };
+    const weaponInv = (id) =>
+        character?.inventory.find(
+            (x) => x.kind === "weapon" && x.ref?.id === id,
+        );
+    const SLOT_TAG = {
+        main: "in main hand",
+        off: "in off hand",
+        armor: "worn",
+    };
 
     // short names for the template
     const race = $derived(character?.race);
@@ -112,7 +151,9 @@
     const pack = $derived(character?.pack);
     const sheet = $derived(character);
     const features = $derived(character?.featureGroups ?? []);
-    const passives = $derived(character?.passives ?? { effects: [], abilities: [] });
+    const passives = $derived(
+        character?.passives ?? { effects: [], abilities: [] },
+    );
 
     const hpNow = $derived(state && character ? state.currentHp(character) : 0);
 
@@ -123,10 +164,12 @@
     let stateError = $state(null);
     let savedJson = $state(null); // what is currently in the DB
     let saving = $state(false);
-    let savedAt = $state(null);   // time of the last save
+    let savedAt = $state(null); // time of the last save
 
     const stateJson = $derived(state ? JSON.stringify(state) : null); // reads all fields → subscription
-    const dirty = $derived(stateJson != null && savedJson != null && stateJson !== savedJson);
+    const dirty = $derived(
+        stateJson != null && savedJson != null && stateJson !== savedJson,
+    );
 
     // --- LAN game: the DM changes Hit Points, the DM's card follows our state ---
     $effect(() => {
@@ -143,7 +186,8 @@
         const onStored = async (e) => {
             const { kind, id, qty } = e.detail ?? {};
             ref = { ...(await loadRefs()) }; // the catalog may have a new custom item
-            if (build && findItem(ref.catalog, kind, id)) build.addToBag(kind, id, qty);
+            if (build && findItem(ref.catalog, kind, id))
+                build.addToBag(kind, id, qty);
         };
         giftEvents.addEventListener("stored", onStored);
         return () => giftEvents.removeEventListener("stored", onStored);
@@ -167,7 +211,9 @@
         const sum = summaryJson;
         clearTimeout(syncTimer);
         syncTimer = setTimeout(() => {
-            sendState(JSON.parse(json), sum ? JSON.parse(sum) : null).catch((e) => console.warn("[game] state not sent:", e));
+            sendState(JSON.parse(json), sum ? JSON.parse(sum) : null).catch(
+                (e) => console.warn("[game] state not sent:", e),
+            );
         }, 250);
         return () => clearTimeout(syncTimer);
     });
@@ -230,12 +276,18 @@
 
     // Print / Save as PDF: the whole sheet, named after the character (see print.js and style.css)
     const printSheet = () =>
-        printPage([build?.name, cls?.name && `${cls.name} ${build.level}`].filter(Boolean).join(" — "));
+        printPage(
+            [build?.name, cls?.name && `${cls.name} ${build.level}`]
+                .filter(Boolean)
+                .join(" — "),
+        );
 
-    const leave = (fn) => async (...args) => {
-        await saveNow();
-        fn?.(...args);
-    };
+    const leave =
+        (fn) =>
+        async (...args) => {
+            await saveNow();
+            fn?.(...args);
+        };
 
     function onKey(e) {
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
@@ -266,15 +318,34 @@
         return { update: fit, destroy: () => ro.disconnect() };
     }
 
-    const hhmm = (d) => d?.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) ?? "";
+    const hhmm = (d) =>
+        d?.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) ?? "";
 
     let hpAmount = $state(1);
 
     // Hit Point buttons (icons: assets/icons/hpDamage|hpHeal|hpTemp.svg)
     const HP_ACTIONS = [
-        { id: "dmg", icon: "hpDamage", short: "−", label: "Damage", run: () => state.damage(hpAmount, character) },
-        { id: "heal", icon: "hpHeal", short: "+", label: "Heal", run: () => state.heal(hpAmount, character) },
-        { id: "temp", icon: "hpTemp", short: "T", label: "Temp HP", run: () => state.setTempHp(hpAmount) },
+        {
+            id: "dmg",
+            icon: "hpDamage",
+            short: "−",
+            label: "Damage",
+            run: () => state.damage(hpAmount, character),
+        },
+        {
+            id: "heal",
+            icon: "hpHeal",
+            short: "+",
+            label: "Heal",
+            run: () => state.heal(hpAmount, character),
+        },
+        {
+            id: "temp",
+            icon: "hpTemp",
+            short: "T",
+            label: "Temp HP",
+            run: () => state.setTempHp(hpAmount),
+        },
     ];
 
     const ft = (n) => `${n} ft.`;
@@ -283,7 +354,9 @@
 <!-- item image (or a placeholder letter) -->
 {#snippet thumb(it, size = "lg")}
     <span class="thumb {size}" class:empty={!it}>
-        {#if it?.ref?.image}<img src={it.ref.image} alt="" />{:else if it}<span>{it.name.slice(0, 1)}</span>{/if}
+        {#if it?.ref?.image}<img src={it.ref.image} alt="" />{:else if it}<span
+                >{it.name.slice(0, 1)}</span
+            >{/if}
     </span>
 {/snippet}
 
@@ -320,20 +393,46 @@
                     {:else}All saved
                     {/if}
                 </span>
-                <button class="save" onclick={saveNow} disabled={saving || !dirty} title="Save state (Ctrl/Cmd+S)">
+                <button
+                    class="save"
+                    onclick={saveNow}
+                    disabled={saving || !dirty}
+                    title="Save state (Ctrl/Cmd+S)"
+                >
                     Save
                 </button>
             {/if}
             {#if onGiveItem}
-                <button class="ghost" onclick={leave(onGiveItem)}>＋ Give Item</button>
+                <button class="ghost" onclick={leave(onGiveItem)}
+                    >＋ Give Item</button
+                >
             {/if}
             {#if onLevelUp && build.level < 20}
-                <button class="ghost levelup" onclick={leave(onLevelUp)}>▲ Level Up</button>
+                <button class="ghost levelup" onclick={leave(onLevelUp)}
+                    >▲ Level Up</button
+                >
             {/if}
-            <button class="ghost" onclick={leave(printSheet)} title="Print the whole sheet or save it as a PDF">Print</button>
-            <button class="ghost" class:bad={!!exportError} onclick={leave(exportSheet)} disabled={exporting}
-                title={exportError || exportNote || "Save the character as a .json file (to move it to another computer or share it)"}>
-                {exporting ? "Exporting…" : exportError ? "Export failed" : exportNote ? "Exported ✓" : "Export"}
+            <button
+                class="ghost"
+                onclick={leave(printSheet)}
+                title="Print the whole sheet or save it as a PDF">Print</button
+            >
+            <button
+                class="ghost"
+                class:bad={!!exportError}
+                onclick={leave(exportSheet)}
+                disabled={exporting}
+                title={exportError ||
+                    exportNote ||
+                    "Save the character as a .json file (to move it to another computer or share it)"}
+            >
+                {exporting
+                    ? "Exporting…"
+                    : exportError
+                      ? "Export failed"
+                      : exportNote
+                        ? "Exported ✓"
+                        : "Export"}
             </button>
             {#if onEdit}
                 <button class="ghost" onclick={leave(() => onEdit(raw))}
@@ -450,16 +549,27 @@
                     <h3>Skills</h3>
                     <ul class="checklist cols-3">
                         {#each sheet.skills as s (s.id)}
-                            <li class:prof={s.proficient} class:expert={s.expertise}>
+                            <li
+                                class:prof={s.proficient}
+                                class:expert={s.expertise}
+                            >
                                 <span class="dot"></span>
-                                <span class="val">{formatModifier(s.value)}</span>
-                                <span>{s.name} <small>({ABILITIES[s.ability].short})</small></span>
+                                <span class="val"
+                                    >{formatModifier(s.value)}</span
+                                >
+                                <span
+                                    >{s.name}
+                                    <small>({ABILITIES[s.ability].short})</small
+                                    ></span
+                                >
                             </li>
                         {/each}
                     </ul>
                     <p class="passive">
                         Passive Perception: <b>{sheet.passivePerception}</b>
-                        {#if sheet.darkvision}· Darkvision: <b>{ft(sheet.darkvision)}</b>{/if}
+                        {#if sheet.darkvision}· Darkvision: <b
+                                >{ft(sheet.darkvision)}</b
+                            >{/if}
                     </p>
                 </div>
             </section>
@@ -486,17 +596,72 @@
                     {#if character.inventory.length}
                         <ul class="inventory">
                             {#each [...character.inventory].sort((a, b) => KIND_ORDER[a.kind] - KIND_ORDER[b.kind]) as it (it.key)}
-                                {@const where = slotOf(it.key, character.equipped)}
+                                {@const where = slotOf(
+                                    it.key,
+                                    character.equipped,
+                                )}
                                 <li class:worn={where}>
                                     <span>
                                         <Tooltip>
                                             {it.name}
-                                            {#snippet tip()}{@render itemTip(it)}{/snippet}
+                                            {#snippet tip()}{@render itemTip(
+                                                    it,
+                                                )}{/snippet}
                                         </Tooltip>
-                                        {#if where}<small class="tag">{SLOT_TAG[where]}</small>{/if}
-                                        {#if it.given}<small class="tag">given</small>{/if}
+                                        {#if where}<small class="tag"
+                                                >{SLOT_TAG[where]}</small
+                                            >{/if}
+                                        {#if it.given}<small class="tag"
+                                                >given</small
+                                            >{/if}
                                     </span>
-                                    <span class="qty">× {it.qty}</span>
+                                    <span class="qty-ctl">
+                                        <button
+                                            class="qty-btn"
+                                            title="Decrease"
+                                            aria-label="Decrease {it.name}"
+                                            disabled={it.qty <= 1}
+                                            onclick={() =>
+                                                state.changeQty(it, -1)}
+                                        >
+                                            <svg
+                                                viewBox="0 0 16 16"
+                                                aria-hidden="true"
+                                                ><path d="M3.5 8h9" /></svg
+                                            >
+                                        </button>
+                                        <span class="qty">× {it.qty}</span>
+                                        <button
+                                            class="qty-btn"
+                                            title="Increase"
+                                            aria-label="Increase {it.name}"
+                                            disabled={it.qty >= BAG_MAX}
+                                            onclick={() =>
+                                                state.changeQty(it, 1)}
+                                        >
+                                            <svg
+                                                viewBox="0 0 16 16"
+                                                aria-hidden="true"
+                                                ><path
+                                                    d="M3.5 8h9M8 3.5v9"
+                                                /></svg
+                                            >
+                                        </button>
+                                        <button
+                                            class="qty-btn remove"
+                                            title="Remove from backpack"
+                                            aria-label="Remove {it.name}"
+                                            onclick={() => state.removeItem(it)}
+                                        >
+                                            <svg
+                                                viewBox="0 0 16 16"
+                                                aria-hidden="true"
+                                                ><path
+                                                    d="M4.5 4.5l7 7M11.5 4.5l-7 7"
+                                                /></svg
+                                            >
+                                        </button>
+                                    </span>
                                 </li>
                             {/each}
                         </ul>
@@ -531,24 +696,44 @@
                 <!-- game state -->
                 <section class="card play">
                     <h2>Status</h2>
-                    {#if stateError}<p class="error">Not saved: {stateError}</p>{/if}
+                    {#if stateError}<p class="error">
+                            Not saved: {stateError}
+                        </p>{/if}
 
                     <div class="hp-row">
                         <div class="hp-big" class:down={hpNow === 0}>
                             <span class="hp-now">{hpNow}</span>
                             <span class="hp-max">/ {character.maxHp}</span>
-                            {#if state.tempHp}<span class="hp-temp">+{state.tempHp} temp</span>{/if}
+                            {#if state.tempHp}<span class="hp-temp"
+                                    >+{state.tempHp} temp</span
+                                >{/if}
                         </div>
                         <!-- number and action column: damage / heal / Temp HP -->
                         <div class="hp-ctl">
-                            <input class="hp-input" type="number" min="1" bind:value={hpAmount} aria-label="Hit Points amount" />
+                            <input
+                                class="hp-input"
+                                type="number"
+                                min="1"
+                                bind:value={hpAmount}
+                                aria-label="Hit Points amount"
+                            />
                             <div class="hp-actions">
                                 {#each HP_ACTIONS as act (act.id)}
                                     <Tooltip delay={150}>
-                                        <button class="hp-btn {act.id}" onclick={() => act.run()} aria-label={act.label}>
-                                            <Icon name={act.icon} label={act.label} short={act.short} native={false} />
+                                        <button
+                                            class="hp-btn {act.id}"
+                                            onclick={() => act.run()}
+                                            aria-label={act.label}
+                                        >
+                                            <Icon
+                                                name={act.icon}
+                                                label={act.label}
+                                                short={act.short}
+                                                native={false}
+                                            />
                                         </button>
-                                        {#snippet tip()}<b>{act.label}</b> by {hpAmount || 0}{/snippet}
+                                        {#snippet tip()}<b>{act.label}</b> by {hpAmount ||
+                                                0}{/snippet}
                                     </Tooltip>
                                 {/each}
                             </div>
@@ -561,30 +746,58 @@
                             {#each character.resources as r (r.id)}
                                 {@const left = state.resourceLeft(r)}
                                 <li>
-                                    <span class="pool-name">{r.name}{#if r.die} <b class="pool-die">{r.die}</b>{/if}
-                                        <small><IconLabel
-                                            name={r.recharge === "short" ? "shortRest" : "longRest"}
-                                            kind="rest"
-                                            label={r.recharge === "short" ? "Recharges on a Short Rest" : "Recharges on a Long Rest"}
-                                            text={r.recharge === "short" ? "Short Rest" : "Long Rest"}
-                                        /></small></span>
+                                    <span class="pool-name"
+                                        >{r.name}{#if r.die}
+                                            <b class="pool-die">{r.die}</b>{/if}
+                                        <small
+                                            ><IconLabel
+                                                name={r.recharge === "short"
+                                                    ? "shortRest"
+                                                    : "longRest"}
+                                                kind="rest"
+                                                label={r.recharge === "short"
+                                                    ? "Recharges on a Short Rest"
+                                                    : "Recharges on a Long Rest"}
+                                                text={r.recharge === "short"
+                                                    ? "Short Rest"
+                                                    : "Long Rest"}
+                                            /></small
+                                        ></span
+                                    >
                                     <span class="pips">
                                         {#if r.max > 10}
-                                            <button class="ghost step" onclick={() => state.spend(r)} disabled={left === 0} aria-label="Spend">−</button>
-                                            <button class="ghost step" onclick={() => state.restore(r)} disabled={left === r.max} aria-label="Restore">+</button>
-                                        {:else}
-                                        {#each Array(r.max) as _, i}
                                             <button
-                                                class="pip"
-                                                class:full={i < left}
-                                                title={i < left ? "Spend" : "Restore"}
-                                                aria-label={r.name}
-                                                onclick={() => (i < left ? state.spend(r) : state.restore(r))}
-                                            ></button>
-                                        {/each}
+                                                class="ghost step"
+                                                onclick={() => state.spend(r)}
+                                                disabled={left === 0}
+                                                aria-label="Spend">−</button
+                                            >
+                                            <button
+                                                class="ghost step"
+                                                onclick={() => state.restore(r)}
+                                                disabled={left === r.max}
+                                                aria-label="Restore">+</button
+                                            >
+                                        {:else}
+                                            {#each Array(r.max) as _, i}
+                                                <button
+                                                    class="pip"
+                                                    class:full={i < left}
+                                                    title={i < left
+                                                        ? "Spend"
+                                                        : "Restore"}
+                                                    aria-label={r.name}
+                                                    onclick={() =>
+                                                        i < left
+                                                            ? state.spend(r)
+                                                            : state.restore(r)}
+                                                ></button>
+                                            {/each}
                                         {/if}
                                     </span>
-                                    <span class="pool-count">{left}/{r.max}</span>
+                                    <span class="pool-count"
+                                        >{left}/{r.max}</span
+                                    >
                                 </li>
                             {/each}
                         </ul>
@@ -593,7 +806,17 @@
                     {#if character.spellSlots.length}
                         <h3>
                             Spell Slots
-                            <small class="sc-meta"><IconLabel name="dc" kind="meta" label="Your spell save DC" text="DC" /> {character.spellcasting.saveDC} · attack {formatModifier(character.spellcasting.attack)}</small>
+                            <small class="sc-meta"
+                                ><IconLabel
+                                    name="dc"
+                                    kind="meta"
+                                    label="Your spell save DC"
+                                    text="DC"
+                                />
+                                {character.spellcasting.saveDC} · attack {formatModifier(
+                                    character.spellcasting.attack,
+                                )}</small
+                            >
                         </h3>
                         <ul class="pools">
                             {#each character.spellSlots as slot (state.slotKey(slot))}
@@ -603,10 +826,13 @@
                                         <IconLabel
                                             name={slot.pact ? "pact" : "slot"}
                                             kind="meta"
-                                            label={slot.pact ? "Pact slot — recharges on a Short Rest" : "Spell slot"}
+                                            label={slot.pact
+                                                ? "Pact slot — recharges on a Short Rest"
+                                                : "Spell slot"}
                                             text=""
                                         />
-                                        Level {slot.level}{#if slot.pact && !hasIcon("pact")} <small>pact</small>{/if}
+                                        Level {slot.level}{#if slot.pact && !hasIcon("pact")}
+                                            <small>pact</small>{/if}
                                     </span>
                                     <span class="pips">
                                         {#each Array(slot.max) as _, i}
@@ -615,19 +841,33 @@
                                                 class:pact={slot.pact}
                                                 class:full={i < left}
                                                 aria-label="Level {slot.level} slot"
-                                                onclick={() => state.useSlot(slot, i < left ? 1 : -1)}
+                                                onclick={() =>
+                                                    state.useSlot(
+                                                        slot,
+                                                        i < left ? 1 : -1,
+                                                    )}
                                             ></button>
                                         {/each}
                                     </span>
-                                    <span class="pool-count">{left}/{slot.max}</span>
+                                    <span class="pool-count"
+                                        >{left}/{slot.max}</span
+                                    >
                                 </li>
                             {/each}
                         </ul>
                     {/if}
 
                     <div class="rests">
-                        <button class="ghost" onclick={() => state.shortRest(character)}>Short Rest</button>
-                        <button class="ghost" onclick={() => state.longRest(character)}>Long Rest</button>
+                        <button
+                            class="ghost"
+                            onclick={() => state.shortRest(character)}
+                            >Short Rest</button
+                        >
+                        <button
+                            class="ghost"
+                            onclick={() => state.longRest(character)}
+                            >Long Rest</button
+                        >
                     </div>
                 </section>
 
@@ -642,19 +882,48 @@
                                     <dd>
                                         {#each g.items as l (l.label)}
                                             <Tooltip>
-                                                <span class="fx-chip fx-{g.id}" style={l.dmg ? `--c: var(--color-dmg-${l.dmg})` : ""}>
-                                                    {#if l.dmg && hasIcon(l.dmg)}<Icon name={l.dmg} kind="dmg" label={l.label} native={false} />{:else}{l.label}{/if}
+                                                <span
+                                                    class="fx-chip fx-{g.id}"
+                                                    style={l.dmg
+                                                        ? `--c: var(--color-dmg-${l.dmg})`
+                                                        : ""}
+                                                >
+                                                    {#if l.dmg && hasIcon(l.dmg)}<Icon
+                                                            name={l.dmg}
+                                                            kind="dmg"
+                                                            label={l.label}
+                                                            native={false}
+                                                        />{:else}{l.label}{/if}
                                                 </span>
                                                 {#snippet tip()}
                                                     <div class="tip">
-                                                        {#if l.dmg}<div class="tip-head"><b>{g.title}: {l.label}</b></div>{/if}
-                                                        {#if l.note}<p class="tip-desc">{l.note}</p>{/if}
+                                                        {#if l.dmg}<div
+                                                                class="tip-head"
+                                                            >
+                                                                <b
+                                                                    >{g.title}: {l.label}</b
+                                                                >
+                                                            </div>{/if}
+                                                        {#if l.note}<p
+                                                                class="tip-desc"
+                                                            >
+                                                                {l.note}
+                                                            </p>{/if}
                                                         {#each l.sources as s}
-                                                            <div class="tip-head">
+                                                            <div
+                                                                class="tip-head"
+                                                            >
                                                                 <b>{s.name}</b>
-                                                                {#if s.from}<span class="tip-tag">{s.from}</span>{/if}
+                                                                {#if s.from}<span
+                                                                        class="tip-tag"
+                                                                        >{s.from}</span
+                                                                    >{/if}
                                                             </div>
-                                                            {#if s.desc}<p class="tip-desc">{s.desc}</p>{/if}
+                                                            {#if s.desc}<p
+                                                                    class="tip-desc"
+                                                                >
+                                                                    {s.desc}
+                                                                </p>{/if}
                                                         {/each}
                                                     </div>
                                                 {/snippet}
@@ -675,14 +944,24 @@
                                                 <div class="tip">
                                                     <div class="tip-head">
                                                         <b>{a.name}</b>
-                                                        <span class="tip-tag">{a.source}{a.level ? ` · Level ${a.level}` : ""}</span>
+                                                        <span class="tip-tag"
+                                                            >{a.source}{a.level
+                                                                ? ` · Level ${a.level}`
+                                                                : ""}</span
+                                                        >
                                                     </div>
-                                                    {#if a.desc}<p class="tip-desc">{a.desc}</p>{/if}
+                                                    {#if a.desc}<p
+                                                            class="tip-desc"
+                                                        >
+                                                            {a.desc}
+                                                        </p>{/if}
                                                 </div>
                                             {/snippet}
                                         </Tooltip>
                                         <small>{a.source}</small>
-                                        {#each a.notes as n}<span class="pa-note">{n}</span>{/each}
+                                        {#each a.notes as n}<span
+                                                class="pa-note">{n}</span
+                                            >{/each}
                                     </li>
                                 {/each}
                             </ul>
@@ -701,7 +980,9 @@
                                 {#if held}
                                     <Tooltip>
                                         {@render thumb(held, "lg")}
-                                        {#snippet tip()}{@render itemTip(held)}{/snippet}
+                                        {#snippet tip()}{@render itemTip(
+                                                held,
+                                            )}{/snippet}
                                     </Tooltip>
                                 {:else}
                                     {@render thumb(null, "lg")}
@@ -711,12 +992,19 @@
                                     disabled={blocked}
                                     onchange={(e) => onEquip(slot.id, e)}
                                 >
-                                    <option value="">{blocked ? "— occupied (two-handed) —" : "— empty —"}</option>
+                                    <option value=""
+                                        >{blocked
+                                            ? "— occupied (two-handed) —"
+                                            : "— empty —"}</option
+                                    >
                                     {#each slotOptions(slot.id, character.inventory) as it (it.key)}
                                         <option value={it.key}>
                                             {it.name}{isTwoHanded(it)
                                                 ? " (two-handed)"
-                                                : (it.ref?.data?.properties ?? []).includes("light")
+                                                : (
+                                                        it.ref?.data
+                                                            ?.properties ?? []
+                                                    ).includes("light")
                                                   ? " (light)"
                                                   : ""}
                                         </option>
@@ -731,10 +1019,20 @@
                         {#if worn}
                             <Tooltip>
                                 <b class="al-name">{worn.name}</b>
-                                {#snippet tip()}{@render itemTip(worn)}{/snippet}
+                                {#snippet tip()}{@render itemTip(
+                                        worn,
+                                    )}{/snippet}
                             </Tooltip>
-                            <span class="al-meta">{ARMOR_CAT[worn.ref.category] ?? ""} · AC {acText(worn.ref)}{worn.ref.data?.acBonus ? ` +${worn.ref.data.acBonus}` : ""}</span>
-                            {#if worn.ref.data?.stealthDisadvantage}<span class="al-warn">Stealth Disadvantage</span>{/if}
+                            <span class="al-meta"
+                                >{ARMOR_CAT[worn.ref.category] ?? ""} · AC {acText(
+                                    worn.ref,
+                                )}{worn.ref.data?.acBonus
+                                    ? ` +${worn.ref.data.acBonus}`
+                                    : ""}</span
+                            >
+                            {#if worn.ref.data?.stealthDisadvantage}<span
+                                    class="al-warn">Stealth Disadvantage</span
+                                >{/if}
                         {:else}
                             <span class="al-meta">no armor</span>
                         {/if}
@@ -742,41 +1040,87 @@
                             <span class="al-sep">+</span>
                             <Tooltip>
                                 <b class="al-name">{heldShield.name}</b>
-                                {#snippet tip()}{@render itemTip(heldShield)}{/snippet}
+                                {#snippet tip()}{@render itemTip(
+                                        heldShield,
+                                    )}{/snippet}
                             </Tooltip>
-                            <span class="al-meta">+{heldShield.ref.data?.acBonus ?? 2} AC</span>
+                            <span class="al-meta"
+                                >+{heldShield.ref.data?.acBonus ?? 2} AC</span
+                            >
                         {/if}
                         <span class="al-total">Total AC <b>{sheet.ac}</b></span>
                     </div>
 
                     <table class="attacks">
                         <thead>
-                            <tr><th>Hand</th><th>Weapon</th><th>Action</th><th>Bonus</th><th>Damage / type</th></tr>
+                            <tr
+                                ><th>Hand</th><th>Weapon</th><th>Action</th><th
+                                    >Bonus</th
+                                ><th>Damage / type</th></tr
+                            >
                         </thead>
                         <tbody>
                             {#each sheet.attacks as a (a.hand + a.id)}
                                 <tr>
-                                    <td class="hand">{a.hand === "off" ? "off" : "main"}</td>
+                                    <td class="hand"
+                                        >{a.hand === "off" ? "off" : "main"}</td
+                                    >
                                     <td>
                                         {#if weaponInv(a.id)}
                                             <Tooltip>
                                                 {a.name}
-                                                {#snippet tip()}{@render itemTip(weaponInv(a.id))}{/snippet}
+                                                {#snippet tip()}{@render itemTip(
+                                                        weaponInv(a.id),
+                                                    )}{/snippet}
                                             </Tooltip>
                                         {:else}{a.name}{/if}
-                                        {#if a.magic}<small class="magic">★</small>{/if}
+                                        {#if a.magic}<small class="magic"
+                                                >★</small
+                                            >{/if}
                                     </td>
-                                    <td class="act" class:bonus={a.action === "bonus"}>
-                                        {a.action === "bonus" ? "bonus" : "attack"}
+                                    <td
+                                        class="act"
+                                        class:bonus={a.action === "bonus"}
+                                    >
+                                        {a.action === "bonus"
+                                            ? "bonus"
+                                            : "attack"}
                                     </td>
-                                    <td class="num">{formatModifier(a.toHit)}</td>
+                                    <td class="num"
+                                        >{formatModifier(a.toHit)}</td
+                                    >
                                     <td>
                                         {a.damage}
-                                        <small class="dmg-ico"><IconLabel name={a.damageType} kind="dmg" label={damageLabel(a.damageType)} text={damageShort(a.damageType)} /></small>
+                                        <small class="dmg-ico"
+                                            ><IconLabel
+                                                name={a.damageType}
+                                                kind="dmg"
+                                                label={damageLabel(
+                                                    a.damageType,
+                                                )}
+                                                text={damageShort(a.damageType)}
+                                            /></small
+                                        >
                                         {#each a.extra ?? [] as x}
-                                            <span class="extra">+ {x.dice} <small class="dmg-ico"><IconLabel name={x.type} kind="dmg" label={damageLabel(x.type)} text={damageShort(x.type)} /></small></span>
+                                            <span class="extra"
+                                                >+ {x.dice}
+                                                <small class="dmg-ico"
+                                                    ><IconLabel
+                                                        name={x.type}
+                                                        kind="dmg"
+                                                        label={damageLabel(
+                                                            x.type,
+                                                        )}
+                                                        text={damageShort(
+                                                            x.type,
+                                                        )}
+                                                    /></small
+                                                ></span
+                                            >
                                         {/each}
-                                        {#if a.note}<small class="hint">· {a.note}</small>{/if}
+                                        {#if a.note}<small class="hint"
+                                                >· {a.note}</small
+                                            >{/if}
                                     </td>
                                 </tr>
                             {/each}
@@ -790,7 +1134,9 @@
                             Actions & spells
                             {#if character.spellcasting}
                                 <small class="h2-sub">
-                                    DC {character.spellcasting.saveDC} · attack {formatModifier(character.spellcasting.attack)}
+                                    DC {character.spellcasting.saveDC} · attack {formatModifier(
+                                        character.spellcasting.attack,
+                                    )}
                                 </small>
                             {/if}
                         </h2>
@@ -803,7 +1149,9 @@
                                         level={character.level}
                                         source={c.source}
                                         uses={c.uses}
-                                        saveDC={g.spells ? c.saveDC ?? null : null}
+                                        saveDC={g.spells
+                                            ? (c.saveDC ?? null)
+                                            : null}
                                         note={c.note ?? ""}
                                     />
                                 {/each}
@@ -817,7 +1165,8 @@
                     <section class="card notes">
                         <h2>
                             Notes
-                            {#if dirty}<small class="h2-sub">not saved</small>{/if}
+                            {#if dirty}<small class="h2-sub">not saved</small
+                                >{/if}
                         </h2>
                         <textarea
                             bind:value={state.notes}
@@ -918,8 +1267,8 @@
         font-family: var(--font-lore);
         font-size: 15px;
         line-height: 1.5;
-        resize: none;       /* height is set by the text (autosize) */
-        overflow: hidden;   /* no inner scrolling */
+        resize: none; /* height is set by the text (autosize) */
+        overflow: hidden; /* no inner scrolling */
         outline: none;
     }
 
@@ -1038,9 +1387,15 @@
         height: 16px;
     }
 
-    .hp-btn.dmg { --c: var(--color-danger); }
-    .hp-btn.heal { --c: var(--color-success); }
-    .hp-btn.temp { --c: var(--color-text-accent); }
+    .hp-btn.dmg {
+        --c: var(--color-danger);
+    }
+    .hp-btn.heal {
+        --c: var(--color-success);
+    }
+    .hp-btn.temp {
+        --c: var(--color-text-accent);
+    }
 
     .hp-btn:hover {
         border-color: var(--c);
@@ -1671,10 +2026,72 @@
     .inventory li {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     .qty {
         color: var(--color-gold);
+    }
+
+    .qty-ctl {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex: 0 0 auto;
+    }
+
+    .qty-ctl .qty {
+        min-width: 44px;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .qty-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+    }
+
+    .qty-btn svg {
+        width: 12px;
+        height: 12px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+    }
+
+    .qty-btn:hover:not(:disabled) {
+        border-color: var(--color-gold);
+        color: var(--color-gold-hover);
+    }
+
+    .qty-btn.remove {
+        margin-left: 4px;
+    }
+
+    .qty-btn.remove:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    .qty-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+
+    @media print {
+        .qty-btn {
+            display: none;
+        }
     }
 
     /* ---------- features ---------- */
@@ -1789,7 +2206,9 @@
 
     /* expertise: outlined circle */
     .checklist li.expert .dot {
-        box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-gold);
+        box-shadow:
+            0 0 0 2px var(--color-bg),
+            0 0 0 3px var(--color-gold);
     }
 
     /* ---------- tooltips ---------- */
@@ -1935,11 +2354,21 @@
         color: var(--c);
     }
 
-    .fx-chip.fx-advantage { --c: var(--color-success); }
-    .fx-chip.fx-disadvantage { --c: var(--color-danger); }
-    .fx-chip.fx-sense { --c: var(--color-rest-shortRest); }
-    .fx-chip.fx-bonus { --c: var(--color-gold); }
-    .fx-chip.fx-note { --c: var(--color-text-secondary); }
+    .fx-chip.fx-advantage {
+        --c: var(--color-success);
+    }
+    .fx-chip.fx-disadvantage {
+        --c: var(--color-danger);
+    }
+    .fx-chip.fx-sense {
+        --c: var(--color-rest-shortRest);
+    }
+    .fx-chip.fx-bonus {
+        --c: var(--color-gold);
+    }
+    .fx-chip.fx-note {
+        --c: var(--color-text-secondary);
+    }
 
     .pa {
         margin: 0;

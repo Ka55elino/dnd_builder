@@ -67,8 +67,9 @@ export class Character {
      * @param refs  { races, classes, eq: { armor, weapons, packs } }
      * @param equipped loadout from CharacterState ({ main, off, armor }) or null —
      *                 then the default from the builder choices is used
+     * @param bagAdjust CharacterState.bagAdjust — { [item key]: qty delta } or null
      */
-    constructor(build, refs = {}, equipped = null) {
+    constructor(build, refs = {}, equipped = null, bagAdjust = null) {
         const races = refs.races ?? [];
         const classes = refs.classes ?? [];
         const eq = refs.eq ?? {};
@@ -119,6 +120,10 @@ export class Character {
             if (same) same.qty += b.qty;
             else this.inventory.push({ key, kind, name: ref.name, ref, qty: b.qty, given: true });
         }
+        // in-play changes from CharacterState.bagAdjust: +/- per row, 0 — thrown away
+        this.inventory = this.inventory
+            .map((it) => ({ ...it, qty: Math.min(1000, it.qty + (bagAdjust?.[it.key] ?? 0)) }))
+            .filter((it) => it.qty > 0);
 
         // --- loadout: what's in hand and what's worn ---
         this.equipped = equipped
