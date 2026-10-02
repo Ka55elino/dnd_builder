@@ -1,0 +1,20 @@
+{
+  "id": "protectionFromEvil",
+  "name": "Protection from Evil and Good",
+  "category": "effect",
+  "spell": "protectionFromEvil",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacksAgainst",
+      "note": "from Aberrations, Celestials, Elementals, Fey, Fiends and Undead"
+    },
+    {
+      "kind": "note",
+      "note": "they can't Charm, Frighten or possess you"
+    }
+  ],
+  "desc": "Protection from Aberrations, Celestials, Elementals, Fey, Fiends, and Undead."
+}

@@ -8,6 +8,9 @@
   "classes": [
     "ranger"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "You throw a weapon or fire a piece of ammunition, creating a 60-foot Cone of projectiles: 3d8 damage (the weapon's damage type), Dexterity saving throw for half.",
   "casting": {
     "time": "1 action",

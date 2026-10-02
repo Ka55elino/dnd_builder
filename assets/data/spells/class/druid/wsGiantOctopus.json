@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1. HP 52, AC 11, Speed 10 ft., Swim 60 ft. Tentacles grapple (escape DC 16); ink cloud; Water Breathing.",
   "damage": {
     "dice": "2d6",

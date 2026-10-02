@@ -5,5 +5,12 @@
   "subclass": "war",
   "level": 6,
   "action": "reaction",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. As a Reaction, you grant a +10 bonus to an attack roll for yourself or an ally within 30 feet (after the roll, before the result)."
 }

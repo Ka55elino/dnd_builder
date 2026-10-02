@@ -8,6 +8,13 @@
   "classes": [
     "paladin"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
+  "apply": {
+    "condition": "prone",
+    "target": "enemy"
+  },
   "desc": "As a Bonus Action: your next hit deals an extra 2d6 Thunder damage; the target makes a Strength saving throw or is knocked Prone and pushed 10 feet away.",
   "damage": {
     "dice": "2d6",

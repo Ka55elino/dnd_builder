@@ -1,0 +1,62 @@
+{
+  "id": "srd-homunculus",
+  "name": "Homunculus",
+  "type": "construct",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 13,
+  "hp": 5,
+  "hpFormula": "2d4",
+  "initiative": 2,
+  "speed": {
+    "fly": 40,
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 11,
+    "dex": 15,
+    "int": 10,
+    "str": 4,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "understands the languages of its creator but can't speak",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Telepathic Bond",
+      "desc": "While the homunculus is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      }
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/construct/homunculus.png"
+}

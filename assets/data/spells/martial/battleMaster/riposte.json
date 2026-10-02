@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "When an enemy misses you with a melee attack, you use your Reaction to attack it, with extra damage equal to the die.",
   "action": "reaction",
   "pool": "maneuver"

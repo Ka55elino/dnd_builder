@@ -67,5 +67,6 @@
   "traits": [],
   "bonusActions": [],
   "reactions": [],
-  "senses": {}
+  "senses": {},
+  "image": "/img/monsters/celestial/pegasus.png"
 }

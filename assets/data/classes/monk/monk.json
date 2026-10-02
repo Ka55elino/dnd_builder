@@ -87,7 +87,17 @@
     {
       "level": 5,
       "name": "Extra Attack",
-      "desc": "You make two attacks when you take the Attack action."
+      "desc": "You make two attacks when you take the Attack action.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "set",
+            "target": "attacksPerAction",
+            "value": 2
+          }
+        }
+      ]
     },
     {
       "level": 5,

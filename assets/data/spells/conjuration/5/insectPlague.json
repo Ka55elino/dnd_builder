@@ -10,6 +10,12 @@
     "druid",
     "sorcerer"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "A swarm in a 20-foot Sphere: Difficult Terrain and Piercing damage. Concentration.",
   "damage": {
     "dice": "4d10",

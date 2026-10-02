@@ -11,5 +11,8 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "text": "+{n} hour duration"
+  },
   "desc": "A cylinder protects against a chosen creature type (Fiends, Undead, and so on)."
 }

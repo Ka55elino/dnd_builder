@@ -1,0 +1,61 @@
+{
+  "id": "srd-rhinoceros",
+  "name": "Rhinoceros",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 11,
+  "hp": 45,
+  "hpFormula": "6d10+12",
+  "initiative": -1,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 15,
+    "dex": 8,
+    "int": 2,
+    "str": 21,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Strength saving throw or be knocked prone."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Gore",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d8+5",
+          "avg": 14
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/rhinoceros.png"
+}

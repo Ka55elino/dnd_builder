@@ -1,0 +1,16 @@
+{
+  "id": "crusadersMantle",
+  "name": "Crusader's Mantle",
+  "category": "effect",
+  "spell": "crusadersMantle",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "damage",
+      "dice": "1d4",
+      "sign": 1,
+      "type": "radiant"
+    }
+  ],
+  "desc": "Your weapon attacks deal an extra 1d4 Radiant damage."
+}

@@ -1,0 +1,64 @@
+{
+  "id": "srd-crocodile",
+  "name": "Crocodile",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 12,
+  "hp": 19,
+  "hpFormula": "3d10+3",
+  "initiative": 0,
+  "speed": {
+    "swim": 20,
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 13,
+    "dex": 10,
+    "int": 2,
+    "str": 15,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "stealth": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Hold Breath",
+      "desc": "The crocodile can hold its breath for 15 minutes."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target is grappled (escape DC 12). Until this grapple ends, the target is restrained, and the crocodile can't bite another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+2",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/crocodile.png"
+}

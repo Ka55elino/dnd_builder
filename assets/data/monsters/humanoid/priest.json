@@ -1,0 +1,69 @@
+{
+  "id": "srd-priest",
+  "name": "Priest",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 13,
+  "hp": 27,
+  "hpFormula": "5d8+5",
+  "initiative": 0,
+  "speed": {
+    "walk": 25
+  },
+  "abilities": {
+    "cha": 13,
+    "con": 12,
+    "dex": 10,
+    "int": 13,
+    "str": 10,
+    "wis": 16
+  },
+  "saves": {},
+  "skills": {
+    "medicine": 7,
+    "persuasion": 3,
+    "religion": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "any two languages",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Divine Eminence",
+      "desc": "As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st."
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:\n\n* Cantrips (at will): light, sacred flame, thaumaturgy\n* 1st level (4 slots): cure wounds, guiding bolt, sanctuary\n* 2nd level (3 slots): lesser restoration, spiritual weapon\n* 3rd level (2 slots): dispel magic, spirit guardians"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Mace",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+0",
+          "avg": 3
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/priest.png"
+}

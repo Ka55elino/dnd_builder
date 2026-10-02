@@ -1,0 +1,16 @@
+{
+  "id": "trueStrike",
+  "name": "True Strike",
+  "category": "effect",
+  "spell": "trueStrike",
+  "duration": "until used",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacks",
+      "note": "your next attack against the chosen target"
+    }
+  ],
+  "desc": "Your next attack roll against the target has Advantage."
+}

@@ -11,5 +11,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "frightened",
+    "target": "enemy"
+  },
   "desc": "Creatures in a 30-foot Cone make a Wisdom saving throw or drop what they're holding and flee in fear. Concentration."
 }

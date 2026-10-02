@@ -1,0 +1,68 @@
+{
+  "id": "srd-giant-bat",
+  "name": "Giant Bat",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 13,
+  "hp": 22,
+  "hpFormula": "4d10",
+  "initiative": 3,
+  "speed": {
+    "fly": 60,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 11,
+    "dex": 16,
+    "int": 2,
+    "str": 15,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Echolocation",
+      "desc": "The bat can't use its blindsight while deafened."
+    },
+    {
+      "name": "Keen Hearing",
+      "desc": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-bat.png"
+}

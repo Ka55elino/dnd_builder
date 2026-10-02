@@ -1,0 +1,9 @@
+{
+  "id": "barrel",
+  "name": "Barrel",
+  "image": "/img/items/barrel.png",
+  "isDefault": true,
+  "weight": 70.0,
+  "cost": "2 GP",
+  "desc": "A Barrel holds up to 40 gallons of liquid or up to 4 cubic feet of dry goods."
+}

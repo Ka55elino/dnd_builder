@@ -1,0 +1,20 @@
+{
+  "id": "devouringBlade",
+  "name": "Devouring Blade",
+  "category": "invocation",
+  "level": 12,
+  "desc": "Requires Thirsting Blade. The Extra Attack of your Thirsting Blade invocation confers two extra attacks rather than one: you attack three times with your pact weapon when you take the Attack action.",
+  "prereq": {
+    "invocation": "thirstingBlade"
+  },
+  "effects": [
+    {
+      "kind": "set",
+      "target": "attacksPerAction",
+      "value": 3,
+      "when": {
+        "weapon": "pact"
+      }
+    }
+  ]
+}

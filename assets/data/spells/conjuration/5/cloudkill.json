@@ -11,6 +11,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "A cloud of poisonous fog rolls away from you: Poison damage (Constitution saving throw for half). Concentration.",
   "damage": {
     "dice": "5d8",

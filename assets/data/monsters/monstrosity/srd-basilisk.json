@@ -1,0 +1,63 @@
+{
+  "id": "srd-basilisk",
+  "name": "Basilisk",
+  "type": "monstrosity",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 12,
+  "hp": 52,
+  "hpFormula": "8d8+16",
+  "initiative": -1,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 15,
+    "dex": 8,
+    "int": 2,
+    "str": 16,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Petrifying Gaze",
+      "desc": "If a creature starts its turn within 30 ft. of the basilisk and the two of them can see each other, the basilisk can force the creature to make a DC 12 Constitution saving throw if the basilisk isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.\nA creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.\nIf the basilisk sees its reflection within 30 ft. of it in bright light, it mistakes itself for a rival and targets itself with its gaze."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage plus 7 (2d6) poison damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+2d6+3",
+          "avg": 17
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/srd-basilisk.png"
+}

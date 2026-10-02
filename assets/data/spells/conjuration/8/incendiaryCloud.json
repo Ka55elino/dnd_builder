@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A cloud of smoke and embers moves, dealing damage at the start of turns (Dexterity saving throw). Concentration.",
   "damage": {
     "dice": "10d8",

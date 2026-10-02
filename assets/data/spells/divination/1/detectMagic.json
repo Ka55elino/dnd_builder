@@ -19,6 +19,7 @@
     "time": "1 action",
     "range": "Self (30 feet)",
     "components": "V, S",
-    "duration": "Concentration, up to 10 minutes"
+    "duration": "Concentration, up to 10 minutes",
+    "ritual": true
   }
 }

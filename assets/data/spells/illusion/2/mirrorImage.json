@@ -12,5 +12,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "mirrorImage",
+    "target": "self"
+  },
   "desc": "You create 3 illusory duplicates that divert attacks against you."
 }

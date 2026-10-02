@@ -5,5 +5,9 @@
   "subclass": "shadow",
   "level": 17,
   "action": "action",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 3
+  },
   "desc": "Costs 3 Focus Points. For 1 minute, you become imperceptible to creatures and devices: attack rolls against you have Disadvantage, and your attack rolls have Advantage. The effect ends if you have the Incapacitated condition."
 }

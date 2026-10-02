@@ -9,6 +9,11 @@
     "sorcerer",
     "wizard"
   ],
+  "apply": {
+    "condition": "shockingGrasp",
+    "target": "enemy",
+    "rounds": 1
+  },
   "desc": "A lightning touch (spell attack, with Advantage if the target is wearing metal armor); the target can't take Reactions.",
   "damage": {
     "dice": "1d8",

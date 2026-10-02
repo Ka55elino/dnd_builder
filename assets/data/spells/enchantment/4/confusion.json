@@ -12,5 +12,17 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "text": "{n}-foot-radius Sphere",
+    "base": 10,
+    "each": 5
+  },
+  "apply": {
+    "condition": "confused",
+    "target": "enemy"
+  },
   "desc": "Creatures in the area: Wisdom saving throw or they act randomly. Concentration."
 }

@@ -1,0 +1,92 @@
+{
+  "id": "srd-spy",
+  "name": "Spy",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 12,
+  "hp": 27,
+  "hpFormula": "6d8",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 10,
+    "dex": 15,
+    "int": 12,
+    "str": 10,
+    "wis": 14
+  },
+  "saves": {},
+  "skills": {
+    "deception": 5,
+    "insight": 4,
+    "investigation": 5,
+    "perception": 6,
+    "persuasion": 5,
+    "stealth": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 16,
+  "languages": "any two languages",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Cunning Action",
+      "desc": "On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action."
+    },
+    {
+      "name": "Sneak Attack (1/Turn)",
+      "desc": "The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The spy makes two melee attacks."
+    },
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Hand Crossbow",
+      "desc": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "range": "30/120"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/spy.png"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "srd-red-dragon-wyrmling",
+  "name": "Red Dragon Wyrmling",
+  "type": "dragon",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 4.0,
+  "ac": 17,
+  "hp": 75,
+  "hpFormula": "10d8+30",
+  "initiative": 0,
+  "speed": {
+    "climb": 30,
+    "fly": 60,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 15,
+    "con": 17,
+    "dex": 10,
+    "int": 12,
+    "str": 19,
+    "wis": 11
+  },
+  "saves": {
+    "cha": 4,
+    "con": 5,
+    "dex": 2,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "fire"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (1d10 + 4) piercing damage plus 3 (1d6) fire damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+1d6+4",
+          "avg": 12
+        }
+      ]
+    },
+    {
+      "name": "Fire Breath (Recharge 5-6)",
+      "desc": "The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC 13 Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "7d6+0",
+          "avg": 24
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/red-dragon-wyrmling.png"
+}

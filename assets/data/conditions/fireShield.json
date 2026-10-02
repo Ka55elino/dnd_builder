@@ -1,0 +1,23 @@
+{
+  "id": "fireShield",
+  "name": "Fire Shield",
+  "category": "effect",
+  "spell": "fireShield",
+  "duration": "10 minutes",
+  "choose": "damageType",
+  "options": [
+    "cold",
+    "fire"
+  ],
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "$choice"
+    },
+    {
+      "kind": "note",
+      "note": "a creature that hits you with a melee attack takes 2d8 damage"
+    }
+  ],
+  "desc": "Wispy flames: Resistance to the chosen damage type; melee attackers take damage."
+}

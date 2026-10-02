@@ -1,0 +1,23 @@
+{
+  "id": "invisible",
+  "name": "Invisible",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "initiative"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacks"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacksAgainst"
+    }
+  ],
+  "desc": "You can't be seen without magic or a special sense. You have Advantage on Initiative. Attack rolls against you have Disadvantage, and your attack rolls have Advantage (unless the attacker can see you)."
+}

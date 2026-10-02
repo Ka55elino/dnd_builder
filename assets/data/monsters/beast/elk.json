@@ -1,0 +1,53 @@
+{
+  "id": "srd-elk",
+  "name": "Elk",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 10,
+  "hp": 13,
+  "hpFormula": "2d10+2",
+  "initiative": 0,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 12,
+    "dex": 10,
+    "int": 2,
+    "str": 16,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Ram",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage."
+    },
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one prone creature. Hit: 8 (2d4 + 3) bludgeoning damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/elk.png"
+}

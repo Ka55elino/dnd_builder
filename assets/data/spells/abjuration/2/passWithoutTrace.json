@@ -10,6 +10,10 @@
     "druid",
     "ranger"
   ],
+  "apply": {
+    "condition": "passWithoutTrace",
+    "target": "creature"
+  },
   "desc": "You and allies within 30 feet gain +10 to Stealth checks and leave no tracks. Concentration, up to 1 hour.",
   "casting": {
     "time": "1 action",

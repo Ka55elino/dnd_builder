@@ -1,0 +1,61 @@
+{
+  "id": "srd-killer-whale",
+  "name": "Killer Whale",
+  "type": "beast",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 12,
+  "hp": 90,
+  "hpFormula": "12d12+12",
+  "initiative": 0,
+  "speed": {
+    "swim": 60
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 13,
+    "dex": 10,
+    "int": 3,
+    "str": 19,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 120
+  },
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Echolocation",
+      "desc": "The whale can't use its blindsight while deafened."
+    },
+    {
+      "name": "Hold Breath",
+      "desc": "The whale can hold its breath for 30 minutes"
+    },
+    {
+      "name": "Keen Hearing",
+      "desc": "The whale has advantage on Wisdom (Perception) checks that rely on hearing."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 21 (5d6 + 4) piercing damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/killer-whale.png"
+}

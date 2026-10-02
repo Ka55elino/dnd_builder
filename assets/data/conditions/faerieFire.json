@@ -1,0 +1,19 @@
+{
+  "id": "faerieFire",
+  "name": "Faerie Fire",
+  "category": "effect",
+  "spell": "faerieFire",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "note",
+      "note": "can't benefit from the Invisible condition; sheds Dim Light"
+    }
+  ],
+  "desc": "Outlined in light."
+}

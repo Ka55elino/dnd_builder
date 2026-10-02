@@ -1,0 +1,80 @@
+{
+  "id": "srd-ape",
+  "name": "Ape",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 12,
+  "hp": 19,
+  "hpFormula": "3d8+6",
+  "initiative": 2,
+  "speed": {
+    "climb": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 14,
+    "dex": 14,
+    "int": 6,
+    "str": 16,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "athletics": 5,
+    "perception": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The ape makes two fist attacks."
+    },
+    {
+      "name": "Fist",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Rock",
+      "desc": "Ranged Weapon Attack: +5 to hit, range 25/50 ft., one target. Hit: 6 (1d6 + 3) bludgeoning damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "range": "25/50"
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/ape.png"
+}

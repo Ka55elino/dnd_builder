@@ -12,5 +12,12 @@
     "paladin",
     "ranger"
   ],
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "freedomOfMovement",
+    "target": "creature"
+  },
   "desc": "The target can't be Restrained or Paralyzed by magic and ignores Difficult Terrain."
 }

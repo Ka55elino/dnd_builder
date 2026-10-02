@@ -1,0 +1,9 @@
+{
+  "id": "clothesCommon",
+  "name": "Common Clothes",
+  "isDefault": true,
+  "category": "clothing",
+  "weight": 3,
+  "cost": "5 SP",
+  "desc": "Simple everyday clothing: a shirt, trousers or a skirt, and a belt or a cloak."
+}

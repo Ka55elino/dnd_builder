@@ -71,5 +71,6 @@
   "resistances": [],
   "traits": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/construct/animatedArmor.png"
 }

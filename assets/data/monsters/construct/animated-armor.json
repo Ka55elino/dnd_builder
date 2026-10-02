@@ -1,0 +1,83 @@
+{
+  "id": "srd-animated-armor",
+  "name": "Animated Armor",
+  "type": "construct",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 18,
+  "hp": 33,
+  "hpFormula": "6d8+6",
+  "initiative": 0,
+  "speed": {
+    "walk": 25
+  },
+  "abilities": {
+    "cha": 1,
+    "con": 13,
+    "dex": 11,
+    "int": 1,
+    "str": 14,
+    "wis": 3
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "poison",
+    "psychic"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "exhaustion",
+    "frightened",
+    "paralyzed",
+    "petrified",
+    "poisoned"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 6,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Antimagic Susceptibility",
+      "desc": "The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+    },
+    {
+      "name": "False Appearance",
+      "desc": "While the armor remains motionless, it is indistinguishable from a normal suit of armor."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The armor makes two melee attacks."
+    },
+    {
+      "name": "Slam",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/construct/animated-armor.png"
+}

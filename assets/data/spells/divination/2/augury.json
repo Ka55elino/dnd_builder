@@ -8,5 +8,8 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "You learn whether an action will lead to weal or woe within the next 30 minutes."
 }

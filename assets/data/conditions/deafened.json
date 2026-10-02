@@ -1,0 +1,14 @@
+{
+  "id": "deafened",
+  "name": "Deafened",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "checks",
+      "note": "that require hearing"
+    }
+  ],
+  "desc": "You can't hear and automatically fail any ability check that requires hearing."
+}

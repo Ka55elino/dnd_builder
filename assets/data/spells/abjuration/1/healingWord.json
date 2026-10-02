@@ -10,5 +10,8 @@
     "cleric",
     "druid"
   ],
+  "upcast": {
+    "heal": "2d4"
+  },
   "desc": "As a Bonus Action, you heal a creature within 60 feet for 2d4 + your spellcasting ability modifier."
 }

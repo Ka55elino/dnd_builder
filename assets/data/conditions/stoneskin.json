@@ -1,0 +1,22 @@
+{
+  "id": "stoneskin",
+  "name": "Stoneskin",
+  "category": "effect",
+  "spell": "stoneskin",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "bludgeoning"
+    },
+    {
+      "kind": "resistance",
+      "value": "piercing"
+    },
+    {
+      "kind": "resistance",
+      "value": "slashing"
+    }
+  ],
+  "desc": "Resistance to Bludgeoning, Piercing, and Slashing damage."
+}

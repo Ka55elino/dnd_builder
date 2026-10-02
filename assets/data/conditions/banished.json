@@ -1,0 +1,17 @@
+{
+  "id": "banished",
+  "name": "Banished",
+  "category": "effect",
+  "spell": "banishment",
+  "duration": "Concentration, up to 1 minute",
+  "implies": [
+    "incapacitated"
+  ],
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "it is on another plane (an extraplanar creature may not return)"
+    }
+  ],
+  "desc": "Banished to another plane."
+}

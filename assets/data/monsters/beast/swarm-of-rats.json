@@ -1,0 +1,80 @@
+{
+  "id": "srd-swarm-of-rats",
+  "name": "Swarm of Rats",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 10,
+  "hp": 24,
+  "hpFormula": "7d8-7",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 9,
+    "dex": 11,
+    "int": 2,
+    "str": 9,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "charmed",
+    "frightened",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "prone",
+    "restrained",
+    "stunned"
+  ],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The swarm has advantage on Wisdom (Perception) checks that rely on smell."
+    },
+    {
+      "name": "Swarm",
+      "desc": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny rat. The swarm can't regain hit points or gain temporary hit points."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bites",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 0 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 0
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+0",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/swarm-of-rats.png"
+}

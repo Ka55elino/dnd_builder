@@ -1,0 +1,9 @@
+{
+  "id": "caseCrossbowBolt",
+  "name": "Case, Crossbow Bolt",
+  "image": "/img/items/caseCrossbowBolt.png",
+  "isDefault": true,
+  "weight": 1.0,
+  "cost": "1 GP",
+  "desc": "A Crossbow Bolt Case holds up to 20 Bolts."
+}

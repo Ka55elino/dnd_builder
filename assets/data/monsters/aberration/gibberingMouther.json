@@ -80,5 +80,6 @@
   "resistances": [],
   "immunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/aberration/gibberingMouther.png"
 }

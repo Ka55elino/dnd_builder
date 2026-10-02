@@ -14,6 +14,7 @@
      * source    — top-right label ('Class', 'Level 1', 'Elf'…)
      * uses      — { max, per } — how many times and when it recharges
      * note      — extra line under the description (e.g. species spell: ability, DC, free cast)
+     * footer    — optional snippet at the bottom (the sheet's Cast / Use bar); not for selectable cards
      * saveDC    — saving throw DC (shown if the description mentions a saving throw)
      * selectable / selected / onclick — selection mode (level screen)
      */
@@ -34,6 +35,8 @@
         selectable = false,
         selected = false,
         onclick = null,
+        footer = null,
+        boost = null, // { die, base, from } — an active effect changed the die (Symbiotic Entity)
     } = $props();
 
     const d = $derived(item?.data ?? {});
@@ -80,7 +83,9 @@
             </span>
         {/each}
 
-        {#if die}<span class="chip">die <b>{die}</b></span>{/if}
+        {#if boost}
+            <span class="chip boost" title="{boost.from}: {boost.base} → {boost.die}">die <b>{boost.die}</b> <s>{boost.base}</s></span>
+        {:else if die}<span class="chip">die <b>{die}</b></span>{/if}
 
         {#if uses?.max}
             <span class="chip rest" style="--c: var(--color-rest-{uses.per})">
@@ -124,9 +129,22 @@
             {/if}
         {/if}
     </div>
+
+    <!-- the snippet brings its own wrapper (put margin-top: auto on it to sit at the bottom) -->
+    {#if footer && !selectable}{@render footer()}{/if}
 </svelte:element>
 
 <style>
+    .chip.boost {
+        border-color: var(--color-text-accent);
+        color: var(--color-text-accent);
+    }
+
+    .chip.boost s {
+        opacity: 0.6;
+        font-size: 0.9em;
+    }
+
     .card {
         display: flex;
         flex-direction: column;

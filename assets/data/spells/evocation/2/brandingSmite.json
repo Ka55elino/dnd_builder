@@ -8,6 +8,16 @@
   "classes": [
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
+  "apply": {
+    "condition": "brandingSmite",
+    "target": "enemy"
+  },
   "desc": "As a Bonus Action: your next hit deals an extra 2d6 Radiant damage, and the target sheds light and can't become Invisible. Concentration.",
   "damage": {
     "dice": "2d6",

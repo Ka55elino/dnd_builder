@@ -5,5 +5,12 @@
   "subclass": "devotion",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. You imbue a weapon for 10 minutes: + your Charisma modifier to attack rolls, it sheds light in a 20-foot radius, and its damage counts as Radiant."
 }

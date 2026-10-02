@@ -1,0 +1,68 @@
+{
+  "id": "srd-blink-dog",
+  "name": "Blink Dog",
+  "type": "fey",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 13,
+  "hp": 22,
+  "hpFormula": "4d8+4",
+  "initiative": 3,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 12,
+    "dex": 17,
+    "int": 10,
+    "str": 12,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "Blink Dog, understands Sylvan but can't speak it",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Hearing and Smell",
+      "desc": "The dog has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    },
+    {
+      "name": "Teleport (Recharge 4-6)",
+      "desc": "The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 ft. to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fey/blink-dog.png"
+}

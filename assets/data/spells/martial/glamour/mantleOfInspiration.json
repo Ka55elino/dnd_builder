@@ -5,5 +5,9 @@
   "subclass": "glamour",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": "bardicInspiration",
+    "amount": 1
+  },
   "desc": "By expending a Bardic Inspiration die, you give up to (Charisma modifier) creatures you can see Temporary Hit Points equal to the number rolled; each can use its Reaction to move up to its Speed without provoking Opportunity Attacks."
 }

@@ -8,6 +8,11 @@
   "classes": [
     "bard"
   ],
+  "apply": {
+    "condition": "nextAttackDisadvantage",
+    "target": "enemy",
+    "rounds": 1
+  },
   "desc": "You unleash a string of insults at a creature (Wisdom saving throw): Psychic damage and Disadvantage on its next attack roll.",
   "damage": {
     "dice": "1d4",

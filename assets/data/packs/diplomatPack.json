@@ -12,10 +12,6 @@
       "qty": 1
     },
     {
-      "id": "clothesFine",
-      "qty": 1
-    },
-    {
       "id": "ink",
       "qty": 1
     },
@@ -49,6 +45,12 @@
     },
     {
       "id": "tinderbox",
+      "qty": 1
+    }
+  ],
+  "armor": [
+    {
+      "id": "clothesFine",
       "qty": 1
     }
   ]

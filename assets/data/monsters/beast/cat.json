@@ -1,0 +1,53 @@
+{
+  "id": "srd-cat",
+  "name": "Cat",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 12,
+  "hp": 2,
+  "hpFormula": "1d4",
+  "initiative": 2,
+  "speed": {
+    "climb": 30,
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 10,
+    "dex": 15,
+    "int": 3,
+    "str": 3,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The cat has advantage on Wisdom (Perception) checks that rely on smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +0 to hit, reach 5 ft., one target. Hit: 1 slashing damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/cat.png"
+}

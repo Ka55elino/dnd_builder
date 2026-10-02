@@ -9,6 +9,14 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
+  "apply": {
+    "condition": "poisoned",
+    "target": "enemy",
+    "rounds": 1
+  },
   "desc": "A greenish ray: ranged spell attack, 2d8 Poison damage; on a hit, the target makes a Constitution saving throw or has the Poisoned condition until the end of your next turn.",
   "casting": {
     "time": "1 action",

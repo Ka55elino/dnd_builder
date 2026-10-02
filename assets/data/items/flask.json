@@ -1,0 +1,9 @@
+{
+  "id": "flask",
+  "name": "Flask",
+  "image": "/img/items/flask.png",
+  "isDefault": true,
+  "weight": 1.0,
+  "cost": "2 CP",
+  "desc": "A Flask holds up to 1 pint."
+}

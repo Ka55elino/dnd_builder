@@ -11,5 +11,8 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "Your gaze puts a creature to sleep, frightens it, or sickens it (Wisdom saving throw). Concentration."
 }

@@ -1,0 +1,9 @@
+{
+  "id": "woodcarversTools",
+  "name": "Woodcarver's Tools",
+  "image": "/img/items/woodcarversTools.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "1 GP",
+  "desc": "Ability: Dexterity Weight: 5 lb. Utilize: Carve a pattern in wood (DC 10) Craft: Club, Greatclub, Quarterstaff, Ranged weapons (except Pistol, Musket, and Sling), Arcane Focus, Arrows, Bolts, Druidic Focus, Ink Pen, Needles #### Other Tools"
+}

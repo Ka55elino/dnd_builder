@@ -1,0 +1,14 @@
+{
+  "id": "mirrorImage",
+  "name": "Mirror Image",
+  "category": "effect",
+  "spell": "mirrorImage",
+  "duration": "1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "3 illusory duplicates: an attack against you may hit one instead"
+    }
+  ],
+  "desc": "Illusory duplicates divert attacks against you."
+}

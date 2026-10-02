@@ -10,5 +10,8 @@
     "cleric",
     "wizard"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "You learn the properties of a magic item or the spells affecting a target."
 }

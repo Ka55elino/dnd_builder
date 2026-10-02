@@ -11,6 +11,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "A hail of ice in an area: Bludgeoning and Cold damage; creates Difficult Terrain.",
   "damage": {
     "dice": "2d8",

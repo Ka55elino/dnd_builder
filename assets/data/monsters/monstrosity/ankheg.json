@@ -1,0 +1,75 @@
+{
+  "id": "srd-ankheg",
+  "name": "Ankheg",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 14,
+  "hp": 39,
+  "hpFormula": "6d10+6",
+  "initiative": 0,
+  "speed": {
+    "burrow": 10,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 13,
+    "dex": 11,
+    "int": 1,
+    "str": 17,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60,
+    "tremorsense": 60
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage plus 3 (1d6) acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d6+1d6+3",
+          "avg": 13
+        }
+      ]
+    },
+    {
+      "name": "Acid Spray (Recharge 6)",
+      "desc": "The ankheg spits acid in a line that is 30 ft. long and 5 ft. wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "acid",
+          "dice": "3d6+0",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/ankheg.png"
+}

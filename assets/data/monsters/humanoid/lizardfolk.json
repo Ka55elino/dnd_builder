@@ -1,0 +1,119 @@
+{
+  "id": "srd-lizardfolk",
+  "name": "Lizardfolk",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 15,
+  "hp": 22,
+  "hpFormula": "4d8+4",
+  "initiative": 0,
+  "speed": {
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 13,
+    "dex": 10,
+    "int": 7,
+    "str": 15,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 4,
+    "survival": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Hold Breath",
+      "desc": "The lizardfolk can hold its breath for 15 minutes."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The lizardfolk makes two melee attacks, each one with a different weapon."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Heavy Club",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Javelin",
+      "desc": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "reach": 5,
+        "range": "30/120"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Spiked Shield",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/lizardfolk.png"
+}

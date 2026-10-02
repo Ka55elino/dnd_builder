@@ -72,13 +72,27 @@ const dmgName = (t) => DMG_NOUN[t] ?? DAMAGE_TYPES[t]?.name?.toLowerCase() ?? t;
 export const normName = (s) => String(s ?? '').toLowerCase().replace(/\s*\(.*?\)\s*/g, ' ').trim();
 const sign = (n) => (n >= 0 ? `+${n}` : `${n}`);
 
-/** Substitutes {chaMod}, {level}, {halfLevel}, {rageBonus}, {prof} into text. */
+/**
+ * Substitutes placeholders into text:
+ *   {level} {halfLevel} {prof} {rageBonus} {chaMod}/{dexMod}/… (signed, min +1)
+ *   {saveDc} — spell save DC (ctx.saveDC), {monkDc} — 8 + prof + Wis,
+ *   {sporesHp} — 4 × level, {beastHp} — 5 × level, {touchOfDeath} — 5 + 2 × level,
+ *   {searUndead} — Wis modifier d8s (min 1d8)
+ * Unknown placeholders stay as they are.
+ */
 export function fillTemplate(text, ctx) {
+    const wis = ctx.mods?.wis ?? 0;
     const vars = {
         level: ctx.level,
         halfLevel: Math.floor(ctx.level / 2),
         prof: ctx.prof,
         rageBonus: ctx.level >= 16 ? 4 : ctx.level >= 9 ? 3 : 2,
+        saveDc: ctx.saveDC ?? null,
+        monkDc: 8 + (ctx.prof ?? 0) + wis,
+        sporesHp: 4 * ctx.level,
+        beastHp: 5 * ctx.level,
+        touchOfDeath: 5 + 2 * ctx.level,
+        searUndead: `${Math.max(1, wis)}d8`,
         ...Object.fromEntries(Object.entries(ctx.mods ?? {}).map(([k, v]) => [`${k}Mod`, sign(Math.max(1, v))])),
     };
     return String(text ?? '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? String(vars[k]) : m));

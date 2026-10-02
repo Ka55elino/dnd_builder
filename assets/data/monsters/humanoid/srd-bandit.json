@@ -1,0 +1,72 @@
+{
+  "id": "srd-bandit",
+  "name": "Bandit",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 12,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 12,
+    "dex": 12,
+    "int": 10,
+    "str": 11,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Scimitar",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    },
+    {
+      "name": "Light Crossbow",
+      "desc": "Ranged Weapon Attack: +3 to hit, range 80/320 ft., one target. Hit: 5 (1d8 + 1) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "range": "80/320"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+1",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/srd-bandit.png"
+}

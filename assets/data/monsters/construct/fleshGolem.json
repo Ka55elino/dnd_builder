@@ -91,5 +91,6 @@
   "vulnerabilities": [],
   "resistances": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/construct/fleshGolem.png"
 }

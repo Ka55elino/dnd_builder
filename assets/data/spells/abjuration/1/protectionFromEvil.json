@@ -11,5 +11,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "protectionFromEvil",
+    "target": "creature"
+  },
   "desc": "The target is protected from Aberrations, Fiends, Undead, and Fey: their attacks have Disadvantage, and it is immune to being Charmed or Frightened by them. Concentration."
 }

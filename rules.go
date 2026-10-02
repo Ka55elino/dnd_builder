@@ -25,6 +25,16 @@ type Feat struct {
 	Data     map[string]any `json:"data"` // asi, effects, prereq...
 }
 
+// Condition is a condition (Prone, Grappled, Exhaustion…) or a named effect (Slowed, Enlarged):
+// category = condition | effect. Data holds modifiers, implies, levels (see frontend rules/modifiers.js).
+type Condition struct {
+	ID       string         `json:"id"`
+	Name     string         `json:"name"`
+	Category string         `json:"category"`
+	Desc     string         `json:"desc"`
+	Data     map[string]any `json:"data"`
+}
+
 // Spell is a spell or an ability: kind = spell | class | martial | action.
 type Spell struct {
 	ID            string         `json:"id"`
@@ -90,6 +100,56 @@ func getFeats(db *sql.DB) ([]Feat, error) {
 		out = append(out, f)
 	}
 	return out, rows.Err()
+}
+
+func getConditions(db *sql.DB) ([]Condition, error) {
+	rows, err := db.Query(Q("GetAllConditions"))
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := []Condition{}
+	for rows.Next() {
+		var (
+			c    Condition
+			desc sql.NullString
+			data string
+		)
+		if err := rows.Scan(&c.ID, &c.Name, &c.Category, &desc, &data); err != nil {
+			return nil, err
+		}
+		if c.Data, err = unmarshalData(data); err != nil {
+			return nil, err
+		}
+		c.Desc = desc.String
+		out = append(out, c)
+	}
+	return out, rows.Err()
+}
+
+func insertConditionJSON(tx *sql.Tx, raw []byte) error {
+	var head struct {
+		ID       string  `json:"id"`
+		Name     string  `json:"name"`
+		Category *string `json:"category"`
+		Desc     *string `json:"desc"`
+	}
+	if err := json.Unmarshal(raw, &head); err != nil {
+		return err
+	}
+	if head.ID == "" || head.Name == "" {
+		return fmt.Errorf("missing id or name")
+	}
+	cat := "condition"
+	if head.Category != nil && *head.Category != "" {
+		cat = *head.Category
+	}
+	data, err := withoutKeys(raw, "desc")
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec(Q("InsertCondition"), head.ID, head.Name, cat, head.Desc, data)
+	return err
 }
 
 func getSpells(db *sql.DB) ([]Spell, error) {

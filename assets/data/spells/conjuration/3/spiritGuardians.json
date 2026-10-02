@@ -8,6 +8,16 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d8"
+  },
+  "apply": {
+    "condition": "spiritGuardians",
+    "target": "self"
+  },
   "desc": "Spirits swirl within 15 feet: Difficult Terrain and Radiant or Necrotic damage to enemies, Wisdom saving throw for half. Concentration.",
   "damage": {
     "dice": "3d8",

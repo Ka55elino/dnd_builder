@@ -1,0 +1,63 @@
+{
+  "id": "srd-pegasus",
+  "name": "Pegasus",
+  "type": "celestial",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 59,
+  "hpFormula": "7d10+21",
+  "initiative": 2,
+  "speed": {
+    "fly": 90,
+    "walk": 60
+  },
+  "abilities": {
+    "cha": 13,
+    "con": 16,
+    "dex": 15,
+    "int": 10,
+    "str": 18,
+    "wis": 15
+  },
+  "saves": {
+    "cha": 3,
+    "dex": 4,
+    "wis": 4
+  },
+  "skills": {
+    "perception": 6
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 16,
+  "languages": "understands Celestial, Common, Elvish, and Sylvan but can't speak",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/celestial/srd-pegasus.png"
+}

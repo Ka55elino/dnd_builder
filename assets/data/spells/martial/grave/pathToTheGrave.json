@@ -5,5 +5,12 @@
   "subclass": "grave",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. You curse a creature within 30 feet: the next attack that hits it this turn or next turn gives it Vulnerability to all of that damage."
 }

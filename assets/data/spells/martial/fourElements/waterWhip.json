@@ -5,6 +5,10 @@
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 2
+  },
   "desc": "Costs 2 Focus Points. A whip of water strikes a creature within 30 feet: 3d10 Bludgeoning damage (Dexterity saving throw for half); on a failed save, you pull the target up to 25 feet or knock it Prone.",
   "damage": {
     "dice": "3d10",

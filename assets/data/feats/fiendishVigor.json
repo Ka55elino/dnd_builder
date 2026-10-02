@@ -3,5 +3,13 @@
   "name": "Fiendish Vigor",
   "category": "invocation",
   "level": 1,
-  "desc": "You can cast False Life on yourself at will (at its minimum effect), without a spell slot."
+  "desc": "You can cast False Life on yourself at will (at its minimum effect), without a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "falseLife",
+      "atWill": true,
+      "note": "on yourself only"
+    }
+  ]
 }

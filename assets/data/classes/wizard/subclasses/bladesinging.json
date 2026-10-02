@@ -27,7 +27,17 @@
     {
       "level": 6,
       "name": "Extra Attack",
-      "desc": "When you take the Attack action, you attack twice; you can replace one attack with casting a cantrip."
+      "desc": "When you take the Attack action, you attack twice; you can replace one attack with casting a cantrip.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "set",
+            "target": "attacksPerAction",
+            "value": 2
+          }
+        }
+      ]
     },
     {
       "level": 10,

@@ -60,7 +60,8 @@
 
     function armorCard(a) {
         const d = a.data ?? {};
-        const bonus = d.acBonus && a.category !== "shield" ? ` ${fmt(d.acBonus)}` : "";
+        const plainClothes = a.category === "clothing" && !a.baseAC;
+        const bonus = d.acBonus && a.category !== "shield" && !plainClothes ? ` ${fmt(d.acBonus)}` : "";
         return {
             sub: ARMOR_CAT[a.category] ?? a.category,
             stat: acText(a) + bonus,

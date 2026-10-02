@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "On a hit, extra damage equal to the die; an ally's next attack roll against the target has Advantage.",
   "pool": "maneuver"
 }

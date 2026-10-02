@@ -12,6 +12,11 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "text": "{n}-foot radius",
+    "base": 20,
+    "each": 20
+  },
   "desc": "You create a 20-foot-radius Sphere of fog that is Heavily Obscured. Concentration, up to 1 hour.",
   "casting": {
     "time": "1 action",

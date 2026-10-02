@@ -1,0 +1,14 @@
+{
+  "id": "deathWard",
+  "name": "Death Ward",
+  "category": "effect",
+  "spell": "deathWard",
+  "duration": "8 hours",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "the first time you would drop to 0 Hit Points, you drop to 1 instead; instant death is negated"
+    }
+  ],
+  "desc": "You are protected from death once."
+}

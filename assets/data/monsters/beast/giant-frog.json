@@ -1,0 +1,75 @@
+{
+  "id": "srd-giant-frog",
+  "name": "Giant Frog",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 11,
+  "hp": 18,
+  "hpFormula": "4d8",
+  "initiative": 1,
+  "speed": {
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 11,
+    "dex": 13,
+    "int": 2,
+    "str": 12,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2,
+    "stealth": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 12,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Amphibious",
+      "desc": "The frog can breathe air and water"
+    },
+    {
+      "name": "Standing Leap",
+      "desc": "The frog's long jump is up to 20 ft. and its high jump is up to 10 ft., with or without a running start."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage, and the target is grappled (escape DC 11). Until this grapple ends, the target is restrained, and the frog can't bite another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    },
+    {
+      "name": "Swallow",
+      "desc": "The frog makes one bite attack against a Small or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends. The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the frog, and it takes 5 (2d4) acid damage at the start of each of the frog's turns. The frog can have only one target swallowed at a time. If the frog dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-frog.png"
+}

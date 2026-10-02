@@ -1,0 +1,77 @@
+{
+  "id": "srd-giant-constrictor-snake",
+  "name": "Giant Constrictor Snake",
+  "type": "beast",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 60,
+  "hpFormula": "8d12+8",
+  "initiative": 2,
+  "speed": {
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 12,
+    "dex": 14,
+    "int": 1,
+    "str": 19,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10
+  },
+  "passivePerception": 12,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Constrict",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 13 (2d8 + 4) bludgeoning damage, and the target is grappled (escape DC 16). Until this grapple ends, the creature is restrained, and the snake can't constrict another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-constrictor-snake.png"
+}

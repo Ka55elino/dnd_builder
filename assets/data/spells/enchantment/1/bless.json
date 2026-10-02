@@ -9,5 +9,15 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "bless",
+    "target": "creature"
+  },
   "desc": "Up to 3 creatures add 1d4 to attack rolls and saving throws. Concentration, up to 1 minute."
 }

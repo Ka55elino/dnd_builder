@@ -12,5 +12,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "trueSeeing",
+    "target": "creature"
+  },
   "desc": "The target sees in darkness and through illusions and invisibility within 30 feet for 1 hour."
 }

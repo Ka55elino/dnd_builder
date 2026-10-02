@@ -12,6 +12,9 @@
     "paladin",
     "ranger"
   ],
+  "upcast": {
+    "heal": "2d8"
+  },
   "desc": "You touch a creature to restore 2d8 + your spellcasting ability modifier Hit Points. Has no effect on Undead or Constructs.",
   "casting": {
     "time": "1 action",

@@ -1,0 +1,56 @@
+{
+  "id": "srd-commoner",
+  "name": "Commoner",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 10,
+  "hp": 4,
+  "hpFormula": "1d8",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 10,
+    "dex": 10,
+    "int": 10,
+    "str": 10,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Club",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d4+0",
+          "avg": 2
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/commoner.png"
+}

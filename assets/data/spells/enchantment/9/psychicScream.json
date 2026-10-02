@@ -11,6 +11,10 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "stunned",
+    "target": "enemy"
+  },
   "desc": "Up to 10 creatures (Intelligence saving throw): Psychic damage and Stunned; if a creature dies, its skull explodes.",
   "damage": {
     "dice": "14d6",

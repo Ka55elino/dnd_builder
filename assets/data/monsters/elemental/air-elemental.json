@@ -1,0 +1,88 @@
+{
+  "id": "srd-air-elemental",
+  "name": "Air Elemental",
+  "type": "elemental",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 15,
+  "hp": 90,
+  "hpFormula": "12d10+24",
+  "initiative": 5,
+  "speed": {
+    "fly": 90,
+    "hover": true
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 14,
+    "dex": 20,
+    "int": 6,
+    "str": 14,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "lightning",
+    "thunder; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "poisoned",
+    "prone",
+    "restrained",
+    "unconscious"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Auran",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Air Form",
+      "desc": "The elemental can enter a hostile creature's space and stop there. It can move through a space as narrow as 1 inch wide without squeezing."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The elemental makes two slam attacks."
+    },
+    {
+      "name": "Slam",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d8+5",
+          "avg": 14
+        }
+      ]
+    },
+    {
+      "name": "Whirlwind (Recharge 4-6)",
+      "desc": "Each creature in the elemental's space must make a DC 13 Strength saving throw. On a failure, a target takes 15 (3d8 + 2) bludgeoning damage and is flung up 20 feet away from the elemental in a random direction and knocked prone. If a thrown target strikes an object, such as a wall or floor, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 13 Dexterity saving throw or take the same damage and be knocked prone.\nIf the saving throw is successful, the target takes half the bludgeoning damage and isn't flung away or knocked prone."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/elemental/air-elemental.png"
+}

@@ -1,0 +1,111 @@
+{
+  "id": "srd-erinyes",
+  "name": "Erinyes",
+  "type": "fiend",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 12.0,
+  "ac": 18,
+  "hp": 153,
+  "hpFormula": "18d8+72",
+  "initiative": 3,
+  "speed": {
+    "fly": 60,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 18,
+    "con": 18,
+    "dex": 16,
+    "int": 14,
+    "str": 18,
+    "wis": 14
+  },
+  "saves": {
+    "cha": 8,
+    "con": 8,
+    "dex": 7,
+    "wis": 6
+  },
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "cold; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with silvered weapons"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "truesight": 120
+  },
+  "passivePerception": 12,
+  "languages": "Infernal, telepathy 120 ft.",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Hellish Weapons",
+      "desc": "The erinyes's weapon attacks are magical and deal an extra 13 (3d8) poison damage on a hit (included in the attacks)."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "The erinyes has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The erinyes makes three attacks"
+    },
+    {
+      "name": "Longsword",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1d10 + 4) slashing damage if used with two hands, plus 13 (3d8) poison damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+3d8+4",
+          "avg": 21
+        }
+      ]
+    },
+    {
+      "name": "Longbow",
+      "desc": "Ranged Weapon Attack: +7 to hit, range 150/600 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 13 (3d8) poison damage, and the target must succeed on a DC 14 Constitution saving throw or be poisoned. The poison lasts until it is removed by the lesser restoration spell or similar magic.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 7,
+        "range": "150/600"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+3d8+3",
+          "avg": 20
+        }
+      ]
+    },
+    {
+      "name": "Variant: Rope of Entanglement",
+      "desc": "Some erinyes carry a rope of entanglement (detailed in the Dungeon Master's Guide). When such an erinyes uses its Multiattack, the erinyes can use the rope in place of two of the attacks."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [
+    {
+      "name": "Parry",
+      "desc": "The erinyes adds 4 to its AC against one melee attack that would hit it. To do so, the erinyes must see the attacker and be wielding a melee weapon."
+    }
+  ],
+  "desc": "",
+  "image": "/img/monsters/fiend/erinyes.png"
+}

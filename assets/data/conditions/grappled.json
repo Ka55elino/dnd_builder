@@ -1,0 +1,19 @@
+{
+  "id": "grappled",
+  "name": "Grappled",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks",
+      "note": "against anyone but the grappler"
+    }
+  ],
+  "desc": "Your Speed is 0. You have Disadvantage on attack rolls against any target other than the grappler. The grappler can drag you, at extra movement cost."
+}

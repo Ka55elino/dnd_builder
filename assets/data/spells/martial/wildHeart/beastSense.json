@@ -5,5 +5,8 @@
   "subclass": "wildHeart",
   "level": 3,
   "action": "action",
+  "casting": {
+    "concentration": true
+  },
   "desc": "As a Ritual (Concentration, up to 1 hour), you inhabit the senses of a willing Beast: you see and hear through its senses, while you have the Blinded and Deafened conditions with regard to your own."
 }

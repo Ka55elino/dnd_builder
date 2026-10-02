@@ -10,6 +10,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "text": "Slam damage +{n} die (d4 Medium or smaller, d6 Large, d12 Huge)"
+  },
   "desc": "You animate up to 10 objects that attack at your command. Concentration.",
   "damage": {
     "dice": "2d6",

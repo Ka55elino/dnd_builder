@@ -1,0 +1,9 @@
+{
+  "id": "robeOfTheArchmagi",
+  "name": "Robe of the Archmagi",
+  "isDefault": false,
+  "category": "clothing",
+  "baseAC": 15,
+  "addDex": true,
+  "desc": "Legendary, requires attunement by a Sorcerer, Warlock or Wizard. While you wear it and aren't wearing armor, your base AC is 15 + your Dexterity modifier. You also have Advantage on saving throws against spells and magical effects, and your spell save DC and spell attack bonus each increase by 2."
+}

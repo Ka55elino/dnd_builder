@@ -10,6 +10,10 @@
     "sorcerer",
     "wizard"
   ],
+  "apply": {
+    "condition": "blinded",
+    "target": "enemy"
+  },
   "desc": "A dazzling flash in a 60-foot Sphere: Constitution saving throw, Radiant damage and Blinded.",
   "damage": {
     "dice": "12d6",

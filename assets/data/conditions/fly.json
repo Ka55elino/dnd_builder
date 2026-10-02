@@ -1,0 +1,14 @@
+{
+  "id": "fly",
+  "name": "Fly",
+  "category": "effect",
+  "spell": "fly",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Fly Speed 60 feet"
+    }
+  ],
+  "desc": "You have a Fly Speed of 60 feet."
+}

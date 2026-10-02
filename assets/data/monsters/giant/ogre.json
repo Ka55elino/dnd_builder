@@ -74,5 +74,6 @@
   "conditionImmunities": [],
   "traits": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/giant/ogre.png"
 }

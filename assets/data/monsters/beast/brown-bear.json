@@ -1,0 +1,84 @@
+{
+  "id": "srd-brown-bear",
+  "name": "Brown Bear",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 11,
+  "hp": 34,
+  "hpFormula": "4d10+12",
+  "initiative": 0,
+  "speed": {
+    "climb": 30,
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 16,
+    "dex": 10,
+    "int": 2,
+    "str": 19,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The bear has advantage on Wisdom (Perception) checks that rely on smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The bear makes two attacks: one with its bite and one with its claws."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+4",
+          "avg": 8
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/brown-bear.png"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "srd-flying-sword",
+  "name": "Flying Sword",
+  "type": "construct",
+  "size": "small",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 17,
+  "hp": 17,
+  "hpFormula": "5d6",
+  "initiative": 2,
+  "speed": {
+    "fly": 50,
+    "hover": true
+  },
+  "abilities": {
+    "cha": 1,
+    "con": 11,
+    "dex": 15,
+    "int": 1,
+    "str": 12,
+    "wis": 5
+  },
+  "saves": {
+    "dex": 4
+  },
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "poison",
+    "psychic"
+  ],
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "frightened",
+    "paralyzed",
+    "petrified",
+    "poisoned"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 7,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Antimagic Susceptibility",
+      "desc": "The sword is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute."
+    },
+    {
+      "name": "False Appearance",
+      "desc": "While the sword remains motionless and isn't flying, it is indistinguishable from a normal sword."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Longsword",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+1",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/construct/flying-sword.png"
+}

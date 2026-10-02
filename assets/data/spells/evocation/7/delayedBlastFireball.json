@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A pulsing sphere builds up power; when it bursts, Dexterity saving throw for half damage.",
   "damage": {
     "dice": "12d6",

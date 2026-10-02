@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A 100-foot Line of lightning: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "8d6",

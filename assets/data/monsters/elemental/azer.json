@@ -1,0 +1,76 @@
+{
+  "id": "srd-azer",
+  "name": "Azer",
+  "type": "elemental",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 17,
+  "hp": 39,
+  "hpFormula": "6d8+12",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 15,
+    "dex": 12,
+    "int": 12,
+    "str": 17,
+    "wis": 13
+  },
+  "saves": {
+    "con": 4
+  },
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {},
+  "passivePerception": 11,
+  "languages": "Ignan",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Heated Body",
+      "desc": "A creature that touches the azer or hits it with a melee attack while within 5 ft. of it takes 5 (1d10) fire damage."
+    },
+    {
+      "name": "Heated Weapons",
+      "desc": "When the azer hits with a metal melee weapon, it deals an extra 3 (1d6) fire damage (included in the attack)."
+    },
+    {
+      "name": "Illumination",
+      "desc": "The azer sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Warhammer",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage, or 8 (1d10 + 3) bludgeoning damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d8+1d6+3",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/elemental/azer.png"
+}

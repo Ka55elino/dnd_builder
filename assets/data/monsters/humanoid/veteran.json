@@ -1,0 +1,95 @@
+{
+  "id": "srd-veteran",
+  "name": "Veteran",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 17,
+  "hp": 58,
+  "hpFormula": "9d8+18",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 14,
+    "dex": 13,
+    "int": 10,
+    "str": 16,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "athletics": 5,
+    "perception": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 12,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
+    },
+    {
+      "name": "Longsword",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+3",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Heavy Crossbow",
+      "desc": "Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "range": "100/400"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+1",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/veteran.png"
+}

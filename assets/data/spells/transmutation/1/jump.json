@@ -11,5 +11,12 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "jump",
+    "target": "creature"
+  },
   "desc": "With a touch, you triple a creature's jump distance for 1 minute."
 }

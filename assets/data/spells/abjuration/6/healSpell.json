@@ -9,5 +9,8 @@
     "cleric",
     "druid"
   ],
+  "upcast": {
+    "heal": 10
+  },
   "desc": "You touch a creature to restore 70 Hit Points and end the Blinded and Deafened conditions and any diseases."
 }

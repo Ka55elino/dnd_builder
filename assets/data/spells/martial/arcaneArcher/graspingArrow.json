@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "+2d6 Poison damage; the target's Speed is reduced by 10 feet, and each time it moves it takes 2d6 Slashing damage (for 1 minute or until it pulls out the arrow as an action).",
   "damage": {
     "dice": "2d6",

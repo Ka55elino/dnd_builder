@@ -1,0 +1,65 @@
+{
+  "id": "srd-giant-boar",
+  "name": "Giant Boar",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 42,
+  "hpFormula": "5d10+15",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 16,
+    "dex": 10,
+    "int": 2,
+    "str": 17,
+    "wis": 7
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the boar moves at least 20 ft. straight toward a target and then hits it with a tusk attack on the same turn, the target takes an extra 7 (2d6) slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+    },
+    {
+      "name": "Relentless (Recharges after a Short or Long Rest)",
+      "desc": "If the boar takes 10 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Tusk",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d6+3",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-boar.png"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mageArmor",
+  "name": "Mage Armor",
+  "category": "effect",
+  "spell": "mageArmor",
+  "duration": "8 hours",
+  "modifiers": [
+    {
+      "kind": "acBase",
+      "base": 13,
+      "ability": "dex",
+      "unarmored": true
+    }
+  ],
+  "desc": "Your base AC is 13 + your Dexterity modifier while you wear no armor."
+}

@@ -11,5 +11,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A 60-foot Line of wind pushes creatures away and disperses gases. Concentration."
 }

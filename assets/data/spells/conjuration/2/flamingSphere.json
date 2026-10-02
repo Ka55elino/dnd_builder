@@ -9,6 +9,12 @@
     "druid",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A 5-foot ball of fire: when it rams a creature, Dexterity saving throw, Fire damage; you move it as a Bonus Action. Concentration.",
   "damage": {
     "dice": "2d6",

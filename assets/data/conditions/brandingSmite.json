@@ -1,0 +1,14 @@
+{
+  "id": "brandingSmite",
+  "name": "Branding Smite",
+  "category": "effect",
+  "spell": "brandingSmite",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "sheds Dim Light; can't become Invisible"
+    }
+  ],
+  "desc": "Marked by radiant light."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "guidance",
+  "name": "Guidance",
+  "category": "effect",
+  "spell": "guidance",
+  "duration": "Concentration, up to 1 minute",
+  "choose": "skill",
+  "modifiers": [
+    {
+      "kind": "dice",
+      "dice": "1d4",
+      "sign": 1,
+      "on": "checks",
+      "skill": "$choice"
+    }
+  ],
+  "desc": "You add 1d4 to ability checks with the chosen skill."
+}

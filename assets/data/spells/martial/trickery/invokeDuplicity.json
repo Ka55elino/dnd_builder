@@ -5,5 +5,12 @@
   "subclass": "trickery",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. You create an illusory duplicate of yourself for 1 minute: you can cast spells through it and have Advantage on attack rolls against creatures within 5 feet of it."
 }

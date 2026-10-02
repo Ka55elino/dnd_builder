@@ -1,0 +1,96 @@
+{
+  "id": "srd-salamander",
+  "name": "Salamander",
+  "type": "elemental",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 15,
+  "hp": 90,
+  "hpFormula": "12d10+24",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 12,
+    "con": 15,
+    "dex": 14,
+    "int": 11,
+    "str": 18,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [
+    "cold"
+  ],
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "immunities": [
+    "fire"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Ignan",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Heated Body",
+      "desc": "A creature that touches the salamander or hits it with a melee attack while within 5 ft. of it takes 7 (2d6) fire damage."
+    },
+    {
+      "name": "Heated Weapons",
+      "desc": "Any metal melee weapon the salamander wields deals an extra 3 (1d6) fire damage on a hit (included in the attack)."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The salamander makes two attacks: one with its spear and one with its tail."
+    },
+    {
+      "name": "Spear",
+      "desc": "Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack, plus 3 (1d6) fire damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 7,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Tail",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage plus 7 (2d6) fire damage, and the target is grappled (escape DC 14). Until this grapple ends, the target is restrained, the salamander can automatically hit the target with its tail, and the salamander can't make tail attacks against other targets.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d6+2d6+4",
+          "avg": 18
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/elemental/salamander.png"
+}

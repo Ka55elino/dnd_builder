@@ -11,5 +11,9 @@
     "ranger",
     "wizard"
   ],
+  "apply": {
+    "condition": "nondetection",
+    "target": "creature"
+  },
   "desc": "The target is hidden from divination and magical sensors for 8 hours."
 }

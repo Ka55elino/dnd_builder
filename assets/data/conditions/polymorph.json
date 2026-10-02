@@ -1,0 +1,14 @@
+{
+  "id": "polymorph",
+  "name": "Polymorph",
+  "category": "effect",
+  "spell": "polymorph",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you are a Beast: its statistics and Hit Points replace yours"
+    }
+  ],
+  "desc": "You are transformed into a Beast."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "holySymbol",
+  "name": "Holy Symbol",
+  "image": "/img/items/holySymbol.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "Varies",
+  "desc": "A Holy Symbol takes one of the forms in the Holy Symbol table and is bejeweled or painted to channel divine magic. A Cleric or Paladin can use a Holy Symbol as a Spellcasting Focus. The table indicates whether a Holy Symbol needs to be held, worn, or borne on fabric (such as a tabard or banner) or a Shield."
+}

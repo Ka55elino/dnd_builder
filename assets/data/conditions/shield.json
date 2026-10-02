@@ -1,0 +1,19 @@
+{
+  "id": "shield",
+  "name": "Shield",
+  "category": "effect",
+  "spell": "shield",
+  "duration": "until the start of your next turn",
+  "modifiers": [
+    {
+      "kind": "ac",
+      "op": "add",
+      "value": 5
+    },
+    {
+      "kind": "note",
+      "note": "no damage from Magic Missile"
+    }
+  ],
+  "desc": "+5 AC, including against the triggering attack."
+}

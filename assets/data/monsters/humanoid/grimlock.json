@@ -1,0 +1,77 @@
+{
+  "id": "srd-grimlock",
+  "name": "Grimlock",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 11,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 12,
+    "dex": 12,
+    "int": 9,
+    "str": 16,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {
+    "athletics": 5,
+    "perception": 3,
+    "stealth": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [
+    "blinded"
+  ],
+  "senses": {
+    "blindsight": 30
+  },
+  "passivePerception": 13,
+  "languages": "Undercommon",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Blind Senses",
+      "desc": "The grimlock can't use its blindsight while deafened and unable to smell."
+    },
+    {
+      "name": "Keen Hearing and Smell",
+      "desc": "The grimlock has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    },
+    {
+      "name": "Stone Camouflage",
+      "desc": "The grimlock has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Spiked Bone Club",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) bludgeoning damage plus 2 (1d4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+1d4+5",
+          "avg": 9
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/grimlock.png"
+}

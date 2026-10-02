@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "Forgoing one of your attacks, you command an ally: it uses its Reaction to make an attack with extra damage equal to a Superiority Die.",
   "action": "reaction",
   "pool": "maneuver"

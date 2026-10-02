@@ -13,5 +13,8 @@
     "ranger",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You sense the direction to a known creature within 1,000 feet. Concentration."
 }

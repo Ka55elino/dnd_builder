@@ -11,5 +11,13 @@
     "druid",
     "wizard"
   ],
+  "upcast": {
+    "at": {
+      "6": "lasts 10 days",
+      "7": "lasts 30 days",
+      "8": "lasts 180 days",
+      "9": "lasts a year and a day"
+    }
+  },
   "desc": "You bind a summoned creature to serve you (Charisma saving throw)."
 }

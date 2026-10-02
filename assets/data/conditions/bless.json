@@ -1,0 +1,22 @@
+{
+  "id": "bless",
+  "name": "Bless",
+  "category": "effect",
+  "spell": "bless",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "dice",
+      "dice": "1d4",
+      "sign": 1,
+      "on": "attacks"
+    },
+    {
+      "kind": "dice",
+      "dice": "1d4",
+      "sign": 1,
+      "on": "saves"
+    }
+  ],
+  "desc": "You add 1d4 to attack rolls and saving throws."
+}

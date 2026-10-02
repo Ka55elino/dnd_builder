@@ -1,0 +1,9 @@
+{
+  "id": "ladder",
+  "name": "Ladder",
+  "image": "/img/items/ladder.png",
+  "isDefault": true,
+  "weight": 25.0,
+  "cost": "1 SP",
+  "desc": "A Ladder is 10 feet tall. You must climb to move up or down it."
+}

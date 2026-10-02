@@ -1,0 +1,82 @@
+{
+  "id": "srd-orc",
+  "name": "Orc",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 13,
+  "hp": 15,
+  "hpFormula": "2d8+6",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 16,
+    "dex": 12,
+    "int": 7,
+    "str": 16,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "intimidation": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Common, Orc",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Aggressive",
+      "desc": "As a bonus action, the orc can move up to its speed toward a hostile creature that it can see."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Greataxe",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d12+3",
+          "avg": 9
+        }
+      ]
+    },
+    {
+      "name": "Javelin",
+      "desc": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "reach": 5,
+        "range": "30/120"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/orc.png"
+}

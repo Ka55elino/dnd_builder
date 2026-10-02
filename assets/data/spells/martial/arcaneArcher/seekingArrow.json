@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "Choose a creature you have seen within the past minute: the arrow flies toward it, going around obstacles; Dexterity saving throw: weapon damage + 1d6 Force damage (half on a success), and you learn its location.",
   "damage": {
     "dice": "1d6",

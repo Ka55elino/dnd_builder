@@ -8,5 +8,8 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "You ask a deity 3 yes-or-no questions."
 }

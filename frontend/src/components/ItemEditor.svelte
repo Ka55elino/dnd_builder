@@ -47,7 +47,9 @@
         extraDamage: (d.extraDamage ?? []).map((x) => ({ ...x })),
         // armor
         aCategory: initial?.category ?? "light",
-        baseAC: initial?.baseAC ?? 11,
+        baseAC: initial?.category === "clothing" ? 11 : initial?.baseAC ?? 11,
+        clothAC: initial?.category === "clothing" ? initial?.baseAC || "" : "", // clothing: own base AC, optional
+        addDex: d.addDex ?? true, // … + Dex?
         maxDex: d.maxDex ?? 2,
         acBonus: d.acBonus ?? "",
         strengthReq: d.strengthReq ?? "",
@@ -59,6 +61,7 @@
     let saving = $state(false);
 
     const isShield = $derived(f.aCategory === "shield");
+    const isClothes = $derived(f.aCategory === "clothing");
 
     // --- image ---
     let fileInput;
@@ -130,6 +133,18 @@
         // armor: Dexterity by category (light: full, medium: up to maxDex, heavy: none)
         if (isShield) {
             return { ...base, category: "shield", acBonus: num(f.acBonus) ?? 2, ...extra };
+        }
+        // clothing: not armor; an optional base AC used when you wear no armor (Robe of the Archmagi)
+        if (isClothes) {
+            const ownAC = num(f.clothAC);
+            if (ownAC != null && ownAC < 1) throw new Error("Base AC must be at least 1 (or leave it empty).");
+            return {
+                ...base,
+                category: "clothing",
+                ...(ownAC ? { baseAC: ownAC, addDex: !!f.addDex } : {}),
+                ...(num(f.acBonus) ? { acBonus: num(f.acBonus) } : {}),
+                ...extra,
+            };
         }
         const baseAC = num(f.baseAC);
         if (baseAC == null || baseAC < 1) throw new Error("Enter the base AC.");
@@ -262,7 +277,18 @@
                         {#each Object.entries(ARMOR_CAT) as [k, v]}<option value={k}>{v}</option>{/each}
                     </select>
                 </label>
-                {#if !isShield}
+                {#if isClothes}
+                    <label class="field">
+                        <span>Own base AC</span>
+                        <input type="number" min="1" bind:value={f.clothAC} placeholder="—" />
+                    </label>
+                    {#if f.clothAC}
+                        <label class="check">
+                            <input type="checkbox" bind:checked={f.addDex} />
+                            <span>+ Dex</span>
+                        </label>
+                    {/if}
+                {:else if !isShield}
                     <label class="field">
                         <span>Base AC</span>
                         <input type="number" min="1" bind:value={f.baseAC} />
@@ -278,7 +304,7 @@
                     <span>{isShield ? "Shield AC bonus" : "Magic AC bonus"}</span>
                     <input type="number" bind:value={f.acBonus} placeholder={isShield ? "2" : "0"} />
                 </label>
-                {#if !isShield}
+                {#if !isShield && !isClothes}
                     <label class="field">
                         <span>Strength required</span>
                         <input type="number" min="0" bind:value={f.strengthReq} placeholder="—" />
@@ -293,6 +319,7 @@
                 {#if f.aCategory === "light"}Light: AC = base + Dex.
                 {:else if f.aCategory === "medium"}Medium: AC = base + Dex (up to the max bonus).
                 {:else if f.aCategory === "heavy"}Heavy: Dexterity is not added.
+                {:else if isClothes}Clothing: worn in the Armor slot but doesn't count as armor (Mage Armor, Unarmored Defense still work). An own base AC applies only if it is better.
                 {:else}Shield: adds to AC, occupies a hand.{/if}
             </p>
         {/if}

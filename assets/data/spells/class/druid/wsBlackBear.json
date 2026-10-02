@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1/2. HP 19, AC 11, Speed 40 ft., Climb 30 ft. Multiattack: Bite (1d6 Piercing) and Claws (2d4 Slashing).",
   "damage": {
     "dice": "1d6",

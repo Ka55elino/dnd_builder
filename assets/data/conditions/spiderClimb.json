@@ -1,0 +1,14 @@
+{
+  "id": "spiderClimb",
+  "name": "Spider Climb",
+  "category": "effect",
+  "spell": "spiderClimb",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Climb Speed equal to your Speed; you can move on walls and ceilings"
+    }
+  ],
+  "desc": "You can climb walls and ceilings."
+}

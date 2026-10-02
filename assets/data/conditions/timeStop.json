@@ -1,0 +1,14 @@
+{
+  "id": "timeStop",
+  "name": "Time Stop",
+  "category": "effect",
+  "spell": "timeStop",
+  "duration": "1d4 + 1 turns",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you take several turns in a row; it ends if you affect another creature"
+    }
+  ],
+  "desc": "Time stops for everyone else."
+}

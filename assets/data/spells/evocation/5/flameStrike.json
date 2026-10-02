@@ -9,6 +9,9 @@
     "cleric",
     "paladin"
   ],
+  "upcast": {
+    "text": "+{n}d6 Fire and +{n}d6 Radiant damage"
+  },
   "desc": "A column of fire: Dexterity saving throw, Fire and Radiant damage.",
   "damage": {
     "dice": "4d6",

@@ -1,0 +1,9 @@
+{
+  "id": "sack",
+  "name": "Sack",
+  "image": "/img/items/sack.png",
+  "isDefault": true,
+  "weight": 1.0,
+  "cost": "1 CP",
+  "desc": "A Sack holds up to 30 pounds within 1 cubic foot."
+}

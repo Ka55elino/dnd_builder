@@ -1,0 +1,9 @@
+{
+  "id": "brewersSupplies",
+  "name": "Brewer's Supplies",
+  "image": "/img/items/brewersSupplies.png",
+  "isDefault": true,
+  "weight": 9.0,
+  "cost": "20 GP",
+  "desc": "Ability: Intelligence Weight: 9 lb. Utilize: Detect poisoned drink (DC 15), or identify alcohol (DC 10) Craft: Antitoxin"
+}

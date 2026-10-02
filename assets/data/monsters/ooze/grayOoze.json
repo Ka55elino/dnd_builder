@@ -82,5 +82,6 @@
   "vulnerabilities": [],
   "immunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/ooze/grayOoze.png"
 }

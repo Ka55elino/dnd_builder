@@ -9,5 +9,8 @@
     "cleric",
     "paladin"
   ],
+  "upcast": {
+    "targets": 1
+  },
   "desc": "A creature makes a Wisdom saving throw or follows a one-word command on its next turn."
 }

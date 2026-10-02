@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "On a hit, the target must succeed on a Charisma saving throw or be banished to the Feywild until the end of its next turn. Starting at level 18, it also takes 2d6 Force damage.",
   "damage": {
     "type": "force",

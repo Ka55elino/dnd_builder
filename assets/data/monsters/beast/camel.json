@@ -1,0 +1,56 @@
+{
+  "id": "srd-camel",
+  "name": "Camel",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 9,
+  "hp": 15,
+  "hpFormula": "2d10+4",
+  "initiative": -1,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 14,
+    "dex": 8,
+    "int": 2,
+    "str": 16,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d4+0",
+          "avg": 2
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/camel.png"
+}

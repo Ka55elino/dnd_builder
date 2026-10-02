@@ -97,5 +97,6 @@
   "resistances": [],
   "immunities": [],
   "conditionImmunities": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/fey/dryad.png"
 }

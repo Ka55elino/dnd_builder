@@ -10,5 +10,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "slowed",
+    "target": "enemy"
+  },
   "desc": "Up to 6 creatures: Wisdom saving throw or their Speed and actions are limited. Concentration."
 }

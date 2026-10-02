@@ -8,6 +8,16 @@
   "classes": [
     "warlock"
   ],
+  "upcast": {
+    "damage": 5,
+    "temp": 5
+  },
+  "apply": {
+    "condition": "armorOfAgathys",
+    "target": "self",
+    "tempHp": 5,
+    "endsWithTempHp": true
+  },
   "desc": "You gain 5 Temporary Hit Points; a creature that hits you with a melee attack takes 5 Cold damage (increases with spell level).",
   "damage": {
     "dice": "5",

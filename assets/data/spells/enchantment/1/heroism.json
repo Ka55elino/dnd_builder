@@ -10,5 +10,15 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "heroism",
+    "target": "creature"
+  },
   "desc": "A creature is immune to the Frightened condition and gains Temporary Hit Points (equal to your spellcasting modifier) at the start of each of its turns. Concentration."
 }

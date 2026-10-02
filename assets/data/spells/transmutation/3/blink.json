@@ -12,5 +12,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "blink",
+    "target": "self"
+  },
   "desc": "At the end of each of your turns, there's a 50% chance you vanish to the Ethereal Plane until the start of your next turn."
 }

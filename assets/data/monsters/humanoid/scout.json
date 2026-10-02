@@ -1,0 +1,86 @@
+{
+  "id": "srd-scout",
+  "name": "Scout",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 13,
+  "hp": 16,
+  "hpFormula": "3d8+3",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 12,
+    "dex": 14,
+    "int": 11,
+    "str": 11,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "nature": 4,
+    "perception": 5,
+    "stealth": 6,
+    "survival": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 15,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Hearing and Sight",
+      "desc": "The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The scout makes two melee attacks or two ranged attacks."
+    },
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Longbow",
+      "desc": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "range": "150/600"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+2",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/scout.png"
+}

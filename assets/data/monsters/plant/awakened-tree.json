@@ -1,0 +1,66 @@
+{
+  "id": "srd-awakened-tree",
+  "name": "Awakened Tree",
+  "type": "plant",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 13,
+  "hp": 59,
+  "hpFormula": "7d12+14",
+  "initiative": -2,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 15,
+    "dex": 6,
+    "int": 10,
+    "str": 19,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [
+    "fire"
+  ],
+  "resistances": [
+    "bludgeoning",
+    "piercing"
+  ],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "one language known by its creator",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "False Appearance",
+      "desc": "While the tree remains motionless, it is indistinguishable from a normal tree."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Slam",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 14 (3d6 + 4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "3d6+4",
+          "avg": 14
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/plant/awakened-tree.png"
+}

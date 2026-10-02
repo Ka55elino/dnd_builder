@@ -1,0 +1,65 @@
+{
+  "id": "srd-goat",
+  "name": "Goat",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 10,
+  "hp": 4,
+  "hpFormula": "1d8",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 11,
+    "dex": 10,
+    "int": 2,
+    "str": 12,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the goat moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 2 (1d4) bludgeoning damage. If the target is a creature, it must succeed on a DC 10 Strength saving throw or be knocked prone."
+    },
+    {
+      "name": "Sure-Footed",
+      "desc": "The goat has advantage on Strength and Dexterity saving throws made against effects that would knock it prone."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Ram",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d4+1",
+          "avg": 3
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/goat.png"
+}

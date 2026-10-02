@@ -1,0 +1,97 @@
+{
+  "id": "srd-wyvern",
+  "name": "Wyvern",
+  "type": "dragon",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 6.0,
+  "ac": 13,
+  "hp": 110,
+  "hpFormula": "13d10+39",
+  "initiative": 0,
+  "speed": {
+    "fly": 80,
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 16,
+    "dex": 10,
+    "int": 5,
+    "str": 19,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The wyvern makes two attacks: one with its bite and one with its stinger. While flying, it can use its claws in place of one other attack."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    },
+    {
+      "name": "Stinger",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 11 (2d6 + 4) piercing damage. The target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/wyvern.png"
+}

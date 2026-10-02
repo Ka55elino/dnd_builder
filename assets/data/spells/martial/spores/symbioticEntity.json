@@ -5,5 +5,17 @@
   "subclass": "spores",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
+  "apply": {
+    "condition": "symbioticEntity",
+    "target": "self",
+    "tempHp": {
+      "perLevel": 4
+    },
+    "endsWithTempHp": true
+  },
   "desc": "As an action (expending a use of Wild Shape instead of transforming), you gain {sporesHp} Temporary Hit Points (4 × Druid level) for 10 minutes. While active, your melee attacks deal an extra 1d6 Necrotic damage, and your Halo of Spores damage is doubled."
 }

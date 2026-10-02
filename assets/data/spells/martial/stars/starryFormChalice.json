@@ -5,6 +5,10 @@
   "subclass": "stars",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "Chalice form: when you or a creature within 30 feet is healed by a spell of level 1 or higher, the target also regains 1d8 + your Wisdom modifier.",
   "damage": {
     "dice": "1d8",

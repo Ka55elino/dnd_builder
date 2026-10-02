@@ -7,5 +7,20 @@
     "sorcerer"
   ],
   "action": "bonus",
+  "cost": {
+    "resource": "sorceryPoints",
+    "bySlot": {
+      "1": 2,
+      "2": 3,
+      "3": 5,
+      "4": 6,
+      "5": 7
+    }
+  },
+  "gain": {
+    "slot": {
+      "max": 5
+    }
+  },
   "desc": "As a Bonus Action, you spend Sorcery Points to create a spell slot: level 1 — 2 points, level 2 — 3, level 3 — 5, level 4 — 6, level 5 — 7."
 }

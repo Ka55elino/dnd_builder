@@ -1,0 +1,40 @@
+{
+  "id": "unconscious",
+  "name": "Unconscious",
+  "category": "condition",
+  "implies": [
+    "incapacitated",
+    "prone"
+  ],
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "dex"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "flag",
+      "mode": "autoCrit",
+      "on": "attacksAgainst",
+      "note": "from within 5 feet"
+    }
+  ],
+  "desc": "You are Incapacitated and Prone, drop whatever you're holding, and are unaware of your surroundings. Speed 0; you automatically fail Strength and Dexterity saves; attacks against you have Advantage, and any hit from within 5 feet is a Critical Hit."
+}

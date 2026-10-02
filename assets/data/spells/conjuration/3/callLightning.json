@@ -9,6 +9,12 @@
     "cleric",
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "A storm cloud: as an action, you call down lightning (Dexterity saving throw for half). Concentration.",
   "damage": {
     "dice": "3d10",

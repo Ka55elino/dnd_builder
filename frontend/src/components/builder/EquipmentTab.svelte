@@ -13,7 +13,7 @@
     import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
     import ChoiceGrid from "./common/ChoiceGrid.svelte";
     import ChoiceCard from "./common/ChoiceCard.svelte";
-    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, acText } from "../../rules/equipment.js";
+    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, acText, armorSummary, isClothing } from "../../rules/equipment.js";
 
     let { build } = $props();
 
@@ -34,9 +34,9 @@
 
     // --- captions (shared ones — rules/equipment.js) ---
     const PROPS = WEAPON_PROPS;
-    const armorCaption = (a) => `${ARMOR_CAT[a.category] ?? a.category} · AC ${acText(a)}`;
+    const armorCaption = (a) => armorSummary(a);
     const weaponCaption = (w) => `${w.damage} ${damageShort(w.damageType)}`.trim();
-    const packCaption = (p) => `${p.items.length} items · ${p.cost || "—"}`;
+    const packCaption = (p) => `${p.items.length + (p.armor?.length ?? 0)} items · ${p.cost || "—"}`;
 
     onMount(async () => {
         try {
@@ -62,7 +62,11 @@
                 <ChoiceCard item={armor} badge="Armor" onclear={() => build.setArmor(null)}>
                     <div class="stats">
                         <span>Type: <b>{ARMOR_CAT[armor.category] ?? armor.category}</b></span>
-                        <span>AC: <b>{acText(armor)}</b></span>
+                        {#if isClothing(armor)}
+                            <span>Doesn't count as armor{#if armor.baseAC}; AC <b>{acText(armor)}</b>{/if}</span>
+                        {:else}
+                            <span>AC: <b>{acText(armor)}</b></span>
+                        {/if}
                         {#if armor.data.strengthReq}
                             <span>Strength required: <b>{armor.data.strengthReq}</b></span>
                         {/if}
@@ -130,6 +134,14 @@
                                 <img src={pi.item.image} alt="" />
                                 <span class="c-name">{pi.item.name}</span>
                                 <span class="c-qty">× {pi.qty}</span>
+                            </li>
+                        {/each}
+                        <!-- clothes (armor table, category clothing) -->
+                        {#each pack.armor ?? [] as pa (pa.armor.id)}
+                            <li>
+                                {#if pa.armor.image}<img src={pa.armor.image} alt="" />{:else}<span class="img-ph"></span>{/if}
+                                <span class="c-name">{pa.armor.name}</span>
+                                <span class="c-qty">× {pa.qty}</span>
                             </li>
                         {/each}
                     </ul>
@@ -225,6 +237,13 @@
         gap: 10px;
         font-family: var(--font-ui);
         font-size: 14px;
+    }
+
+    .contents .img-ph {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        background: var(--color-border);
     }
 
     .contents img {

@@ -9,5 +9,13 @@
     "cleric",
     "paladin"
   ],
+  "upcast": {
+    "text": "+{n} Hit Points (maximum and current)",
+    "each": 5
+  },
+  "apply": {
+    "condition": "aid",
+    "target": "creature"
+  },
   "desc": "Up to 3 creatures: their Hit Point maximum and current Hit Points increase by 5 for 8 hours."
 }

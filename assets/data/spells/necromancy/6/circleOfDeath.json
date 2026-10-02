@@ -10,6 +10,9 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "damage": "2d6"
+  },
   "desc": "A wave of negative energy in a 60-foot Sphere: Constitution saving throw for half damage.",
   "damage": {
     "dice": "8d6",

@@ -9,5 +9,8 @@
     "cleric",
     "wizard"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "A body is protected from decay and can't become Undead; extends the time limit for raising it from the dead."
 }

@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "As a Bonus Action, you gain Advantage on your next attack roll against the target this turn; on a hit, extra damage equal to the die.",
   "action": "bonus",
   "pool": "maneuver"

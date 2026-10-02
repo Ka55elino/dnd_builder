@@ -1,0 +1,112 @@
+{
+  "id": "srd-half-red-dragon-veteran",
+  "name": "Half-Red Dragon Veteran",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 18,
+  "hp": 65,
+  "hpFormula": "10d8+20",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 14,
+    "dex": 13,
+    "int": 10,
+    "str": 16,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "fire"
+  ],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "Common, Draconic",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack."
+    },
+    {
+      "name": "Longsword",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+3",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Heavy Crossbow",
+      "desc": "Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "range": "100/400"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+1",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Fire Breath (Recharge 5-6)",
+      "desc": "The veteran exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "7d6+0",
+          "avg": 24
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/half-red-dragon-veteran.png"
+}

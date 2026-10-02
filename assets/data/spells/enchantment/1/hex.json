@@ -8,6 +8,20 @@
   "classes": [
     "warlock"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "at": {
+      "2": "Concentration up to 4 hours",
+      "3": "Concentration up to 8 hours",
+      "5": "Concentration up to 24 hours"
+    }
+  },
+  "apply": {
+    "condition": "hex",
+    "target": "enemy"
+  },
   "desc": "As a Bonus Action, you curse a creature: your attacks against it deal an extra 1d6 Necrotic damage, and the target has Disadvantage on ability checks with the chosen ability. Concentration.",
   "damage": {
     "dice": "1d6",

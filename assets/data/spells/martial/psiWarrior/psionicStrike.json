@@ -4,5 +4,9 @@
   "kind": "martial",
   "subclass": "psiWarrior",
   "level": 3,
+  "cost": {
+    "resource": "psionicEnergyDice",
+    "amount": 1
+  },
   "desc": "Once per turn when you hit with an attack (within 30 feet), you expend a Psionic Energy Die to deal extra Force damage equal to the die + your Intelligence modifier."
 }

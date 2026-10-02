@@ -1,0 +1,64 @@
+{
+  "id": "srd-eagle",
+  "name": "Eagle",
+  "type": "beast",
+  "size": "small",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 12,
+  "hp": 3,
+  "hpFormula": "1d6",
+  "initiative": 2,
+  "speed": {
+    "fly": 60,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 10,
+    "dex": 15,
+    "int": 2,
+    "str": 6,
+    "wis": 14
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 14,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Sight",
+      "desc": "The eagle has advantage on Wisdom (Perception) checks that rely on sight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Talons",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d4+2",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/eagle.png"
+}

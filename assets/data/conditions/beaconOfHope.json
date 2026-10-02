@@ -1,0 +1,20 @@
+{
+  "id": "beaconOfHope",
+  "name": "Beacon of Hope",
+  "category": "effect",
+  "spell": "beaconOfHope",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "ability": "wis"
+    },
+    {
+      "kind": "note",
+      "note": "Advantage on Death Saving Throws; healing restores the maximum"
+    }
+  ],
+  "desc": "Advantage on Wisdom saves and Death Saving Throws; healing is maximized."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "masonsTools",
+  "name": "Mason's Tools",
+  "image": "/img/items/masonsTools.png",
+  "isDefault": true,
+  "weight": 8.0,
+  "cost": "10 GP",
+  "desc": "Ability: Strength Weight: 8 lb. Utilize: Chisel a symbol or hole in stone (DC 10) Craft: Block and Tackle"
+}

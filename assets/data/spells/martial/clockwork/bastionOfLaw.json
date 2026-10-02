@@ -5,5 +5,12 @@
   "subclass": "clockwork",
   "level": 6,
   "action": "action",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": {
+      "min": 1,
+      "max": 5
+    }
+  },
   "desc": "Costs 1–5 Sorcery Points. As an action, you surround yourself or a creature within 30 feet with a shield of that many d8s; when the target takes damage, it expends dice to reduce the damage by the total rolled."
 }

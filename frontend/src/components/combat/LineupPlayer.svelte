@@ -12,7 +12,7 @@
     <section class="lineup">
         <header>
             <h2>Encounter{#if seen.name}<span class="nm"> · {seen.name}</span>{/if}</h2>
-            <span class="meta">order of play</span>
+            <span class="meta">order of play · round {seen.round}</span>
         </header>
         <div class="line" role="list">
             {#each seen.line as c, i (c.id)}

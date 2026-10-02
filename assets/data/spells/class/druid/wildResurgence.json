@@ -7,5 +7,14 @@
     "druid"
   ],
   "action": "bonus",
+  "cost": {
+    "slot": {
+      "min": 1
+    }
+  },
+  "gain": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "Once per turn, as a Bonus Action, you expend a spell slot to regain one use of Wild Shape."
 }

@@ -9,5 +9,12 @@
     "bard",
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "faerieFire",
+    "target": "enemy"
+  },
   "desc": "Creatures in a 20-foot Cube: Dexterity saving throw or they are outlined in light, and attack rolls against them have Advantage. Concentration."
 }

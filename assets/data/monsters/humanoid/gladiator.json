@@ -1,0 +1,98 @@
+{
+  "id": "srd-gladiator",
+  "name": "Gladiator",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 16,
+  "hp": 112,
+  "hpFormula": "15d8+45",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 15,
+    "con": 16,
+    "dex": 15,
+    "int": 10,
+    "str": 18,
+    "wis": 12
+  },
+  "saves": {
+    "con": 6,
+    "dex": 5,
+    "str": 7
+  },
+  "skills": {
+    "athletics": 10,
+    "intimidation": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 11,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Brave",
+      "desc": "The gladiator has advantage on saving throws against being frightened."
+    },
+    {
+      "name": "Brute",
+      "desc": "A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack)."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The gladiator makes three melee attacks or two ranged attacks."
+    },
+    {
+      "name": "Spear",
+      "desc": "Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 7,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Shield Bash",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d4+4",
+          "avg": 9
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [
+    {
+      "name": "Parry",
+      "desc": "The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon."
+    }
+  ],
+  "desc": "",
+  "image": "/img/monsters/humanoid/gladiator.png"
+}

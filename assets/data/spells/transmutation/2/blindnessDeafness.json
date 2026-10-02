@@ -11,5 +11,12 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "blinded",
+    "target": "enemy"
+  },
   "desc": "A creature makes a Constitution saving throw or is Blinded or Deafened for 1 minute."
 }

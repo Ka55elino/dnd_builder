@@ -8,5 +8,8 @@
   "classes": [
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You banish a creature to a labyrinthine demiplane until it escapes (Intelligence check). Concentration."
 }

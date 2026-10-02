@@ -1,0 +1,100 @@
+{
+  "id": "srd-manticore",
+  "name": "Manticore",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 14,
+  "hp": 68,
+  "hpFormula": "8d10+24",
+  "initiative": 3,
+  "speed": {
+    "fly": 50,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 17,
+    "dex": 16,
+    "int": 7,
+    "str": 17,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Tail Spike Regrowth",
+      "desc": "The manticore has twenty-four tail spikes. Used spikes regrow when the manticore finishes a long rest."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The manticore makes three attacks: one with its bite and two with its claws or three with its tail spikes."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+3",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Tail Spike",
+      "desc": "Ranged Weapon Attack: +5 to hit, range 100/200 ft., one target. Hit: 7 (1d8 + 3) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "range": "100/200"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+3",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/manticore.png"
+}

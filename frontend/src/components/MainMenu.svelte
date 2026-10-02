@@ -16,6 +16,7 @@
         { id: "spells", title: "Spells" },
         { id: "items", title: "Items" },
         { id: "bestiary", title: "Bestiary" },
+        { id: "conditions", title: "Conditions" },
         { id: "homebrew", title: "Homebrew" },
     ];
 

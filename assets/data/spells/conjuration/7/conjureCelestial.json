@@ -8,6 +8,13 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d12",
+    "heal": "1d12"
+  },
   "desc": "You summon a celestial spirit: it heals allies and sears enemies with Radiant damage. Concentration.",
   "damage": {
     "dice": "4d8",

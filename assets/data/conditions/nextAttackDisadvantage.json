@@ -1,0 +1,16 @@
+{
+  "id": "nextAttackDisadvantage",
+  "name": "Off Balance",
+  "category": "effect",
+  "spell": "viciousMockery",
+  "duration": "until the end of its next turn",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks",
+      "note": "its next attack roll"
+    }
+  ],
+  "desc": "Disadvantage on its next attack roll (Frostbite, Vicious Mockery)."
+}

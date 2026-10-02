@@ -1,0 +1,9 @@
+{
+  "id": "potIron",
+  "name": "Pot, Iron",
+  "image": "/img/items/potIron.png",
+  "isDefault": true,
+  "weight": 10.0,
+  "cost": "2 GP",
+  "desc": "An Iron Pot holds up to 1 gallon."
+}

@@ -10,5 +10,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "expeditiousRetreat",
+    "target": "self"
+  },
   "desc": "As a Bonus Action, you take the Dash action; you can do so again as a Bonus Action on each of your later turns. Concentration."
 }

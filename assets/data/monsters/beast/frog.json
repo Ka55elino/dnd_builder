@@ -1,0 +1,54 @@
+{
+  "id": "srd-frog",
+  "name": "Frog",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 11,
+  "hp": 1,
+  "hpFormula": "1d4-1",
+  "initiative": 1,
+  "speed": {
+    "swim": 20,
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 8,
+    "dex": 13,
+    "int": 1,
+    "str": 1,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {
+    "perception": 1,
+    "stealth": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Amphibious",
+      "desc": "The frog can breathe air and water"
+    },
+    {
+      "name": "Standing Leap",
+      "desc": "The frog's long jump is up to 10 ft. and its high jump is up to 5 ft., with or without a running start."
+    }
+  ],
+  "actions": [],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/frog.png"
+}

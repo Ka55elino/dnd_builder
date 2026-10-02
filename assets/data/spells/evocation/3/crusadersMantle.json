@@ -9,6 +9,13 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "crusadersMantle",
+    "target": "creature"
+  },
   "desc": "Allies within 30 feet deal an extra 1d4 Radiant damage. Concentration.",
   "damage": {
     "dice": "1d4",

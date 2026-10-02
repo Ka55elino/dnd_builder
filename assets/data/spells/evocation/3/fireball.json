@@ -9,6 +9,9 @@
     "wizard",
     "sorcerer"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A burst of flame in a 20-foot Sphere at a point up to 150 feet away: Dexterity saving throw, Fire damage.",
   "damage": {
     "dice": "8d6",

@@ -1,0 +1,15 @@
+{
+  "id": "shockingGrasp",
+  "name": "Jolted",
+  "category": "effect",
+  "spell": "shockingGrasp",
+  "duration": "until the start of its next turn",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "reactions"
+    }
+  ],
+  "desc": "Can't take Reactions (Shocking Grasp)."
+}

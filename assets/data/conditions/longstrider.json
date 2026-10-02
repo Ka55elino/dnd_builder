@@ -1,0 +1,15 @@
+{
+  "id": "longstrider",
+  "name": "Longstrider",
+  "category": "effect",
+  "spell": "longstrider",
+  "duration": "1 hour",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "add",
+      "value": 10
+    }
+  ],
+  "desc": "Your Speed increases by 10 feet."
+}

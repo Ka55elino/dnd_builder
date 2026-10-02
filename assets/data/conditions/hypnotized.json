@@ -1,0 +1,23 @@
+{
+  "id": "hypnotized",
+  "name": "Hypnotized",
+  "category": "effect",
+  "spell": "hypnoticPattern",
+  "duration": "Concentration, up to 1 minute",
+  "implies": [
+    "charmed",
+    "incapacitated"
+  ],
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "note",
+      "note": "ends if it takes damage or someone shakes it awake"
+    }
+  ],
+  "desc": "Charmed and Incapacitated by Hypnotic Pattern."
+}

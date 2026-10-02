@@ -1,0 +1,9 @@
+{
+  "id": "string",
+  "name": "String",
+  "image": "/img/items/string.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "1 SP",
+  "desc": "String is 10 feet long. You can tie a knot in it as a Utilize action."
+}

@@ -9,5 +9,12 @@
     "wizard",
     "sorcerer"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "restrained",
+    "target": "enemy"
+  },
   "desc": "You fill a 20-foot Cube with sticky webs (Difficult Terrain; Dexterity saving throw or Restrained). Concentration."
 }

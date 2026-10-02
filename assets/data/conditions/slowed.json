@@ -1,0 +1,32 @@
+{
+  "id": "slowed",
+  "name": "Slowed",
+  "category": "effect",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "mul",
+      "value": 0.5
+    },
+    {
+      "kind": "ac",
+      "op": "add",
+      "value": -2
+    },
+    {
+      "kind": "save",
+      "ability": "dex",
+      "value": -2
+    },
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "reactions"
+    },
+    {
+      "kind": "note",
+      "note": "an action or a Bonus Action on your turn, not both; one attack"
+    }
+  ],
+  "desc": "Slow (spell): your Speed is halved, −2 to AC and Dexterity saving throws, you can't take Reactions, and on your turn you can take an action or a Bonus Action, not both (and make only one attack)."
+}

@@ -10,6 +10,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "A 60-foot Cone of frost: Constitution saving throw for half damage.",
   "damage": {
     "dice": "8d8",

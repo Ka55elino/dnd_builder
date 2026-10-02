@@ -1,0 +1,14 @@
+{
+  "id": "nondetection",
+  "name": "Nondetection",
+  "category": "effect",
+  "spell": "nondetection",
+  "duration": "8 hours",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you can't be targeted by divination magic or seen through magical sensors"
+    }
+  ],
+  "desc": "You are hidden from divination."
+}

@@ -1,0 +1,77 @@
+{
+  "id": "srd-spirit-naga",
+  "name": "Spirit Naga",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 8.0,
+  "ac": 15,
+  "hp": 75,
+  "hpFormula": "10d10+20",
+  "initiative": 3,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 14,
+    "dex": 17,
+    "int": 16,
+    "str": 18,
+    "wis": 15
+  },
+  "saves": {
+    "cha": 6,
+    "con": 5,
+    "dex": 6,
+    "wis": 5
+  },
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "Abyssal, Common",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Rejuvenation",
+      "desc": "If it dies, the naga returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning."
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "The naga is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:\n\n* Cantrips (at will): mage hand, minor illusion, ray of frost\n* 1st level (4 slots): charm person, detect magic, sleep\n* 2nd level (3 slots): detect thoughts, hold person\n* 3rd level (3 slots): lightning bolt, water breathing\n* 4th level (3 slots): blight, dimension door\n* 5th level (2 slots): dominate person"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 7 (1d6 + 4) piercing damage, and the target must make a DC 13 Constitution saving throw, taking 31 (7d8) poison damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+4",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/spirit-naga.png"
+}

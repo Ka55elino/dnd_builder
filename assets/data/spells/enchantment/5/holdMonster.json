@@ -12,5 +12,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "paralyzed",
+    "target": "enemy"
+  },
   "desc": "A creature (not Undead) makes a Wisdom saving throw or is Paralyzed. Concentration."
 }

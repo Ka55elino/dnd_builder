@@ -1,0 +1,156 @@
+{
+  "id": "srd-adult-white-dragon",
+  "name": "Adult White Dragon",
+  "type": "dragon",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 13.0,
+  "ac": 18,
+  "hp": 200,
+  "hpFormula": "16d12+96",
+  "initiative": 0,
+  "speed": {
+    "burrow": 30,
+    "fly": 80,
+    "swim": 40,
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 12,
+    "con": 22,
+    "dex": 10,
+    "int": 8,
+    "str": 22,
+    "wis": 12
+  },
+  "saves": {
+    "cha": 6,
+    "con": 11,
+    "dex": 5,
+    "wis": 6
+  },
+  "skills": {
+    "perception": 11,
+    "stealth": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "cold"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 60,
+    "darkvision": 120
+  },
+  "passivePerception": 21,
+  "languages": "Common, Draconic",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Ice Walk",
+      "desc": "The dragon can move across and climb icy surfaces without needing to make an ability check. Additionally, difficult terrain composed of ice or snow doesn't cost it extra movement."
+    },
+    {
+      "name": "Legendary Resistance (3/Day)",
+      "desc": "If the dragon fails a saving throw, it can choose to succeed instead."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The dragon can use its Frightful Presence. It then makes three attacks: one with its bite and two with its claws."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 17 (2d10 + 6) piercing damage plus 4 (1d8) cold damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 11,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d10+1d8+6",
+          "avg": 21
+        }
+      ]
+    },
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +11 to hit, reach 5 ft., one target. Hit: 13 (2d6 + 6) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 11,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d6+6",
+          "avg": 13
+        }
+      ]
+    },
+    {
+      "name": "Tail",
+      "desc": "Melee Weapon Attack: +11 to hit, reach 15 ft., one target. Hit: 15 (2d8 + 6) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 11,
+        "reach": 15
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d8+6",
+          "avg": 15
+        }
+      ]
+    },
+    {
+      "name": "Frightful Presence",
+      "desc": "Each creature of the dragon's choice that is within 120 ft. of the dragon and aware of it must succeed on a DC 14 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the dragon's Frightful Presence for the next 24 hours."
+    },
+    {
+      "name": "Cold Breath (Recharge 5-6)",
+      "desc": "The dragon exhales an icy blast in a 60-foot cone. Each creature in that area must make a DC 19 Constitution saving throw, taking 54 (12d8) cold damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "cold",
+          "dice": "12d8+0",
+          "avg": 54
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "legendary": {
+    "perRound": 3,
+    "actions": [
+      {
+        "name": "Detect",
+        "desc": "The dragon makes a Wisdom (Perception) check.",
+        "cost": 1
+      },
+      {
+        "name": "Tail Attack",
+        "desc": "The dragon makes a tail attack.",
+        "cost": 1
+      },
+      {
+        "name": "Wing Attack (Costs 2 Actions)",
+        "desc": "The dragon beats its wings. Each creature within 10 ft. of the dragon must succeed on a DC 19 Dexterity saving throw or take 13 (2d6 + 6) bludgeoning damage and be knocked prone. The dragon can then fly up to half its flying speed.",
+        "cost": 2
+      }
+    ]
+  },
+  "image": "/img/monsters/dragon/adult-white-dragon.png"
+}

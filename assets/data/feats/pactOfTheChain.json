@@ -4,5 +4,13 @@
   "category": "invocation",
   "level": 1,
   "desc": "You cast Find Familiar as a Ritual; the familiar can take the form of an imp, pseudodragon, quasit, or sprite. You can forgo one of your attacks to let it attack with its Reaction.",
-  "boon": true
+  "boon": true,
+  "grants": [
+    {
+      "type": "spell",
+      "id": "findFamiliar",
+      "ritual": true,
+      "note": "special forms: imp, pseudodragon, quasit, skeleton, sprite…"
+    }
+  ]
 }

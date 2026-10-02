@@ -1,0 +1,63 @@
+{
+  "id": "srd-giant-hyena",
+  "name": "Giant Hyena",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 12,
+  "hp": 45,
+  "hpFormula": "6d10+12",
+  "initiative": 2,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 14,
+    "dex": 14,
+    "int": 2,
+    "str": 16,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Rampage",
+      "desc": "When the hyena reduces a creature to 0 hit points with a melee attack on its turn, the hyena can take a bonus action to move up to half its speed and make a bite attack."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-hyena.png"
+}

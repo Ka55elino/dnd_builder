@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "You add a Superiority Die to an attack roll (you can do so after the roll, before the result is determined).",
   "pool": "maneuver"
 }

@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "You hurl a sphere of the chosen element (spell attack): Acid, Cold, Fire, Lightning, Poison, or Thunder damage.",
   "damage": {
     "dice": "3d8",

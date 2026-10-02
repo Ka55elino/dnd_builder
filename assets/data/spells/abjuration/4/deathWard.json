@@ -9,5 +9,9 @@
     "cleric",
     "paladin"
   ],
+  "apply": {
+    "condition": "deathWard",
+    "target": "creature"
+  },
   "desc": "The first time the target drops to 0 Hit Points, it drops to 1 Hit Point instead; an instant-death effect is negated."
 }

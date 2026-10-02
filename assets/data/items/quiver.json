@@ -1,0 +1,9 @@
+{
+  "id": "quiver",
+  "name": "Quiver",
+  "image": "/img/items/quiver.png",
+  "isDefault": true,
+  "weight": 1.0,
+  "cost": "1 GP",
+  "desc": "A Quiver holds up to 20 Arrows."
+}

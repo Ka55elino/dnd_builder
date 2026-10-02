@@ -10,5 +10,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "fly",
+    "target": "creature"
+  },
   "desc": "With a touch, you give a creature a Fly Speed of 60 feet. Concentration, up to 10 minutes."
 }

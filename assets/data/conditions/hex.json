@@ -1,0 +1,21 @@
+{
+  "id": "hex",
+  "name": "Hex",
+  "category": "effect",
+  "spell": "hex",
+  "duration": "Concentration, up to 1 hour",
+  "choose": "ability",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "checks",
+      "ability": "$choice"
+    },
+    {
+      "kind": "note",
+      "note": "the caster's attacks deal +1d6 Necrotic damage to it"
+    }
+  ],
+  "desc": "Cursed by Hex."
+}

@@ -1,0 +1,69 @@
+{
+  "id": "srd-reef-shark",
+  "name": "Reef Shark",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 12,
+  "hp": 22,
+  "hpFormula": "4d8+1",
+  "initiative": 1,
+  "speed": {
+    "swim": 40
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 13,
+    "dex": 13,
+    "int": 1,
+    "str": 14,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 30
+  },
+  "passivePerception": 12,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Pack Tactics",
+      "desc": "The shark has advantage on an attack roll against a creature if at least one of the shark's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+    },
+    {
+      "name": "Water Breathing",
+      "desc": "The shark can breathe only underwater."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+2",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/reef-shark.png"
+}

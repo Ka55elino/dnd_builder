@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "On a hit, extra damage equal to the die; the target has Disadvantage on attack rolls against anyone other than you (Wisdom saving throw).",
   "pool": "maneuver"
 }

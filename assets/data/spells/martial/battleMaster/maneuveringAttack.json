@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "On a hit, extra damage equal to the die; an ally uses its Reaction to move up to half its Speed without provoking an Opportunity Attack from the target.",
   "pool": "maneuver"
 }

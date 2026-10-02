@@ -8,5 +8,15 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "bane",
+    "target": "enemy"
+  },
   "desc": "Up to 3 creatures: Charisma saving throw or subtract 1d4 from attack rolls and saving throws. Concentration, up to 1 minute."
 }

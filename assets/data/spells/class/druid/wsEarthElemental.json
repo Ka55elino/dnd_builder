@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 5. HP 126, AC 17, Speed 30 ft., Burrow 30 ft. Circle of the Moon ONLY (level 10). Multiattack: 2 Slams; Earth Glide through stone.",
   "damage": {
     "dice": "2d8",

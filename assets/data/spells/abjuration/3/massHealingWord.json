@@ -9,5 +9,8 @@
     "bard",
     "cleric"
   ],
+  "upcast": {
+    "heal": "1d4"
+  },
   "desc": "As a Bonus Action, up to 6 creatures heal 1d4 + your spellcasting ability modifier."
 }

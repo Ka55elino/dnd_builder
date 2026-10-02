@@ -7,5 +7,9 @@
     "monk"
   ],
   "action": "bonus",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 1
+  },
   "desc": "As a Bonus Action, you take the Dash action for free; by spending 1 Focus Point, you also take the Disengage action, and your jump distance is doubled (starting at level 10, you can carry a willing ally with you)."
 }

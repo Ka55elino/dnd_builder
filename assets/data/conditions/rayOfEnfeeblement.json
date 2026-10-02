@@ -1,0 +1,14 @@
+{
+  "id": "rayOfEnfeeblement",
+  "name": "Enfeebled",
+  "category": "effect",
+  "spell": "rayOfEnfeeblement",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "it deals only half damage with Strength-based attacks"
+    }
+  ],
+  "desc": "Weakened (Ray of Enfeeblement)."
+}

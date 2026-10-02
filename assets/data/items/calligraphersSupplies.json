@@ -1,0 +1,9 @@
+{
+  "id": "calligraphersSupplies",
+  "name": "Calligrapher's Supplies",
+  "image": "/img/items/calligraphersSupplies.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "10 GP",
+  "desc": "Ability: Dexterity Weight: 5 lb. Utilize: Write text with impressive flourishes that guard against forgery (DC 15) Craft: Ink, Spell Scroll"
+}

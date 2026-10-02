@@ -12,6 +12,16 @@
     "paladin",
     "wizard"
   ],
+  "upcast": {
+    "at": {
+      "7": "lasts 30 days",
+      "9": "lasts until ended by Remove Curse, Greater Restoration or Wish"
+    }
+  },
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "You command a creature (Wisdom saving throw) to carry out a task under threat of Psychic damage.",
   "damage": {
     "dice": "5d10",

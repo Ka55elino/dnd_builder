@@ -1,0 +1,9 @@
+{
+  "id": "jug",
+  "name": "Jug",
+  "image": "/img/items/jug.png",
+  "isDefault": true,
+  "weight": 4.0,
+  "cost": "2 CP",
+  "desc": "A Jug holds up to 1 gallon."
+}

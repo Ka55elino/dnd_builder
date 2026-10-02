@@ -1,0 +1,29 @@
+{
+  "id": "enlarged",
+  "name": "Enlarged",
+  "category": "effect",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "damage",
+      "dice": "1d4",
+      "sign": 1
+    },
+    {
+      "kind": "note",
+      "note": "size +1 category"
+    }
+  ],
+  "desc": "Enlarge (spell): your size increases by one category. Advantage on Strength checks and Strength saving throws; your weapon attacks deal an extra 1d4 damage."
+}

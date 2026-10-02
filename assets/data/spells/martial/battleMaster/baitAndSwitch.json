@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "You swap places with an ally within 5 feet; one of you adds a Superiority Die to AC.",
   "pool": "maneuver"
 }

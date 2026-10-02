@@ -33,11 +33,12 @@ INSERT INTO armor (id, name, image, category, base_ac, is_default, data_json)
 VALUES (?, ?, ?, ?, ?, ?, ?);
 
 -- name: GetDefaultArmor
--- Only armor with is_default = 1; light → medium → heavy → shields.
+-- Only armor with is_default = 1; clothing → light → medium → heavy → shields.
 SELECT id, name, image, category, base_ac, data_json, is_default
 FROM armor
 WHERE is_default = 1
 ORDER BY CASE category
+             WHEN 'clothing' THEN 0
              WHEN 'light'  THEN 1
              WHEN 'medium' THEN 2
              WHEN 'heavy'  THEN 3
@@ -49,7 +50,7 @@ ORDER BY CASE category
 SELECT id, name, image, category, base_ac, data_json, is_default
 FROM armor
 ORDER BY is_default DESC,
-         CASE category WHEN 'light' THEN 1 WHEN 'medium' THEN 2 WHEN 'heavy' THEN 3 ELSE 4 END,
+         CASE category WHEN 'clothing' THEN 0 WHEN 'light' THEN 1 WHEN 'medium' THEN 2 WHEN 'heavy' THEN 3 ELSE 4 END,
          name COLLATE NOCASE;
 
 -- ---------- items ----------

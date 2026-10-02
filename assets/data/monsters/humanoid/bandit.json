@@ -69,5 +69,6 @@
   "traits": [],
   "bonusActions": [],
   "reactions": [],
-  "senses": {}
+  "senses": {},
+  "image": "/img/monsters/humanoid/bandit.png"
 }

@@ -1,0 +1,95 @@
+{
+  "id": "srd-stone-giant",
+  "name": "Stone Giant",
+  "type": "giant",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 7.0,
+  "ac": 17,
+  "hp": 126,
+  "hpFormula": "11d12+55",
+  "initiative": 2,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 9,
+    "con": 20,
+    "dex": 15,
+    "int": 10,
+    "str": 23,
+    "wis": 12
+  },
+  "saves": {
+    "con": 8,
+    "dex": 5,
+    "wis": 4
+  },
+  "skills": {
+    "athletics": 12,
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Giant",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Stone Camouflage",
+      "desc": "The giant has advantage on Dexterity (Stealth) checks made to hide in rocky terrain."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The giant makes two greatclub attacks."
+    },
+    {
+      "name": "Greatclub",
+      "desc": "Melee Weapon Attack: +9 to hit, reach 15 ft., one target. Hit: 19 (3d8 + 6) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 9,
+        "reach": 15
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "3d8+6",
+          "avg": 19
+        }
+      ]
+    },
+    {
+      "name": "Rock",
+      "desc": "Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage. If the target is a creature, it must succeed on a DC 17 Strength saving throw or be knocked prone.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 9,
+        "range": "60/240"
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "4d10+6",
+          "avg": 28
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [
+    {
+      "name": "Rock Catching",
+      "desc": "If a rock or similar object is hurled at the giant, the giant can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it."
+    }
+  ],
+  "desc": "",
+  "image": "/img/monsters/giant/stone-giant.png"
+}

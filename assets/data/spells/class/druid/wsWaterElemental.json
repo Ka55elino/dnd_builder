@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 5. HP 114, AC 14, Speed 30 ft., Swim 90 ft. Circle of the Moon ONLY (level 10). Engulf and grapple; Water Form.",
   "damage": {
     "dice": "2d8",

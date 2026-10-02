@@ -1,0 +1,26 @@
+{
+  "id": "gaseousForm",
+  "name": "Gaseous Form",
+  "category": "effect",
+  "spell": "gaseousForm",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "bludgeoning"
+    },
+    {
+      "kind": "resistance",
+      "value": "piercing"
+    },
+    {
+      "kind": "resistance",
+      "value": "slashing"
+    },
+    {
+      "kind": "note",
+      "note": "Fly Speed 10 feet; you can pass through small holes; no attacks or spells"
+    }
+  ],
+  "desc": "You turn into mist."
+}

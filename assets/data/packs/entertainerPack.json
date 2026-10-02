@@ -24,10 +24,6 @@
       "qty": 1
     },
     {
-      "id": "costume",
-      "qty": 3
-    },
-    {
       "id": "mirror",
       "qty": 1
     },
@@ -46,6 +42,12 @@
     {
       "id": "waterskin",
       "qty": 1
+    }
+  ],
+  "armor": [
+    {
+      "id": "costume",
+      "qty": 3
     }
   ]
 }

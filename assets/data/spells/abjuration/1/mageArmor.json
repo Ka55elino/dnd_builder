@@ -9,5 +9,9 @@
     "wizard",
     "sorcerer"
   ],
+  "apply": {
+    "condition": "mageArmor",
+    "target": "creature"
+  },
   "desc": "You touch a creature not wearing armor to give it a base AC of 13 + its Dexterity modifier for 8 hours."
 }

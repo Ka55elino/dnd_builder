@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "The arrow explodes: the target and each creature within 10 feet of it take 2d6 Force damage.",
   "damage": {
     "dice": "2d6",

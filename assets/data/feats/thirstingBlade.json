@@ -11,7 +11,10 @@
     {
       "kind": "set",
       "target": "attacksPerAction",
-      "value": 2
+      "value": 2,
+      "when": {
+        "weapon": "pact"
+      }
     }
   ]
 }

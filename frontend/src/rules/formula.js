@@ -8,6 +8,7 @@
  *                                        for the largest key ≤ level
  *   { "abilityMod": "cha", "min": 1 }  — ability modifier
  *   { "sum": [ ... ] }                 — sum of several formulas
+ *   { "perLevel": 4 }                  — 4 × level (Symbiotic Entity Temporary Hit Points)
  *
  * Any object formula may add "min" / "max".
  *
@@ -24,6 +25,7 @@ export function evalFormula(f, ctx) {
         if (f.byLevel) v = byLevel(f.byLevel, ctx.level);
         else if (f.abilityMod) v = ctx.mods?.[f.abilityMod] ?? 0;
         else if (Array.isArray(f.sum)) v = f.sum.reduce((s, x) => s + evalFormula(x, ctx), 0);
+        else if (f.perLevel != null) v = Number(f.perLevel) * ctx.level;
         if (f.min != null) v = Math.max(f.min, v);
         if (f.max != null) v = Math.min(f.max, v);
         return v;

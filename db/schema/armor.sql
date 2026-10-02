@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS armor (
     id          TEXT PRIMARY KEY,                -- 'chainMail'
     name        TEXT NOT NULL,                   -- 'Chain Mail'
     image       TEXT,                            -- "/img/…" URL (see images.go) | NULL
-    category    TEXT NOT NULL,                   -- light | medium | heavy | shield
-    base_ac     INTEGER,                         -- 16 (NULL for a shield)
+    category    TEXT NOT NULL,                   -- clothing | light | medium | heavy | shield
+    base_ac     INTEGER,                         -- 16 (NULL for a shield and plain clothing)
     is_default  INTEGER NOT NULL DEFAULT 0,      -- 0/1
     data_json   TEXT NOT NULL,                   -- addDex, maxDex, stealthDisadvantage, strengthReq, acBonus...
     is_custom   INTEGER NOT NULL DEFAULT 0,

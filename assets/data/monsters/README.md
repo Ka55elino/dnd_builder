@@ -10,6 +10,8 @@ count with, nothing is rolled. Numbers are given as "average (dice)".
 Stat blocks here are original write-ups in the style of the D&D 2024 rules;
 descriptions are our own words.
 
+The `srd-*` entries are adapted from the [D&D System Reference Document v5.2.1](https://github.com/adkinn/srd-5.2.1/blob/main/data/monsters.json), provided under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). The source dataset attributes Wizards of the Coast LLC and republishes the material via Open5e.
+
 ## Fields
 
 List/filter fields (become table columns):

@@ -1,0 +1,76 @@
+{
+  "id": "srd-giant-wolf-spider",
+  "name": "Giant Wolf Spider",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 13,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 3,
+  "speed": {
+    "climb": 40,
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 13,
+    "dex": 16,
+    "int": 3,
+    "str": 12,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 7
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Spider Climb",
+      "desc": "The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    },
+    {
+      "name": "Web Sense",
+      "desc": "While in contact with a web, the spider knows the exact location of any other creature in contact with the same web."
+    },
+    {
+      "name": "Web Walker",
+      "desc": "The spider ignores movement restrictions caused by webbing."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 7 (2d6) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-wolf-spider.png"
+}

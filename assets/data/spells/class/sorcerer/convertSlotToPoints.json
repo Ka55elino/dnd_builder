@@ -7,5 +7,14 @@
     "sorcerer"
   ],
   "action": "bonus",
+  "cost": {
+    "slot": {
+      "min": 1
+    }
+  },
+  "gain": {
+    "resource": "sorceryPoints",
+    "amount": "slotLevel"
+  },
   "desc": "As a Bonus Action, you expend a spell slot to gain Sorcery Points equal to the slot's level."
 }

@@ -9,6 +9,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "2d8"
+  },
   "desc": "A giant hand of force strikes, pushes, grapples, or protects. Concentration.",
   "damage": {
     "dice": "4d8",

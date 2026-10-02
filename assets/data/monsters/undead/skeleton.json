@@ -1,0 +1,81 @@
+{
+  "id": "srd-skeleton",
+  "name": "Skeleton",
+  "type": "undead",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 13,
+  "hp": 13,
+  "hpFormula": "2d8+4",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 15,
+    "dex": 14,
+    "int": 6,
+    "str": 10,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [
+    "bludgeoning"
+  ],
+  "resistances": [
+    "poison"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "exhaustion",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "understands the languages it knew in life but can't speak",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Shortbow",
+      "desc": "Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "range": "80/320"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/undead/skeleton.png"
+}

@@ -1,0 +1,79 @@
+{
+  "id": "srd-giant-elk",
+  "name": "Giant Elk",
+  "type": "beast",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 15,
+  "hp": 42,
+  "hpFormula": "5d12+10",
+  "initiative": 3,
+  "speed": {
+    "walk": 60
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 14,
+    "dex": 16,
+    "int": 7,
+    "str": 19,
+    "wis": 14
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 14,
+  "languages": "Giant Elk, understands Common, Elvish, and Sylvan but can't speak",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be knocked prone."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Ram",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one prone creature. Hit: 22 (4d8 + 4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "4d8+4",
+          "avg": 22
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-elk.png"
+}

@@ -10,5 +10,8 @@
     "druid",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You raise, part, or redirect large volumes of water. Concentration."
 }

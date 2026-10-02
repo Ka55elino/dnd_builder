@@ -1,0 +1,101 @@
+{
+  "id": "srd-satyr",
+  "name": "Satyr",
+  "type": "fey",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 14,
+  "hp": 31,
+  "hpFormula": "7d8",
+  "initiative": 3,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 14,
+    "con": 11,
+    "dex": 16,
+    "int": 12,
+    "str": 12,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2,
+    "performance": 6,
+    "stealth": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 12,
+  "languages": "Common, Elvish, Sylvan",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Magic Resistance",
+      "desc": "The satyr has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Ram",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d4+1",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Shortsword",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Shortbow",
+      "desc": "Ranged Weapon Attack: +5 to hit, range 80/320 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "range": "80/320"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Variant: Panpipes",
+      "desc": "Gentle Lullaby. The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fey/satyr.png"
+}

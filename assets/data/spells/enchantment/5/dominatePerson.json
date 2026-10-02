@@ -11,5 +11,19 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "at": {
+      "6": "Concentration up to 10 minutes",
+      "7": "Concentration up to 1 hour",
+      "8": "Concentration up to 8 hours"
+    }
+  },
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "A Humanoid makes a Wisdom saving throw or falls under your control. Concentration."
 }

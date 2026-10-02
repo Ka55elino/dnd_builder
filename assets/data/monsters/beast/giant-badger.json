@@ -1,0 +1,84 @@
+{
+  "id": "srd-giant-badger",
+  "name": "Giant Badger",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 10,
+  "hp": 13,
+  "hpFormula": "2d8+4",
+  "initiative": 0,
+  "speed": {
+    "burrow": 10,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 15,
+    "dex": 10,
+    "int": 2,
+    "str": 13,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The badger has advantage on Wisdom (Perception) checks that rely on smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The badger makes two attacks: one with its bite and one with its claws."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d4+1",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-badger.png"
+}

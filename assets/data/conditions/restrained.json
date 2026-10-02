@@ -1,0 +1,29 @@
+{
+  "id": "restrained",
+  "name": "Restrained",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "saves",
+      "ability": "dex"
+    }
+  ],
+  "desc": "Your Speed is 0. Attack rolls against you have Advantage, your attack rolls have Disadvantage, and you have Disadvantage on Dexterity saving throws."
+}

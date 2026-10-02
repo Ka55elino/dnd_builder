@@ -7,5 +7,9 @@
     "monk"
   ],
   "action": "bonus",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 1
+  },
   "desc": "As a Bonus Action, you take the Disengage action for free; by spending 1 Focus Point, you also take the Dodge action (starting at level 10, you also gain Temporary Hit Points equal to a roll of your Martial Arts die)."
 }

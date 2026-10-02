@@ -1,0 +1,14 @@
+{
+  "id": "feebleminded",
+  "name": "Feebleminded",
+  "category": "effect",
+  "spell": "feeblemind",
+  "duration": "until cured",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Intelligence and Charisma become 1; it can't cast spells or use magic items; repeats the save every 30 days"
+    }
+  ],
+  "desc": "Its mind is shattered."
+}

@@ -1,0 +1,56 @@
+{
+  "id": "srd-bat",
+  "name": "Bat",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 12,
+  "hp": 1,
+  "hpFormula": "1d4-1",
+  "initiative": 2,
+  "speed": {
+    "fly": 30,
+    "walk": 5
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 8,
+    "dex": 15,
+    "int": 2,
+    "str": 2,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Echolocation",
+      "desc": "The bat can't use its blindsight while deafened."
+    },
+    {
+      "name": "Keen Hearing",
+      "desc": "The bat has advantage on Wisdom (Perception) checks that rely on hearing."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +0 to hit, reach 5 ft., one creature. Hit: 1 piercing damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/bat.png"
+}

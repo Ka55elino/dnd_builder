@@ -1,0 +1,14 @@
+{
+  "id": "shapechange",
+  "name": "Shapechange",
+  "category": "effect",
+  "spell": "shapechange",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you are in the form of another creature; you keep your mind and Hit Points"
+    }
+  ],
+  "desc": "You take another creature's form."
+}

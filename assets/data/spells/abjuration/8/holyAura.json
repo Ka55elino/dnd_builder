@@ -8,5 +8,12 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "holyAura",
+    "target": "creature"
+  },
   "desc": "Allies within 30 feet: Advantage on saving throws, Disadvantage for attackers, and Fiends and Undead are Blinded on a hit. Concentration."
 }

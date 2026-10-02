@@ -8,6 +8,9 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A wall of whirling blades: Dexterity saving throw, Slashing damage, provides Cover. Concentration.",
   "damage": {
     "dice": "6d10",

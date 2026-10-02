@@ -68,5 +68,6 @@
   "resistances": [],
   "immunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/plant/twigBlight.png"
 }

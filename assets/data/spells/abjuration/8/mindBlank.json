@@ -9,5 +9,9 @@
     "bard",
     "wizard"
   ],
+  "apply": {
+    "condition": "mindBlank",
+    "target": "creature"
+  },
   "desc": "For 24 hours, the target is immune to Psychic damage, divination, and being Charmed."
 }

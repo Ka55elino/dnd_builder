@@ -9,5 +9,12 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "shieldOfFaith",
+    "target": "creature"
+  },
   "desc": "A creature within 60 feet gains +2 to AC for the duration (Concentration, up to 10 minutes)."
 }

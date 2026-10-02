@@ -8,6 +8,12 @@
   "classes": [
     "warlock"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d12"
+  },
   "desc": "A bolt of lightning (spell attack): Lightning damage; on your later turns, you can use an action to deal the damage to the same target again. Concentration.",
   "damage": {
     "dice": "1d12",

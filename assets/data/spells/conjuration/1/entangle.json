@@ -8,5 +8,12 @@
   "classes": [
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "restrained",
+    "target": "enemy"
+  },
   "desc": "A 20-foot area becomes overgrown: creatures make a Strength saving throw or are Restrained. Concentration."
 }

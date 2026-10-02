@@ -11,5 +11,10 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "bladeWard",
+    "target": "self",
+    "rounds": 1
+  },
   "desc": "Until the end of your next turn, you have Resistance to Bludgeoning, Piercing, and Slashing damage."
 }

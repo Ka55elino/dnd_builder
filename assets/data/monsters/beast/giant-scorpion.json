@@ -1,0 +1,78 @@
+{
+  "id": "srd-giant-scorpion",
+  "name": "Giant Scorpion",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 15,
+  "hp": 52,
+  "hpFormula": "7d10+14",
+  "initiative": 1,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 15,
+    "dex": 13,
+    "int": 1,
+    "str": 15,
+    "wis": 9
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) bludgeoning damage, and the target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d8+2",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Multiattack",
+      "desc": "The scorpion makes three attacks: two with its claws and one with its sting."
+    },
+    {
+      "name": "Sting",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 12 Constitution saving throw, taking 22 (4d10) poison damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+2",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-scorpion.png"
+}

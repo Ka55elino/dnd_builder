@@ -10,5 +10,8 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "Creatures: Wisdom saving throw or you direct their movement. Concentration."
 }

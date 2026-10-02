@@ -1,0 +1,68 @@
+{
+  "id": "srd-mage",
+  "name": "Mage",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 6.0,
+  "ac": 12,
+  "hp": 40,
+  "hpFormula": "9d8",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 11,
+    "dex": 14,
+    "int": 17,
+    "str": 9,
+    "wis": 12
+  },
+  "saves": {
+    "int": 6,
+    "wis": 4
+  },
+  "skills": {
+    "arcana": 6,
+    "history": 6
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 11,
+  "languages": "any four languages",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Spellcasting",
+      "desc": "The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:\n\n* Cantrips (at will): fire bolt, light, mage hand, prestidigitation\n* 1st level (4 slots): detect magic, mage armor, magic missile, shield\n* 2nd level (3 slots): misty step, suggestion\n* 3rd level (3 slots): counterspell, fireball, fly\n* 4th level (3 slots): greater invisibility, ice storm\n* 5th level (1 slot): cone of cold"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Dagger",
+      "desc": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d4 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+2",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/srd-mage.png"
+}

@@ -11,5 +11,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "An area of ice and snow: Difficult Terrain, extinguishes fires, and breaks Concentration. Concentration."
 }

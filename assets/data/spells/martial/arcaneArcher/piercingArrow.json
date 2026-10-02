@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "The arrow flies in a 30-foot-long, 1-foot-wide Line through creatures; each makes a Dexterity saving throw: weapon damage + 1d6 Piercing damage (half on a success).",
   "damage": {
     "dice": "1d6",

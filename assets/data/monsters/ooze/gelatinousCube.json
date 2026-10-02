@@ -87,5 +87,6 @@
   "resistances": [],
   "immunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/ooze/gelatinousCube.png"
 }

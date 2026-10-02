@@ -1,0 +1,14 @@
+{
+  "id": "chillTouch",
+  "name": "Spectral Grip",
+  "category": "effect",
+  "spell": "chillTouch",
+  "duration": "until the start of the caster's next turn",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "can't regain Hit Points"
+    }
+  ],
+  "desc": "Can't regain Hit Points (Chill Touch)."
+}

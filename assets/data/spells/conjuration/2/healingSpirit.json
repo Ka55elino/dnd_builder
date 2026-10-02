@@ -9,5 +9,11 @@
     "druid",
     "ranger"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "heal": "1d6"
+  },
   "desc": "A spirit in a 5-foot Cube heals a creature (1d6) when it enters or starts its turn there. Concentration."
 }

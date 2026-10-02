@@ -12,12 +12,24 @@
      * onHp(op, amount) — may return a promise (players: sent to their app)
      * turn   — it's this combatant's turn; onTurn() — the DM marks it (a radio on the icon, one for the line)
      * onMove(dir), onRemove()
+     * onConditions() — open the Conditions dialog (LineupDM renders it, outside the draggable card)
+     * Conditions show as chips under the name (a save due is highlighted).
      */
     import Icon from "../common/Icon.svelte";
+    import Tooltip from "../common/Tooltip.svelte";
+    import { monsterView } from "../../combat.svelte.js";
 
-    let { c, n = 1, sheet = null, first = false, last = false, turn = false, onTurn, onHp, onMove, onRemove } = $props();
+    let {
+        c, n = 1, sheet = null, first = false, last = false, turn = false,
+        onTurn, onHp, onMove, onRemove, onConditions = null,
+    } = $props();
 
-    const nums = $derived(c.kind === "monster" ? { hp: c.hp, maxHp: c.maxHp, temp: c.temp, ac: c.ac } : sheet);
+    // monsters: conditions computed here (AC with Slowed −2 …); players: from their summary
+    const mv = $derived(c.kind === "monster" ? monsterView(c) : null);
+    const nums = $derived(c.kind === "monster" ? { hp: c.hp, maxHp: c.maxHp, temp: c.temp, ac: mv.ac } : sheet);
+    const condNames = $derived(c.kind === "monster" ? mv.names : (sheet?.conditions ?? []));
+    const instances = $derived(c.kind === "monster" ? (c.effects ?? []) : (sheet?.conditionInstances ?? []));
+    const saveDue = $derived(instances.some((e) => e.savePending));
     const pct = $derived(nums?.maxHp ? Math.round((nums.hp / nums.maxHp) * 100) : 0);
     const state = $derived(!nums ? "" : nums.hp <= 0 ? "down" : pct <= 25 ? "critical" : pct <= 50 ? "bloodied" : pct < 100 ? "hurt" : "ok");
 
@@ -70,6 +82,33 @@
     </label>
 
     <p class="name" title={c.name}>{c.name}</p>
+
+    <div class="conds">
+        {#each condNames as name (name)}
+            <span class="cchip">{name}</span>
+        {/each}
+        {#if onConditions}
+            {#if mv && (mv.summary.flags.length || mv.summary.changes.length)}
+                <Tooltip>
+                    <span class="cchip info">?</span>
+                    {#snippet tip()}
+                        <div class="ctip">
+                            {#each mv.summary.changes as x}<p>{x.label} <small>{x.sources.join(", ")}</small></p>{/each}
+                            {#each mv.summary.flags as f (f.key)}<p>
+                                    {f.label.target}: <b>{f.label.mode}</b>
+                                    <small>{f.sources.map((s) => s.source).join(", ")}</small>
+                                </p>{/each}
+                            {#each mv.summary.notes as x}<p>{x.note} <small>{x.source}</small></p>{/each}
+                        </div>
+                    {/snippet}
+                </Tooltip>
+            {/if}
+            <button class="cbtn" class:due={saveDue} onclick={() => onConditions?.()}
+                title={saveDue ? "A save is due — open Conditions" : "Conditions"} aria-label="Conditions of {c.name}"
+                >{saveDue ? "save!" : "◎"}</button
+            >
+        {/if}
+    </div>
 
     {#if nums}
         <p class="stats">
@@ -139,6 +178,62 @@
     .top {
         display: flex;
         align-items: center;
+    }
+
+    .conds {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3px;
+        min-height: 18px;
+    }
+
+    .cchip {
+        padding: 0 6px;
+        border: 1px solid var(--color-danger);
+        border-radius: 999px;
+        font-size: 10px;
+        line-height: 16px;
+        color: var(--color-text-primary);
+        background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    }
+
+    .cchip.info {
+        border-color: var(--color-border);
+        background: transparent;
+        color: var(--color-text-muted);
+        cursor: help;
+    }
+
+    .cbtn {
+        padding: 0 6px;
+        background: transparent;
+        border: 1px dashed var(--color-border);
+        border-radius: 999px;
+        font-size: 10px;
+        line-height: 16px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+
+    .cbtn:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    .cbtn.due {
+        border-style: solid;
+        border-color: var(--color-gold);
+        color: var(--color-gold);
+    }
+
+    .ctip p {
+        margin: 2px 0;
+        font-size: 12px;
+    }
+
+    .ctip small {
+        color: var(--color-text-muted);
     }
 
     .n {

@@ -1,0 +1,15 @@
+{
+  "id": "shieldOfFaith",
+  "name": "Shield of Faith",
+  "category": "effect",
+  "spell": "shieldOfFaith",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "ac",
+      "op": "add",
+      "value": 2
+    }
+  ],
+  "desc": "+2 AC."
+}

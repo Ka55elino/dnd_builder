@@ -10,5 +10,8 @@
     "bard",
     "druid"
   ],
+  "upcast": {
+    "heal": "1d8"
+  },
   "desc": "Up to 6 creatures in an area heal 3d8 + your spellcasting ability modifier."
 }

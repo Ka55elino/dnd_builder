@@ -25,7 +25,9 @@ import { spellSlots } from '../rules/spellcasting.js';
 import { dieAt } from '../rules/damage.js';
 import { defaultEquipped, normalize, resolve } from '../rules/loadout.js';
 import { summarizeChoices, spellcastingOf } from '../rules/progression.js';
-import { collectPassives, normName } from '../rules/passives.js';
+import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
+import { isBodyArmor } from '../rules/equipment.js';
+import { resolveConditions, conditionModifiers, inlineDef, rowName, modifierText } from '../rules/modifiers.js';
 
 // feat and Fighting Style effects that the sheet accounts for (rules/sheet.js)
 const PERKS = { tough: 'tough', alert: 'alert', defense: 'defense', archery: 'archery', dueling: 'dueling', twf: 'twf' };
@@ -50,6 +52,58 @@ export function usesMax(u, { level, prof, mods }) {
 
 const fmtMod = (n) => (n >= 0 ? `+${n}` : `${n}`);
 
+/** The spell/ability requires Concentration (DB column, casting.concentration, or a "Conc." duration). */
+export const isConcentration = (sp) =>
+    !!(sp?.concentration || sp?.data?.casting?.concentration || /^conc/i.test(sp?.data?.casting?.duration ?? ''));
+
+/** Constitution saving throw DC to keep Concentration after taking damage (PHB 2024: max 30). */
+export const concentrationDC = (damage) => Math.min(30, Math.max(10, Math.floor(damage / 2)));
+
+/** The three things a turn has (rules/modifiers.js 'economy' modifiers add to them). */
+export const ECONOMY = [
+    { id: 'action', name: 'Action', icon: 'action', flag: 'actions' },
+    { id: 'bonus', name: 'Bonus Action', icon: 'bonus', flag: 'bonusActions' },
+    { id: 'reaction', name: 'Reaction', icon: 'reaction', flag: 'reactions' },
+];
+
+/** '1d6' × 2 → '2d6' (a die count multiplier); anything else is returned as is. */
+export function multiplyDice(d, k) {
+    const m = /^(\d+)d(\d+)$/.exec(String(d ?? ''));
+    return m && k !== 1 ? `${Number(m[1]) * k}d${m[2]}` : d;
+}
+
+const WEAPON_LABEL = { pact: 'pact weapon', melee: 'melee weapon', ranged: 'ranged weapon' };
+
+/**
+ * Attacks per Attack action.
+ * @param features class + subclass features (already filtered by level)
+ * @param feats    chosen feats / styles / invocations ({ name, data.effects, sourceTitle })
+ * @returns {{ count, conditional: [{ count, label }], sources: [{ name, from, count, label }] }}
+ *   count       — attacks with any weapon (1 without Extra Attack)
+ *   conditional — higher counts that apply only to a specific weapon (Thirsting Blade)
+ */
+export function attacksPerAction(features = [], feats = []) {
+    const isAttacks = (e) => e?.kind === 'set' && e.target === 'attacksPerAction' && Number(e.value) > 0;
+    const sources = [];
+    for (const f of features) {
+        const effects = (f.grants ?? []).filter((g) => g.type === 'effect').map((g) => g.effect).filter(isAttacks);
+        // homebrew without the grant: a feature named "Extra Attack" still means 2
+        if (!effects.length && /^extra attack$/i.test(f.name ?? '')) effects.push({ value: 2 });
+        for (const e of effects) sources.push({ name: f.name, desc: f.desc, count: Number(e.value), label: WEAPON_LABEL[e.when?.weapon] ?? e.when?.weapon ?? '' });
+    }
+    for (const f of feats) {
+        for (const e of (f.effects ?? f.data?.effects ?? []).filter(isAttacks))
+            sources.push({ name: f.name, desc: f.desc, from: f.sourceTitle, count: Number(e.value), label: WEAPON_LABEL[e.when?.weapon] ?? e.when?.weapon ?? '' });
+    }
+    const count = Math.max(1, ...sources.filter((s) => !s.label).map((s) => s.count));
+    const best = new Map(); // label → the highest count for that weapon
+    for (const s of sources) if (s.label && s.count > count && s.count > (best.get(s.label) ?? 0)) best.set(s.label, s.count);
+    const conditional = [...best].map(([label, n]) => ({ count: n, label }));
+    // only the sources that matter: the highest unconditional one + the conditional winners
+    const used = sources.filter((s) => (s.label ? best.get(s.label) === s.count : s.count === count));
+    return { count, conditional, sources: used };
+}
+
 /**
  * Spellcasting ability for species spells: data.spellAbility on the subspecies,
  * otherwise on the species. A string ('int') is fixed; an array (or nothing) means the
@@ -68,8 +122,12 @@ export class Character {
      * @param equipped loadout from CharacterState ({ main, off, armor }) or null —
      *                 then the default from the builder choices is used
      * @param bagAdjust CharacterState.bagAdjust — { [item key]: qty delta } or null
+     * @param effects   CharacterState.effects — what is on the character now, or null:
+     *                  spell/ability effects [{ id, name }] (what they do: the spell's data.apply,
+     *                  e.g. Mage Armor → AC) and conditions [{ id, type: 'condition', level? }]
+     *                  (refs.conditions; Prone, Exhaustion 2, Slowed…) — see rules/modifiers.js
      */
-    constructor(build, refs = {}, equipped = null, bagAdjust = null) {
+    constructor(build, refs = {}, equipped = null, bagAdjust = null, effects = null) {
         const races = refs.races ?? [];
         const classes = refs.classes ?? [];
         const eq = refs.eq ?? {};
@@ -100,6 +158,9 @@ export class Character {
             if (kind === 'armor') return pool(catalog.armor, eq.armor).find((a) => a.id === id);
             return pool(catalog.items, eq.items).find((x) => x.id === id);
         };
+        // clothes used to be items: an old { kind: 'item', id: 'robe' } grant now finds the armor record
+        const legacyClothes = (b) =>
+            b.kind === 'item' && !findIn('item', b.id) && findIn('armor', b.id) ? { ...b, kind: 'armor' } : b;
         const baseInventory = [
             ...(this.armor ? [{ key: `armor:${this.armor.id}`, kind: 'armor', name: this.armor.name, ref: this.armor, qty: 1 }] : []),
             ...(this.shieldItem ? [{ key: 'shield', kind: 'shield', name: this.shieldItem.name, ref: this.shieldItem, qty: 1 }] : []),
@@ -108,9 +169,16 @@ export class Character {
                 key: `item:${pi.item.id}`, kind: 'item', name: pi.item.name, ref: pi.item, qty: pi.qty,
             })),
         ];
+        // clothes from the pack (armor table, category 'clothing'): wearable in the Armor slot
+        for (const pa of this.pack?.armor ?? []) {
+            const same = baseInventory.find((x) => x.kind === 'armor' && x.ref?.id === pa.armor.id);
+            if (same) same.qty += pa.qty;
+            else baseInventory.push({ key: `armor:${pa.armor.id}`, kind: 'armor', name: pa.armor.name, ref: pa.armor, qty: pa.qty });
+        }
         // granted: identical items stack into one row with a quantity
         this.inventory = [...baseInventory];
-        for (const b of e.bag ?? []) {
+        for (const raw of e.bag ?? []) {
+            const b = legacyClothes(raw);
             const ref = findIn(b.kind, b.id);
             if (!ref) continue;
             const isShield = b.kind === 'armor' && ref.category === 'shield';
@@ -140,6 +208,58 @@ export class Character {
         const perkIds = [...this.chosen.feats, ...this.chosen.fightingStyles];
         const perks = new Set(perkIds.map((id) => PERKS[id]).filter(Boolean));
 
+        const wearing = isBodyArmor(this.loadout.armor?.ref); // clothing doesn't count
+
+        // --- conditions (Prone, Grappled, Exhaustion…) and named effects (Slowed, Enlarged…) ---
+        // immunities from species traits, class features and feats ({ kind: 'immunity', value: 'charmed' })
+        const lvlOk = (f) => !f.level || f.level <= (build.level ?? 1);
+        const immuneTo = new Set(
+            [
+                ...(this.race?.data?.traits ?? []), ...(this.subrace?.data?.traits ?? []),
+                ...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? []),
+            ]
+                .filter(lvlOk)
+                .flatMap((f) => (f.grants ?? []).filter((g) => g.type === 'effect').map((g) => g.effect))
+                .concat(
+                    [...this.chosen.feats, ...this.chosen.invocations]
+                        .map((id) => (refs.feats ?? []).find((f) => f.id === id))
+                        .flatMap((f) => f?.data?.effects ?? []),
+                )
+                .filter((x) => x?.kind === 'immunity')
+                .map((x) => x.value),
+        );
+        // + custom conditions that came with their definition (the DM's homebrew over the LAN)
+        const known = new Set((refs.conditions ?? []).map((d) => d.id));
+        this.conditionDefs = [
+            ...(refs.conditions ?? []),
+            ...(effects ?? []).filter((e) => e?.type === 'condition' && e.def && !known.has(e.id)).map((e) => inlineDef(e.def)),
+        ];
+        this.conditionImmune = immuneTo; // condition ids the character can't get
+        this.conditions = resolveConditions(effects ?? [], this.conditionDefs, immuneTo);
+        // Mage Armor & co. (only a base AC "without armor"): no effect while wearing armor
+        for (const r of this.conditions) {
+            const mods = (r.def.data ?? r.def).modifiers ?? [];
+            if (wearing && mods.length && mods.every((m) => m.kind === 'acBase' && m.unarmored)) r.inactive = 'no effect while wearing armor';
+        }
+        // everything on the character as modifiers, each with its source (rules/modifiers.js)
+        const modifiers = conditionModifiers(this.conditions);
+        // spell effects that are on (Mage Armor, Bless, Guidance…) — the "Active effects" list;
+        // other named effects (Slowed, Hasted…) are in the Effects grid
+        this.activeEffects = this.conditions
+            .filter((r) => r.explicit && (r.def.data ?? r.def).spell)
+            .map((r) => {
+                const d = r.def.data ?? r.def;
+                return {
+                    id: r.id,
+                    name: rowName(r),
+                    conc: !!r.instance?.conc,
+                    duration: d.duration ?? '',
+                    lines: conditionModifiers([{ ...r, inactive: null }]).map(modifierText).filter(Boolean),
+                    inactive: r.inactive ?? '',
+                    instance: r.instance,
+                };
+            });
+
         // --- sheet: AC, Hit Points, saving throws, skills, attacks ---
         Object.assign(
             this,
@@ -155,9 +275,40 @@ export class Character {
                 skills: [...this.chosen.skills],
                 expertise: [...this.chosen.expertise],
                 perks,
+                modifiers,
             }),
         );
         this.maxHp = this.hp;
+
+        // --- action economy: Action, Bonus Action, Reaction per turn ---
+        //   { kind: 'economy', action: 'action' | 'bonus' | 'reaction', value: +1 } — from conditions
+        //   (Hasted: +1 action), spell effects and class/subclass feature grants (Thief: +1 Bonus Action);
+        //   a "can't" flag (Incapacitated: actions, bonusActions, reactions) blocks it
+        const featureEcon = [
+            ...(this.cls?.data?.features ?? []).map((f) => [f, this.cls?.name]),
+            ...(this.subclass?.data?.features ?? []).map((f) => [f, this.subclass?.name]),
+        ]
+            .filter(([f]) => lvlOk(f))
+            .flatMap(([f]) =>
+                (f.grants ?? [])
+                    .filter((g) => g.type === 'effect' && g.effect?.kind === 'economy')
+                    .map((g) => ({ ...g.effect, source: f.name })),
+            );
+        const econ = [...modifiers.filter((m) => m.kind === 'economy'), ...featureEcon];
+        const blockedBy = (on) =>
+            (this.effectSummary?.flags ?? [])
+                .filter((f) => f.mode === 'cant' && f.on === on)
+                .flatMap((f) => f.sources.map((s) => s.source));
+        this.economy = ECONOMY.map((e) => {
+            const extra = econ.filter((m) => m.action === e.id);
+            const blocked = blockedBy(e.flag);
+            return {
+                ...e,
+                count: Math.max(0, 1 + extra.reduce((n, m) => n + (Number(m.value) || 0), 0)),
+                sources: extra.map((m) => m.source),
+                blocked: blocked.length ? blocked : null,
+            };
+        });
 
         // --- features (up to the current level), grouped by source ---
         const upTo = (list) => (list ?? []).filter((f) => !f.level || f.level <= this.level);
@@ -309,7 +460,21 @@ export class Character {
         const speciesName = this.subrace?.name ?? this.race?.name ?? 'Species';
         const withUses = (sp) =>
             sp.data?.uses ? { max: usesMax(sp.data.uses, ctx), per: sp.data.uses.per } : null;
-        const card = (sp, source) => ({ item: sp, source, uses: withUses(sp) });
+        // descriptions with placeholders ({sporesHp}, {saveDc}…) get the character's numbers
+        const tpl = { ...ctx, saveDC: this.spellcasting?.saveDC ?? null };
+        this.tplCtx = tpl;
+        const fill = (sp) => (sp?.desc && /\{\w+\}/.test(sp.desc) ? { ...sp, desc: fillTemplate(sp.desc, tpl) } : sp);
+        // active effects that change a card's die (Symbiotic Entity: Halo of Spores ×2)
+        const dieBoost = (sp) => {
+            const fx = modifiers
+                .filter((x) => x.kind === 'die' && [].concat(x.target ?? []).includes(sp.id))
+                .map((x) => ({ ...x, from: x.source }));
+            const base = fx.length ? dieAt(sp.data?.scaleDie, this.level) : null;
+            if (!base) return null;
+            const die = fx.reduce((d, x) => multiplyDice(d, Number(x.multiply) || 1), base);
+            return { die, base, from: [...new Set(fx.map((x) => x.from))].join(', ') };
+        };
+        const card = (sp, source) => ({ item: fill(sp), source, uses: withUses(sp), boost: dieBoost(sp) });
         // spell card: species spells use the species ability for the DC and get a note
         const spellCard = (sp, title) => {
             if (!this.raceSpellIds.has(sp.id)) return { ...card(sp, title), saveDC: this.spellcasting?.saveDC ?? null };
@@ -335,6 +500,27 @@ export class Character {
             { title: 'Species Abilities', cards: racePowers.map((sp) => card(sp, speciesName)) },
             { title: 'Metamagic', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Metamagic')) },
         ];
+
+        // spells granted by chosen invocations / feats (feat.data.grants { type: 'spell', id, atWill?, ritual?, note? }):
+        // Armor of Shadows → Mage Armor at will, Pact of the Chain → Find Familiar as a Ritual…
+        const grantCards = { invocation: [], other: [] };
+        for (const f of chosenFeats) {
+            for (const g of f.data?.grants ?? []) {
+                if (g.type !== 'spell' || !g.id) continue;
+                const sp = spells.find((s) => s.id === g.id);
+                if (!sp) continue;
+                const how = g.atWill ? 'at will, without a spell slot' : g.ritual ? 'as a Ritual' : '';
+                const note = [how, g.note].filter(Boolean).join(' · ');
+                const list = f.category === 'invocation' ? grantCards.invocation : grantCards.other;
+                if (list.some((c) => c.item.id === sp.id)) continue;
+                // free: at will (no slot); ritual: can be cast as a Ritual (rules/casting.js)
+                list.push({ ...card(sp, f.name), saveDC: this.spellcasting?.saveDC ?? null, note, free: !!g.atWill, ritual: !!g.ritual });
+            }
+        }
+        this.actionGroups.push(
+            { title: 'Eldritch Invocations', spells: true, cards: grantCards.invocation },
+            { title: 'Feat Spells', spells: true, cards: grantCards.other },
+        );
         const byCircle = {};
         for (const sp of this.spellbook) (byCircle[sp.level] ??= []).push(sp);
         for (const c of Object.keys(byCircle).map(Number).sort((a, b) => a - b)) {
@@ -342,6 +528,17 @@ export class Character {
             this.actionGroups.push({ title, spells: true, cards: byCircle[c].map((sp) => spellCard(sp, title)) });
         }
         this.actionGroups = this.actionGroups.filter((g) => g.cards.length);
+
+        // --- what the character can concentrate on: known spells, invocation/feat spells, abilities ---
+        const seenConc = new Set();
+        this.concentrationSpells = [
+            ...this.spellbook,
+            ...grantCards.invocation.map((c) => c.item),
+            ...grantCards.other.map((c) => c.item),
+            ...this.powers,
+        ]
+            .filter((sp) => isConcentration(sp) && !seenConc.has(sp.id) && seenConc.add(sp.id))
+            .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name));
 
         // --- passive effects: resistances, senses, advantages + passive features ---
         // invocations live here (not in "Actions"): almost all of them are always on
@@ -362,6 +559,20 @@ export class Character {
             activeNames: new Set([...this.powers, ...this.resources].map((x) => normName(x.name))),
             ctx,
         });
+
+        // placeholders in feature texts too ({chaMod} in Aura of Protection, {level}…)
+        const fillDesc = (f) => (f?.desc && /\{\w+\}/.test(f.desc) ? { ...f, desc: fillTemplate(f.desc, tpl) } : f);
+        this.featureGroups = this.featureGroups.map((g) => ({ ...g, items: g.items.map(fillDesc) }));
+        this.passives.abilities = this.passives.abilities.map(fillDesc);
+
+        // --- attacks per Attack action ---
+        //   class/subclass features: grant { type: 'effect', effect: { kind: 'set', target: 'attacksPerAction', value } }
+        //   (Extra Attack → 2, Two Extra Attacks → 3…); invocations/feats: the same effect in their effects field.
+        //   An effect with when.weapon (Thirsting Blade: pact weapon) counts only for that weapon.
+        this.attackCount = attacksPerAction(
+            [...upTo(this.cls?.data?.features), ...upTo(this.subclass?.data?.features)],
+            passiveFeats,
+        );
     }
 
     /** Resource by id. */

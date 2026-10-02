@@ -10,5 +10,9 @@
     "cleric",
     "druid"
   ],
+  "apply": {
+    "condition": "regenerate",
+    "target": "creature"
+  },
   "desc": "The target is healed and regrows lost limbs; it regains Hit Points every turn for 1 hour."
 }

@@ -5,5 +5,12 @@
   "subclass": "life",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. You restore Hit Points equal to 5 × your Cleric level, divided among creatures within 30 feet (no higher than half their Hit Point maximum)."
 }

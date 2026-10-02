@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "By expending a Superiority Die, you add it to a Stealth check or Initiative roll.",
   "pool": "maneuver"
 }

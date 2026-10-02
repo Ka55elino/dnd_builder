@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1/2. HP 19, AC 12, Speed 20 ft., Swim 30 ft. Bite grapples the target (escape DC 12); holds its breath for 15 minutes.",
   "damage": {
     "dice": "1d10",

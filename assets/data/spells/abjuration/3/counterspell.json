@@ -10,5 +10,8 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "text": "automatically counters spells of level {slot} or lower"
+  },
   "desc": "As a Reaction, you interrupt a creature casting a spell (level 3 or lower automatically; otherwise make a check)."
 }

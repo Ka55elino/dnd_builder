@@ -5,5 +5,9 @@
   "subclass": "shadowMagic",
   "level": 18,
   "action": "action",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": 6
+  },
   "desc": "Costs 6 Sorcery Points. As an action, for 1 minute you turn into a shadow: Resistance to all damage except Force and Radiant; you can move through objects and creatures."
 }

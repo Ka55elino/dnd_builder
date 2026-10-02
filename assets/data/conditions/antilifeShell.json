@@ -1,0 +1,14 @@
+{
+  "id": "antilifeShell",
+  "name": "Antilife Shell",
+  "category": "effect",
+  "spell": "antilifeShell",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "living creatures other than Undead and Constructs can't pass the 10-foot barrier"
+    }
+  ],
+  "desc": "A barrier keeps living creatures away from you."
+}

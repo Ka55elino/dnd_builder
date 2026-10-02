@@ -1,0 +1,22 @@
+{
+  "id": "mindBlank",
+  "name": "Mind Blank",
+  "category": "effect",
+  "spell": "mindBlank",
+  "duration": "24 hours",
+  "modifiers": [
+    {
+      "kind": "immunity",
+      "value": "psychic"
+    },
+    {
+      "kind": "immunity",
+      "value": "charmed"
+    },
+    {
+      "kind": "note",
+      "note": "you can't be read, scried or have your memory altered"
+    }
+  ],
+  "desc": "Immunity to Psychic damage and the Charmed condition; protection from divination."
+}

@@ -126,5 +126,6 @@
   "resistances": [],
   "conditionImmunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/dragon/adultRedDragon.png"
 }

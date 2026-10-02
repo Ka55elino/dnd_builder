@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1. HP 26, AC 13, Speed 10 ft., Fly 80 ft. Multiattack: Beak (1d6 Piercing) and Talons (2d6 Slashing). Flying is available starting at level 8.",
   "damage": {
     "dice": "1d6",

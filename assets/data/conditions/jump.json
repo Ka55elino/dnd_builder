@@ -1,0 +1,14 @@
+{
+  "id": "jump",
+  "name": "Jump",
+  "category": "effect",
+  "spell": "jump",
+  "duration": "1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "your jump distance is tripled"
+    }
+  ],
+  "desc": "Your jump distance is tripled."
+}

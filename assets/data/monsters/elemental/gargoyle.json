@@ -1,0 +1,94 @@
+{
+  "id": "srd-gargoyle",
+  "name": "Gargoyle",
+  "type": "elemental",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 15,
+  "hp": 52,
+  "hpFormula": "7d8+21",
+  "initiative": 0,
+  "speed": {
+    "fly": 60,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 16,
+    "dex": 11,
+    "int": 6,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with adamantine weapons"
+  ],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "petrified",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Terran",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "False Appearance",
+      "desc": "While the gargoyle remains motion less, it is indistinguishable from an inanimate statue."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The gargoyle makes two attacks: one with its bite and one with its claws."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/elemental/gargoyle.png"
+}

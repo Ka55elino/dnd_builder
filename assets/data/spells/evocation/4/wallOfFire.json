@@ -10,6 +10,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "A wall of fire up to 60 feet long: Dexterity saving throw, Fire damage on one side. Concentration.",
   "damage": {
     "dice": "5d8",

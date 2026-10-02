@@ -6,6 +6,9 @@
   "classes": [
     "warrior"
   ],
+  "turnGain": {
+    "action": 1
+  },
   "desc": "On your turn, you can take one additional action (except the Magic action).",
   "uses": {
     "count": 1,

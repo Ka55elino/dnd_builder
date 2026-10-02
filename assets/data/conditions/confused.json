@@ -1,0 +1,19 @@
+{
+  "id": "confused",
+  "name": "Confused",
+  "category": "effect",
+  "spell": "confusion",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "reactions"
+    },
+    {
+      "kind": "note",
+      "note": "rolls each turn for what it does (moves randomly, attacks, does nothing)"
+    }
+  ],
+  "desc": "Acting randomly (Confusion)."
+}

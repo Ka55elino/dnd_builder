@@ -9,5 +9,12 @@
     "cleric",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "antimagicField",
+    "target": "self"
+  },
   "desc": "A 10-foot sphere in which magic doesn't function: spells are suppressed and magic items become mundane. Concentration."
 }

@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "On a hit, extra damage equal to the die; the target has the Frightened condition until the end of your next turn (Wisdom saving throw).",
   "pool": "maneuver"
 }

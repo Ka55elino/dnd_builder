@@ -11,5 +11,8 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "For 1 hour, you understand any spoken language you hear and any written text you read."
 }

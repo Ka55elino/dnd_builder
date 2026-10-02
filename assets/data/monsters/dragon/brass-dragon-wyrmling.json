@@ -1,0 +1,86 @@
+{
+  "id": "srd-brass-dragon-wyrmling",
+  "name": "Brass Dragon Wyrmling",
+  "type": "dragon",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 16,
+  "hp": 16,
+  "hpFormula": "3d8+3",
+  "initiative": 0,
+  "speed": {
+    "burrow": 15,
+    "fly": 60,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 13,
+    "con": 13,
+    "dex": 10,
+    "int": 10,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {
+    "cha": 3,
+    "con": 3,
+    "dex": 2,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "fire"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+2",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Breath Weapons (Recharge 5-6)",
+      "desc": "The dragon uses one of the following breath weapons.\n**Fire Breath.** The dragon exhales fire in an 20-foot line that is 5 feet wide. Each creature in that line must make a DC 11 Dexterity saving throw, taking 14 (4d6) fire damage on a failed save, or half as much damage on a successful one.\n**Sleep Breath.** The dragon exhales sleep gas in a 15-foot cone. Each creature in that area must succeed on a DC 11 Constitution saving throw or fall unconscious for 1 minute. This effect ends for a creature if the creature takes damage or someone uses an action to wake it.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "4d6+0",
+          "avg": 14
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/brass-dragon-wyrmling.png"
+}

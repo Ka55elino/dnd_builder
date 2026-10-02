@@ -177,6 +177,33 @@ func (a *App) GetFeats() ([]Feat, error) {
 	return getFeats(db)
 }
 
+// GetConditions returns conditions (Prone, Grappled, Exhaustion…) and named effects (Slowed, Enlarged).
+func (a *App) GetConditions() ([]Condition, error) {
+	db, err := a.conn()
+	if err != nil {
+		return nil, err
+	}
+	return getConditions(db)
+}
+
+// SaveCustomCondition creates or updates a custom condition (assets/data/conditions format; without an id, a new one is created).
+func (a *App) SaveCustomCondition(conditionJSON string) (string, error) {
+	db, err := a.conn()
+	if err != nil {
+		return "", err
+	}
+	return saveCustomRecord(db, "condition", conditionJSON)
+}
+
+// DeleteCustomCondition deletes a custom condition (built-in ones cannot be deleted).
+func (a *App) DeleteCustomCondition(id string) error {
+	db, err := a.conn()
+	if err != nil {
+		return err
+	}
+	return deleteCustomRecord(db, "condition", id)
+}
+
 // GetSpells returns spells and class/species abilities.
 func (a *App) GetSpells() ([]Spell, error) {
 	db, err := a.conn()

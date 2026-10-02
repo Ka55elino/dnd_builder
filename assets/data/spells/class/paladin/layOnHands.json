@@ -11,5 +11,11 @@
     "perLevel": 5,
     "per": "longRest"
   },
+  "cost": {
+    "resource": "layOnHands",
+    "amount": {
+      "min": 1
+    }
+  },
   "desc": "Hit Point pool = 5 × your Paladin level. As an action, you touch a creature and restore Hit Points from the pool; alternatively, you can expend 5 points to cure a disease or poison instead. Replenishes on a Long Rest."
 }

@@ -1,0 +1,34 @@
+{
+  "id": "incapacitated",
+  "name": "Incapacitated",
+  "category": "condition",
+  "breaksConcentration": true,
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "actions"
+    },
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "bonusActions"
+    },
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "reactions"
+    },
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "speech"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "initiative"
+    }
+  ],
+  "desc": "You can't take any action, Bonus Action, or Reaction, and you can't speak. Your Concentration is broken. You have Disadvantage on Initiative."
+}

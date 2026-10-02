@@ -1,0 +1,9 @@
+{
+  "id": "shovel",
+  "name": "Shovel",
+  "image": "/img/items/shovel.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "2 GP",
+  "desc": "Working for 1 hour, you can use a Shovel to dig a hole that is 5 feet on each side in soil or similar material."
+}

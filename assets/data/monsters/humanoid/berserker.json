@@ -1,0 +1,61 @@
+{
+  "id": "srd-berserker",
+  "name": "Berserker",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 13,
+  "hp": 67,
+  "hpFormula": "9d8+27",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 9,
+    "con": 17,
+    "dex": 12,
+    "int": 9,
+    "str": 16,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Reckless",
+      "desc": "At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Greataxe",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d12+3",
+          "avg": 9
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/berserker.png"
+}

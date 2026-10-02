@@ -8,6 +8,13 @@
   "classes": [
     "ranger"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
+  "apply": {
+    "condition": "restrained",
+    "target": "enemy"
+  },
   "desc": "Your next weapon hit entangles the target in vines: Strength saving throw or Restrained. While Restrained, it takes 1d6 Piercing damage at the start of each of its turns. Concentration, up to 1 minute.",
   "casting": {
     "time": "1 bonus action",

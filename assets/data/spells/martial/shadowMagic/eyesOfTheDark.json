@@ -5,5 +5,9 @@
   "subclass": "shadowMagic",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": 2
+  },
   "desc": "Costs 2 Sorcery Points. As an action, you cast Darkness; you can see through the magical Darkness it creates."
 }

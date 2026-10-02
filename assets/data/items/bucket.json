@@ -1,0 +1,9 @@
+{
+  "id": "bucket",
+  "name": "Bucket",
+  "image": "/img/items/bucket.png",
+  "isDefault": true,
+  "weight": 2.0,
+  "cost": "5 CP",
+  "desc": "A Bucket holds up to half a cubic foot of contents."
+}

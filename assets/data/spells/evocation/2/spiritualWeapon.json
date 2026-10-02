@@ -8,6 +8,9 @@
   "classes": [
     "cleric"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "You create a floating spectral weapon (it attacks as a Bonus Action, dealing Force damage + your modifier). 1 minute.",
   "damage": {
     "dice": "1d8",

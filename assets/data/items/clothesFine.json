@@ -1,9 +1,0 @@
-{
-  "id": "clothesFine",
-  "name": "Fine Clothes",
-  "image": "/img/items/clothesFine.png",
-  "isDefault": true,
-  "weight": 6,
-  "cost": "15 GP",
-  "desc": "Clothing made of expensive fabrics with skillful trim. Some events and locations admit only people wearing such clothes."
-}

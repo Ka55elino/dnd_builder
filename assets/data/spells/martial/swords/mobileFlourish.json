@@ -5,6 +5,10 @@
   "subclass": "swords",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "bardicInspiration",
+    "amount": 1
+  },
   "desc": "Expending a Bardic Inspiration die on a hit: extra damage equal to the die; you push the target a number of feet equal to the roll + 5 feet and can move toward it without provoking Opportunity Attacks.",
   "damage": {
     "dice": "1d6",

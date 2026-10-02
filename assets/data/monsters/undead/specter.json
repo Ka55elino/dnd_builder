@@ -1,0 +1,89 @@
+{
+  "id": "srd-specter",
+  "name": "Specter",
+  "type": "undead",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 12,
+  "hp": 22,
+  "hpFormula": "5d8",
+  "initiative": 2,
+  "speed": {
+    "fly": 50,
+    "hover": true
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 11,
+    "dex": 14,
+    "int": 10,
+    "str": 1,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "acid",
+    "cold",
+    "fire",
+    "lightning",
+    "thunder; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "immunities": [
+    "necrotic",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "poisoned",
+    "prone",
+    "restrained",
+    "unconscious"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "understands all languages it knew in life but can't speak",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Incorporeal Movement",
+      "desc": "The specter can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+    },
+    {
+      "name": "Sunlight Sensitivity",
+      "desc": "While in sunlight, the specter has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Life Drain",
+      "desc": "Melee Spell Attack: +4 to hit, reach 5 ft., one creature. Hit: 10 (3d6) necrotic damage. The target must succeed on a DC 10 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the creature finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "necrotic",
+          "dice": "3d6+0",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/undead/specter.png"
+}

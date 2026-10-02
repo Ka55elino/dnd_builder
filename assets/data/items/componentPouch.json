@@ -1,0 +1,9 @@
+{
+  "id": "componentPouch",
+  "name": "Component Pouch",
+  "image": "/img/items/componentPouch.png",
+  "isDefault": true,
+  "weight": 2.0,
+  "cost": "25 GP",
+  "desc": "A Component Pouch is watertight and filled with compartments that hold all the free Material components of your spells."
+}

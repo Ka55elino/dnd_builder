@@ -8,6 +8,9 @@
   "classes": [
     "cleric"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A beam of light strikes a creature (spell attack): Radiant damage; the next attack roll against the target has Advantage.",
   "damage": {
     "dice": "4d6",

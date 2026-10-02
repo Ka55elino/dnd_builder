@@ -79,7 +79,17 @@
     {
       "level": 5,
       "name": "Extra Attack",
-      "desc": "You make two attacks when you take the Attack action."
+      "desc": "You make two attacks when you take the Attack action.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "set",
+            "target": "attacksPerAction",
+            "value": 2
+          }
+        }
+      ]
     },
     {
       "level": 5,
@@ -99,7 +109,17 @@
     {
       "level": 11,
       "name": "Two Extra Attacks",
-      "desc": "You can attack three times when you take the Attack action."
+      "desc": "You can attack three times when you take the Attack action.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "set",
+            "target": "attacksPerAction",
+            "value": 3
+          }
+        }
+      ]
     },
     {
       "level": 13,
@@ -109,7 +129,17 @@
     {
       "level": 20,
       "name": "Three Extra Attacks",
-      "desc": "You can attack four times when you take the Attack action."
+      "desc": "You can attack four times when you take the Attack action.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "set",
+            "target": "attacksPerAction",
+            "value": 4
+          }
+        }
+      ]
     }
   ]
 }

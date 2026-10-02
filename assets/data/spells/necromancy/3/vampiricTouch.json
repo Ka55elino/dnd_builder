@@ -10,6 +10,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A necrotic touch; you regain Hit Points equal to half the damage dealt. Concentration, up to 1 minute.",
   "damage": {
     "dice": "3d6",

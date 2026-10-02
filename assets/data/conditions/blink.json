@@ -1,0 +1,14 @@
+{
+  "id": "blink",
+  "name": "Blink",
+  "category": "effect",
+  "spell": "blink",
+  "duration": "1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "at the end of each of your turns, roll: on 11+ you vanish to the Ethereal Plane until your next turn"
+    }
+  ],
+  "desc": "You flicker between planes."
+}

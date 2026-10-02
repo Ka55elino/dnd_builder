@@ -1,0 +1,23 @@
+{
+  "id": "symbioticEntity",
+  "name": "Symbiotic Entity",
+  "category": "effect",
+  "spell": "symbioticEntity",
+  "duration": "10 minutes, or until the Temporary Hit Points run out",
+  "modifiers": [
+    {
+      "kind": "die",
+      "target": [
+        "haloOfSpores",
+        "spreadingSpores"
+      ],
+      "multiply": 2,
+      "note": "Halo of Spores damage ×2"
+    },
+    {
+      "kind": "note",
+      "note": "melee attacks +1d6 Necrotic damage"
+    }
+  ],
+  "desc": "Spores empower you."
+}

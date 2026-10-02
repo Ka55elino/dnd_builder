@@ -22,7 +22,7 @@ type Armor struct {
 	ID        string         `json:"id"`
 	Name      string         `json:"name"`
 	Image     string         `json:"image"`
-	Category  string         `json:"category"` // light | medium | heavy | shield
+	Category  string         `json:"category"` // clothing | light | medium | heavy | shield (clothing doesn't count as armor)
 	BaseAC    int            `json:"baseAC"`
 	IsDefault bool           `json:"isDefault"`
 	Data      map[string]any `json:"data"`
@@ -45,6 +45,12 @@ type PackItem struct {
 	Qty  int  `json:"qty"`
 }
 
+// PackArmor is wearable gear in a pack (clothes), with its quantity.
+type PackArmor struct {
+	Armor Armor `json:"armor"`
+	Qty   int   `json:"qty"`
+}
+
 // Pack is an equipment pack with its contents.
 type Pack struct {
 	ID    string         `json:"id"`
@@ -54,6 +60,7 @@ type Pack struct {
 	Desc  string         `json:"desc"`
 	Data  map[string]any `json:"data"`
 	Items []PackItem     `json:"items"`
+	Armor []PackArmor    `json:"armor"` // from the pack JSON "armor": [{ id, qty }] (clothes)
 }
 
 // Catalog is ALL equipment, including named items (for handing items out to a character).
@@ -263,5 +270,37 @@ func queryPacks(db *sql.DB) ([]Pack, error) {
 			packs[i].Items = append(packs[i].Items, PackItem{Item: it, Qty: qty})
 		}
 	}
-	return packs, itemRows.Err()
+	if err := itemRows.Err(); err != nil {
+		return nil, err
+	}
+	itemRows.Close() // free the connection before the next query
+
+	// wearable gear (clothes) lives in the armor table: the pack keeps "armor": [{ id, qty }] in data_json
+	allArmor, err := queryArmor(db, "GetAllArmor")
+	if err != nil {
+		return nil, err
+	}
+	armorByID := make(map[string]Armor, len(allArmor))
+	for _, a := range allArmor {
+		armorByID[a.ID] = a
+	}
+	for i := range packs {
+		packs[i].Armor = []PackArmor{}
+		list, _ := packs[i].Data["armor"].([]any)
+		for _, x := range list {
+			m, _ := x.(map[string]any)
+			id, _ := m["id"].(string)
+			a, ok := armorByID[id]
+			if !ok {
+				continue
+			}
+			qty := 1
+			if q, ok := m["qty"].(float64); ok && q > 0 {
+				qty = int(q)
+			}
+			packs[i].Armor = append(packs[i].Armor, PackArmor{Armor: a, Qty: qty})
+		}
+		delete(packs[i].Data, "armor")
+	}
+	return packs, nil
 }

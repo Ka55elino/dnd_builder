@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "When you move, you add a Superiority Die to your AC until the end of the turn.",
   "pool": "maneuver"
 }

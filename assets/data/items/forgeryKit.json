@@ -1,0 +1,9 @@
+{
+  "id": "forgeryKit",
+  "name": "Forgery Kit",
+  "image": "/img/items/forgeryKit.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "15 GP",
+  "desc": "Ability: Dexterity Weight: 5 lb. Utilize: Mimic 10 or fewer words of someone else's handwriting (DC 15), or duplicate a wax seal (DC 20)"
+}

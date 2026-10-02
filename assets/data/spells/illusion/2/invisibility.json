@@ -11,5 +11,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "invisible",
+    "target": "creature"
+  },
   "desc": "A creature becomes Invisible until it attacks or casts a spell. Concentration, up to 1 hour."
 }

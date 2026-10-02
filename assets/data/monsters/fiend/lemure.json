@@ -1,0 +1,76 @@
+{
+  "id": "srd-lemure",
+  "name": "Lemure",
+  "type": "fiend",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 7,
+  "hp": 13,
+  "hpFormula": "3d8",
+  "initiative": -3,
+  "speed": {
+    "walk": 15
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 11,
+    "dex": 5,
+    "int": 1,
+    "str": 10,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "cold"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "frightened",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 10,
+  "languages": "understands infernal but can't speak",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Devil's Sight",
+      "desc": "Magical darkness doesn't impede the lemure's darkvision."
+    },
+    {
+      "name": "Hellish Rejuvenation",
+      "desc": "A lemure that dies in the Nine Hells comes back to life with all its hit points in 1d10 days unless it is killed by a good-aligned creature with a bless spell cast on that creature or its remains are sprinkled with holy water."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Fist",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d4+0",
+          "avg": 2
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fiend/lemure.png"
+}

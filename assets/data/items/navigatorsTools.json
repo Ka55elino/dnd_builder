@@ -1,0 +1,9 @@
+{
+  "id": "navigatorsTools",
+  "name": "Navigator's Tools",
+  "image": "/img/items/navigatorsTools.png",
+  "isDefault": true,
+  "weight": 2.0,
+  "cost": "25 GP",
+  "desc": "Ability: Wisdom Weight: 2 lb. Utilize: Plot a course (DC 10), or determine position by stargazing (DC 15)"
+}

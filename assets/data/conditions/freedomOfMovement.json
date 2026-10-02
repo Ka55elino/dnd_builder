@@ -1,0 +1,22 @@
+{
+  "id": "freedomOfMovement",
+  "name": "Freedom of Movement",
+  "category": "effect",
+  "spell": "freedomOfMovement",
+  "duration": "1 hour",
+  "modifiers": [
+    {
+      "kind": "immunity",
+      "value": "paralyzed"
+    },
+    {
+      "kind": "immunity",
+      "value": "restrained"
+    },
+    {
+      "kind": "note",
+      "note": "Difficult Terrain costs you no extra movement"
+    }
+  ],
+  "desc": "You can't be Paralyzed or Restrained by magic."
+}

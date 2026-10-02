@@ -1,0 +1,56 @@
+{
+  "id": "srd-pony",
+  "name": "Pony",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 10,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 13,
+    "dex": 10,
+    "int": 2,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d4+2",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/pony.png"
+}

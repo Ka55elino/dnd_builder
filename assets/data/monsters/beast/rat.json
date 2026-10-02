@@ -1,0 +1,51 @@
+{
+  "id": "srd-rat",
+  "name": "Rat",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 10,
+  "hp": 1,
+  "hpFormula": "1d4-1",
+  "initiative": 0,
+  "speed": {
+    "walk": 20
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 9,
+    "dex": 11,
+    "int": 2,
+    "str": 2,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The rat has advantage on Wisdom (Perception) checks that rely on smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +0 to hit, reach 5 ft., one target. Hit: 1 piercing damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/rat.png"
+}

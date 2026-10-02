@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1/4. HP 13, AC 12, Speed 50 ft., Climb 40 ft. Pounce: if it moves 20 feet toward a target and hits, it can knock the target Prone as a Bonus Action.",
   "damage": {
     "dice": "1d6",

@@ -80,5 +80,6 @@
   "conditionImmunities": [],
   "traits": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/beast/brownBear.png"
 }

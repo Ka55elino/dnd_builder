@@ -1,0 +1,83 @@
+{
+  "id": "srd-thug",
+  "name": "Thug",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 11,
+  "hp": 32,
+  "hpFormula": "5d8+10",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 14,
+    "dex": 11,
+    "int": 10,
+    "str": 15,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "intimidation": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Pack Tactics",
+      "desc": "The thug has advantage on an attack roll against a creature if at least one of the thug's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The thug makes two melee attacks."
+    },
+    {
+      "name": "Mace",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Heavy Crossbow",
+      "desc": "Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 2,
+        "range": "100/400"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+0",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/thug.png"
+}

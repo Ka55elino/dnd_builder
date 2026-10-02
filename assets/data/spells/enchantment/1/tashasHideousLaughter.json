@@ -8,5 +8,15 @@
   "classes": [
     "bard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "hideousLaughter",
+    "target": "enemy"
+  },
   "desc": "A creature (Wisdom saving throw) collapses in a fit of laughter: it has the Incapacitated and Prone conditions. Concentration."
 }

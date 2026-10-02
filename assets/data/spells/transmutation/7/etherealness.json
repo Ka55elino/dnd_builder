@@ -12,5 +12,12 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "targets": 3
+  },
+  "apply": {
+    "condition": "etherealness",
+    "target": "self"
+  },
   "desc": "You step into the Border Ethereal, passing through objects."
 }

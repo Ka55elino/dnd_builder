@@ -1,0 +1,104 @@
+{
+  "id": "srd-bone-devil",
+  "name": "Bone Devil",
+  "type": "fiend",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 9.0,
+  "ac": 19,
+  "hp": 142,
+  "hpFormula": "15d10+60",
+  "initiative": 3,
+  "speed": {
+    "fly": 40,
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 18,
+    "dex": 16,
+    "int": 13,
+    "str": 18,
+    "wis": 14
+  },
+  "saves": {
+    "cha": 7,
+    "int": 5,
+    "wis": 6
+  },
+  "skills": {
+    "deception": 7,
+    "insight": 6
+  },
+  "vulnerabilities": [],
+  "resistances": [
+    "cold; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with silvered weapons"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 9,
+  "languages": "Infernal, telepathy 120 ft.",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Devil's Sight",
+      "desc": "Magical darkness doesn't impede the devil's darkvision."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "The devil has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The devil makes three attacks: two with its claws and one with its sting."
+    },
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 8 (1d8 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+4",
+          "avg": 8
+        }
+      ]
+    },
+    {
+      "name": "Sting",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 13 (2d8 + 4) piercing damage plus 17 (5d6) poison damage, and the target must succeed on a DC 14 Constitution saving throw or become poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fiend/bone-devil.png"
+}

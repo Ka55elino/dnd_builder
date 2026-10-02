@@ -1,0 +1,15 @@
+{
+  "id": "trueSeeing",
+  "name": "True Seeing",
+  "category": "effect",
+  "spell": "trueSeeing",
+  "duration": "1 hour",
+  "modifiers": [
+    {
+      "kind": "sense",
+      "sense": "truesight",
+      "range": 120
+    }
+  ],
+  "desc": "You have Truesight with a range of 120 feet."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "passWithoutTrace",
+  "name": "Pass without Trace",
+  "category": "effect",
+  "spell": "passWithoutTrace",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "check",
+      "skill": "stealth",
+      "value": 10
+    },
+    {
+      "kind": "note",
+      "note": "you leave no tracks"
+    }
+  ],
+  "desc": "+10 to Dexterity (Stealth) checks; you leave no tracks."
+}

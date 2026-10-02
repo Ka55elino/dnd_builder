@@ -11,5 +11,12 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "hypnotized",
+    "target": "enemy"
+  },
   "desc": "A shimmering pattern: creatures in a 30-foot Cube make a Wisdom saving throw or are Charmed and Incapacitated. Concentration."
 }

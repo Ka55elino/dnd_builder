@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1. HP 37, AC 14, Speed 50 ft. On a hit, a Large or smaller target makes a Strength saving throw or is knocked Prone. Pack Tactics.",
   "damage": {
     "dice": "2d6",

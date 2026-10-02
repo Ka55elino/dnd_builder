@@ -1,0 +1,68 @@
+{
+  "id": "srd-giant-lizard",
+  "name": "Giant Lizard",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 12,
+  "hp": 19,
+  "hpFormula": "3d10+3",
+  "initiative": 1,
+  "speed": {
+    "climb": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 13,
+    "dex": 12,
+    "int": 2,
+    "str": 15,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Variant: Hold Breath",
+      "desc": "The lizard can hold its breath for 15 minutes. (A lizard that has this trait also has a swimming speed of 30 feet.)"
+    },
+    {
+      "name": "Variant: Spider Climb",
+      "desc": "The lizard can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+2",
+          "avg": 6
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-lizard.png"
+}

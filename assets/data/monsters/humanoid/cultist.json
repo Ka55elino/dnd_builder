@@ -1,0 +1,64 @@
+{
+  "id": "srd-cultist",
+  "name": "Cultist",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 12,
+  "hp": 9,
+  "hpFormula": "2d8",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 10,
+    "dex": 12,
+    "int": 10,
+    "str": 11,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "deception": 2,
+    "religion": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Dark Devotion",
+      "desc": "The cultist has advantage on saving throws against being charmed or frightened."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Scimitar",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/cultist.png"
+}

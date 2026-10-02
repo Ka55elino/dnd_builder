@@ -11,6 +11,11 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "chillTouch",
+    "target": "enemy",
+    "rounds": 1
+  },
   "desc": "A ranged spell attack with a ghostly hand; on a hit, Necrotic damage, and the target can't regain Hit Points until the start of your next turn. The damage increases with level.",
   "casting": {
     "time": "1 action",

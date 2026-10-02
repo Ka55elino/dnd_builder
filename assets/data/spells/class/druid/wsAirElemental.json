@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 5. HP 90, AC 15, Fly Speed 90 ft. Circle of the Moon ONLY (Elemental Wild Shape, level 10). Multiattack: 2 Slams; Whirlwind form.",
   "damage": {
     "dice": "2d8",

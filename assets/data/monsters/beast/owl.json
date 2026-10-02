@@ -1,0 +1,64 @@
+{
+  "id": "srd-owl",
+  "name": "Owl",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 11,
+  "hp": 1,
+  "hpFormula": "1d4-1",
+  "initiative": 1,
+  "speed": {
+    "fly": 60,
+    "walk": 5
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 8,
+    "dex": 13,
+    "int": 2,
+    "str": 3,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Flyby",
+      "desc": "The owl doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+    },
+    {
+      "name": "Keen Hearing and Sight",
+      "desc": "The owl has advantage on Wisdom (Perception) checks that rely on hearing or sight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Talons",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 1 slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      }
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/owl.png"
+}

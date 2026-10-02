@@ -1,0 +1,24 @@
+{
+  "id": "levitate",
+  "name": "Levitate",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "casting": {
+    "time": "1 action",
+    "range": "60 feet",
+    "components": "V, S, M",
+    "duration": "Conc., 10 min",
+    "concentration": true
+  },
+  "apply": {
+    "condition": "levitate",
+    "target": "creature"
+  },
+  "desc": "One creature or loose object of your choice within 60 feet rises vertically up to 20 feet and stays suspended there; it can move only by pushing or pulling against something fixed. Constitution save for an unwilling target. Concentration, up to 10 minutes."
+}

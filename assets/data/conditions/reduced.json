@@ -1,0 +1,29 @@
+{
+  "id": "reduced",
+  "name": "Reduced",
+  "category": "effect",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "checks",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "damage",
+      "dice": "1d4",
+      "sign": -1
+    },
+    {
+      "kind": "note",
+      "note": "size −1 category"
+    }
+  ],
+  "desc": "Reduce (spell): your size decreases by one category. Disadvantage on Strength checks and Strength saving throws; your weapon attacks deal 1d4 less damage (minimum 1)."
+}

@@ -11,6 +11,11 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "nextAttackDisadvantage",
+    "target": "enemy",
+    "rounds": 1
+  },
   "desc": "A creature makes a Constitution saving throw: Cold damage and Disadvantage on its next attack roll.",
   "damage": {
     "dice": "1d6",

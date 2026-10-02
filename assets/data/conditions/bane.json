@@ -1,0 +1,22 @@
+{
+  "id": "bane",
+  "name": "Bane",
+  "category": "effect",
+  "spell": "bane",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "dice",
+      "dice": "1d4",
+      "sign": -1,
+      "on": "attacks"
+    },
+    {
+      "kind": "dice",
+      "dice": "1d4",
+      "sign": -1,
+      "on": "saves"
+    }
+  ],
+  "desc": "Subtracts 1d4 from attack rolls and saving throws."
+}

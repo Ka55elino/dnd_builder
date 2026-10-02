@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "When you hit a target, you deal damage equal to a Superiority Die (of the same type) to a second target next to it.",
   "pool": "maneuver"
 }

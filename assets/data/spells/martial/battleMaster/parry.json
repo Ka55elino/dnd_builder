@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "As a Reaction, you reduce the damage you take from an attack by a Superiority Die + your Dexterity modifier.",
   "action": "reaction",
   "pool": "maneuver"

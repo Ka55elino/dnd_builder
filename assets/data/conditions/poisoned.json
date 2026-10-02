@@ -1,0 +1,18 @@
+{
+  "id": "poisoned",
+  "name": "Poisoned",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "checks"
+    }
+  ],
+  "desc": "You have Disadvantage on attack rolls and ability checks."
+}

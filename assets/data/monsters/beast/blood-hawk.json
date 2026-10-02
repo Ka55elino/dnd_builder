@@ -1,0 +1,68 @@
+{
+  "id": "srd-blood-hawk",
+  "name": "Blood Hawk",
+  "type": "beast",
+  "size": "small",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 12,
+  "hp": 7,
+  "hpFormula": "2d6",
+  "initiative": 2,
+  "speed": {
+    "fly": 60,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 10,
+    "dex": 14,
+    "int": 3,
+    "str": 6,
+    "wis": 14
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 14,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Sight",
+      "desc": "The hawk has advantage on Wisdom (Perception) checks that rely on sight."
+    },
+    {
+      "name": "Pack Tactics",
+      "desc": "The hawk has advantage on an attack roll against a creature if at least one of the hawk's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Beak",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+2",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/blood-hawk.png"
+}

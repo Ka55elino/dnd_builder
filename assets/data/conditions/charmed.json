@@ -1,0 +1,18 @@
+{
+  "id": "charmed",
+  "name": "Charmed",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "cant",
+      "on": "attacks",
+      "note": "against the charmer"
+    },
+    {
+      "kind": "note",
+      "note": "the charmer has Advantage on social checks with you"
+    }
+  ],
+  "desc": "You can't attack the charmer or target it with damaging abilities or magical effects. The charmer has Advantage on any ability check to interact with you socially."
+}

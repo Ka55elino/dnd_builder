@@ -8,5 +8,8 @@
   "classes": [
     "cleric"
   ],
+  "upcast": {
+    "heal": "1d8"
+  },
   "desc": "Up to 6 creatures regain 2d8 + your spellcasting ability modifier Hit Points (casting time 10 minutes)."
 }

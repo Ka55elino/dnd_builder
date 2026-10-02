@@ -10,5 +10,8 @@
     "druid",
     "sorcerer"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "Tremors topple structures and knock creatures Prone in a 100-foot area. Concentration."
 }

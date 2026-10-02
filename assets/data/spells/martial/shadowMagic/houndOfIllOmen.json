@@ -5,5 +5,9 @@
   "subclass": "shadowMagic",
   "level": 6,
   "action": "bonus",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": 3
+  },
   "desc": "Costs 3 Sorcery Points. As a Bonus Action, you summon a shadow hound next to a target within 120 feet for 5 rounds: the target has Disadvantage on saving throws against your spells, and the hound pursues it."
 }

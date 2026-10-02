@@ -12,6 +12,13 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "A Humanoid within 30 feet must succeed on a Wisdom saving throw or be Charmed by you for the duration or until you harm it. The Charmed creature regards you as a friendly acquaintance.",
   "casting": {
     "time": "1 action",

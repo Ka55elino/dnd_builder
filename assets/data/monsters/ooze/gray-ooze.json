@@ -1,0 +1,85 @@
+{
+  "id": "srd-gray-ooze",
+  "name": "Gray Ooze",
+  "type": "ooze",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 8,
+  "hp": 22,
+  "hpFormula": "3d8+9",
+  "initiative": -2,
+  "speed": {
+    "climb": 10,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 2,
+    "con": 16,
+    "dex": 6,
+    "int": 1,
+    "str": 12,
+    "wis": 6
+  },
+  "saves": {},
+  "skills": {
+    "stealth": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [
+    "acid",
+    "cold",
+    "fire"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "blinded",
+    "charmed",
+    "deafened",
+    "exhaustion",
+    "frightened",
+    "prone"
+  ],
+  "senses": {
+    "blindsight": 60
+  },
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Amorphous",
+      "desc": "The ooze can move through a space as narrow as 1 inch wide without squeezing."
+    },
+    {
+      "name": "Corrode Metal",
+      "desc": "Any nonmagical weapon made of metal that hits the ooze corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal that hits the ooze is destroyed after dealing damage.\nThe ooze can eat through 2-inch-thick, nonmagical metal in 1 round."
+    },
+    {
+      "name": "False Appearance",
+      "desc": "While the ooze remains motionless, it is indistinguishable from an oily pool or wet rock."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Pseudopod",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) bludgeoning damage plus 7 (2d6) acid damage, and if the target is wearing nonmagical metal armor, its armor is partly corroded and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/ooze/gray-ooze.png"
+}

@@ -3,5 +3,13 @@
   "name": "Ascendant Step",
   "category": "invocation",
   "level": 9,
-  "desc": "You can cast Levitate on yourself at will, without a spell slot."
+  "desc": "You can cast Levitate on yourself at will, without a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "levitate",
+      "atWill": true,
+      "note": "on yourself only"
+    }
+  ]
 }

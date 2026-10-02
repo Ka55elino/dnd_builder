@@ -9,5 +9,12 @@
     "bard",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "invisible",
+    "target": "self"
+  },
   "desc": "You create an illusory double and become Invisible; you can act through the double. Concentration."
 }

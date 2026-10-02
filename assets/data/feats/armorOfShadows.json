@@ -3,5 +3,13 @@
   "name": "Armor of Shadows",
   "category": "invocation",
   "level": 1,
-  "desc": "You can cast Mage Armor on yourself at will, without expending a spell slot."
+  "desc": "You can cast Mage Armor on yourself at will, without expending a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "mageArmor",
+      "atWill": true,
+      "note": "on yourself only"
+    }
+  ]
 }

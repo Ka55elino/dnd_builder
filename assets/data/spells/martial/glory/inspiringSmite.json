@@ -5,5 +5,12 @@
   "subclass": "glory",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Cost: 1 use of Channel Divinity. Immediately after Divine Smite, you distribute Temporary Hit Points (2d8 + your Paladin level) among creatures within 30 feet."
 }

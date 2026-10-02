@@ -8,6 +8,9 @@
   "classes": [
     "ranger"
   ],
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "Your next hit with a ranged weapon showers thorns on everyone within 5 feet of the target: 1d10 Piercing damage (Dexterity saving throw for half). Concentration, up to 1 minute.",
   "casting": {
     "time": "1 bonus action",

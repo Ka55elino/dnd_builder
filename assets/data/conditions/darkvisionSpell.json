@@ -1,0 +1,15 @@
+{
+  "id": "darkvisionSpell",
+  "name": "Darkvision",
+  "category": "effect",
+  "spell": "darkvisionSpell",
+  "duration": "8 hours",
+  "modifiers": [
+    {
+      "kind": "sense",
+      "sense": "darkvision",
+      "range": 60
+    }
+  ],
+  "desc": "You have Darkvision with a range of 60 feet."
+}

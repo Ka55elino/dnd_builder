@@ -10,6 +10,9 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "As a Reaction to taking damage, you wreathe the attacker in flame: Dexterity saving throw, 2d10 Fire damage (half on a success).",
   "casting": {
     "time": "1 reaction",

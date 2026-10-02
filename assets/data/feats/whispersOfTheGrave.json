@@ -3,5 +3,12 @@
   "name": "Whispers of the Grave",
   "category": "invocation",
   "level": 7,
-  "desc": "You can cast Speak with Dead at will, without a spell slot."
+  "desc": "You can cast Speak with Dead at will, without a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "speakWithDead",
+      "atWill": true
+    }
+  ]
 }

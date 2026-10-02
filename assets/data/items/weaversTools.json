@@ -1,0 +1,9 @@
+{
+  "id": "weaversTools",
+  "name": "Weaver's Tools",
+  "image": "/img/items/weaversTools.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "1 GP",
+  "desc": "Ability: Dexterity Weight: 5 lb. Utilize: Mend a tear in clothing (DC 10), or sew a Tiny design (DC 10) Craft: Padded Armor, Basket, Bedroll, Blanket, Fine Clothes, Net, Robe, Rope, Sack, String, Tent, Traveler's Clothes"
+}

@@ -1,0 +1,71 @@
+{
+  "id": "srd-violet-fungus",
+  "name": "Violet Fungus",
+  "type": "plant",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 5,
+  "hp": 18,
+  "hpFormula": "4d8",
+  "initiative": -5,
+  "speed": {
+    "walk": 5
+  },
+  "abilities": {
+    "cha": 1,
+    "con": 10,
+    "dex": 1,
+    "int": 1,
+    "str": 3,
+    "wis": 3
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [
+    "blinded",
+    "deafened",
+    "frightened"
+  ],
+  "senses": {
+    "blindsight": 30
+  },
+  "passivePerception": 6,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "False Appearance",
+      "desc": "While the violet fungus remains motionless, it is indistinguishable from an ordinary fungus."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The fungus makes 1d4 Rotting Touch attacks."
+    },
+    {
+      "name": "Rotting Touch",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 10 ft., one creature. Hit: 4 (1d8) necrotic damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "necrotic",
+          "dice": "1d8+0",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/plant/violet-fungus.png"
+}

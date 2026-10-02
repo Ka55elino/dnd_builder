@@ -5,5 +5,9 @@
   "subclass": "draconic",
   "level": 18,
   "action": "action",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": 5
+  },
   "desc": "Costs 5 Sorcery Points. As an action, you create a 60-foot aura for 1 minute: enemies must succeed on a Wisdom saving throw or have the Charmed (awe) or Frightened (fear) condition from you."
 }

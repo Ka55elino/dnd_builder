@@ -3,7 +3,14 @@
  * Shared by the builder's "Equipment" tab and the "Give Item" page.
  */
 
-export const ARMOR_CAT = { light: 'Light', medium: 'Medium', heavy: 'Heavy', shield: 'Shield' };
+// clothing — worn in the Armor slot but doesn't count as armor (unarmored AC, Mage Armor and
+// Unarmored Defense still work); it may carry its own baseAC (Robe of the Archmagi) or acBonus
+export const ARMOR_CAT = { clothing: 'Clothing', light: 'Light', medium: 'Medium', heavy: 'Heavy', shield: 'Shield' };
+
+/** Clothing: worn, but not armor. */
+export const isClothing = (a) => a?.category === 'clothing';
+/** Body armor that counts as armor (not a shield, not clothing). */
+export const isBodyArmor = (a) => !!a && a.category !== 'shield' && a.category !== 'clothing';
 export const WEAPON_CAT = { simple: 'Simple', martial: 'Martial' };
 
 export const WEAPON_PROPS = {
@@ -23,11 +30,23 @@ export const WEAPON_PROPS = {
 export function acText(a) {
     const d = a.data ?? {};
     if (a.category === 'shield') return `+${d.acBonus ?? 2}`;
+    if (isClothing(a) && !a.baseAC) return d.acBonus ? fmtBonus(d.acBonus) : '—';
     if (!d.addDex) return `${a.baseAC}`;
     return d.maxDex != null ? `${a.baseAC} + Dex (max ${d.maxDex})` : `${a.baseAC} + Dex`;
 }
 
-const fmtBonus = (n) => (n > 0 ? `+${n}` : `${n}`);
+function fmtBonus(n) {
+    return n > 0 ? `+${n}` : `${n}`;
+}
+
+/** "Light · AC 11 + Dex", "Clothing · not armor", "Clothing · AC 15 + Dex". */
+export function armorSummary(a) {
+    const cat = ARMOR_CAT[a.category] ?? a.category ?? '';
+    const d = a.data ?? {};
+    if (isClothing(a) && !a.baseAC && !d.acBonus) return `${cat} · not armor`;
+    const bonus = d.acBonus && a.category !== 'shield' && !(isClothing(a) && !a.baseAC) ? ` ${fmtBonus(d.acBonus)}` : '';
+    return `${cat} · AC ${acText(a)}${bonus}`;
+}
 
 /**
  * Item description for a tooltip: { title, tag, lines: [stat lines], desc }.
@@ -53,7 +72,13 @@ export function describeItem(item, { damageShort = (t) => t } = {}) {
         if (d.properties?.length) lines.push(d.properties.map((p) => WEAPON_PROPS[p] ?? p).join(', '));
     } else if (item.kind === 'armor' || item.kind === 'shield') {
         lines.push(ARMOR_CAT[r.category] ?? r.category ?? '');
-        lines.push(`AC: ${acText(r)}${d.acBonus && r.category !== 'shield' ? ` ${fmtBonus(d.acBonus)}` : ''}`);
+        if (isClothing(r)) {
+            lines.push("Doesn't count as armor");
+            if (r.baseAC) lines.push(`AC: ${acText(r)} (if you wear no armor)`);
+            if (d.acBonus) lines.push(`AC ${fmtBonus(d.acBonus)}`);
+            if (d.weight) lines.push(`Weight: ${d.weight} lb.`);
+            if (d.cost) lines.push(`Cost: ${d.cost}`);
+        } else lines.push(`AC: ${acText(r)}${d.acBonus && r.category !== 'shield' ? ` ${fmtBonus(d.acBonus)}` : ''}`);
         if (d.strengthReq) lines.push(`Requires Strength ${d.strengthReq}`);
         if (d.stealthDisadvantage) lines.push('Disadvantage on Stealth');
     } else {

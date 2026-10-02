@@ -10,5 +10,8 @@
     "druid",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You change the weather within 5 miles for as long as you maintain Concentration."
 }

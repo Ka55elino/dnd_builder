@@ -1,0 +1,15 @@
+{
+  "id": "rayOfFrost",
+  "name": "Chilled",
+  "category": "effect",
+  "spell": "rayOfFrost",
+  "duration": "until the start of the caster's next turn",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "add",
+      "value": -10
+    }
+  ],
+  "desc": "Speed −10 feet (Ray of Frost)."
+}

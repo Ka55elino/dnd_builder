@@ -1,0 +1,33 @@
+{
+  "id": "hasted",
+  "name": "Hasted",
+  "category": "effect",
+  "modifiers": [
+    {
+      "kind": "economy",
+      "action": "action",
+      "value": 1
+    },
+    {
+      "kind": "speed",
+      "op": "mul",
+      "value": 2
+    },
+    {
+      "kind": "ac",
+      "op": "add",
+      "value": 2
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "ability": "dex"
+    },
+    {
+      "kind": "note",
+      "note": "an extra action each turn (one attack, Dash, Disengage, Hide or Utilize)"
+    }
+  ],
+  "desc": "Haste (spell): your Speed is doubled, +2 to AC, Advantage on Dexterity saving throws, and an extra action each turn (Attack with one attack, Dash, Disengage, Hide, or Utilize). When it ends, you can't move or act until after your next turn."
+}

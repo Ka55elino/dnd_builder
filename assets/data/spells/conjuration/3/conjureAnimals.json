@@ -9,6 +9,12 @@
     "druid",
     "ranger"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "You summon bestial spirits: an aura that deals damage and creates Difficult Terrain around you. Concentration.",
   "damage": {
     "dice": "2d8",

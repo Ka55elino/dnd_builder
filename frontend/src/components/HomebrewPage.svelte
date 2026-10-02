@@ -1,6 +1,6 @@
 <script>
     /**
-     * “Homebrew” — export the user's own items, spells and monsters to a JSON file
+     * “Homebrew” — export the user's own items, spells, monsters and conditions to a JSON file
      * and import such a file (see homebrew.js).
      *   Export: tick what goes into the file (all by default) → Export.
      *   Import: pick a file → a preview: what's new, what's the same, what differs
@@ -14,11 +14,11 @@
 
     let { onBack } = $props();
 
-    const GROUP_TITLES = { equipment: "Items", spells: "Spells & abilities", monsters: "Monsters" };
+    const GROUP_TITLES = { equipment: "Items", spells: "Spells & abilities", monsters: "Monsters", conditions: "Conditions" };
     const KIND_LABELS = { weapon: "Weapon", armor: "Armor", item: "Gear" };
     const STATUS_LABELS = { new: "New", changed: "Differs from yours", same: "Already here", builtin: "Built-in id — skipped" };
 
-    let local = $state.raw({ equipment: [], spells: [], monsters: [] });
+    let local = $state.raw({ equipment: [], spells: [], monsters: [], conditions: [] });
     let picked = $state({}); // id → true (export)
     let loading = $state(true);
     let error = $state("");
@@ -36,6 +36,7 @@
         })),
         spells: local.spells.map((sp) => ({ id: sp.id, name: sp.name, meta: spellMeta(sp) })),
         monsters: local.monsters.map((m) => ({ id: m.id, name: m.name, meta: monsterMeta(m) })),
+        conditions: (local.conditions ?? []).map((c) => ({ id: c.id, name: c.name, meta: c.category === "effect" ? "Effect" : "Condition" })),
     });
 
     function spellMeta(sp) {
@@ -46,7 +47,7 @@
 
     const monsterMeta = (m) => [`CR ${crLabel(m.cr)}`, CREATURE_TYPES[m.type] ?? m.type].join(" · ");
 
-    const total = $derived(rows.equipment.length + rows.spells.length + rows.monsters.length);
+    const total = $derived(rows.equipment.length + rows.spells.length + rows.monsters.length + rows.conditions.length);
     const pickedCount = $derived(Object.values(picked).filter(Boolean).length);
 
     async function reload() {
@@ -115,7 +116,7 @@
     const importable = (e) => e.status === "new" || e.status === "changed";
     const previewGroups = $derived.by(() => {
         if (!preview) return [];
-        return ["equipment", "spells", "monsters"]
+        return ["equipment", "spells", "monsters", "conditions"]
             .map((g) => ({ g, list: preview.plan.map((e, i) => ({ e, i })).filter((x) => x.e.group === g) }))
             .filter((x) => x.list.length);
     });
@@ -135,6 +136,7 @@
     function entryMeta(e) {
         if (e.group === "equipment") return [KIND_LABELS[e.kind], e.def.category].filter(Boolean).join(" · ");
         if (e.group === "spells") return spellMeta(e.def);
+        if (e.group === "conditions") return e.def.category === "effect" ? "Effect" : "Condition";
         return monsterMeta(e.def);
     }
 
@@ -180,7 +182,7 @@
     </header>
 
     <p class="lead">
-        Your own items, spells and monsters in one file — to move them to another computer or share them
+        Your own items, spells, monsters and conditions in one file — to move them to another computer or share them
         with the table. Records keep their ids: importing the same file twice doesn't duplicate anything.
     </p>
 
@@ -197,12 +199,12 @@
         <p class="error">Failed to load: {error}</p>
     {:else if !total}
         <p class="muted">
-            No homebrew yet. Create items on the Items page, spells on the Spells page and monsters in the
-            Bestiary — or import a file.
+            No homebrew yet. Create items on the Items page, spells on the Spells page, monsters in the
+            Bestiary and conditions on the Conditions page — or import a file.
         </p>
     {:else}
         <div class="groups">
-            {#each ["equipment", "spells", "monsters"] as g (g)}
+            {#each ["equipment", "spells", "monsters", "conditions"] as g (g)}
                 <section class="group">
                     <header>
                         <label class="check">

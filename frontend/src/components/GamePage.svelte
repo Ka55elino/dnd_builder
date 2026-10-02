@@ -11,11 +11,11 @@
     import { untrack } from 'svelte';
     import { HostGame, StopGame, GetPlayerCharacter } from '../api.js';
     import { server, applyStatus, onGameEvent } from '../server.svelte.js';
-    import { EV, sendHp, sendWhisper, sendGive } from '../game.js';
+    import { EV, sendHp, sendWhisper, sendGive, sendCondition } from '../game.js';
     import CharacterBrief from './CharacterBrief.svelte';
     import StartEncounterDialog from './combat/StartEncounterDialog.svelte';
     import LineupDM from './combat/LineupDM.svelte';
-    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, playerSheet } from '../combat.svelte.js';
+    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, playerSheet, setConditionDefs, notePlayerConditions } from '../combat.svelte.js';
     import { loadRefs } from '../data/refs.js';
 
     let { onBack } = $props();
@@ -31,6 +31,7 @@
     loadRefs()
         .then((r) => {
             refs = r;
+            setConditionDefs(r.conditions); // monsters' conditions in the line
         })
         .catch(() => {});
 
@@ -71,6 +72,8 @@
             if (ev?.kind !== EV.STATE || !ev.from || !ev.data?.state) return;
             live[ev.from] = ev.data.state; // may arrive before the snapshot is fetched
             if (ev.data.summary) liveSummary[ev.from] = ev.data.summary;
+            // the line everyone sees shows the player's conditions too
+            if (Array.isArray(ev.data.summary?.conditions)) notePlayerConditions(ev.from, ev.data.summary.conditions);
         }),
     );
 
@@ -146,7 +149,12 @@
 
     {#if hosting}
         {#if combat.active}
-            <LineupDM {sheetOf} onPlayerHp={(pid, op, n) => sendHp(pid, op, n)} />
+            <LineupDM
+                {sheetOf}
+                conditionDefs={refs?.conditions ?? []}
+                onPlayerHp={(pid, op, n) => sendHp(pid, op, n)}
+                onPlayerCondition={(pid, data) => sendCondition(pid, data, refs?.conditions ?? [])}
+            />
         {/if}
         <section>
             <h2>Party <span class="count">{server.players.length}</span></h2>
@@ -165,6 +173,7 @@
                                 onHp={(op, n) => sendHp(p.id, op, n)}
                                 onWhisper={(text) => sendWhisper(p.id, text)}
                                 onGive={(kind, item) => sendGive(p.id, kind, item)}
+                                onCondition={(data) => sendCondition(p.id, data, refs?.conditions ?? [])}
                             />
                         {:else}
                             <!-- loading or unavailable: what the lobby row knows -->

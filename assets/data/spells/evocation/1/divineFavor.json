@@ -9,6 +9,13 @@
     "cleric",
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "divineFavor",
+    "target": "self"
+  },
   "desc": "Your weapon attacks deal an extra 1d4 Radiant damage. Concentration, up to 1 minute.",
   "damage": {
     "dice": "1d4",

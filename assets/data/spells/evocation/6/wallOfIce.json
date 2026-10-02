@@ -8,6 +8,12 @@
   "classes": [
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "2d6"
+  },
   "desc": "A wall of ice: Cold damage when breached; blocks passage. Concentration.",
   "damage": {
     "dice": "10d6",

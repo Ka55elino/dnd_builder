@@ -1,0 +1,28 @@
+{
+  "id": "stunned",
+  "name": "Stunned",
+  "category": "condition",
+  "implies": [
+    "incapacitated"
+  ],
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "dex"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    }
+  ],
+  "desc": "You are Incapacitated. You automatically fail Strength and Dexterity saving throws, and attack rolls against you have Advantage."
+}

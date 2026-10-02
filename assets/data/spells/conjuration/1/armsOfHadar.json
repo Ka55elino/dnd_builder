@@ -8,6 +8,9 @@
   "classes": [
     "warlock"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "Tendrils of darkness strike everyone within 10 feet: Strength saving throw, Necrotic damage, and the target can't take Reactions.",
   "damage": {
     "dice": "2d6",

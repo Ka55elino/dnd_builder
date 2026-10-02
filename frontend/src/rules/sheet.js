@@ -7,6 +7,7 @@
  */
 import { ABILITY_KEYS, modifier } from './abilities.js';
 import { SKILLS } from './skills.js';
+import { applyModifiers } from './modifiers.js';
 
 /** Proficiency bonus by level: +2 at 1–4, +3 at 5–8 … +6 at 17–20. */
 export const proficiencyBonus = (level) => 2 + Math.floor((Math.max(1, level) - 1) / 4);
@@ -29,13 +30,18 @@ const traitGrants = (level, ...sources) =>
  *   expertise — expertise: [id]
  *   perks   — feat/fighting style effects: Set id ('tough', 'alert',
  *             'defense', 'archery', 'dueling', 'twf')
+ *   modifiers — everything on the character now: conditions, named effects, spell effects
+ *             (rules/modifiers.js, each with source). The base stage is here:
+ *             { kind: 'acBase', base: 13, ability: 'dex', unarmored: true }  — Mage Armor: another
+ *                 way to calculate AC (the best one is used); unarmored — only without body armor
+ *             the rest (set → mul → add → min) runs in applyModifiers at the end
  * }
  */
 export function computeSheet(
     build,
     {
         race, subrace, cls, armor = null, shield = false, hands = [],
-        skills: extraSkills = [], expertise = [], perks = new Set(),
+        skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
     } = {},
 ) {
     const level = build.level ?? 1;
@@ -71,15 +77,33 @@ export function computeSheet(
     // no armor: 10 + Dex, or the class's "Unarmored Defense" (monk: Dex+Wis, barbarian: Dex+Con)
     const unarmored = cls?.data?.unarmoredDefense ?? [];
     let ac = unarmored.length ? 10 + unarmored.reduce((sum, k) => sum + (mods[k] ?? 0), 0) : 10 + mods.dex;
-    if (armor && armor.category !== 'shield') {
+    // clothing (category 'clothing') is worn in the armor slot but is not armor
+    const wearing = !!armor && armor.category !== 'shield' && armor.category !== 'clothing';
+    const clothes = armor?.category === 'clothing' ? armor : null;
+    // spell effects: which ones apply now (Mage Armor — only without body armor)
+    const acBases = modifiers.filter((e) => e.kind === 'acBase' && !(e.unarmored && wearing));
+    // magic clothing: its own base AC (Robe of the Archmagi: 15 + Dex) and/or a bonus
+    const later = [];
+    if (clothes?.baseAC) acBases.push({ kind: 'acBase', base: clothes.baseAC, ability: clothes.data?.addDex ? 'dex' : null, source: clothes.name });
+    if (Number(clothes?.data?.acBonus)) later.push({ kind: 'ac', op: 'add', value: Number(clothes.data.acBonus), source: clothes.name });
+    const acSources = [];
+    if (wearing) {
         const d = armor.data ?? {};
         let dex = d.addDex ? mods.dex : 0;
         if (d.addDex && d.maxDex != null) dex = Math.min(dex, d.maxDex);
         ac = (armor.baseAC ?? 10) + dex + (Number(d.acBonus) || 0); // + armor's magic bonus
     }
+    // another base AC (Mage Armor: 13 + Dex) — used if it is better
+    for (const e of acBases) {
+        const alt = (Number(e.base) || 10) + (e.ability ? mods[e.ability] ?? 0 : 0);
+        if (alt > ac) {
+            ac = alt;
+            acSources.push({ name: e.source ?? e.name, text: `base AC ${e.base}${e.ability ? ` + ${e.ability.toUpperCase()}` : ''}` });
+        }
+    }
     // shield: +2 (or its acBonus if the shield is magic); shield — shield object or true
     if (shield) ac += Number(shield?.data?.acBonus) || 2;
-    if (perks.has('defense') && armor && armor.category !== 'shield') ac += 1; // "Defense" fighting style
+    if (perks.has('defense') && wearing) ac += 1; // "Defense" fighting style
 
     // --- speed (race base + bonus effects) ---
     const speed =
@@ -122,7 +146,7 @@ export function computeSheet(
         });
     }
 
-    return {
+    const sheet = {
         level,
         prof,
         mods,
@@ -130,6 +154,7 @@ export function computeSheet(
         skills,
         passivePerception,
         ac,
+        acSources, // active effects that changed AC: [{ name, text }]
         initiative: mods.dex + (perks.has('alert') ? prof : 0), // "Alert" feat
         speed,
         hp,
@@ -137,6 +162,10 @@ export function computeSheet(
         darkvision,
         attacks,
     };
+    // conditions and effects: set → mul → add → min (rules/modifiers.js);
+    // effectSummary — what changed, flags (Advantage / Disadvantage…) and notes for Status
+    sheet.effectSummary = applyModifiers(sheet, [...modifiers.filter((m) => m.kind !== 'acBase'), ...later]);
+    return sheet;
 }
 
 const isLight = (w) => (w?.data?.properties ?? []).includes('light');

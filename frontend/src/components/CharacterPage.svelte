@@ -23,8 +23,9 @@
      *   wrap handlers in leave(fn) so unsaved state is saved first
      */
     import { onMount } from "svelte";
-    import { onGameEvent } from "../server.svelte.js";
-    import { EV, applyHp, sendState, findItem, giftEvents } from "../game.js";
+    import { onGameEvent, server } from "../server.svelte.js";
+    import { seen } from "../combat.svelte.js";
+    import { EV, applyHp, applyCondition, sendState, findItem, giftEvents } from "../game.js";
     import { printPage } from "../print.js";
     import { exportCharacter } from "../transfer.js";
     import { buildSummary } from "../rules/summary.js";
@@ -34,10 +35,14 @@
         SaveCharacterState,
     } from "../api.js";
     import { loadRefs, EMPTY_REFS } from "../data/refs.js";
-    import { Character } from "../models/Character.js";
+    import { Character, concentrationDC } from "../models/Character.js";
     import ActionCard from "./common/ActionCard.svelte";
+    import { useOptions, applyUse, upcastLines, applyInfo } from "../rules/casting.js";
+    import { breaksConcentration } from "../rules/modifiers.js";
+    import { instanceInfo } from "../rules/conditions.js";
+    import ConditionDialog from "./ConditionDialog.svelte";
     import Tooltip from "./common/Tooltip.svelte";
-    import { describeItem, acText, ARMOR_CAT } from "../rules/equipment.js";
+    import { describeItem, armorSummary } from "../rules/equipment.js";
     import {
         CharacterState,
         BAG_MAX,
@@ -103,6 +108,7 @@
                   ref,
                   state?.equipped ?? null,
                   state?.bagAdjust ?? null,
+                  state?.effects ?? null,
               )
             : null,
     );
@@ -175,8 +181,27 @@
     $effect(() => {
         if (!inGame) return;
         return onGameEvent((ev) => {
-            if (ev?.kind === EV.HP) applyHp(state, character, ev.data); // autosave picks it up
+            // the DM puts a condition on / takes it off / passes the turn (rules/conditions.js)
+            if (ev?.kind === EV.CONDITION) {
+                const before = state?.concentration;
+                if (applyCondition(state, character, ev.data) && before && !state.concentration) concCheck = null;
+                return;
+            }
+            if (ev?.kind !== EV.HP) return;
+            const was = state?.concentration;
+            if (applyHp(state, character, ev.data) && ev.data?.op === "damage")
+                concentrationHit(was, ev.data.amount); // autosave picks it up
         });
+    });
+
+    // the DM's line says it's now this player's turn: Action, Bonus Action and Reaction are back
+    let lastTurn = null;
+    $effect(() => {
+        if (!inGame) return;
+        const t = seen.active ? seen.turn : null;
+        const mine = t && server.playerId && t === `p:${server.playerId}`;
+        if (mine && lastTurn !== t) state?.newTurn();
+        lastTurn = t;
     });
 
     // a gift is stored in the DB by WhisperPopups (a custom item is saved to the catalog
@@ -323,6 +348,85 @@
 
     let hpAmount = $state(1);
 
+    // --- Concentration ---
+    // the spell being concentrated on (null if none, or if it is no longer on the list)
+    const concSpell = $derived(
+        state && character ? state.concentratingOn(character) : null,
+    );
+    // after damage while concentrating: the Constitution saving throw DC to keep it
+    let concCheck = $state(null);
+    function concentrationHit(wasConcentrating, amount) {
+        const n = Math.floor(Number(amount));
+        if (!wasConcentrating || !(n > 0)) return;
+        // 0 Hit Points ends it outright (CharacterState.damage)
+        concCheck = state.concentration ? concentrationDC(n) : null;
+    }
+    function onConcentrate(e) {
+        state.concentrate(e.currentTarget.value);
+        concCheck = null;
+    }
+    // --- Cast / Use on action and spell cards (rules/casting.js) ---
+    // per card: the chosen slot (or Ritual) and amount; key = group title + item id
+    let useSel = $state({});
+    let usedKey = $state(null); // the card just used — a short "✓" confirmation
+    let usedTimer;
+    // the effect a card's spell leaves (rules/casting.js applyInfo): "on me" ticked and the first choice by default
+    const effectOf = (c) => applyInfo(c.item, character?.conditionDefs ?? []);
+    const selOf = (c, key) => {
+        const ap = effectOf(c);
+        return { onMe: true, choose: ap?.choose?.[0]?.value ?? "", ...(useSel[key] ?? {}) };
+    };
+    function useCard(c, info, key) {
+        const sel = selOf(c, key);
+        const wasConc = state.concentration;
+        if (!applyUse(info, sel, character, state, c.item)) return;
+        if (info.concentration && wasConc !== state.concentration) concCheck = null;
+        usedKey = key;
+        clearTimeout(usedTimer);
+        usedTimer = setTimeout(() => (usedKey = null), 1500);
+    }
+    const setSel = (key, patch) => (useSel[key] = { ...(useSel[key] ?? {}), ...patch });
+
+    // --- Conditions (rules/modifiers.js): the grid toggles instances in state.effects ---
+    const condGroups = $derived.by(() => {
+        const defs = [...(character?.conditionDefs ?? [])].sort((a, b) => a.name.localeCompare(b.name));
+        return [
+            { id: "condition", title: "Conditions", defs: defs.filter((d) => (d.category ?? "condition") === "condition") },
+            { id: "effect", title: "Effects", defs: defs.filter((d) => d.category === "effect" && !d.data?.spell) },
+        ].filter((g) => g.defs.length);
+    });
+    const condRow = (id) => character?.conditions.find((c) => c.id === id) ?? null;
+    const maxLevel = (d) => Number(d.data?.levels) || null;
+    function toggleCondition(d) {
+        const before = state.concentration;
+        state.toggleCondition(d.id, {
+            breaks: breaksConcentration(d.id, character.conditionDefs),
+            level: maxLevel(d) ? 1 : null,
+        });
+        if (before && !state.concentration) concCheck = null;
+    }
+    // the same popup the DM has: every condition, effect and spell effect, with rounds / save / choice
+    let condDialog = $state(false);
+    function onConditionDialog(data) {
+        const before = state.concentration;
+        applyCondition(state, character, data, null);
+        if (before && !state.concentration) concCheck = null;
+    }
+
+    const fx = $derived(sheet?.effectSummary ?? { changes: [], flags: [], notes: [] });
+    const speedChanged = $derived(fx.changes.some((c) => c.label.startsWith("Speed")));
+
+    const concGroups = $derived.by(() => {
+        const out = [];
+        for (const sp of character?.concentrationSpells ?? []) {
+            const title = sp.kind !== "spell" ? "Abilities" : sp.level === 0 ? "Cantrips" : `Level ${sp.level}`;
+            let g = out.find((x) => x.title === title);
+            if (!g) out.push((g = { title, spells: [] }));
+            g.spells.push(sp);
+        }
+        return out;
+    });
+
     // Hit Point buttons (icons: assets/icons/hpDamage|hpHeal|hpTemp.svg)
     const HP_ACTIONS = [
         {
@@ -330,7 +434,11 @@
             icon: "hpDamage",
             short: "−",
             label: "Damage",
-            run: () => state.damage(hpAmount, character),
+            run: () => {
+                const was = state.concentration;
+                state.damage(hpAmount, character);
+                concentrationHit(was, hpAmount);
+            },
         },
         {
             id: "heal",
@@ -377,7 +485,115 @@
     </div>
 {/snippet}
 
+<!-- Cast / Use bar at the bottom of an action or spell card -->
+{#snippet useBar(c, key)}
+    {@const info = useOptions(c, character, state)}
+    {#if info}
+        {@const sel = useSel[key]?.value ?? info.defaultValue}
+        {@const opt = info.options?.find((o) => o.value === sel) ?? null}
+        {@const amount = useSel[key]?.amount ?? info.amount}
+        {@const lines =
+            (c.item.kind === "spell" || info.kind === "slot") && opt?.slot
+                ? upcastLines(c.item, opt.level)
+                : []}
+        {@const off =
+            info.disabled ||
+            !!opt?.disabled ||
+            (info.options && !info.options.length)}
+        {@const ap = effectOf(c)}
+        {@const cs = selOf(c, key)}
+        <div class="use no-print">
+        {#if ap}
+            <!-- the lasting effect: on you, on an ally, or on the target (the DM puts it on) -->
+            <div class="use-fx">
+                {#if ap.target === "enemy"}
+                    <span class="fx-on enemy" title="The DM puts it on the target">→ inflicts <b>{ap.name}</b></span>
+                {:else if ap.target === "self"}
+                    <span class="fx-on" title="Shown in Status when cast">→ <b>{ap.name}</b> on you</span>
+                {:else}
+                    <label class="fx-on" title="Untick when you cast it on someone else (the DM puts it on them)">
+                        <input type="checkbox" checked={cs.onMe} onchange={(e) => setSel(key, { onMe: e.currentTarget.checked })} />
+                        <b>{ap.name}</b> on me
+                    </label>
+                {/if}
+                {#if ap.choose && ap.target !== "enemy"}
+                    <select class="use-select" value={cs.choose} onchange={(e) => setSel(key, { choose: e.currentTarget.value })}
+                        aria-label="Choose for {ap.name}">
+                        {#each ap.choose as o (o.value)}<option value={o.value}>{o.label}</option>{/each}
+                    </select>
+                {/if}
+            </div>
+        {/if}
+        <div class="use-bar">
+            {#if info.options?.length}
+                <select
+                    class="use-select"
+                    value={sel}
+                    onchange={(e) => setSel(key, { value: e.currentTarget.value })}
+                    aria-label="Spell slot"
+                >
+                    {#each info.options as o (o.value)}
+                        <option value={o.value} disabled={o.disabled}
+                            >{o.label}</option
+                        >
+                    {/each}
+                </select>
+            {/if}
+            {#if info.kind === "resource" && info.resource}
+                {#if info.amountRange && info.amountRange[1] > info.amountRange[0]}
+                    <input
+                        class="use-amount"
+                        type="number"
+                        min={info.amountRange[0]}
+                        max={info.amountRange[1]}
+                        value={amount}
+                        oninput={(e) =>
+                            setSel(key, { amount: Number(e.currentTarget.value) })}
+                        aria-label="Amount to spend"
+                    />
+                {/if}
+                <small class="use-cost"
+                    >{info.amountRange ? "" : `${info.amount} · `}{info.resource
+                        .name}
+                    <b
+                        >{state.resourceLeft(info.resource)}/{info.resource
+                            .max}</b
+                    ></small
+                >
+            {:else if info.kind === "resource"}
+                <small class="use-cost muted">{info.reason}</small>
+            {/if}
+            <span class="spacer"></span>
+            {#if usedKey === key}<span class="used">✓</span>{/if}
+            <button
+                class="use-btn"
+                disabled={off}
+                title={info.reason ||
+                    (opt?.disabled ? "No slots of this level left" : "") ||
+                    (info.concentration
+                        ? `${info.label} — starts Concentration`
+                        : info.label)}
+                onclick={() => useCard(c, info, key)}>{info.label}</button
+            >
+        </div>
+        {#if lines.length}
+            <p class="upcast"><b>Upcast:</b> {lines.join(" · ")}</p>
+        {/if}
+        </div>
+    {/if}
+{/snippet}
+
 <svelte:window onkeydown={onKey} />
+
+{#if condDialog && character && state}
+    <ConditionDialog
+        name={build?.name ?? ""}
+        defs={character.conditionDefs}
+        current={state.effects.filter((e) => e.type === "condition")}
+        onApply={onConditionDialog}
+        onClose={() => (condDialog = false)}
+    />
+{/if}
 
 <div class="page">
     <header class="top no-print">
@@ -482,7 +698,15 @@
             <!-- attributes -->
             <section class="stats">
                 <div class="combat">
-                    <div class="stat shield">
+                    <div
+                        class="stat shield"
+                        class:boosted={sheet.acSources?.length}
+                        title={sheet.acSources?.length
+                            ? sheet.acSources
+                                  .map((x) => `${x.name}: ${x.text}`)
+                                  .join("\n")
+                            : null}
+                    >
                         <span class="stat-label">AC</span>
                         <span class="stat-value">{sheet.ac}</span>
                     </div>
@@ -492,7 +716,7 @@
                             >{formatModifier(sheet.initiative)}</span
                         >
                     </div>
-                    <div class="stat">
+                    <div class="stat" class:boosted={speedChanged}>
                         <span class="stat-label">Speed</span>
                         <span class="stat-value">{ft(sheet.speed)}</span>
                     </div>
@@ -534,10 +758,12 @@
                     <h3>Saving Throws</h3>
                     <ul class="checklist cols-3">
                         {#each sheet.saves as s}
-                            <li class:prof={s.proficient}>
+                            <li class:prof={s.proficient} class:modded={s.modified}>
                                 <span class="dot"></span>
                                 <span class="val"
-                                    >{formatModifier(s.value)}</span
+                                    >{formatModifier(s.value)}{#if s.dice}<small class="die-add"
+                                            >{s.dice.join(" ")}</small
+                                        >{/if}</span
                                 >
                                 <span>{ABILITIES[s.key].name}</span>
                             </li>
@@ -552,10 +778,13 @@
                             <li
                                 class:prof={s.proficient}
                                 class:expert={s.expertise}
+                                class:modded={s.modified}
                             >
                                 <span class="dot"></span>
                                 <span class="val"
-                                    >{formatModifier(s.value)}</span
+                                    >{formatModifier(s.value)}{#if s.dice}<small class="die-add"
+                                            >{s.dice.join(" ")}</small
+                                        >{/if}</span
                                 >
                                 <span
                                     >{s.name}
@@ -738,7 +967,332 @@
                                 {/each}
                             </div>
                         </div>
+
+                        <!-- this turn: Action / Bonus Action / Reaction — click to mark spent (grey);
+                             Hasted / Thief add pips, Incapacitated blocks them; a new turn resets them -->
+                        <div class="economy">
+                            {#each character.economy as e (e.id)}
+                                {@const used = state.turnTotal(e) - state.turnLeft(e)}
+                                <div class="econ {e.id}" class:blocked={e.blocked}>
+                                    <span class="econ-label">{e.name}</span>
+                                    <span class="econ-pips">
+                                        {#each Array(state.turnTotal(e)) as _, i}
+                                            <Tooltip delay={200}>
+                                                <button
+                                                    class="econ-btn"
+                                                    class:spent={i < used || e.blocked}
+                                                    class:extra={i >= e.count}
+                                                    disabled={!!e.blocked}
+                                                    onclick={() => state.toggleTurn(e, i)}
+                                                    aria-label="{e.name} {i + 1}"
+                                                    aria-pressed={i < used}
+                                                >
+                                                    <Icon name={e.icon} label={e.name} short={e.name[0]} native={false} />
+                                                </button>
+                                                {#snippet tip()}
+                                                    <div class="tip">
+                                                        <div class="tip-head">
+                                                            <b>{e.name}{state.turnTotal(e) > 1 ? ` ${i + 1}` : ""}</b>
+                                                            <span class="tip-tag"
+                                                                >{e.blocked ? "can't" : i < used ? "used" : "available"}</span
+                                                            >
+                                                        </div>
+                                                        {#if e.blocked}<p class="tip-desc">{e.blocked.join(", ")}</p>
+                                                        {:else if i >= e.count}<p class="tip-desc">
+                                                                This turn only: {state.turnExtra[e.id]?.from.join(", ")}
+                                                            </p>
+                                                        {:else if i >= 1 && e.sources.length}<p class="tip-desc">
+                                                                Extra: {e.sources.join(", ")}
+                                                            </p>{/if}
+                                                    </div>
+                                                {/snippet}
+                                            </Tooltip>
+                                        {/each}
+                                    </span>
+                                </div>
+                            {/each}
+                            <button class="econ-reset" onclick={() => state.newTurn()} title="New turn: all available again"
+                                >↺ New turn</button
+                            >
+                        </div>
                     </div>
+
+                    <!-- attacks per Attack action: 1, Extra Attack → 2, Thirsting Blade → 2 with the pact weapon -->
+                    {#if character.attackCount}
+                        {@const atk = character.attackCount}
+                        <div class="attacks-row">
+                            <Tooltip>
+                                <span class="atk-label">Attacks per action</span>
+                                {#snippet tip()}
+                                    <div class="tip">
+                                        <div class="tip-head">
+                                            <b>Attack action</b>
+                                        </div>
+                                        {#if atk.sources.length}
+                                            {#each atk.sources as s (s.name)}
+                                                <div class="tip-head">
+                                                    <b>{s.name}</b>
+                                                    <span class="tip-tag"
+                                                        >{s.count}{s.label
+                                                            ? ` · ${s.label}`
+                                                            : ""}</span
+                                                    >
+                                                </div>
+                                                {#if s.desc}<p class="tip-desc">
+                                                        {s.desc}
+                                                    </p>{/if}
+                                            {/each}
+                                        {:else}
+                                            <p class="tip-desc">
+                                                One attack when you take the
+                                                Attack action.
+                                            </p>
+                                        {/if}
+                                    </div>
+                                {/snippet}
+                            </Tooltip>
+                            <b class="atk-count">{atk.count}</b>
+                            {#each atk.conditional as c (c.label)}
+                                <span class="atk-cond"
+                                    ><b>{c.count}</b> with {c.label}</span
+                                >
+                            {/each}
+                        </div>
+                    {/if}
+
+                    <!-- Concentration: one spell at a time; damage → Con save DC, 0 HP or Long Rest → ends -->
+                    {#if character.concentrationSpells.length || concSpell}
+                        <div class="conc-row" class:on={concSpell}>
+                            <Tooltip>
+                                <span class="atk-label">Concentration</span>
+                                {#snippet tip()}
+                                    <div class="tip">
+                                        <div class="tip-head">
+                                            <b>Concentration</b>
+                                        </div>
+                                        <p class="tip-desc">
+                                            Only one Concentration spell at a
+                                            time: casting another ends it. When
+                                            you take damage, make a Constitution
+                                            saving throw (DC 10 or half the
+                                            damage, up to 30). It ends at 0 Hit
+                                            Points (Incapacitated).
+                                        </p>
+                                    </div>
+                                {/snippet}
+                            </Tooltip>
+                            <select
+                                class="conc-select"
+                                value={concSpell?.id ?? ""}
+                                onchange={onConcentrate}
+                                aria-label="Spell you are concentrating on"
+                            >
+                                <option value="">— not concentrating —</option>
+                                {#each concGroups as g (g.title)}
+                                    <optgroup label={g.title}>
+                                        {#each g.spells as sp (sp.id)}
+                                            <option value={sp.id}
+                                                >{sp.name}</option
+                                            >
+                                        {/each}
+                                    </optgroup>
+                                {/each}
+                            </select>
+                            {#if concSpell}
+                                <button
+                                    class="ghost step"
+                                    onclick={() => {
+                                        state.concentrate(null);
+                                        concCheck = null;
+                                    }}
+                                    title="End Concentration"
+                                    aria-label="End Concentration">End</button
+                                >
+                            {/if}
+                            {#if concCheck && concSpell}
+                                <span class="conc-check">
+                                    Con save <b>DC {concCheck}</b> to keep it
+                                    <button
+                                        class="conc-x"
+                                        onclick={() => (concCheck = null)}
+                                        aria-label="Dismiss">×</button
+                                    >
+                                </span>
+                            {/if}
+                        </div>
+                    {/if}
+
+                    <!-- active spell effects (Mage Armor…): they change the sheet; × ends one -->
+                    {#if character.activeEffects.length}
+                        <h3>Active effects</h3>
+                        <ul class="effects">
+                            {#each character.activeEffects as e (e.id)}
+                                <li class:inactive={e.inactive}>
+                                    <Tooltip>
+                                        <span class="fx-name">{e.name}</span>
+                                        {#snippet tip()}
+                                            <div class="tip">
+                                                <div class="tip-head">
+                                                    <b>{e.name}</b>
+                                                    {#if e.duration}<span
+                                                            class="tip-tag"
+                                                            >{e.duration}</span
+                                                        >{/if}
+                                                </div>
+                                                {#each e.lines.filter(Boolean) as l}<p
+                                                        class="tip-desc"
+                                                    >
+                                                        {l}
+                                                    </p>{/each}
+                                                {#if e.inactive}<p
+                                                        class="tip-desc"
+                                                    >
+                                                        Now: {e.inactive}.
+                                                    </p>{/if}
+                                            </div>
+                                        {/snippet}
+                                    </Tooltip>
+                                    <small class="fx-lines"
+                                        >{e.inactive ||
+                                            e.lines.filter(Boolean).join(" · ")}</small
+                                    >
+                                    {#if e.conc}<small class="fx-conc"
+                                            >conc.</small
+                                        >{/if}
+                                    <button
+                                        class="fx-x"
+                                        onclick={() => {
+                                            if (state.concentration === e.id)
+                                                concCheck = null;
+                                            state.removeEffect(e.id);
+                                        }}
+                                        title="End {e.name}"
+                                        aria-label="End {e.name}">×</button
+                                    >
+                                </li>
+                            {/each}
+                        </ul>
+                    {/if}
+
+                    <!-- end-of-turn saves the DM's "turn passed" made due (rules/conditions.js) -->
+                    {#each character.conditions.filter((r) => r.instance?.savePending) as r (r.id)}
+                        <div class="save-due">
+                            <span
+                                ><b>{r.name}</b>: {ABILITIES[r.instance.save.ability]?.short ??
+                                    r.instance.save.ability} save DC {r.instance.save.dc} to end it</span
+                            >
+                            <button class="ghost step" onclick={() => state.resolveSave(r.id, true)}
+                                >Saved</button
+                            >
+                            <button class="ghost step" onclick={() => state.resolveSave(r.id, false)}
+                                >Failed</button
+                            >
+                        </div>
+                    {/each}
+
+                    <!-- conditions and named effects: click to put on / take off (rules/modifiers.js) -->
+                    <div class="cond-head">
+                        <button class="ghost step" onclick={() => (condDialog = true)}
+                            title="All conditions and effects (spell effects too): rounds, end-of-turn save, choice"
+                            >＋ Conditions & effects…</button
+                        >
+                    </div>
+                    {#if condGroups.length}
+                        {#each condGroups as grp (grp.id)}
+                            <h3>{grp.title}</h3>
+                            <div class="cond-grid">
+                                {#each grp.defs as d (d.id)}
+                                    {@const row = condRow(d.id)}
+                                    {@const immune =
+                                        row?.immune || character.conditionImmune?.has(d.id)}
+                                    <span
+                                        class="cond"
+                                        class:on={row?.explicit && !immune}
+                                        class:implied={row && !row.explicit && !immune}
+                                        class:immune
+                                    >
+                                        <Tooltip delay={250}>
+                                            <button
+                                                class="cond-btn"
+                                                onclick={() => toggleCondition(d)}
+                                                aria-pressed={!!row?.explicit}
+                                                >{d.name}{#if row?.level}
+                                                    <b>{row.level}</b>{/if}{#if row?.instance?.rounds}
+                                                    <small class="cond-r">{row.instance.rounds}r</small>{/if}</button
+                                            >
+                                            {#snippet tip()}
+                                                <div class="tip">
+                                                    <div class="tip-head">
+                                                        <b>{d.name}</b>
+                                                        {#if immune}<span
+                                                                class="tip-tag"
+                                                                >immune</span
+                                                            >{:else if row && !row.explicit}<span
+                                                                class="tip-tag"
+                                                                >via {row.impliedBy.join(", ")}</span
+                                                            >{/if}
+                                                    </div>
+                                                    <p class="tip-desc">{d.desc}</p>
+                                                    {#if row?.instance && instanceInfo(row.instance)}<p
+                                                            class="tip-desc"
+                                                        >
+                                                            {instanceInfo(row.instance, (k) => ABILITIES[k]?.short ?? k)}
+                                                        </p>{/if}
+                                                </div>
+                                            {/snippet}
+                                        </Tooltip>
+                                        {#if maxLevel(d) && row?.explicit}
+                                            <button
+                                                class="cond-step"
+                                                onclick={() =>
+                                                    state.setConditionLevel(d.id, row.level - 1, maxLevel(d))}
+                                                aria-label="Lower {d.name}">−</button
+                                            >
+                                            <button
+                                                class="cond-step"
+                                                disabled={row.level >= maxLevel(d)}
+                                                onclick={() =>
+                                                    state.setConditionLevel(d.id, row.level + 1, maxLevel(d))}
+                                                aria-label="Raise {d.name}">+</button
+                                            >
+                                        {/if}
+                                    </span>
+                                {/each}
+                            </div>
+                        {/each}
+                    {/if}
+
+                    <!-- what everything on the character does: numbers changed + flags + notes -->
+                    {#if fx.changes.length || fx.flags.length || fx.notes.length}
+                        <h3>Effects on you</h3>
+                        <ul class="fx-sum">
+                            {#each fx.changes as c (c.label + c.sources.join())}
+                                <li>
+                                    <span class="fx-what">{c.label}</span>
+                                    <small>{c.sources.join(", ")}</small>
+                                </li>
+                            {/each}
+                            {#each fx.flags as f (f.key)}
+                                <li class="flag {f.mode}" class:cancels={f.cancels}>
+                                    <span class="fx-what"
+                                        >{f.label.target}: <b>{f.label.mode}</b></span
+                                    >
+                                    <small
+                                        >{f.sources
+                                            .map((x) => (x.note ? `${x.source} (${x.note})` : x.source))
+                                            .join(", ")}{#if f.cancels}
+                                            · cancels out with the opposite{/if}</small
+                                    >
+                                </li>
+                            {/each}
+                            {#each fx.notes as n (n.source + n.note)}
+                                <li class="note">
+                                    <span class="fx-what">{n.note}</span>
+                                    <small>{n.source}</small>
+                                </li>
+                            {/each}
+                        </ul>
+                    {/if}
 
                     {#if character.resources.length}
                         <h3>Resources</h3>
@@ -1024,11 +1578,7 @@
                                     )}{/snippet}
                             </Tooltip>
                             <span class="al-meta"
-                                >{ARMOR_CAT[worn.ref.category] ?? ""} · AC {acText(
-                                    worn.ref,
-                                )}{worn.ref.data?.acBonus
-                                    ? ` +${worn.ref.data.acBonus}`
-                                    : ""}</span
+                                >{armorSummary(worn.ref)}</span
                             >
                             {#if worn.ref.data?.stealthDisadvantage}<span
                                     class="al-warn">Stealth Disadvantage</span
@@ -1087,7 +1637,9 @@
                                             : "attack"}
                                     </td>
                                     <td class="num"
-                                        >{formatModifier(a.toHit)}</td
+                                        >{formatModifier(a.toHit)}{#if a.dice}<small class="die-add"
+                                                >{a.dice.join(" ")}</small
+                                            >{/if}</td
                                     >
                                     <td>
                                         {a.damage}
@@ -1153,7 +1705,15 @@
                                             ? (c.saveDC ?? null)
                                             : null}
                                         note={c.note ?? ""}
-                                    />
+                                        boost={c.boost ?? null}
+                                    >
+                                        {#snippet footer()}
+                                            {#if state}{@render useBar(
+                                                    c,
+                                                    `${g.title}:${c.item.id}`,
+                                                )}{/if}
+                                        {/snippet}
+                                    </ActionCard>
                                 {/each}
                             </div>
                         {/each}
@@ -1333,6 +1893,107 @@
         color: var(--color-text-accent);
     }
 
+    /* ---------- action economy ---------- */
+    .economy {
+        margin-left: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 14px;
+    }
+
+    .econ {
+        --c: var(--color-act-action);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .econ.bonus {
+        --c: var(--color-act-bonus);
+    }
+
+    .econ.reaction {
+        --c: var(--color-act-reaction);
+    }
+
+    .econ-label {
+        font-family: var(--font-ui);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .econ-pips {
+        display: flex;
+        gap: 4px;
+    }
+
+    .econ-btn {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        background: color-mix(in srgb, var(--c) 15%, transparent);
+        border: 1px solid var(--c);
+        border-radius: 8px;
+        color: var(--c);
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .econ-btn :global(.icon) {
+        width: 20px;
+        height: 20px;
+        color: inherit;
+    }
+
+    .econ-btn:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--c) 30%, transparent);
+    }
+
+    /* spent (or can't): grey */
+    .econ-btn.spent {
+        background: transparent;
+        border-color: var(--color-border);
+        color: var(--color-text-muted);
+        filter: grayscale(1);
+        opacity: 0.6;
+    }
+
+    /* gained for this turn only (Action Surge) */
+    .econ-btn.extra {
+        border-style: dashed;
+    }
+
+    .econ.blocked .econ-btn {
+        cursor: not-allowed;
+    }
+
+    .econ.blocked .econ-label {
+        text-decoration: line-through;
+    }
+
+    .econ-reset {
+        align-self: flex-end;
+        padding: 4px 10px;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-muted);
+        font-family: var(--font-ui);
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .econ-reset:hover {
+        border-color: var(--color-gold);
+        color: var(--color-gold-hover);
+    }
+
     .hp-ctl {
         display: flex;
         align-items: stretch;
@@ -1400,6 +2061,424 @@
     .hp-btn:hover {
         border-color: var(--c);
         background: color-mix(in srgb, var(--c) 15%, transparent);
+    }
+
+    .attacks-row {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+        color: var(--color-text-primary);
+    }
+
+    .atk-label {
+        border-bottom: 1px dotted var(--color-text-muted);
+        cursor: help;
+    }
+
+    .atk-count {
+        font-family: var(--font-heading);
+        font-size: 20px;
+        color: var(--color-text-primary);
+    }
+
+    .atk-cond {
+        padding: 1px 8px;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+
+    .atk-cond b {
+        color: var(--color-text-accent);
+    }
+
+    /* ---------- conditions ---------- */
+    .cond-head {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .cond-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .cond {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+
+    .cond-btn {
+        padding: 3px 10px;
+        background: transparent;
+        border: none;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+    }
+
+    .cond-btn b {
+        margin-left: 2px;
+    }
+
+    .cond.on {
+        border-color: var(--color-danger);
+        background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+        color: var(--color-text-primary);
+    }
+
+    .cond.implied {
+        border-style: dashed;
+        border-color: var(--color-danger);
+        color: var(--color-text-primary);
+    }
+
+    .cond.immune {
+        opacity: 0.45;
+        text-decoration: line-through;
+    }
+
+    .cond-r {
+        margin-left: 3px;
+        color: var(--color-text-muted);
+        font-size: 10px;
+    }
+
+    .save-due {
+        margin: 6px 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border: 1px solid var(--color-gold);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+        font-family: var(--font-ui);
+        font-size: 13px;
+    }
+
+    .save-due span {
+        flex: 1;
+    }
+
+    .cond-step {
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        color: var(--color-text-secondary);
+        font-size: 12px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .cond-step:disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
+
+    .fx-sum {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+    }
+
+    .fx-sum li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
+        padding-left: 8px;
+        border-left: 2px solid var(--color-text-accent);
+    }
+
+    .fx-sum li.flag.advantage {
+        border-left-color: var(--color-success);
+    }
+
+    .fx-sum li.flag.disadvantage,
+    .fx-sum li.flag.autoFail,
+    .fx-sum li.flag.cant,
+    .fx-sum li.flag.autoCrit {
+        border-left-color: var(--color-danger);
+    }
+
+    .fx-sum li.cancels {
+        opacity: 0.6;
+    }
+
+    .fx-sum li.note {
+        border-left-color: var(--color-border);
+    }
+
+    .fx-what {
+        color: var(--color-text-primary);
+    }
+
+    .fx-sum small {
+        color: var(--color-text-muted);
+        font-size: 11px;
+    }
+
+    /* saves and skills changed by a condition or effect */
+    .checklist li.modded .val {
+        color: var(--color-text-accent);
+    }
+
+    /* ---------- active effects ---------- */
+    .effects {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .effects li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 4px 4px 10px;
+        border: 1px solid var(--color-text-accent);
+        border-radius: 8px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+    }
+
+    .effects li.inactive {
+        border-style: dashed;
+        border-color: var(--color-border);
+        opacity: 0.7;
+    }
+
+    .fx-name {
+        color: var(--color-text-primary);
+        font-weight: 600;
+    }
+
+    .fx-lines {
+        flex: 1;
+        color: var(--color-text-secondary);
+        font-size: 12px;
+    }
+
+    .fx-conc {
+        color: var(--color-meta-concentration);
+        font-size: 11px;
+    }
+
+    .fx-x {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: var(--color-text-muted);
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .fx-x:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    /* AC changed by an active effect */
+    .stat.boosted .stat-value {
+        color: var(--color-text-accent);
+    }
+
+    /* ---------- Cast / Use bar on cards ---------- */
+    /* pushed to the bottom of the card so the bars line up across a row */
+    .use {
+        margin-top: auto;
+        padding-top: 6px;
+        border-top: 1px dashed var(--color-border);
+    }
+
+    .use-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+    }
+
+    .use-bar .spacer {
+        flex: 1;
+    }
+
+    .use-fx {
+        margin-bottom: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+
+    .fx-on {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .fx-on b {
+        color: var(--color-text-accent);
+        font-weight: 600;
+    }
+
+    .fx-on.enemy b {
+        color: var(--color-danger);
+    }
+
+    .die-add {
+        margin-left: 3px;
+        color: var(--color-text-accent);
+        font-size: 0.8em;
+    }
+
+    .use-select,
+    .use-amount {
+        padding: 2px 4px;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        font-size: 12px;
+    }
+
+    .use-select {
+        max-width: 100%;
+    }
+
+    .use-amount {
+        width: 56px;
+    }
+
+    .use-cost {
+        color: var(--color-text-secondary);
+    }
+
+    .use-cost b {
+        margin-left: 2px;
+        color: var(--color-text-primary);
+    }
+
+    .use-btn {
+        padding: 3px 12px;
+        background: transparent;
+        border: 1px solid var(--color-gold);
+        border-radius: 6px;
+        color: var(--color-gold);
+        font-family: var(--font-ui);
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .use-btn:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--color-gold) 15%, transparent);
+    }
+
+    .use-btn:disabled {
+        opacity: 0.45;
+        cursor: default;
+    }
+
+    .used {
+        color: var(--color-success);
+        font-size: 13px;
+    }
+
+    .upcast {
+        margin: 4px 0 0;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-text-accent);
+    }
+
+    .upcast b {
+        color: var(--color-text-secondary);
+        font-weight: 600;
+    }
+
+    .conc-row {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+        color: var(--color-text-primary);
+    }
+
+    .conc-select {
+        min-width: 180px;
+        max-width: 100%;
+        padding: 3px 6px;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        font-size: 13px;
+    }
+
+    .conc-row.on .conc-select {
+        border-color: var(--color-meta-concentration);
+        color: var(--color-meta-concentration);
+    }
+
+    .conc-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 1px 4px 1px 8px;
+        border: 1px solid var(--color-meta-concentration);
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+
+    .conc-check b {
+        color: var(--color-meta-concentration);
+    }
+
+    .conc-x {
+        padding: 0 4px;
+        background: transparent;
+        border: none;
+        color: var(--color-text-muted);
+        cursor: pointer;
     }
 
     .pools {

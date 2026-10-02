@@ -1,0 +1,17 @@
+{
+  "id": "beguilingInfluence",
+  "name": "Beguiling Influence",
+  "category": "invocation",
+  "level": 1,
+  "desc": "You gain proficiency in the Deception and Persuasion skills.",
+  "grants": [
+    {
+      "type": "skill",
+      "id": "deception"
+    },
+    {
+      "type": "skill",
+      "id": "persuasion"
+    }
+  ]
+}

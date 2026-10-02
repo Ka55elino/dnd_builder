@@ -10,6 +10,15 @@
     "sorcerer",
     "wizard"
   ],
+  "apply": {
+    "condition": "fireShield",
+    "target": "self",
+    "choose": "damageType",
+    "options": [
+      "cold",
+      "fire"
+    ]
+  },
   "desc": "Flames grant Resistance to Fire or Cold damage; a nearby attacker takes damage.",
   "damage": {
     "dice": "2d8",

@@ -1,0 +1,62 @@
+{
+  "id": "srd-tribal-warrior",
+  "name": "Tribal Warrior",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 12,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 12,
+    "dex": 11,
+    "int": 8,
+    "str": 13,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any one language",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Pack Tactics",
+      "desc": "The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Spear",
+      "desc": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/tribal-warrior.png"
+}

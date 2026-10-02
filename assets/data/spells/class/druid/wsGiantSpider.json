@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1. HP 26, AC 14, Speed 30 ft., Climb 30 ft. Bite +2d8 Poison (Constitution saving throw); web restrains; web walker.",
   "damage": {
     "dice": "1d8",

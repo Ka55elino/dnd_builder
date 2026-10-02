@@ -1,0 +1,105 @@
+{
+  "id": "srd-oni",
+  "name": "Oni",
+  "type": "giant",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 7.0,
+  "ac": 16,
+  "hp": 110,
+  "hpFormula": "13d10+39",
+  "initiative": 0,
+  "speed": {
+    "fly": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 15,
+    "con": 16,
+    "dex": 11,
+    "int": 14,
+    "str": 19,
+    "wis": 12
+  },
+  "saves": {
+    "cha": 5,
+    "con": 6,
+    "dex": 3,
+    "wis": 4
+  },
+  "skills": {
+    "arcana": 5,
+    "deception": 8,
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Common, Giant",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Innate Spellcasting",
+      "desc": "The oni's innate spellcasting ability is Charisma (spell save DC 13). The oni can innately cast the following spells, requiring no material components:\n\nAt will: darkness, invisibility\n1/day each: charm person, cone of cold, gaseous form, sleep"
+    },
+    {
+      "name": "Magic Weapons",
+      "desc": "The oni's weapon attacks are magical."
+    },
+    {
+      "name": "Regeneration",
+      "desc": "The oni regains 10 hit points at the start of its turn if it has at least 1 hit point."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The oni makes two attacks, either with its claws or its glaive."
+    },
+    {
+      "name": "Claw (Oni Form Only)",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+4",
+          "avg": 8
+        }
+      ]
+    },
+    {
+      "name": "Glaive",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) slashing damage, or 9 (1d10 + 4) slashing damage in Small or Medium form.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d10+4",
+          "avg": 15
+        }
+      ]
+    },
+    {
+      "name": "Change Shape",
+      "desc": "The oni magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If the oni dies, it reverts to its true form, and its glaive reverts to its normal size."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/giant/oni.png"
+}

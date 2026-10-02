@@ -1,0 +1,14 @@
+{
+  "id": "expeditiousRetreat",
+  "name": "Expeditious Retreat",
+  "category": "effect",
+  "spell": "expeditiousRetreat",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Dash as a Bonus Action on each of your turns"
+    }
+  ],
+  "desc": "You can take the Dash action as a Bonus Action."
+}

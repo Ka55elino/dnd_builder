@@ -85,5 +85,6 @@
   "immunities": [],
   "conditionImmunities": [],
   "traits": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/fey/goblinWarrior.png"
 }

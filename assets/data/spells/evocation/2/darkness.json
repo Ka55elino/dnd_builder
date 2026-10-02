@@ -15,6 +15,7 @@
     "time": "1 action",
     "range": "60 feet",
     "components": "V, M",
-    "duration": "Concentration, up to 10 minutes"
+    "duration": "Concentration, up to 10 minutes",
+    "concentration": true
   }
 }

@@ -42,6 +42,7 @@ var seeders = []seeder{
 	{table: "backgrounds", dir: "assets/data/backgrounds", count: "CountBackgrounds", row: insertBackgroundJSON},
 	{table: "feats", dir: "assets/data/feats", count: "CountFeats", row: insertFeatJSON},
 	{table: "spells", dir: "assets/data/spells", count: "CountSpells", row: insertSpellJSON},
+	{table: "conditions", dir: "assets/data/conditions", count: "CountConditions", row: insertConditionJSON},
 
 	// bestiary
 	{table: "monsters", dir: "assets/data/monsters", count: "CountMonsters", row: insertMonsterJSON},

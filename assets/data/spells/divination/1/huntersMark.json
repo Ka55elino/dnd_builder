@@ -8,6 +8,16 @@
   "classes": [
     "ranger"
   ],
+  "upcast": {
+    "at": {
+      "3": "Concentration up to 8 hours",
+      "5": "Concentration up to 24 hours"
+    }
+  },
+  "apply": {
+    "condition": "huntersMark",
+    "target": "enemy"
+  },
   "desc": "As a Bonus Action, you mark a creature you can see. Your attacks against it deal an extra 1d6 damage (d10 at Ranger level 20). If the target drops to 0 Hit Points, you can move the mark. Concentration, up to 1 hour.",
   "casting": {
     "time": "1 bonus action",

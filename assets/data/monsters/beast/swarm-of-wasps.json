@@ -1,0 +1,77 @@
+{
+  "id": "srd-swarm-of-wasps",
+  "name": "Swarm of Wasps",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 12,
+  "hp": 22,
+  "hpFormula": "5d8",
+  "initiative": 1,
+  "speed": {
+    "fly": 30,
+    "walk": 5
+  },
+  "abilities": {
+    "cha": 1,
+    "con": 10,
+    "dex": 13,
+    "int": 1,
+    "str": 3,
+    "wis": 7
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "charmed",
+    "frightened",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "prone",
+    "restrained",
+    "stunned"
+  ],
+  "senses": {
+    "blindsight": 10
+  },
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Swarm",
+      "desc": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bites",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 0
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "4d4+0",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/swarm-of-wasps.png"
+}

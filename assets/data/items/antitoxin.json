@@ -1,0 +1,9 @@
+{
+  "id": "antitoxin",
+  "name": "Antitoxin",
+  "image": "/img/items/antitoxin.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "50 GP",
+  "desc": "As a Bonus Action, you can drink a vial of Antitoxin to gain Advantage on saving throws to avoid or end the Poisoned condition for 1 hour."
+}

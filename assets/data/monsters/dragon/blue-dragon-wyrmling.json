@@ -1,0 +1,86 @@
+{
+  "id": "srd-blue-dragon-wyrmling",
+  "name": "Blue Dragon Wyrmling",
+  "type": "dragon",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 17,
+  "hp": 52,
+  "hpFormula": "8d8+16",
+  "initiative": 0,
+  "speed": {
+    "burrow": 15,
+    "fly": 60,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 15,
+    "con": 15,
+    "dex": 10,
+    "int": 12,
+    "str": 17,
+    "wis": 11
+  },
+  "saves": {
+    "cha": 4,
+    "con": 4,
+    "dex": 2,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "lightning"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage plus 3 (1d6) lightning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+1d6+3",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Lightning Breath (Recharge 5-6)",
+      "desc": "The dragon exhales lightning in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 12 Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "lightning",
+          "dice": "4d10+0",
+          "avg": 22
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/blue-dragon-wyrmling.png"
+}

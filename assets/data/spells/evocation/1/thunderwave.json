@@ -12,6 +12,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "A 15-foot Cube: Constitution saving throw, Thunder damage, and pushed away on a failed save.",
   "damage": {
     "dice": "2d8",

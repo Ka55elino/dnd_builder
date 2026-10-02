@@ -1,0 +1,79 @@
+{
+  "id": "srd-giant-octopus",
+  "name": "Giant Octopus",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 11,
+  "hp": 52,
+  "hpFormula": "8d10+8",
+  "initiative": 1,
+  "speed": {
+    "swim": 60,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 13,
+    "dex": 13,
+    "int": 4,
+    "str": 17,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4,
+    "stealth": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Hold Breath",
+      "desc": "While out of water, the octopus can hold its breath for 1 hour."
+    },
+    {
+      "name": "Underwater Camouflage",
+      "desc": "The octopus has advantage on Dexterity (Stealth) checks made while underwater."
+    },
+    {
+      "name": "Water Breathing",
+      "desc": "The octopus can breathe only underwater."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Tentacles",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 15 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage. If the target is a creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 15
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d6+3",
+          "avg": 10
+        }
+      ]
+    },
+    {
+      "name": "Ink Cloud (Recharges after a Short or Long Rest)",
+      "desc": "A 20-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-octopus.png"
+}

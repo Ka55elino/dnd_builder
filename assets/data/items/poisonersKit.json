@@ -1,0 +1,9 @@
+{
+  "id": "poisonersKit",
+  "name": "Poisoner's Kit",
+  "image": "/img/items/poisonersKit.png",
+  "isDefault": true,
+  "weight": 2.0,
+  "cost": "50 GP",
+  "desc": "Ability: Intelligence Weight: 2 lb. Utilize: Detect a poisoned object (DC 10) Craft: Basic Poison"
+}

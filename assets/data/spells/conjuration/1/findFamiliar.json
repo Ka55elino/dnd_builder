@@ -1,0 +1,19 @@
+{
+  "id": "findFamiliar",
+  "name": "Find Familiar",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "conjuration",
+  "classes": [
+    "wizard"
+  ],
+  "casting": {
+    "time": "1 hour or Ritual",
+    "range": "10 feet",
+    "components": "V, S, M",
+    "duration": "Instantaneous",
+    "ritual": true
+  },
+  "desc": "You gain the service of a familiar, a spirit that takes an animal form you choose (bat, cat, frog, hawk, lizard, octopus, owl, rat, raven, spider, weasel…). It acts independently, can deliver your touch spells, and you can see through its eyes as a Bonus Action."
+}

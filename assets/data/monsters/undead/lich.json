@@ -1,0 +1,123 @@
+{
+  "id": "srd-lich",
+  "name": "Lich",
+  "type": "undead",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 21.0,
+  "ac": 17,
+  "hp": 135,
+  "hpFormula": "18d8+54",
+  "initiative": 3,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 16,
+    "dex": 16,
+    "int": 20,
+    "str": 11,
+    "wis": 14
+  },
+  "saves": {
+    "con": 10,
+    "int": 12,
+    "wis": 9
+  },
+  "skills": {
+    "arcana": 19,
+    "history": 12,
+    "insight": 9,
+    "perception": 9
+  },
+  "vulnerabilities": [],
+  "resistances": [
+    "cold",
+    "lightning",
+    "necrotic"
+  ],
+  "immunities": [
+    "poison; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "frightened",
+    "paralyzed",
+    "poisoned"
+  ],
+  "senses": {
+    "truesight": 120
+  },
+  "passivePerception": 19,
+  "languages": "Common plus up to five other languages",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Legendary Resistance (3/Day)",
+      "desc": "If the lich fails a saving throw, it can choose to succeed instead."
+    },
+    {
+      "name": "Rejuvenation",
+      "desc": "If it has a phylactery, a destroyed lich gains a new body in 1d10 days, regaining all its hit points and becoming active again. The new body appears within 5 feet of the phylactery."
+    },
+    {
+      "name": "Spellcasting",
+      "desc": "The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:\n\n* Cantrips (at will): mage hand, prestidigitation, ray of frost\n* 1st level (4 slots): detect magic, magic missile, shield, thunderwave\n* 2nd level (3 slots): detect thoughts, invisibility, acid arrow, mirror image\n* 3rd level (3 slots): animate dead, counterspell, dispel magic, fireball\n* 4th level (3 slots): blight, dimension door\n* 5th level (3 slots): cloudkill, scrying\n* 6th level (1 slot): disintegrate, globe of invulnerability\n* 7th level (1 slot): finger of death, plane shift\n* 8th level (1 slot): dominate monster, power word stun\n* 9th level (1 slot): power word kill"
+    },
+    {
+      "name": "Turn Resistance",
+      "desc": "The lich has advantage on saving throws against any effect that turns undead."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Paralyzing Touch",
+      "desc": "Melee Spell Attack: +12 to hit, reach 5 ft., one creature. Hit: 10 (3d6) cold damage. The target must succeed on a DC 18 Constitution saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 12,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "cold",
+          "dice": "3d6+0",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "legendary": {
+    "perRound": 3,
+    "actions": [
+      {
+        "name": "Cantrip",
+        "desc": "The lich casts a cantrip.",
+        "cost": 1
+      },
+      {
+        "name": "Paralyzing Touch (Costs 2 Actions)",
+        "desc": "The lich uses its Paralyzing Touch.",
+        "cost": 2
+      },
+      {
+        "name": "Frightening Gaze (Costs 2 Actions)",
+        "desc": "The lich fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a DC 18 Wisdom saving throw against this magic or become frightened for 1 minute. The frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the lich's gaze for the next 24 hours.",
+        "cost": 2
+      },
+      {
+        "name": "Disrupt Life (Costs 3 Actions)",
+        "desc": "Each non-undead creature within 20 feet of the lich must make a DC 18 Constitution saving throw against this magic, taking 21 (6d6) necrotic damage on a failed save, or half as much damage on a successful one.",
+        "cost": 3
+      }
+    ]
+  },
+  "image": "/img/monsters/undead/lich.png"
+}

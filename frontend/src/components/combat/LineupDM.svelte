@@ -5,11 +5,24 @@
      *
      * sheetOf(playerId) — { hp, maxHp, temp, ac } | null for a player's card
      * onPlayerHp(playerId, op, amount) — Hit Points of a player (sent to their app)
+     * onPlayerCondition(playerId, data) — a "condition" event for a player (game.js)
+     * conditionDefs — refs.conditions (for the Conditions dialog)
      */
-    import { combat, move, moveTo, remove, monsterHp, setTurn } from "../../combat.svelte.js";
+    import { combat, move, moveTo, remove, monsterHp, setTurn, nextTurn, monsterCondition } from "../../combat.svelte.js";
     import CombatantDM from "./CombatantDM.svelte";
+    import ConditionDialog from "../ConditionDialog.svelte";
 
-    let { sheetOf = () => null, onPlayerHp } = $props();
+    let { sheetOf = () => null, onPlayerHp, onPlayerCondition, conditionDefs = [] } = $props();
+
+    // the combatant whose Conditions dialog is open (its id — the entry itself may be replaced)
+    let condFor = $state(null);
+    const condC = $derived(combat.line.find((c) => c.id === condFor) ?? null);
+    const instancesOf = (c) => (c.kind === "monster" ? (c.effects ?? []) : (sheetOf(c.playerId)?.conditionInstances ?? []));
+
+    function onCondition(c, data) {
+        if (c.kind === "monster") return monsterCondition(c, data);
+        return onPlayerCondition?.(c.playerId, data);
+    }
 
     let dragFrom = $state(-1);
     let dragOver = $state(-1);
@@ -34,7 +47,10 @@
         <span class="meta">
             {combat.line.length} in order · {monsters.length} {monsters.length === 1 ? "monster" : "monsters"}{#if down}, {down} down{/if}
         </span>
-        <span class="hint">Order: ◀ ▶ or drag a card · whose turn: the circle on the icon</span>
+        <span class="round">Round <b>{combat.round}</b></span>
+        <button class="next" onclick={nextTurn} disabled={!combat.line.length}
+            title="End this turn (conditions tick: rounds, saves) and pass it on">Next turn ▶</button>
+        <span class="hint">Order: ◀ ▶ or drag a card · whose turn: the circle on the icon or “Next turn”</span>
     </header>
 
     <div class="line" role="list">
@@ -69,6 +85,7 @@
                     turn={combat.turn === c.id}
                     onTurn={() => setTurn(c.id)}
                     onHp={(op, n) => onHp(c, op, n)}
+                    onConditions={() => (condFor = c.id)}
                     onMove={(dir) => move(i, dir)}
                     onRemove={() => remove(i)}
                 />
@@ -78,6 +95,16 @@
         {/each}
     </div>
 </section>
+
+{#if condC}
+    <ConditionDialog
+        name={condC.name}
+        defs={conditionDefs}
+        current={instancesOf(condC)}
+        onApply={(data) => onCondition(condC, data)}
+        onClose={() => (condFor = null)}
+    />
+{/if}
 
 <style>
     .lineup {
@@ -117,6 +144,32 @@
 
     .hint {
         margin-left: auto;
+    }
+
+    .round {
+        font-family: var(--font-ui);
+        font-size: 13px;
+        color: var(--color-text-secondary);
+    }
+
+    .next {
+        padding: 4px 12px;
+        background: transparent;
+        border: 1px solid var(--color-gold);
+        border-radius: 6px;
+        color: var(--color-gold);
+        font-family: var(--font-ui);
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .next:hover:not(:disabled) {
+        background: color-mix(in srgb, var(--color-gold) 15%, transparent);
+    }
+
+    .next:disabled {
+        opacity: 0.4;
+        cursor: default;
     }
 
     /* left to right; long encounters scroll sideways */

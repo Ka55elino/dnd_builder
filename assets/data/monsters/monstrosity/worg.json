@@ -1,0 +1,65 @@
+{
+  "id": "srd-worg",
+  "name": "Worg",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 13,
+  "hp": 26,
+  "hpFormula": "4d10+4",
+  "initiative": 1,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 13,
+    "dex": 13,
+    "int": 7,
+    "str": 16,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Goblin, Worg",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Hearing and Smell",
+      "desc": "The worg has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+3",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/worg.png"
+}

@@ -6,6 +6,10 @@
   "pool": "arcaneShot",
   "level": 3,
   "action": "free",
+  "cost": {
+    "resource": "arcaneShot",
+    "amount": 1
+  },
   "desc": "+2d6 Necrotic damage; the target makes a Constitution saving throw, or the damage of its weapon attacks is halved until the start of your next turn.",
   "damage": {
     "dice": "2d6",

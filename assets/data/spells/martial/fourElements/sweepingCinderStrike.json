@@ -5,6 +5,10 @@
   "subclass": "fourElements",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 2
+  },
   "desc": "Costs 2 Focus Points. A 15-foot Cone of fire: 3d10 Fire damage to everyone in the area (Dexterity saving throw for half).",
   "damage": {
     "dice": "3d10",

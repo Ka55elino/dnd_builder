@@ -8,6 +8,12 @@
   "classes": [
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "A 5-foot column of moonlight: creatures make a Constitution saving throw or take Radiant damage; you can move the beam. Concentration.",
   "damage": {
     "dice": "2d10",

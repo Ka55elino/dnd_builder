@@ -1,0 +1,93 @@
+{
+  "id": "srd-green-dragon-wyrmling",
+  "name": "Green Dragon Wyrmling",
+  "type": "dragon",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 17,
+  "hp": 38,
+  "hpFormula": "7d8+7",
+  "initiative": 1,
+  "speed": {
+    "fly": 60,
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 13,
+    "con": 13,
+    "dex": 12,
+    "int": 14,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {
+    "cha": 3,
+    "con": 3,
+    "dex": 3,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 3
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Amphibious",
+      "desc": "The dragon can breathe air and water."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d10 + 2) piercing damage plus 3 (1d6) poison damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+1d6+3",
+          "avg": 11
+        }
+      ]
+    },
+    {
+      "name": "Poison Breath (Recharge 5-6)",
+      "desc": "The dragon exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 11 Constitution saving throw, taking 21 (6d6) poison damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "poison",
+          "dice": "6d6+0",
+          "avg": 21
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/green-dragon-wyrmling.png"
+}

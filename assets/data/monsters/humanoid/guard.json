@@ -1,0 +1,59 @@
+{
+  "id": "srd-guard",
+  "name": "Guard",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 16,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 12,
+    "dex": 12,
+    "int": 10,
+    "str": 13,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 12,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Spear",
+      "desc": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/guard.png"
+}

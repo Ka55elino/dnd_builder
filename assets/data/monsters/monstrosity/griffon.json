@@ -1,0 +1,86 @@
+{
+  "id": "srd-griffon",
+  "name": "Griffon",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 59,
+  "hpFormula": "7d10+21",
+  "initiative": 2,
+  "speed": {
+    "fly": 80,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 16,
+    "dex": 15,
+    "int": 2,
+    "str": 18,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "perception": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 15,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Sight",
+      "desc": "The griffon has advantage on Wisdom (Perception) checks that rely on sight."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The griffon makes two attacks: one with its beak and one with its claws."
+    },
+    {
+      "name": "Beak",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+4",
+          "avg": 8
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/griffon.png"
+}

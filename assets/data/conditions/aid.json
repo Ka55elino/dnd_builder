@@ -1,0 +1,14 @@
+{
+  "id": "aid",
+  "name": "Aid",
+  "category": "effect",
+  "spell": "aid",
+  "duration": "8 hours",
+  "modifiers": [
+    {
+      "kind": "hpMax",
+      "value": 5
+    }
+  ],
+  "desc": "Your Hit Point maximum and current Hit Points increase by 5 (more when upcast)."
+}

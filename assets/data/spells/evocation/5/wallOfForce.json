@@ -8,5 +8,8 @@
   "classes": [
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "An invisible, impenetrable wall of force for 10 minutes. Concentration."
 }

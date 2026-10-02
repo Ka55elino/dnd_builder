@@ -14,6 +14,7 @@
     import WhisperPopups from './components/WhisperPopups.svelte';
     import BestiaryPage from './components/bestiary/BestiaryPage.svelte';
     import HomebrewPage from './components/HomebrewPage.svelte';
+    import ConditionsPage from './components/ConditionsPage.svelte';
     import AppFooter from './components/AppFooter.svelte';
 
     /**
@@ -85,6 +86,8 @@
     <ItemsPage onBack={showMenu} />
 {:else if screen === 'bestiary'}
     <BestiaryPage onBack={showMenu} />
+{:else if screen === 'conditions'}
+    <ConditionsPage onBack={showMenu} />
 {:else if screen === 'homebrew'}
     <HomebrewPage onBack={showMenu} />
 {:else if screen === 'game'}

@@ -8,6 +8,9 @@
   "classes": [
     "sorcerer"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A mote of a random element (spell attack): 2d8 + 1d6; if both d8s show the same number, it leaps to a new target.",
   "damage": {
     "dice": "2d8",

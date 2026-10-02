@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1/4. HP 11, AC 13, Speed 40 ft. On a hit, a Medium or smaller target makes a Strength saving throw or is knocked Prone.",
   "damage": {
     "dice": "2d4",

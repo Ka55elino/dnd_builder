@@ -10,5 +10,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "Gravity reverses in a 50-foot Cylinder — everything falls upward. Concentration."
 }

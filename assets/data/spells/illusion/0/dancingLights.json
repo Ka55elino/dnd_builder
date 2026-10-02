@@ -10,5 +10,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You create up to 4 hovering lights (or a glowing humanoid form) within 120 feet. Concentration."
 }

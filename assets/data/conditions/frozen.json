@@ -1,0 +1,33 @@
+{
+  "id": "frozen",
+  "name": "Frozen",
+  "category": "effect",
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "saves",
+      "ability": "dex"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "note",
+      "note": "Vulnerability to Bludgeoning damage; Fire damage ends it"
+    }
+  ],
+  "desc": "Homebrew: you are encased in ice. Your Speed is 0, you have Disadvantage on attack rolls and Dexterity saving throws, and attack rolls against you have Advantage. You have Vulnerability to Bludgeoning damage; Fire damage ends the effect."
+}

@@ -12,5 +12,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "polymorph",
+    "target": "creature"
+  },
   "desc": "You transform a creature into a Beast (Wisdom saving throw). Concentration, up to 1 hour."
 }

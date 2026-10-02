@@ -8,6 +8,9 @@
   "classes": [
     "ranger"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "Your next ranged attack turns into lightning: 4d8 Lightning damage on a hit (half on a miss); everyone within 10 feet of the target takes 2d8 (Dexterity saving throw for half). Concentration, up to 1 minute.",
   "casting": {
     "time": "1 bonus action",

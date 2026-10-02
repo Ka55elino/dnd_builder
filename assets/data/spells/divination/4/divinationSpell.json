@@ -9,5 +9,8 @@
     "cleric",
     "wizard"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "You ask a deity about an event within the next 7 days and receive a truthful omen (ritual)."
 }

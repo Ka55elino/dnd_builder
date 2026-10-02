@@ -1,0 +1,14 @@
+{
+  "id": "etherealness",
+  "name": "Etherealness",
+  "category": "effect",
+  "spell": "etherealness",
+  "duration": "up to 8 hours",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you are on the Ethereal Plane: you can move through objects and only affect ethereal creatures"
+    }
+  ],
+  "desc": "You step into the Border Ethereal."
+}

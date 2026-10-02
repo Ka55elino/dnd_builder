@@ -8,6 +8,9 @@
   "classes": [
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A colossal storm: thunder, lightning, hail, and wind batter everyone beneath it round after round. Concentration.",
   "damage": {
     "dice": "2d6",

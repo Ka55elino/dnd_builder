@@ -13,6 +13,12 @@
  *                          def — for a custom item, its full record (image as a data URL):
  *                          the player's app saves it as its own custom record with the same
  *                          id (marked fromDM), so giving it again updates it, not duplicates
+ *   DM → player   "condition" { op: 'add', id, level?, rounds?, save?: { ability, dc }, def? }
+ *                          | { op: 'remove', id } | { op: 'level', id, level }
+ *                          | { op: 'tick' }            — the player's turn just ended (rounds, saves)
+ *                          | { op: 'save', id, success } — the DM settled a pending save
+ *                          the player's app changes its CharacterState (rules/conditions.js);
+ *                          def — a custom condition's definition (the player may not have it)
  *   DM → all      "encounter" { active, name, line: [{ id, kind, name, image, type, playerId }] }
  *                          the initiative line (names, icons, order — no HP), see combat.svelte.js
  *   player → DM   "state"  { state: CharacterState JSON, summary }
@@ -26,12 +32,14 @@
 import { SendGameEvent, GetCharacter, SaveCharacter } from './api.js';
 import { loadRefs, saveCustomEquipment } from './data/refs.js';
 import { CharacterBuild } from './models/CharacterBuild.svelte.js';
+import { inlineDef, breaksConcentration, conditionDefinition } from './rules/modifiers.js';
 
 export const EV = {
     HP: 'hp',
     STATE: 'state',
     WHISPER: 'whisper',
     GIVE: 'give',
+    CONDITION: 'condition',
 };
 
 /** catalog list for an item kind (refs.catalog) */
@@ -105,6 +113,65 @@ export const HP_OPS = ['damage', 'heal', 'temp'];
 /** DM: ask a player's app to change Hit Points. */
 export function sendHp(playerId, op, amount) {
     return SendGameEvent(EV.HP, playerId, JSON.stringify({ op, amount }));
+}
+
+/**
+ * DM: put a condition on a player / change it / take it off (see "condition" above).
+ * defs — the DM's condition definitions: a custom one travels with its definition.
+ */
+export function sendCondition(playerId, data, defs = []) {
+    return SendGameEvent(EV.CONDITION, playerId, JSON.stringify(withConditionDef(data, defs)));
+}
+
+/** { op: 'add', id } for a custom condition → with def (the other app may not have it). */
+export function withConditionDef(data, defs = []) {
+    if (data?.op !== 'add') return data;
+    const rec = defs.find((d) => d.id === data.id);
+    return rec?.data?.custom ? { ...data, def: conditionDefinition(rec) } : data;
+}
+
+/**
+ * Player: applies a "condition" event to a CharacterState (same rules as the Status grid).
+ * defs — the character's condition definitions (Character.conditionDefs). Returns true if applied.
+ * by — who put it on ('DM' for events; null when the player does it on their own sheet)
+ */
+export function applyCondition(state, character, data, by = 'DM') {
+    if (!state || !data) return false;
+    const id = typeof data.id === 'string' ? data.id : '';
+    const defs = character?.conditionDefs ?? [];
+    switch (data.op) {
+        case 'add': {
+            if (!id) return false;
+            const def = data.def && data.def.id === id ? data.def : undefined;
+            const all = def && !defs.some((d) => d.id === id) ? [...defs, inlineDef(def)] : defs;
+            if (!all.some((d) => d.id === id)) return false; // unknown and no definition sent
+            state.addCondition(id, {
+                breaks: breaksConcentration(id, all),
+                level: data.level ?? undefined,
+                rounds: data.rounds ?? null,
+                save: data.save ?? null,
+                by: by ?? undefined,
+                def,
+                choice: data.choice ?? undefined,
+            });
+            return true;
+        }
+        case 'remove':
+            state.removeCondition(id);
+            return true;
+        case 'level': {
+            const max = Number(defs.find((d) => d.id === id)?.data?.levels) || 6;
+            state.setConditionLevel(id, data.level, max);
+            return true;
+        }
+        case 'tick':
+            state.endOfTurn();
+            return true;
+        case 'save':
+            state.resolveSave(id, !!data.success);
+            return true;
+    }
+    return false;
 }
 
 /** DM: whisper a private message to one player. */

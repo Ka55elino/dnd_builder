@@ -1,0 +1,89 @@
+{
+  "id": "srd-minotaur",
+  "name": "Minotaur",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 14,
+  "hp": 76,
+  "hpFormula": "9d10+27",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 9,
+    "con": 16,
+    "dex": 11,
+    "int": 6,
+    "str": 18,
+    "wis": 16
+  },
+  "saves": {},
+  "skills": {
+    "perception": 7
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 17,
+  "languages": "Abyssal",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the minotaur moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 ft. away and knocked prone."
+    },
+    {
+      "name": "Labyrinthine Recall",
+      "desc": "The minotaur can perfectly recall any path it has traveled."
+    },
+    {
+      "name": "Reckless",
+      "desc": "At the start of its turn, the minotaur can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Greataxe",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d12+4",
+          "avg": 17
+        }
+      ]
+    },
+    {
+      "name": "Gore",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/minotaur.png"
+}

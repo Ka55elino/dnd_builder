@@ -12,6 +12,9 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d8"
+  },
   "desc": "You wither a creature: Constitution saving throw, heavy Necrotic damage.",
   "damage": {
     "dice": "8d8",

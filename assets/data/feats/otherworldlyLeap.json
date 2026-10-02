@@ -3,5 +3,13 @@
   "name": "Otherworldly Leap",
   "category": "invocation",
   "level": 5,
-  "desc": "You can cast Jump on yourself at will, without a spell slot."
+  "desc": "You can cast Jump on yourself at will, without a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "jump",
+      "atWill": true,
+      "note": "on yourself only"
+    }
+  ]
 }

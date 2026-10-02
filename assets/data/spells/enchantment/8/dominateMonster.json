@@ -11,5 +11,17 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "at": {
+      "9": "Concentration up to 8 hours"
+    }
+  },
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "Any creature (Wisdom saving throw) falls under your control. Concentration."
 }

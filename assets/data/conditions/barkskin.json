@@ -1,0 +1,15 @@
+{
+  "id": "barkskin",
+  "name": "Barkskin",
+  "category": "effect",
+  "spell": "barkskin",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "ac",
+      "op": "min",
+      "value": 16
+    }
+  ],
+  "desc": "Your AC can't be lower than 16."
+}

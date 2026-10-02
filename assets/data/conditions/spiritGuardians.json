@@ -1,0 +1,14 @@
+{
+  "id": "spiritGuardians",
+  "name": "Spirit Guardians",
+  "category": "effect",
+  "spell": "spiritGuardians",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "enemies within 15 feet: Difficult Terrain; Wisdom save or Radiant/Necrotic damage (half on a success)"
+    }
+  ],
+  "desc": "Spirits protect you in a 15-foot Emanation."
+}

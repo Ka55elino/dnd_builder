@@ -9,6 +9,9 @@
     "bard",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A spectral sword attacks at your command, dealing Force damage. Concentration.",
   "damage": {
     "dice": "3d10",

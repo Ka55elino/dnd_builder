@@ -9,5 +9,8 @@
     "bard",
     "wizard"
   ],
+  "casting": {
+    "ritual": true
+  },
   "desc": "A 10-foot dome protects up to 9 creatures from weather and damage from outside for 8 hours (ritual)."
 }

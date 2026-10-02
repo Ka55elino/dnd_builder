@@ -5,5 +5,9 @@
   "subclass": "battleMaster",
   "level": 7,
   "action": "bonus",
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "As a Bonus Action (expending a Superiority Die), you study a creature: you learn its Immunities, Resistances, and Vulnerabilities, or how its Hit Points compare to yours."
 }

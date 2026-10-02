@@ -7,6 +7,15 @@
     "paladin"
   ],
   "action": "bonus",
+  "cost": {
+    "slot": {
+      "min": 1
+    }
+  },
+  "upcast": {
+    "damage": "1d8",
+    "maxSteps": 3
+  },
   "desc": "When you hit with a melee attack, you expend a spell slot: an extra 2d8 Radiant damage, +1d8 for each slot level above 1 (max 5d8), and another +1d8 against Undead and Fiends.",
   "damage": {
     "dice": "2d8",

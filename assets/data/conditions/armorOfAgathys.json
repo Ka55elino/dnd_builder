@@ -1,0 +1,14 @@
+{
+  "id": "armorOfAgathys",
+  "name": "Armor of Agathys",
+  "category": "effect",
+  "spell": "armorOfAgathys",
+  "duration": "1 hour, or until the Temporary Hit Points run out",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "a creature that hits you with a melee attack takes 5 Cold damage (more when upcast)"
+    }
+  ],
+  "desc": "Spectral frost covers you: Temporary Hit Points, and melee attackers take Cold damage."
+}

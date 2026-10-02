@@ -1,0 +1,72 @@
+{
+  "id": "srd-octopus",
+  "name": "Octopus",
+  "type": "beast",
+  "size": "small",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 12,
+  "hp": 3,
+  "hpFormula": "1d6",
+  "initiative": 2,
+  "speed": {
+    "swim": 30,
+    "walk": 5
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 11,
+    "dex": 15,
+    "int": 3,
+    "str": 4,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2,
+    "stealth": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 12,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Hold Breath",
+      "desc": "While out of water, the octopus can hold its breath for 30 minutes."
+    },
+    {
+      "name": "Underwater Camouflage",
+      "desc": "The octopus has advantage on Dexterity (Stealth) checks made while underwater."
+    },
+    {
+      "name": "Water Breathing",
+      "desc": "The octopus can breathe only underwater."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Tentacles",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 1 bludgeoning damage, and the target is grappled (escape DC 10). Until this grapple ends, the octopus can't use its tentacles on another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      }
+    },
+    {
+      "name": "Ink Cloud (Recharges after a Short or Long Rest)",
+      "desc": "A 5-foot-radius cloud of ink extends all around the octopus if it is underwater. The area is heavily obscured for 1 minute, although a significant current can disperse the ink. After releasing the ink, the octopus can use the Dash action as a bonus action."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/octopus.png"
+}

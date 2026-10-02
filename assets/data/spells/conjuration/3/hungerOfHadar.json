@@ -8,6 +8,12 @@
   "classes": [
     "warlock"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A 20-foot area of void: a blind zone, Cold damage at the start of turns, and Piercing damage when leaving it. Concentration.",
   "damage": {
     "dice": "2d6",

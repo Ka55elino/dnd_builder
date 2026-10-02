@@ -11,5 +11,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "foresight",
+    "target": "creature"
+  },
   "desc": "For 8 hours, the target has Advantage on everything and can't be Surprised; attack rolls against it have Disadvantage."
 }

@@ -1,0 +1,9 @@
+{
+  "id": "carpentersTools",
+  "name": "Carpenter's Tools",
+  "image": "/img/items/carpentersTools.png",
+  "isDefault": true,
+  "weight": 6.0,
+  "cost": "8 GP",
+  "desc": "Ability: Strength Weight: 6 lb. Utilize: Seal or pry open a door or container (DC 20) Craft: Club, Greatclub, Quarterstaff, Barrel, Chest, Ladder, Pole, Portable Ram, Torch"
+}

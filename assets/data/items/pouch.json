@@ -1,0 +1,9 @@
+{
+  "id": "pouch",
+  "name": "Pouch",
+  "image": "/img/items/pouch.png",
+  "isDefault": true,
+  "weight": 1.0,
+  "cost": "5 SP",
+  "desc": "A Pouch holds up to 6 pounds within one-fifth of a cubic foot."
+}

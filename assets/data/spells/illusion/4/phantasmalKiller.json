@@ -9,6 +9,16 @@
     "bard",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d10"
+  },
+  "apply": {
+    "condition": "frightened",
+    "target": "enemy"
+  },
   "desc": "An illusion of fear torments the target (Wisdom saving throw): Psychic damage each turn. Concentration.",
   "damage": {
     "dice": "4d10",

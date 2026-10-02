@@ -1,0 +1,92 @@
+{
+  "id": "srd-roper",
+  "name": "Roper",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 20,
+  "hp": 93,
+  "hpFormula": "11d10+33",
+  "initiative": -1,
+  "speed": {
+    "climb": 10,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 17,
+    "dex": 8,
+    "int": 7,
+    "str": 18,
+    "wis": 16
+  },
+  "saves": {},
+  "skills": {
+    "perception": 6,
+    "stealth": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 16,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "False Appearance",
+      "desc": "While the roper remains motionless, it is indistinguishable from a normal cave formation, such as a stalagmite."
+    },
+    {
+      "name": "Grasping Tendrils",
+      "desc": "The roper can have up to six tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to the roper, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it."
+    },
+    {
+      "name": "Spider Climb",
+      "desc": "The roper can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The roper makes four attacks with its tendrils, uses Reel, and makes one attack with its bite."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 22 (4d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "4d8+4",
+          "avg": 22
+        }
+      ]
+    },
+    {
+      "name": "Tendril",
+      "desc": "Melee Weapon Attack: +7 to hit, reach 50 ft., one creature. Hit: The target is grappled (escape DC 15). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the roper can't use the same tendril on another target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 7,
+        "reach": 50
+      }
+    },
+    {
+      "name": "Reel",
+      "desc": "The roper pulls each creature grappled by it up to 25 ft. straight toward it."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/roper.png"
+}

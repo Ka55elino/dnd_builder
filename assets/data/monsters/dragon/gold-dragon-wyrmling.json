@@ -1,0 +1,91 @@
+{
+  "id": "srd-gold-dragon-wyrmling",
+  "name": "Gold Dragon Wyrmling",
+  "type": "dragon",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 17,
+  "hp": 60,
+  "hpFormula": "8d8+24",
+  "initiative": 2,
+  "speed": {
+    "fly": 60,
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 17,
+    "dex": 14,
+    "int": 14,
+    "str": 19,
+    "wis": 11
+  },
+  "saves": {
+    "cha": 5,
+    "con": 5,
+    "dex": 4,
+    "wis": 2
+  },
+  "skills": {
+    "perception": 4,
+    "stealth": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "fire"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10,
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "Draconic",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Amphibious",
+      "desc": "The dragon can breathe air and water."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (1d10 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+4",
+          "avg": 9
+        }
+      ]
+    },
+    {
+      "name": "Breath Weapons (Recharge 5-6)",
+      "desc": "The dragon uses one of the following breath weapons.\n**Fire Breath.** The dragon exhales fire in a 15-foot cone. Each creature in that area must make a DC 13 Dexterity saving throw, taking 22 (4d10) fire damage on a failed save, or half as much damage on a successful one.\n**Weakening Breath.** The dragon exhales gas in a 15-foot cone. Each creature in that area must succeed on a DC 13 Strength saving throw or have disadvantage on Strength-based attack rolls, Strength checks, and Strength saving throws for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "4d10+0",
+          "avg": 22
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/dragon/gold-dragon-wyrmling.png"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "blockAndTackle",
+  "name": "Block and Tackle",
+  "image": "/img/items/blockAndTackle.png",
+  "isDefault": true,
+  "weight": 5.0,
+  "cost": "1 GP",
+  "desc": "A Block and Tackle allows you to hoist up to four times the weight you can normally lift."
+}

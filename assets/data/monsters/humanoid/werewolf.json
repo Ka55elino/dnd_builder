@@ -1,0 +1,108 @@
+{
+  "id": "srd-werewolf",
+  "name": "Werewolf",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 11,
+  "hp": 58,
+  "hpFormula": "9d8+18",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 10,
+    "con": 14,
+    "dex": 13,
+    "int": 10,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with silvered weapons"
+  ],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 14,
+  "languages": "Common (can't speak in wolf form)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Shapechanger",
+      "desc": "The werewolf can use its action to polymorph into a wolf-humanoid hybrid or into a wolf, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    },
+    {
+      "name": "Keen Hearing and Smell",
+      "desc": "The werewolf has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack (Humanoid or Hybrid Form Only)",
+      "desc": "The werewolf makes two attacks: two with its spear (humanoid form) or one with its bite and one with its claws (hybrid form)."
+    },
+    {
+      "name": "Bite (Wolf or Hybrid Form Only)",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with werewolf lycanthropy.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+2",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Claws (Hybrid Form Only)",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (2d4 + 2) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d4+2",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Spear (Humanoid Form Only)",
+      "desc": "Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6-2",
+          "avg": 1
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/werewolf.png"
+}

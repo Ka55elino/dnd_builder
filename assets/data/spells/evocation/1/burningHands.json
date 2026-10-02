@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "A 15-foot Cone of fire: Dexterity saving throw for half damage.",
   "damage": {
     "dice": "3d6",

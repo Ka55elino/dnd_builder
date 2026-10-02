@@ -7,5 +7,12 @@
     "cleric"
   ],
   "action": "action",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Cost: 1 use of Channel Divinity. Undead within 30 feet make a Wisdom saving throw (DC {saveDc}) or are Turned for 1 minute (spending their turns fleeing). Starting at level 5 (Sear Undead), turned creatures take {searUndead} Radiant damage."
 }

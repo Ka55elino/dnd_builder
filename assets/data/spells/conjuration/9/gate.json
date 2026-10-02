@@ -10,5 +10,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "You open a portal to another plane and can summon a creature from it. Concentration."
 }

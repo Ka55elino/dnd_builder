@@ -1,0 +1,24 @@
+{
+  "id": "frightened",
+  "name": "Frightened",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "checks",
+      "note": "while the source is in sight"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks",
+      "note": "while the source is in sight"
+    },
+    {
+      "kind": "note",
+      "note": "can't willingly move closer to the source"
+    }
+  ],
+  "desc": "You have Disadvantage on ability checks and attack rolls while the source of fear is within line of sight, and you can't willingly move closer to it."
+}

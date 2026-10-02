@@ -1,0 +1,64 @@
+{
+  "id": "srd-acolyte",
+  "name": "Acolyte",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 10,
+  "hp": 9,
+  "hpFormula": "2d8",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 11,
+    "con": 10,
+    "dex": 10,
+    "int": 10,
+    "str": 10,
+    "wis": 14
+  },
+  "saves": {},
+  "skills": {
+    "medicine": 4,
+    "religion": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 12,
+  "languages": "any one language (usually Common)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Spellcasting",
+      "desc": "The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:\n\n* Cantrips (at will): light, sacred flame, thaumaturgy\n* 1st level (3 slots): bless, cure wounds, sanctuary"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Club",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d4+0",
+          "avg": 2
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/acolyte.png"
+}

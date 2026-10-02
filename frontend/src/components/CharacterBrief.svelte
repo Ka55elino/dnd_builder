@@ -17,6 +17,8 @@
      * onHp(op, amount) — show an amount input + Damage / Heal / Temp HP buttons.
      * onWhisper(text) — show a "whisper" button: a dialog to send the player a private message.
      * onGive(kind, item) — show a "give item" button: a dialog with the named items of the catalog.
+     * onCondition(data) — show a "conditions" button: a dialog to put conditions on / take them off
+     *   (data — a "condition" event, see game.js); the current ones come from the summary.
      */
     import { GetCharacter, GetCharacterState } from "../api.js";
     import { loadRefs, EMPTY_REFS } from "../data/refs.js";
@@ -28,11 +30,13 @@
     import Icon from "./common/Icon.svelte";
     import WhisperDialog from "./WhisperDialog.svelte";
     import GiveItemDialog from "./GiveItemDialog.svelte";
+    import ConditionDialog from "./ConditionDialog.svelte";
 
-    let { id = null, build: buildData = null, state: stateData = null, summary = null, fallback = null, note = "Character sheet unavailable", onHp = null, onWhisper = null, onGive = null } = $props();
+    let { id = null, build: buildData = null, state: stateData = null, summary = null, fallback = null, note = "Character sheet unavailable", onHp = null, onWhisper = null, onGive = null, onCondition = null } = $props();
 
     let whisperOpen = $state(false);
     let giveOpen = $state(false);
+    let condOpen = $state(false);
 
     // Hit Points controls (shown when onHp is passed, e.g. the DM's card):
     // onHp(op, amount) — op: 'damage' | 'heal' | 'temp'; may return a promise
@@ -97,7 +101,7 @@
         if (!build || ref === EMPTY_REFS) return { ch: null, err: null };
         if (!build.classId) return { ch: null, err: "no class" };
         try {
-            return { ch: new Character(build, ref, state.equipped ?? null, state.bagAdjust ?? null), err: null };
+            return { ch: new Character(build, ref, state.equipped ?? null, state.bagAdjust ?? null, state.effects ?? null), err: null };
         } catch (e) {
             console.warn("[brief]", e);
             return { ch: null, err: e?.message ?? String(e) };
@@ -195,7 +199,7 @@
             <div class="bar" role="meter" aria-valuenow={hp} aria-valuemin="0" aria-valuemax={maxHp} aria-label="Hit Points">
                 <span class="fill" style:width="{hpPct}%"></span>
             </div>
-            {#if onHp || onWhisper || onGive}
+            {#if onHp || onWhisper || onGive || onCondition}
                 <div class="dm-ctl">
                 {#if onHp}
                     <div class="hp-ctl" class:busy={hpBusy}>
@@ -224,6 +228,16 @@
                         aria-label="Whisper to {displayName}"
                     >
                         <Icon name="whisper" label="Whisper" short="…" native={false} />
+                    </button>
+                {/if}
+                {#if onCondition}
+                    <button
+                        class="side-btn cond-btn"
+                        onclick={() => (condOpen = true)}
+                        title="Conditions of {displayName}"
+                        aria-label="Conditions of {displayName}"
+                    >
+                        <Icon name="conditions" label="Conditions" short="◎" native={false} />
                     </button>
                 {/if}
                 {#if onGive}
@@ -334,6 +348,16 @@
         {/if}
     {/if}
 </article>
+
+{#if condOpen && onCondition}
+    <ConditionDialog
+        name={displayName}
+        defs={ref.conditions ?? []}
+        current={v?.conditionInstances ?? []}
+        onApply={onCondition}
+        onClose={() => (condOpen = false)}
+    />
+{/if}
 
 {#if giveOpen && onGive}
     <GiveItemDialog to={displayName} {onGive} onClose={() => (giveOpen = false)} />
@@ -608,6 +632,11 @@
     .give-btn {
         --c: var(--color-gold);
         --c-border: var(--color-gold);
+    }
+
+    .cond-btn {
+        --c: var(--color-danger);
+        --c-border: var(--color-danger);
     }
 
     .hp-btn:disabled {

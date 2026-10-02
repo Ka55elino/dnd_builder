@@ -1,0 +1,9 @@
+{
+  "id": "disguiseKit",
+  "name": "Disguise Kit",
+  "image": "/img/items/disguiseKit.png",
+  "isDefault": true,
+  "weight": 3.0,
+  "cost": "25 GP",
+  "desc": "Ability: Charisma Weight: 3 lb. Utilize: Apply makeup (DC 10) Craft: Costume"
+}

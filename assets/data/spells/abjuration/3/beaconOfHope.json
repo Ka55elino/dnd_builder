@@ -8,5 +8,12 @@
   "classes": [
     "cleric"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "beaconOfHope",
+    "target": "creature"
+  },
   "desc": "Chosen creatures: Advantage on Wisdom saving throws and Death Saving Throws, and they regain the maximum number of Hit Points from healing. Concentration."
 }

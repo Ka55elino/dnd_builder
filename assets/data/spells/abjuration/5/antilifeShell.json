@@ -9,5 +9,12 @@
     "cleric",
     "druid"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "antilifeShell",
+    "target": "self"
+  },
   "desc": "A 10-foot barrier keeps out living creatures. Concentration."
 }

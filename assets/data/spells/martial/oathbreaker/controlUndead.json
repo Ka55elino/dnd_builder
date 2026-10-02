@@ -5,5 +5,12 @@
   "subclass": "oathbreaker",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": [
+      "channelDivinity",
+      "channelDivinityPaladin"
+    ],
+    "amount": 1
+  },
   "desc": "Costs 1 use of Channel Divinity. Undead with a CR no higher than your level within 30 feet must succeed on a Charisma saving throw or obey you for 24 hours."
 }

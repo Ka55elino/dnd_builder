@@ -8,6 +8,16 @@
   "classes": [
     "paladin"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
+  "apply": {
+    "condition": "searingSmite",
+    "target": "enemy"
+  },
   "desc": "As a Bonus Action: your next weapon hit sets the target ablaze, dealing an extra 1d6 Fire damage and 1d6 at the start of each of its turns (Constitution saving throw to extinguish the flames). Concentration.",
   "damage": {
     "dice": "1d6",

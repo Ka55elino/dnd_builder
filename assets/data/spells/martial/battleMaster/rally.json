@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "As a Bonus Action, an ally gains Temporary Hit Points equal to a Superiority Die + the modifier of your chosen ability.",
   "action": "bonus",
   "pool": "maneuver"

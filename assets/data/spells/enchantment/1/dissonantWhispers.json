@@ -8,6 +8,9 @@
   "classes": [
     "bard"
   ],
+  "upcast": {
+    "damage": "1d6"
+  },
   "desc": "You whisper pain into the target's mind (Wisdom saving throw): Psychic damage; on a failed save, it uses its Reaction to flee.",
   "damage": {
     "dice": "3d6",

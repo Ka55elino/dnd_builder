@@ -7,6 +7,10 @@
     "druid"
   ],
   "action": "action",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "CR 1/8. HP 7, AC 12, Speed 30 ft. Pack Tactics (Advantage if an ally is next to the target).",
   "damage": {
     "dice": "1d4",

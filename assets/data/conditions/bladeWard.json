@@ -1,0 +1,22 @@
+{
+  "id": "bladeWard",
+  "name": "Blade Ward",
+  "category": "effect",
+  "spell": "bladeWard",
+  "duration": "until the end of your next turn",
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "bludgeoning"
+    },
+    {
+      "kind": "resistance",
+      "value": "piercing"
+    },
+    {
+      "kind": "resistance",
+      "value": "slashing"
+    }
+  ],
+  "desc": "Resistance to Bludgeoning, Piercing, and Slashing damage."
+}

@@ -1,0 +1,98 @@
+{
+  "id": "srd-deva",
+  "name": "Deva",
+  "type": "celestial",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 10.0,
+  "ac": 17,
+  "hp": 136,
+  "hpFormula": "16d8+64",
+  "initiative": 4,
+  "speed": {
+    "fly": 90,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 20,
+    "con": 18,
+    "dex": 18,
+    "int": 17,
+    "str": 18,
+    "wis": 20
+  },
+  "saves": {
+    "cha": 9,
+    "wis": 9
+  },
+  "skills": {
+    "insight": 9,
+    "perception": 9
+  },
+  "vulnerabilities": [],
+  "resistances": [
+    "radiant; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "charmed",
+    "exhaustion",
+    "frightened"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 19,
+  "languages": "all, telepathy 120 ft.",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Angelic Weapons",
+      "desc": "The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an extra 4d8 radiant damage (included in the attack)."
+    },
+    {
+      "name": "Innate Spellcasting",
+      "desc": "The deva's spellcasting ability is Charisma (spell save DC 17). The deva can innately cast the following spells, requiring only verbal components:\nAt will: detect evil and good\n1/day each: commune, raise dead"
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "The deva has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The deva makes two melee attacks."
+    },
+    {
+      "name": "Mace",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) bludgeoning damage plus 18 (4d8) radiant damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "1d6+4d8+4",
+          "avg": 25
+        }
+      ]
+    },
+    {
+      "name": "Healing Touch (3/Day)",
+      "desc": "The deva touches another creature. The target magically regains 20 (4d8 + 2) hit points and is freed from any curse, disease, poison, blindness, or deafness."
+    },
+    {
+      "name": "Change Shape",
+      "desc": "The deva magically polymorphs into a humanoid or beast that has a challenge rating equal to or less than its own, or back into its true form. It reverts to its true form if it dies. Any equipment it is wearing or carrying is absorbed or borne by the new form (the deva's choice).\nIn a new form, the deva retains its game statistics and ability to speak, but its AC, movement modes, Strength, Dexterity, and special senses are replaced by those of the new form, and it gains any statistics and capabilities (except class features, legendary actions, and lair actions) that the new form has but that it lacks."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/celestial/srd-deva.png"
+}

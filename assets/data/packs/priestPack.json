@@ -28,11 +28,13 @@
       "qty": 7
     },
     {
-      "id": "robe",
-      "qty": 1
-    },
-    {
       "id": "tinderbox",
+      "qty": 1
+    }
+  ],
+  "armor": [
+    {
+      "id": "robe",
       "qty": 1
     }
   ]

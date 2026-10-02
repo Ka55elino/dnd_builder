@@ -1,0 +1,9 @@
+{
+  "id": "cartographersTools",
+  "name": "Cartographer's Tools",
+  "image": "/img/items/cartographersTools.png",
+  "isDefault": true,
+  "weight": 6.0,
+  "cost": "15 GP",
+  "desc": "Ability: Wisdom Weight: 6 lb. Utilize: Draft a map of a small area (DC 15) Craft: Map"
+}

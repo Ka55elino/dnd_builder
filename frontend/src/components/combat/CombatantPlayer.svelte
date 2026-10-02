@@ -3,7 +3,7 @@
      * One combatant in the player's initiative line: order number, icon, name.
      * No Hit Points or stats — that's for the DM.
      *
-     * c   — { id, kind, name, image, type, playerId } (what the DM shares)
+     * c   — { id, kind, name, image, type, playerId, conditions } (what the DM shares)
      * n   — its place in the line (1-based)
      * me  — this is the player's own character
      * turn — it's this combatant's turn (set by the DM; shown as a check on the icon)
@@ -25,9 +25,29 @@
         {#if turn}<span class="turn-mark" aria-label="Their turn">✓</span>{/if}
     </div>
     <span class="name">{c.name}{#if me}<small> (you)</small>{/if}</span>
+    {#if c.conditions?.length}
+        <span class="conds">{#each c.conditions as x (x)}<span class="cchip">{x}</span>{/each}</span>
+    {/if}
 </div>
 
 <style>
+    .conds {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3px;
+    }
+
+    .cchip {
+        padding: 0 5px;
+        border: 1px solid var(--color-danger);
+        border-radius: 999px;
+        font-size: 10px;
+        line-height: 15px;
+        color: var(--color-text-primary);
+        background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+    }
+
     .cmb {
         position: relative;
         width: 112px;

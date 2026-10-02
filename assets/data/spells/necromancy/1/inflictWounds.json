@@ -8,6 +8,9 @@
   "classes": [
     "cleric"
   ],
+  "upcast": {
+    "damage": "1d10"
+  },
   "desc": "Melee spell attack by touch: heavy Necrotic damage.",
   "damage": {
     "dice": "3d10",

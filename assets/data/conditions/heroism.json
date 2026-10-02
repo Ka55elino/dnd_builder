@@ -1,0 +1,18 @@
+{
+  "id": "heroism",
+  "name": "Heroism",
+  "category": "effect",
+  "spell": "heroism",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "immunity",
+      "value": "frightened"
+    },
+    {
+      "kind": "note",
+      "note": "Temporary Hit Points equal to the caster's spellcasting modifier at the start of each of your turns"
+    }
+  ],
+  "desc": "Immune to the Frightened condition; Temporary Hit Points every turn."
+}

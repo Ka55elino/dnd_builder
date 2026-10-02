@@ -1,0 +1,41 @@
+{
+  "id": "petrified",
+  "name": "Petrified",
+  "category": "condition",
+  "implies": [
+    "incapacitated"
+  ],
+  "modifiers": [
+    {
+      "kind": "speed",
+      "op": "set",
+      "value": 0
+    },
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "autoFail",
+      "on": "saves",
+      "ability": "dex"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "resistance",
+      "value": "all"
+    },
+    {
+      "kind": "immunity",
+      "value": "poisoned"
+    }
+  ],
+  "desc": "You are transformed into a solid inanimate substance: Incapacitated, Speed 0, automatically fail Strength and Dexterity saves, attacks against you have Advantage, Resistance to all damage, and Immunity to the Poisoned condition."
+}

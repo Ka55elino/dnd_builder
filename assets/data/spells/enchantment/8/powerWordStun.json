@@ -11,5 +11,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "stunned",
+    "target": "enemy"
+  },
   "desc": "A creature with 150 Hit Points or fewer is Stunned, with no saving throw."
 }

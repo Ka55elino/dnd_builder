@@ -7,7 +7,8 @@
  *     "appVersion": "0.3.2", "exportedAt": "2026-09-28T12:00:00Z",
  *     "equipment": [{ "kind": "weapon" | "armor" | "item", "def": { … } }],
  *     "spells":    [{ … }],
- *     "monsters":  [{ … }]
+ *     "monsters":  [{ … }],
+ *     "conditions": [{ … }]        — assets/data/conditions format (older files have none)
  *   }
  *
  * Every def is in assets/data format (what SaveCustom* takes), pictures as data URLs.
@@ -18,7 +19,16 @@
  *   builtin — the id is a built-in record here → never touched.
  */
 import { NetStatus, SaveTextFile, OpenTextFile } from './api.js';
-import { loadRefs, refreshEquipment, refreshSpells, saveCustomEquipment, saveCustomSpell } from './data/refs.js';
+import {
+    loadRefs,
+    refreshEquipment,
+    refreshSpells,
+    refreshConditions,
+    saveCustomEquipment,
+    saveCustomSpell,
+    saveCustomCondition,
+} from './data/refs.js';
+import { conditionDefinition } from './rules/modifiers.js';
 import { loadMonsters, saveMonster } from './data/bestiary.js';
 import { imageData, itemDefinition } from './game.js';
 
@@ -28,7 +38,7 @@ export const HOMEBREW_FORMAT_VERSION = 1;
 /** Equipment kind → catalog list. */
 export const EQUIPMENT_KINDS = { weapon: 'weapons', armor: 'armor', item: 'items' };
 
-export const GROUPS = ['equipment', 'spells', 'monsters'];
+export const GROUPS = ['equipment', 'spells', 'monsters', 'conditions'];
 
 const isCustom = (r) => !!r?.data?.custom;
 
@@ -77,7 +87,7 @@ export async function equipmentDefinition(x) {
 
 /**
  * The custom records in this app, for the export list:
- * { equipment: [{ kind, record }], spells: [record], monsters: [record] }
+ * { equipment: [{ kind, record }], spells: [record], monsters: [record], conditions: [record] }
  */
 export async function localHomebrew() {
     const [refs, monsters] = await Promise.all([loadRefs(), loadMonsters()]);
@@ -89,6 +99,7 @@ export async function localHomebrew() {
         equipment,
         spells: (refs.spells ?? []).filter(isCustom),
         monsters: (monsters ?? []).filter(isCustom),
+        conditions: (refs.conditions ?? []).filter(isCustom),
     };
 }
 
@@ -109,16 +120,19 @@ export async function homebrewFile(ids = null) {
         equipment: [],
         spells: [],
         monsters: [],
+        conditions: [],
     };
     for (const { kind, record } of local.equipment) {
         if (want(record)) file.equipment.push({ kind, def: await equipmentDefinition(record) });
     }
     for (const sp of local.spells) if (want(sp)) file.spells.push(spellDefinition(sp));
     for (const m of local.monsters) if (want(m)) file.monsters.push(await monsterDefinition(m));
+    for (const c of local.conditions) if (want(c)) file.conditions.push(conditionDefinition(c));
     return file;
 }
 
-export const homebrewCount = (f) => (f?.equipment?.length ?? 0) + (f?.spells?.length ?? 0) + (f?.monsters?.length ?? 0);
+export const homebrewCount = (f) =>
+    (f?.equipment?.length ?? 0) + (f?.spells?.length ?? 0) + (f?.monsters?.length ?? 0) + (f?.conditions?.length ?? 0);
 
 /** Export: ask where to save, write the file. Returns { path, count }; path "" — cancelled. */
 export async function exportHomebrew(ids = null) {
@@ -154,8 +168,9 @@ export function parseHomebrewFile(text) {
         equipment: list(f.equipment).filter((e) => EQUIPMENT_KINDS[e?.kind] && ok(e.def)),
         spells: list(f.spells).filter(ok),
         monsters: list(f.monsters).filter(ok),
+        conditions: list(f.conditions).filter(ok),
     };
-    if (!homebrewCount(out)) throw new Error('The file has no items, spells or monsters in it.');
+    if (!homebrewCount(out)) throw new Error('The file has no items, spells, monsters or conditions in it.');
     return out;
 }
 
@@ -203,6 +218,10 @@ export async function planHomebrew(file) {
         const local = (monsters ?? []).find((x) => x.id === def.id);
         plan.push({ group: 'monsters', def, local, status: await status(local, def, monsterDefinition) });
     }
+    for (const def of file.conditions ?? []) {
+        const local = (refs.conditions ?? []).find((x) => x.id === def.id);
+        plan.push({ group: 'conditions', def, local, status: await status(local, def, conditionDefinition) });
+    }
     return plan;
 }
 
@@ -214,6 +233,7 @@ export async function applyHomebrew(entries) {
     const out = { added: 0, updated: 0, failed: [] };
     let equipment = false;
     let spells = false;
+    let conditions = false;
     for (const e of entries) {
         if (e.status !== 'new' && e.status !== 'changed') continue;
         try {
@@ -225,6 +245,9 @@ export async function applyHomebrew(entries) {
                 spells = true;
             } else if (e.group === 'monsters') {
                 await saveMonster(e.def);
+            } else if (e.group === 'conditions') {
+                await saveCustomCondition(e.def);
+                conditions = true;
             }
             if (e.status === 'new') out.added++;
             else out.updated++;
@@ -235,6 +258,7 @@ export async function applyHomebrew(entries) {
     // the saves above refresh their caches already; this keeps them right if one failed midway
     if (equipment) await refreshEquipment().catch(() => {});
     if (spells) await refreshSpells().catch(() => {});
+    if (conditions) await refreshConditions().catch(() => {});
     return out;
 }
 

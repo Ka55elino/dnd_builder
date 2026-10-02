@@ -1,0 +1,14 @@
+{
+  "id": "antimagicField",
+  "name": "Antimagic Field",
+  "category": "effect",
+  "spell": "antimagicField",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "magic doesn't work within 10 feet of you: spells, magic items, summons"
+    }
+  ],
+  "desc": "A 10-foot Emanation where magic is suppressed."
+}

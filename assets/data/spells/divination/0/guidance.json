@@ -9,5 +9,13 @@
     "cleric",
     "druid"
   ],
-  "desc": "You touch a creature to give it +1d4 to one ability check. Concentration, up to 1 minute."
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "guidance",
+    "target": "creature",
+    "choose": "skill"
+  },
+  "desc": "You touch a willing creature and choose a skill. Until the spell ends, the creature adds 1d4 to any ability check using that skill. Concentration, up to 1 minute."
 }

@@ -1,0 +1,51 @@
+{
+  "id": "srd-scorpion",
+  "name": "Scorpion",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 11,
+  "hp": 1,
+  "hpFormula": "1d4-1",
+  "initiative": 0,
+  "speed": {
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 2,
+    "con": 8,
+    "dex": 11,
+    "int": 1,
+    "str": 2,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10
+  },
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Sting",
+      "desc": "Melee Weapon Attack: +2 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must make a DC 9 Constitution saving throw, taking 4 (1d8) poison damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 2,
+        "reach": 5
+      }
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/scorpion.png"
+}

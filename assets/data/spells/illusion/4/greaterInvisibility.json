@@ -10,5 +10,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "invisible",
+    "target": "creature"
+  },
   "desc": "A creature is Invisible, even while attacking or casting spells. Concentration, up to 1 minute."
 }

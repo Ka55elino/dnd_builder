@@ -14,5 +14,8 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "text": "automatically ends spells of level {slot} or lower"
+  },
   "desc": "You end one spell on a target (level 3 or lower automatically)."
 }

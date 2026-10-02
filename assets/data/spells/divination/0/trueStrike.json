@@ -12,6 +12,10 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "trueStrike",
+    "target": "self"
+  },
   "desc": "You cast the spell on a creature you can see within 30 feet; the effect lasts 10 minutes. While it lasts, you have Advantage on attack rolls against that target, and on a hit you deal an extra 1d6 Radiant damage to it (increases with level).",
   "weaponAttack": true,
   "damage": {

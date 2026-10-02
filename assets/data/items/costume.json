@@ -1,9 +1,0 @@
-{
-  "id": "costume",
-  "name": "Costume",
-  "image": "/img/items/costume.png",
-  "isDefault": true,
-  "weight": 4,
-  "cost": "5 GP",
-  "desc": "While wearing the costume, you have Advantage on any ability check you make to impersonate the person or type of person it represents."
-}

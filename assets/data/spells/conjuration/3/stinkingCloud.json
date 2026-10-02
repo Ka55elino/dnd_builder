@@ -10,5 +10,8 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "A 20-foot Sphere of poisonous gas: Constitution saving throw or a creature spends its action retching. Concentration."
 }

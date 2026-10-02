@@ -1,0 +1,9 @@
+{
+  "id": "map",
+  "name": "Map",
+  "image": "/img/items/map.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "1 GP",
+  "desc": "If you consult an accurate Map, you gain a +5 bonus to Wisdom (Survival) checks you make to find your way in the place represented on it."
+}

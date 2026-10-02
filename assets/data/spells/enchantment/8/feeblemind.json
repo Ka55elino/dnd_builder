@@ -11,6 +11,10 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "feebleminded",
+    "target": "enemy"
+  },
   "desc": "You shatter the target's mind (Intelligence saving throw): its Intelligence and Charisma scores drop to 1.",
   "damage": {
     "dice": "4d6",

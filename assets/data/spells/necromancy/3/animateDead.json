@@ -9,5 +9,9 @@
     "cleric",
     "wizard"
   ],
+  "upcast": {
+    "text": "+{n} more Undead (animate or reassert control)",
+    "each": 2
+  },
   "desc": "You raise a Skeleton or Zombie under your control."
 }

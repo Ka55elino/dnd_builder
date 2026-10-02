@@ -67,5 +67,6 @@
   "immunities": [],
   "conditionImmunities": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/beast/wolf.png"
 }

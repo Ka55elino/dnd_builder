@@ -5,5 +5,9 @@
   "subclass": "shadow",
   "level": 3,
   "action": "action",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 1
+  },
   "desc": "Costs 1 Focus Point. You create magical Darkness (a 15-foot-radius Sphere) for 10 minutes and can see through it."
 }

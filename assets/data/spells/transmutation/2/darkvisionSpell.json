@@ -11,5 +11,9 @@
     "sorcerer",
     "wizard"
   ],
+  "apply": {
+    "condition": "darkvisionSpell",
+    "target": "creature"
+  },
   "desc": "You touch a creature to give it Darkvision with a range of 60 feet for 8 hours."
 }

@@ -9,5 +9,12 @@
     "druid",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "shapechange",
+    "target": "self"
+  },
   "desc": "You transform into any creature with a CR no higher than your level, keeping your mind. Concentration."
 }

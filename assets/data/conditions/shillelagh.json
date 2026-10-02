@@ -1,0 +1,14 @@
+{
+  "id": "shillelagh",
+  "name": "Shillelagh",
+  "category": "effect",
+  "spell": "shillelagh",
+  "duration": "1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Club / Quarterstaff: spellcasting ability for attack and damage rolls"
+    }
+  ],
+  "desc": "Your Club or Quarterstaff uses your spellcasting ability for its attack and damage rolls."
+}

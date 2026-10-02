@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "fourElements",
   "level": 3,
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 1
+  },
   "desc": "Costs 1 Focus Point. Your Unarmed Strikes have +10 feet of reach this turn; on a hit, they deal an extra 1d10 Fire damage.",
   "damage": {
     "dice": "1d10",

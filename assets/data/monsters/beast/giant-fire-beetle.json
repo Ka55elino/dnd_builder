@@ -1,0 +1,63 @@
+{
+  "id": "srd-giant-fire-beetle",
+  "name": "Giant Fire Beetle",
+  "type": "beast",
+  "size": "small",
+  "alignment": "unaligned",
+  "cr": 0.0,
+  "ac": 13,
+  "hp": 4,
+  "hpFormula": "1d6+1",
+  "initiative": 0,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 3,
+    "con": 12,
+    "dex": 10,
+    "int": 1,
+    "str": 8,
+    "wis": 7
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 30
+  },
+  "passivePerception": 8,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Illumination",
+      "desc": "The beetle sheds bright light in a 10-foot radius and dim light for an additional 10 ft.."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +1 to hit, reach 5 ft., one target. Hit: 2 (1d6 - 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 1,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6-1",
+          "avg": 2
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/giant-fire-beetle.png"
+}

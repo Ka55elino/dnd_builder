@@ -11,6 +11,13 @@
     "ranger",
     "wizard"
   ],
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "longstrider",
+    "target": "creature"
+  },
   "desc": "With a touch, you increase a creature's Speed by 10 feet for 1 hour.",
   "casting": {
     "time": "1 action",

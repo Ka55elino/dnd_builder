@@ -1,0 +1,74 @@
+{
+  "id": "srd-tiger",
+  "name": "Tiger",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 1.0,
+  "ac": 12,
+  "hp": 37,
+  "hpFormula": "5d10+10",
+  "initiative": 2,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 15,
+    "int": 3,
+    "str": 17,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 3,
+    "stealth": 6
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 13,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Smell",
+      "desc": "The tiger has advantage on Wisdom (Perception) checks that rely on smell."
+    },
+    {
+      "name": "Pounce",
+      "desc": "If the tiger moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the tiger can make one bite attack against it as a bonus action."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d10+3",
+          "avg": 8
+        }
+      ]
+    },
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/tiger.png"
+}

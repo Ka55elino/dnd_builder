@@ -1,0 +1,89 @@
+{
+  "id": "srd-bandit-captain",
+  "name": "Bandit Captain",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 15,
+  "hp": 65,
+  "hpFormula": "10d8+20",
+  "initiative": 3,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 14,
+    "con": 14,
+    "dex": 16,
+    "int": 14,
+    "str": 15,
+    "wis": 11
+  },
+  "saves": {
+    "dex": 5,
+    "str": 4,
+    "wis": 2
+  },
+  "skills": {
+    "athletics": 4,
+    "deception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "any two languages",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The captain makes three melee attacks: two with its scimitar and one with its dagger. Or the captain makes two ranged attacks with its daggers."
+    },
+    {
+      "name": "Scimitar",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Dagger",
+      "desc": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d4 + 3) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+3",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [
+    {
+      "name": "Parry",
+      "desc": "The captain adds 2 to its AC against one melee attack that would hit it. To do so, the captain must see the attacker and be wielding a melee weapon."
+    }
+  ],
+  "desc": "",
+  "image": "/img/monsters/humanoid/bandit-captain.png"
+}

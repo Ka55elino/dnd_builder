@@ -1,0 +1,125 @@
+{
+  "id": "srd-barbed-devil",
+  "name": "Barbed Devil",
+  "type": "fiend",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 15,
+  "hp": 110,
+  "hpFormula": "13d8+52",
+  "initiative": 3,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 14,
+    "con": 18,
+    "dex": 17,
+    "int": 12,
+    "str": 16,
+    "wis": 14
+  },
+  "saves": {
+    "cha": 5,
+    "con": 7,
+    "str": 6,
+    "wis": 5
+  },
+  "skills": {
+    "deception": 5,
+    "insight": 5,
+    "perception": 8
+  },
+  "vulnerabilities": [],
+  "resistances": [
+    "cold; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with silvered weapons"
+  ],
+  "immunities": [
+    "fire",
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 18,
+  "languages": "Infernal, telepathy 120 ft.",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Barbed Hide",
+      "desc": "At the start of each of its turns, the barbed devil deals 5 (1d10) piercing damage to any creature grappling it."
+    },
+    {
+      "name": "Devil's Sight",
+      "desc": "Magical darkness doesn't impede the devil's darkvision."
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "The devil has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The devil makes three melee attacks: one with its tail and two with its claws. Alternatively, it can use Hurl Flame twice."
+    },
+    {
+      "name": "Claw",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+3",
+          "avg": 6
+        }
+      ]
+    },
+    {
+      "name": "Tail",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+3",
+          "avg": 10
+        }
+      ]
+    },
+    {
+      "name": "Hurl Flame",
+      "desc": "Ranged Spell Attack: +5 to hit, range 150 ft., one target. Hit: 10 (3d6) fire damage. If the target is a flammable object that isn't being worn or carried, it also catches fire.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 5,
+        "range": 150
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "3d6+0",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fiend/barbed-devil.png"
+}

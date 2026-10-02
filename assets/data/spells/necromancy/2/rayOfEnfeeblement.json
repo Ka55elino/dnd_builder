@@ -9,11 +9,16 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "rayOfEnfeeblement",
+    "target": "enemy"
+  },
   "desc": "A black ray: ranged spell attack; on a hit, the target deals only half damage with Strength-based attacks. Concentration.",
   "casting": {
     "time": "1 action",
     "range": "60 feet",
     "components": "V, S",
-    "duration": "Concentration, up to 1 minute"
+    "duration": "Concentration, up to 1 minute",
+    "concentration": true
   }
 }

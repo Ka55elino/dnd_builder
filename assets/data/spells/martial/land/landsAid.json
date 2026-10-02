@@ -5,6 +5,10 @@
   "subclass": "land",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "resource": "wildShape",
+    "amount": 1
+  },
   "desc": "As a Bonus Action (expending a use of Wild Shape), you choose a point within 60 feet: a creature there is healed or takes Necrotic damage (Constitution saving throw for half). The die increases with your level.",
   "damage": {
     "dice": "2d6",

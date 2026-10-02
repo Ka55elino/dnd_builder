@@ -1,0 +1,18 @@
+{
+  "id": "hideousLaughter",
+  "name": "Tasha's Hideous Laughter",
+  "category": "effect",
+  "spell": "tashasHideousLaughter",
+  "duration": "Concentration, up to 1 minute",
+  "implies": [
+    "prone",
+    "incapacitated"
+  ],
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "it repeats the Wisdom save at the end of each of its turns and when it takes damage"
+    }
+  ],
+  "desc": "Laughing uncontrollably."
+}

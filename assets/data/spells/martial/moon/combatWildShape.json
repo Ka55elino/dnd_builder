@@ -5,5 +5,14 @@
   "subclass": "moon",
   "level": 3,
   "action": "bonus",
+  "cost": {
+    "slot": {
+      "min": 1
+    }
+  },
+  "upcast": {
+    "text": "regain {n}d8 Hit Points",
+    "base": 1
+  },
   "desc": "You enter (or leave) Wild Shape as a Bonus Action. In beast form, as a Bonus Action you expend a spell slot to heal 1d8 per level of the slot."
 }

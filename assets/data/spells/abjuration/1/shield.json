@@ -9,6 +9,11 @@
     "sorcerer",
     "wizard"
   ],
+  "apply": {
+    "condition": "shield",
+    "target": "self",
+    "rounds": 1
+  },
   "desc": "As a Reaction, you create an invisible barrier: +5 to AC until the start of your next turn, including against the triggering attack, and immunity to Magic Missile.",
   "casting": {
     "time": "1 reaction",

@@ -1,0 +1,9 @@
+{
+  "id": "vial",
+  "name": "Vial",
+  "image": "/img/items/vial.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "1 GP",
+  "desc": "A Vial holds up to 4 ounces."
+}

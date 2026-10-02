@@ -1,0 +1,25 @@
+{
+  "id": "exhaustion",
+  "name": "Exhaustion",
+  "category": "condition",
+  "levels": 6,
+  "longRest": "level",
+  "modifiers": [
+    {
+      "kind": "d20",
+      "value": -2,
+      "perLevel": true
+    },
+    {
+      "kind": "speed",
+      "op": "add",
+      "value": -5,
+      "perLevel": true
+    },
+    {
+      "kind": "note",
+      "note": "level 6: you die"
+    }
+  ],
+  "desc": "Each level: −2 to every D20 Test (attack rolls, ability checks, saving throws) and −5 feet of Speed. You die at level 6. A Long Rest removes 1 level."
+}

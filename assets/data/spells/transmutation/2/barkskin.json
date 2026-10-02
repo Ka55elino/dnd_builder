@@ -9,5 +9,15 @@
     "druid",
     "ranger"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "barkskin",
+    "target": "creature"
+  },
   "desc": "The target's AC can't be lower than 16 for the duration (Concentration, up to 1 hour)."
 }

@@ -9,6 +9,9 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "damage": "3d6"
+  },
   "desc": "A green ray (Dexterity saving throw): massive Force damage; a target reduced to 0 Hit Points is disintegrated into dust.",
   "damage": {
     "dice": "10d6",

@@ -1,0 +1,106 @@
+{
+  "id": "srd-glabrezu",
+  "name": "Glabrezu",
+  "type": "fiend",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 9.0,
+  "ac": 17,
+  "hp": 157,
+  "hpFormula": "15d10+75",
+  "initiative": 2,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 16,
+    "con": 21,
+    "dex": 15,
+    "int": 19,
+    "str": 20,
+    "wis": 17
+  },
+  "saves": {
+    "cha": 7,
+    "con": 9,
+    "str": 9,
+    "wis": 7
+  },
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "cold",
+    "fire",
+    "lightning; bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks"
+  ],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "senses": {
+    "truesight": 120
+  },
+  "passivePerception": 13,
+  "languages": "Abyssal, telepathy 120 ft.",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Innate Spellcasting",
+      "desc": "The glabrezu's spellcasting ability is Intelligence (spell save DC 16). The glabrezu can innately cast the following spells, requiring no material components:\nAt will: darkness, detect magic, dispel magic\n1/day each: confusion, fly, power word stun"
+    },
+    {
+      "name": "Magic Resistance",
+      "desc": "The glabrezu has advantage on saving throws against spells and other magical effects."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The glabrezu makes four attacks: two with its pincers and two with its fists. Alternatively, it makes two attacks with its pincers and casts one spell."
+    },
+    {
+      "name": "Pincer",
+      "desc": "Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage. If the target is a Medium or smaller creature, it is grappled (escape DC 15). The glabrezu has two pincers, each of which can grapple only one target.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 9,
+        "reach": 10
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d10+5",
+          "avg": 16
+        }
+      ]
+    },
+    {
+      "name": "Fist",
+      "desc": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 9,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d4+2",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Variant: Summon Demon (1/Day)",
+      "desc": "The demon chooses what to summon and attempts a magical summoning.\nA glabrezu has a 30 percent chance of summoning 1d3 vrocks, 1d2 hezrous, or one glabrezu.\nA summoned demon appears in an unoccupied space within 60 feet of its summoner, acts as an ally of its summoner, and can't summon other demons. It remains for 1 minute, until it or its summoner dies, or until its summoner dismisses it as an action."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fiend/glabrezu.png"
+}

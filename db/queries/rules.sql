@@ -44,3 +44,17 @@ INSERT OR IGNORE INTO spell_classes (spell_id, class_id) VALUES (?, ?);
 SELECT id, name, kind, level, school, action, concentration, ritual, description, data_json
 FROM spells
 ORDER BY kind, level, name COLLATE NOCASE;
+
+-- ---------- conditions and named effects ----------
+-- category: condition | effect
+
+-- name: CountConditions
+SELECT COUNT(*) FROM conditions;
+
+-- name: InsertCondition
+INSERT INTO conditions (id, name, category, description, data_json) VALUES (?, ?, ?, ?, ?);
+
+-- name: GetAllConditions
+SELECT id, name, category, description, data_json
+FROM conditions
+ORDER BY category, name COLLATE NOCASE;

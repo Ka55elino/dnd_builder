@@ -7,5 +7,9 @@
     "monk"
   ],
   "action": "reaction",
+  "cost": {
+    "resource": "kiPoints",
+    "amount": 1
+  },
   "desc": "As a Reaction, you reduce Bludgeoning, Piercing, or Slashing damage from an attack against you by 1d10 {dexMod} (Dex) +{level} (Monk level). If the damage is reduced to 0, you can spend 1 Focus Point to redirect it at a creature within 5 feet (Dexterity saving throw, damage = 2 Martial Arts dice + Dex)."
 }

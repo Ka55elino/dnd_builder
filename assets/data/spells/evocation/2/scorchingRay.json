@@ -9,6 +9,10 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "text": "{n} rays (2d6 Fire each)",
+    "base": 3
+  },
   "desc": "Three fiery rays (a separate spell attack for each): each deals Fire damage.",
   "damage": {
     "dice": "2d6",

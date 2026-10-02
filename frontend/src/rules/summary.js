@@ -10,6 +10,8 @@
  *
  * build — CharacterBuild, ch — Character, state — CharacterState
  */
+import { rowName } from './modifiers.js';
+
 export const SUMMARY_VERSION = 1;
 
 export function buildSummary(build, ch, state) {
@@ -33,7 +35,10 @@ export function buildSummary(build, ch, state) {
         maxHp: ch.maxHp,
         temp: state?.tempHp ?? 0,
         deathSaves: { success: ds.success ?? 0, fail: ds.fail ?? 0 },
-        conditions: [...(state?.conditions ?? [])],
+        // conditions by name ("Prone", "Exhaustion 2"), including implied ones (Unconscious → Prone)
+        conditions: (ch.conditions ?? []).filter((c) => !c.immune).map((c) => rowName(c)),
+        // the instances themselves (rules/conditions.js) — for the DM's Conditions dialog
+        conditionInstances: (state?.effects ?? []).filter((e) => e?.type === 'condition').map(({ def, ...e }) => ({ ...e, ...(def ? { name: def.name } : {}) })), // eslint-disable-line no-unused-vars
         inspiration: !!state?.inspiration,
 
         mods: { ...ch.mods },

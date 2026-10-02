@@ -12,5 +12,9 @@
     "warlock",
     "wizard"
   ],
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "A creature makes a Wisdom saving throw or follows a reasonable suggested course of action."
 }

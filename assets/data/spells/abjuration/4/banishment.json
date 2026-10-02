@@ -13,5 +13,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "banished",
+    "target": "enemy"
+  },
   "desc": "A creature (Charisma saving throw) is sent to another plane for the duration of Concentration; an extraplanar creature is banished permanently."
 }

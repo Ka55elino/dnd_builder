@@ -1,0 +1,58 @@
+{
+  "id": "srd-flying-snake",
+  "name": "Flying Snake",
+  "type": "beast",
+  "size": "tiny",
+  "alignment": "unaligned",
+  "cr": 0.125,
+  "ac": 14,
+  "hp": 5,
+  "hpFormula": "2d4",
+  "initiative": 4,
+  "speed": {
+    "fly": 60,
+    "swim": 30,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 11,
+    "dex": 18,
+    "int": 2,
+    "str": 4,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "blindsight": 10
+  },
+  "passivePerception": 11,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Flyby",
+      "desc": "The snake doesn't provoke opportunity attacks when it flies out of an enemy's reach."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 1 piercing damage plus 7 (3d4) poison damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      }
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/flying-snake.png"
+}

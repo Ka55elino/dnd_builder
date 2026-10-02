@@ -1,0 +1,65 @@
+{
+  "id": "srd-warhorse-skeleton",
+  "name": "Warhorse Skeleton",
+  "type": "undead",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 13,
+  "hp": 22,
+  "hpFormula": "3d10+6",
+  "initiative": 1,
+  "speed": {
+    "walk": 60
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 15,
+    "dex": 12,
+    "int": 2,
+    "str": 18,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [
+    "bludgeoning"
+  ],
+  "resistances": [],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "—",
+  "habitats": [],
+  "traits": [],
+  "actions": [
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d6+4",
+          "avg": 11
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/undead/warhorse-skeleton.png"
+}

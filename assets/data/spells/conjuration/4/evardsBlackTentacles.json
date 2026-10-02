@@ -8,6 +8,16 @@
   "classes": [
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "damage": "1d6"
+  },
+  "apply": {
+    "condition": "restrained",
+    "target": "enemy"
+  },
   "desc": "Tentacles sprout in a 20-foot area: Dexterity saving throw or Restrained and damage. Concentration.",
   "damage": {
     "dice": "3d6",

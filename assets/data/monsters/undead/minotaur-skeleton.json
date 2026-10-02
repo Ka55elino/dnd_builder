@@ -1,0 +1,86 @@
+{
+  "id": "srd-minotaur-skeleton",
+  "name": "Minotaur Skeleton",
+  "type": "undead",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 67,
+  "hpFormula": "9d10+18",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 15,
+    "dex": 11,
+    "int": 6,
+    "str": 18,
+    "wis": 8
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [
+    "bludgeoning"
+  ],
+  "resistances": [],
+  "immunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "poisoned"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 9,
+  "languages": "understands Abyssal but can't speak",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Charge",
+      "desc": "If the skeleton moves at least 10 feet straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 feet away and knocked prone."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Greataxe",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "2d12+4",
+          "avg": 17
+        }
+      ]
+    },
+    {
+      "name": "Gore",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/undead/minotaur-skeleton.png"
+}

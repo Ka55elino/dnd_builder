@@ -1,0 +1,14 @@
+{
+  "id": "levitate",
+  "name": "Levitate",
+  "category": "effect",
+  "spell": "levitate",
+  "duration": "Concentration, up to 10 minutes",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you float up to 20 feet off the ground; move only by pushing or pulling"
+    }
+  ],
+  "desc": "You rise vertically and stay suspended."
+}

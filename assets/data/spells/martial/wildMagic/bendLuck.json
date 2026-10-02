@@ -5,6 +5,10 @@
   "subclass": "wildMagic",
   "level": 6,
   "action": "reaction",
+  "cost": {
+    "resource": "sorceryPoints",
+    "amount": 2
+  },
   "desc": "Costs 2 Sorcery Points. As a Reaction, when a creature makes an attack roll, ability check, or saving throw, you add 1d4 to or subtract it from the result.",
   "damage": {
     "dice": "1d4",

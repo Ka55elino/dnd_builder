@@ -1,0 +1,75 @@
+{
+  "id": "srd-swarm-of-ravens",
+  "name": "Swarm of Ravens",
+  "type": "beast",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.25,
+  "ac": 12,
+  "hp": 24,
+  "hpFormula": "7d8-7",
+  "initiative": 2,
+  "speed": {
+    "fly": 50,
+    "walk": 10
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 8,
+    "dex": 14,
+    "int": 3,
+    "str": 6,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "immunities": [],
+  "conditionImmunities": [
+    "charmed",
+    "frightened",
+    "grappled",
+    "paralyzed",
+    "petrified",
+    "prone",
+    "restrained",
+    "stunned"
+  ],
+  "senses": {},
+  "passivePerception": 15,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Swarm",
+      "desc": "The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny raven. The swarm can't regain hit points or gain temporary hit points."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Beaks",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target in the swarm's space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d6+0",
+          "avg": 7
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/swarm-of-ravens.png"
+}

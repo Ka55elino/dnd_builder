@@ -1,0 +1,111 @@
+{
+  "id": "srd-sahuagin",
+  "name": "Sahuagin",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 12,
+  "hp": 22,
+  "hpFormula": "4d8+4",
+  "initiative": 0,
+  "speed": {
+    "swim": 40,
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 9,
+    "con": 12,
+    "dex": 11,
+    "int": 12,
+    "str": 13,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "perception": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 120
+  },
+  "passivePerception": 15,
+  "languages": "Sahuagin",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Blood Frenzy",
+      "desc": "The sahuagin has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    },
+    {
+      "name": "Limited Amphibiousness",
+      "desc": "The sahuagin can breathe air and water, but it needs to be submerged at least once every 4 hours to avoid suffocating."
+    },
+    {
+      "name": "Shark Telepathy",
+      "desc": "The sahuagin can magically command any shark within 120 feet of it, using a limited telepathy."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The sahuagin makes two melee attacks: one with its bite and one with its claws or spear."
+    },
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+1",
+          "avg": 3
+        }
+      ]
+    },
+    {
+      "name": "Claws",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d4+1",
+          "avg": 3
+        }
+      ]
+    },
+    {
+      "name": "Spear",
+      "desc": "Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "reach": 5,
+        "range": "20/60"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+1",
+          "avg": 4
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/sahuagin.png"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "alchemistsSupplies",
+  "name": "Alchemist's Supplies",
+  "image": "/img/items/alchemistsSupplies.png",
+  "isDefault": true,
+  "weight": 8.0,
+  "cost": "50 GP",
+  "desc": "Ability: Intelligence Weight: 8 lb. Utilize: Identify a substance (DC 15), or start a fire (DC 15) Craft: Acid, Alchemist's Fire, Component Pouch, Oil, Paper, Perfume"
+}

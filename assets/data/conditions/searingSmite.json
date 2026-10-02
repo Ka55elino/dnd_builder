@@ -1,0 +1,14 @@
+{
+  "id": "searingSmite",
+  "name": "Searing Smite",
+  "category": "effect",
+  "spell": "searingSmite",
+  "duration": "1 minute",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "takes 1d6 Fire damage at the start of each of its turns; Constitution save ends it"
+    }
+  ],
+  "desc": "Set ablaze."
+}

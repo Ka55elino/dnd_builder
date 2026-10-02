@@ -11,6 +11,13 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "enlarged",
+    "target": "creature"
+  },
   "desc": "You change a creature's or object's size by one category: +/- damage and Advantage/Disadvantage on Strength checks. Concentration.",
   "damage": {
     "dice": "1d4",

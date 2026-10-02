@@ -10,6 +10,10 @@
     "sorcerer",
     "wizard"
   ],
+  "upcast": {
+    "text": "{n} darts (1d4 + 1 Force each)",
+    "base": 3
+  },
   "desc": "Three glowing darts hit automatically: each deals 1d4+1 Force damage.",
   "damage": {
     "dice": "3d4",

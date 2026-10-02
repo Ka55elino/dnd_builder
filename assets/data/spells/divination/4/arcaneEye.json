@@ -9,5 +9,8 @@
     "cleric",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
   "desc": "An Invisible scouting eye you can see through (Darkvision 30 feet). Concentration."
 }

@@ -1,0 +1,14 @@
+{
+  "id": "regenerate",
+  "name": "Regenerate",
+  "category": "effect",
+  "spell": "regenerate",
+  "duration": "1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you regain 1 Hit Point at the start of each of your turns; severed parts regrow"
+    }
+  ],
+  "desc": "You regenerate."
+}

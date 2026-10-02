@@ -10,5 +10,17 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "text": "{n}d8 Hit Point pool",
+    "base": 5,
+    "each": 2
+  },
+  "apply": {
+    "condition": "unconscious",
+    "target": "enemy"
+  },
   "desc": "Creatures within 20 feet fall asleep until 5d8 is exhausted by their combined Hit Points (starting with the lowest). Concentration."
 }

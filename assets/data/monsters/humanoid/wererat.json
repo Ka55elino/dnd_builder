@@ -1,0 +1,110 @@
+{
+  "id": "srd-wererat",
+  "name": "Wererat",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 33,
+  "hpFormula": "6d8+6",
+  "initiative": 2,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 8,
+    "con": 12,
+    "dex": 15,
+    "int": 11,
+    "str": 10,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2,
+    "stealth": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "bludgeoning",
+    "piercing",
+    "and slashing from nonmagical attacks not made with silvered weapons"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "Common (can't speak in rat form)",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Shapechanger",
+      "desc": "The wererat can use its action to polymorph into a rat-humanoid hybrid or into a giant rat, or back into its true form, which is humanoid. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies."
+    },
+    {
+      "name": "Keen Smell",
+      "desc": "The wererat has advantage on Wisdom (Perception) checks that rely on smell."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack (Humanoid or Hybrid Form Only)",
+      "desc": "The wererat makes two attacks, only one of which can be a bite."
+    },
+    {
+      "name": "Bite (Rat or Hybrid Form Only).",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 11 Constitution saving throw or be cursed with wererat lycanthropy.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d4+2",
+          "avg": 4
+        }
+      ]
+    },
+    {
+      "name": "Shortsword (Humanoid or Hybrid Form Only)",
+      "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 4,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Hand Crossbow (Humanoid or Hybrid Form Only)",
+      "desc": "Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 4,
+        "range": "30/120"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d6+2",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/wererat.png"
+}

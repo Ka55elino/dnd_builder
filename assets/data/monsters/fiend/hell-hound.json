@@ -1,0 +1,86 @@
+{
+  "id": "srd-hell-hound",
+  "name": "Hell Hound",
+  "type": "fiend",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 3.0,
+  "ac": 15,
+  "hp": 45,
+  "hpFormula": "7d8+14",
+  "initiative": 1,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 6,
+    "con": 14,
+    "dex": 12,
+    "int": 6,
+    "str": 17,
+    "wis": 13
+  },
+  "saves": {},
+  "skills": {
+    "perception": 5
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [
+    "fire"
+  ],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 15,
+  "languages": "understands Infernal but can't speak it",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Keen Hearing and Smell",
+      "desc": "The hound has advantage on Wisdom (Perception) checks that rely on hearing or smell."
+    },
+    {
+      "name": "Pack Tactics",
+      "desc": "The hound has advantage on an attack roll against a creature if at least one of the hound's allies is within 5 ft. of the creature and the ally isn't incapacitated."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 7 (2d6) fire damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+3",
+          "avg": 7
+        }
+      ]
+    },
+    {
+      "name": "Fire Breath (Recharge 5-6)",
+      "desc": "The hound exhales fire in a 15-foot cone. Each creature in that area must make a DC 12 Dexterity saving throw, taking 21 (6d6) fire damage on a failed save, or half as much damage on a successful one.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 0
+      },
+      "damage": [
+        {
+          "type": "fire",
+          "dice": "6d6+0",
+          "avg": 21
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/fiend/hell-hound.png"
+}

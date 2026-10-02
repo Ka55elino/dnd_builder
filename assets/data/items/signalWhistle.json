@@ -1,0 +1,9 @@
+{
+  "id": "signalWhistle",
+  "name": "Signal Whistle",
+  "image": "/img/items/signalWhistle.png",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "5 CP",
+  "desc": "When blown as a Utilize action, a Signal Whistle produces a sound that can be heard up to 600 feet away."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "holyAura",
+  "name": "Holy Aura",
+  "category": "effect",
+  "spell": "holyAura",
+  "duration": "Concentration, up to 1 minute",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "note",
+      "note": "a Fiend or Undead that hits you with a melee attack is Blinded (Constitution save)"
+    }
+  ],
+  "desc": "Divine light protects you."
+}

@@ -10,5 +10,18 @@
     "paladin",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "at": {
+      "3": "+2 bonus",
+      "6": "+3 bonus"
+    }
+  },
+  "apply": {
+    "condition": "magicWeapon",
+    "target": "creature"
+  },
   "desc": "A weapon becomes a +1 magic weapon for the duration (Concentration, up to 1 hour)."
 }

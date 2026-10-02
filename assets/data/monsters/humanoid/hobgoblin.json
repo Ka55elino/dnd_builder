@@ -1,0 +1,79 @@
+{
+  "id": "srd-hobgoblin",
+  "name": "Hobgoblin",
+  "type": "humanoid",
+  "size": "medium",
+  "alignment": "unaligned",
+  "cr": 0.5,
+  "ac": 18,
+  "hp": 11,
+  "hpFormula": "2d8+2",
+  "initiative": 1,
+  "speed": {
+    "walk": 30
+  },
+  "abilities": {
+    "cha": 9,
+    "con": 12,
+    "dex": 12,
+    "int": 10,
+    "str": 13,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 10,
+  "languages": "Common, Goblin",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Martial Advantage",
+      "desc": "Once per turn, the hobgoblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the hobgoblin that isn't incapacitated."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Longsword",
+      "desc": "Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage, or 6 (1d10 + 1) slashing damage if used with two hands.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 3,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+1",
+          "avg": 5
+        }
+      ]
+    },
+    {
+      "name": "Longbow",
+      "desc": "Ranged Weapon Attack: +3 to hit, range 150/600 ft., one target. Hit: 5 (1d8 + 1) piercing damage.",
+      "attack": {
+        "kind": "ranged",
+        "bonus": 3,
+        "range": "150/600"
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+1",
+          "avg": 5
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/humanoid/hobgoblin.png"
+}

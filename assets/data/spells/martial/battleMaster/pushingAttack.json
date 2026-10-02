@@ -4,6 +4,10 @@
   "kind": "martial",
   "subclass": "battleMaster",
   "level": 3,
+  "cost": {
+    "resource": "superiorityDice",
+    "amount": 1
+  },
   "desc": "On a hit, extra damage equal to the die; you push the target up to 15 feet (Strength saving throw).",
   "pool": "maneuver"
 }

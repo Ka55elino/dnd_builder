@@ -1,0 +1,23 @@
+{
+  "id": "prone",
+  "name": "Prone",
+  "category": "condition",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacks"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacksAgainst",
+      "note": "from within 5 feet; Disadvantage from farther"
+    },
+    {
+      "kind": "note",
+      "note": "crawl, or stand up for half your Speed"
+    }
+  ],
+  "desc": "You can only crawl (or stand up for half your Speed). You have Disadvantage on attack rolls. Attack rolls against you have Advantage if the attacker is within 5 feet, otherwise Disadvantage."
+}

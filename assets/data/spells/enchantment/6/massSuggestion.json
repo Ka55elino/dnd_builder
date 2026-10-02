@@ -11,5 +11,16 @@
     "warlock",
     "wizard"
   ],
+  "upcast": {
+    "at": {
+      "7": "lasts 10 days",
+      "8": "lasts 30 days",
+      "9": "lasts a year and a day"
+    }
+  },
+  "apply": {
+    "condition": "charmed",
+    "target": "enemy"
+  },
   "desc": "Up to 12 creatures (Wisdom saving throw) follow a reasonable suggestion."
 }

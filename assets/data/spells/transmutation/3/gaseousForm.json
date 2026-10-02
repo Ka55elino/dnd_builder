@@ -10,5 +10,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "gaseousForm",
+    "target": "creature"
+  },
   "desc": "A creature and its gear turn into mist: Resistance to Bludgeoning, Piercing, and Slashing damage, Fly Speed 10 feet. Concentration."
 }

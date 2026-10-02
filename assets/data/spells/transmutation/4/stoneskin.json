@@ -12,5 +12,12 @@
     "sorcerer",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "apply": {
+    "condition": "stoneskin",
+    "target": "creature"
+  },
   "desc": "The target has Resistance to nonmagical Bludgeoning, Piercing, and Slashing damage. Concentration."
 }

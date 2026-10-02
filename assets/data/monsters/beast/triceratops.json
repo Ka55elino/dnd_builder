@@ -1,0 +1,77 @@
+{
+  "id": "srd-triceratops",
+  "name": "Triceratops",
+  "type": "beast",
+  "size": "huge",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 13,
+  "hp": 95,
+  "hpFormula": "10d12+30",
+  "initiative": -1,
+  "speed": {
+    "walk": 50
+  },
+  "abilities": {
+    "cha": 5,
+    "con": 17,
+    "dex": 9,
+    "int": 2,
+    "str": 22,
+    "wis": 11
+  },
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {},
+  "passivePerception": 10,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Trampling Charge",
+      "desc": "If the triceratops moves at least 20 ft. straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 13 Strength saving throw or be knocked prone. If the target is prone, the triceratops can make one stomp attack against it as a bonus action."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Gore",
+      "desc": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 24 (4d8 + 6) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 9,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "4d8+6",
+          "avg": 24
+        }
+      ]
+    },
+    {
+      "name": "Stomp",
+      "desc": "Melee Weapon Attack: +9 to hit, reach 5 ft., one prone creature. Hit: 22 (3d10 + 6) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 9,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "3d10+6",
+          "avg": 22
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/triceratops.png"
+}

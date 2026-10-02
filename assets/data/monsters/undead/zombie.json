@@ -67,5 +67,6 @@
   "vulnerabilities": [],
   "resistances": [],
   "bonusActions": [],
-  "reactions": []
+  "reactions": [],
+  "image": "/img/monsters/undead/zombie.png"
 }

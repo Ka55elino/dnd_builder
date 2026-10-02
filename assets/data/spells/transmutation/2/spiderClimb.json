@@ -10,5 +10,15 @@
     "warlock",
     "wizard"
   ],
+  "casting": {
+    "concentration": true
+  },
+  "upcast": {
+    "targets": 1
+  },
+  "apply": {
+    "condition": "spiderClimb",
+    "target": "creature"
+  },
   "desc": "You touch a creature to give it a Climb Speed and the ability to move along walls and ceilings. Concentration, up to 1 hour."
 }

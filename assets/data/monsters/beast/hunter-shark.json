@@ -1,0 +1,69 @@
+{
+  "id": "srd-hunter-shark",
+  "name": "Hunter Shark",
+  "type": "beast",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 2.0,
+  "ac": 12,
+  "hp": 45,
+  "hpFormula": "6d10+12",
+  "initiative": 1,
+  "speed": {
+    "swim": 40
+  },
+  "abilities": {
+    "cha": 4,
+    "con": 15,
+    "dex": 13,
+    "int": 1,
+    "str": 18,
+    "wis": 10
+  },
+  "saves": {},
+  "skills": {
+    "perception": 2
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "senses": {
+    "darkvision": 30
+  },
+  "passivePerception": 12,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Blood Frenzy",
+      "desc": "The shark has advantage on melee attack rolls against any creature that doesn't have all its hit points."
+    },
+    {
+      "name": "Water Breathing",
+      "desc": "The shark can breathe only underwater."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bite",
+      "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 6,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d8+4",
+          "avg": 13
+        }
+      ]
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/beast/hunter-shark.png"
+}

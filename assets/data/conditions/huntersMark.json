@@ -1,0 +1,14 @@
+{
+  "id": "huntersMark",
+  "name": "Hunter's Mark",
+  "category": "effect",
+  "spell": "huntersMark",
+  "duration": "Concentration, up to 1 hour",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "the ranger's weapon attacks deal +1d6 Force damage to it; they know where it is"
+    }
+  ],
+  "desc": "Marked by Hunter's Mark."
+}

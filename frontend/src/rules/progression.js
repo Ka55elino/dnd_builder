@@ -24,6 +24,10 @@
  *   option               — other (Divine Order / Primal Order)
  *   pool                 — "choose N" from a subclass pool (Battle Master maneuvers,
  *                          arcane shots) — the subclass.optionPools field
+ *
+ * Feats/invocations can carry fixed grants (feat.data.grants):
+ *   { type: 'skill', id }                              — skill proficiency (counted here)
+ *   { type: 'spell', id, atWill?, ritual?, note? }     — a spell card (models/Character.js)
  */
 import { SKILLS } from './skills.js';
 import { ABILITY_KEYS, ABILITIES, modifier } from './abilities.js';
@@ -141,6 +145,11 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
     for (const t of [...(race?.data?.traits ?? []), ...(sub?.data?.traits ?? [])]) {
         if (lvlOf(t) > upTo) continue;
         for (const g of t.grants ?? []) if (g.type === 'skill' && g.id) out.skills.add(g.id);
+    }
+    // fixed skills from chosen feats / fighting styles / invocations
+    // (feat data: "grants": [{ "type": "skill", "id": "deception" }] — e.g. Beguiling Influence)
+    for (const id of [...out.feats, ...out.fightingStyles, ...out.invocations]) {
+        for (const g of findFeat(refs, id)?.data?.grants ?? []) if (g.type === 'skill' && g.id) out.skills.add(g.id);
     }
     return out;
 }

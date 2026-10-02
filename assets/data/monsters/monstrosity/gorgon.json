@@ -1,0 +1,87 @@
+{
+  "id": "srd-gorgon",
+  "name": "Gorgon",
+  "type": "monstrosity",
+  "size": "large",
+  "alignment": "unaligned",
+  "cr": 5.0,
+  "ac": 19,
+  "hp": 114,
+  "hpFormula": "12d10+48",
+  "initiative": 0,
+  "speed": {
+    "walk": 40
+  },
+  "abilities": {
+    "cha": 7,
+    "con": 18,
+    "dex": 11,
+    "int": 2,
+    "str": 20,
+    "wis": 12
+  },
+  "saves": {},
+  "skills": {
+    "perception": 4
+  },
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [
+    "petrified"
+  ],
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 14,
+  "languages": "—",
+  "habitats": [],
+  "traits": [
+    {
+      "name": "Trampling Charge",
+      "desc": "If the gorgon moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the gorgon can make one attack with its hooves against it as a bonus action."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Gore",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 18 (2d12 + 5) piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "2d12+5",
+          "avg": 18
+        }
+      ]
+    },
+    {
+      "name": "Hooves",
+      "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 8,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "bludgeoning",
+          "dice": "2d10+5",
+          "avg": 16
+        }
+      ]
+    },
+    {
+      "name": "Petrifying Breath (Recharge 5-6)",
+      "desc": "The gorgon exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a DC 13 Constitution saving throw. On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the end of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic."
+    }
+  ],
+  "bonusActions": [],
+  "reactions": [],
+  "desc": "",
+  "image": "/img/monsters/monstrosity/gorgon.png"
+}

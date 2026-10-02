@@ -1,0 +1,9 @@
+{
+  "id": "basket",
+  "name": "Basket",
+  "image": "/img/items/basket.png",
+  "isDefault": true,
+  "weight": 2.0,
+  "cost": "4 SP",
+  "desc": "A Basket holds up to 40 pounds within 2 cubic feet."
+}
