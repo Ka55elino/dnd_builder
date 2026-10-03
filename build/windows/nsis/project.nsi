@@ -22,7 +22,7 @@ Unicode true
 ## !define INFO_PROJECTNAME    "my-project" # Default "dnd-builder-v3"
 ## !define INFO_COMPANYNAME    "My Company" # Default "Ka55elino"
 ## !define INFO_PRODUCTNAME    "My Product Name" # Default "DnD Builder"
-## !define INFO_PRODUCTVERSION "1.0.0"     # Default "0.3.3"
+## !define INFO_PRODUCTVERSION "1.0.0"     # Default "0.3.4"
 ## !define INFO_COPYRIGHT      "(c) Now, My Company" # Default "© now, My Company"
 ###
 ## !define PRODUCT_EXECUTABLE  "Application.exe"      # Default "${INFO_PROJECTNAME}.exe"

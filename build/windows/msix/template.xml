@@ -17,7 +17,7 @@
         PackageDisplayName="DnD Builder"
         PublisherName="CN=Ka55elino"
         PublisherDisplayName="Ka55elino"
-        Version="0.3.3.0"
+        Version="0.3.4.0"
         PackageDescription="My Product Description">
         <Capabilities>
             <Capability Name="runFullTrust" />
