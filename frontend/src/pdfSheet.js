@@ -14,7 +14,7 @@
 import { ABILITIES, ABILITY_KEYS, formatModifier } from './rules/abilities.js';
 import { BIO_GROUPS } from './models/CharacterBuild.svelte.js';
 import { damageName, actionName, restName } from './rules/labels.js';
-import { slotOf } from './rules/loadout.js';
+import { slotsOf } from './rules/loadout.js';
 import { rowName } from './rules/modifiers.js';
 import { SaveCharacterPDF } from './api.js';
 
@@ -177,7 +177,7 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
         .map((it) => ({
             name: it.name,
             qty: it.qty ?? 1,
-            tag: SLOT_TAG[slotOf(it.key, ch.equipped)] ?? '',
+            tag: ((sl) => (sl.includes('main') && sl.includes('off') ? 'both hands' : SLOT_TAG[sl[0]] ?? ''))(slotsOf(it.key, ch.equipped ?? {})),
         }));
     const bioGroups = BIO_GROUPS.map((g) => ({
         title: g.title,

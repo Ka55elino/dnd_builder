@@ -279,6 +279,9 @@ export function applyModifiers(sheet, modifiers = []) {
         if (other) f.cancels = true;
     }
 
+    // --- weapons in hand changed by a spell (Shillelagh): applied in sheet.js; here — the summary ---
+    for (const m of of('weapon')) note(weaponModText(m), [m.source]);
+
     const notes = [
         ...of('resistance').map((m) => ({ note: `Resistance to ${m.value === 'all' ? 'all damage' : `${m.value} damage`}`, source: m.source })),
         ...of('immunity').map((m) => ({ note: `Immunity: ${m.value}`, source: m.source })),
@@ -307,6 +310,21 @@ export function flagLabel(m) {
     if (m.on === 'saves') target = m.ability ? `${ABBR(m.ability)} saving throws` : 'Saving throws';
     if (m.on === 'checks') target = m.ability ? `${ABBR(m.ability)} checks` : 'Ability checks';
     return { target: target ?? m.on, mode: MODE[m.mode] ?? m.mode };
+}
+
+/**
+ * { kind: 'weapon' } — a spell changes the weapons you hold (Shillelagh):
+ *   weapons — weapon ids (a named weapon counts by its base), melee — melee attacks only,
+ *   ability — '$spell' (the spellcasting ability, if it is better), die — the damage die by
+ *   character level { "1": "1d8", "5": "1d10" … }, damageTypeAlt — another damage type it may deal
+ */
+export function weaponModText(m) {
+    const what = m.name ?? (m.weapons ?? []).join(' / ');
+    const parts = [];
+    if (m.ability) parts.push(m.ability === '$spell' ? 'spellcasting ability' : ABBR(m.ability));
+    if (m.die) parts.push(`damage die ${typeof m.die === 'string' ? m.die : Object.values(m.die)[0]}${typeof m.die === 'object' && Object.keys(m.die).length > 1 ? '+' : ''}`);
+    if (m.damageTypeAlt) parts.push(`or ${m.damageTypeAlt[0].toUpperCase()}${m.damageTypeAlt.slice(1)} damage`);
+    return `${what}: ${parts.join(', ')}`;
 }
 
 /** One modifier as text — for the Conditions page and the editor preview. */
@@ -364,6 +382,8 @@ export function modifierText(m) {
             return m.note ?? '';
         case 'economy':
             return `${SIGN(v)} ${{ action: 'Action', bonus: 'Bonus Action', reaction: 'Reaction' }[m.action] ?? m.action} per turn`;
+        case 'weapon':
+            return weaponModText(m);
         default:
             return m.note ?? m.kind ?? '';
     }

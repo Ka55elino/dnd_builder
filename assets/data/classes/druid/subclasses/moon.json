@@ -3,6 +3,12 @@
   "name": "Circle of the Moon",
   "image": "/img/classes/druid/subclasses/moon.png",
   "class": "druid",
+  "wildShape": {
+    "cr": "level/3",
+    "acMin": "13+wis",
+    "tempHp": "3*level",
+    "elementalCost": 2
+  },
   "features": [
     {
       "level": 3,

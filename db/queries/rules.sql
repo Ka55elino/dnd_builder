@@ -58,3 +58,22 @@ INSERT INTO conditions (id, name, category, description, data_json) VALUES (?, ?
 SELECT id, name, category, description, data_json
 FROM conditions
 ORDER BY category, name COLLATE NOCASE;
+
+-- name: CountWildShapeForms
+SELECT COUNT(*) FROM wild_shape_forms;
+
+-- name: InsertWildShapeForm
+INSERT INTO wild_shape_forms (monster_id, class_id, subclass_id, min_level, sort, is_custom)
+VALUES (?, ?, ?, ?, ?, 0)
+ON CONFLICT(monster_id, class_id, subclass_id) DO UPDATE SET min_level = excluded.min_level, sort = excluded.sort;
+
+-- name: GetWildShapeForms
+-- The forms whose monster is in the bestiary (a deleted custom monster drops out).
+-- With a summary of the monster for the choice lists; the full stat block: GetMonsters.
+SELECT f.monster_id, f.class_id, f.subclass_id, f.min_level, f.sort, f.is_custom,
+       m.name, m.type, m.size, m.cr, m.ac, m.hp, COALESCE(m.image, ''), COALESCE(json_extract(m.data_json, '$.speed'), '{}')
+FROM wild_shape_forms f JOIN monsters m ON m.id = f.monster_id
+ORDER BY f.class_id, f.min_level, f.sort, m.name;
+
+-- name: MonsterExists
+SELECT COUNT(*) FROM monsters WHERE id = ?;

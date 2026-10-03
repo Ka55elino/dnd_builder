@@ -41,6 +41,7 @@ export class CharacterState {
                                   //   — conditions (Prone, Exhaustion 2…) and named effects, including
                                   //   spell effects (Mage Armor, Bless, Guidance…: assets/data/conditions)
                                   // comes from the spell's data.apply (see Character, rules/sheet.js)
+    wildShape = $state(null);    // Wild Shape: { monsterId, name, since } — the beast form now (rules/wildshape.js)
     bagAdjust = $state({});      // { [backpack item key]: qty delta } — used up / found / thrown away;
                                  // an item whose qty drops to 0 is removed (see Character)
 
@@ -82,6 +83,28 @@ export class CharacterState {
             if (id && !this.hasCondition(id)) this.effects.push({ id, type: 'condition' });
         }
         this.bagAdjust = { ...(data.bagAdjust ?? {}) };
+        this.wildShape =
+            data.wildShape && typeof data.wildShape.monsterId === 'string'
+                ? { monsterId: data.wildShape.monsterId, name: String(data.wildShape.name ?? ''), since: Number(data.wildShape.since) || 0 }
+                : null;
+    }
+
+    // ---------- Wild Shape ----------
+
+    /**
+     * Turn into a beast: spend the uses, take the Temporary Hit Points (they don't add up —
+     * the higher stays), remember the form. form — { monsterId, name }, res — the Wild Shape
+     * resource (Character.resources), cost — uses, tempHp — from the form.
+     */
+    startWildShape(form, { res = null, cost = 1, tempHp = 0 } = {}) {
+        if (res) this.spend(res, cost);
+        this.tempHp = Math.max(this.tempHp, Math.max(0, Math.floor(tempHp)));
+        this.wildShape = { monsterId: form.monsterId, name: form.name ?? '', since: Date.now() };
+    }
+
+    /** Back to the druid's own shape (the Temporary Hit Points stay until they're lost). */
+    endWildShape() {
+        this.wildShape = null;
     }
 
     // ---------- backpack ----------
@@ -120,8 +143,9 @@ export class CharacterState {
         this.hpLost = clamp(this.hpLost + (n - fromTemp), 0, ch.maxHp);
         // Symbiotic Entity: ends when its Temporary Hit Points run out
         if (!this.tempHp && this.effects.some((e) => e.tempHp)) this.effects = this.effects.filter((e) => !e.tempHp);
-        // 0 Hit Points → Unconscious → Concentration ends
+        // 0 Hit Points → Unconscious → Concentration ends, the beast form too
         if (this.concentration && this.currentHp(ch) === 0) this.concentrate(null);
+        if (this.wildShape && this.currentHp(ch) === 0) this.endWildShape();
     }
 
     heal(n, ch) {
@@ -288,6 +312,7 @@ export class CharacterState {
         this.hitDiceUsed = Math.max(0, this.hitDiceUsed - Math.max(1, Math.floor(ch.level / 2)));
         this.deathSaves = { success: 0, fail: 0 };
         this.concentration = null;
+        this.wildShape = null; // 8 hours: longer than any form lasts before level 16
         // 8 hours pass: spell effects are over; conditions stay, except those that a Long Rest
         // changes (definition longRest: 'level' — Exhaustion −1, 'remove' — gone)
         const defs = new Map((ch.conditionDefs ?? []).map((d) => [d.id, d.data ?? d]));
@@ -320,6 +345,7 @@ export class CharacterState {
             turnExtra: this.turnExtra,
             effects: this.effects,
             bagAdjust: this.bagAdjust,
+            wildShape: this.wildShape,
         });
     }
 

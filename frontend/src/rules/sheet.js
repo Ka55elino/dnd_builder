@@ -42,6 +42,7 @@ export function computeSheet(
     {
         race, subrace, cls, armor = null, shield = false, hands = [],
         skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
+        spellAbility = null, // the class's spellcasting ability (Shillelagh: "$spell")
     } = {},
 ) {
     const level = build.level ?? 1;
@@ -126,8 +127,10 @@ export function computeSheet(
 
     // --- attacks: weapons in hand; empty hands — unarmed strike ---
     const weaponProf = new Set(cls?.data?.weaponProficiencies ?? []);
+    // spells that change the weapons held (Shillelagh): { kind: 'weapon' } modifiers
+    const weaponMods = modifiers.filter((m) => m.kind === 'weapon');
     const attacks = handAttacks(hands, {
-        mods, prof, weaponProf,
+        mods, prof, weaponProf, weaponMods, spellAbility, level,
         bonusAddsMod: perks.has('twf'), // "Two-Weapon Fighting" fighting style
         archery: perks.has('archery'),
         dueling: perks.has('dueling'),
@@ -168,6 +171,7 @@ export function computeSheet(
     return sheet;
 }
 
+const cap = (t) => String(t)[0].toUpperCase() + String(t).slice(1);
 const isLight = (w) => (w?.data?.properties ?? []).includes('light');
 
 /**
@@ -187,13 +191,13 @@ const isLight = (w) => (w?.data?.properties ?? []).includes('light');
  */
 export function handAttacks(
     hands,
-    { mods, prof, weaponProf, bonusAddsMod = false, anyLight = false, archery = false, dueling = false },
+    { mods, prof, weaponProf, bonusAddsMod = false, anyLight = false, archery = false, dueling = false, weaponMods = [], spellAbility = null, level = 1 },
 ) {
     const main = hands.find((h) => h.hand === 'main')?.weapon ?? null;
     const off = hands.find((h) => h.hand === 'off')?.weapon ?? null;
     // "Dueling": +2 damage with a one-handed melee weapon if the other hand holds no weapon
     const oneWeapon = !!main !== !!off;
-    const base = { mods, prof, weaponProf, archery, dueling: dueling && oneWeapon };
+    const base = { mods, prof, weaponProf, archery, dueling: dueling && oneWeapon, weaponMods, spellAbility, level };
     const out = [];
 
     if (main) out.push(weaponAttack(main, { ...base, hand: 'main' }));
@@ -218,12 +222,30 @@ export function handAttacks(
  */
 export function weaponAttack(
     w,
-    { mods, prof, weaponProf, hand = 'main', bonus = false, bonusAddsMod = false, archery = false, dueling = false },
+    {
+        mods, prof, weaponProf, hand = 'main', bonus = false, bonusAddsMod = false, archery = false, dueling = false,
+        weaponMods = [], spellAbility = null, level = 1,
+    },
 ) {
     const p = w.data?.properties ?? [];
     const ranged = p.includes('ranged');
     const finesse = p.includes('finesse');
-    const ability = ranged ? 'dex' : finesse ? (mods.dex > mods.str ? 'dex' : 'str') : 'str';
+    let ability = ranged ? 'dex' : finesse ? (mods.dex > mods.str ? 'dex' : 'str') : 'str';
+
+    // a spell on this weapon (Shillelagh on a Club / Quarterstaff): every weapon held that it
+    // fits gets it — two Clubs, both; a sword, never
+    const base = w.data?.base ?? w.base ?? '';
+    const spell = weaponMods.find((m) => (m.weapons ?? []).some((id) => id === w.id || id === base) && !(m.melee && ranged));
+    let die = w.damage;
+    if (spell) {
+        const alt = spell.ability === '$spell' ? spellAbility : spell.ability;
+        if (alt && (mods[alt] ?? -99) > mods[ability]) ability = alt; // "can use … instead of Strength"
+        if (typeof spell.die === 'string') die = spell.die;
+        else if (spell.die) {
+            const at = Object.keys(spell.die).map(Number).filter((l) => l <= level).sort((a, b) => b - a)[0];
+            if (at != null) die = spell.die[at];
+        }
+    }
     const proficient = weaponProf.has(w.category) || weaponProf.has(w.id);
 
     const abilMod = mods[ability];
@@ -250,11 +272,15 @@ export function weaponAttack(
         ability,
         proficient,
         toHit: abilMod + (proficient ? prof : 0) + hitBonus,
-        damage: w.damage ? `${w.damage}${fmtMod(dmgMod)}` : '—',
+        damage: die ? `${die}${fmtMod(dmgMod)}` : '—',
         damageType: w.damageType,
         extra, // [{ dice, type }] — extra damage on hit
         magic: magicHit || magicDmg || extra.length ? { hit: magicHit, dmg: magicDmg } : null,
-        note: noMod ? 'no modifier to damage' : null,
+        // the spell on it: its name, and what it changed
+        spell: spell ? { name: spell.source ?? 'spell', ability, damageTypeAlt: spell.damageTypeAlt ?? null } : null,
+        note: [noMod ? 'no modifier to damage' : '', spell ? `${spell.source ?? 'spell'}${spell.damageTypeAlt ? `: or ${cap(spell.damageTypeAlt)} damage` : ''}` : '']
+            .filter(Boolean)
+            .join(' · ') || null,
     };
 }
 

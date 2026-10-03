@@ -2,7 +2,8 @@
  * Reference data from the DB as one object, cached for the app's lifetime.
  *
  *   const refs = await loadRefs();
- *   refs.races, refs.classes, refs.eq, refs.backgrounds, refs.feats, refs.spells, refs.conditions
+ *   refs.races, refs.classes, refs.eq, refs.backgrounds, refs.feats, refs.spells, refs.conditions,
+ *   refs.wildShapeForms — [{ monsterId, classId, subclassId, minLevel }] (the monsters: data/bestiary.js)
  *
  * Reference data loads once. Exceptions are equipment and spells: the user can
  * add their own. Save/delete them only through saveCustom… / deleteCustom… below —
@@ -20,6 +21,7 @@ import {
     GetRaces,
     GetSpells,
     GetConditions,
+    GetWildShapeForms,
     SaveCustomCondition,
     DeleteCustomCondition,
     SaveCustomEquipment,
@@ -39,8 +41,9 @@ export function loadRefs() {
         GetCatalog(),
         // conditions (Prone, Exhaustion…): an app built before the binding existed has no method
         GetConditions ? GetConditions().catch(() => []) : Promise.resolve([]),
+        GetWildShapeForms ? GetWildShapeForms().catch(() => []) : Promise.resolve([]),
     ])
-        .then(([races, classes, eq, backgrounds, feats, spells, catalog, conditions]) => ({
+        .then(([races, classes, eq, backgrounds, feats, spells, catalog, conditions, wildShapeForms]) => ({
             races,
             classes,
             eq,
@@ -49,6 +52,7 @@ export function loadRefs() {
             spells,
             catalog, // all equipment, including named items: { weapons, armor, items }
             conditions: conditions ?? [], // conditions and named effects (rules/modifiers.js)
+            wildShapeForms: wildShapeForms ?? [], // Wild Shape: class → bestiary monster, from level N
         }))
         .catch((e) => {
             cache = null; // the next attempt reloads

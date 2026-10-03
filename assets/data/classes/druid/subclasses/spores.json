@@ -3,6 +3,11 @@
   "name": "Circle of Spores",
   "image": "/img/classes/druid/subclasses/spores.png",
   "class": "druid",
+  "domainSpells": {
+    "0": [
+      "chillTouch"
+    ]
+  },
   "features": [
     {
       "level": 3,

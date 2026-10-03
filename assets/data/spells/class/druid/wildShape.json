@@ -6,24 +6,25 @@
   "classes": [
     "druid"
   ],
-  "action": "action",
+  "action": "bonus",
   "uses": {
     "count": 2,
-    "per": "shortRest",
+    "per": "longRest",
+    "shortRestRegain": 1,
     "scale": [
-      [
-        2,
-        2
-      ],
-      [
-        6,
-        3
-      ],
-      [
-        17,
-        4
-      ]
+      [2, 2],
+      [6, 3],
+      [17, 4]
     ]
   },
-  "desc": "As an action, you transform into a Beast from the available forms (see below). The available CR and movement types increase with level; Circle of the Moon expands your combat forms. Uses are regained on a Short or Long Rest."
+  "wildShape": {
+    "known": [
+      [2, 4],
+      [4, 6],
+      [8, 8]
+    ],
+    "tempHp": "level",
+    "hours": "level/2"
+  },
+  "desc": "As a Bonus Action you shape-shift into a Beast form you know (the 🐾 Wild Shape button in Status). You gain Temporary Hit Points equal to your Druid level; your own Hit Points stay, and damage takes the temporary ones first. The form lasts a number of hours equal to half your Druid level, until you leave it as a Bonus Action, become Incapacitated, die or use Wild Shape again. You can't cast spells, but Concentration isn't broken. You regain one use on a Short Rest and all on a Long Rest. Known forms: 4 at level 2, 6 at level 4, 8 at level 8."
 }

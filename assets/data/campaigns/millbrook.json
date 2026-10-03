@@ -258,7 +258,7 @@
       "notes": "At dusk; the wolves flee when two of them fall.",
       "monsters": [
         {
-          "monsterId": "wolf",
+          "monsterId": "srd-wolf",
           "count": 3
         }
       ],

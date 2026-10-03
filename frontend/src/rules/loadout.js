@@ -12,7 +12,8 @@
  *
  * Rules:
  *   - hands hold only weapons or shields; the armor slot holds only armor;
- *   - one item cannot be held in both hands at once;
+ *   - one item cannot be held in both hands at once — unless there are two or more of it
+ *     (2 Clubs, 2 Daggers: one in each hand);
  *   - a two-handed weapon takes both hands: the other hand becomes empty.
  */
 
@@ -29,6 +30,8 @@ export const isTwoHanded = (it) =>
     it?.kind === 'weapon' && (it.ref?.data?.properties ?? []).includes('twoHanded');
 
 const byKey = (inventory, key) => (key ? inventory.find((it) => it.key === key) ?? null : null);
+// enough of it for both hands
+const pair = (it) => (Number(it?.qty) || 1) >= 2;
 
 /** Options for a slot (for the select). */
 export function slotOptions(slot, inventory) {
@@ -60,7 +63,7 @@ export function normalize(equipped, inventory) {
     const armor = byKey(inventory, e.armor);
 
     e.main = main && isHandItem(main) ? main.key : null;
-    e.off = off && isHandItem(off) && off.key !== e.main ? off.key : null;
+    e.off = off && isHandItem(off) && (off.key !== e.main || pair(off)) ? off.key : null;
     e.armor = armor?.kind === 'armor' ? armor.key : null;
 
     if (isTwoHanded(byKey(inventory, e.main))) e.off = null;
@@ -75,8 +78,8 @@ export function equip(equipped, slot, key, inventory) {
 
     if (slot !== 'armor' && key) {
         const other = slot === 'main' ? 'off' : 'main';
-        // same item in the other hand — move it
-        if (e[other] === key) e[other] = null;
+        // the same item in the other hand — move it (two of it: one in each hand)
+        if (e[other] === key && !pair(byKey(inventory, key))) e[other] = null;
         // two-handed — the other hand is emptied
         if (isTwoHanded(byKey(inventory, key))) e[other] = null;
         // the other hand holds a two-handed weapon — it has to go
@@ -94,7 +97,12 @@ export function resolve(equipped, inventory) {
     };
 }
 
-/** Where the item is now: 'main' | 'off' | 'armor' | null. */
+/** Where the item is now: 'main' | 'off' | 'armor' | null (both hands — 'main'; see slotsOf). */
 export function slotOf(key, equipped) {
     return SLOTS.find((s) => equipped[s.id] === key)?.id ?? null;
+}
+
+/** Every slot the item is in: ['main', 'off'] for a pair held in both hands. */
+export function slotsOf(key, equipped) {
+    return SLOTS.filter((s) => equipped[s.id] === key).map((s) => s.id);
 }

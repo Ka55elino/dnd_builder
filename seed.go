@@ -47,6 +47,9 @@ var seeders = []seeder{
 	// bestiary
 	{table: "monsters", dir: "assets/data/monsters", count: "CountMonsters", row: insertMonsterJSON},
 
+	// Wild Shape forms: the link class → bestiary monster (after the monsters)
+	{table: "wild_shape_forms", dir: "assets/data/wildshape", count: "CountWildShapeForms", row: insertWildShapeJSON},
+
 	// sample characters: dev mode only, and only if there are no characters yet
 	{table: "characters", dir: "assets/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
 

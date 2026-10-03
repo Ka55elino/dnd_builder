@@ -259,8 +259,9 @@
                     <span class="ds bad">{"●".repeat(v.deathSaves?.fail ?? 0)}{"○".repeat(3 - (v.deathSaves?.fail ?? 0))}</span>
                 </div>
             {/if}
-            {#if v.conditions?.length || v.inspiration}
+            {#if v.conditions?.length || v.inspiration || v.wildShape}
                 <ul class="chips">
+                    {#if v.wildShape}<li class="ws" title="Wild Shape — the beast's Armor Class">🐾 {v.wildShape.name}{#if v.wildShape.ac != null} · AC {v.wildShape.ac}{/if}</li>{/if}
                     {#if v.inspiration}<li class="insp">Inspiration</li>{/if}
                     {#each v.conditions as c (c)}<li>{cap(c)}</li>{/each}
                 </ul>
@@ -368,6 +369,11 @@
 {/if}
 
 <style>
+    .chips li.ws {
+        border-color: var(--color-gold);
+        color: var(--color-gold);
+    }
+
     .brief {
         box-sizing: border-box;
         width: 100%;

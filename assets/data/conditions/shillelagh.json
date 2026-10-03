@@ -6,9 +6,14 @@
   "duration": "1 minute",
   "modifiers": [
     {
-      "kind": "note",
-      "note": "Club / Quarterstaff: spellcasting ability for attack and damage rolls"
+      "kind": "weapon",
+      "weapons": ["club", "quarterstaff"],
+      "melee": true,
+      "ability": "$spell",
+      "die": { "1": "1d8", "5": "1d10", "11": "1d12", "17": "2d6" },
+      "damageTypeAlt": "force",
+      "name": "Club / Quarterstaff"
     }
   ],
-  "desc": "Your Club or Quarterstaff uses your spellcasting ability for its attack and damage rolls."
+  "desc": "A Club or Quarterstaff you are holding: your spellcasting ability for its attack and damage rolls, its damage die becomes a d8 (d10 at level 5, d12 at 11, 2d6 at 17), and the damage can be Force or its normal type. Ends early if you cast it again or let go of the weapon."
 }

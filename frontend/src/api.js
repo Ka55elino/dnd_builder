@@ -47,6 +47,7 @@ export const {
     GetRaces,
     GetSpells,
     GetConditions,
+    GetWildShapeForms,
     SaveCustomCondition,
     DeleteCustomCondition,
     ListCharacters,

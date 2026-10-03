@@ -24,7 +24,8 @@ import { evalFormula, byLevelPairs } from '../rules/formula.js';
 import { spellSlots } from '../rules/spellcasting.js';
 import { dieAt } from '../rules/damage.js';
 import { defaultEquipped, normalize, resolve } from '../rules/loadout.js';
-import { summarizeChoices, spellcastingOf } from '../rules/progression.js';
+import { summarizeChoices, spellcastingOf, subclassSpellIds } from '../rules/progression.js';
+import { wildShapeAbility, formTempHp, formHours, formCost } from '../rules/wildshape.js';
 import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
 import { isBodyArmor } from '../rules/equipment.js';
 import { resolveConditions, conditionModifiers, inlineDef, rowName, modifierText } from '../rules/modifiers.js';
@@ -134,6 +135,7 @@ export class Character {
 
         this.build = build;
         this.level = build.level ?? 1;
+        Object.defineProperty(this, 'refs', { value: refs, enumerable: false }); // for wildShapeInfo
 
         // --- sources ---
         this.race = races.find((r) => r.id === build.raceId) ?? null;
@@ -237,9 +239,15 @@ export class Character {
         this.conditionImmune = immuneTo; // condition ids the character can't get
         this.conditions = resolveConditions(effects ?? [], this.conditionDefs, immuneTo);
         // Mage Armor & co. (only a base AC "without armor"): no effect while wearing armor
+        // Shillelagh & co. (they change a weapon you hold): no effect without such a weapon in hand
+        const held = hands.filter((h) => h.item?.kind === 'weapon').map((h) => h.item.ref);
         for (const r of this.conditions) {
             const mods = (r.def.data ?? r.def).modifiers ?? [];
             if (wearing && mods.length && mods.every((m) => m.kind === 'acBase' && m.unarmored)) r.inactive = 'no effect while wearing armor';
+            const wm = mods.filter((m) => m.kind === 'weapon');
+            if (wm.length && !held.some((w) => wm.some((m) => (m.weapons ?? []).some((id) => id === w?.id || id === (w?.data?.base ?? w?.base))))) {
+                r.inactive = `no effect: hold a ${wm.flatMap((m) => m.weapons ?? []).map((id) => id[0].toUpperCase() + id.slice(1)).join(' or ')}`;
+            }
         }
         // everything on the character as modifiers, each with its source (rules/modifiers.js)
         const modifiers = conditionModifiers(this.conditions);
@@ -276,6 +284,7 @@ export class Character {
                 expertise: [...this.chosen.expertise],
                 perks,
                 modifiers,
+                spellAbility: spellcastingOf(this.cls, this.subclass)?.ability ?? null,
             }),
         );
         this.maxHp = this.hp;
@@ -381,7 +390,7 @@ export class Character {
                 feature: sp.name,
                 max: Math.max(0, usesMax(sp.data.uses, ctx)),
                 recharge: sp.data.uses.per === 'shortRest' ? 'short' : 'long',
-                shortRestRegain: null,
+                shortRestRegain: sp.data.uses.shortRestRegain ?? null, // Wild Shape: one back on a Short Rest
                 die: dieAt(sp.data.scaleDie, this.level) || null,
             }));
         const DIE = (d) => Number(String(d ?? '').replace(/^\d*d/, '')) || 0;
@@ -426,7 +435,9 @@ export class Character {
 
         // --- known spells: chosen + fixed species grants ---
         const raceSpellIds = grants.filter((g) => g.type === 'spell' && g.id).map((g) => g.id);
-        const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...raceSpellIds])];
+        // Domain / Oath / Patron / Circle spells: always prepared, cast with the class ability
+        this.subclassSpellIds = new Set(subclassSpellIds(this.subclass, this.cls, this.level).map((x) => x.id));
+        const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...this.subclassSpellIds, ...raceSpellIds])];
 
         // species spells have their own spellcasting ability (see speciesSpellAbility):
         // fixed grants + spells chosen through species traits (choice keys L<n>:race:… / L<n>:subrace:…)
@@ -438,6 +449,7 @@ export class Character {
         const raceChosenIds = Object.entries(build.choices ?? {})
             .filter(([k, c]) => /^L\d+:(race|subrace):/.test(k) && ['cantrips', 'spells'].includes(c?.kind))
             .flatMap(([, c]) => c.ids ?? []);
+        for (const id of this.subclassSpellIds) classSpellIds.add(id);
         // a spell the class also grants is cast with the class ability
         this.raceSpellIds = new Set([...raceSpellIds, ...raceChosenIds].filter((id) => !classSpellIds.has(id)));
         const freeCastIds = new Set(
@@ -477,7 +489,14 @@ export class Character {
         const card = (sp, source) => ({ item: fill(sp), source, uses: withUses(sp), boost: dieBoost(sp) });
         // spell card: species spells use the species ability for the DC and get a note
         const spellCard = (sp, title) => {
-            if (!this.raceSpellIds.has(sp.id)) return { ...card(sp, title), saveDC: this.spellcasting?.saveDC ?? null };
+            if (!this.raceSpellIds.has(sp.id)) {
+                const sub = this.subclassSpellIds.has(sp.id) && this.subclass;
+                return {
+                    ...card(sp, sub ? `${title} · ${sub.name}` : title),
+                    saveDC: this.spellcasting?.saveDC ?? null,
+                    ...(sub ? { note: sp.level > 0 ? 'always prepared' : 'from the subclass' } : {}),
+                };
+            }
             const rs = this.raceSpellcasting;
             const abil = rs?.ability ? ABILITIES[rs.ability]?.short : null;
             return {
@@ -573,6 +592,28 @@ export class Character {
             [...upTo(this.cls?.data?.features), ...upTo(this.subclass?.data?.features)],
             passiveFeats,
         );
+    }
+
+    /**
+     * Wild Shape: the forms this character knows (links refs.wildShapeForms, in short — the stat
+     * block is the bestiary's) and the numbers of a transformation; null if the class has none.
+     *   { forms: [form], resource, tempHp, hours, cost(form) }
+     */
+    get wildShapeInfo() {
+        const ab = wildShapeAbility(this.refs, this.cls?.id);
+        if (!ab || this.level < (ab.level ?? 2)) return null;
+        const known = new Set(this.chosen.wildShapeForms ?? []);
+        const forms = (this.refs?.wildShapeForms ?? []).filter(
+            (f) => known.has(f.monsterId) && f.classId === this.cls?.id && (!f.subclassId || f.subclassId === this.subclass?.id),
+        );
+        const seen = new Set();
+        return {
+            forms: forms.filter((f) => !seen.has(f.monsterId) && seen.add(f.monsterId)),
+            resource: this.resource(ab.data?.resource ?? ab.id),
+            tempHp: formTempHp(this.refs, this.cls?.id, this.subclass, this.level),
+            hours: formHours(this.level),
+            cost: (f) => formCost(f, this.subclass),
+        };
     }
 
     /** Resource by id. */

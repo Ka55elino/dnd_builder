@@ -32,6 +32,7 @@
 import { SKILLS } from './skills.js';
 import { ABILITY_KEYS, ABILITIES, modifier } from './abilities.js';
 import { byLevelPairs } from './formula.js';
+import { formsKnownAt, formsAvailable, crText, speedText } from './wildshape.js';
 import { spellSlots } from './spellcasting.js';
 import { proficiencyBonus } from './sheet.js';
 import { SCHOOLS } from './labels.js';
@@ -83,6 +84,7 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
         spells: [],
         options: [],
         pool: [],           // picks from subclass pools (maneuvers, shots)
+        wildShapeForms: [], // Wild Shape: known forms (bestiary monster ids)
     };
 
     const bg = findBg(build, refs);
@@ -135,6 +137,9 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
                 break;
             case 'pool':
                 out.pool.push(...ids);
+                break;
+            case 'wildShapeForms':
+                out.wildShapeForms.push(...ids);
                 break;
         }
     }
@@ -337,7 +342,29 @@ export function levelPlan(build, level, refs) {
         }
     }
 
+    // Wild Shape: new known forms at this level (4 at 2, 6 at 4, 8 at 8) — from the forms linked
+    // to the class (rules/wildshape.js); Circle of the Moon may take higher CRs
+    const formsNew = cls ? formsKnownAt(refs, cls.id, level) - (level > 1 ? formsKnownAt(refs, cls.id, level - 1) : 0) : 0;
+    if (formsNew > 0) {
+        add({
+            key: `L${level}:class:wildShapeForms`,
+            kind: 'wildShapeForms',
+            title: 'Wild Shape: known forms',
+            desc: 'Beasts you can turn into. Flying forms — from level 8.',
+            pick: formsNew,
+            options: formsAvailable(refs, cls.id, subclass?.id ?? '', level, subclass)
+                .filter((f) => !done.wildShapeForms.includes(f.monsterId))
+                .map((f) => ({
+                    id: f.monsterId,
+                    name: f.name,
+                    desc: `AC ${f.ac} · HP ${f.hp} · ${speedText(f.speed)}`,
+                    meta: `CR ${crText(f.cr)}${f.subclassId ? ' · Circle' : ''}`,
+                })),
+        });
+    }
+
     // class (or subclass) spells
+    const granted = new Set(subclassSpellIds(subclass, cls, level).map((x) => x.id));
     if (scOn(level)) {
         const list = sc.list ?? cls.id;
         const who = scOwner?.name ?? cls.name;
@@ -350,7 +377,9 @@ export function levelPlan(build, level, refs) {
                 kind: 'cantrips',
                 title: `Cantrips (${who})`,
                 pick: cNew,
-                options: spellList(refs, list, { maxLevel: 0 }).filter((sp) => !done.cantrips.includes(sp.id)).map(spellOption),
+                options: spellList(refs, list, { maxLevel: 0 })
+                    .filter((sp) => !done.cantrips.includes(sp.id) && !granted.has(sp.id))
+                    .map(spellOption),
             });
         }
         if (pNew > 0 && maxCircle > 0) {
@@ -361,7 +390,7 @@ export function levelPlan(build, level, refs) {
                 desc: `Spell level — up to ${maxCircle}.`,
                 pick: pNew,
                 options: spellList(refs, list, { minLevel: 1, maxLevel: maxCircle })
-                    .filter((sp) => !done.spells.includes(sp.id))
+                    .filter((sp) => !done.spells.includes(sp.id) && !granted.has(sp.id))
                     .map(spellOption),
             });
         }
@@ -443,6 +472,25 @@ export function levelPlan(build, level, refs) {
     }
 
     return { level, prof, profChanged, hp, slots, slotsChanged, gains, choices };
+}
+
+/**
+ * Spells the subclass gives for free (always prepared, not counted against the choice):
+ * subclass.data.domainSpells = { "<character level>": [spell ids] } — Domain / Oath / Patron /
+ * Circle spells; the key "0" — cantrips from the subclass level (Death: Chill Touch, Spores…).
+ * → [{ id, from }] up to `level`.
+ */
+export function subclassSpellIds(subclass, cls, level) {
+    const ds = subclass?.data?.domainSpells;
+    if (!ds) return [];
+    const start = cls?.subclassLevel ?? 3;
+    const out = [];
+    for (const [k, ids] of Object.entries(ds)) {
+        const at = Number(k) === 0 ? start : Math.max(Number(k) || 0, start);
+        if (level < at) continue;
+        for (const id of [].concat(ids ?? [])) if (!out.some((x) => x.id === id)) out.push({ id, from: at });
+    }
+    return out;
 }
 
 /** The class's spellcasting, otherwise the subclass's. */
@@ -532,7 +580,9 @@ function featFollowUps(featId, key, level, done, refs, add) {
         const list = mi[1].toLowerCase();
         add({
             key: `${key}:cantrips`, kind: 'cantrips', title: `${feat.name}: cantrips`, pick: 2,
-            options: spellList(refs, list, { maxLevel: 0 }).filter((sp) => !done.cantrips.includes(sp.id)).map(spellOption),
+            options: spellList(refs, list, { maxLevel: 0 })
+                    .filter((sp) => !done.cantrips.includes(sp.id) && !granted.has(sp.id))
+                    .map(spellOption),
         });
         add({
             key: `${key}:spells`, kind: 'spells', title: `${feat.name}: level 1 spell`, pick: 1,

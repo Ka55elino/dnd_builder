@@ -8,13 +8,15 @@
  * records or their data differ. The DM never recomputes a player's sheet when
  * a summary is available.
  *
- * build — CharacterBuild, ch — Character, state — CharacterState
+ * build — CharacterBuild, ch — Character, state — CharacterState,
+ * form — the Wild Shape monster (its AC, image) if the character is in beast form
  */
 import { rowName } from './modifiers.js';
+import { formStats } from './wildshape.js';
 
 export const SUMMARY_VERSION = 1;
 
-export function buildSummary(build, ch, state) {
+export function buildSummary(build, ch, state, { form = null } = {}) {
     const ds = state?.deathSaves ?? {};
     return {
         v: SUMMARY_VERSION,
@@ -40,6 +42,15 @@ export function buildSummary(build, ch, state) {
         // the instances themselves (rules/conditions.js) — for the DM's Conditions dialog
         conditionInstances: (state?.effects ?? []).filter((e) => e?.type === 'condition').map(({ def, ...e }) => ({ ...e, ...(def ? { name: def.name } : {}) })), // eslint-disable-line no-unused-vars
         inspiration: !!state?.inspiration,
+        // Wild Shape (variant B): the DM sees the form and its AC on the card
+        wildShape: state?.wildShape
+            ? {
+                  name: state.wildShape.name || form?.name || '',
+                  // Circle of the Moon: at least 13 + WIS
+                  ac: form ? formStats(form, { mods: ch.mods, subclass: ch.subclass }).ac : null,
+                  image: form?.image ?? '',
+              }
+            : null,
 
         mods: { ...ch.mods },
         scores: { ...(build.totalAbilities ?? {}) },

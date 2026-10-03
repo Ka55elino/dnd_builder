@@ -1,5 +1,8 @@
 <script>
     import { damageShort, damageName, damageLabel } from "../rules/labels.js";
+    import WildShapeCard from "./WildShapeCard.svelte";
+    import { loadMonsters } from "../data/bestiary.js";
+    import { crText, speedText } from "../rules/wildshape.js";
     import IconLabel from "./common/IconLabel.svelte";
     import Icon, { hasIcon } from "./common/Icon.svelte";
     /**
@@ -52,7 +55,7 @@
         SLOTS,
         equip,
         slotOptions,
-        slotOf,
+        slotsOf,
         isTwoHanded,
     } from "../rules/loadout.js";
     import {
@@ -147,6 +150,9 @@
         off: "in off hand",
         armor: "worn",
     };
+    // a pair held in both hands: one tag
+    const slotTag = (slots) =>
+        slots.includes("main") && slots.includes("off") ? "in both hands" : SLOT_TAG[slots[0]];
 
     // short names for the template
     const race = $derived(character?.race);
@@ -163,6 +169,29 @@
     );
 
     const hpNow = $derived(state && character ? state.currentHp(character) : 0);
+
+    // ---------- Wild Shape (rules/wildshape.js; the beast's card: WildShapeCard) ----------
+    const wsInfo = $derived(character?.wildShapeInfo ?? null);
+    let monsters = $state([]); // the bestiary (the forms' stat blocks), loaded for a Wild Shape class
+    $effect(() => {
+        if (wsInfo && !monsters.length) loadMonsters().then((m) => (monsters = m ?? [])).catch(() => {});
+    });
+    const formMonster = $derived(state?.wildShape ? (monsters.find((m) => m.id === state.wildShape.monsterId) ?? null) : null);
+    const wsLeft = $derived(wsInfo?.resource && state ? state.resourceLeft(wsInfo.resource) : 0);
+    let wsOpen = $state(false);
+
+    function transform(f) {
+        if (!wsInfo || !state) return;
+        state.startWildShape(f, { res: wsInfo.resource, cost: wsInfo.cost(f), tempHp: wsInfo.tempHp });
+        wsOpen = false;
+    }
+
+    // Incapacitated (Unconscious, Stunned… imply it) — the form ends
+    $effect(() => {
+        if (!state?.wildShape || !character) return;
+        const down = character.conditions.some((r) => !r.immune && !r.inactive && r.id === "incapacitated");
+        if (down) state.endWildShape();
+    });
 
     // --- game state (Hit Points, resources, slots, equipment, notes) ---
     // Saved by the “Save” button (or Ctrl/Cmd+S), and also automatically
@@ -223,7 +252,7 @@
     const summaryJson = $derived.by(() => {
         if (!inGame || !character || !build || !state) return null;
         try {
-            return JSON.stringify(buildSummary(build, character, state));
+            return JSON.stringify(buildSummary(build, character, state, { form: formMonster }));
         } catch (e) {
             console.warn("[game] summary:", e);
             return null;
@@ -531,7 +560,9 @@
 <!-- Cast / Use bar at the bottom of an action or spell card -->
 {#snippet useBar(c, key)}
     {@const info = useOptions(c, character, state)}
-    {#if info}
+    {#if c.item.data?.wildShape}
+        <div class="use no-print"><small class="muted">Transform in Status → 🐾 Wild Shape</small></div>
+    {:else if info}
         {@const sel = useSel[key]?.value ?? info.defaultValue}
         {@const opt = info.options?.find((o) => o.value === sel) ?? null}
         {@const amount = useSel[key]?.amount ?? info.amount}
@@ -539,7 +570,9 @@
             (c.item.kind === "spell" || info.kind === "slot") && opt?.slot
                 ? upcastLines(c.item, opt.level)
                 : []}
+        {@const noCast = !!state?.wildShape && c.item.kind === "spell" && character.level < 18}
         {@const off =
+            noCast ||
             info.disabled ||
             !!opt?.disabled ||
             (info.options && !info.options.length)}
@@ -611,7 +644,8 @@
             <button
                 class="use-btn"
                 disabled={off}
-                title={info.reason ||
+                title={(noCast ? "You can't cast spells in beast form" : "") ||
+                    info.reason ||
                     (opt?.disabled ? "No slots of this level left" : "") ||
                     (info.concentration
                         ? `${info.label} — starts Concentration`
@@ -729,6 +763,11 @@
         <div class="row row-title">
             <section>
                 <h1>{build.name}</h1>
+                {#if state?.wildShape}
+                    <p class="ws-plaque" title="Variant B: the beast's numbers are in its card in the Status column">
+                        🐾 In beast form: <b>{state.wildShape.name || formMonster?.name || "a beast"}</b> — the sheet's numbers are your own
+                    </p>
+                {/if}
                 <p class="class-line">
                     {cls?.name ?? build.classId}
                     <span class="lvl">Level {build.level}</span>
@@ -883,10 +922,11 @@
                     {#if character.inventory.length}
                         <ul class="inventory">
                             {#each [...character.inventory].sort((a, b) => KIND_ORDER[a.kind] - KIND_ORDER[b.kind]) as it (it.key)}
-                                {@const where = slotOf(
+                                {@const slots = slotsOf(
                                     it.key,
                                     character.equipped,
                                 )}
+                                {@const where = slots.length ? slotTag(slots) : ""}
                                 <li class:worn={where}>
                                     <span>
                                         <Tooltip>
@@ -896,7 +936,7 @@
                                                 )}{/snippet}
                                         </Tooltip>
                                         {#if where}<small class="tag"
-                                                >{SLOT_TAG[where]}</small
+                                                >{where}</small
                                             >{/if}
                                         {#if it.given}<small class="tag"
                                                 >given</small
@@ -1415,6 +1455,44 @@
                         </ul>
                     {/if}
 
+                    {#if wsInfo}
+                        <h3>Wild Shape</h3>
+                        {#if !wsInfo.forms.length}
+                            <p class="muted ws-none">No forms known yet — choose them when leveling up (or in Edit).</p>
+                        {:else if state.wildShape}
+                            <div class="ws-row">
+                                <span class="ws-now">🐾 <b>{state.wildShape.name || formMonster?.name}</b></span>
+                                <span class="spacer"></span>
+                                <button class="ghost" onclick={() => state.endWildShape()} title="Return to your own shape (a Bonus Action)">Revert</button>
+                            </div>
+                        {:else}
+                            <div class="ws-row">
+                                <button
+                                    class="ghost ws-btn"
+                                    class:open={wsOpen}
+                                    onclick={() => (wsOpen = !wsOpen)}
+                                    disabled={!wsLeft}
+                                    title={wsLeft ? "Choose a form (a Bonus Action)" : "No uses of Wild Shape left — a Short Rest gives one back"}
+                                >🐾 Transform ▾</button>
+                                <small class="muted">{wsLeft}/{wsInfo.resource?.max ?? 0} uses · +{wsInfo.tempHp} temp HP · up to {wsInfo.hours} h</small>
+                            </div>
+                            {#if wsOpen}
+                                <ul class="ws-forms">
+                                    {#each wsInfo.forms as f (f.monsterId)}
+                                        {@const cost = wsInfo.cost(f)}
+                                        <li>
+                                            <button class="ws-form" onclick={() => transform(f)} disabled={wsLeft < cost}>
+                                                {#if f.image}<img src={f.image} alt="" />{:else}<span class="ws-dot">🐾</span>{/if}
+                                                <span class="ws-name">{f.name}<small>CR {crText(f.cr)} · AC {f.ac} · {speedText(f.speed)}</small></span>
+                                                {#if cost > 1}<small class="ws-cost">{cost} uses</small>{/if}
+                                            </button>
+                                        </li>
+                                    {/each}
+                                </ul>
+                            {/if}
+                        {/if}
+                    {/if}
+
                     {#if character.spellSlots.length}
                         <h3>
                             Spell Slots
@@ -1482,6 +1560,17 @@
                         >
                     </div>
                 </section>
+
+                <!-- Wild Shape: the beast's card (the sheet stays the druid's) -->
+                {#if state?.wildShape}
+                    <WildShapeCard
+                        monster={formMonster}
+                        form={wsInfo?.forms.find((f) => f.monsterId === state.wildShape.monsterId) ?? null}
+                        {character}
+                        {state}
+                        onRevert={() => state.endWildShape()}
+                    />
+                {/if}
 
                 <!-- passive effects: always active -->
                 {#if passives.effects.length || passives.abilities.length}
@@ -1826,6 +1915,106 @@
 
     .spacer {
         flex: 1;
+    }
+
+    /* ---------- Wild Shape ---------- */
+    .ws-plaque {
+        margin: 6px 0 0;
+        padding: 4px 10px;
+        display: inline-block;
+        background: color-mix(in srgb, var(--color-gold) 14%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-gold) 50%, transparent);
+        border-radius: 6px;
+        color: var(--color-text-secondary);
+        font-family: var(--font-ui);
+        font-size: 12px;
+    }
+
+    .ws-plaque b {
+        color: var(--color-gold);
+    }
+
+    .ws-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .ws-row small,
+    .ws-none {
+        font-size: 12px;
+    }
+
+    .ws-now b {
+        color: var(--color-gold);
+    }
+
+    .ws-btn.open {
+        border-color: var(--color-gold);
+        color: var(--color-gold);
+    }
+
+    .ws-forms {
+        margin: 6px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 6px;
+    }
+
+    .ws-form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px;
+        background: var(--color-card-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .ws-form:hover:not(:disabled) {
+        border-color: var(--color-gold);
+    }
+
+    .ws-form:disabled {
+        opacity: 0.45;
+        cursor: default;
+    }
+
+    .ws-form img,
+    .ws-dot {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: grid;
+        place-items: center;
+        background: var(--color-card);
+    }
+
+    .ws-name {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .ws-name small {
+        display: block;
+        color: var(--color-text-muted);
+        font-size: 11px;
+    }
+
+    .ws-cost {
+        color: var(--color-gold);
+        font-size: 11px;
     }
 
     .top {
