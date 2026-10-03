@@ -100,11 +100,6 @@ export const {
     LogToActiveSession,
     UpdateSessionEvent,
     DeleteSessionEvent,
-    // the campaign board (boards.go)
-    GetCampaignBoard,
-    SaveBoardNodes,
-    ResetBoardLayout,
-    GetPartyLocation,
     // local-network game (net.go)
     NetStatus,
     HostGame,

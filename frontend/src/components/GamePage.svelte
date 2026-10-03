@@ -23,7 +23,6 @@
         loadActiveSession, loadCampaign, logToActiveSession, loadCampaigns, loadSessions, setSessionStatus,
         saveSession, loadSession,
     } from '../data/campaigns.js';
-    import CampaignBoard from './campaign/board/CampaignBoard.svelte';
     import SessionView from './campaign/SessionView.svelte';
 
     let { onBack } = $props();
@@ -44,7 +43,7 @@
         .catch(() => {});
 
     // the session being played (Campaign → Sessions → ▶ Start): combat and Give Item log there
-    // logTo — { label, campaign, session } of the session being played (the Map and Log tabs need it)
+    // logTo — { label, campaign, session } of the session being played (the Log tab needs it)
     let logTo = $state(null);
     async function refreshLogTo() {
         try {
@@ -58,7 +57,7 @@
     }
     refreshLogTo();
 
-    // the screen while hosting: Party (the character cards) | Map (the campaign board) | Log (the session)
+    // the screen while hosting: Party (the character cards) | Log (the session)
     let tab = $state('party');
     $effect(() => {
         if (!logTo && tab !== 'party') tab = 'party';
@@ -295,15 +294,10 @@
         {#if logTo?.campaign}
             <nav class="tabs" aria-label="Game screen">
                 <button class:on={tab === 'party'} onclick={() => (tab = 'party')}>Party <span class="count">{server.players.length}</span></button>
-                <button class:on={tab === 'map'} onclick={() => (tab = 'map')}>Map</button>
                 <button class:on={tab === 'log'} onclick={() => (tab = 'log')}>Log · Session {logTo.session.number}</button>
             </nav>
         {/if}
-        {#if tab === 'map' && logTo?.campaign}
-            {#key logTo.campaign.id}
-                <div class="tabpane"><CampaignBoard campaign={logTo.campaign} /></div>
-            {/key}
-        {:else if tab === 'log' && logTo?.campaign}
+        {#if tab === 'log' && logTo?.campaign}
             {#key logTo.session.id}
                 <div class="tabpane"><SessionView campaign={logTo.campaign} id={logTo.session.id} embedded /></div>
             {/key}

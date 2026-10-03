@@ -456,23 +456,6 @@
         "notes": "Oren gives the quest but tries to steer the party away from the quarry.",
         "tags": [
           "chapter 1"
-        ],
-        "route": [
-          {
-            "locationId": "loc_road",
-            "label": "Search the wrecked wagons",
-            "objective": 0
-          },
-          {
-            "locationId": "loc_tankard_cellar",
-            "label": "Follow the stolen goods",
-            "objective": 1
-          },
-          {
-            "locationId": "loc_quarry",
-            "label": "Confront the bandits",
-            "objective": 2
-          }
         ]
       }
     },
@@ -504,23 +487,6 @@
         "notes": "Leads straight to Corvane and the shrine.",
         "tags": [
           "chapter 2"
-        ],
-        "route": [
-          {
-            "locationId": "loc_chapel",
-            "label": "Talk to the burned miners",
-            "objective": 0
-          },
-          {
-            "locationId": "loc_quarry",
-            "label": "Down into the galleries",
-            "objective": 1
-          },
-          {
-            "locationId": "loc_shrine",
-            "label": "Stop the ritual",
-            "objective": 2
-          }
         ]
       }
     },
@@ -544,19 +510,7 @@
             "done": false
           }
         ],
-        "notes": "If the party is rough with Tam, Hilda turns unfriendly.",
-        "route": [
-          {
-            "locationId": "loc_tankard",
-            "label": "Follow Tam at night",
-            "objective": 0
-          },
-          {
-            "locationId": "loc_tankard_cellar",
-            "label": "Meet his contact",
-            "objective": 1
-          }
-        ]
+        "notes": "If the party is rough with Tam, Hilda turns unfriendly."
       }
     },
     {
@@ -579,19 +533,7 @@
             "done": false
           }
         ],
-        "notes": "A goblin alliance makes the bandit camp fight much easier.",
-        "route": [
-          {
-            "locationId": "loc_thornwood",
-            "label": "Parley with Grizzletooth",
-            "objective": 0
-          },
-          {
-            "locationId": "loc_quarry",
-            "label": "Drive out the bandits",
-            "objective": 1
-          }
-        ]
+        "notes": "A goblin alliance makes the bandit camp fight much easier."
       }
     }
   ],

@@ -133,31 +133,9 @@ CREATE TABLE IF NOT EXISTS campaign_session_events (
 CREATE INDEX IF NOT EXISTS idx_events_session ON campaign_session_events(session_id, position);
 CREATE INDEX IF NOT EXISTS idx_events_ref     ON campaign_session_events(ref_type, ref_id);
 
--- Boards: the campaign's diagram (Overview). A board only keeps where things are drawn —
--- what is drawn (locations, quests, routes, links) comes from the campaign itself.
-CREATE TABLE IF NOT EXISTS campaign_boards (
-    id          TEXT PRIMARY KEY,                -- 'brd_xxxx'
-    campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
-    name        TEXT NOT NULL DEFAULT 'Campaign map',
-    data_json   TEXT NOT NULL DEFAULT '{}',      -- viewport, filters…
-    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),
-    updated_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))
-);
-
-CREATE INDEX IF NOT EXISTS idx_boards_campaign ON campaign_boards(campaign_id);
-
--- Where a thing sits on a board. x / y are relative to its parent node for a location
--- inside another one (nested nodes); w / h — the size of a group (a location with children).
-CREATE TABLE IF NOT EXISTS campaign_board_nodes (
-    board_id TEXT NOT NULL REFERENCES campaign_boards(id) ON DELETE CASCADE,
-    ref_type TEXT NOT NULL,                      -- location | quest
-    ref_id   TEXT NOT NULL,
-    x        REAL NOT NULL DEFAULT 0,
-    y        REAL NOT NULL DEFAULT 0,
-    w        REAL,
-    h        REAL,
-    PRIMARY KEY (board_id, ref_type, ref_id)
-);
+-- The old campaign board (Overview graph) is gone: drop its tables from existing databases.
+DROP TABLE IF EXISTS campaign_board_nodes;
+DROP TABLE IF EXISTS campaign_boards;
 
 -- Links between anything in a campaign — the edges of the future diagram.
 --   from/to type: npc | location | encounter | character | quest | faction | session …

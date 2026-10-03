@@ -41,12 +41,6 @@ ON CONFLICT(id) DO UPDATE SET
 -- name: DeleteCampaignLinks
 DELETE FROM campaign_links WHERE campaign_id = ?;
 
--- name: DeleteCampaignBoardNodes
-DELETE FROM campaign_board_nodes WHERE board_id IN (SELECT id FROM campaign_boards WHERE campaign_id = ?);
-
--- name: DeleteCampaignBoards
-DELETE FROM campaign_boards WHERE campaign_id = ?;
-
 -- name: DeleteCampaignEvents
 DELETE FROM campaign_session_events WHERE campaign_id = ?;
 
@@ -366,45 +360,3 @@ DELETE FROM campaign_session_events WHERE id = ?;
 
 -- name: TouchSession
 UPDATE campaign_sessions SET updated_at = strftime('%s','now') WHERE id = ?;
-
--- ---------- the board (the campaign's diagram) ----------
-
--- name: GetCampaignBoard
-SELECT id, campaign_id, name, data_json FROM campaign_boards WHERE campaign_id = ? ORDER BY created_at LIMIT 1;
-
--- name: InsertBoard
-INSERT INTO campaign_boards (id, campaign_id, name) VALUES (?, ?, ?);
-
--- name: GetBoardCampaign
-SELECT campaign_id FROM campaign_boards WHERE id = ?;
-
--- name: GetBoardNodes
-SELECT ref_type, ref_id, x, y, w, h FROM campaign_board_nodes WHERE board_id = ?;
-
--- name: UpsertBoardNode
-INSERT INTO campaign_board_nodes (board_id, ref_type, ref_id, x, y, w, h) VALUES (?, ?, ?, ?, ?, ?, ?)
-ON CONFLICT(board_id, ref_type, ref_id) DO UPDATE SET x = excluded.x, y = excluded.y, w = excluded.w, h = excluded.h;
-
--- name: ClearBoardNodes
--- "Tidy up": forget every position (the board lays itself out again).
-DELETE FROM campaign_board_nodes WHERE board_id = ?;
-
--- name: TouchBoard
-UPDATE campaign_boards SET updated_at = strftime('%s','now') WHERE id = ?;
-
--- name: GetPartyLocation
--- Where the party is: the latest "location visited" in the campaign's logs.
-SELECT e.ref_id
-FROM campaign_session_events e
-JOIN campaign_sessions s ON s.id = e.session_id
-WHERE e.campaign_id = ? AND e.kind = 'location_visited' AND e.ref_id <> ''
-ORDER BY s.number DESC, e.position DESC, e.at DESC
-LIMIT 1;
-
--- name: GetQuestRoutesWith
--- Quests whose route goes through a location (to drop it from the route when it is deleted).
-SELECT id, data_json FROM campaign_quests
-WHERE campaign_id = ? AND data_json LIKE '%' || ? || '%';
-
--- name: SetQuestData
-UPDATE campaign_quests SET data_json = ?, updated_at = strftime('%s','now') WHERE id = ?;

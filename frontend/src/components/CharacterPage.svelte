@@ -1900,11 +1900,6 @@
         color: var(--color-text-muted);
     }
 
-    .share-menu hr {
-        margin: 4px 6px;
-        border: 0;
-        border-top: 1px solid var(--color-border);
-    }
 
     .share-note {
         position: absolute;

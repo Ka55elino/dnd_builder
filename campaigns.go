@@ -144,7 +144,7 @@ func deleteCampaign(db *sql.DB, id string) error {
 		return err
 	}
 	defer tx.Rollback()
-	for _, q := range []string{"DeleteCampaignLinks", "DeleteCampaignBoardNodes", "DeleteCampaignBoards",
+	for _, q := range []string{"DeleteCampaignLinks",
 		"DeleteCampaignEvents", "DeleteCampaignSessions",
 		"DeleteCampaignQuests", "DeleteCampaignFactions",
 		"DeleteCampaignNpcs", "DeleteCampaignLocations", "DeleteCampaign"} {
@@ -362,9 +362,6 @@ func deleteLocation(db *sql.DB, id string) error {
 		{"UnsetStartLocation", []any{campaignID, id}},
 		{"TouchCampaign", []any{campaignID}},
 	}
-	if err := dropFromRoutes(tx, campaignID, id); err != nil {
-		return err
-	}
 	for _, s := range steps {
 		if _, err := tx.Exec(Q(s.q), s.args...); err != nil {
 			return err
@@ -547,7 +544,7 @@ func (a *App) DeleteNpc(id string) error {
 
 // ---------- links ----------
 
-// Link connects two things in a campaign (the arrows of the future board).
+// Link connects two things in a campaign.
 type Link struct {
 	ID         string `json:"id"`
 	CampaignID string `json:"campaignId"`
@@ -1100,19 +1097,6 @@ func putQuest(q querier, x Quest) (string, error) {
 	}
 	if err := refIn(q, "GetLocationCampaign", x.LocationID, x.CampaignID, "location"); err != nil {
 		return "", err
-	}
-	// the route (the campaign board): every step is a location of this campaign
-	if route, ok := x.Data["route"].([]any); ok {
-		for i, step := range route {
-			m, _ := step.(map[string]any)
-			loc, _ := m["locationId"].(string)
-			if loc == "" {
-				return "", fmt.Errorf("route step %d has no location", i+1)
-			}
-			if err := refIn(q, "GetLocationCampaign", loc, x.CampaignID, "route location"); err != nil {
-				return "", err
-			}
-		}
 	}
 	data, err := dataJSON(x.Data)
 	if err != nil {

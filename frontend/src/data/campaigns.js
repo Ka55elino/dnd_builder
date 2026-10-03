@@ -37,7 +37,6 @@ import {
     GetCampaignFactions, SaveFaction, DeleteFaction,
     GetCampaignSessions, GetSession, GetActiveSession, SaveSession, SetSessionStatus, DeleteSession,
     GetSessionEvents, GetRefEvents, AddSessionEvent, LogToActiveSession, UpdateSessionEvent, DeleteSessionEvent,
-    GetCampaignBoard, SaveBoardNodes, ResetBoardLayout, GetPartyLocation,
 } from '../api.js';
 
 export const CAMPAIGN_STATUSES = [
@@ -221,15 +220,6 @@ export function eventText(e, { attitudes = [], statuses = [], questStatuses = []
         default: return eventKind(e.kind).name;
     }
 }
-
-// ---------- the board (data/board.js builds the graph) ----------
-
-/** The campaign's board with saved positions: { id, nodes: [{ refType, refId, x, y, w, h }] }. */
-export const loadBoard = (campaignId) => need(GetCampaignBoard)(campaignId);
-export const saveBoardNodes = (boardId, nodes) => need(SaveBoardNodes)(boardId, JSON.stringify(nodes));
-export const resetBoardLayout = (boardId) => need(ResetBoardLayout)(boardId);
-/** Where the party is (the latest "location visited" in the logs), or ''. */
-export const loadPartyLocation = async (campaignId) => (GetPartyLocation ? (await GetPartyLocation(campaignId)) ?? '' : '');
 
 export const loadLinks = (campaignId) => list(GetCampaignLinks, campaignId);
 /** Create a link (or update the note of the same one); returns the id. */

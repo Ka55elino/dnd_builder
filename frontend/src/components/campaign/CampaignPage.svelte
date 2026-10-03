@@ -10,8 +10,8 @@
      *   │ OTHER     Encounters · Quests…  │                                          │
      *   └─────────────────────────────────┴──────────────────────────────────────────┘
      *
-     * Overview: the campaign's name with ✎ (a popup edits name, short description, status) and
-     * the campaign board (board/CampaignBoard.svelte — locations, quests, routes, "unlocks").
+     * Overview: the campaign's name with ✎ (a popup edits name, short description, status),
+     * the counts; the overview itself is a work in progress.
      *
      * id — campaign id; onBack() — to the list
      */
@@ -23,7 +23,6 @@
     import QuestsSection from "./QuestsSection.svelte";
     import FactionsSection from "./FactionsSection.svelte";
     import SessionsSection from "./SessionsSection.svelte";
-    import CampaignBoard from "./board/CampaignBoard.svelte";
 
     let { id, onBack } = $props();
 
@@ -222,10 +221,10 @@
                 </p>
             </header>
 
-            <!-- the campaign board: locations (nested), quests, their routes and what unlocks what -->
-            {#key campaign.id}
-                <CampaignBoard {campaign} onOpen={(s) => (section = s)} />
-            {/key}
+            <section class="panel placeholder">
+                <span class="big-ico" aria-hidden="true">◈</span>
+                <p><b>Overview</b> — work in progress.</p>
+            </section>
         {:else if section === "npcs"}
             <header class="sec-head"><h1>NPCs</h1></header>
             <NpcsSection {campaign} onChanged={refreshCounts} />
