@@ -46,21 +46,24 @@
 </script>
 
 <main class="start">
-    <header class="top">
-        {#if onBack}<button class="ghost" onclick={onBack}>← Menu</button>{/if}
-        <h1>Characters</h1>
-        <button class="ghost import" onclick={doImport} disabled={importing} title="Add a character from a .json file (Export on a character sheet)">
-            {importing ? "Importing…" : "Import"}
-        </button>
-    </header>
-    {#if notice}
-        <p class="notice" class:bad={!notice.ok}>
-            {notice.text}
-            {#if notice.id}<button class="link" onclick={() => onOpen?.(notice.id)}>Open</button>{/if}
-            <button class="link x" onclick={() => (notice = null)} aria-label="Dismiss">✕</button>
-        </p>
-    {/if}
-    <CharacterGrid {characters} {onCreate} {onOpen} />
+    <CharacterGrid {characters} {onCreate} {onOpen}>
+        {#snippet header()}
+            <header class="top">
+                {#if onBack}<button class="ghost back" onclick={onBack}>← Menu</button>{:else}<span></span>{/if}
+                <h1>Characters</h1>
+                <button class="ghost import" onclick={doImport} disabled={importing} title="Add a character from a .json file (Export on a character sheet)">
+                    {importing ? "Importing…" : "Import"}
+                </button>
+            </header>
+            {#if notice}
+                <p class="notice" class:bad={!notice.ok}>
+                    {notice.text}
+                    {#if notice.id}<button class="link" onclick={() => onOpen?.(notice.id)}>Open</button>{/if}
+                    <button class="link x" onclick={() => (notice = null)} aria-label="Dismiss">✕</button>
+                </p>
+            {/if}
+        {/snippet}
+    </CharacterGrid>
 </main>
 
 <style>
@@ -81,17 +84,19 @@
         color: var(--color-gold);
     }
 
+    /* back · title · import — over exactly the width of the card grid */
     .top {
-        width: 100%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
-        justify-content: center;
-        position: relative;
+        gap: 12px;
+    }
+
+    .top .back {
+        justify-self: start;
     }
 
     .top .ghost {
-        position: absolute;
-        left: 0;
         padding: 6px 12px;
         background: transparent;
         border: 1px solid var(--color-border);
@@ -107,8 +112,7 @@
     }
 
     .top .ghost.import {
-        left: auto;
-        right: 0;
+        justify-self: end;
     }
 
     .top .ghost:disabled {
@@ -117,7 +121,6 @@
     }
 
     .notice {
-        max-width: 720px;
         margin: 0;
         padding: 8px 14px;
         display: flex;

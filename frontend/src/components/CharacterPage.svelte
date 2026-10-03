@@ -26,8 +26,9 @@
     import { onGameEvent, server } from "../server.svelte.js";
     import { seen } from "../combat.svelte.js";
     import { EV, applyHp, applyCondition, sendState, findItem, giftEvents } from "../game.js";
-    import { printPage } from "../print.js";
     import { exportCharacter } from "../transfer.js";
+    import { pdfModel, savePdf } from "../pdfSheet.js";
+    import { NetStatus } from "../api.js";
     import { buildSummary } from "../rules/summary.js";
     import {
         GetCharacter,
@@ -275,37 +276,59 @@
     });
 
     // leaving the page — save first
-    // Export to a .json file (transfer.js): build + state + portrait + the custom records it uses
-    let exporting = $state(false);
-    let exportNote = $state("");
-    let exportError = $state("");
-    let exportTimer;
-    async function exportSheet() {
-        exporting = true;
-        exportError = "";
+    // Download ▾ — PDF / JSON (icons + a hint).
+    // JSON: transfer.js (build + state + portrait + the custom records it uses);
+    // PDF: the print model (pdfSheet.js) rendered by Go (pdf.go);
+    let shareOpen = $state(false);
+    let shareBusy = $state(false);
+    let shareNote = $state("");
+    let shareError = $state("");
+    let shareTimer;
+    function shareStatus(note, err = "") {
+        shareNote = note;
+        shareError = err;
+        clearTimeout(shareTimer);
+        if (note || err)
+            shareTimer = setTimeout(
+                () => ((shareNote = ""), (shareError = "")),
+                err ? 8000 : 6000,
+            );
+    }
+    async function shareRun(fn) {
+        shareOpen = false;
+        shareBusy = true;
+        shareStatus("");
         try {
-            const path = await exportCharacter(id);
-            if (path) {
-                exportNote = `Saved to ${path}`;
-                clearTimeout(exportTimer);
-                exportTimer = setTimeout(() => (exportNote = ""), 4000);
-            }
+            await fn();
         } catch (e) {
-            exportError = e?.message ?? String(e);
-            clearTimeout(exportTimer);
-            exportTimer = setTimeout(() => (exportError = ""), 6000);
+            shareStatus("", e?.message ?? String(e));
         } finally {
-            exporting = false;
+            shareBusy = false;
         }
     }
+    // the PDF itself: the print model (pdfSheet.js) rendered by Go (pdf.go)
+    const sheetModel = async () =>
+        pdfModel({
+            build,
+            character,
+            state,
+            refs: ref,
+            appVersion: (await NetStatus().catch(() => null))?.appVersion ?? "",
+        });
+    const downloadPdf = () =>
+        shareRun(async () => {
+            const path = await savePdf(await sheetModel());
+            if (path) shareStatus(`Saved to ${path}`);
+        });
+    const downloadJson = () =>
+        shareRun(async () => {
+            const path = await exportCharacter(id);
+            if (path) shareStatus(`Saved to ${path}`);
+        });
 
-    // Print / Save as PDF: the whole sheet, named after the character (see print.js and style.css)
-    const printSheet = () =>
-        printPage(
-            [build?.name, cls?.name && `${cls.name} ${build.level}`]
-                .filter(Boolean)
-                .join(" — "),
-        );
+    function closeShare(e) {
+        if (shareOpen && !e.target.closest?.(".share")) shareOpen = false;
+    }
 
     const leave =
         (fn) =>
@@ -319,6 +342,7 @@
             e.preventDefault();
             saveNow();
         }
+        if (e.key === "Escape" && shareOpen) shareOpen = false;
     }
 
     /**
@@ -460,6 +484,25 @@
 </script>
 
 <!-- item image (or a placeholder letter) -->
+<!-- Download menu icons: tray + arrow down; config = the JSON file: a gear with the arrow as a badge -->
+{#snippet downloadIcon(config = false)}
+    <svg class="share-ico" viewBox="0 0 24 24" aria-hidden="true">
+        {#if config}
+            <g transform="translate(1 1) scale(0.62)">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                />
+            </g>
+            <g transform="translate(10 10) scale(0.58)">
+                <path d="M12 3v12M7 10l5 5 5-5M4 17v3h16v-3" />
+            </g>
+        {:else}
+            <path d="M12 3v12M7 10l5 5 5-5M4 17v3h16v-3" />
+        {/if}
+    </svg>
+{/snippet}
+
 {#snippet thumb(it, size = "lg")}
     <span class="thumb {size}" class:empty={!it}>
         {#if it?.ref?.image}<img src={it.ref.image} alt="" />{:else if it}<span
@@ -583,7 +626,7 @@
     {/if}
 {/snippet}
 
-<svelte:window onkeydown={onKey} />
+<svelte:window onkeydown={onKey} onclick={closeShare} />
 
 {#if condDialog && character && state}
     <ConditionDialog
@@ -628,28 +671,43 @@
                     >▲ Level Up</button
                 >
             {/if}
-            <button
-                class="ghost"
-                onclick={leave(printSheet)}
-                title="Print the whole sheet or save it as a PDF">Print</button
-            >
-            <button
-                class="ghost"
-                class:bad={!!exportError}
-                onclick={leave(exportSheet)}
-                disabled={exporting}
-                title={exportError ||
-                    exportNote ||
-                    "Save the character as a .json file (to move it to another computer or share it)"}
-            >
-                {exporting
-                    ? "Exporting…"
-                    : exportError
-                      ? "Export failed"
-                      : exportNote
-                        ? "Exported ✓"
-                        : "Export"}
-            </button>
+            <div class="share">
+                <button
+                    class="ghost"
+                    class:bad={!!shareError}
+                    class:open={shareOpen}
+                    onclick={() => (shareOpen = !shareOpen)}
+                    disabled={shareBusy}
+                    aria-haspopup="menu"
+                    aria-expanded={shareOpen}
+                    title={shareError ||
+                        shareNote ||
+                        "Download or send the sheet (PDF) or the character file (JSON)"}
+                >
+                    {shareBusy
+                        ? "Working…"
+                        : shareError
+                          ? "Download failed"
+                          : "Download ▾"}
+                </button>
+                {#if shareOpen}
+                    <div class="share-menu" role="menu">
+                        <button role="menuitem" onclick={leave(downloadPdf)} aria-label="Download PDF" title="Download PDF">
+                            {@render downloadIcon()}
+                            <small>Character sheet, 2–3 pages</small>
+                        </button>
+                        <button role="menuitem" onclick={leave(downloadJson)} aria-label="Download JSON" title="Download JSON">
+                            {@render downloadIcon(true)}
+                            <small>Character file — import it in another copy of the app</small>
+                        </button>
+                    </div>
+                {/if}
+                {#if shareNote || shareError}
+                    <p class="share-note" class:bad={!!shareError}>
+                        {shareError || shareNote}
+                    </p>
+                {/if}
+            </div>
             {#if onEdit}
                 <button class="ghost" onclick={leave(() => onEdit(raw))}
                     >Edit</button
@@ -1772,6 +1830,102 @@
 
     .top {
         align-items: center;
+    }
+
+    .share {
+        position: relative;
+    }
+
+    .share > .ghost.open {
+        border-color: var(--color-text-accent);
+        color: var(--color-text-accent);
+    }
+
+    .share-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        z-index: 50;
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+        padding: 6px;
+        background: var(--color-card-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .share-menu button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        background: transparent;
+        border: 0;
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .share-menu button:hover,
+    .share-menu button:focus-visible {
+        background: var(--color-border);
+    }
+
+    .share-ico {
+        flex: none;
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: var(--color-text-accent);
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .share-ico :global(*) {
+        vector-effect: non-scaling-stroke;
+    }
+
+    .share-menu button:hover .share-ico {
+        stroke: var(--color-text-primary);
+    }
+
+    .share-menu small {
+        font-size: 11px;
+        color: var(--color-text-muted);
+    }
+
+    .share-menu hr {
+        margin: 4px 6px;
+        border: 0;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .share-note {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        z-index: 40;
+        width: max-content;
+        max-width: 360px;
+        margin: 0;
+        padding: 6px 10px;
+        background: var(--color-card-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+
+    .share-note.bad {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
     }
 
     .ghost.bad {

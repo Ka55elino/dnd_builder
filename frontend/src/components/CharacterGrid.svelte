@@ -4,10 +4,12 @@
         onCreate = () => console.log("[create]"),
         onOpen = (id) => console.log("[open]", id),
         showCreate = true, // false: pick-only grid (Join Game)
+        header = null, // snippet above the cards — spans exactly the width of the card columns
     } = $props();
 </script>
 
 <div class="grid">
+    {#if header}<div class="head">{@render header()}</div>{/if}
     {#if showCreate}
         <button class="cell create" onclick={onCreate} title="Create character">
             <span class="plus">+</span>
@@ -41,9 +43,18 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, var(--cell-size));
-        grid-auto-rows: var(--cell-size);
+        /* rows: the cards set their own height (a header row can be shorter) */
         justify-content: center; /* rows centered on the page */
         gap: 12px;
+    }
+
+    /* the header spans all the columns, so it is as wide as the cards below */
+    .head {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 12px;
     }
 
     .cell {

@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	codeberg.org/go-pdf/fpdf v0.12.0
 	github.com/adrg/xdg v0.5.3 // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect

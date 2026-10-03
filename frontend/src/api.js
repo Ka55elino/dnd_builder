@@ -54,6 +54,8 @@ export const {
     // files: save / open through the system dialogs (files.go)
     SaveTextFile,
     OpenTextFile,
+    // character sheet PDF (pdf.go)
+    SaveCharacterPDF,
     // bestiary (bestiary.go)
     GetMonsters,
     SaveCustomMonster,

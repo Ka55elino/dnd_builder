@@ -22,26 +22,7 @@ const maxOpenFile = 32 << 20
 // SaveTextFile asks where to save (the name is suggested) and writes the content
 // there. Returns the path, or "" if the user cancelled.
 func (a *App) SaveTextFile(suggestedName, content string) (string, error) {
-	app := application.Get()
-	if app == nil {
-		return "", errors.New("no application")
-	}
-	name := safeFileName(suggestedName)
-	path, err := app.Dialog.SaveFile().
-		SetFilename(name).
-		AddFilter("JSON", "*.json").
-		CanCreateDirectories(true).
-		PromptForSingleSelection()
-	if err != nil || path == "" {
-		return "", err // "" — cancelled
-	}
-	if filepath.Ext(path) == "" {
-		path += ".json"
-	}
-	if err := os.WriteFile(path, []byte(content), 0o644); err != nil {
-		return "", fmt.Errorf("could not save the file: %w", err)
-	}
-	return path, nil
+	return saveFileAs(suggestedName, "JSON", ".json", []byte(content))
 }
 
 // OpenTextFile asks for a JSON file and returns its content, or "" if the user cancelled.
@@ -73,8 +54,11 @@ func (a *App) OpenTextFile(title string) (string, error) {
 	return string(b), nil
 }
 
-// safeFileName keeps a suggested file name usable on every OS.
-func safeFileName(s string) string {
+// safeFileName keeps a suggested file name usable on every OS (a .json file).
+func safeFileName(s string) string { return safeName(s, ".json") }
+
+// safeName: the suggested name without characters some OS forbid, with the extension.
+func safeName(s, ext string) string {
 	s = strings.TrimSpace(s)
 	s = strings.Map(func(r rune) rune {
 		if strings.ContainsRune(`/\:*?"<>|`, r) || r < 32 {
@@ -85,8 +69,32 @@ func safeFileName(s string) string {
 	if s == "" {
 		s = "character"
 	}
-	if !strings.HasSuffix(strings.ToLower(s), ".json") {
-		s += ".json"
+	if !strings.HasSuffix(strings.ToLower(s), ext) {
+		s += ext
 	}
 	return s
+}
+
+// saveFileAs asks where to save (filter: label + "*"+ext) and writes data there.
+// Returns the path, or "" if the user cancelled.
+func saveFileAs(suggestedName, label, ext string, data []byte) (string, error) {
+	app := application.Get()
+	if app == nil {
+		return "", errors.New("no application")
+	}
+	path, err := app.Dialog.SaveFile().
+		SetFilename(safeName(suggestedName, ext)).
+		AddFilter(label, "*"+ext).
+		CanCreateDirectories(true).
+		PromptForSingleSelection()
+	if err != nil || path == "" {
+		return "", err // "" — cancelled
+	}
+	if filepath.Ext(path) == "" {
+		path += ext
+	}
+	if err := os.WriteFile(path, data, 0o644); err != nil {
+		return "", fmt.Errorf("could not save the file: %w", err)
+	}
+	return path, nil
 }
