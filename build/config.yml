@@ -11,13 +11,13 @@ info:
   description: "DnD 2024 character builder"
   copyright: "(c) 2026, Ka55elino"
   comments: "Character builder for Dungeons and Dragons 2024"
-  version: "0.3.4" # set by `wails3 task version:set VERSION=x.y.z` from APP_VERSION in constants.go — don't edit by hand
+  version: "0.4.1" # set by `wails3 task version:set VERSION=x.y.z` from APP_VERSION in constants.go — don't edit by hand
 
 # iOS build configuration (keys here override `info` for the iOS project)
 # ios:
 #   bundleID: "com.ka55elino.dndbuilder"
 #   displayName: "DnD Builder"
-#   version: "0.3.4"
+#   version: "0.4.1"
 #   company: "Ka55elino"
 
 # Dev mode (`wails3 dev`): rebuilds and restarts the app when Go files change

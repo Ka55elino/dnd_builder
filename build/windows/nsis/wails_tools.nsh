@@ -14,7 +14,7 @@
     !define INFO_PRODUCTNAME "DnD Builder"
 !endif
 !ifndef INFO_PRODUCTVERSION
-    !define INFO_PRODUCTVERSION "0.3.4"
+    !define INFO_PRODUCTVERSION "0.4.1"
 !endif
 !ifndef INFO_COPYRIGHT
     !define INFO_COPYRIGHT "(c) 2026, Ka55elino"
