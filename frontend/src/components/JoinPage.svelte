@@ -409,4 +409,26 @@
         border-color: var(--color-gold);
         color: var(--color-gold-hover);
     }
+
+    @media (max-width: 640px) {
+        .ptabs {
+            margin: 6px 12px;
+        }
+
+        .ptabs button {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 14px;
+        }
+
+        .page {
+            padding: 16px 12px 28px;
+            gap: 20px;
+        }
+
+        .top {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    }
 </style>

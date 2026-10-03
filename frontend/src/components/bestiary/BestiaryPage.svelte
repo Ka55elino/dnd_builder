@@ -283,7 +283,7 @@
         flex: 1;
         min-height: 0;
         display: grid;
-        grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+        grid-template-columns: minmax(min(280px, 100%), 360px) minmax(0, 1fr);
         gap: 20px;
     }
 

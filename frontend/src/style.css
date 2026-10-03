@@ -12,7 +12,13 @@ body {
     height: 100%;
 }
 
+html {
+    -webkit-text-size-adjust: 100%; /* phones: no automatic text inflation */
+    text-size-adjust: 100%;
+}
+
 body {
+    -webkit-tap-highlight-color: transparent;
     background: var(--color-bg);
     color: var(--color-text-primary);
     font-family: var(--font-ui);
@@ -22,6 +28,28 @@ body {
 
 #app {
     height: 100%;
+    height: 100dvh; /* phones: the visible height, without the browser bars */
+    /* notches / rounded corners (viewport-fit=cover in index.html) */
+    padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
+
+/* ---------- phones ----------
+ * One breakpoint for the whole app: max-width 640px (components use the same number).
+ * Here — only what is the same everywhere; layouts adapt in their own components.
+ */
+@media (max-width: 640px) {
+    /* iOS zooms into inputs with text smaller than 16px; :where — zero specificity,
+       so a component's own size still wins */
+    :where(input:not([type='checkbox']):not([type='radio']):not([type='range']), select, textarea) {
+        font-size: 16px;
+    }
+}
+
+/* Horizontal scroller for wide tables / rows on narrow screens: <div class="hscroll"><table>… */
+.hscroll {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Spinner — query loader (QueryLoader.svelte); the startup loader has its own copy in index.html */

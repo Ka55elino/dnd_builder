@@ -157,4 +157,25 @@
         margin: 0;
         color: var(--color-danger);
     }
+
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 12px;
+        }
+
+        .top {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        h1 {
+            flex: 1;
+            font-size: 22px;
+        }
+
+        .content {
+            padding: 12px;
+        }
+    }
 </style>

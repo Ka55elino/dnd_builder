@@ -153,4 +153,23 @@
         margin-left: auto;
         color: var(--color-text-muted);
     }
+
+    @media (max-width: 640px) {
+        .start {
+            height: auto;
+            min-height: 100%;
+            padding: 12px 12px 24px;
+            gap: 16px;
+        }
+
+        .top {
+            grid-template-columns: auto 1fr auto;
+            gap: 8px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+    }
 </style>

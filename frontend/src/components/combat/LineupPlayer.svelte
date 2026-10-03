@@ -72,9 +72,32 @@
         display: flex;
     }
 
+    /* phones: a compact strip — the sheet / map below matter more */
+
     @media print {
         .lineup {
             display: none;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .lineup {
+            margin: 8px 12px 0;
+            padding: 8px 10px;
+            gap: 6px;
+        }
+
+        header {
+            flex-wrap: wrap;
+            gap: 2px 8px;
+        }
+
+        h2 {
+            font-size: 14px;
+        }
+
+        .meta {
+            font-size: 11px;
         }
     }
 </style>

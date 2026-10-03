@@ -52,6 +52,7 @@
         flex-direction: column;
         gap: 8px;
         height: calc(100vh - 190px);
+        height: calc(100dvh - 190px); /* phones: without the browser bars */
         min-height: 360px;
         padding: 0 24px 24px;
         box-sizing: border-box;
@@ -93,5 +94,24 @@
         font-family: var(--font-ui);
         font-size: 11px;
         pointer-events: none;
+    }
+
+    @media (max-width: 640px) {
+        .pmap {
+            /* status bar + lineup strip + tabs + footer */
+            height: calc(100dvh - 250px);
+            min-height: 300px;
+            padding: 0 12px 12px;
+        }
+
+        header {
+            flex-wrap: wrap;
+            gap: 2px 8px;
+            font-size: 13px;
+        }
+
+        .hint {
+            display: none; /* covers the zoom read-out; the header says the DM moves tokens */
+        }
     }
 </style>

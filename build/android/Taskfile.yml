@@ -40,6 +40,7 @@ tasks:
     deps:
       - task: common:go:mod:tidy
       - task: generate:android:overlay
+      - task: common:generate:icons # launcher icons from build/appicon.png
       - task: common:build:frontend
         vars:
           BUILD_FLAGS:

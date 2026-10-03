@@ -150,4 +150,25 @@
         font-family: var(--font-ui);
         color: var(--color-gold);
     }
+
+    /* phones: smaller cards in the initiative strip */
+
+    @media (max-width: 640px) {
+        .cmb {
+            width: 84px;
+            padding: 6px 4px 4px;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+        }
+
+        .turn-mark {
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+        }
+    }
 </style>

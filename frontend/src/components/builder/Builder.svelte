@@ -351,4 +351,45 @@
         margin: 0;
         color: var(--color-text-muted);
     }
+
+    /* phones: tighter, the steps in one row that scrolls sideways */
+    @media (max-width: 640px) {
+        .builder {
+            height: auto;
+            min-height: 100%;
+            padding: 12px 12px 24px;
+            gap: 12px;
+        }
+
+        .top {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        h1 {
+            flex: 1;
+            font-size: 22px;
+        }
+
+        .steps {
+            flex-wrap: nowrap;
+            margin: 0 -12px;
+            padding: 0 12px 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .steps::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            flex: none;
+            padding: 8px 14px;
+        }
+
+        .content {
+            padding: 12px;
+        }
+    }
 </style>

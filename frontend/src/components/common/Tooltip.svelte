@@ -1,6 +1,8 @@
 <script>
     /**
-     * Tooltip shown on hover (and keyboard focus).
+     * Tooltip shown on hover (and keyboard focus); on a touch screen — on a tap (info
+     * chips, icons) or a long press (buttons and other controls — a tap still presses them).
+     * A touch-opened tooltip closes on a tap elsewhere or after a few seconds.
      *
      *   <Tooltip>
      *       Chain Mail                     ← the hovered element (children)
@@ -29,6 +31,56 @@
     function hide() {
         clearTimeout(timer);
         open = false;
+        stopOutside?.();
+    }
+
+    // ---------- touch ----------
+    const CONTROLS = 'button, select, input, textarea, a, label, [role="button"]';
+    let touch = false; // the last pointer was a finger / pen: ignore the emulated mouse / focus events
+    let press; // long-press timer (controls)
+    let pressed = false; // a long press opened it: swallow the click that follows
+    let stopOutside = null;
+
+    function openTouch() {
+        clearTimeout(timer);
+        open = true;
+        requestAnimationFrame(place);
+        stopOutside?.();
+        const outside = (e) => {
+            if (!anchor?.contains(e.target) && !panel?.contains(e.target)) hide();
+        };
+        const t = setTimeout(hide, 5000);
+        document.addEventListener("pointerdown", outside, true);
+        stopOutside = () => {
+            clearTimeout(t);
+            document.removeEventListener("pointerdown", outside, true);
+            stopOutside = null;
+        };
+    }
+
+    function onPointerDown(e) {
+        touch = e.pointerType !== "mouse";
+        if (!touch) return;
+        clearTimeout(press);
+        if (e.target.closest?.(CONTROLS)) {
+            press = setTimeout(() => {
+                pressed = true;
+                openTouch();
+            }, 450);
+        }
+    }
+
+    function onPointerUp(e) {
+        if (e.pointerType === "mouse") return;
+        clearTimeout(press);
+        if (!e.target.closest?.(CONTROLS)) (open ? hide() : openTouch());
+    }
+
+    function onClickCapture(e) {
+        if (!pressed) return;
+        pressed = false;
+        e.preventDefault();
+        e.stopPropagation();
     }
 
     // below the element; if it doesn't fit — above it; horizontally stays within the window
@@ -48,10 +100,15 @@
 <span
     class="anchor"
     bind:this={anchor}
-    onmouseenter={show}
-    onmouseleave={hide}
-    onfocusin={show}
-    onfocusout={hide}
+    onmouseenter={() => !touch && show()}
+    onmouseleave={() => !touch && hide()}
+    onfocusin={() => !touch && show()}
+    onfocusout={() => !touch && hide()}
+    onpointerdown={onPointerDown}
+    onpointerup={onPointerUp}
+    onpointercancel={() => clearTimeout(press)}
+    onclickcapture={onClickCapture}
+    oncontextmenu={(e) => touch && e.preventDefault()}
     role="note"
 >
     {@render children?.()}
@@ -67,6 +124,7 @@
     .anchor {
         display: inline;
         cursor: help;
+        -webkit-touch-callout: none; /* long press: our tooltip, not the system menu */
     }
 
     .tooltip {

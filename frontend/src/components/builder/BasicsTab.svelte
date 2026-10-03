@@ -251,4 +251,27 @@
     input::placeholder {
         color: var(--color-text-muted);
     }
+
+    @media (max-width: 640px) {
+        .basics {
+            gap: 16px;
+        }
+
+        .identity {
+            gap: 12px;
+        }
+
+        .portrait-box {
+            width: 96px;
+            height: 96px;
+        }
+
+        .name {
+            min-width: 0;
+        }
+
+        .group {
+            padding: 10px;
+        }
+    }
 </style>

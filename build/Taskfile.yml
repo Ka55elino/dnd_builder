@@ -191,7 +191,7 @@ tasks:
       - wails3 generate bindings -f '{{.BUILD_FLAGS}}' -clean=true -time-type=Date{{if eq .OBFUSCATED "true"}} -obfuscated{{end}}
 
   generate:icons:
-    summary: Generates Windows `.ico` and Mac `.icns` from an image; on macOS, `-iconcomposerinput appicon.icon -macassetdir darwin` also produces `Assets.car` from a `.icon` file (skipped on other platforms).
+    summary: Generates Windows `.ico`, Mac `.icns` and the Android launcher icons from an image; on macOS, `-iconcomposerinput appicon.icon -macassetdir darwin` also produces `Assets.car` from a `.icon` file (skipped on other platforms).
     run: once
     dir: build
     sources:
@@ -199,9 +199,12 @@ tasks:
     generates:
       - "darwin/icons.icns"
       - "windows/icon.ico"
+      - "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     cmds:
       # only from appicon.png: the template's appicon.icon (Icon Composer → Assets.car) held the Wails logo
       - wails3 generate icons -input appicon.png -macfilename darwin/icons.icns -windowsfilename windows/icon.ico
+      # Android launcher icons (mipmap-*, adaptive icon): wails3 doesn't make them
+      - go run ../tools/androidicons -in appicon.png -res android/app/src/main/res
 
   dev:frontend:
     summary: Runs the frontend in development mode

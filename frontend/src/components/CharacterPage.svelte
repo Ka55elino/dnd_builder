@@ -1,5 +1,6 @@
 <script>
     import { damageShort, damageName, damageLabel } from "../rules/labels.js";
+    import SectionNav from "./common/SectionNav.svelte";
     import WildShapeCard from "./WildShapeCard.svelte";
     import { loadMonsters } from "../data/bestiary.js";
     import { crText, speedText } from "../rules/wildshape.js";
@@ -67,6 +68,18 @@
         ABILITY_KEYS,
         formatModifier,
     } from "../rules/abilities.js";
+
+    // phones: the section tabs (common/SectionNav.svelte), in the order of the mobile layout
+    const SHEET_SECTIONS = [
+        { id: "cs-stats", label: "Stats" },
+        { id: "cs-status", label: "Status" },
+        { id: "cs-attacks", label: "Attacks" },
+        { id: "cs-actions", label: "Actions & spells" },
+        { id: "cs-notes", label: "Notes" },
+        { id: "cs-backpack", label: "Backpack" },
+        { id: "cs-features", label: "Features" },
+        { id: "cs-bio", label: "Bio" },
+    ];
 
     let {
         id,
@@ -760,6 +773,8 @@
         <p class="error">Failed to load character: {error}</p>
     {:else if build && sheet}
         <!-- ================= top: 2 / 4 ================= -->
+        <SectionNav items={SHEET_SECTIONS} />
+
         <div class="row row-title">
             <section>
                 <h1>{build.name}</h1>
@@ -793,7 +808,7 @@
             </section>
 
             <!-- attributes -->
-            <section class="stats">
+            <section class="stats" id="cs-stats" data-section>
                 <div class="combat">
                     <div
                         class="stat shield"
@@ -905,8 +920,8 @@
         <div class="row row-bottom">
             <!-- Appearance, Personality — in one column -->
             <div class="col">
-                {#each BIO_GROUPS as group}
-                    <section class="card">
+                {#each BIO_GROUPS as group, gi}
+                    <section class="card" id={gi === 0 ? "cs-bio" : null} data-section>
                         <h2>{group.title}</h2>
                         <dl>
                             {#each group.fields as f}
@@ -917,7 +932,7 @@
                     </section>
                 {/each}
 
-                <section class="card">
+                <section class="card" id="cs-backpack" data-section>
                     <h2>Backpack</h2>
                     {#if character.inventory.length}
                         <ul class="inventory">
@@ -996,7 +1011,7 @@
                         <p class="muted">Empty.</p>
                     {/if}
                 </section>
-                <section class="card">
+                <section class="card" id="cs-features" data-section>
                     <h2>Features & traits</h2>
                     {#each features as g}
                         <h3>{g.title}</h3>
@@ -1021,7 +1036,7 @@
             <!-- equipment, skills and more -->
             <div class="col">
                 <!-- game state -->
-                <section class="card play">
+                <section class="card play" id="cs-status" data-section>
                     <h2>Status</h2>
                     {#if stateError}<p class="error">
                             Not saved: {stateError}
@@ -1670,7 +1685,7 @@
                     </section>
                 {/if}
 
-                <section class="card">
+                <section class="card" id="cs-attacks" data-section>
                     <h2>Equipment & attacks</h2>
                     <div class="slots">
                         {#each SLOTS as slot (slot.id)}
@@ -1748,6 +1763,7 @@
                         <span class="al-total">Total AC <b>{sheet.ac}</b></span>
                     </div>
 
+                    <div class="hscroll">
                     <table class="attacks">
                         <thead>
                             <tr
@@ -1825,10 +1841,11 @@
                             {/each}
                         </tbody>
                     </table>
+                    </div>
                 </section>
 
                 {#if character.actionGroups.length}
-                    <section class="card">
+                    <section class="card" id="cs-actions" data-section>
                         <h2>
                             Actions & spells
                             {#if character.spellcasting}
@@ -1869,7 +1886,7 @@
 
                 <!-- player notes: stored in the character state -->
                 {#if state}
-                    <section class="card notes">
+                    <section class="card notes" id="cs-notes" data-section>
                         <h2>
                             Notes
                             {#if dirty}<small class="h2-sub">not saved</small
@@ -2953,13 +2970,6 @@
         }
     }
 
-    .card {
-        padding: 16px 20px;
-        background: var(--color-card);
-        border: 1px solid var(--color-border);
-        border-radius: 8px;
-        min-width: 0;
-    }
 
     h2 {
         margin: 0 0 12px;
@@ -3607,7 +3617,7 @@
     /* ---------- action cards ---------- */
     .cards {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
         gap: 10px;
         margin-bottom: 8px;
     }
@@ -3826,5 +3836,128 @@
         font-family: var(--font-ui);
         font-size: 12px;
         color: var(--color-text-accent);
+    }
+
+    /* ---------- phones (≤ 640px, see style.css) ---------- */
+
+    .card {
+        padding: 16px 20px;
+        background: var(--color-card);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        min-width: 0;
+    }
+
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 28px;
+            gap: 14px;
+        }
+
+        .top {
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .top .spacer {
+            display: none;
+        }
+
+        .top .save-status {
+            order: 10; /* its own line, under the buttons */
+            flex-basis: 100%;
+            font-size: 11px;
+        }
+
+        .ghost,
+        .save {
+            padding: 8px 10px;
+            font-size: 13px;
+        }
+
+        .share-menu {
+            position: fixed;
+            top: auto;
+            right: 8px;
+            left: 8px;
+            bottom: calc(8px + env(safe-area-inset-bottom, 0));
+            min-width: 0;
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        .card {
+            padding: 12px;
+        }
+
+        /* the portrait: a small one, not a whole screen */
+        .portrait {
+            width: 132px;
+        }
+
+        .combat,
+        .abilities {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .abilities {
+            row-gap: 22px; /* room for the score ovals */
+        }
+
+        .ab-name {
+            font-size: 9px;
+            letter-spacing: 0.03em;
+        }
+
+        .ab-mod {
+            font-size: 28px;
+        }
+
+        .stat-value {
+            font-size: 19px;
+        }
+
+        .checklist.cols-3 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px 10px;
+        }
+
+        /* equipment slots: a small picture next to the select, not a square per slot */
+        .slot {
+            display: grid;
+            grid-template-columns: 56px minmax(0, 1fr);
+            align-items: center;
+            column-gap: 10px;
+        }
+
+        .slot > span {
+            grid-column: 1 / -1;
+        }
+
+        .thumb.lg {
+            width: 56px;
+        }
+
+        .thumb.lg span {
+            font-size: 22px;
+        }
+
+        /* finger-sized HP buttons */
+        .hp-btn {
+            width: 42px;
+            height: 34px;
+        }
+
+        .hp-input {
+            width: 84px;
+        }
+
+        /* the play column (status, attacks, spells, notes) before the bio / backpack one */
+        .row-bottom > .col:last-child {
+            order: -1;
+        }
     }
 </style>

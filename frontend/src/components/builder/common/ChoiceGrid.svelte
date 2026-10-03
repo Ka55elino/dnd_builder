@@ -98,4 +98,28 @@
     .cell:hover .cell-name {
         color: var(--color-gold-hover);
     }
+
+    /* phones: two square cells per row, filling the width */
+    @media (max-width: 640px) {
+        .grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: auto;
+            gap: 10px;
+        }
+
+        .cell {
+            width: auto;
+            height: auto;
+            aspect-ratio: 1;
+        }
+
+        .cell-name {
+            padding: 20px 6px 8px;
+            font-size: 14px;
+        }
+
+        .cell:hover {
+            transform: none;
+        }
+    }
 </style>
