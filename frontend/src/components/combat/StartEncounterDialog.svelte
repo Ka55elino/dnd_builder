@@ -5,7 +5,8 @@
      *   Monsters — pick monsters and how many of each.
      * The party's players join the line automatically.
      *
-     * onStart({ name, lines: [{ monsterId, count }], monsters }), onClose()
+     * onStart({ name, presetId, lines: [{ monsterId, count }], monsters }), onClose()
+     *   presetId — the saved preset it came from (null for a hand-made pick): the session log names it
      */
     import { loadMonsters, loadEncounters, encounterTotals, CREATURE_TYPES, crLabel, fmtXP } from "../../data/bestiary.js";
 
@@ -51,8 +52,8 @@
 
     function start() {
         if (!canStart) return;
-        if (tab === "saved") onStart?.({ name: preset.name, lines: preset.monsters, monsters });
-        else onStart?.({ name: "", lines: pickLines, monsters });
+        if (tab === "saved") onStart?.({ name: preset.name, presetId: preset.id, lines: preset.monsters, monsters });
+        else onStart?.({ name: "", presetId: null, lines: pickLines, monsters });
     }
 
     const onKey = (e) => e.key === "Escape" && onClose?.();

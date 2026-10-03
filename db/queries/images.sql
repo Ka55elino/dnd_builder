@@ -20,5 +20,9 @@ WHERE NOT EXISTS (
         UNION ALL SELECT image FROM items
         UNION ALL SELECT image FROM packs
         UNION ALL SELECT portrait FROM characters
+        UNION ALL SELECT image FROM monsters
+        UNION ALL SELECT portrait FROM campaign_npcs
+        UNION ALL SELECT image FROM campaign_locations
+        UNION ALL SELECT emblem FROM campaign_factions
     ) WHERE url = '/img/db/' || images.id
 );

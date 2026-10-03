@@ -49,6 +49,9 @@ var seeders = []seeder{
 
 	// sample characters: dev mode only, and only if there are no characters yet
 	{table: "characters", dir: "assets/data/characters", count: "CountCharacters", row: insertCharacterJSON, dev: true},
+
+	// a sample campaign (locations, NPCs, encounters, links): dev mode only, if there are none
+	{table: "campaigns", dir: "assets/data/campaigns", count: "CountCampaigns", row: insertCampaignJSON, dev: true},
 }
 
 func inSubclasses(path string) bool    { return strings.Contains(path, "/subclasses/") }

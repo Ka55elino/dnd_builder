@@ -1,0 +1,837 @@
+{
+  "id": "cmp_seed_millbrook",
+  "name": "Shadows over Millbrook",
+  "status": "active",
+  "data": {
+    "startLocationId": "loc_tankard"
+  },
+  "description": "A quiet mining town at the edge of the Thornwood. Caravans vanish on the Ember Road, the old quarry has gone silent, and someone in town is lying about why.",
+  "locations": [
+    {
+      "id": "loc_valley",
+      "name": "The Ember Vale",
+      "type": "Region",
+      "parentId": "",
+      "visible": true,
+      "data": {
+        "readAloud": "Low hills of red stone, pine forest to the north, and a single road winding through it all.",
+        "notes": "",
+        "tags": []
+      }
+    },
+    {
+      "id": "loc_millbrook",
+      "name": "Millbrook",
+      "type": "Settlement",
+      "parentId": "loc_valley",
+      "visible": false,
+      "data": {
+        "readAloud": "A few dozen timber houses around a market square; smoke rises from the smithy, and the bell of a small chapel rings the hour.",
+        "notes": "Population ~300. The town council meets at the inn.",
+        "tags": [
+          "chapter 1"
+        ]
+      }
+    },
+    {
+      "id": "loc_tankard",
+      "name": "The Gilded Tankard",
+      "type": "Building",
+      "parentId": "loc_millbrook",
+      "visible": true,
+      "data": {
+        "readAloud": "Warm light, the smell of roast and pipe smoke, and a bard who knows exactly three songs.",
+        "notes": "Rooms 5 sp a night. Hilda hears every rumour.",
+        "tags": []
+      }
+    },
+    {
+      "id": "loc_tankard_cellar",
+      "name": "Tankard Cellar",
+      "type": "Room",
+      "parentId": "loc_tankard",
+      "visible": false,
+      "data": {
+        "readAloud": "",
+        "notes": "A loose flagstone hides a tunnel to the old drainage — Vesk's men use it to move stolen goods.",
+        "tags": [
+          "secret"
+        ]
+      }
+    },
+    {
+      "id": "loc_chapel",
+      "name": "Chapel of the Dawn",
+      "type": "Building",
+      "parentId": "loc_millbrook",
+      "visible": true,
+      "data": {
+        "readAloud": "Whitewashed walls, a sunburst window and a garden of healing herbs.",
+        "notes": "",
+        "tags": []
+      }
+    },
+    {
+      "id": "loc_road",
+      "name": "The Ember Road",
+      "type": "Wilderness",
+      "parentId": "loc_valley",
+      "visible": false,
+      "data": {
+        "readAloud": "Rutted cart tracks between red boulders; broken wagons lie in the ditches.",
+        "notes": "Wolves hunt here at dusk.",
+        "tags": [
+          "chapter 1"
+        ]
+      }
+    },
+    {
+      "id": "loc_quarry",
+      "name": "The Old Quarry",
+      "type": "Dungeon",
+      "parentId": "loc_valley",
+      "visible": false,
+      "data": {
+        "readAloud": "",
+        "notes": "Abandoned after a collapse 10 years ago. Bandits camp in the upper pit; the lower galleries lead to the cult's shrine.",
+        "tags": [
+          "chapter 2"
+        ]
+      }
+    },
+    {
+      "id": "loc_shrine",
+      "name": "Shrine of the Hollow Flame",
+      "type": "Room",
+      "parentId": "loc_quarry",
+      "visible": false,
+      "data": {
+        "readAloud": "",
+        "notes": "Corvane's cultists keep a black candle burning here. The ritual completes at the next new moon.",
+        "tags": [
+          "chapter 3",
+          "secret"
+        ]
+      }
+    },
+    {
+      "id": "loc_thornwood",
+      "name": "The Thornwood",
+      "type": "Wilderness",
+      "parentId": "loc_valley",
+      "visible": false,
+      "data": {
+        "readAloud": "Twisted trees close in overhead; thorns catch at cloaks and skin.",
+        "notes": "Grizzletooth's goblins lair in a hollow under a fallen oak.",
+        "tags": []
+      }
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_hilda",
+      "name": "Hilda Brannock",
+      "role": "Innkeeper",
+      "race": "Human",
+      "attitude": "friendly",
+      "status": "alive",
+      "locationId": "loc_tankard",
+      "monsterId": "srd-commoner",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "Broad-shouldered, flour on her apron, a laugh you hear across the square.",
+        "voice": "Calls everyone \"love\"; never sits down.",
+        "motivation": "Keep the inn full and her nephew out of trouble.",
+        "secret": "Knows her nephew Tam runs errands for the bandits, and pays them to leave the inn alone."
+      }
+    },
+    {
+      "id": "npc_oren",
+      "name": "Captain Oren Vale",
+      "role": "Captain of the guard",
+      "race": "Human",
+      "attitude": "neutral",
+      "status": "alive",
+      "locationId": "loc_millbrook",
+      "monsterId": "srd-guard",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "Grey beard, polished breastplate, tired eyes.",
+        "voice": "Short sentences. Taps his sword hilt when nervous.",
+        "motivation": "Keep order with six guards and no money.",
+        "secret": "Takes coin from Vesk to look the other way on the Ember Road."
+      }
+    },
+    {
+      "id": "npc_maelis",
+      "name": "Sister Maelis",
+      "role": "Priest of the Dawn",
+      "race": "Half-elf",
+      "attitude": "ally",
+      "status": "alive",
+      "locationId": "loc_chapel",
+      "monsterId": "srd-priest",
+      "visible": true,
+      "data": {
+        "tags": [],
+        "appearance": "Young, sun-tanned, an old scar on her hand.",
+        "voice": "Quiet and certain; quotes scripture only when angry.",
+        "motivation": "Find out why the quarry miners who came to her for healing all had the same black burn."
+      }
+    },
+    {
+      "id": "npc_tam",
+      "name": "Tam Brannock",
+      "role": "Stable boy",
+      "race": "Human",
+      "attitude": "unfriendly",
+      "status": "alive",
+      "locationId": "loc_tankard",
+      "monsterId": "srd-commoner",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "Fifteen, too thin, quick hands.",
+        "motivation": "Earn enough to leave Millbrook.",
+        "secret": "Carries messages between Vesk and the cellar tunnel."
+      }
+    },
+    {
+      "id": "npc_vesk",
+      "name": "Vesk the Red",
+      "role": "Bandit leader",
+      "race": "Human",
+      "attitude": "hostile",
+      "status": "alive",
+      "locationId": "loc_quarry",
+      "monsterId": "srd-bandit-captain",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "Red scarf, a crossbow on her back, a crooked grin.",
+        "motivation": "Grow rich before the cult turns on her.",
+        "secret": "Is afraid of Corvane and would trade him to the party for her freedom."
+      }
+    },
+    {
+      "id": "npc_grizzletooth",
+      "name": "Grizzletooth",
+      "role": "Goblin chief",
+      "race": "Goblin",
+      "attitude": "hostile",
+      "status": "alive",
+      "locationId": "loc_thornwood",
+      "monsterId": "goblinWarrior",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "One fang of gold, a helmet made from a cooking pot.",
+        "voice": "Shouts, then giggles.",
+        "motivation": "Shiny things. Revenge on the bandits who took his cave."
+      }
+    },
+    {
+      "id": "npc_corvane",
+      "name": "Corvane",
+      "role": "Cult leader",
+      "race": "Human",
+      "attitude": "hostile",
+      "status": "alive",
+      "locationId": "loc_shrine",
+      "monsterId": "mage",
+      "visible": false,
+      "data": {
+        "tags": [],
+        "appearance": "Grey robes, ash-stained fingers, a calm and pleasant voice.",
+        "motivation": "Wake the Hollow Flame sleeping beneath the quarry.",
+        "secret": "Was the quarry's foreman; caused the collapse himself.",
+        "notes": "The villain of the campaign. The party should hear of him long before they meet him."
+      }
+    }
+  ],
+  "encounters": [
+    {
+      "id": "enc_seed_road_wolves",
+      "name": "Wolves on the Ember Road",
+      "notes": "At dusk; the wolves flee when two of them fall.",
+      "monsters": [
+        {
+          "monsterId": "wolf",
+          "count": 3
+        }
+      ],
+      "locationId": "loc_road"
+    },
+    {
+      "id": "enc_seed_quarry_bandits",
+      "name": "Bandit camp",
+      "notes": "Vesk parleys if the fight turns against her.",
+      "monsters": [
+        {
+          "monsterId": "bandit",
+          "count": 4
+        },
+        {
+          "monsterId": "srd-bandit-captain",
+          "count": 1
+        }
+      ],
+      "locationId": "loc_quarry"
+    },
+    {
+      "id": "enc_seed_goblin_den",
+      "name": "Goblin den",
+      "notes": "Grizzletooth offers a deal against the bandits.",
+      "monsters": [
+        {
+          "monsterId": "goblinWarrior",
+          "count": 5
+        }
+      ],
+      "locationId": "loc_thornwood"
+    },
+    {
+      "id": "enc_seed_shrine",
+      "name": "The Hollow Flame ritual",
+      "notes": "Interrupting the chant before round 4 stops the ritual.",
+      "monsters": [
+        {
+          "monsterId": "srd-cultist",
+          "count": 4
+        },
+        {
+          "monsterId": "mage",
+          "count": 1
+        }
+      ],
+      "locationId": "loc_shrine"
+    },
+    {
+      "id": "enc_seed_cellar",
+      "name": "Smugglers in the cellar",
+      "notes": "Optional — if the party follows Tam at night.",
+      "monsters": [
+        {
+          "monsterId": "srd-thug",
+          "count": 2
+        }
+      ],
+      "locationId": "loc_tankard_cellar"
+    }
+  ],
+  "links": [
+    {
+      "from": "npc:npc_hilda",
+      "to": "npc:npc_tam",
+      "kind": "family",
+      "note": "aunt"
+    },
+    {
+      "from": "npc:npc_tam",
+      "to": "npc:npc_vesk",
+      "kind": "works_for",
+      "note": "messenger"
+    },
+    {
+      "from": "npc:npc_oren",
+      "to": "npc:npc_vesk",
+      "kind": "works_for",
+      "note": "bribed"
+    },
+    {
+      "from": "npc:npc_vesk",
+      "to": "npc:npc_corvane",
+      "kind": "ally",
+      "note": "out of fear"
+    },
+    {
+      "from": "npc:npc_grizzletooth",
+      "to": "npc:npc_vesk",
+      "kind": "enemy",
+      "note": "she took his cave"
+    },
+    {
+      "from": "npc:npc_maelis",
+      "to": "npc:npc_corvane",
+      "kind": "enemy"
+    },
+    {
+      "from": "npc:npc_maelis",
+      "to": "location:loc_quarry",
+      "kind": "knows",
+      "note": "the burned miners"
+    },
+    {
+      "from": "npc:npc_corvane",
+      "to": "encounter:enc_seed_shrine",
+      "kind": "leads"
+    },
+    {
+      "from": "npc:npc_corvane",
+      "to": "faction:fac_seed_flame",
+      "kind": "member_of",
+      "note": "leader"
+    },
+    {
+      "from": "npc:npc_vesk",
+      "to": "faction:fac_seed_redscarves",
+      "kind": "member_of",
+      "note": "leader"
+    },
+    {
+      "from": "npc:npc_tam",
+      "to": "faction:fac_seed_redscarves",
+      "kind": "member_of",
+      "note": "messenger"
+    },
+    {
+      "from": "npc:npc_oren",
+      "to": "faction:fac_seed_watch",
+      "kind": "member_of",
+      "note": "captain"
+    },
+    {
+      "from": "faction:fac_seed_redscarves",
+      "to": "faction:fac_seed_flame",
+      "kind": "ally",
+      "note": "an uneasy deal"
+    },
+    {
+      "from": "quest:qst_seed_caravans",
+      "to": "encounter:enc_seed_quarry_bandits",
+      "kind": "leads_to"
+    },
+    {
+      "from": "quest:qst_seed_burns",
+      "to": "encounter:enc_seed_shrine",
+      "kind": "leads_to"
+    },
+    {
+      "from": "quest:qst_seed_caravans",
+      "to": "quest:qst_seed_burns",
+      "kind": "unlocks",
+      "note": "the ledger points to the quarry"
+    },
+    {
+      "from": "quest:qst_seed_tam",
+      "to": "quest:qst_seed_caravans",
+      "kind": "unlocks",
+      "note": "Tam talks: a shortcut to the bandits"
+    },
+    {
+      "from": "quest:qst_seed_cave",
+      "to": "quest:qst_seed_caravans",
+      "kind": "unlocks",
+      "note": "if allied with the goblins"
+    }
+  ],
+  "quests": [
+    {
+      "id": "qst_seed_caravans",
+      "name": "The Vanishing Caravans",
+      "kind": "main",
+      "status": "open",
+      "giverNpcId": "npc_oren",
+      "locationId": "loc_road",
+      "reward": "50 gp from the town council",
+      "visible": true,
+      "data": {
+        "summary": "Three caravans have disappeared on the Ember Road this month. Find out what happened.",
+        "objectives": [
+          {
+            "text": "Search the Ember Road for the last caravan",
+            "done": false
+          },
+          {
+            "text": "Find where the stolen goods go",
+            "done": false
+          },
+          {
+            "text": "Deal with whoever is behind it",
+            "done": false
+          }
+        ],
+        "notes": "Oren gives the quest but tries to steer the party away from the quarry.",
+        "tags": [
+          "chapter 1"
+        ],
+        "route": [
+          {
+            "locationId": "loc_road",
+            "label": "Search the wrecked wagons",
+            "objective": 0
+          },
+          {
+            "locationId": "loc_tankard_cellar",
+            "label": "Follow the stolen goods",
+            "objective": 1
+          },
+          {
+            "locationId": "loc_quarry",
+            "label": "Confront the bandits",
+            "objective": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "qst_seed_burns",
+      "name": "The Black Burns",
+      "kind": "main",
+      "status": "open",
+      "giverNpcId": "npc_maelis",
+      "locationId": "loc_quarry",
+      "reward": "The chapel's blessing and a healing potion each",
+      "visible": true,
+      "data": {
+        "summary": "Miners who came to the chapel all carried the same black burn. Sister Maelis wants to know why.",
+        "objectives": [
+          {
+            "text": "Talk to the burned miners",
+            "done": false
+          },
+          {
+            "text": "Explore the lower galleries of the quarry",
+            "done": false
+          },
+          {
+            "text": "Stop the ritual of the Hollow Flame",
+            "done": false
+          }
+        ],
+        "notes": "Leads straight to Corvane and the shrine.",
+        "tags": [
+          "chapter 2"
+        ],
+        "route": [
+          {
+            "locationId": "loc_chapel",
+            "label": "Talk to the burned miners",
+            "objective": 0
+          },
+          {
+            "locationId": "loc_quarry",
+            "label": "Down into the galleries",
+            "objective": 1
+          },
+          {
+            "locationId": "loc_shrine",
+            "label": "Stop the ritual",
+            "objective": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "qst_seed_tam",
+      "name": "Tam's Debt",
+      "kind": "side",
+      "status": "open",
+      "giverNpcId": "npc_hilda",
+      "locationId": "loc_tankard",
+      "reward": "Free rooms at the Gilded Tankard",
+      "data": {
+        "summary": "Hilda asks the party to quietly get her nephew out of the bandits' service.",
+        "objectives": [
+          {
+            "text": "Follow Tam at night",
+            "done": false
+          },
+          {
+            "text": "Pay off or scare off his contact",
+            "done": false
+          }
+        ],
+        "notes": "If the party is rough with Tam, Hilda turns unfriendly.",
+        "route": [
+          {
+            "locationId": "loc_tankard",
+            "label": "Follow Tam at night",
+            "objective": 0
+          },
+          {
+            "locationId": "loc_tankard_cellar",
+            "label": "Meet his contact",
+            "objective": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "qst_seed_cave",
+      "name": "Grizzletooth's Cave",
+      "kind": "side",
+      "status": "open",
+      "giverNpcId": "npc_grizzletooth",
+      "locationId": "loc_thornwood",
+      "reward": "Safe passage through the Thornwood, and a gold fang",
+      "data": {
+        "summary": "The goblin chief wants his old cave back from the bandits.",
+        "objectives": [
+          {
+            "text": "Agree terms with Grizzletooth",
+            "done": false
+          },
+          {
+            "text": "Drive the bandits out of the upper pit",
+            "done": false
+          }
+        ],
+        "notes": "A goblin alliance makes the bandit camp fight much easier.",
+        "route": [
+          {
+            "locationId": "loc_thornwood",
+            "label": "Parley with Grizzletooth",
+            "objective": 0
+          },
+          {
+            "locationId": "loc_quarry",
+            "label": "Drive out the bandits",
+            "objective": 1
+          }
+        ]
+      }
+    }
+  ],
+  "factions": [
+    {
+      "id": "fac_seed_flame",
+      "name": "Cult of the Hollow Flame",
+      "type": "Cult",
+      "attitude": "hostile",
+      "reputation": -5,
+      "leaderNpcId": "npc_corvane",
+      "hqLocationId": "loc_shrine",
+      "data": {
+        "description": "Miners and drifters who heard a voice in the deep galleries.",
+        "goals": "Wake the Hollow Flame at the next new moon.",
+        "secret": "The flame is a bound fire spirit, not a god.",
+        "tags": [
+          "villains"
+        ]
+      }
+    },
+    {
+      "id": "fac_seed_redscarves",
+      "name": "The Red Scarves",
+      "type": "Bandit gang",
+      "attitude": "hostile",
+      "reputation": -2,
+      "leaderNpcId": "npc_vesk",
+      "hqLocationId": "loc_quarry",
+      "visible": true,
+      "data": {
+        "description": "A dozen cutthroats who rob the Ember Road.",
+        "goals": "Get rich and get out before the cult turns on them."
+      }
+    },
+    {
+      "id": "fac_seed_watch",
+      "name": "Millbrook Watch",
+      "type": "Town guard",
+      "attitude": "neutral",
+      "reputation": 1,
+      "leaderNpcId": "npc_oren",
+      "hqLocationId": "loc_millbrook",
+      "visible": true,
+      "data": {
+        "description": "Six tired guards and one honest sergeant.",
+        "goals": "Keep the peace without spending money.",
+        "secret": "Their captain is on the bandits' payroll."
+      }
+    }
+  ],
+  "sessions": [
+    {
+      "id": "ses_seed_1",
+      "number": 1,
+      "title": "Arrival in Millbrook",
+      "playedOn": "2026-09-26",
+      "ingameDate": "Day 1, late autumn",
+      "status": "played",
+      "data": {
+        "prep": "Start on the Ember Road at dusk with a wrecked wagon. Wolves attack, then the party reaches Millbrook and the Gilded Tankard.",
+        "secrets": [
+          {
+            "text": "The last caravan was carrying quarry tools, not grain",
+            "revealed": false
+          },
+          {
+            "text": "Captain Oren knows more than he says",
+            "revealed": false
+          },
+          {
+            "text": "Tam slips out of the inn every night",
+            "revealed": false
+          },
+          {
+            "text": "The miners at the chapel all have black burns",
+            "revealed": false
+          }
+        ],
+        "planned": {
+          "npcs": [
+            "npc_hilda",
+            "npc_oren",
+            "npc_tam"
+          ],
+          "locations": [
+            "loc_road",
+            "loc_millbrook",
+            "loc_tankard"
+          ],
+          "encounters": [
+            "enc_seed_road_wolves"
+          ],
+          "quests": [
+            "qst_seed_caravans"
+          ]
+        },
+        "recap": "The party found a wrecked wagon on the Ember Road and fought off wolves. In Millbrook, Captain Oren hired them to find the missing caravans, and Hilda gave them rooms at the Gilded Tankard.",
+        "notes": "Players loved Hilda — give her more scenes. The rogue is suspicious of Oren already; let the bribe come out in session 3, not earlier.",
+        "attendees": [
+          "Thorin",
+          "Lyra",
+          "Kess",
+          "Brother Aldo"
+        ],
+        "xp": "Milestone: level 2",
+        "loot": "12 gp, a dented lantern, a caravan ledger"
+      },
+      "events": [
+        {
+          "kind": "time",
+          "note": "Dusk on the Ember Road"
+        },
+        {
+          "kind": "location_visited",
+          "ref": "location:loc_road"
+        },
+        {
+          "kind": "encounter_done",
+          "ref": "encounter:enc_seed_road_wolves",
+          "outcome": "victory",
+          "note": "3 rounds; Lyra dropped to 4 HP"
+        },
+        {
+          "kind": "loot",
+          "note": "A caravan ledger in the wreck"
+        },
+        {
+          "kind": "secret_revealed",
+          "ref": "session:ses_seed_1",
+          "change": {
+            "index": 0
+          },
+          "note": "From the ledger"
+        },
+        {
+          "kind": "location_visited",
+          "ref": "location:loc_millbrook"
+        },
+        {
+          "kind": "npc_met",
+          "ref": "npc:npc_oren"
+        },
+        {
+          "kind": "quest_received",
+          "ref": "quest:qst_seed_caravans",
+          "note": "50 gp from the council"
+        },
+        {
+          "kind": "quest_objective",
+          "ref": "quest:qst_seed_caravans",
+          "change": {
+            "index": 0
+          }
+        },
+        {
+          "kind": "npc_met",
+          "ref": "npc:npc_hilda"
+        },
+        {
+          "kind": "npc_talked",
+          "ref": "npc:npc_hilda",
+          "note": "She told them about the burned miners at the chapel"
+        },
+        {
+          "kind": "npc_attitude",
+          "ref": "npc:npc_hilda",
+          "change": {
+            "to": "ally"
+          },
+          "note": "Kess helped in the kitchen"
+        },
+        {
+          "kind": "faction_reputation",
+          "ref": "faction:fac_seed_watch",
+          "change": {
+            "delta": 1
+          },
+          "note": "Took the caravan job"
+        },
+        {
+          "kind": "encounter_skipped",
+          "ref": "encounter:enc_seed_cellar",
+          "outcome": "skipped",
+          "note": "Nobody followed Tam — keep it for later"
+        },
+        {
+          "kind": "rest",
+          "note": "Long rest at the Gilded Tankard"
+        }
+      ]
+    },
+    {
+      "id": "ses_seed_2",
+      "number": 2,
+      "title": "The Chapel and the Quarry Road",
+      "ingameDate": "Day 2",
+      "status": "planned",
+      "data": {
+        "prep": "Open with Sister Maelis asking for help with the burned miners. If they follow the tracks from the ledger, they reach the quarry by evening.",
+        "secrets": [
+          {
+            "text": "Captain Oren knows more than he says",
+            "revealed": false
+          },
+          {
+            "text": "Tam slips out of the inn every night",
+            "revealed": false
+          },
+          {
+            "text": "The miners at the chapel all have black burns",
+            "revealed": false
+          },
+          {
+            "text": "Vesk is afraid of Corvane",
+            "revealed": false
+          }
+        ],
+        "planned": {
+          "npcs": [
+            "npc_maelis",
+            "npc_tam",
+            "npc_vesk"
+          ],
+          "locations": [
+            "loc_chapel",
+            "loc_quarry"
+          ],
+          "encounters": [
+            "enc_seed_cellar",
+            "enc_seed_quarry_bandits"
+          ],
+          "quests": [
+            "qst_seed_burns",
+            "qst_seed_tam"
+          ]
+        },
+        "notes": "If they go to the quarry too early, Vesk parleys instead of fighting."
+      },
+      "events": []
+    }
+  ]
+}

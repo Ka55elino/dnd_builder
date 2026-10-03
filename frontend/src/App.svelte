@@ -15,6 +15,7 @@
     import BestiaryPage from './components/bestiary/BestiaryPage.svelte';
     import HomebrewPage from './components/HomebrewPage.svelte';
     import ConditionsPage from './components/ConditionsPage.svelte';
+    import CampaignsPage from './components/campaign/CampaignsPage.svelte';
     import AppFooter from './components/AppFooter.svelte';
 
     /**
@@ -26,6 +27,7 @@
      *   'spells'     — spell reference
      *   'items'      — item reference
      *   'bestiary'   — monsters and encounter presets (DM)
+     *   'campaign'   — the DM's campaigns (list → a campaign with its own sidebar layout)
      *   'builder' | 'character' | 'levelup' | 'give' — working with a character
      */
     let screen = $state('menu');
@@ -86,6 +88,8 @@
     <ItemsPage onBack={showMenu} />
 {:else if screen === 'bestiary'}
     <BestiaryPage onBack={showMenu} />
+{:else if screen === 'campaign'}
+    <CampaignsPage onBack={showMenu} />
 {:else if screen === 'conditions'}
     <ConditionsPage onBack={showMenu} />
 {:else if screen === 'homebrew'}

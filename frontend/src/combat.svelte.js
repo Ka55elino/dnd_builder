@@ -30,6 +30,7 @@ import { isSummary } from './rules/summary.js';
 import { EV } from './game.js';
 import { withCondition, withoutCondition, withLevel, tickEndOfTurn, resolveSave } from './rules/conditions.js';
 import { resolveConditions, conditionModifiers, applyModifiers, rowName } from './rules/modifiers.js';
+import { logToActiveSession } from './data/campaigns.js';
 
 export const EV_ENCOUNTER = 'encounter';
 
@@ -43,9 +44,14 @@ export const EV_ENCOUNTER = 'encounter';
  *   effects                         — monster: condition instances (rules/conditions.js)
  * }]
  * round — counts up each time the turn wraps from the last combatant to the first
+ * presetId — the encounter preset it was started from (null — a hand-made pick)
+ *
+ * Ending an encounter logs it into the session being played (data/campaigns.js
+ * logToActiveSession): the preset, rounds, which monsters went down — the DM edits the
+ * outcome afterwards if it wasn't a win.
  * playerConds — player id → condition names (from their summaries), for the public line
  */
-export const combat = $state({ active: false, name: '', turn: null, round: 1, line: [], playerConds: {} });
+export const combat = $state({ active: false, name: '', presetId: null, turn: null, round: 1, line: [], playerConds: {} });
 
 // condition definitions (refs.conditions) — set by the DM screen once loaded
 let condDefs = [];
@@ -59,7 +65,7 @@ let seq = 0;
  * Start an encounter: players (lobby order) first, then the monsters.
  * lines — [{ monsterId, count }] (an encounter preset or a hand-made pick)
  */
-export function startEncounter({ name = '', lines = [], monsters = [], players = [] }) {
+export function startEncounter({ name = '', presetId = null, lines = [], monsters = [], players = [] }) {
     const byId = new Map(monsters.map((m) => [m.id, m]));
     const line = players.map(playerEntry);
     for (const l of lines) {
@@ -83,6 +89,7 @@ export function startEncounter({ name = '', lines = [], monsters = [], players =
     }
     combat.active = true;
     combat.name = name;
+    combat.presetId = presetId;
     combat.turn = null;
     combat.round = 1;
     combat.line = line;
@@ -90,12 +97,41 @@ export function startEncounter({ name = '', lines = [], monsters = [], players =
 }
 
 export function endEncounter() {
+    if (combat.active) logEncounter();
     combat.active = false;
     combat.name = '';
+    combat.presetId = null;
     combat.turn = null;
     combat.round = 1;
     combat.line = [];
     broadcast();
+}
+
+/** The finished encounter → the session log (no session being played — nothing happens). */
+function logEncounter() {
+    const monsters = combat.line.filter((c) => c.kind === 'monster');
+    if (!monsters.length) return;
+    const down = monsters.filter((c) => c.hp <= 0);
+    // "3× Goblin, 1× Bugbear" — the name of a hand-made encounter, and what fell
+    const count = (list) => {
+        const m = new Map();
+        for (const c of list) {
+            const base = c.monsterId;
+            m.set(base, { n: (m.get(base)?.n ?? 0) + 1, name: c.name.replace(/ \d+$/, '') });
+        }
+        return [...m.values()].map((x) => `${x.n}× ${x.name}`).join(', ');
+    };
+    const rounds = combat.round;
+    logToActiveSession({
+        kind: 'encounter_done',
+        refType: combat.presetId ? 'encounter' : '',
+        refId: combat.presetId ?? '',
+        refName: combat.name || count(monsters),
+        outcome: down.length === monsters.length ? 'victory' : 'ended',
+        note: [`${rounds} round${rounds === 1 ? '' : 's'}`, `${down.length}/${monsters.length} monsters down`, down.length && down.length < monsters.length ? `(${count(down)})` : '']
+            .filter(Boolean)
+            .join(' · '),
+    });
 }
 
 const playerEntry = (p) => ({

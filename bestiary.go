@@ -191,7 +191,7 @@ func insertMonsterJSON(tx *sql.Tx, raw []byte) error {
 }
 
 // saveEncounter creates or updates a preset and returns its id.
-func saveEncounter(db *sql.DB, raw string) (string, error) {
+func saveEncounter(db execer, raw string) (string, error) {
 	var e Encounter
 	if err := json.Unmarshal([]byte(raw), &e); err != nil {
 		return "", err
@@ -275,12 +275,23 @@ func (a *App) SaveEncounter(encounterJSON string) (string, error) {
 	return saveEncounter(db, encounterJSON)
 }
 
-// DeleteEncounter deletes an encounter preset.
+// DeleteEncounter deletes an encounter preset; it leaves every campaign that used it
+// (its links go too).
 func (a *App) DeleteEncounter(id string) error {
 	db, err := a.conn()
 	if err != nil {
 		return err
 	}
-	_, err = db.Exec(Q("DeleteEncounter"), id)
-	return err
+	tx, err := db.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	if _, err := tx.Exec(Q("DeleteLinksOf"), "encounter", id, "encounter", id); err != nil {
+		return err
+	}
+	if _, err := tx.Exec(Q("DeleteEncounter"), id); err != nil {
+		return err
+	}
+	return tx.Commit()
 }

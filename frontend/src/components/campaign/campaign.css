@@ -1,0 +1,271 @@
+/* Shared styles of the campaign screens (NPCs, locations…): classes start with cp-. */
+
+.cp-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.cp-toolbar .cp-grow {
+    flex: 1;
+}
+
+.cp-input,
+.cp-select,
+.cp-textarea {
+    padding: 6px 10px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-primary);
+    font: inherit;
+    font-size: 13px;
+}
+
+.cp-input:focus,
+.cp-select:focus,
+.cp-textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.cp-textarea {
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.cp-search {
+    min-width: 220px;
+}
+
+.cp-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.cp-btn:hover:not(:disabled) {
+    border-color: var(--color-gold);
+    color: var(--color-gold-hover);
+}
+
+.cp-btn.cp-sm {
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+.cp-btn.cp-danger:hover:not(:disabled) {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+.cp-btn.cp-add {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.cp-btn.cp-primary {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-bg);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cp-btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+/* the list */
+.cp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.cp-table th {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--color-text-muted);
+}
+
+.cp-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+    color: var(--color-text-secondary);
+    vertical-align: middle;
+}
+
+.cp-table tbody tr {
+    cursor: pointer;
+}
+
+.cp-table tbody tr:hover td {
+    background: var(--color-card);
+}
+
+.cp-table tbody tr.cp-sel td {
+    background: var(--color-card-elevated);
+}
+
+.cp-table .cp-name {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cp-thumb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: grid;
+    place-items: center;
+    background: var(--color-card-elevated);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.cp-chip {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 11px;
+    line-height: 18px;
+    white-space: nowrap;
+}
+
+.cp-att-hostile { border-color: var(--color-danger); color: var(--color-danger); }
+.cp-att-unfriendly { border-color: var(--color-act-bonus); color: var(--color-act-bonus); }
+.cp-att-neutral { color: var(--color-text-secondary); }
+.cp-att-friendly { border-color: var(--color-success); color: var(--color-success); }
+.cp-att-ally { border-color: var(--color-gold); color: var(--color-gold); }
+.cp-st-dead { opacity: 0.55; text-decoration: line-through; }
+
+.cp-muted {
+    color: var(--color-text-muted);
+}
+
+.cp-error {
+    color: var(--color-danger);
+    font-size: 13px;
+}
+
+.cp-empty {
+    padding: 28px;
+    border: 1px dashed var(--color-border);
+    border-radius: 10px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* the editor: a panel over the right side of the content */
+.cp-drawer-back {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.cp-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 901;
+    width: min(560px, 100%);
+    display: flex;
+    flex-direction: column;
+    background: var(--color-card);
+    border-left: 1px solid var(--color-border);
+    box-shadow: -16px 0 48px rgba(0, 0, 0, 0.4);
+    font-family: var(--font-ui);
+}
+
+.cp-drawer header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cp-drawer header h2 {
+    flex: 1;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 22px;
+    color: var(--color-text-primary);
+}
+
+.cp-drawer .cp-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 18px;
+}
+
+.cp-drawer footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--color-border);
+}
+
+.cp-drawer footer .cp-grow {
+    flex: 1;
+}
+
+.cp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.cp-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cp-row > .cp-field {
+    flex: 1 1 140px;
+}
+
+.cp-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.cp-h {
+    margin: 6px 0 0;
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.cp-secret {
+    border-color: color-mix(in srgb, var(--color-danger) 50%, var(--color-border));
+}

@@ -1,29 +1,48 @@
 <script>
     /**
      * Main menu (start screen) — a plain game-style vertical menu.
-     * onNavigate(screen) — 'game' | 'join' | 'characters' | 'spells' | 'items' | 'bestiary' | 'homebrew'
+     * onNavigate(screen) — 'game' | 'join' | 'campaign' | 'characters' | 'spells' | 'items' | 'bestiary' | 'conditions' | 'homebrew'
      * While in a game (hosting or joined), Start/Join are replaced by
      * "Return to Game" leading to the matching screen.
      * An item with `stub: true` only shows "coming soon".
+     * Exit — the last item: quits the app (desktop only; phones close apps themselves).
      */
     import { onMount } from "svelte";
+    import { Application, System } from "@wailsio/runtime";
     import { server } from "../server.svelte.js";
 
     let { onNavigate } = $props();
 
     const REFERENCE = [
-        { id: "characters", title: "Characters", divider: true },
+        { id: "campaign", title: "Campaign", divider: true },
+        { id: "characters", title: "Characters" },
         { id: "spells", title: "Spells" },
         { id: "items", title: "Items" },
         { id: "bestiary", title: "Bestiary" },
         { id: "conditions", title: "Conditions" },
         { id: "homebrew", title: "Homebrew" },
+        ...exitItem(),
     ];
 
+    function exitItem() {
+        try {
+            if (System.IsMobile()) return [];
+        } catch {
+            // no desktop shell
+        }
+        return [{ id: "exit", title: "Exit", divider: true }];
+    }
+
     let ITEMS = $derived.by(() => {
-        if (server.role === "host") return [{ id: "game", title: "Return to Game" }, ...REFERENCE];
-        if (server.role === "player") return [{ id: "join", title: "Return to Game" }, ...REFERENCE];
-        return [{ id: "game", title: "Start Game" }, { id: "join", title: "Join Game" }, ...REFERENCE];
+        if (server.role === "host")
+            return [{ id: "game", title: "Return to Game" }, ...REFERENCE];
+        if (server.role === "player")
+            return [{ id: "join", title: "Return to Game" }, ...REFERENCE];
+        return [
+            { id: "game", title: "Start Game" },
+            { id: "join", title: "Join Game" },
+            ...REFERENCE,
+        ];
     });
 
     // the list can shrink/grow while the menu is open — keep the cursor in range
@@ -37,8 +56,12 @@
     let buttons = [];
 
     const choose = (item) => {
+        if (item.id === "exit") {
+            Application.Quit().catch(() => {});
+            return;
+        }
         if (item.stub) {
-            // TODO: wire up game sessions
+            // TODO: the Campaign screen
             notice = `${item.title} — coming soon`;
             clearTimeout(noticeTimer);
             noticeTimer = setTimeout(() => (notice = ""), 2000);
