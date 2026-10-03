@@ -17,13 +17,14 @@
     import CharacterBrief from './CharacterBrief.svelte';
     import StartEncounterDialog from './combat/StartEncounterDialog.svelte';
     import LineupDM from './combat/LineupDM.svelte';
-    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, playerSheet, setConditionDefs, notePlayerConditions } from '../combat.svelte.js';
+    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, sendMap, playerSheet, setConditionDefs, notePlayerConditions } from '../combat.svelte.js';
     import { loadRefs } from '../data/refs.js';
     import {
         loadActiveSession, loadCampaign, logToActiveSession, loadCampaigns, loadSessions, setSessionStatus,
         saveSession, loadSession,
     } from '../data/campaigns.js';
     import SessionView from './campaign/SessionView.svelte';
+    import MapView from './campaign/map/MapView.svelte';
 
     let { onBack } = $props();
 
@@ -43,7 +44,7 @@
         .catch(() => {});
 
     // the session being played (Campaign → Sessions → ▶ Start): combat and Give Item log there
-    // logTo — { label, campaign, session } of the session being played (the Log tab needs it)
+    // logTo — { label, campaign, session } of the session being played (the Map and Log tabs need it)
     let logTo = $state(null);
     async function refreshLogTo() {
         try {
@@ -57,7 +58,7 @@
     }
     refreshLogTo();
 
-    // the screen while hosting: Party (the character cards) | Log (the session)
+    // the screen while hosting: Party (the character cards) | Map (the campaign's maps, view only) | Log (the session)
     let tab = $state('party');
     $effect(() => {
         if (!logTo && tab !== 'party') tab = 'party';
@@ -73,6 +74,7 @@
     function begin(opts) {
         pickOpen = false;
         startEncounter({ ...opts, players: server.players });
+        if (logTo?.campaign) tab = 'map'; // the encounter's map, with its combatants to place
     }
 
     // a player's numbers for the line, from their latest state
@@ -89,6 +91,7 @@
         lastIds = key;
         untrack(() => {
             if (!syncPlayers(server.players)) broadcast();
+            sendMap(); // newcomers get the encounter's map too
         });
     });
 
@@ -294,10 +297,15 @@
         {#if logTo?.campaign}
             <nav class="tabs" aria-label="Game screen">
                 <button class:on={tab === 'party'} onclick={() => (tab = 'party')}>Party <span class="count">{server.players.length}</span></button>
+                <button class:on={tab === 'map'} onclick={() => (tab = 'map')}>Map</button>
                 <button class:on={tab === 'log'} onclick={() => (tab = 'log')}>Log · Session {logTo.session.number}</button>
             </nav>
         {/if}
-        {#if tab === 'log' && logTo?.campaign}
+        {#if tab === 'map' && logTo?.campaign}
+            {#key logTo.campaign.id}
+                <div class="tabpane"><MapView campaign={logTo.campaign} /></div>
+            {/key}
+        {:else if tab === 'log' && logTo?.campaign}
             {#key logTo.session.id}
                 <div class="tabpane"><SessionView campaign={logTo.campaign} id={logTo.session.id} embedded /></div>
             {/key}

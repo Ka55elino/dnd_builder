@@ -276,7 +276,7 @@ func (a *App) SaveEncounter(encounterJSON string) (string, error) {
 }
 
 // DeleteEncounter deletes an encounter preset; it leaves every campaign that used it
-// (its links go too).
+// (its links, its maps and its markers on the campaigns' maps go too).
 func (a *App) DeleteEncounter(id string) error {
 	db, err := a.conn()
 	if err != nil {
@@ -287,6 +287,9 @@ func (a *App) DeleteEncounter(id string) error {
 		return err
 	}
 	defer tx.Rollback()
+	if err := dropEncounterMapsEverywhere(tx, id); err != nil {
+		return err
+	}
 	if _, err := tx.Exec(Q("DeleteLinksOf"), "encounter", id, "encounter", id); err != nil {
 		return err
 	}

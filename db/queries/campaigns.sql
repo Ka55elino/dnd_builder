@@ -360,3 +360,88 @@ DELETE FROM campaign_session_events WHERE id = ?;
 
 -- name: TouchSession
 UPDATE campaign_sessions SET updated_at = strftime('%s','now') WHERE id = ?;
+
+-- ---------- maps (maps.go) ----------
+
+-- name: GetMapLayers
+-- Every map of a campaign, without its cells: what the layer menu shows.
+SELECT m.owner_type, m.owner_id, m.cell_count,
+       (SELECT COUNT(*) FROM campaign_map_markers k WHERE k.map_id = m.id), m.updated_at
+FROM campaign_maps m WHERE m.campaign_id = ?;
+
+-- name: GetMapByOwner
+SELECT id, cells_json, data_json, updated_at FROM campaign_maps
+WHERE campaign_id = ? AND owner_type = ? AND owner_id = ?;
+
+-- name: InsertMap
+INSERT INTO campaign_maps (id, campaign_id, owner_type, owner_id) VALUES (?, ?, ?, ?);
+
+-- name: SetMapCells
+UPDATE campaign_maps SET cells_json = ?, cell_count = ?, updated_at = strftime('%s','now') WHERE id = ?;
+
+-- name: GetMapMarkers
+SELECT ref_type, ref_id, x, y FROM campaign_map_markers WHERE map_id = ? ORDER BY ref_type, ref_id;
+
+-- name: MarkerAt
+SELECT ref_type, ref_id FROM campaign_map_markers WHERE map_id = ? AND x = ? AND y = ?;
+
+-- name: UpsertMapMarker
+INSERT INTO campaign_map_markers (map_id, ref_type, ref_id, x, y) VALUES (?, ?, ?, ?, ?)
+ON CONFLICT(map_id, ref_type, ref_id) DO UPDATE SET x = excluded.x, y = excluded.y;
+
+-- name: DeleteMapMarker
+DELETE FROM campaign_map_markers WHERE map_id = ? AND ref_type = ? AND ref_id = ?;
+
+-- name: TouchMap
+UPDATE campaign_maps SET updated_at = strftime('%s','now') WHERE id = ?;
+
+-- name: GetLocationParent
+-- A location's parent ('' — top level), only if it is in the campaign.
+SELECT COALESCE(parent_id, '') FROM campaign_locations WHERE id = ? AND campaign_id = ?;
+
+-- name: GetNpcLocation
+SELECT COALESCE(location_id, '') FROM campaign_npcs WHERE id = ? AND campaign_id = ?;
+
+-- name: GetEncounterLocation
+-- Where an encounter of the campaign happens ('' — nowhere in particular).
+SELECT COALESCE((SELECT to_id FROM campaign_links h
+                 WHERE h.campaign_id = l.campaign_id AND h.from_type = 'encounter' AND h.from_id = l.to_id
+                   AND h.kind = 'happens_at' AND h.to_type = 'location' LIMIT 1), '')
+FROM campaign_links l
+WHERE l.campaign_id = ? AND l.from_type = 'campaign' AND l.to_type = 'encounter' AND l.to_id = ? AND l.kind = 'includes';
+
+-- name: DeleteMarkersOfRef
+-- The thing was deleted / left the campaign: its markers go (on the campaign's maps).
+DELETE FROM campaign_map_markers
+WHERE ref_type = ? AND ref_id = ? AND map_id IN (SELECT id FROM campaign_maps WHERE campaign_id = ?);
+
+-- name: PruneMarkersOfRef
+-- The thing moved (another parent / location): its markers stay only on the new owner's map.
+DELETE FROM campaign_map_markers
+WHERE ref_type = ? AND ref_id = ?
+  AND map_id IN (SELECT id FROM campaign_maps WHERE campaign_id = ?
+                 AND NOT (owner_type = 'location' AND owner_id = ?));
+
+-- name: DeleteOwnerMapMarkers
+DELETE FROM campaign_map_markers
+WHERE map_id IN (SELECT id FROM campaign_maps WHERE campaign_id = ? AND owner_type = ? AND owner_id = ?);
+
+-- name: DeleteOwnerMap
+DELETE FROM campaign_maps WHERE campaign_id = ? AND owner_type = ? AND owner_id = ?;
+
+-- name: DeleteCampaignMapMarkers
+DELETE FROM campaign_map_markers WHERE map_id IN (SELECT id FROM campaign_maps WHERE campaign_id = ?);
+
+-- name: DeleteCampaignMaps
+DELETE FROM campaign_maps WHERE campaign_id = ?;
+
+-- name: DeleteEncounterMapsEverywhere
+-- An encounter preset was deleted: its markers and maps in every campaign.
+DELETE FROM campaign_map_markers WHERE ref_type = 'encounter' AND ref_id = ?;
+
+-- name: DeleteEncounterOwnedMarkers
+DELETE FROM campaign_map_markers
+WHERE map_id IN (SELECT id FROM campaign_maps WHERE owner_type = 'encounter' AND owner_id = ?);
+
+-- name: DeleteEncounterOwnedMaps
+DELETE FROM campaign_maps WHERE owner_type = 'encounter' AND owner_id = ?;

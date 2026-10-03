@@ -22,6 +22,8 @@
 //	enc goblin 3, ogre                      → start an encounter: the players + 3 Goblin Warriors + an Ogre
 //	enc · enc move 3 1 · enc end             → show the line · move 3rd to place 1 · end it
 //	enc turn 2 · enc next                   → whose turn: the 2nd · the next one
+//	enc maps · enc map [name|field]          → the encounter's map (sent on start; see encounter.go)
+//	enc pos 3 2 -1 · enc place · enc off 3   → put the 3rd into cell (2, -1) · everyone back · take off
 //	players                                 → list players
 //	quit                                    → end the game (Ctrl+C works too)
 //
@@ -51,6 +53,7 @@ func main() {
 	flag.Parse()
 	items = loadNamedItems(*data)
 	monsters = loadMonsters(*data)
+	dataRoot = *data
 	log.SetFlags(log.Ltime)
 
 	var dm *lan.Manager
@@ -168,7 +171,7 @@ func findPlayer(dm *lan.Manager, q string) (lan.PlayerInfo, bool) {
 
 func console(dm *lan.Manager, done chan struct{}) {
 	defer close(done)
-	fmt.Println(`type: enc <monster> [n], … · enc · enc move <from> <to> · enc turn <n> · enc next · enc end · monsters  ·  w <player> <text>  ·  dmg|heal|temp <player> <n>  ·  give <player> <item> [n]  ·  items  ·  <kind> [json]  ·  @<player> <kind> [json]  ·  players  ·  quit`)
+	fmt.Println(`type: enc <monster> [n], … · enc · enc move <from> <to> · enc turn <n> · enc next · enc end · enc maps · enc map [name] · enc pos <n> <x> <y> · enc place · enc off <n> · monsters  ·  w <player> <text>  ·  dmg|heal|temp <player> <n>  ·  give <player> <item> [n]  ·  items  ·  <kind> [json]  ·  @<player> <kind> [json]  ·  players  ·  quit`)
 	sc := bufio.NewScanner(os.Stdin)
 	for sc.Scan() {
 		line := strings.TrimSpace(sc.Text())

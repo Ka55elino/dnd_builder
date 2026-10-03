@@ -144,7 +144,7 @@ func deleteCampaign(db *sql.DB, id string) error {
 		return err
 	}
 	defer tx.Rollback()
-	for _, q := range []string{"DeleteCampaignLinks",
+	for _, q := range []string{"DeleteCampaignLinks", "DeleteCampaignMapMarkers", "DeleteCampaignMaps",
 		"DeleteCampaignEvents", "DeleteCampaignSessions",
 		"DeleteCampaignQuests", "DeleteCampaignFactions",
 		"DeleteCampaignNpcs", "DeleteCampaignLocations", "DeleteCampaign"} {
@@ -326,6 +326,10 @@ func saveLocation(db *sql.DB, raw string) (string, error) {
 		strings.TrimSpace(l.Type), nullable(l.Image), boolInt(l.Visible), data); err != nil {
 		return "", err
 	}
+	// moved to another parent: its marker stays only on the new parent's map
+	if err := pruneMarkersOf(tx, l.CampaignID, "location", l.ID, l.ParentID); err != nil {
+		return "", err
+	}
 	if _, err := tx.Exec(Q("TouchCampaign"), l.CampaignID); err != nil {
 		return "", err
 	}
@@ -333,7 +337,7 @@ func saveLocation(db *sql.DB, raw string) (string, error) {
 }
 
 // deleteLocation removes a location: its sub-locations move up to its parent,
-// NPCs there lose their location, its links are deleted.
+// NPCs there lose their location, its links, its map and its markers are deleted.
 func deleteLocation(db *sql.DB, id string) error {
 	tx, err := db.Begin()
 	if err != nil {
@@ -358,6 +362,9 @@ func deleteLocation(db *sql.DB, id string) error {
 		{"UnsetQuestLocation", []any{id}},
 		{"UnsetFactionHq", []any{id}},
 		{"DeleteLinksOf", []any{"location", id, "location", id}},
+		{"DeleteMarkersOfRef", []any{"location", id, campaignID}},
+		{"DeleteOwnerMapMarkers", []any{campaignID, "location", id}},
+		{"DeleteOwnerMap", []any{campaignID, "location", id}},
 		{"DeleteLocation", []any{id}},
 		{"UnsetStartLocation", []any{campaignID, id}},
 		{"TouchCampaign", []any{campaignID}},
@@ -452,6 +459,10 @@ func saveNpc(db *sql.DB, raw string) (string, error) {
 		boolInt(n.Visible), data); err != nil {
 		return "", err
 	}
+	// moved to another location: its marker stays only on that location's map
+	if err := pruneMarkersOf(tx, n.CampaignID, "npc", n.ID, n.LocationID); err != nil {
+		return "", err
+	}
 	if _, err := tx.Exec(Q("TouchCampaign"), n.CampaignID); err != nil {
 		return "", err
 	}
@@ -474,6 +485,7 @@ func deleteNpc(db *sql.DB, id string) error {
 		args []any
 	}{
 		{"DeleteLinksOf", []any{"npc", id, "npc", id}},
+		{"DeleteMarkersOfRef", []any{"npc", id, campaignID}},
 		{"UnsetNpcRefs", []any{id}},
 		{"UnsetFactionLeader", []any{id}},
 		{"DeleteNpc", []any{id}},
@@ -730,6 +742,10 @@ func placeEncounter(q querier, campaignID, encounterID, locationID string) error
 			return err
 		}
 	}
+	// another location: its marker stays only on that location's map
+	if err := pruneMarkersOf(q, campaignID, "encounter", encounterID, locationID); err != nil {
+		return err
+	}
 	_, err := q.Exec(Q("TouchCampaign"), campaignID)
 	return err
 }
@@ -756,14 +772,22 @@ func removeCampaignEncounter(db *sql.DB, campaignID, encounterID string, deleteP
 	}
 	defer tx.Rollback()
 	if deletePreset {
+		if err := dropEncounterMapsEverywhere(tx, encounterID); err != nil {
+			return err
+		}
 		if _, err := tx.Exec(Q("DeleteLinksOf"), "encounter", encounterID, "encounter", encounterID); err != nil {
 			return err
 		}
 		if _, err := tx.Exec(Q("DeleteEncounter"), encounterID); err != nil {
 			return err
 		}
-	} else if _, err := tx.Exec(Q("DeleteCampaignLinksOf"), campaignID, "encounter", encounterID, "encounter", encounterID); err != nil {
-		return err
+	} else {
+		if err := dropMapsOf(tx, campaignID, "encounter", encounterID); err != nil {
+			return err
+		}
+		if _, err := tx.Exec(Q("DeleteCampaignLinksOf"), campaignID, "encounter", encounterID, "encounter", encounterID); err != nil {
+			return err
+		}
 	}
 	if _, err := tx.Exec(Q("TouchCampaign"), campaignID); err != nil {
 		return err
@@ -869,6 +893,16 @@ type campaignSeed struct {
 		Kind string `json:"kind"`
 		Note string `json:"note"`
 	} `json:"links"`
+	// maps: "owner": "location:loc_x" | "encounter:enc_x"; markers' "ref": "npc:npc_x"…
+	Maps []struct {
+		Owner   string           `json:"owner"`
+		Tiles   map[string][]int `json:"tiles"`
+		Markers []struct {
+			Ref string `json:"ref"`
+			X   int    `json:"x"`
+			Y   int    `json:"y"`
+		} `json:"markers"`
+	} `json:"maps"`
 }
 
 func insertCampaignJSON(tx *sql.Tx, raw []byte) error {
@@ -972,6 +1006,31 @@ func insertCampaignJSON(tx *sql.Tx, raw []byte) error {
 		}
 		if _, err := putLink(tx, Link{CampaignID: c.ID, FromType: ft, FromID: fid, ToType: tt, ToID: tid, Kind: l.Kind, Note: l.Note}); err != nil {
 			return fmt.Errorf("link %s → %s: %w", l.From, l.To, err)
+		}
+	}
+	for _, m := range c.Maps {
+		ot, oid, ok := strings.Cut(m.Owner, ":")
+		if !ok {
+			return fmt.Errorf("map %q: use type:id", m.Owner)
+		}
+		cells, err := json.Marshal(mapCells{V: mapCellsVersion, Tiles: m.Tiles})
+		if err != nil {
+			return err
+		}
+		if _, err := mapID(tx, c.ID, ot, oid, true); err != nil {
+			return fmt.Errorf("map %s: %w", m.Owner, err)
+		}
+		if err := saveMapCells(tx, c.ID, ot, oid, string(cells)); err != nil {
+			return fmt.Errorf("map %s: %w", m.Owner, err)
+		}
+		for _, k := range m.Markers {
+			rt, rid, ok := strings.Cut(k.Ref, ":")
+			if !ok {
+				return fmt.Errorf("map %s, marker %q: use type:id", m.Owner, k.Ref)
+			}
+			if err := placeMapMarker(tx, c.ID, ot, oid, MapMarker{RefType: rt, RefID: rid, X: k.X, Y: k.Y}); err != nil {
+				return fmt.Errorf("map %s, marker %s: %w", m.Owner, k.Ref, err)
+			}
 		}
 	}
 	return nil

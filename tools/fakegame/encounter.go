@@ -25,6 +25,17 @@ import (
 //	enc turn 2 · enc next    mark whose turn it is: the 2nd · the next one (players see a check)
 //	enc end                  end the encounter
 //	monsters                 the monsters from assets/data/monsters
+//
+// The encounter's map (the player's read-only "Map" tab, see combat/PlayerMap.svelte):
+// starting an encounter sends a map and puts everyone on it (players on the left, monsters
+// on the right) — like the DM placing the tokens.
+//
+//	enc maps                 the maps in the seed campaigns (assets/data/campaigns/*.json)
+//	enc map [name]           send another map: an owner from "enc maps" (or a part of it);
+//	                         "enc map field" — a plain generated field
+//	enc pos 3 2 -1           put the 3rd combatant into cell (2, -1)
+//	enc place                put everyone back in the default places
+//	enc off 3                take the 3rd combatant off the map
 
 type seedMonster struct {
 	ID, Name, Image, Type string
@@ -47,7 +58,136 @@ var (
 	encLine  []combatant
 	encTurn  string // id of the combatant whose turn it is
 	encSeq   int
+	encPos   = map[string]string{} // combatant id → "x,y"
+	encMap   *encounterMap         // the map sent with the encounter (nil — none)
+	dataRoot = "assets/data"
 )
+
+// encounterMap is the "encmap" event: { key, name, tiles: { tileId: [x, y, …] } }.
+type encounterMap struct {
+	Key   string           `json:"key"`
+	Name  string           `json:"name"`
+	Tiles map[string][]int `json:"tiles"`
+}
+
+// seedMaps reads the maps of the seed campaigns: owner ("encounter:enc_x") → tiles.
+func seedMaps() []encounterMap {
+	var out []encounterMap
+	files, _ := filepath.Glob(filepath.Join(dataRoot, "campaigns", "*.json"))
+	for _, f := range files {
+		raw, err := os.ReadFile(f)
+		if err != nil {
+			continue
+		}
+		var c struct {
+			Maps []struct {
+				Owner string           `json:"owner"`
+				Tiles map[string][]int `json:"tiles"`
+			} `json:"maps"`
+		}
+		if json.Unmarshal(raw, &c) != nil {
+			continue
+		}
+		for _, m := range c.Maps {
+			if len(m.Tiles) > 0 {
+				_, id, _ := strings.Cut(m.Owner, ":")
+				name := strings.ReplaceAll(strings.TrimPrefix(strings.TrimPrefix(id, "enc_"), "loc_"), "_", " ")
+				out = append(out, encounterMap{Key: m.Owner, Name: name, Tiles: m.Tiles})
+			}
+		}
+	}
+	// encounters' maps first: that is what an encounter normally opens
+	sort.SliceStable(out, func(i, j int) bool {
+		return strings.HasPrefix(out[i].Key, "encounter:") && !strings.HasPrefix(out[j].Key, "encounter:")
+	})
+	return out
+}
+
+// fieldMap: a generated map — grass, a road through the middle, a stream and a wood.
+func fieldMap() *encounterMap {
+	t := map[string][]int{}
+	for y := -4; y <= 4; y++ {
+		for x := -7; x <= 7; x++ {
+			tile := "grass"
+			switch {
+			case y == 0:
+				tile = "sand"
+			case x == 3 && y != 0:
+				tile = "water"
+			case y <= -3 && x <= -3:
+				tile = "forest"
+			case y >= 3 && x >= 5:
+				tile = "mountain"
+			}
+			t[tile] = append(t[tile], x, y)
+		}
+	}
+	return &encounterMap{Key: "fake:field", Name: "Test field", Tiles: t}
+}
+
+// pickMap: by a part of its owner ("wolves"), "field", or the first seed map.
+func pickMap(q string) *encounterMap {
+	q = strings.ToLower(strings.TrimSpace(q))
+	if q == "field" {
+		return fieldMap()
+	}
+	for _, m := range seedMaps() {
+		if q == "" || strings.Contains(strings.ToLower(m.Key), q) {
+			m := m
+			return &m
+		}
+	}
+	if q == "" {
+		return fieldMap()
+	}
+	return nil
+}
+
+// sendMap sends the encounter's map to everyone (or "no map"). Call with encMu held.
+func sendMap(dm *lan.Manager) {
+	data := any(map[string]any{})
+	if encOn && encMap != nil {
+		data = encMap
+	}
+	raw, _ := json.Marshal(data)
+	if err := dm.Send("encmap", "", raw); err != nil && !strings.Contains(err.Error(), "not in a game") {
+		fmt.Println("send:", err)
+	}
+}
+
+// placeAll: players in a column on the left, monsters on the right (only those not placed
+// yet, unless all). Call with encMu held.
+func placeAll(all bool) {
+	if all {
+		encPos = map[string]string{}
+	}
+	taken := map[string]bool{}
+	for _, p := range encPos {
+		taken[p] = true
+	}
+	free := func(x, y int) string {
+		for ; ; y++ {
+			k := fmt.Sprintf("%d,%d", x, y)
+			if !taken[k] {
+				taken[k] = true
+				return k
+			}
+		}
+	}
+	np, nm := 0, 0
+	for _, c := range encLine {
+		if _, ok := encPos[c.ID]; ok {
+			continue
+		}
+		if c.Kind == "player" {
+			encPos[c.ID] = free(-4, -1+np)
+			np++
+		} else {
+			encPos[c.ID] = free(2+nm%2, -2+nm/2*2)
+			nm++
+		}
+	}
+}
 
 func loadMonsters(root string) []seedMonster {
 	var out []seedMonster
@@ -104,7 +244,13 @@ func sendEncounter(dm *lan.Manager) {
 		if encTurn != "" {
 			turn = encTurn
 		}
-		data = map[string]any{"active": true, "name": "", "turn": turn, "line": encLine}
+		pos := map[string]string{}
+		for _, c := range encLine {
+			if p, ok := encPos[c.ID]; ok {
+				pos[c.ID] = p
+			}
+		}
+		data = map[string]any{"active": true, "name": "Test encounter", "turn": turn, "line": encLine, "positions": pos}
 	}
 	raw, _ := json.Marshal(data)
 	if err := dm.Send("encounter", "", raw); err != nil && !strings.Contains(err.Error(), "not in a game") {
@@ -145,8 +291,10 @@ func encounterPlayersChanged(dm *lan.Manager, players []lan.PlayerInfo) {
 				encLine = append(encLine, playerCombatant(p))
 			}
 		}
+		placeAll(false) // newcomers get a place
 	}
 	sendEncounter(dm)
+	sendMap(dm) // newcomers get the map
 }
 
 func printLine() {
@@ -154,13 +302,29 @@ func printLine() {
 		fmt.Println("no encounter (start one: enc goblin 3, ogre)")
 		return
 	}
+	if encMap != nil {
+		fmt.Printf("  map: %s\n", encMap.Key)
+	}
 	for i, c := range encLine {
 		mark := " "
 		if c.ID == encTurn {
 			mark = "▶"
 		}
-		fmt.Printf("  %s %2d. %-24s %s\n", mark, i+1, c.Name, c.Kind)
+		pos := encPos[c.ID]
+		if pos == "" {
+			pos = "—"
+		}
+		fmt.Printf("  %s %2d. %-24s %-8s at %s\n", mark, i+1, c.Name, c.Kind, pos)
 	}
+}
+
+// nth: the combatant at place n (1-based) from a string.
+func nth(s string) (combatant, bool) {
+	n, err := strconv.Atoi(strings.TrimSpace(s))
+	if err != nil || n < 1 || n > len(encLine) {
+		return combatant{}, false
+	}
+	return encLine[n-1], true
 }
 
 // encounterCommand handles "enc …"; returns false if the line isn't an enc command.
@@ -187,9 +351,71 @@ func encounterCommand(dm *lan.Manager, line string) bool {
 	case rest == "":
 		printLine()
 	case rest == "end":
-		encOn, encLine, encTurn = false, nil, ""
+		encOn, encLine, encTurn, encPos, encMap = false, nil, "", map[string]string{}, nil
 		sendEncounter(dm)
 		log.Print("encounter ended")
+	case rest == "maps":
+		for _, m := range seedMaps() {
+			n := 0
+			for _, xy := range m.Tiles {
+				n += len(xy) / 2
+			}
+			fmt.Printf("  %-40s %d cells\n", m.Key, n)
+		}
+		fmt.Println("  field                                    a generated test field")
+	case rest == "map" || strings.HasPrefix(rest, "map "):
+		if !encOn {
+			fmt.Println("no encounter (start one: enc goblin 3, ogre)")
+			return true
+		}
+		m := pickMap(strings.TrimPrefix(rest, "map"))
+		if m == nil {
+			fmt.Println("no such map (see: enc maps)")
+			return true
+		}
+		encMap = m
+		sendMap(dm)
+		log.Printf("map sent: %s", m.Key)
+	case rest == "place":
+		if !encOn {
+			fmt.Println("no encounter")
+			return true
+		}
+		placeAll(true)
+		sendEncounter(dm)
+		printLine()
+	case strings.HasPrefix(rest, "pos "):
+		f := strings.Fields(rest)
+		c, ok := nth(f[1])
+		x, err1 := 0, error(nil)
+		y, err2 := 0, error(nil)
+		if len(f) == 4 {
+			x, err1 = strconv.Atoi(f[2])
+			y, err2 = strconv.Atoi(f[3])
+		}
+		if !encOn || !ok || len(f) != 4 || err1 != nil || err2 != nil {
+			fmt.Println("usage: enc pos <place> <x> <y> (see: enc)")
+			return true
+		}
+		k := fmt.Sprintf("%d,%d", x, y)
+		for id, p := range encPos {
+			if p == k && id != c.ID {
+				fmt.Println("this cell is taken")
+				return true
+			}
+		}
+		encPos[c.ID] = k
+		sendEncounter(dm)
+		printLine()
+	case strings.HasPrefix(rest, "off "):
+		c, ok := nth(strings.TrimPrefix(rest, "off "))
+		if !encOn || !ok {
+			fmt.Println("usage: enc off <place> (see: enc)")
+			return true
+		}
+		delete(encPos, c.ID)
+		sendEncounter(dm)
+		printLine()
 	case rest == "next" || strings.HasPrefix(rest, "turn"):
 		if !encOn || len(encLine) == 0 {
 			fmt.Println("no encounter")
@@ -260,8 +486,12 @@ func encounterCommand(dm *lan.Manager, line string) bool {
 			}
 		}
 		encOn, encLine, encTurn = true, line, ""
+		// like the DM's screen: the encounter's map opens and the tokens go on it
+		encMap = pickMap("")
+		placeAll(true)
 		sendEncounter(dm)
-		log.Printf("encounter started: %d in order", len(line))
+		sendMap(dm)
+		log.Printf("encounter started: %d in order · map %s", len(line), encMap.Key)
 		printLine()
 	}
 	return true

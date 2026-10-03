@@ -16,6 +16,9 @@ import { track } from './loader.svelte.js';
 const SILENT = new Set([
     'Ready',
     'SaveCharacterState',
+    'SaveMapCells', // the map's autosave has its own indicator
+    'PlaceMapMarker',
+    'RemoveMapMarker',
     'NetStatus',
     'StartDiscovery',
     'StopDiscovery',
@@ -100,6 +103,12 @@ export const {
     LogToActiveSession,
     UpdateSessionEvent,
     DeleteSessionEvent,
+    // campaign maps (maps.go)
+    GetMapLayers,
+    GetMapLayer,
+    SaveMapCells,
+    PlaceMapMarker,
+    RemoveMapMarker,
     // local-network game (net.go)
     NetStatus,
     HostGame,

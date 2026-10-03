@@ -107,6 +107,8 @@ Console commands — the same actions as the buttons on the DM's player card:
 | `enc goblin 3, ogre` | start an encounter: the players + 3 Goblin Warriors + an Ogre (monster id or part of its name) — the player sees the initiative line above the sheet |
 | `enc` · `enc move 3 1` · `enc end` | show the line · move the 3rd combatant to place 1 · end the encounter |
 | `enc turn 2` · `enc next` | mark whose turn it is: the 2nd · the next one (the player sees a check on that icon) |
+| `enc maps` · `enc map wolves` · `enc map field` | the encounter's map: starting an encounter already sends one (the first map of the seed campaigns) and puts everyone on it — players on the left, monsters on the right; the player gets a **Map** tab (read-only) |
+| `enc pos 3 2 -1` · `enc place` · `enc off 3` | put the 3rd combatant into cell (2, −1) — the player sees the token move · everyone back to the default places · take the 3rd off the map |
 | `start {"round":1}` | any event with JSON, to all players |
 | `@grom hp {"op":"damage","amount":5}` | any event to one player |
 | `quit` | end the game (Ctrl+C works too): players see "The DM ended the game" |

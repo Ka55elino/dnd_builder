@@ -4,7 +4,8 @@
      *   1. games found on the local network (mDNS) or an address typed by hand
      *   2. pick a character
      *   3. joined: the character's sheet (CharacterPage) with "Leave game" in its header;
-     *      during an encounter the DM's initiative line is shown above it (LineupPlayer)
+     *      during an encounter the DM's initiative line is shown above it (LineupPlayer); when
+     *      the DM's encounter has a map, Sheet | Map tabs appear (the map: read-only, PlayerMap)
      * Leaving the screen keeps the connection (the header shows it).
      * onBack() — to the menu
      */
@@ -14,7 +15,8 @@
     import CharacterGrid from './CharacterGrid.svelte';
     import CharacterPage from './CharacterPage.svelte';
     import LineupPlayer from './combat/LineupPlayer.svelte';
-    import { resetSeen } from '../combat.svelte.js';
+    import PlayerMap from './combat/PlayerMap.svelte';
+    import { resetSeen, seen } from '../combat.svelte.js';
 
     let { onBack } = $props();
 
@@ -27,6 +29,17 @@
     let searching = $state(false);
 
     let joined = $derived(server.role === 'player' && server.game);
+
+    // the encounter's map: a Map tab next to the sheet; a new map opens it
+    const hasMap = $derived(seen.active && !!seen.map);
+    let view = $state('sheet'); // 'sheet' | 'map'
+    let lastMap = 0;
+    $effect(() => {
+        const at = hasMap ? seen.map.at : 0;
+        if (at && at !== lastMap) view = 'map';
+        if (!at) view = 'sheet';
+        lastMap = at;
+    });
     let isHost = $derived(server.role === 'host');
 
     // search only while choosing a game
@@ -91,9 +104,19 @@
 
 {#if joined && server.characterId}
     <LineupPlayer />
-    {#key server.characterId}
-        <CharacterPage id={server.characterId} onBack={onBack} backLabel="← Menu" actions={gameActions} inGame />
-    {/key}
+    {#if hasMap}
+        <nav class="ptabs" aria-label="Game screen">
+            <button class:on={view === 'sheet'} onclick={() => (view = 'sheet')}>Character</button>
+            <button class:on={view === 'map'} onclick={() => (view = 'map')}>Map</button>
+        </nav>
+    {/if}
+    {#if hasMap && view === 'map'}<PlayerMap />{/if}
+    <!-- the sheet stays mounted under the map: it keeps the game state in sync -->
+    <div class="sheet" class:hidden={hasMap && view === 'map'}>
+        {#key server.characterId}
+            <CharacterPage id={server.characterId} onBack={onBack} backLabel="← Menu" actions={gameActions} inGame />
+        {/key}
+    </div>
 {:else}
 <div class="page">
     <header class="top">
@@ -167,6 +190,33 @@
 {/if}
 
 <style>
+    .ptabs {
+        display: flex;
+        gap: 4px;
+        margin: 8px 24px 8px;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .ptabs button {
+        padding: 6px 14px;
+        background: transparent;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-secondary);
+        font-family: var(--font-ui);
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .ptabs button.on {
+        color: var(--color-text-primary);
+        border-bottom-color: var(--color-gold);
+    }
+
+    .sheet.hidden {
+        display: none;
+    }
+
     .page {
         min-height: 100%;
         padding: 32px;

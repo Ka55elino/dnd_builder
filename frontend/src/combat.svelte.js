@@ -10,7 +10,10 @@
  * Player side (`seen`): what the DM shares — names, icons and the order only.
  *
  * Event (DM → all players, see game.js):
- *   "encounter" { active: true, name, turn, round, line: [{ id, kind: 'player' | 'monster', name, image, type, playerId, conditions }] }
+ *   "encounter" { active: true, name, turn, round, line: [{ id, kind: 'player' | 'monster', name, image, type, playerId, conditions }],
+ *                 positions: { combatantId: "x,y" } }     — where the DM put them on the encounter's map
+ *   "encmap"    { key, name, tiles: { tileId: [x, y, …] } } — the encounter's map (terrain only), sent when
+ *                 it opens and to newcomers; {} — no map. Players show it read-only (combat/PlayerMap.svelte)
  *                                                        — turn: id of the combatant whose turn it is (or null)
  *                                                        — conditions: names everyone can see ("Prone", "Exhaustion 2")
  *
@@ -50,8 +53,11 @@ export const EV_ENCOUNTER = 'encounter';
  * logToActiveSession): the preset, rounds, which monsters went down — the DM edits the
  * outcome afterwards if it wasn't a win.
  * playerConds — player id → condition names (from their summaries), for the public line
+ * positions — combatant id → "x,y": where the DM put them on the encounter's map
+ *             (MapView; for now only the DM sees it)
  */
-export const combat = $state({ active: false, name: '', presetId: null, turn: null, round: 1, line: [], playerConds: {} });
+export const combat = $state({ active: false, name: '', presetId: null, turn: null, round: 1, line: [], playerConds: {}, positions: {}, map: null });
+export const EV_ENCOUNTER_MAP = 'encmap';
 
 // condition definitions (refs.conditions) — set by the DM screen once loaded
 let condDefs = [];
@@ -93,7 +99,10 @@ export function startEncounter({ name = '', presetId = null, lines = [], monster
     combat.turn = null;
     combat.round = 1;
     combat.line = line;
+    combat.positions = {};
+    combat.map = null;
     broadcast();
+    sendMap();
 }
 
 export function endEncounter() {
@@ -104,7 +113,40 @@ export function endEncounter() {
     combat.turn = null;
     combat.round = 1;
     combat.line = [];
+    combat.positions = {};
+    combat.map = null;
     broadcast();
+}
+
+// ---------- the encounter's map: where the combatants stand (the DM moves them) ----------
+
+/** Put a combatant into a cell (or move them). A cell holds one; returns false if it is taken. */
+export function placeToken(id, x, y) {
+    if (!combat.line.some((c) => c.id === id)) return false;
+    const k = `${x},${y}`;
+    if (Object.entries(combat.positions).some(([other, pos]) => pos === k && other !== id && combat.line.some((c) => c.id === other))) return false;
+    combat.positions = { ...combat.positions, [id]: k };
+    broadcast();
+    return true;
+}
+
+/** Take a combatant off the map. */
+export function removeToken(id) {
+    const { [id]: _, ...rest } = combat.positions; // eslint-disable-line no-unused-vars
+    combat.positions = rest;
+    broadcast();
+}
+
+/** The encounter's map (MapView sets it when it opens): { key, name, tiles } — sent to the players. */
+export function setCombatMap(m) {
+    combat.map = m ?? null;
+    sendMap();
+}
+
+/** Send the encounter's map — to everyone, or to one player (a newcomer). */
+export function sendMap(to = '') {
+    const data = combat.active && combat.map ? combat.map : {};
+    SendGameEvent(EV_ENCOUNTER_MAP, to, JSON.stringify(data)).catch(() => {}); // not hosting — nothing to do
 }
 
 /** The finished encounter → the session log (no session being played — nothing happens). */
@@ -292,9 +334,15 @@ function publicLine() {
 }
 
 /** Send the current line to every player (also used to catch up newcomers). */
+// positions of the combatants still in the line
+function publicPositions() {
+    const ids = new Set(combat.line.map((c) => c.id));
+    return Object.fromEntries(Object.entries(combat.positions).filter(([id]) => ids.has(id)));
+}
+
 export function broadcast() {
     const data = combat.active
-        ? { active: true, name: combat.name, turn: combat.turn, round: combat.round, line: publicLine() }
+        ? { active: true, name: combat.name, turn: combat.turn, round: combat.round, line: publicLine(), positions: publicPositions() }
         : { active: false };
     SendGameEvent(EV_ENCOUNTER, '', JSON.stringify(data)).catch(() => {}); // not hosting — nothing to do
 }
@@ -328,13 +376,15 @@ export function playerSheet(snap, state, refs, summary = null) {
 // ---------- player ----------
 
 /** The line the DM shares with this player. */
-export const seen = $state({ active: false, name: '', turn: null, round: 1, line: [] });
+export const seen = $state({ active: false, name: '', turn: null, round: 1, line: [], positions: {}, map: null });
 
 export function resetSeen() {
     seen.active = false;
     seen.name = '';
     seen.turn = null;
     seen.line = [];
+    seen.positions = {};
+    seen.map = null;
 }
 
 let listening = false;
@@ -344,6 +394,11 @@ export function initCombat() {
     if (listening) return;
     listening = true;
     onGameEvent((ev) => {
+        if (ev?.kind === EV_ENCOUNTER_MAP) {
+            const d = ev.data ?? {};
+            seen.map = d.tiles && typeof d.tiles === 'object' ? { key: d.key ?? '', name: d.name ?? '', tiles: d.tiles, at: Date.now() } : null;
+            return;
+        }
         if (ev?.kind !== EV_ENCOUNTER) return;
         const d = ev.data ?? {};
         seen.active = !!d.active;
@@ -351,5 +406,7 @@ export function initCombat() {
         seen.turn = d.active ? (d.turn ?? null) : null;
         seen.round = d.active ? Number(d.round) || 1 : 1;
         seen.line = d.active && Array.isArray(d.line) ? d.line : [];
+        seen.positions = d.active && d.positions && typeof d.positions === 'object' ? d.positions : {};
+        if (!d.active) seen.map = null;
     });
 }

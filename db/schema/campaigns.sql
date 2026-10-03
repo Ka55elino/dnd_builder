@@ -159,3 +159,34 @@ CREATE TABLE IF NOT EXISTS campaign_links (
 CREATE INDEX IF NOT EXISTS idx_links_campaign ON campaign_links(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_links_from     ON campaign_links(from_type, from_id);
 CREATE INDEX IF NOT EXISTS idx_links_to       ON campaign_links(to_type, to_id);
+
+-- Maps: every location and every encounter of a campaign can have its own map — a layer of
+-- terrain painted into grid cells, with markers on it (the location's direct children, its
+-- NPCs, its encounters). A row appears with the first stroke.
+--   cells_json: terrain grouped by tile — { "v": 1, "tiles": { "grass": [x1, y1, x2, y2, …] } }
+CREATE TABLE IF NOT EXISTS campaign_maps (
+    id          TEXT PRIMARY KEY,                -- 'map_xxxx'
+    campaign_id TEXT NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+    owner_type  TEXT NOT NULL,                   -- location | encounter
+    owner_id    TEXT NOT NULL,
+    cells_json  TEXT NOT NULL DEFAULT '{}',
+    cell_count  INTEGER NOT NULL DEFAULT 0,      -- painted cells (the layer menu shows it)
+    data_json   TEXT NOT NULL DEFAULT '{}',      -- later: default view, cell scale, fog…
+    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),
+    updated_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),
+    UNIQUE (campaign_id, owner_type, owner_id)   -- one map per location / encounter
+);
+
+-- What stands in a map's cells. One level only: on a location's map — its direct child
+-- locations, its NPCs (npc.location) and its encounters (happens_at).
+CREATE TABLE IF NOT EXISTS campaign_map_markers (
+    map_id   TEXT NOT NULL REFERENCES campaign_maps(id) ON DELETE CASCADE,
+    ref_type TEXT NOT NULL,                      -- location | npc | encounter
+    ref_id   TEXT NOT NULL,
+    x        INTEGER NOT NULL,
+    y        INTEGER NOT NULL,
+    PRIMARY KEY (map_id, ref_type, ref_id),      -- a thing is on a map once
+    UNIQUE (map_id, x, y)                        -- one marker per cell
+);
+
+CREATE INDEX IF NOT EXISTS idx_map_markers_ref ON campaign_map_markers(ref_type, ref_id);

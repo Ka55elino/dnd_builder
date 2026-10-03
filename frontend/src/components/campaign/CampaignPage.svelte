@@ -11,7 +11,8 @@
      *   └─────────────────────────────────┴──────────────────────────────────────────┘
      *
      * Overview: the campaign's name with ✎ (a popup edits name, short description, status),
-     * the counts; the overview itself is a work in progress.
+     * the counts and the campaign map (map/MapEditor.svelte — a coordinate grid with terrain
+     * painted into its cells; the map is being built step by step).
      *
      * id — campaign id; onBack() — to the list
      */
@@ -23,6 +24,7 @@
     import QuestsSection from "./QuestsSection.svelte";
     import FactionsSection from "./FactionsSection.svelte";
     import SessionsSection from "./SessionsSection.svelte";
+    import MapEditor from "./map/MapEditor.svelte";
 
     let { id, onBack } = $props();
 
@@ -221,9 +223,11 @@
                 </p>
             </header>
 
-            <section class="panel placeholder">
-                <span class="big-ico" aria-hidden="true">◈</span>
-                <p><b>Overview</b> — work in progress.</p>
+            <!-- the campaign map (work in progress: terrain on a coordinate grid) -->
+            <section class="map-box">
+                {#key campaign.id}
+                    <MapEditor {campaign} onOpenSection={(s) => (section = s)} />
+                {/key}
             </section>
         {:else if section === "npcs"}
             <header class="sec-head"><h1>NPCs</h1></header>
@@ -595,6 +599,15 @@
     }
 
 
+
+    .map-box {
+        flex: none;
+        height: calc(100vh - 220px);
+        min-height: 420px;
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
     .panel {
         padding: 18px;

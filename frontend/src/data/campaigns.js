@@ -22,6 +22,10 @@
  *                       recap, notes, attendees: [], xp, loot }, events (count) }
  *   event:    { id, sessionId, kind, refType, refId, refName, outcome, note, auto, at, position,
  *               change: { field, from, to, delta?, index? } | null } — see EVENT_KINDS
+ *   map layer: every location / encounter can have a map (maps.go) — { ownerType ('location' |
+ *               'encounter'), ownerId, tiles: { tileId: [x1, y1, x2, y2…] }, markers: [{ refType
+ *               ('location' | 'npc' | 'encounter'), refId, x, y }] }; the layer list — { ownerType,
+ *               ownerId, cells, markers } (counts)
  *   visible — the players know it (shown to them later; for now just a flag)
  *
  * An app built before these bindings existed has no methods: lists are empty and
@@ -37,6 +41,7 @@ import {
     GetCampaignFactions, SaveFaction, DeleteFaction,
     GetCampaignSessions, GetSession, GetActiveSession, SaveSession, SetSessionStatus, DeleteSession,
     GetSessionEvents, GetRefEvents, AddSessionEvent, LogToActiveSession, UpdateSessionEvent, DeleteSessionEvent,
+    GetMapLayers, GetMapLayer, SaveMapCells, PlaceMapMarker, RemoveMapMarker,
 } from '../api.js';
 
 export const CAMPAIGN_STATUSES = [
@@ -219,6 +224,38 @@ export function eventText(e, { attitudes = [], statuses = [], questStatuses = []
         case 'secret_revealed': return `Revealed: ${secrets[c?.index]?.text ?? 'a secret'}`;
         default: return eventKind(e.kind).name;
     }
+}
+
+// ---------- maps (maps.go) ----------
+
+/** Every map of the campaign without its cells: [{ ownerType, ownerId, cells, markers }]. */
+export const loadMapLayers = (campaignId) => list(GetMapLayers, campaignId);
+/** One map: { tiles, markers } (empty if nothing is painted yet). */
+export const loadMapLayer = (campaignId, ownerType, ownerId) => need(GetMapLayer)(campaignId, ownerType, ownerId);
+/** Store a map's terrain; cells — { "x,y": tileId }. */
+export const saveMapCells = (campaignId, ownerType, ownerId, cells) =>
+    need(SaveMapCells)(campaignId, ownerType, ownerId, JSON.stringify(cellsToTiles(cells)));
+export const placeMapMarker = (campaignId, ownerType, ownerId, refType, refId, x, y) =>
+    need(PlaceMapMarker)(campaignId, ownerType, ownerId, refType, refId, x, y);
+export const removeMapMarker = (campaignId, ownerType, ownerId, refType, refId) =>
+    need(RemoveMapMarker)(campaignId, ownerType, ownerId, refType, refId);
+
+/** { "x,y": tileId } → the stored form, grouped by tile: { v: 1, tiles: { tileId: [x, y, …] } }. */
+export function cellsToTiles(cells) {
+    const tiles = {};
+    for (const [k, t] of Object.entries(cells ?? {})) {
+        if (!t) continue;
+        const [x, y] = k.split(',').map(Number);
+        (tiles[t] ??= []).push(x, y);
+    }
+    return { v: 1, tiles };
+}
+
+/** The stored tiles → { "x,y": tileId }. */
+export function tilesToCells(tiles) {
+    const cells = {};
+    for (const [t, xy] of Object.entries(tiles ?? {})) for (let i = 0; i + 1 < xy.length; i += 2) cells[`${xy[i]},${xy[i + 1]}`] = t;
+    return cells;
 }
 
 export const loadLinks = (campaignId) => list(GetCampaignLinks, campaignId);
