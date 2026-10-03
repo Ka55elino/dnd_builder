@@ -5,8 +5,11 @@
      * hosting, the "ip:port" to share — click copies it to the clipboard.
      * While in a game, ✕ ends it (DM) or leaves it (player); the first click
      * asks, the second confirms (in-app, no OS dialog — works the same on every platform).
+     * ⛶ next to the app name: full screen on / off (the window; F11 / Esc / the system
+     * button work too — the icon follows the window).
      */
-    import { Clipboard } from '@wailsio/runtime';
+    import { onMount } from 'svelte';
+    import { Clipboard, Window, System } from '@wailsio/runtime';
     import { StopGame, LeaveGame } from '../api.js';
     import { server, STATUS_LABELS, gameAddress } from '../server.svelte.js';
 
@@ -64,10 +67,85 @@
     });
 
     let title = $derived(server.game ? gameAddress(server.game) : '');
+
+    // ---------- full screen ----------
+    const mobile = (() => {
+        try {
+            return System.IsMobile();
+        } catch {
+            return false;
+        }
+    })();
+    let fullscreen = $state(false);
+
+    // the window's state (the app: Wails; a plain browser: the Fullscreen API)
+    async function readFullscreen() {
+        try {
+            fullscreen = !!(await Window.IsFullscreen());
+        } catch {
+            fullscreen = !!document.fullscreenElement;
+        }
+    }
+
+    async function toggleFullscreen() {
+        try {
+            await Window.ToggleFullscreen();
+        } catch {
+            if (document.fullscreenElement) await document.exitFullscreen?.();
+            else await document.documentElement.requestFullscreen?.();
+        }
+        // macOS animates into full screen: ask again once it is done
+        setTimeout(readFullscreen, 150);
+        setTimeout(readFullscreen, 900);
+    }
+
+    // left full screen another way (Esc, the green button, F11): entering / leaving
+    // resizes the page, so check then
+    onMount(() => {
+        readFullscreen();
+        let t;
+        const onResize = () => {
+            clearTimeout(t);
+            t = setTimeout(readFullscreen, 250);
+        };
+        const onKey = (e) => {
+            if (e.key === 'F11') {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+        };
+        window.addEventListener('resize', onResize);
+        window.addEventListener('keydown', onKey);
+        document.addEventListener('fullscreenchange', readFullscreen);
+        return () => {
+            clearTimeout(t);
+            window.removeEventListener('resize', onResize);
+            window.removeEventListener('keydown', onKey);
+            document.removeEventListener('fullscreenchange', readFullscreen);
+        };
+    });
 </script>
 
 <header class="status-bar">
     <span class="app">D&D Builder</span>
+    {#if !mobile}
+        <button
+            class="fs"
+            class:on={fullscreen}
+            onclick={toggleFullscreen}
+            title={fullscreen ? 'Exit full screen (F11)' : 'Full screen (F11)'}
+            aria-label={fullscreen ? 'Exit full screen' : 'Full screen'}
+            aria-pressed={fullscreen}
+        >
+            {#if fullscreen}
+                <!-- arrows in: leave full screen -->
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2v4H2M10 2v4h4M6 14v-4H2M10 14v-4h4" /></svg>
+            {:else}
+                <!-- arrows out: full screen -->
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" /></svg>
+            {/if}
+        </button>
+    {/if}
 
     <span class="server {server.state}" {title}>
         <span class="dot" aria-hidden="true"></span>
@@ -119,6 +197,39 @@
         font-weight: var(--font-weight-semibold);
         letter-spacing: 0.04em;
         color: var(--color-text-secondary);
+    }
+
+    .fs {
+        width: 22px;
+        height: 22px;
+        margin-left: -10px; /* close to the name */
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+    }
+
+    .fs svg {
+        width: 13px;
+        height: 13px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .fs:hover,
+    .fs.on {
+        color: var(--color-gold);
+    }
+
+    .fs:hover {
+        border-color: var(--color-border);
     }
 
     .ip {
