@@ -2,12 +2,12 @@
     /**
      * "Class" tab — same pattern as "Species".
      * Nothing selected  → grid of classes.
-     * Class selected    → only its card (×) + grid of subclasses.
+     * Class selected    → only its card (×) + grid of subclasses (from the subclass level).
      * Subclass selected → only its card (×).
      * The choice is written to build (CharacterBuild.classId / subclassId).
      *
-     * TODO: per the rules, the subclass is chosen at subclassLevel (usually 3) —
-     * this restriction is not enforced yet.
+     * The subclass comes at the class's subclassLevel (usually 3): below it there is no
+     * picker (just a note), and a subclass left from before is dropped.
      */
     import { onMount } from "svelte";
     import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
@@ -26,6 +26,13 @@
     const subclass = $derived(
         cls?.subclasses.find((s) => s.id === build.subclassId) ?? null,
     );
+
+    // the level the class picks its subclass at (usually 3)
+    const subLevel = $derived(cls?.subclassLevel || 3);
+    const subclassOpen = $derived((build.level ?? 1) >= subLevel);
+    $effect(() => {
+        if (cls && !subclassOpen && build.subclassId) build.setSubclass(null);
+    });
 
     const ARMOR = { light: "light", medium: "medium", heavy: "heavy", shield: "shields" };
     const WEAPONS = { simple: "simple", martial: "martial" };
@@ -83,7 +90,9 @@
             <FeatureList items={classFeatures} />
         </ChoiceCard>
 
-        {#if cls.subclasses.length}
+        {#if cls.subclasses.length && !subclassOpen}
+            <p class="sub-note">Subclass — at level {subLevel} (on Level Up).</p>
+        {:else if cls.subclasses.length}
             <h4>Subclass</h4>
             {#if subclass}
                 <ChoiceCard
@@ -141,5 +150,12 @@
     .error {
         margin: 0;
         color: var(--color-danger);
+    }
+
+    .sub-note {
+        margin: 0;
+        font-family: var(--font-ui);
+        font-size: 13px;
+        color: var(--color-text-muted);
     }
 </style>

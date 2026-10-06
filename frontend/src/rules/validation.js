@@ -62,10 +62,8 @@ export function validateBuild(build, { races = [], classes = [] } = {}) {
 
     // --- Equipment ---
     const eq = build.equipment ?? {};
-    // armor is required only if the class is trained in it (wizard, sorcerer, monk — no armor)
-    const cls = classes.find((c) => c.id === build.classId);
-    const armorless = cls && !(cls.data?.armorTraining ?? []).some((a) => a !== 'shield');
-    if (!eq.armorId && !armorless) add(TAB.EQUIPMENT, 'No armor chosen');
+    // something to wear: armor or clothes (either is enough; a wizard picks clothes)
+    if (!eq.armorId && !eq.clothingId) add(TAB.EQUIPMENT, 'No armor or clothes chosen');
     if (!eq.weaponIds?.length) add(TAB.EQUIPMENT, 'No weapon chosen');
     if (!eq.packId) add(TAB.EQUIPMENT, 'No equipment pack chosen');
 

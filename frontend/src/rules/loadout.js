@@ -42,7 +42,9 @@ export function slotOptions(slot, inventory) {
 
 /** Default loadout — from what was chosen in the builder. */
 export function defaultEquipped(inventory) {
-    const armor = inventory.find((it) => it.kind === 'armor')?.key ?? null;
+    // real armor first; clothes only when there is none
+    const armors = inventory.filter((it) => it.kind === 'armor');
+    const armor = (armors.find((it) => !['clothing', 'shield'].includes(it.ref?.category)) ?? armors[0])?.key ?? null;
     const weapons = inventory.filter((it) => it.kind === 'weapon');
     const shield = inventory.find((it) => it.kind === 'shield')?.key ?? null;
 

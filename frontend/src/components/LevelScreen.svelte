@@ -11,6 +11,7 @@
     import { levelPlan, evaluatePlan } from "../rules/progression.js";
     import { formatModifier } from "../rules/abilities.js";
     import ActionCard from "./common/ActionCard.svelte";
+    import ChoiceCard from "./builder/common/ChoiceCard.svelte";
 
     // these choices are shown as cards with a description; skills as compact chips
     const CARD_KINDS = new Set([
@@ -36,6 +37,57 @@
     $effect(() => {
         complete = ev.complete;
     });
+
+    // --- tabs: "gains" (what the level grants) + one per choice group ---
+    // a group = a choice + the choices that depend on it (feat → its "<key>:asi", "<key>:skills"…)
+    const groups = $derived.by(() => {
+        const roots = ev.choices.filter((c) => !ev.choices.some((p) => p !== c && c.key.startsWith(p.key + ":")));
+        return roots.map((root) => {
+            const items = [root, ...ev.choices.filter((c) => c.key.startsWith(root.key + ":"))];
+            return {
+                key: root.key,
+                root,
+                items,
+                done: items.every((c) => c.done),
+                optional: root.optional,
+            };
+        });
+    });
+
+    let tab = $state("gains");
+    // the tab disappeared — back to the overview
+    const current = $derived(groups.find((g) => g.key === tab) ?? null);
+    $effect(() => {
+        if (tab !== "gains" && !current) tab = "gains";
+    });
+    // another level shown — start from the overview
+    $effect(() => {
+        level;
+        tab = "gains";
+    });
+
+    const order = $derived(["gains", ...groups.map((g) => g.key)]);
+    const nextTab = $derived(order[order.indexOf(tab) + 1] ?? null);
+    const nextTitle = $derived(groups.find((g) => g.key === nextTab)?.root.title ?? "");
+
+    // wild shape forms: grouped by CR (ascending), names alphabetical inside a group
+    function crGroups(opts) {
+        const map = new Map();
+        const sorted = [...opts].sort((a, b) => (a.cr ?? 0) - (b.cr ?? 0) || a.name.localeCompare(b.name));
+        for (const o of sorted) {
+            const label = o.crLabel ?? o.meta ?? "";
+            if (!map.has(label)) map.set(label, []);
+            map.get(label).push(o);
+        }
+        return [...map].map(([label, items]) => ({ label, items }));
+    }
+
+    // a single-pick feat that is already chosen: show only it (with × to undo)
+    const collapses = (c) => (c.kind === "feat" || c.kind === "subclass") && c.pick === 1 && c.valid.length > 0;
+
+    // subclass features, by level
+    const subFeatures = (ref) =>
+        [...(ref?.data?.features ?? [])].sort((a, b) => (a.level ?? 1) - (b.level ?? 1));
 
     // --- changing a choice ---
     function toggle(choice, id) {
@@ -104,99 +156,189 @@
         {/if}
     </section>
 
-    <div class="cols">
+    <!-- tabs -->
+    <div class="tabs" role="tablist">
+        <button role="tab" class:on={tab === "gains"} aria-selected={tab === "gains"} onclick={() => (tab = "gains")}>
+            What this level grants
+        </button>
+        {#each groups as g (g.key)}
+            <button role="tab" class:on={tab === g.key} aria-selected={tab === g.key} onclick={() => (tab = g.key)}>
+                <span class="dot" class:done={g.done} class:opt={g.optional && !g.done}></span>
+                {g.root.title}
+                <span class="t-count">{g.root.count}/{g.root.pick}</span>
+            </button>
+        {/each}
+    </div>
+
+    {#if tab === "gains"}
         <!-- what the level grants -->
         <section class="gains">
-            <h3>What this level grants</h3>
             {#each plan.gains as g}
                 <div class="gain-group">
                     <h4>{g.title}</h4>
-                    {#if g.items.some((it) => it.ref)}
-                        <div class="gain-cards">
-                            {#each g.items as it}
-                                <ActionCard item={it.ref ?? { name: it.name, desc: it.desc }} {level} />
-                            {/each}
-                        </div>
-                    {:else}
                     <ul>
                         {#each g.items as it}
+                            {@const desc = it.desc || it.ref?.desc || it.ref?.data?.desc || ""}
                             <li>
-                                <b>{it.name}{#if it.tag}<small class="tag">{it.tag}</small>{/if}</b>
-                                {#if it.desc}<span>{it.desc}</span>{/if}
+                                <b>{it.ref?.name ?? it.name}{#if it.tag}<small class="tag">{it.tag}</small>{/if}</b>
+                                {#if desc}<span>{desc}</span>{/if}
                             </li>
                         {/each}
                     </ul>
-                    {/if}
                 </div>
             {:else}
                 <p class="muted">No new features at this level.</p>
             {/each}
-        </section>
-
-        <!-- choices -->
-        <section class="choices">
-            <h3>Choices</h3>
-            {#each ev.choices as c (c.key)}
-                {@const n = c.count}
-                {@const opts = c.visible}
-                {@const sel = new Set(c.valid)}
-                <div class="choice" class:done={c.done}>
-                    <div class="c-head">
-                        <b>{c.title}</b>
-                        <span class="count">{#if c.optional}optional · {/if}{n} / {c.pick}</span>
-                    </div>
-                    {#if c.desc}<p class="c-desc">{c.desc}</p>{/if}
-
-                    {#if c.kind === "asi"}
-                        <div class="asi">
-                            {#each c.options as o}
-                                {@const v = c.value?.asi?.[o.id] ?? 0}
-                                <div class="asi-row" class:on={v}>
-                                    <span>{o.name}</span>
-                                    <span class="asi-ctl">
-                                        <button onclick={() => bumpAsi(c, o.id, -1)} disabled={!v}>−</button>
-                                        <b>+{v}</b>
-                                        <button onclick={() => bumpAsi(c, o.id, +1)}>+</button>
-                                    </span>
-                                </div>
-                            {/each}
-                        </div>
-                    {:else}
-                        {#if CARD_KINDS.has(c.kind)}
-                            <div class="option-cards">
-                                {#each opts as o (o.id)}
-                                    <ActionCard
-                                        item={o.ref ?? { name: o.name, desc: o.desc }}
-                                        {level}
-                                        source={o.meta ?? ""}
-                                        selectable
-                                        selected={sel.has(o.id)}
-                                        onclick={() => toggle(c, o.id)}
-                                    />
-                                {:else}
-                                    <p class="muted">No options available.</p>
-                                {/each}
-                            </div>
-                        {:else}
-                            <div class="chips">
-                                {#each opts as o (o.id)}
-                                    <button class="chip" class:on={sel.has(o.id)} onclick={() => toggle(c, o.id)} title={o.desc}>
-                                        {o.name}
-                                        {#if o.meta}<small>{o.meta}</small>{/if}
-                                    </button>
-                                {:else}
-                                    <p class="muted">No options available.</p>
-                                {/each}
-                            </div>
-                        {/if}
-                    {/if}
+            {#if groups.length}
+                <div class="todo">
+                    <h4>Choices at this level</h4>
+                    <ul>
+                        {#each groups as g (g.key)}
+                            <li>
+                                <button class="todo-row" onclick={() => (tab = g.key)}>
+                                    <span class="dot" class:done={g.done} class:opt={g.optional && !g.done}></span>
+                                    <span>{g.root.title}</span>
+                                    <span class="t-count">{g.optional ? "optional · " : ""}{g.root.count}/{g.root.pick}</span>
+                                </button>
+                            </li>
+                        {/each}
+                    </ul>
                 </div>
             {:else}
                 <p class="muted">Nothing to choose at this level.</p>
+            {/if}
+        </section>
+    {:else if current}
+        <!-- one choice group: the choice and what it requires -->
+        <section class="choices">
+            {#each current.items as c (c.key)}
+                {@render choiceBlock(c)}
             {/each}
         </section>
-    </div>
+    {/if}
+
+    {#if nextTab}
+        <div class="next">
+            <button onclick={() => (tab = nextTab)}>Next: {nextTitle} →</button>
+        </div>
+    {/if}
 </div>
+
+{#snippet choiceBlock(c)}
+    {@const opts = collapses(c) ? c.visible.filter((o) => c.valid.includes(o.id)) : c.visible}
+    {@const sel = new Set(c.valid)}
+    <div class="choice" class:done={c.done}>
+        <div class="c-head">
+            <b>{c.title}</b>
+            <span class="count">{#if c.optional}optional · {/if}{c.count} / {c.pick}</span>
+        </div>
+        {#if c.desc}<p class="c-desc">{c.desc}</p>{/if}
+
+        {#if c.kind === "asi"}
+            <div class="asi">
+                {#each c.options as o}
+                    {@const v = c.value?.asi?.[o.id] ?? 0}
+                    <div class="asi-row" class:on={v}>
+                        <span>{o.name}</span>
+                        <span class="asi-ctl">
+                            <button onclick={() => bumpAsi(c, o.id, -1)} disabled={!v}>−</button>
+                            <b>+{v}</b>
+                            <button onclick={() => bumpAsi(c, o.id, +1)}>+</button>
+                        </span>
+                    </div>
+                {/each}
+            </div>
+        {:else if c.kind === "subclass" && collapses(c)}
+            <!-- chosen subclass: picture + what it grants; × — choose again -->
+            {#each opts as o (o.id)}
+                {@const desc = o.ref?.desc ?? o.ref?.data?.desc ?? o.desc}
+                <div class="sub-picked">
+                    <ChoiceCard item={o.ref ?? o} badge="Subclass" sub onclear={() => toggle(c, o.id)}>
+                        {#if desc}<p class="sub-desc">{desc}</p>{/if}
+                        <ul class="sub-feats">
+                            {#each subFeatures(o.ref) as f}
+                                <li class:now={(f.level ?? 1) === level} class:later={(f.level ?? 1) > level}>
+                                    <span class="f-lvl">Level {f.level ?? 1}</span>
+                                    <b>{f.name}</b>
+                                    {#if f.desc}<span class="f-desc">{f.desc}</span>{/if}
+                                </li>
+                            {:else}
+                                <li class="muted">No features listed.</li>
+                            {/each}
+                        </ul>
+                    </ChoiceCard>
+                </div>
+            {/each}
+        {:else if collapses(c)}
+            <div class="picked-cards">
+                {#each opts as o (o.id)}
+                    <div class="picked-card">
+                        <ActionCard item={o.ref ?? { name: o.name, desc: o.desc }} {level} source={o.meta ?? ""} />
+                        <button class="clear" onclick={() => toggle(c, o.id)} title="Clear selection" aria-label="Clear selection">×</button>
+                    </div>
+                {/each}
+            </div>
+        {:else if c.kind === "wildShapeForms"}
+            <!-- beasts grouped by CR: picture, name, AC / HP / speed -->
+            {#each crGroups(opts) as grp (grp.label)}
+                <div class="cr-group">
+                    <h5>{grp.label}</h5>
+                    <div class="beasts">
+                        {#each grp.items as o (o.id)}
+                            {@const on = sel.has(o.id)}
+                            <button
+                                class="beast"
+                                class:on
+                                class:full={!on && c.valid.length >= c.pick}
+                                onclick={() => toggle(c, o.id)}
+                                aria-pressed={on}
+                            >
+                                <span class="b-img">{#if o.image}<img src={o.image} alt="" loading="lazy" />{/if}</span>
+                                <span class="b-body">
+                                    <b>{o.name}{#if o.circle}<small class="tag">Circle</small>{/if}</b>
+                                    {#if o.stats}
+                                        <small>AC {o.stats.ac} · HP {o.stats.hp} · {o.stats.speed}</small>
+                                    {:else if o.desc}
+                                        <small>{o.desc}</small>
+                                    {/if}
+                                </span>
+                            </button>
+                        {/each}
+                    </div>
+                </div>
+            {:else}
+                <p class="muted">No options available.</p>
+            {/each}
+        {:else if CARD_KINDS.has(c.kind)}
+            <div class="option-cards">
+                {#each opts as o (o.id)}
+                    <ActionCard
+                        item={o.ref ?? { name: o.name, desc: o.desc }}
+                        {level}
+                        source={o.meta ?? ""}
+                        image={c.kind === "subclass" ? (o.ref?.image ?? "") : undefined}
+                        selectable
+                        selected={sel.has(o.id)}
+                        onclick={() => toggle(c, o.id)}
+                    />
+                {:else}
+                    <p class="muted">No options available.</p>
+                {/each}
+            </div>
+        {:else}
+            <div class="chips">
+                {#each opts as o (o.id)}
+                    <button class="chip" class:on={sel.has(o.id)} onclick={() => toggle(c, o.id)} title={o.desc}>
+                        {o.name}
+                        {#if o.meta}<small>{o.meta}</small>{/if}
+                    </button>
+                {:else}
+                    <p class="muted">No options available.</p>
+                {/each}
+            </div>
+        {/if}
+    </div>
+{/snippet}
 
 <style>
     .level {
@@ -267,27 +409,129 @@
         color: var(--color-text-muted);
     }
 
-    /* --- columns --- */
-    .cols {
-        display: grid;
-        grid-template-columns: 2fr 3fr;
-        gap: 20px;
-        align-items: start;
+    /* --- tabs --- */
+    .tabs {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        border-bottom: 1px solid var(--color-border);
     }
 
-    @media (max-width: 1000px) {
-        .cols {
-            grid-template-columns: 1fr;
-        }
+    .tabs::-webkit-scrollbar {
+        display: none;
     }
 
-    h3 {
-        margin: 0 0 10px;
-        font-family: var(--font-heading);
+    .tabs button {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: transparent;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-secondary);
+        font-family: var(--font-ui);
         font-size: 14px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    .tabs button:hover {
+        color: var(--color-text-primary);
+    }
+
+    .tabs button.on {
+        color: var(--color-text-primary);
+        border-bottom-color: var(--color-gold);
+    }
+
+    .dot {
+        flex: none;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--color-danger);
+    }
+
+    .dot.opt {
+        background: var(--color-text-muted);
+    }
+
+    .dot.done {
+        background: var(--color-success);
+    }
+
+    .t-count {
+        font-size: 12px;
+        color: var(--color-text-muted);
+    }
+
+    /* overview: list of choices to make */
+    .todo {
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .todo ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .todo-row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        background: var(--color-card-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        font-size: 14px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .todo-row:hover {
+        border-color: var(--color-gold);
+    }
+
+    .todo-row .t-count {
+        margin-left: auto;
+    }
+
+    .next {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .next button {
+        padding: 8px 16px;
+        background: var(--color-card-elevated);
+        border: 1px solid var(--color-gold);
+        border-radius: 6px;
         color: var(--color-gold);
+        font-family: var(--font-ui);
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .next button:hover {
+        background: var(--color-gold);
+        color: var(--color-bg);
+    }
+
+    @media (max-width: 640px) {
+        .tabs button {
+            padding: 10px;
+            font-size: 13px;
+        }
     }
 
     h4 {
@@ -415,10 +659,192 @@
         color: var(--color-text-primary);
     }
 
-    .gain-cards {
+    /* --- chosen subclass --- */
+    .sub-picked {
+        margin-top: 10px;
+    }
+
+    .sub-desc {
+        margin: 0 0 10px;
+        font-family: var(--font-spell);
+        font-size: 15px;
+        color: var(--color-text-secondary);
+    }
+
+    .sub-feats {
+        margin: 0;
+        padding: 0;
+        list-style: none;
         display: flex;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .sub-feats li {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        column-gap: 10px;
+        padding-left: 10px;
+        border-left: 2px solid var(--color-border);
+    }
+
+    .sub-feats li.now {
+        border-left-color: var(--color-magic-purple);
+    }
+
+    .sub-feats li.later {
+        opacity: 0.55;
+    }
+
+    .f-lvl {
+        grid-row: span 2;
+        padding-top: 2px;
+        font-family: var(--font-ui);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .sub-feats b {
+        font-family: var(--font-ui);
+        font-size: 14px;
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-primary);
+    }
+
+    .f-desc {
+        font-family: var(--font-spell);
+        font-size: 14px;
+        line-height: 1.35;
+        color: var(--color-text-secondary);
+    }
+
+    /* --- wild shape forms --- */
+    .cr-group {
+        margin-top: 12px;
+    }
+
+    h5 {
+        margin: 0 0 6px;
+        font-family: var(--font-ui);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+
+    .beasts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 6px;
+    }
+
+    .beast {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px;
+        min-width: 0;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--color-text-primary);
+        font-family: var(--font-ui);
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .beast:hover {
+        border-color: var(--color-gold);
+    }
+
+    .beast.on {
+        background: var(--color-magic-purple-dark);
+        border-color: var(--color-magic-purple);
+    }
+
+    .beast.full {
+        opacity: 0.5;
+    }
+
+    .b-img {
+        flex: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--color-card);
+    }
+
+    .b-img img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    .b-body {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .b-body b {
+        font-size: 13px;
+        font-weight: var(--font-weight-semibold);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .b-body small {
+        font-size: 11px;
+        color: var(--color-text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .picked-cards {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .picked-card {
+        position: relative;
+    }
+
+    .picked-card :global(.card) {
+        padding-right: 48px;
+        border-color: var(--color-magic-purple);
+        background: var(--color-magic-purple-dark);
+    }
+
+    .clear {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        color: var(--color-text-secondary);
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .clear:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
     }
 
     .option-cards {

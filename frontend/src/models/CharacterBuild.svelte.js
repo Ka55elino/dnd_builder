@@ -74,8 +74,9 @@ const emptyAssign = () => byAbility(() => null);
 
 const defaultEquipment = () => ({
     armorId: null,   // armor (one)
+    clothingId: null, // clothes (one, worn when there's no armor or kept in the pack)
     shield: false,
-    weaponIds: [],   // weapons (several)
+    weaponIds: [],   // weapons (several; an id repeats for several of the same: 2 daggers)
     packId: null,    // equipment pack (one)
     items: [],       // individual items: [{ id, qty }]
     bag: [],         // granted later ("Give item"): [{ kind: 'weapon'|'armor'|'item', id, qty }]
@@ -284,18 +285,40 @@ export class CharacterBuild {
         this.touch();
     }
 
+    /** Clothes (armor table, category clothing; null — remove). */
+    setClothing(clothingId) {
+        this.equipment.clothingId = clothingId ?? null;
+        this.touch();
+    }
+
     /** Shield: taken / not taken. */
     setShield(on) {
         this.equipment.shield = !!on;
         this.touch();
     }
 
-    /** Add / remove a weapon. */
+    /** Add / remove a weapon (all of that kind). */
     toggleWeapon(weaponId) {
         const list = this.equipment.weaponIds;
-        const i = list.indexOf(weaponId);
-        if (i === -1) list.push(weaponId);
-        else list.splice(i, 1);
+        if (list.includes(weaponId)) this.equipment.weaponIds = list.filter((id) => id !== weaponId);
+        else list.push(weaponId);
+        this.touch();
+    }
+
+    /** How many of this weapon are taken. */
+    weaponCount(weaponId) {
+        return this.equipment.weaponIds.filter((id) => id === weaponId).length;
+    }
+
+    /** One more / one less of a weapon (delta +1 / -1); at most 20 of a kind. */
+    stepWeapon(weaponId, delta) {
+        const list = this.equipment.weaponIds;
+        if (delta > 0) {
+            if (this.weaponCount(weaponId) < 20) list.push(weaponId);
+        } else {
+            const i = list.lastIndexOf(weaponId);
+            if (i !== -1) list.splice(i, 1);
+        }
         this.touch();
     }
 

@@ -146,7 +146,11 @@ export class Character {
         // --- equipment ---
         const e = build.equipment ?? {};
         this.armor = (eq.armor ?? []).find((a) => a.id === e.armorId) ?? null;
-        this.weapons = (eq.weapons ?? []).filter((w) => (e.weaponIds ?? []).includes(w.id));
+        this.clothing = e.clothingId && e.clothingId !== e.armorId ? (eq.armor ?? []).find((a) => a.id === e.clothingId) ?? null : null;
+        // weaponIds repeats an id for several of the same weapon (2 daggers)
+        const weaponQty = {};
+        for (const id of e.weaponIds ?? []) weaponQty[id] = (weaponQty[id] ?? 0) + 1;
+        this.weapons = (eq.weapons ?? []).filter((w) => weaponQty[w.id]);
         this.pack = (eq.packs ?? []).find((p) => p.id === e.packId) ?? null;
         this.shieldItem = e.shield
             ? (eq.armor ?? []).find((a) => a.category === 'shield') ?? null
@@ -166,7 +170,8 @@ export class Character {
         const baseInventory = [
             ...(this.armor ? [{ key: `armor:${this.armor.id}`, kind: 'armor', name: this.armor.name, ref: this.armor, qty: 1 }] : []),
             ...(this.shieldItem ? [{ key: 'shield', kind: 'shield', name: this.shieldItem.name, ref: this.shieldItem, qty: 1 }] : []),
-            ...this.weapons.map((w) => ({ key: `weapon:${w.id}`, kind: 'weapon', name: w.name, ref: w, qty: 1 })),
+            ...(this.clothing ? [{ key: `armor:${this.clothing.id}`, kind: 'armor', name: this.clothing.name, ref: this.clothing, qty: 1 }] : []),
+            ...this.weapons.map((w) => ({ key: `weapon:${w.id}`, kind: 'weapon', name: w.name, ref: w, qty: weaponQty[w.id] })),
             ...(this.pack?.items ?? []).map((pi) => ({
                 key: `item:${pi.item.id}`, kind: 'item', name: pi.item.name, ref: pi.item, qty: pi.qty,
             })),

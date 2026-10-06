@@ -128,4 +128,29 @@
         font-family: var(--font-heading-alt);
         color: var(--color-text-primary);
     }
+
+    /* phones: a small picture beside the text, not a 250px square */
+    @media (max-width: 640px) {
+        .active,
+        .active.compact {
+            --cell: 72px;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        h3,
+        .active.compact h3 {
+            font-size: 19px;
+        }
+
+        /* the text under the picture, full width */
+        .active {
+            flex-wrap: wrap;
+        }
+
+        .active-body {
+            flex-basis: 100%;
+            padding-right: 0;
+        }
+    }
 </style>

@@ -4,13 +4,17 @@
      * items    — [{ id, name, image }]
      * onpick(id)
      * caption  — (item) => line below the name (optional)
+     * badge    — (item) => a count / mark in the corner (optional; falsy — none): "×2"
+     * small    — smaller cells (160px) for long lists (weapons)
      */
-    let { items = [], onpick, caption = null } = $props();
+    let { items = [], onpick, caption = null, badge = null, small = false } = $props();
 </script>
 
-<div class="grid">
+<div class="grid" class:small>
     {#each items as item (item.id)}
-        <button class="cell" onclick={() => onpick(item.id)} title={item.name}>
+        {@const b = badge?.(item)}
+        <button class="cell" class:marked={!!b} onclick={() => onpick(item.id)} title={item.name}>
+            {#if b}<span class="badge">{b}</span>{/if}
             {#if item.image}
                 <img src={item.image} alt="" />
             {:else}
@@ -57,6 +61,34 @@
     .cell:hover {
         border-color: var(--color-gold);
         transform: translateY(-2px);
+    }
+
+    .grid.small {
+        --cell: 160px;
+    }
+
+    .grid.small .cell-name {
+        padding: 22px 8px 8px;
+        font-size: 15px;
+    }
+
+    .cell.marked {
+        border-color: var(--color-gold);
+    }
+
+    .badge {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        z-index: 1;
+        min-width: 26px;
+        padding: 2px 7px;
+        background: var(--color-gold);
+        border-radius: 999px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-bg);
     }
 
     .cell:focus-visible {
@@ -120,6 +152,21 @@
 
         .cell:hover {
             transform: none;
+        }
+
+        /* long lists (weapons): three per row */
+        .grid.small {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .grid.small .cell-name {
+            padding: 16px 4px 6px;
+            font-size: 12px;
+        }
+
+        .grid.small .cell-name small {
+            font-size: 10px;
         }
     }
 </style>

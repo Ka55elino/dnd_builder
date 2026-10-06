@@ -359,6 +359,11 @@ export function levelPlan(build, level, refs) {
                     name: f.name,
                     desc: `AC ${f.ac} · HP ${f.hp} · ${speedText(f.speed)}`,
                     meta: `CR ${crText(f.cr)}${f.subclassId ? ' · Circle' : ''}`,
+                    cr: f.cr,
+                    crLabel: `CR ${crText(f.cr)}`,
+                    image: f.image ?? '',
+                    stats: { ac: f.ac, hp: f.hp, speed: speedText(f.speed) },
+                    circle: !!f.subclassId,
                 })),
         });
     }
@@ -581,7 +586,7 @@ function featFollowUps(featId, key, level, done, refs, add) {
         add({
             key: `${key}:cantrips`, kind: 'cantrips', title: `${feat.name}: cantrips`, pick: 2,
             options: spellList(refs, list, { maxLevel: 0 })
-                    .filter((sp) => !done.cantrips.includes(sp.id) && !granted.has(sp.id))
+                    .filter((sp) => !done.cantrips.includes(sp.id))
                     .map(spellOption),
         });
         add({

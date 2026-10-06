@@ -37,6 +37,7 @@
         onclick = null,
         footer = null,
         boost = null, // { die, base, from } — an active effect changed the die (Symbiotic Entity)
+        image = undefined, // picture on the left (subclass choice); "" — empty placeholder
     } = $props();
 
     const d = $derived(item?.data ?? {});
@@ -54,10 +55,17 @@
     class="card"
     class:selectable
     class:selected
+    class:with-img={image !== undefined}
     onclick={selectable ? onclick : undefined}
     type={selectable ? "button" : undefined}
     aria-pressed={selectable ? selected : undefined}
 >
+    {#if image !== undefined}
+        <div class="thumb">
+            {#if image}<img src={image} alt="" loading="lazy" />{/if}
+        </div>
+    {/if}
+    <div class="body">
     <header>
         <b class="name">{item?.name}</b>
         {#if source}<span class="src">{source}</span>{/if}
@@ -132,6 +140,7 @@
 
     <!-- the snippet brings its own wrapper (put margin-top: auto on it to sit at the bottom) -->
     {#if footer && !selectable}{@render footer()}{/if}
+    </div>
 </svelte:element>
 
 <style>
@@ -157,6 +166,50 @@
         text-align: left;
         font: inherit;
         min-width: 0;
+    }
+
+    .body {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .card.with-img {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .card.with-img .body {
+        align-self: stretch;
+    }
+
+    .card.with-img header {
+        justify-content: center;
+    }
+
+    .thumb {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 120px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--color-card);
+    }
+
+    .thumb img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    @media (max-width: 640px) {
+        .thumb {
+            width: 88px;
+            height: 88px;
+        }
     }
 
     .selectable {
