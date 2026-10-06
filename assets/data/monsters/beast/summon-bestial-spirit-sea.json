@@ -1,0 +1,83 @@
+{
+  "id": "summon-bestial-spirit-sea",
+  "name": "Bestial Spirit (Sea)",
+  "type": "beast",
+  "alignment": "unaligned",
+  "cr": 0,
+  "xp": 0,
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "habitats": [],
+  "bonusActions": [],
+  "reactions": [],
+  "size": "small",
+  "abilities": {
+    "str": 18,
+    "dex": 11,
+    "con": 16,
+    "int": 4,
+    "wis": 14,
+    "cha": 5
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "understands the languages you speak",
+  "initiative": 0,
+  "ac": 13,
+  "hp": 30,
+  "hpFormula": "30 + 5 * (slot - 2) (spell level)",
+  "speed": {
+    "walk": 30,
+    "swim": 30
+  },
+  "traits": [
+    {
+      "name": "Pack Tactics",
+      "desc": "The spirit has Advantage on an attack roll against a creature if at least one of the spirit's allies is within 5 feet of the creature and the ally isn't Incapacitated."
+    },
+    {
+      "name": "Water Breathing",
+      "desc": "The spirit can breathe only underwater."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Multiattack",
+      "desc": "The spirit makes a number of Rend attacks equal to half the spell's level (round down)."
+    },
+    {
+      "name": "Rend",
+      "desc": "Melee attack: your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell's level Piercing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "piercing",
+          "dice": "1d8+6",
+          "avg": 10
+        }
+      ]
+    }
+  ],
+  "desc": "A spirit summoned by the Summon Beast spell. Numbers shown for a level 2 slot and a +5 spell attack; on the sheet they follow the slot you cast it with.",
+  "summon": {
+    "ac": "11 + slot",
+    "attack": {
+      "bonus": "spellAttack",
+      "damage": "4 + slot"
+    },
+    "initiative": "owner",
+    "note": "Obeys your verbal commands; acts right after you in Initiative.",
+    "hp": "30 + 5 * (slot - 2)"
+  },
+  "image": "/img/monsters/beast/reef-shark.png"
+}

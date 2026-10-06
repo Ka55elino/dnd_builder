@@ -1,0 +1,75 @@
+{
+  "id": "summon-primal-beast-land",
+  "name": "Primal Beast (Land)",
+  "type": "beast",
+  "alignment": "unaligned",
+  "cr": 0,
+  "xp": 0,
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "habitats": [],
+  "bonusActions": [],
+  "reactions": [],
+  "size": "medium",
+  "ac": 16,
+  "hp": 20,
+  "hpFormula": "5 + 5 * level (Ranger level)",
+  "initiative": 2,
+  "speed": {
+    "walk": 40,
+    "climb": 40
+  },
+  "abilities": {
+    "str": 14,
+    "dex": 14,
+    "con": 15,
+    "int": 8,
+    "wis": 14,
+    "cha": 11
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "understands the languages you speak",
+  "traits": [
+    {
+      "name": "Primal Bond",
+      "desc": "Add your Proficiency Bonus to any ability check or saving throw the beast makes."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Beast's Strike",
+      "desc": "Melee attack: your spell attack modifier, reach 5 ft. Hit: 1d8 + 2 + your Wisdom modifier Bludgeoning, Piercing, or Slashing damage (chosen when summoned). If the beast moved at least 20 feet straight toward the target right before the hit, the target takes an extra 1d6 damage of the same type and, if it is Large or smaller, has the Prone condition.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d8+5",
+          "avg": 9
+        }
+      ]
+    }
+  ],
+  "desc": "The Beast Master's Primal Companion. Numbers shown for a level 3 Ranger with Wisdom +3; on the sheet they follow your level and Wisdom.",
+  "summon": {
+    "ac": "13 + wis",
+    "hp": "5 + 5 * level",
+    "attack": {
+      "bonus": "spellAttack",
+      "damage": "2 + wis"
+    },
+    "initiative": "owner",
+    "note": "Acts on your turn; it takes the Dodge action unless you command it with a Bonus Action (Command Companion)."
+  },
+  "image": "/img/monsters/beast/srd-wolf.png"
+}

@@ -23,9 +23,13 @@
                     x,
                     y,
                     image: c.image || "",
-                    icon: c.kind === "player" ? "🧑" : "👹",
-                    ring: c.kind === "player" ? "#4a86c8" : "#c0392b",
-                    label: c.id === me ? `${c.name} (you)` : c.name,
+                    icon: c.kind === "player" ? "🧑" : c.kind === "summon" ? c.icon || "🐾" : c.down ? "💀" : "👹",
+                    down: !!c.down,
+                    ring: c.kind === "player" ? "#4a86c8" : c.kind === "summon" ? "#6FB35F" : "#c0392b",
+                    label:
+                        c.id === me ? `${c.name} (you)`
+                        : c.kind === "summon" ? `${c.name} · ${c.ownerId === server.playerId ? "yours" : c.ownerName}`
+                        : c.name,
                     active: seen.turn === c.id,
                 };
             }),

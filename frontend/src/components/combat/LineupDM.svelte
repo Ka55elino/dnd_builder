@@ -6,21 +6,22 @@
      * sheetOf(playerId) — { hp, maxHp, temp, ac } | null for a player's card
      * onPlayerHp(playerId, op, amount) — Hit Points of a player (sent to their app)
      * onPlayerCondition(playerId, data) — a "condition" event for a player (game.js)
+     * onSummonHp(playerId, uid, op, amount) — Hit Points of a player's summon (sent to their app)
      * conditionDefs — refs.conditions (for the Conditions dialog)
      */
     import { combat, move, moveTo, remove, monsterHp, setTurn, nextTurn, monsterCondition } from "../../combat.svelte.js";
     import CombatantDM from "./CombatantDM.svelte";
     import ConditionDialog from "../ConditionDialog.svelte";
 
-    let { sheetOf = () => null, onPlayerHp, onPlayerCondition, conditionDefs = [] } = $props();
+    let { sheetOf = () => null, onPlayerHp, onPlayerCondition, onSummonHp, conditionDefs = [] } = $props();
 
     // the combatant whose Conditions dialog is open (its id — the entry itself may be replaced)
     let condFor = $state(null);
     const condC = $derived(combat.line.find((c) => c.id === condFor) ?? null);
-    const instancesOf = (c) => (c.kind === "monster" ? (c.effects ?? []) : (sheetOf(c.playerId)?.conditionInstances ?? []));
+    const instancesOf = (c) => (c.kind !== "player" ? (c.effects ?? []) : (sheetOf(c.playerId)?.conditionInstances ?? []));
 
     function onCondition(c, data) {
-        if (c.kind === "monster") return monsterCondition(c, data);
+        if (c.kind !== "player") return monsterCondition(c, data); // summons: the DM keeps their conditions
         return onPlayerCondition?.(c.playerId, data);
     }
 
@@ -32,6 +33,7 @@
 
     function onHp(c, op, n) {
         if (c.kind === "monster") return monsterHp(c, op, n);
+        if (c.kind === "summon") return onSummonHp?.(c.ownerId, c.uid, op, n);
         return onPlayerHp?.(c.playerId, op, n);
     }
 

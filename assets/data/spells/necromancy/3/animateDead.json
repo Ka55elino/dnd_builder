@@ -13,5 +13,14 @@
     "text": "+{n} more Undead (animate or reassert control)",
     "each": 2
   },
-  "desc": "You raise a Skeleton or Zombie under your control."
+  "desc": "You raise a Skeleton or Zombie under your control.",
+  "summon": {
+    "options": [
+      "srd-skeleton",
+      "srd-zombie"
+    ],
+    "count": "1 + 2 * (slot - 3)",
+    "stack": true,
+    "initiative": "own"
+  }
 }

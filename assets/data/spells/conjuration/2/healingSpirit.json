@@ -15,5 +15,12 @@
   "upcast": {
     "heal": "1d6"
   },
-  "desc": "A spirit in a 5-foot Cube heals a creature (1d6) when it enters or starts its turn there. Concentration."
+  "desc": "A spirit in a 5-foot Cube heals a creature (1d6) when it enters or starts its turn there. Concentration.",
+  "summon": {
+    "token": {
+      "name": "Healing Spirit",
+      "icon": "💚",
+      "note": "Bonus Action: move it up to 30 feet. A creature that enters its space or starts its turn there can regain Hit Points (a limited number of times)."
+    }
+  }
 }

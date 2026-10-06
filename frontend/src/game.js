@@ -19,6 +19,8 @@
  *                          | { op: 'save', id, success } — the DM settled a pending save
  *                          the player's app changes its CharacterState (rules/conditions.js);
  *                          def — a custom condition's definition (the player may not have it)
+ *   DM → player   "summonHp" { uid, op: 'damage' | 'heal' | 'temp', amount }
+ *                          a summon's Hit Points (CharacterState.summons; at 0 it disappears)
  *   DM → all      "encounter" { active, name, line: [{ id, kind, name, image, type, playerId }] }
  *                          the initiative line (names, icons, order — no HP), see combat.svelte.js
  *   player → DM   "state"  { state: CharacterState JSON, summary }
@@ -40,6 +42,7 @@ export const EV = {
     WHISPER: 'whisper',
     GIVE: 'give',
     CONDITION: 'condition',
+    SUMMON_HP: 'summonHp',
 };
 
 /** catalog list for an item kind (refs.catalog) */
@@ -252,4 +255,17 @@ export function applyHp(state, character, data) {
             return true;
     }
     return false;
+}
+
+/** DM: ask a player's app to change a summon's Hit Points ("summonHp", see above). */
+export function sendSummonHp(playerId, uid, op, amount) {
+    return SendGameEvent(EV.SUMMON_HP, playerId, JSON.stringify({ uid, op, amount }));
+}
+
+/** Player: applies a "summonHp" event (CharacterState.changeSummonHp). */
+export function applySummonHp(state, data) {
+    const n = Math.floor(Number(data?.amount));
+    if (!state || typeof data?.uid !== 'string' || !Number.isFinite(n) || n < 0 || !HP_OPS.includes(data?.op)) return false;
+    state.changeSummonHp(data.uid, data.op, n);
+    return true;
 }

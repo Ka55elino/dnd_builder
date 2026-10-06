@@ -19,5 +19,13 @@
   "damage": {
     "dice": "2d8",
     "type": "slashing"
+  },
+  "summon": {
+    "token": {
+      "name": "Spirit Pack",
+      "icon": "🐺",
+      "size": "large",
+      "note": "A Large pack of spirit animals: move it up to 30 feet on your turn; creatures within 10 feet make a Dexterity save or take the Slashing damage. The area is Difficult Terrain for your enemies."
+    }
   }
 }

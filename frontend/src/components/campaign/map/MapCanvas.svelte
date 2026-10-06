@@ -23,7 +23,7 @@
      *
      *   tool 'move' (combat tokens): drag a marker to another cell → onmovemarker(id, x, y);
      *          a click on a marker → onclickmarker(id); a click on an empty cell with `placing`
-     *          → onplace(x, y); otherwise a drag pans. Markers of kind 'player' / 'monster' are
+     *          → onplace(x, y); otherwise a drag pans. Markers of kind 'player' / 'monster' / 'summon' are
      *          tokens: a portrait, `active` (whose turn) — a gold glow, `down` — dimmed;
      *          `selected` — the id of the marker drawn with a dashed ring
      *   ondropitem(data, x, y) — an HTML drag of "text/x-map-item" dropped on a cell
@@ -541,9 +541,10 @@
         // ---- markers: a badge with the icon, the name under the cell ----
         // part: 'all' | 'body' | 'label' — labels go in a second pass, over every token
         const drawMarker = (m, ghost = false, part = "all") => {
-            const token = m.kind === "player" || m.kind === "monster";
+            const summon = m.kind === "summon"; // a player's familiar / spirit: smaller, dashed ring
+            const token = m.kind === "player" || m.kind === "monster" || summon;
             const npc = m.kind === "npc" || token;
-            const r = token ? Math.max(6, Math.min(cpx * 0.42, 28)) : Math.max(npc ? 5 : 6, Math.min(cpx * (npc ? 0.32 : 0.4), npc ? 20 : 26));
+            const r = token ? Math.max(6, Math.min(cpx * (summon ? 0.34 : 0.42), summon ? 22 : 28)) : Math.max(npc ? 5 : 6, Math.min(cpx * (npc ? 0.32 : 0.4), npc ? 20 : 26));
             const l = cx(m.x), t = cy(m.y), w = cx(m.x + 1) - l;
             const mx = l + w / 2, my = t + w / 2;
             c.globalAlpha = ghost ? 0.55 : m.down ? 0.45 : 1;
@@ -584,7 +585,9 @@
             c.arc(mx, my, r, 0, Math.PI * 2);
             c.lineWidth = npc ? 2.5 : 2;
             c.strokeStyle = m.ring || theme.axis; // NPC: attitude, encounter: red, location: gold
+            if (summon) c.setLineDash([4, 3]);
             c.stroke();
+            if (summon) c.setLineDash([]);
             if (selected === m.id && !ghost) {
                 c.save();
                 c.setLineDash([4, 3]);

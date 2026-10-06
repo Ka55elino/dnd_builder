@@ -42,6 +42,9 @@ export class CharacterState {
                                   //   spell effects (Mage Armor, Bless, Guidance…: assets/data/conditions)
                                   // comes from the spell's data.apply (see Character, rules/sheet.js)
     wildShape = $state(null);    // Wild Shape: { monsterId, name, since } — the beast form now (rules/wildshape.js)
+    summons = $state([]);        // summoned creatures (rules/summon.js makeSummon): { uid, monsterId, name, image,
+                                 //   size, source, sourceName, group, slot, conc, ac, maxHp, hpLost, tempHp,
+                                 //   initiative: 'owner' | 'own', since } — the DM puts them in the line and on the map
     bagAdjust = $state({});      // { [backpack item key]: qty delta } — used up / found / thrown away;
                                  // an item whose qty drops to 0 is removed (see Character)
 
@@ -87,6 +90,66 @@ export class CharacterState {
             data.wildShape && typeof data.wildShape.monsterId === 'string'
                 ? { monsterId: data.wildShape.monsterId, name: String(data.wildShape.name ?? ''), since: Number(data.wildShape.since) || 0 }
                 : null;
+        this.summons = Array.isArray(data.summons)
+            ? data.summons
+                .filter((s) => s && typeof s.uid === 'string' && typeof s.monsterId === 'string')
+                .map((s) => ({
+                    ...s,
+                    // a token (Flaming Sphere) may have no Hit Points / AC: null
+                    maxHp: s.maxHp == null ? null : Math.max(1, Math.floor(Number(s.maxHp) || 1)),
+                    hpLost: Math.max(0, Math.floor(Number(s.hpLost) || 0)),
+                    tempHp: Math.max(0, Math.floor(Number(s.tempHp) || 0)),
+                    ac: s.ac == null ? null : Math.floor(Number(s.ac) || 10),
+                    conc: typeof s.conc === 'string' && s.conc ? s.conc : null,
+                    initiative: s.initiative === 'owner' ? 'owner' : 'own',
+                }))
+            : [];
+    }
+
+    // ---------- summons (rules/summon.js) ----------
+
+    /**
+     * New summons of one cast (makeSummons): one cast per group — a second familiar replaces
+     * the first; Animate Dead gives each cast its own group, so they add up.
+     */
+    addSummons(list) {
+        const add = (Array.isArray(list) ? list : [list]).filter(Boolean);
+        if (!add.length) return;
+        const groups = new Set(add.map((s) => s.group));
+        this.summons = [...this.summons.filter((x) => !groups.has(x.group)), ...add];
+    }
+
+    addSummon(s) {
+        this.addSummons([s]);
+    }
+
+    /** It is dismissed / disappears. */
+    removeSummon(uid) {
+        this.summons = this.summons.filter((s) => s.uid !== uid);
+    }
+
+    /** Its Hit Points now; null — it has none (a token: Flaming Sphere). */
+    summonHp(s) {
+        return s.maxHp == null ? null : clamp(s.maxHp - s.hpLost, 0, s.maxHp);
+    }
+
+    /**
+     * Hit Points of a summon: op 'damage' | 'heal' | 'temp', n.
+     * Damage takes Temporary Hit Points first; at 0 Hit Points it disappears.
+     */
+    changeSummonHp(uid, op, n) {
+        n = Math.max(0, Math.floor(Number(n) || 0));
+        const s = this.summons.find((x) => x.uid === uid);
+        if (!s || s.maxHp == null || (!n && op !== 'temp')) return;
+        let { hpLost, tempHp } = s;
+        if (op === 'damage') {
+            const fromTemp = Math.min(tempHp, n);
+            tempHp -= fromTemp;
+            hpLost = Math.min(s.maxHp, hpLost + n - fromTemp);
+        } else if (op === 'heal') hpLost = Math.max(0, hpLost - n);
+        else if (op === 'temp') tempHp = Math.max(tempHp, n);
+        if (hpLost >= s.maxHp) return this.removeSummon(uid);
+        this.summons = this.summons.map((x) => (x.uid === uid ? { ...x, hpLost, tempHp } : x));
     }
 
     // ---------- Wild Shape ----------
@@ -191,13 +254,16 @@ export class CharacterState {
         this.concentration = id || null;
         // effects that last only while you concentrate on their spell end with it
         this.effects = this.effects.filter((e) => !e.conc || e.conc === this.concentration);
+        // and so do the creatures it summoned (Summon Beast)
+        if (this.summons.some((s) => s.conc && s.conc !== this.concentration))
+            this.summons = this.summons.filter((s) => !s.conc || s.conc === this.concentration);
     }
 
     /** End an effect (the × in Status). Ending the effect of the spell you concentrate on ends the Concentration. */
     removeEffect(id) {
         const e = this.condition(id);
         this.removeCondition(id);
-        if (e?.conc && this.concentration === e.conc) this.concentration = null;
+        if (e?.conc && this.concentration === e.conc) this.concentrate(null);
     }
 
     // ---------- conditions (Prone, Grappled, Exhaustion…) ----------
@@ -313,6 +379,8 @@ export class CharacterState {
         this.deathSaves = { success: 0, fail: 0 };
         this.concentration = null;
         this.wildShape = null; // 8 hours: longer than any form lasts before level 16
+        // summons held by Concentration are gone; a familiar / a companion stays (healed)
+        this.summons = this.summons.filter((s) => !s.conc).map((s) => ({ ...s, hpLost: 0, tempHp: 0 }));
         // 8 hours pass: spell effects are over; conditions stay, except those that a Long Rest
         // changes (definition longRest: 'level' — Exhaustion −1, 'remove' — gone)
         const defs = new Map((ch.conditionDefs ?? []).map((d) => [d.id, d.data ?? d]));
@@ -346,6 +414,7 @@ export class CharacterState {
             effects: this.effects,
             bagAdjust: this.bagAdjust,
             wildShape: this.wildShape,
+            summons: this.summons,
         });
     }
 

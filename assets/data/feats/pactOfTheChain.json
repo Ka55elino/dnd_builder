@@ -10,7 +10,17 @@
       "type": "spell",
       "id": "findFamiliar",
       "ritual": true,
-      "note": "special forms: imp, pseudodragon, quasit, skeleton, sprite…"
+      "note": "special forms: imp, pseudodragon, quasit, skeleton, sprite, venomous snake"
     }
-  ]
+  ],
+  "summonOptions": {
+    "findFamiliar": [
+      "srd-imp",
+      "srd-pseudodragon",
+      "srd-quasit",
+      "srd-skeleton",
+      "srd-sprite",
+      "srd-poisonous-snake"
+    ]
+  }
 }

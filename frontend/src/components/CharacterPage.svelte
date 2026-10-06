@@ -2,6 +2,8 @@
     import { damageShort, damageName, damageLabel, normAction } from "../rules/labels.js";
     import SectionNav from "./common/SectionNav.svelte";
     import WildShapeCard from "./WildShapeCard.svelte";
+    import SummonCard from "./SummonCard.svelte";
+    import { summonOf, summonChoices, summonCount, resolveSummon, summonVars, makeSummons, canTakeType, fallenChoices, CREATURE_TYPE_NAMES } from "../rules/summon.js";
     import { loadMonsters } from "../data/bestiary.js";
     import { crText, speedText } from "../rules/wildshape.js";
     import IconLabel from "./common/IconLabel.svelte";
@@ -29,7 +31,7 @@
     import { onMount } from "svelte";
     import { onGameEvent, server } from "../server.svelte.js";
     import { seen } from "../combat.svelte.js";
-    import { EV, applyHp, applyCondition, sendState, findItem, giftEvents } from "../game.js";
+    import { EV, applyHp, applySummonHp, applyCondition, sendState, findItem, giftEvents } from "../game.js";
     import { exportCharacter } from "../transfer.js";
     import { pdfModel, savePdf } from "../pdfSheet.js";
     import { NetStatus } from "../api.js";
@@ -74,6 +76,7 @@
         { id: "cs-stats", label: "Stats" },
         { id: "cs-status", label: "Status" },
         { id: "cs-attacks", label: "Attacks" },
+        { id: "cs-companions", label: "Companions" },
         { id: "cs-actions", label: "Actions & spells" },
         { id: "cs-notes", label: "Notes" },
         { id: "cs-backpack", label: "Backpack" },
@@ -231,10 +234,26 @@
 
     // ---------- Wild Shape (rules/wildshape.js; the beast's card: WildShapeCard) ----------
     const wsInfo = $derived(character?.wildShapeInfo ?? null);
-    let monsters = $state([]); // the bestiary (the forms' stat blocks), loaded for a Wild Shape class
+    let monsters = $state([]); // the bestiary (the forms' / summons' stat blocks), loaded when needed
+    // anything on the sheet that can summon (Find Familiar, Summon Beast, Primal Companion)
+    const canSummon = $derived(
+        !!character?.actionGroups.some((g) => g.cards.some((c) => summonOf(c.item))),
+    );
     $effect(() => {
-        if (wsInfo && !monsters.length) loadMonsters().then((m) => (monsters = m ?? [])).catch(() => {});
+        if ((wsInfo || canSummon || state?.summons.length) && !monsters.length)
+            loadMonsters().then((m) => (monsters = m ?? [])).catch(() => {});
     });
+
+    // ---------- summons (rules/summon.js; the creature's card: SummonCard) ----------
+    // each with its stat block for this caster and the slot it was summoned with
+    const summonCards = $derived(
+        (state?.summons ?? []).map((s) => {
+            if (s.token) return { s, monster: null, note: s.note ?? "" }; // Flaming Sphere: no stat block
+            const m = monsters.find((x) => x.id === s.monsterId) ?? null;
+            const r = m ? resolveSummon(m, summonVars(character, s.slot), { type: s.creatureType }) : null;
+            return { s, monster: r?.monster ?? null, note: r?.note ?? "" };
+        }),
+    );
     const formMonster = $derived(state?.wildShape ? (monsters.find((m) => m.id === state.wildShape.monsterId) ?? null) : null);
     const wsLeft = $derived(wsInfo?.resource && state ? state.resourceLeft(wsInfo.resource) : 0);
     let wsOpen = $state(false);
@@ -274,6 +293,10 @@
             if (ev?.kind === EV.CONDITION) {
                 const before = state?.concentration;
                 if (applyCondition(state, character, ev.data) && before && !state.concentration) concCheck = null;
+                return;
+            }
+            if (ev?.kind === EV.SUMMON_HP) {
+                applySummonHp(state, ev.data);
                 return;
             }
             if (ev?.kind !== EV.HP) return;
@@ -488,11 +511,47 @@
         const ap = effectOf(c);
         return { onMe: true, choose: ap?.choose?.[0]?.value ?? "", ...(useSel[key] ?? {}) };
     };
+    // what a card can summon (bestiary monsters) and the chosen one
+    const summonOpts = (c) => summonChoices(c.item, monsters);
+    const summonPick = (c, key) => {
+        const opts = summonOpts(c);
+        return opts.find((m) => m.id === useSel[key]?.summon) ?? opts[0] ?? null;
+    };
+    // the creature type it takes (Find Familiar: Celestial / Fey / Fiend — a Beast form only)
+    const summonType = (c, key) => {
+        const sm = summonOf(c.item);
+        if (!canTakeType(sm, summonPick(c, key))) return null;
+        return sm.types.includes(useSel[key]?.stype) ? useSel[key].stype : sm.types[0];
+    };
+    // Fungal Infestation: a fallen enemy of the running encounter (the line the DM shares)
+    const fallenOpts = (c) => (inGame && seen.active ? fallenChoices(c.item, seen.line) : []);
+    const fallenPick = (c, key) => fallenOpts(c).find((x) => x.id === useSel[key]?.fallen) ?? null;
+    // the slot level chosen on the card (a spell) — its numbers / count scale with it
+    const slotOf = (c, info, key) => {
+        if (c.item.kind !== "spell") return null;
+        const opt = info?.options?.find((o) => o.value === (useSel[key]?.value ?? info.defaultValue));
+        return opt?.level ?? c.item.level ?? null;
+    };
     function useCard(c, info, key) {
         const sel = selOf(c, key);
         const wasConc = state.concentration;
+        const sm = summonOf(c.item);
+        const pick = sm && sm.options.length ? summonPick(c, key) : null;
+        if (sm && !pick && !sm.token) return; // the bestiary isn't loaded yet
+        const slot = slotOf(c, info, key);
         if (!applyUse(info, sel, character, state, c.item)) return;
         if (info.concentration && wasConc !== state.concentration) concCheck = null;
+        if (sm) {
+            state.addSummons(
+                makeSummons(c.item, pick, {
+                    ch: character,
+                    slot,
+                    conc: info.concentration ? c.item.id : null,
+                    type: summonType(c, key),
+                    fallen: sm.fromFallen ? fallenPick(c, key) : null,
+                }),
+            );
+        }
         usedKey = key;
         clearTimeout(usedTimer);
         usedTimer = setTimeout(() => (usedKey = null), 1500);
@@ -637,7 +696,44 @@
             (info.options && !info.options.length)}
         {@const ap = effectOf(c)}
         {@const cs = selOf(c, key)}
+        {@const sm = summonOf(c.item)}
+        {@const sOpts = sm ? summonOpts(c) : []}
+        {@const sCount = sm ? summonCount(c.item, character, slotOf(c, info, key)) : 0}
         <div class="use no-print">
+        {#if sm}
+            <!-- what it summons: a bestiary creature (or a token); it shows under Companions -->
+            <div class="use-fx">
+                <span class="fx-on">→ {sm.token && !sm.options.length ? "creates" : "summons"}{#if sCount > 1} <b>{sCount}×</b>{/if}</span>
+                {#if sm.token && !sm.options.length}
+                    <span class="fx-on"><b>{sm.token.icon ?? ""} {sm.token.name}</b></span>
+                {:else if sOpts.length > 1}
+                    <select class="use-select" value={summonPick(c, key)?.id ?? ""}
+                        onchange={(e) => setSel(key, { summon: e.currentTarget.value })} aria-label="Creature to summon">
+                        {#each sOpts as m (m.id)}<option value={m.id}>{m.name}</option>{/each}
+                    </select>
+                {:else if sOpts.length}
+                    <span class="fx-on"><b>{sOpts[0].name}</b></span>
+                {:else}
+                    <span class="fx-on muted">loading the bestiary…</span>
+                {/if}
+                {#if sm.fromFallen}
+                    {@const fo = fallenOpts(c)}
+                    <select class="use-select" value={fallenPick(c, key)?.id ?? ""}
+                        onchange={(e) => setSel(key, { fallen: e.currentTarget.value })}
+                        aria-label="The fallen creature to raise"
+                        title={fo.length ? "A fallen Beast or Humanoid of this encounter — it rises where it lies" : "No fallen Beast or Humanoid in the encounter"}>
+                        <option value="">{fo.length ? "— from the fallen —" : "—"}</option>
+                        {#each fo as x (x.id)}<option value={x.id}>{x.name}</option>{/each}
+                    </select>
+                {/if}
+                {#if sm.types && canTakeType(sm, summonPick(c, key))}
+                    <select class="use-select" value={summonType(c, key) ?? ""}
+                        onchange={(e) => setSel(key, { stype: e.currentTarget.value })} aria-label="Creature type">
+                        {#each sm.types as t (t)}<option value={t}>{CREATURE_TYPE_NAMES[t] ?? t}</option>{/each}
+                    </select>
+                {/if}
+            </div>
+        {/if}
         {#if ap}
             <!-- the lasting effect: on you, on an ally, or on the target (the DM puts it on) -->
             <div class="use-fx">
@@ -1631,6 +1727,18 @@
                         {state}
                         onRevert={() => state.endWildShape()}
                     />
+                {/if}
+
+                <!-- summoned creatures: familiar, spirits, companion (CharacterState.summons) -->
+                {#if summonCards.length}
+                    <section class="card companions" id="cs-companions" data-section>
+                        <h2>Companions</h2>
+                        <div class="companion-list">
+                            {#each summonCards as sc (sc.s.uid)}
+                                <SummonCard summon={sc.s} monster={sc.monster} note={sc.note} {state} />
+                            {/each}
+                        </div>
+                    </section>
                 {/if}
 
                 <!-- passive effects: always active -->
@@ -3708,6 +3816,13 @@
         grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
         gap: 10px;
         margin-bottom: 8px;
+    }
+
+    /* ---------- Companions (summons) ---------- */
+    .companion-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 10px;
     }
 
     /* ---------- Actions & spells filter ---------- */

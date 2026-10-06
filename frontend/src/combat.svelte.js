@@ -10,7 +10,8 @@
  * Player side (`seen`): what the DM shares — names, icons and the order only.
  *
  * Event (DM → all players, see game.js):
- *   "encounter" { active: true, name, turn, round, line: [{ id, kind: 'player' | 'monster', name, image, type, playerId, conditions }],
+ *   "encounter" { active: true, name, turn, round, line: [{ id, kind: 'player' | 'monster' | 'summon', name, image, type, playerId,
+ *                 conditions, down, raised, ownerId, ownerName, icon }],
  *                 positions: { combatantId: "x,y" } }     — where the DM put them on the encounter's map
  *   "encmap"    { key, name, tiles: { tileId: [x, y, …] } } — the encounter's map (terrain only), sent when
  *                 it opens and to newcomers; {} — no map. Players show it read-only (combat/PlayerMap.svelte)
@@ -41,8 +42,12 @@ export const EV_ENCOUNTER = 'encounter';
 
 /**
  * combat.line: [{
- *   id, kind: 'player' | 'monster', name, image,
+ *   id, kind: 'player' | 'monster' | 'summon', name, image,
  *   playerId,                       — player
+ *   raised                          — monster: a player raised its corpse (Fungal Infestation)
+ *   ownerId, ownerName, uid, ac, hp, maxHp, temp — summon: a player's familiar / spirit / companion
+ *                                     (syncSummons; its Hit Points are the player's, changed with
+ *                                     "summonHp" events)
  *   monsterId, type, ac, hp, maxHp, temp  — monster (HP counted here)
  *   effects                         — monster: condition instances (rules/conditions.js)
  * }]
@@ -101,6 +106,7 @@ export function startEncounter({ name = '', presetId = null, lines = [], monster
     combat.line = line;
     combat.positions = {};
     combat.map = null;
+    droppedSummons.clear();
     broadcast();
     sendMap();
 }
@@ -184,6 +190,99 @@ const playerEntry = (p) => ({
     playerId: p.id,
 });
 
+// ---------- summons: the players' familiars / spirits / companions (CharacterState.summons) ----------
+
+const summonId = (playerId, uid) => `s:${playerId}:${uid}`;
+const droppedSummons = new Set(); // summons the DM removed from this encounter
+
+/** The nearest free cell around (x, y) on the encounter's map, ring by ring (null — none close). */
+function freeCellNear(x, y, taken) {
+    for (let r = 1; r <= 6; r++) {
+        for (let dy = -r; dy <= r; dy++) {
+            for (let dx = -r; dx <= r; dx++) {
+                if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
+                const k = `${x + dx},${y + dy}`;
+                if (!taken.has(k)) return k;
+            }
+        }
+    }
+    return null;
+}
+
+/**
+ * Keep a player's summons in the line in step with their state (the player's app owns them):
+ * new ones join — 'owner' initiative right after the owner (and their earlier summons),
+ * 'own' at the end — and stand next to the owner on the map; gone ones leave; Hit Points
+ * and AC follow the player's numbers. Returns true if something changed.
+ */
+export function syncSummons(playerId, summons = []) {
+    if (!combat.active || !playerId) return false;
+    const list = Array.isArray(summons) ? summons.filter((s) => s && typeof s.uid === 'string') : [];
+    const want = new Map(list.map((s) => [summonId(playerId, s.uid), s]));
+    let changed = false;
+
+    // gone: dismissed, dropped to 0, the spell ended
+    const before = combat.line.length;
+    combat.line = combat.line.filter((c) => c.kind !== 'summon' || c.ownerId !== playerId || want.has(c.id));
+    if (combat.line.length !== before) {
+        changed = true;
+        if (combat.turn && !combat.line.some((c) => c.id === combat.turn)) combat.turn = null;
+        const ids = new Set(combat.line.map((c) => c.id));
+        combat.positions = Object.fromEntries(Object.entries(combat.positions).filter(([id]) => ids.has(id)));
+    }
+
+    const owner = combat.line.find((c) => c.kind === 'player' && c.playerId === playerId);
+    for (const [id, s] of want) {
+        // a token (Flaming Sphere) has no Hit Points / AC: null
+        const maxHp = s.maxHp == null ? null : Number(s.maxHp) || 1;
+        const hp = maxHp == null ? null : Math.max(0, maxHp - (Number(s.hpLost) || 0));
+        const nums = { name: s.name, ac: s.ac == null ? null : Number(s.ac) || 10, hp, maxHp, temp: Number(s.tempHp) || 0 };
+        const cur = combat.line.find((c) => c.id === id);
+        if (!cur && droppedSummons.has(id)) continue;
+        if (cur) {
+            if (Object.entries(nums).some(([k, v]) => cur[k] !== v)) {
+                Object.assign(cur, nums);
+                changed = true;
+            }
+            continue;
+        }
+        const entry = {
+            id, kind: 'summon', ...nums, image: s.image || '', icon: s.icon || '', token: !!s.token,
+            type: s.creatureType || 'summon', monsterId: s.monsterId,
+            ownerId: playerId, ownerName: owner?.name ?? '', uid: s.uid, source: s.sourceName ?? '', effects: [],
+        };
+        // where in the line: right after the owner and the owner's summons already there
+        let at = combat.line.length;
+        if (s.initiative === 'owner' && owner) {
+            at = combat.line.indexOf(owner) + 1;
+            while (at < combat.line.length && combat.line[at].kind === 'summon' && combat.line[at].ownerId === playerId) at++;
+        }
+        combat.line.splice(at, 0, entry);
+        // raised from a fallen enemy (Fungal Infestation): it stands where the corpse lay
+        const corpse = s.raisedFrom ? combat.line.find((c) => c.id === s.raisedFrom && c.kind === 'monster') : null;
+        if (corpse) {
+            corpse.raised = true;
+            const cell = combat.positions[corpse.id];
+            if (cell) {
+                const { [corpse.id]: _, ...rest } = combat.positions; // eslint-disable-line no-unused-vars
+                combat.positions = { ...rest, [id]: cell };
+                changed = true;
+                continue;
+            }
+        }
+        // on the map: next to the owner (if the owner stands on it)
+        const op = owner ? combat.positions[owner.id] : null;
+        if (op) {
+            const [x, y] = op.split(',').map(Number);
+            const cell = freeCellNear(x, y, new Set(Object.values(combat.positions)));
+            if (cell) combat.positions = { ...combat.positions, [id]: cell };
+        }
+        changed = true;
+    }
+    if (changed) broadcast();
+    return changed;
+}
+
 /** Move a combatant one place left (-1) or right (+1). */
 export function move(i, dir) {
     const j = i + dir;
@@ -202,6 +301,7 @@ export function moveTo(from, to) {
 
 export function remove(i) {
     const [c] = combat.line.splice(i, 1);
+    if (c?.kind === 'summon') droppedSummons.add(c.id); // the DM took it out: it doesn't come back with the next state
     if (c?.id === combat.turn) combat.turn = null;
     broadcast();
 }
@@ -229,7 +329,7 @@ export function nextTurn() {
 }
 
 function endTurnOf(c) {
-    if (c.kind === 'monster') {
+    if (c.kind === 'monster' || c.kind === 'summon') {
         if (c.effects?.length) c.effects = tickEndOfTurn(c.effects).list;
     } else if (c.playerId) {
         SendGameEvent(EV.CONDITION, c.playerId, JSON.stringify({ op: 'tick' })).catch(() => {});
@@ -307,7 +407,7 @@ export function syncPlayers(players) {
     if (!combat.active) return false;
     const ids = new Set(players.map((p) => p.id));
     const before = combat.line.length;
-    combat.line = combat.line.filter((c) => c.kind !== 'player' || ids.has(c.playerId));
+    combat.line = combat.line.filter((c) => (c.kind !== 'player' || ids.has(c.playerId)) && (c.kind !== 'summon' || ids.has(c.ownerId)));
     if (combat.turn && !combat.line.some((c) => c.id === combat.turn)) combat.turn = null;
     let changed = combat.line.length !== before;
     for (const p of players) {
@@ -327,9 +427,14 @@ function publicLine() {
         kind: c.kind,
         name: c.name,
         image: c.image,
+        icon: c.icon ?? '',
         type: c.type ?? '',
+        down: c.kind === 'monster' && c.hp <= 0, // fell — players may raise it (Fungal Infestation)
+        raised: !!c.raised,
         playerId: c.playerId ?? '',
-        conditions: c.kind === 'monster' ? conditionNames(resolveConditions(c.effects ?? [], condDefs)) : (combat.playerConds[c.playerId] ?? []),
+        ownerId: c.ownerId ?? '',
+        ownerName: c.ownerName ?? '',
+        conditions: c.kind !== 'player' ? conditionNames(resolveConditions(c.effects ?? [], condDefs)) : (combat.playerConds[c.playerId] ?? []),
     }));
 }
 

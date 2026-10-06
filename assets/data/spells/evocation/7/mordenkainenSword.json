@@ -16,5 +16,12 @@
   "damage": {
     "dice": "3d10",
     "type": "force"
+  },
+  "summon": {
+    "token": {
+      "name": "Mordenkainen's Sword",
+      "icon": "🗡️",
+      "note": "Bonus Action: move it up to 30 feet and make a melee spell attack (Force damage)."
+    }
   }
 }

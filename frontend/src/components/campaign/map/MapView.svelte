@@ -69,15 +69,17 @@
         noteTimer = setTimeout(() => (note = ""), 2500);
     }
 
+    // token rings: players blue, their summons green (dashed on the canvas), monsters red
+    const RING = { player: "#4a86c8", summon: "#6FB35F", monster: "#c0392b" };
     const tokenOf = (c) => {
         const down = c.kind === "monster" && c.hp <= 0;
         return {
             id: c.id,
             kind: c.kind,
             image: c.image || "",
-            icon: c.kind === "player" ? "🧑" : down ? "💀" : "👹",
-            ring: c.kind === "player" ? "#4a86c8" : "#c0392b",
-            label: c.name,
+            icon: c.kind === "player" ? "🧑" : c.kind === "summon" ? c.icon || "🐾" : down ? "💀" : "👹",
+            ring: RING[c.kind] ?? RING.monster,
+            label: c.kind === "summon" && c.ownerName ? `${c.name} · ${c.ownerName}` : c.name,
             active: combat.turn === c.id,
             down,
         };
@@ -249,12 +251,12 @@
                             onclick={() => pick(c.id)}
                             title={on ? "On the map — drag it there to move, or click and then a cell" : "Drag onto the map, or click and then click a cell"}
                         >
-                            <span class="face" style:border-color={c.kind === "player" ? "#4a86c8" : "#c0392b"}>
-                                {#if c.image}<img src={c.image} alt="" draggable="false" />{:else}{c.kind === "player" ? "🧑" : "👹"}{/if}
+                            <span class="face" style:border-color={RING[c.kind] ?? RING.monster}>
+                                {#if c.image}<img src={c.image} alt="" draggable="false" />{:else}{c.kind === "player" ? "🧑" : c.kind === "summon" ? c.icon || "🐾" : "👹"}{/if}
                             </span>
                             <span class="nm">
                                 {c.name}
-                                {#if c.kind === "monster"}<small>{Math.max(0, c.hp)}/{c.maxHp} HP</small>{:else}<small>player</small>{/if}
+                                {#if c.kind === "monster"}<small>{Math.max(0, c.hp)}/{c.maxHp} HP</small>{:else if c.kind === "summon"}<small>{c.ownerName || "summon"}{#if c.maxHp != null} · {c.hp}/{c.maxHp} HP{/if}</small>{:else}<small>player</small>{/if}
                             </span>
                             <span class="st" class:on>{on ? "●" : "○"}</span>
                         </button>

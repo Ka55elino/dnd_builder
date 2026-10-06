@@ -553,6 +553,22 @@ export class Character {
         }
         this.actionGroups = this.actionGroups.filter((g) => g.cards.length);
 
+        // feats that add forms to a summon (Pact of the Chain: imp, pseudodragon… for Find Familiar)
+        const moreForms = {};
+        for (const f of chosenFeats)
+            for (const [id, list] of Object.entries(f.data?.summonOptions ?? {})) (moreForms[id] ??= []).push(...list);
+        if (Object.keys(moreForms).length) {
+            for (const g of this.actionGroups) {
+                g.cards = g.cards.map((c) => {
+                    const sm = c.item?.data?.summon;
+                    const extra = moreForms[c.item?.id];
+                    if (!sm || !extra) return c;
+                    const options = [...new Set([...(sm.options ?? []), ...extra])];
+                    return { ...c, item: { ...c.item, data: { ...c.item.data, summon: { ...sm, options } } } };
+                });
+            }
+        }
+
         // --- what the character can concentrate on: known spells, invocation/feat spells, abilities ---
         const seenConc = new Set();
         this.concentrationSpells = [

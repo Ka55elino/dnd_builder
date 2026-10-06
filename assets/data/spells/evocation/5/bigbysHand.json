@@ -19,5 +19,15 @@
   "damage": {
     "dice": "4d8",
     "type": "force"
+  },
+  "summon": {
+    "token": {
+      "name": "Bigby's Hand",
+      "icon": "✋",
+      "size": "large",
+      "ac": "20",
+      "hp": "hpMax",
+      "note": "Bonus Action: move it up to 60 feet and Clench, Force Back, Grasp or Interpose. AC 20, Hit Points equal to your Hit Point maximum."
+    }
   }
 }

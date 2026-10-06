@@ -19,18 +19,30 @@
             {#if c.image && !broken}
                 <img src={c.image} alt="" onerror={() => (broken = true)} />
             {:else}
-                <span>{c.name?.[0] ?? "?"}</span>
+                <span>{c.icon || c.name?.[0] || "?"}</span>
             {/if}
         </div>
         {#if turn}<span class="turn-mark" aria-label="Their turn">✓</span>{/if}
     </div>
     <span class="name">{c.name}{#if me}<small> (you)</small>{/if}</span>
+    {#if c.kind === "summon"}<small class="owner">{c.ownerName || "summon"}</small>{/if}
     {#if c.conditions?.length}
         <span class="conds">{#each c.conditions as x (x)}<span class="cchip">{x}</span>{/each}</span>
     {/if}
 </div>
 
 <style>
+    .owner {
+        color: var(--color-act-action);
+        font-size: 10px;
+    }
+
+    .cmb.summon .icon {
+        outline: 2px dashed var(--color-act-action);
+        outline-offset: 1px;
+        border-radius: 50%;
+    }
+
     .conds {
         display: flex;
         flex-wrap: wrap;

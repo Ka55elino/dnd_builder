@@ -5,9 +5,15 @@
   "subclass": "beastMaster",
   "level": 3,
   "action": "bonus",
-  "desc": "Land companion (cat, wolf, etc.). AC 13 + your Wisdom modifier, Hit Points {beastHp} (5 × level), Speed 40 feet. Rend attack: reach 5 feet, attack bonus equal to your spell attack bonus; on a hit, a Large or smaller target can be knocked Prone.",
+  "desc": "Land companion (cat, wolf, etc.). AC 13 + your Wisdom modifier, Hit Points 5 + 5 × your Ranger level, Speed 40 feet, Climb 40 feet. Beast's Strike: your spell attack modifier, reach 5 feet, 1d8 + 2 + your Wisdom modifier; after a 20-foot charge, +1d6 and a Large or smaller target is knocked Prone.",
   "damage": {
     "dice": "1d8",
     "type": "slashing"
+  },
+  "summon": {
+    "options": [
+      "summon-primal-beast-land"
+    ],
+    "group": "primalCompanion"
   }
 }

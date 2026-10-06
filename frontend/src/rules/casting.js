@@ -42,6 +42,9 @@
  *                                              they don't stack: the higher value is kept)
  *     endsWithTempHp: true                     — the effect ends when they run out
  *     effects: [{ kind: 'die', target: [ids], multiply: 2 }]  — doubles another card's die
+ *
+ *   summon: { options: [monster ids], group?, initiative? } — calls a creature (rules/summon.js);
+ *                                              the sheet adds it after applyUse spent the cost
  */
 import { isConcentration } from '../models/Character.js';
 import { evalFormula } from './formula.js';
@@ -194,7 +197,7 @@ export function useOptions(card, ch, state) {
     if (it.kind === 'spell') {
         const free = it.level === 0 || card.free;
         const selfFx = d.apply?.condition && (d.apply.target ?? 'self') !== 'enemy';
-        if (free) return conc || selfFx ? { kind: 'free', label: 'Cast', concentration: conc, disabled: false } : null;
+        if (free) return conc || selfFx || d.summon ? { kind: 'free', label: 'Cast', concentration: conc, disabled: false } : null;
         const opts = slotChoices(ch, state, it.level);
         const ritual = !!(it.ritual || d.casting?.ritual || card.ritual);
         if (ritual) opts.push({ value: 'ritual', label: 'Ritual · no slot, +10 min', level: it.level, disabled: false });
@@ -255,6 +258,7 @@ export function useOptions(card, ch, state) {
     const r = cost?.resource ? findResource(ch, cost.resource) : d.uses ? ch.resource?.(d.resource ?? it.id) : null;
     if (!r) {
         if (cost?.resource) return { kind: 'resource', label: 'Use', amount: 1, disabled: true, reason: 'You don\'t have the resource it needs' };
+        if (d.summon) return { kind: 'free', label: 'Summon', concentration: conc, disabled: false }; // Primal Companion
         return conc ? { kind: 'free', label: 'Use', concentration: true, disabled: false } : null;
     }
     const left = state.resourceLeft(r);

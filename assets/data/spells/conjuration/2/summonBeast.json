@@ -1,0 +1,28 @@
+{
+  "id": "summonBeast",
+  "name": "Summon Beast",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "conjuration",
+  "classes": [
+    "druid",
+    "ranger"
+  ],
+  "casting": {
+    "time": "Action",
+    "range": "90 feet",
+    "components": "V, S, M (a feather, tuft of fur, and fish tail inside a gilded acorn worth 200+ GP)",
+    "duration": "Concentration, up to 1 hour",
+    "concentration": true
+  },
+  "summon": {
+    "options": [
+      "summon-bestial-spirit-land",
+      "summon-bestial-spirit-sea",
+      "summon-bestial-spirit-air"
+    ],
+    "initiative": "owner"
+  },
+  "desc": "You call forth a bestial spirit (Land, Sea, or Air) in an unoccupied space you can see within range. It is your ally, shares your Initiative and acts right after you, obeys your verbal commands, and takes the Dodge action if you give none. It disappears when it drops to 0 Hit Points or when the spell ends."
+}

@@ -13,11 +13,11 @@
     import { untrack } from 'svelte';
     import { HostGame, StopGame, GetPlayerCharacter } from '../api.js';
     import { server, applyStatus, onGameEvent } from '../server.svelte.js';
-    import { EV, sendHp, sendWhisper, sendGive, sendCondition } from '../game.js';
+    import { EV, sendHp, sendSummonHp, sendWhisper, sendGive, sendCondition } from '../game.js';
     import CharacterBrief from './CharacterBrief.svelte';
     import StartEncounterDialog from './combat/StartEncounterDialog.svelte';
     import LineupDM from './combat/LineupDM.svelte';
-    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, sendMap, playerSheet, setConditionDefs, notePlayerConditions } from '../combat.svelte.js';
+    import { combat, startEncounter, endEncounter, syncPlayers, broadcast, sendMap, playerSheet, setConditionDefs, notePlayerConditions, syncSummons } from '../combat.svelte.js';
     import { loadRefs } from '../data/refs.js';
     import {
         loadActiveSession, loadCampaign, logToActiveSession, loadCampaigns, loadSessions, setSessionStatus,
@@ -96,6 +96,15 @@
     });
 
     let hosting = $derived(server.role === 'host' && server.game);
+
+    // players' summons (familiars, spirits, companions) join / leave the line with their state
+    $effect(() => {
+        if (!hosting || !combat.active) return;
+        const all = server.players.map((p) => [p.id, (live[p.id] ?? snaps[p.id]?.state)?.summons ?? []]);
+        untrack(() => {
+            for (const [pid, summons] of all) syncSummons(pid, summons);
+        });
+    });
 
     // player id → character snapshot { build, state } | { error }
     let snaps = $state({});
@@ -291,6 +300,7 @@
                 conditionDefs={refs?.conditions ?? []}
                 onPlayerHp={(pid, op, n) => sendHp(pid, op, n)}
                 onPlayerCondition={(pid, data) => sendCondition(pid, data, refs?.conditions ?? [])}
+                onSummonHp={(pid, uid, op, n) => sendSummonHp(pid, uid, op, n)}
             />
         {/if}
         <!-- the screen: the party, the campaign's map, the session's log -->

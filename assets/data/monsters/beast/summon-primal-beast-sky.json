@@ -1,0 +1,79 @@
+{
+  "id": "summon-primal-beast-sky",
+  "name": "Primal Beast (Sky)",
+  "type": "beast",
+  "alignment": "unaligned",
+  "cr": 0,
+  "xp": 0,
+  "saves": {},
+  "skills": {},
+  "vulnerabilities": [],
+  "resistances": [],
+  "immunities": [],
+  "conditionImmunities": [],
+  "habitats": [],
+  "bonusActions": [],
+  "reactions": [],
+  "size": "small",
+  "ac": 16,
+  "hp": 16,
+  "hpFormula": "4 + 4 * level (Ranger level)",
+  "initiative": 2,
+  "speed": {
+    "walk": 10,
+    "fly": 60
+  },
+  "abilities": {
+    "str": 6,
+    "dex": 16,
+    "con": 13,
+    "int": 8,
+    "wis": 14,
+    "cha": 11
+  },
+  "senses": {
+    "darkvision": 60
+  },
+  "passivePerception": 12,
+  "languages": "understands the languages you speak",
+  "traits": [
+    {
+      "name": "Flyby",
+      "desc": "The beast doesn't provoke Opportunity Attacks when it flies out of an enemy's reach."
+    },
+    {
+      "name": "Primal Bond",
+      "desc": "Add your Proficiency Bonus to any ability check or saving throw the beast makes."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Beast's Strike",
+      "desc": "Melee attack: your spell attack modifier, reach 5 ft. Hit: 1d4 + 3 + your Wisdom modifier Slashing damage.",
+      "attack": {
+        "kind": "melee",
+        "bonus": 5,
+        "reach": 5
+      },
+      "damage": [
+        {
+          "type": "slashing",
+          "dice": "1d4+6",
+          "avg": 8
+        }
+      ]
+    }
+  ],
+  "desc": "The Beast Master's Primal Companion. Numbers shown for a level 3 Ranger with Wisdom +3; on the sheet they follow your level and Wisdom.",
+  "summon": {
+    "ac": "13 + wis",
+    "hp": "4 + 4 * level",
+    "attack": {
+      "bonus": "spellAttack",
+      "damage": "3 + wis"
+    },
+    "initiative": "owner",
+    "note": "Acts on your turn; it takes the Dodge action unless you command it with a Bonus Action (Command Companion)."
+  },
+  "image": "/img/monsters/beast/hawk.png"
+}

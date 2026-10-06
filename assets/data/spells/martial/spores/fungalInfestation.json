@@ -5,7 +5,7 @@
   "subclass": "spores",
   "level": 6,
   "action": "reaction",
-  "desc": "As a Reaction, when a Beast or Humanoid dies within 10 feet of you, you raise it as a friendly zombie for 1 hour. Number of uses equals your Proficiency Bonus (per Long Rest).",
+  "desc": "As a Reaction, when a Beast or Humanoid dies within 10 feet of you, you raise it as a zombie under your control with 1 Hit Point for 1 hour; it acts right after you in Initiative. Number of uses equals your Proficiency Bonus (per Long Rest).",
   "uses": {
     "count": 2,
     "per": "longRest",
@@ -31,5 +31,19 @@
         6
       ]
     ]
+  },
+  "summon": {
+    "options": [
+      "srd-zombie"
+    ],
+    "hp": "1",
+    "stack": true,
+    "initiative": "owner",
+    "fromFallen": {
+      "types": [
+        "beast",
+        "humanoid"
+      ]
+    }
   }
 }

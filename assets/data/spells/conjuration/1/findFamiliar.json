@@ -15,5 +15,27 @@
     "duration": "Instantaneous",
     "ritual": true
   },
-  "desc": "You gain the service of a familiar, a spirit that takes an animal form you choose (bat, cat, frog, hawk, lizard, octopus, owl, rat, raven, spider, weasel…). It acts independently, can deliver your touch spells, and you can see through its eyes as a Bonus Action."
+  "desc": "You gain the service of a familiar, a spirit that takes an animal form you choose (bat, cat, frog, hawk, lizard, octopus, owl, rat, raven, spider, weasel…). It acts independently, can deliver your touch spells, and you can see through its eyes as a Bonus Action.",
+  "summon": {
+    "options": [
+      "srd-bat",
+      "srd-cat",
+      "srd-frog",
+      "srd-hawk",
+      "srd-lizard",
+      "srd-octopus",
+      "srd-owl",
+      "srd-rat",
+      "srd-raven",
+      "srd-spider",
+      "srd-weasel"
+    ],
+    "group": "familiar",
+    "initiative": "own",
+    "types": [
+      "celestial",
+      "fey",
+      "fiend"
+    ]
+  }
 }

@@ -13,5 +13,13 @@
   "damage": {
     "dice": "20",
     "type": "radiant"
+  },
+  "summon": {
+    "token": {
+      "name": "Guardian of Faith",
+      "icon": "🛡️",
+      "size": "large",
+      "note": "An enemy that moves within 10 feet of it for the first time on a turn or starts its turn there makes a Dexterity save (Radiant damage, half on a success). It vanishes after dealing 60 damage."
+    }
   }
 }

@@ -5,9 +5,15 @@
   "subclass": "beastMaster",
   "level": 3,
   "action": "bonus",
-  "desc": "Flying companion (hawk, owl, etc.). AC 13 + your Wisdom modifier, Hit Points {beastHp} (5 × level), Speed 10 feet, Fly 60 feet. Beak attack: reach 5 feet; it doesn't provoke Opportunity Attacks after attacking (Flyby).",
+  "desc": "Flying companion (hawk, owl, etc.). AC 13 + your Wisdom modifier, Hit Points 4 + 4 × your Ranger level, Speed 10 feet, Fly 60 feet. Beast's Strike: your spell attack modifier, reach 5 feet, 1d4 + 3 + your Wisdom modifier; it doesn't provoke Opportunity Attacks when it flies away (Flyby).",
   "damage": {
     "dice": "1d4",
     "type": "piercing"
+  },
+  "summon": {
+    "options": [
+      "summon-primal-beast-sky"
+    ],
+    "group": "primalCompanion"
   }
 }

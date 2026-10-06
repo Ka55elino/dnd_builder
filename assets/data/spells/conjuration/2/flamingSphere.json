@@ -19,5 +19,12 @@
   "damage": {
     "dice": "2d6",
     "type": "fire"
+  },
+  "summon": {
+    "token": {
+      "name": "Flaming Sphere",
+      "icon": "🔥",
+      "note": "Bonus Action: move it up to 30 feet; a creature it rams makes a Dexterity save or takes the Fire damage. Ends with Concentration."
+    }
   }
 }

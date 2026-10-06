@@ -15,5 +15,12 @@
   "damage": {
     "dice": "1d8",
     "type": "force"
+  },
+  "summon": {
+    "token": {
+      "name": "Spiritual Weapon",
+      "icon": "⚔️",
+      "note": "Bonus Action: move it up to 20 feet and make a melee spell attack (Force damage + your spellcasting modifier)."
+    }
   }
 }

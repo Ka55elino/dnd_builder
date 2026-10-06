@@ -19,5 +19,13 @@
   "damage": {
     "dice": "4d8",
     "type": "radiant"
+  },
+  "summon": {
+    "token": {
+      "name": "Celestial Light",
+      "icon": "✨",
+      "size": "large",
+      "note": "A 10-foot cylinder of light: on your turn move it up to 30 feet; choose to heal creatures or sear enemies (Dexterity save) that enter it or end their turn there."
+    }
   }
 }

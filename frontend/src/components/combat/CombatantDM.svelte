@@ -25,10 +25,13 @@
     } = $props();
 
     // monsters: conditions computed here (AC with Slowed −2 …); players: from their summary
-    const mv = $derived(c.kind === "monster" ? monsterView(c) : null);
-    const nums = $derived(c.kind === "monster" ? { hp: c.hp, maxHp: c.maxHp, temp: c.temp, ac: mv.ac } : sheet);
-    const condNames = $derived(c.kind === "monster" ? mv.names : (sheet?.conditions ?? []));
-    const instances = $derived(c.kind === "monster" ? (c.effects ?? []) : (sheet?.conditionInstances ?? []));
+    // a summon (a player's familiar / spirit) carries its numbers like a monster (from the player's state)
+    const own = $derived(c.kind !== "player");
+    const mv = $derived(own ? monsterView(c) : null);
+    const noHp = $derived(c.kind === "summon" && c.maxHp == null); // a token: Flaming Sphere, Spiritual Weapon
+    const nums = $derived(noHp ? null : own ? { hp: c.hp, maxHp: c.maxHp, temp: c.temp, ac: mv.ac } : sheet);
+    const condNames = $derived(own ? mv.names : (sheet?.conditions ?? []));
+    const instances = $derived(own ? (c.effects ?? []) : (sheet?.conditionInstances ?? []));
     const saveDue = $derived(instances.some((e) => e.savePending));
     const pct = $derived(nums?.maxHp ? Math.round((nums.hp / nums.maxHp) * 100) : 0);
     const state = $derived(!nums ? "" : nums.hp <= 0 ? "down" : pct <= 25 ? "critical" : pct <= 50 ? "bloodied" : pct < 100 ? "hurt" : "ok");
@@ -74,14 +77,15 @@
             {#if c.image && !broken}
                 <img src={c.image} alt="" onerror={() => (broken = true)} />
             {:else}
-                <span>{c.name?.[0] ?? "?"}</span>
+                <span>{c.icon || c.name?.[0] || "?"}</span>
             {/if}
         </span>
         <input class="turn-radio" type="radio" name="combat-turn" checked={turn} onchange={() => onTurn?.()}
             aria-label="{c.name}'s turn" />
     </label>
 
-    <p class="name" title={c.name}>{c.name}</p>
+    <p class="name" title={c.kind === "summon" ? `${c.name} — ${c.ownerName}'s ${c.source || "summon"}` : c.name}>{c.name}</p>
+    {#if c.kind === "summon"}<p class="owner">{c.ownerName || "summon"}</p>{/if}
 
     <div class="conds">
         {#each condNames as name (name)}
@@ -110,7 +114,9 @@
         {/if}
     </div>
 
-    {#if nums}
+    {#if noHp}
+        <p class="stats muted">{c.ownerName ? `${c.ownerName}'s spell` : "spell effect"}</p>
+    {:else if nums}
         <p class="stats">
             <span title="Armor Class">AC <b>{nums.ac}</b></span>
             <span title="Hit Points">HP <b>{nums.hp}</b>/{nums.maxHp}{#if nums.temp > 0}<small> +{nums.temp}</small>{/if}</span>
@@ -120,6 +126,7 @@
         <p class="stats muted">…</p>
     {/if}
 
+    {#if !noHp}
     <input type="number" min="0" bind:value={amount} aria-label="Hit Points amount for {c.name}" />
     <div class="btns">
         {#each ACTIONS as a (a.op)}
@@ -129,10 +136,27 @@
             </button>
         {/each}
     </div>
+    {/if}
     {#if error}<p class="error" title={error}>{error}</p>{/if}
 </div>
 
 <style>
+    .owner {
+        margin: -2px 0 0;
+        color: var(--color-act-action);
+        font-size: 10px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .cmb.summon .icon {
+        outline: 2px dashed var(--color-act-action);
+        outline-offset: 1px;
+        border-radius: 50%;
+    }
+
     /* a card in the (horizontal) line; its content goes top to bottom */
     .cmb {
         --hp: var(--color-success);

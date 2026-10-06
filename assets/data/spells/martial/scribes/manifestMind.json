@@ -10,5 +10,12 @@
     "ability": "int",
     "min": 1,
     "per": "longRest"
+  },
+  "summon": {
+    "token": {
+      "name": "Manifested Mind",
+      "icon": "🧠",
+      "note": "Hovers, sheds Dim Light 10 feet; you can cast spells as if you were in its space. Bonus Action: move it up to 30 feet."
+    }
   }
 }
