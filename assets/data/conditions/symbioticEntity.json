@@ -15,8 +15,11 @@
       "note": "Halo of Spores damage ×2"
     },
     {
-      "kind": "note",
-      "note": "melee attacks +1d6 Necrotic damage"
+      "kind": "damage",
+      "dice": "1d6",
+      "sign": 1,
+      "type": "necrotic",
+      "melee": true
     }
   ],
   "desc": "Spores empower you."

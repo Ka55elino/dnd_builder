@@ -1,5 +1,5 @@
 /**
- * Spell slots (D&D 2024).
+ * Spell slots (D&D 2024 + the BOOST house rule below).
  * progression: full | half | third | pact | none
  */
 
@@ -34,6 +34,28 @@ const PACT = [
     [3, 5], [3, 5], [3, 5], [3, 5], [3, 5], [3, 5], [4, 5], [4, 5], [4, 5], [4, 5],
 ];
 
+// House rule: extra slots from these CHARACTER levels on (cumulative).
+// { characterLevel: { slotLevel: at least N slots } } — a slot level the class doesn't have yet is ignored.
+const BOOST = {
+    full: {
+        8: { 1: 5, 2: 4 },
+        12: { 1: 6, 2: 5, 3: 4 },
+        16: { 4: 4, 6: 2 },
+        20: { 3: 5, 6: 3, 8: 2 },
+    },
+    half: {
+        8: { 1: 5 },
+        12: { 2: 4 },
+        16: { 1: 6, 2: 5, 3: 4 },
+        20: { 3: 5, 4: 4, 5: 3 },
+    },
+    third: {
+        8: { 1: 5 },
+        16: { 1: 6, 2: 4 },
+        20: { 3: 4, 4: 3 },
+    },
+};
+
 /** Caster level for the FULL table. */
 export function casterLevel(progression, level) {
     switch (progression) {
@@ -54,5 +76,13 @@ export function spellSlots(progression, level) {
         return count ? [{ level: circle, max: count, pact: true }] : [];
     }
     const cl = casterLevel(progression, level);
-    return (FULL[Math.min(20, cl)] ?? []).map((max, i) => ({ level: i + 1, max }));
+    const row = [...(FULL[Math.min(20, cl)] ?? [])];
+    for (const [at, slots] of Object.entries(BOOST[progression] ?? {})) {
+        if (level < Number(at)) continue;
+        for (const [sl, n] of Object.entries(slots)) {
+            const i = Number(sl) - 1;
+            if (i < row.length) row[i] = Math.max(row[i], n);
+        }
+    }
+    return row.map((max, i) => ({ level: i + 1, max }));
 }

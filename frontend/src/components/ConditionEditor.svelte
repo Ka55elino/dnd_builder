@@ -68,7 +68,7 @@
             case "check": return { kind, ability: "", value: -2 };
             case "attack": return { kind, value: -2 };
             case "initiative": return { kind, value: -2 };
-            case "damage": return { kind, dice: "1d4", sign: 1, type: "" };
+            case "damage": return { kind, dice: "1d4", sign: 1, type: "", reach: "" };
             case "dice": return { kind, dice: "1d4", sign: 1, on: "attacks", ability: "", skill: "" };
             case "hpMax": return { kind, value: 5 };
             case "sense": return { kind, sense: "darkvision", range: 60 };
@@ -92,7 +92,11 @@
                 implies: [...(d.implies ?? [])],
                 breaksConcentration: !!d.breaksConcentration,
                 longRest: d.longRest ?? "",
-                modifiers: (d.modifiers ?? []).map((m) => ({ ...blank(m.kind), ...m })),
+                modifiers: (d.modifiers ?? []).map((m) => ({
+                    ...blank(m.kind),
+                    ...m,
+                    ...(m.kind === "damage" ? { reach: m.melee ? "melee" : m.ranged ? "ranged" : "" } : {}),
+                })),
             };
         }),
     );
@@ -112,6 +116,8 @@
             if (m.ability) o.ability = m.ability;
             if (m.kind === "damage") Object.assign(o, { dice: String(m.dice || "1d4").trim(), sign: Number(m.sign) < 0 ? -1 : 1 });
             if (m.kind === "damage" && m.type) o.type = m.type;
+            if (m.kind === "damage" && m.reach === "melee") o.melee = true;
+            if (m.kind === "damage" && m.reach === "ranged") o.ranged = true;
             if (m.kind === "dice") {
                 Object.assign(o, { dice: String(m.dice || "1d4").trim(), sign: Number(m.sign) < 0 ? -1 : 1, on: m.on });
                 if (m.skill && m.on === "checks") o.skill = m.skill;
@@ -271,6 +277,15 @@
                                 <option value={-1}>−</option>
                             </select>
                             <input class="dice" bind:value={m.dice} placeholder="1d4" aria-label="Dice" />
+                            <select bind:value={m.type} aria-label="Damage type">
+                                <option value="">same type</option>
+                                {#each DMG as [k, v]}<option value={k}>{v.name}</option>{/each}
+                            </select>
+                            <select bind:value={m.reach} aria-label="Attacks">
+                                <option value="">all attacks</option>
+                                <option value="melee">melee only</option>
+                                <option value="ranged">ranged only</option>
+                            </select>
                         {:else if m.kind === "dice"}
                             <select bind:value={m.sign} aria-label="Sign">
                                 <option value={1}>+</option>

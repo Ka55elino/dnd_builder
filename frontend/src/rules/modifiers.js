@@ -19,7 +19,8 @@
  *   { kind: 'd20', value, perLevel? }               — every D20 Test: attacks, checks, saves, Initiative
  *   { kind: 'save', ability?, value } · { kind: 'check', ability?, skill?, value }
  *   { kind: 'attack', value } · { kind: 'initiative', value }
- *   { kind: 'damage', dice: '1d4', sign: 1 | -1, type? } — weapon attacks (Enlarge / Reduce, Divine Favor)
+ *   { kind: 'damage', dice: '1d4', sign: 1 | -1, type?, melee?, ranged? } — weapon attacks (Enlarge / Reduce,
+ *        Divine Favor; melee: true — melee only, Symbiotic Entity +1d6 Necrotic)
  *   { kind: 'dice', dice: '1d4', sign: 1 | -1, on, ability?, skill? } — a die added to a roll, rolled at
  *        the table (Bless, Bane, Guidance, Blade Ward): on = checks | saves | attacks | attacksAgainst | damageTaken
  *   { kind: 'hpMax', value } (Aid) · { kind: 'sense', sense: 'darkvision' | 'truesight' | …, range }
@@ -225,13 +226,23 @@ export function applyModifiers(sheet, modifiers = []) {
     const atk = of('attack').reduce((t, m) => t + val(m), 0) + d20Sum;
     const dmg = of('damage');
     if (atk || dmg.length) {
-        sheet.attacks = sheet.attacks.map((a) => ({
-            ...a,
-            toHit: a.toHit + atk,
-            damage: dmg.reduce((d, m) => `${d} ${m.sign < 0 ? '−' : '+'} ${m.dice}${m.type ? ` ${m.type}` : ''}`, a.damage),
-            modified: true,
-        }));
-        for (const m of dmg) note(`Weapon damage ${m.sign < 0 ? '−' : '+'}${m.dice}${m.type ? ` ${m.type}` : ''}`, [m.source]);
+        // melee: true — melee attacks only (Symbiotic Entity); ranged: true — ranged only
+        const fits = (m, a) => (!m.melee || !a.ranged) && (!m.ranged || a.ranged);
+        sheet.attacks = sheet.attacks.map((a) => {
+            const own = dmg.filter((m) => fits(m, a));
+            // a typed extra die (+1d6 Necrotic) goes next to the weapon's own extra damage, with its icon;
+            // an untyped one (Enlarge +1d4, Reduce −1d4) is part of the weapon's damage
+            const typed = own.filter((m) => m.type && m.sign >= 0);
+            const plain = own.filter((m) => !(m.type && m.sign >= 0));
+            return {
+                ...a,
+                toHit: a.toHit + atk,
+                damage: plain.reduce((d, m) => `${d} ${m.sign < 0 ? '−' : '+'} ${m.dice}${m.type ? ` ${m.type}` : ''}`, a.damage),
+                extra: [...(a.extra ?? []), ...typed.map((m) => ({ dice: m.dice, type: m.type, source: m.source }))],
+                modified: true,
+            };
+        });
+        for (const m of dmg) note(damageModText(m), [m.source]);
     }
     sheet.initiative += of('initiative').reduce((t, m) => t + val(m), 0) + d20Sum;
 
@@ -312,6 +323,13 @@ export function flagLabel(m) {
     return { target: target ?? m.on, mode: MODE[m.mode] ?? m.mode };
 }
 
+/** "Weapon damage +1d4", "Melee damage +1d6 Necrotic". */
+function damageModText(m) {
+    const what = m.melee ? 'Melee damage' : m.ranged ? 'Ranged damage' : 'Weapon damage';
+    const type = m.type ? ` ${m.type[0].toUpperCase()}${m.type.slice(1)}` : '';
+    return `${what} ${m.sign < 0 ? '−' : '+'}${m.dice}${type}`;
+}
+
 /**
  * { kind: 'weapon' } — a spell changes the weapons you hold (Shillelagh):
  *   weapons — weapon ids (a named weapon counts by its base), melee — melee attacks only,
@@ -353,7 +371,7 @@ export function modifierText(m) {
         case 'initiative':
             return `Initiative ${SIGN(v)}`;
         case 'damage':
-            return `Weapon damage ${m.sign < 0 ? '−' : '+'}${m.dice}${m.type ? ` ${m.type}` : ''}`;
+            return damageModText(m);
         case 'dice': {
             const on = {
                 checks: m.skill ? (m.skill === '$choice' ? 'checks with the chosen skill' : SKILL_NAME[m.skill] ?? m.skill) : m.ability ? `${ABBR(m.ability)} checks` : 'ability checks',

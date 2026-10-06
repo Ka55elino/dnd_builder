@@ -64,6 +64,8 @@
     --color-meta-duration:      #6FA8DC;
     --color-meta-slot:          var(--color-slot);
     --color-meta-pact:          var(--color-slot-pact);
+    --color-meta-cantrip:       #6FA8DC;                 /* Actions & spells filter: cantrips */
+    --color-meta-feature:       var(--color-gold);       /* Actions & spells filter: class / species abilities */
 
     /* --- Schools of magic (kind="school" icons) --- */
     --color-school-abjuration:    #6FA8DC;

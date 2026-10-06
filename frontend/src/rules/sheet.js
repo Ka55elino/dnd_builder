@@ -269,6 +269,7 @@ export function weaponAttack(
         name: w.name,
         hand,
         action: bonus ? 'bonus' : 'action',
+        ranged, // melee-only / ranged-only damage modifiers (rules/modifiers.js)
         ability,
         proficient,
         toHit: abilMod + (proficient ? prof : 0) + hitBonus,

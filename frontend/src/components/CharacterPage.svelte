@@ -1,5 +1,5 @@
 <script>
-    import { damageShort, damageName, damageLabel } from "../rules/labels.js";
+    import { damageShort, damageName, damageLabel, normAction } from "../rules/labels.js";
     import SectionNav from "./common/SectionNav.svelte";
     import WildShapeCard from "./WildShapeCard.svelte";
     import { loadMonsters } from "../data/bestiary.js";
@@ -128,6 +128,52 @@
                   state?.effects ?? null,
               )
             : null,
+    );
+
+    // --- Actions & spells filter (icons under the heading) ---
+    // two groups of toggles: what it costs (Action / Bonus / Reaction) and what it is
+    // (Cantrips / Level N / class & species abilities). Within a group — OR, between groups — AND;
+    // nothing on in a group — that group doesn't filter.
+    const ACT_FILTERS = [
+        { id: "action", label: "Action" },
+        { id: "bonus", label: "Bonus Action" },
+        { id: "reaction", label: "Reaction" },
+    ];
+    let fAct = $state([]); // 'action' | 'bonus' | 'reaction'
+    let fKind = $state([]); // 0 (cantrips) | 1…9 (spell level) | 'feature'
+    const cardAct = (c) => normAction(c.item?.action ?? c.item?.data?.action);
+    const cardKind = (g, c) => (g.spells ? Number(c.item?.level) || 0 : "feature");
+    const toggle = (list, v) => (list.includes(v) ? list.filter((x) => x !== v) : [...list, v]);
+    // spell levels: 1 … the highest the character has a slot for (or knows a spell of)
+    const kindFilters = $derived.by(() => {
+        if (!character) return [];
+        const groups = character.actionGroups;
+        const count = (k) => groups.reduce((n, g) => n + g.cards.filter((c) => cardKind(g, c) === k).length, 0);
+        const top = Math.max(
+            0,
+            ...character.spellSlots.map((s) => s.level),
+            ...groups.flatMap((g) => g.cards.map((c) => cardKind(g, c))).filter((k) => typeof k === "number"),
+        );
+        return [
+            { id: 0, label: "Cantrips", icon: "cantrip", count: count(0) },
+            ...Array.from({ length: top }, (_, i) => ({ id: i + 1, label: `Level ${i + 1} spells`, num: i + 1, count: count(i + 1) })),
+            { id: "feature", label: "Class, subclass & species abilities", icon: "feature", count: count("feature") },
+        ];
+    });
+    const actCount = $derived.by(() => {
+        const n = {};
+        for (const g of character?.actionGroups ?? []) for (const c of g.cards) n[cardAct(c)] = (n[cardAct(c)] ?? 0) + 1;
+        return n;
+    });
+    const shownGroups = $derived(
+        (character?.actionGroups ?? [])
+            .map((g) => ({
+                ...g,
+                cards: g.cards.filter(
+                    (c) => (!fAct.length || fAct.includes(cardAct(c))) && (!fKind.length || fKind.includes(cardKind(g, c))),
+                ),
+            }))
+            .filter((g) => g.cards.length),
     );
 
     // equipment: changing the item in a slot
@@ -1856,7 +1902,49 @@
                                 </small>
                             {/if}
                         </h2>
-                        {#each character.actionGroups as g (g.title)}
+                        <div class="af" role="toolbar" aria-label="Filter actions and spells">
+                            <div class="af-group">
+                                {#each ACT_FILTERS as f (f.id)}
+                                    <button
+                                        class="af-btn"
+                                        class:on={fAct.includes(f.id)}
+                                        style="--c: var(--color-act-{f.id})"
+                                        title="{f.label} ({actCount[f.id] ?? 0})"
+                                        aria-pressed={fAct.includes(f.id)}
+                                        disabled={!actCount[f.id] && !fAct.includes(f.id)}
+                                        onclick={() => (fAct = toggle(fAct, f.id))}
+                                    ><Icon name={f.id} kind="act" label={f.label} native={false} /></button>
+                                {/each}
+                            </div>
+                            <span class="af-sep" aria-hidden="true"></span>
+                            <div class="af-group">
+                                {#each kindFilters as f (f.id)}
+                                    <button
+                                        class="af-btn"
+                                        class:on={fKind.includes(f.id)}
+                                        style="--c: var(--color-meta-{f.icon ?? 'slot'})"
+                                        title="{f.label} ({f.count})"
+                                        aria-pressed={fKind.includes(f.id)}
+                                        disabled={!f.count && !fKind.includes(f.id)}
+                                        onclick={() => (fKind = toggle(fKind, f.id))}
+                                    >
+                                        {#if f.num}<span class="af-num">{f.num}</span>{:else}<Icon
+                                                name={f.icon}
+                                                kind="meta"
+                                                label={f.label}
+                                                native={false}
+                                            />{/if}
+                                    </button>
+                                {/each}
+                            </div>
+                            {#if fAct.length || fKind.length}
+                                <button class="af-clear" onclick={() => ((fAct = []), (fKind = []))}>clear</button>
+                            {/if}
+                        </div>
+                        {#if !shownGroups.length}
+                            <p class="af-empty">Nothing matches the filter.</p>
+                        {/if}
+                        {#each shownGroups as g (g.title)}
                             <h3>{g.title}</h3>
                             <div class="cards">
                                 {#each g.cards as c (c.item.id)}
@@ -3620,6 +3708,79 @@
         grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
         gap: 10px;
         margin-bottom: 8px;
+    }
+
+    /* ---------- Actions & spells filter ---------- */
+    .af {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        margin: 2px 0 12px;
+    }
+
+    .af-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .af-sep {
+        width: 1px;
+        height: 22px;
+        background: var(--color-border);
+    }
+
+    .af-btn {
+        --c: var(--color-text-secondary);
+        width: 32px;
+        height: 32px;
+        display: inline-grid;
+        place-items: center;
+        padding: 0;
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        color: var(--c);
+        cursor: pointer;
+        transition: background 0.12s, border-color 0.12s, opacity 0.12s;
+    }
+
+    .af-btn:hover:not(:disabled) {
+        border-color: var(--c);
+    }
+
+    .af-btn.on {
+        border-color: var(--c);
+        background: color-mix(in srgb, var(--c) 22%, transparent);
+    }
+
+    .af-btn:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+
+    .af-num {
+        font-family: var(--font-ui);
+        font-size: 14px;
+        font-weight: var(--font-weight-semibold, 600);
+        color: var(--c);
+    }
+
+    .af-clear {
+        padding: 4px 8px;
+        background: transparent;
+        border: none;
+        color: var(--color-text-muted);
+        font-family: var(--font-ui);
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .af-empty {
+        color: var(--color-text-muted);
+        font-size: 13px;
     }
 
     .h2-sub {

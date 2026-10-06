@@ -130,7 +130,7 @@ export class CharacterBuild {
 
     /**
      * Final ability scores: base + origin + increases from level
-     * choices (choices[*].asi). Max 20. null — base not assigned yet.
+     * choices (choices[*].asi). Not capped. null — base not assigned yet.
      */
     totalAbilities = $derived(
         byAbility((k) => {
@@ -140,7 +140,8 @@ export class CharacterBuild {
                 (sum, c) => sum + (c?.asi?.[k] ?? 0),
                 0,
             );
-            return Math.min(20, base + (this.backgroundBonus[k] ?? 0) + fromChoices);
+            // no cap at 20: feats / boons can push a score past it
+            return base + (this.backgroundBonus[k] ?? 0) + fromChoices;
         }),
     );
 
