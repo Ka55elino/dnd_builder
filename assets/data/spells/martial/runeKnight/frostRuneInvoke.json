@@ -1,0 +1,30 @@
+{
+  "id": "frostRuneInvoke",
+  "name": "Frost Rune — Frost Might",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 3,
+  "with": "frostRune",
+  "showWhile": "frostRune",
+  "action": "bonus",
+  "resource": "frostRuneInvoke",
+  "uses": {
+    "count": 1,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        1
+      ],
+      [
+        15,
+        2
+      ]
+    ]
+  },
+  "desc": "As a Bonus Action, you invoke the rune: for 10 minutes you gain a +2 bonus to all ability checks and saving throws that use Strength or Constitution. Once per Short or Long Rest (twice from level 15, Master of Runes).",
+  "apply": {
+    "condition": "frostRuneInvoked",
+    "target": "self"
+  }
+}

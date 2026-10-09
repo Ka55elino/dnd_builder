@@ -1,0 +1,9 @@
+{
+  "id": "inInsightfulFighting",
+  "name": "Insightful Fighting",
+  "kind": "martial",
+  "subclass": "inquisitive",
+  "level": 3,
+  "action": "bonus",
+  "desc": "As a Bonus Action, you make a Wisdom (Insight) check against a creature you can see that isn't Incapacitated, contested by its Charisma (Deception). On a success, you can use Sneak Attack against it even if you don't have Advantage (but not if you have Disadvantage). This lasts 1 minute or until you successfully use this feature against a different target."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "psychicVeil",
+  "name": "Psychic Veil",
+  "category": "effect",
+  "spell": "psychicVeil",
+  "duration": "1 hour",
+  "longRest": "remove",
+  "implies": [
+    "invisible"
+  ],
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Ends immediately after you deal damage to a creature or force a creature to make a saving throw"
+    }
+  ],
+  "desc": "Soulknife: you are Invisible for 1 hour or until you dismiss it; it ends after you deal damage or force a saving throw."
+}

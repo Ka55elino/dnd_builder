@@ -1,0 +1,55 @@
+{
+  "id": "skPsionicPower",
+  "name": "Psionic Energy Dice",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 3,
+  "resource": "psionicEnergyDice",
+  "action": "free",
+  "uses": {
+    "count": 4,
+    "per": "longRest",
+    "shortRestRegain": 1,
+    "scale": [
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        9,
+        8
+      ],
+      [
+        13,
+        10
+      ],
+      [
+        17,
+        12
+      ]
+    ]
+  },
+  "scaleDie": [
+    [
+      3,
+      "d6"
+    ],
+    [
+      5,
+      "d8"
+    ],
+    [
+      11,
+      "d10"
+    ],
+    [
+      17,
+      "d12"
+    ]
+  ],
+  "desc": "Psionic Energy Dice: twice your Proficiency Bonus, regained all on a Long Rest and one on a Short Rest; the die grows with level (d6, d8 at 5, d10 at 11, d12 at 17). Psi-Bolstered Knack: if you fail an ability check using a skill or tool you're proficient with, you can roll one die and add it, possibly turning the failure into a success; the die is expended only if you succeed. Psychic Whispers (Magic action): telepathy with up to your Proficiency Bonus creatures for hours equal to the die roll; the first use after a Long Rest is free, later uses expend a die."
+}

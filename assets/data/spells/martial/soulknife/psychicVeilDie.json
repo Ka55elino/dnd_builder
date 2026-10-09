@@ -1,0 +1,17 @@
+{
+  "id": "skPsychicVeilDie",
+  "name": "Psychic Veil (Energy Die)",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 13,
+  "action": "action",
+  "cost": {
+    "resource": "psionicEnergyDice",
+    "amount": 1
+  },
+  "apply": {
+    "condition": "psychicVeil",
+    "target": "self"
+  },
+  "desc": "You expend a Psionic Energy Die to use Psychic Veil again: Invisible for 1 hour; it ends early after you deal damage or force a creature to make a saving throw."
+}

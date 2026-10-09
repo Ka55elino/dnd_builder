@@ -27,6 +27,8 @@ export class CharacterState {
     hpLost = $state(0);          // Hit Points lost (current = max - hpLost)
     tempHp = $state(0);          // Temporary Hit Points
     resourcesUsed = $state({});  // { [resourceId]: spent }
+    resourcesHeld = $state({});  // { [resourceId]: held } — resources that start empty (r.startEmpty: Soul Trinkets);
+                                 // kept as a count held, so a bigger max doesn't hand out free ones
     slotsUsed = $state({});      // { [spell level]: spent }, Pact Magic slots — key 'pact'
     hitDiceUsed = $state(0);
     deathSaves = $state({ success: 0, fail: 0 });
@@ -52,6 +54,7 @@ export class CharacterState {
         this.hpLost = Math.max(0, data.hpLost ?? 0);
         this.tempHp = Math.max(0, data.tempHp ?? 0);
         this.resourcesUsed = { ...(data.resourcesUsed ?? {}) };
+        this.resourcesHeld = { ...(data.resourcesHeld ?? {}) };
         this.slotsUsed = { ...(data.slotsUsed ?? {}) };
         this.hitDiceUsed = Math.max(0, data.hitDiceUsed ?? 0);
         this.deathSaves = { success: 0, fail: 0, ...(data.deathSaves ?? {}) };
@@ -223,14 +226,17 @@ export class CharacterState {
     // ---------- resources ----------
 
     resourceLeft(res) {
+        if (res.startEmpty) return clamp(this.resourcesHeld[res.id] ?? 0, 0, res.max);
         return clamp(res.max - (this.resourcesUsed[res.id] ?? 0), 0, res.max);
     }
 
     spend(res, n = 1) {
+        if (res.startEmpty) return void (this.resourcesHeld[res.id] = clamp(this.resourceLeft(res) - n, 0, res.max));
         this.resourcesUsed[res.id] = clamp((this.resourcesUsed[res.id] ?? 0) + n, 0, res.max);
     }
 
     restore(res, n = 1) {
+        if (res.startEmpty) return void (this.resourcesHeld[res.id] = clamp(this.resourceLeft(res) + n, 0, res.max));
         this.resourcesUsed[res.id] = clamp((this.resourcesUsed[res.id] ?? 0) - n, 0, res.max);
     }
 
@@ -373,7 +379,10 @@ export class CharacterState {
         this.turnExtra = {};
         this.hpLost = 0;
         this.tempHp = 0;
-        this.resourcesUsed = {};
+        // resources with recharge 'none' (Soul Trinkets) don't come back on a rest
+        this.resourcesUsed = Object.fromEntries(
+            ch.resources.filter((r) => r.recharge === 'none' && this.resourcesUsed[r.id]).map((r) => [r.id, this.resourcesUsed[r.id]]),
+        );
         this.slotsUsed = {};
         this.hitDiceUsed = Math.max(0, this.hitDiceUsed - Math.max(1, Math.floor(ch.level / 2)));
         this.deathSaves = { success: 0, fail: 0 };
@@ -402,6 +411,7 @@ export class CharacterState {
             hpLost: this.hpLost,
             tempHp: this.tempHp,
             resourcesUsed: this.resourcesUsed,
+            resourcesHeld: this.resourcesHeld,
             slotsUsed: this.slotsUsed,
             hitDiceUsed: this.hitDiceUsed,
             deathSaves: this.deathSaves,

@@ -12,7 +12,11 @@
     {
       "level": 7,
       "name": "Royal Envoy",
-      "desc": "You gain proficiency in the Persuasion skill (or another skill of your choice if you already have it), and your Proficiency Bonus is doubled for Persuasion checks."
+      "desc": "You gain proficiency in the Persuasion skill (or another skill of your choice if you already have it), and your Proficiency Bonus is doubled for Persuasion checks.",
+      "grants": [
+        { "type": "skill", "id": "persuasion", "orChoose": true },
+        { "type": "expertise", "id": "persuasion" }
+      ]
     },
     {
       "level": 10,

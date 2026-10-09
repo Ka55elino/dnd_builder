@@ -1,0 +1,22 @@
+{
+  "id": "stoneRune",
+  "name": "Stone Rune",
+  "category": "effect",
+  "spell": "stoneRune",
+  "duration": "until you inscribe it on another object",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "wis",
+      "note": "Insight"
+    },
+    {
+      "kind": "sense",
+      "sense": "darkvision",
+      "range": 120
+    }
+  ],
+  "desc": "Rune Knight — inscribed rune: Advantage on Wisdom (Insight) checks, and Darkvision 120 feet."
+}

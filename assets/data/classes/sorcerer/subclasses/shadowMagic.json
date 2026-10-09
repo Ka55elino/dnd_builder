@@ -7,7 +7,17 @@
     {
       "level": 3,
       "name": "Eyes of the Dark",
-      "desc": "Darkvision 120 feet (you can see through magical Darkness). For 2 Sorcery Points, you cast Darkness, which you can see through."
+      "desc": "Darkvision 120 feet (you can see through magical Darkness). For 2 Sorcery Points, you cast Darkness, which you can see through.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "sense",
+            "sense": "darkvision",
+            "range": 120
+          }
+        }
+      ]
     },
     {
       "level": 3,

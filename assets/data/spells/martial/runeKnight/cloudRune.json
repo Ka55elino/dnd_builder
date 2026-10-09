@@ -1,0 +1,15 @@
+{
+  "id": "cloudRune",
+  "name": "Cloud Rune",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "pool": "rune",
+  "level": 3,
+  "apply": {
+    "condition": "cloudRune",
+    "target": "self",
+    "choose": "equipped",
+    "label": "Inscribe"
+  },
+  "desc": "Inscribe the rune on a weapon or armor you hold or wear (you can change it when you finish a Short or Long Rest). While you wear or carry the inscribed object: Advantage on Dexterity (Sleight of Hand) and Charisma (Deception) checks. Once inscribed, its invocation appears among your actions."
+}

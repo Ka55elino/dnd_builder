@@ -1,0 +1,26 @@
+{
+  "id": "sacredWeapon",
+  "name": "Sacred Weapon",
+  "category": "effect",
+  "spell": "sacredWeapon",
+  "duration": "10 minutes",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "attack",
+      "valueFrom": "cha",
+      "min": 1,
+      "melee": true
+    },
+    {
+      "kind": "damageType",
+      "alt": "radiant",
+      "melee": true
+    },
+    {
+      "kind": "note",
+      "note": "The weapon sheds Bright Light in a 20-foot radius and Dim Light 20 feet beyond"
+    }
+  ],
+  "desc": "Your melee weapon: + your Charisma modifier (minimum +1) to attack rolls, its damage can be Radiant or its normal type, and it sheds light. Lasts 10 minutes."
+}

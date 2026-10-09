@@ -1,0 +1,18 @@
+{
+  "id": "manifestEcho",
+  "name": "Manifest Echo",
+  "kind": "martial",
+  "subclass": "echoKnight",
+  "level": 3,
+  "action": "bonus",
+  "desc": "As a Bonus Action, you create an echo of yourself within 15 feet (AC 14 + your Proficiency Bonus, 1 Hit Point, immune to all conditions). It lasts until destroyed, dismissed (no action), more than 30 feet away from you at the end of your turn, or you create another. You can attack from its position, swap places with it for 15 feet of movement (Bonus Action), and make Opportunity Attacks from it.",
+  "summon": {
+    "token": {
+      "name": "Echo",
+      "icon": "👤",
+      "ac": "14 + prof",
+      "hp": "1",
+      "note": "A gray, translucent copy of you. Immune to all conditions; destroyed if it ends your turn more than 30 feet from you. You can attack from its space; Bonus Action: swap places (15 feet of movement); Opportunity Attacks from it."
+    }
+  }
+}

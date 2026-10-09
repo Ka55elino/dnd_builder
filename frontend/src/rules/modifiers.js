@@ -19,6 +19,12 @@
  *   { kind: 'd20', value, perLevel? }               — every D20 Test: attacks, checks, saves, Initiative
  *   { kind: 'save', ability?, value } · { kind: 'check', ability?, skill?, value }
  *   { kind: 'attack', value } · { kind: 'initiative', value }
+ *   { kind: 'attack', valueFrom: 'cha', min?: 1, melee? } — + an ability modifier (Sacred Weapon; weapons only)
+ *   { kind: 'damageType', alt: 'radiant', melee? }  — weapon damage can also be this type (Sacred Weapon)
+ *   damage: typeChoice: ['acid', 'cold', …] — the extra die is one of these types, chosen at the table;
+ *        byLevel: { "6": "1d6", "14": "2d6" } — dice by level; weaponOnly — not an Unarmed Strike
+ *   A class/subclass feature can add modifiers while an effect is on (models/Character.js):
+ *        grants: [{ type: 'while', condition: 'raging', modifiers: [...] }] — Elemental Cleaver during Rage
  *   { kind: 'damage', dice: '1d4', sign: 1 | -1, type?, melee?, ranged? } — weapon attacks (Enlarge / Reduce,
  *        Divine Favor; melee: true — melee only, Symbiotic Entity +1d6 Necrotic)
  *   { kind: 'dice', dice: '1d4', sign: 1 | -1, on, ability?, skill? } — a die added to a roll, rolled at
@@ -30,6 +36,8 @@
  *        on:   attacks | attacksAgainst | checks | saves | initiative | actions | bonusActions | reactions | speech
  *   { kind: 'resistance', value } · { kind: 'immunity', value: <condition id or damage type> }
  *   { kind: 'note', note }
+ *   { kind: 'proficiency', skill: 'stealth' | '$choice' } — proficiency in a skill (adds PB if not yet
+ *        proficient) or in a tool (shown as a note) — Whispers of the Dead
  *   { kind: 'economy', action: 'action' | 'bonus' | 'reaction', value } — extra per turn (Hasted: +1 action;
  *        counted in models/Character.js → economy)
  *   perLevel: × the instance level (Exhaustion 2 → −4 to D20 Tests).
@@ -38,9 +46,10 @@
  * Same-named effects don't stack (one instance per id); Exhaustion has a level instead.
  */
 import { ABILITIES } from './abilities.js';
-import { SKILLS } from './skills.js';
+import { SKILLS, TOOLS } from './skills.js';
 
 const SKILL_NAME = Object.fromEntries(SKILLS.map((s) => [s.id, s.name]));
+const TOOL_NAME = Object.fromEntries(TOOLS.map((t) => [t.id, t.name]));
 
 const SIGN = (n) => (n >= 0 ? `+${n}` : `−${-n}`);
 const ABBR = (k) => ABILITIES?.[k]?.short ?? String(k ?? '').toUpperCase();
@@ -126,6 +135,12 @@ export function rowName(r, label = choiceLabel) {
 
 /** '$choice' fields → the chosen value; a modifier that needs a choice nobody made is dropped. */
 function withChoice(m, choice) {
+    // a modifier of one option only (Aspect of the Wilds: { choice: 'owl', kind: 'sense', … })
+    if (m.choice != null) {
+        if (m.choice !== choice) return null;
+        const { choice: _c, ...rest } = m;
+        m = rest;
+    }
     const uses = Object.values(m).some((v) => v === '$choice');
     if (!uses) return m;
     if (!choice) return null;
@@ -134,7 +149,7 @@ function withChoice(m, choice) {
 
 /** A choice id → a readable label (skills, abilities, damage types). */
 export function choiceLabel(id) {
-    return SKILL_NAME[id] ?? ABILITIES?.[id]?.name ?? (id ? id[0].toUpperCase() + id.slice(1) : '');
+    return SKILL_NAME[id] ?? TOOL_NAME[id] ?? ABILITIES?.[id]?.name ?? (id ? id[0].toUpperCase() + id.slice(1) : '');
 }
 
 /** Does adding this condition (or what it implies) break Concentration? */
@@ -211,6 +226,21 @@ export function applyModifiers(sheet, modifiers = []) {
     });
     for (const m of saveMods) note(`${m.ability ? `${ABBR(m.ability)} saves` : 'Saving throws'} ${SIGN(val(m))}`, [m.source]);
 
+    // proficiency granted by an effect (Whispers of the Dead): a skill gets PB, a tool — a note
+    const profNotes = [];
+    for (const m of of('proficiency')) {
+        const sk = sheet.skills.find((x) => x.id === m.skill);
+        if (sk) {
+            if (!sk.proficient) {
+                sheet.skills = sheet.skills.map((x) =>
+                    x.id === sk.id ? { ...x, proficient: true, value: x.value + (sheet.prof ?? 0), modified: true } : x,
+                );
+                if (sk.id === 'perception') sheet.passivePerception += sheet.prof ?? 0;
+            }
+            note(`Proficiency: ${SKILL_NAME[sk.id]}`, [m.source]);
+        } else if (m.skill) profNotes.push({ note: `Proficiency: ${choiceLabel(m.skill)}`, source: m.source });
+    }
+
     const checkMods = of('check');
     const checkFor = (sk) =>
         checkMods.filter((m) => (!m.ability && !m.skill) || m.ability === sk.ability || m.skill === sk.id).reduce((t, m) => t + val(m), 0);
@@ -223,26 +253,48 @@ export function applyModifiers(sheet, modifiers = []) {
     if (perc) sheet.passivePerception += checkFor(perc);
     for (const m of checkMods) note(`${m.skill ?? (m.ability ? `${ABBR(m.ability)} checks` : 'Ability checks')} ${SIGN(val(m))}`, [m.source]);
 
-    const atk = of('attack').reduce((t, m) => t + val(m), 0) + d20Sum;
-    const dmg = of('damage');
-    if (atk || dmg.length) {
-        // melee: true — melee attacks only (Symbiotic Entity); ranged: true — ranged only
-        const fits = (m, a) => (!m.melee || !a.ranged) && (!m.ranged || a.ranged);
+    // attack bonus: a number, or an ability modifier (valueFrom: 'cha', min — Sacred Weapon: Cha, at least +1)
+    const atkMods = of('attack').map((m) => ({ ...m, amount: attackAmount(m, sheet.mods) }));
+    for (const m of atkMods) note(`${m.melee ? 'Melee attack rolls' : m.ranged ? 'Ranged attack rolls' : 'Attack rolls'} ${SIGN(m.amount)}`, [m.source]);
+    // a flat bonus by character level (Rage +2/+3/+4) becomes the "dice" text (a copy: the
+    // modifier objects are shared between recomputes)
+    const dmg = of('damage').map((m) => (m.dice == null ? { ...m, dice: String(damageAmount(m, sheet.level)) } : m));
+    // another damage type the weapon can deal (Sacred Weapon: Radiant) — shown next to its damage
+    const altTypes = of('damageType');
+    if (atkMods.length || d20Sum || dmg.length || altTypes.length) {
+        // melee: true — melee attacks only (Symbiotic Entity); ranged: true — ranged only;
+        // ability: 'str' — only attacks made with that ability (Rage)
+        // a weapon's own thing (Sacred Weapon, Elemental Cleaver) — not an Unarmed Strike
+        const weaponOnly = (a) => a.id !== 'unarmed';
+        const fits = (m, a) =>
+            (!m.melee || !a.ranged) && (!m.ranged || a.ranged) && (!m.ability || m.ability === a.ability) &&
+            (!m.weaponOnly || weaponOnly(a));
         sheet.attacks = sheet.attacks.map((a) => {
             const own = dmg.filter((m) => fits(m, a));
+            const atk = atkMods.filter((m) => fits(m, a) && (!m.valueFrom || weaponOnly(a))).reduce((t, m) => t + m.amount, 0) + d20Sum;
+            const alt = altTypes.filter((m) => fits(m, a) && weaponOnly(a) && m.alt && m.alt !== a.damageType);
             // a typed extra die (+1d6 Necrotic) goes next to the weapon's own extra damage, with its icon;
+            // typeChoice — one of several types, chosen at the table (Elemental Cleaver: Acid / Cold / Fire / Thunder);
             // an untyped one (Enlarge +1d4, Reduce −1d4) is part of the weapon's damage
-            const typed = own.filter((m) => m.type && m.sign >= 0);
-            const plain = own.filter((m) => !(m.type && m.sign >= 0));
+            const isTyped = (m) => (m.type || m.typeChoice?.length) && m.sign >= 0;
+            const typed = own.filter(isTyped);
+            const plain = own.filter((m) => !isTyped(m));
+            if (!atk && !own.length && !alt.length) return a;
             return {
                 ...a,
                 toHit: a.toHit + atk,
                 damage: plain.reduce((d, m) => `${d} ${m.sign < 0 ? '−' : '+'} ${m.dice}${m.type ? ` ${m.type}` : ''}`, a.damage),
-                extra: [...(a.extra ?? []), ...typed.map((m) => ({ dice: m.dice, type: m.type, source: m.source }))],
+                extra: [
+                    ...(a.extra ?? []),
+                    ...typed.map((m) => ({ dice: m.dice, type: m.type ?? m.typeChoice[0], types: m.typeChoice ?? null, source: m.source })),
+                ],
+                altTypes: [...(a.altTypes ?? []), ...alt.map((m) => ({ type: m.alt, source: m.source }))],
+                note: [a.note, ...alt.map((m) => m.source)].filter(Boolean).join(' · ') || null,
                 modified: true,
             };
         });
         for (const m of dmg) note(damageModText(m), [m.source]);
+        for (const m of altTypes) note(damageTypeText(m), [m.source]);
     }
     sheet.initiative += of('initiative').reduce((t, m) => t + val(m), 0) + d20Sum;
 
@@ -297,6 +349,7 @@ export function applyModifiers(sheet, modifiers = []) {
         ...of('resistance').map((m) => ({ note: `Resistance to ${m.value === 'all' ? 'all damage' : `${m.value} damage`}`, source: m.source })),
         ...of('immunity').map((m) => ({ note: `Immunity: ${m.value}`, source: m.source })),
         ...of('note').filter((m) => m.from === 'condition').map((m) => ({ note: m.note, source: m.source })),
+        ...profNotes,
     ];
 
     return { changes, flags: list.sort((a, b) => FLAG_ORDER.indexOf(a.on) - FLAG_ORDER.indexOf(b.on)), notes };
@@ -323,11 +376,45 @@ export function flagLabel(m) {
     return { target: target ?? m.on, mode: MODE[m.mode] ?? m.mode };
 }
 
-/** "Weapon damage +1d4", "Melee damage +1d6 Necrotic". */
+/**
+ * A damage modifier's amount: its dice, or a flat value — fixed (value) or by character
+ * level (byLevel: { "1": 2, "9": 3, "16": 4 } — the highest key ≤ level).
+ */
+export function damageAmount(m, level = null) {
+    if (m.dice != null) return m.dice;
+    if (m.byLevel) {
+        const keys = Object.keys(m.byLevel).map(Number).sort((a, b) => a - b);
+        if (level == null) return keys.map((k) => m.byLevel[k]).join('/'); // no character: "2/3/4"
+        const at = keys.filter((k) => k <= level).pop() ?? keys[0];
+        const v = m.byLevel[at];
+        return typeof v === 'string' && /d/i.test(v) ? v : Number(v) || 0; // dice ("1d6" → "2d6") or a number
+    }
+    return Number(m.value) || 0;
+}
+
+/** An attack modifier's bonus: value, or an ability modifier (valueFrom) with an optional minimum. */
+export function attackAmount(m, mods = null) {
+    if (!m.valueFrom) return val(m);
+    if (!mods) return null; // no character (the Conditions page)
+    const v = Number(mods[m.valueFrom]) || 0;
+    return m.min != null ? Math.max(Number(m.min), v) : v;
+}
+
+/** "Melee weapon damage: can be Radiant". */
+function damageTypeText(m) {
+    const t = m.alt ? m.alt[0].toUpperCase() + m.alt.slice(1) : '';
+    return `${m.melee ? 'Melee weapon' : m.ranged ? 'Ranged weapon' : 'Weapon'} damage: can be ${t}`;
+}
+
+/** "Weapon damage +1d4", "Melee damage +1d6 Necrotic", "STR melee damage +2". */
 function damageModText(m) {
     const what = m.melee ? 'Melee damage' : m.ranged ? 'Ranged damage' : 'Weapon damage';
-    const type = m.type ? ` ${m.type[0].toUpperCase()}${m.type.slice(1)}` : '';
-    return `${what} ${m.sign < 0 ? '−' : '+'}${m.dice}${type}`;
+    const abil = m.ability ? `${ABBR(m.ability)} ` : '';
+    const cap = (t) => t[0].toUpperCase() + t.slice(1);
+    const type = m.typeChoice?.length
+        ? ` ${m.typeChoice.map(cap).join(' / ')} (your choice)`
+        : m.type ? ` ${cap(m.type)}` : '';
+    return `${abil}${abil ? what.toLowerCase() : what} ${m.sign < 0 ? '−' : '+'}${damageAmount(m)}${type}`;
 }
 
 /**
@@ -366,8 +453,13 @@ export function modifierText(m) {
             return `${m.ability ? `${ABBR(m.ability)} saving throws` : 'Saving throws'} ${SIGN(v)}`;
         case 'check':
             return `${m.skill ?? (m.ability ? `${ABBR(m.ability)} checks` : 'Ability checks')} ${SIGN(v)}`;
-        case 'attack':
-            return `Attack rolls ${SIGN(v)}`;
+        case 'attack': {
+            const what = m.melee ? 'Melee attack rolls' : m.ranged ? 'Ranged attack rolls' : 'Attack rolls';
+            if (m.valueFrom) return `${what} + ${ABBR(m.valueFrom)} modifier${m.min != null ? ` (min ${SIGN(Number(m.min))})` : ''}`;
+            return `${what} ${SIGN(v)}`;
+        }
+        case 'damageType':
+            return damageTypeText(m);
         case 'initiative':
             return `Initiative ${SIGN(v)}`;
         case 'damage':

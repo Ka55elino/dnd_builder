@@ -1,0 +1,25 @@
+{
+  "id": "fightingSpirit",
+  "name": "Fighting Spirit",
+  "kind": "martial",
+  "subclass": "samurai",
+  "level": 3,
+  "action": "bonus",
+  "uses": {
+    "count": 3,
+    "per": "longRest"
+  },
+  "apply": {
+    "condition": "fightingSpirit",
+    "target": "self",
+    "rounds": 1,
+    "tempHp": {
+      "byLevel": {
+        "3": 5,
+        "10": 10,
+        "15": 15
+      }
+    }
+  },
+  "desc": "As a Bonus Action, you give yourself Advantage on weapon attack rolls until the end of the current turn and gain Temporary Hit Points: 5 (10 at level 10, 15 at level 15). 3 uses, regained on a Long Rest."
+}

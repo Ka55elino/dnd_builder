@@ -1,0 +1,15 @@
+{
+  "id": "whispersOfTheDead",
+  "name": "Whispers of the Dead",
+  "category": "effect",
+  "spell": "phWhispersOfTheDead",
+  "duration": "until you change it after a rest",
+  "choose": "skillOrTool",
+  "modifiers": [
+    {
+      "kind": "proficiency",
+      "skill": "$choice"
+    }
+  ],
+  "desc": "Phantom: proficiency in the chosen skill or tool, until you choose another one after a Short or Long Rest."
+}

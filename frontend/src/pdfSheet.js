@@ -24,7 +24,7 @@ const ARMOR = { light: 'Light', medium: 'Medium', heavy: 'Heavy', shield: 'Shiel
 const WEAPONS = { simple: 'Simple', martial: 'Martial' };
 const SLOT_TAG = { main: 'main hand', off: 'off hand', armor: 'worn' };
 const KIND_ORDER = { armor: 0, shield: 1, weapon: 2, item: 3 };
-const RECHARGE = { short: 'Short Rest', long: 'Long Rest' };
+const RECHARGE = { short: 'Short Rest', long: 'Long Rest', none: '—' };
 
 /** Markdown-ish data text → plain text (the PDF has no rich text). */
 export function plain(s) {
@@ -113,7 +113,7 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
         key: k,
         name: ABILITIES[k].name,
         short: ABILITIES[k].short,
-        score: build.totalAbilities?.[k] ?? 10,
+        score: ch.scores?.[k] ?? build.totalAbilities?.[k] ?? 10,
         mod: signed(ch.mods?.[k] ?? 0),
         save: signed(saves[k]?.value ?? ch.mods?.[k] ?? 0),
         saveProf: !!saves[k]?.proficient,
@@ -130,7 +130,9 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
         bonus: signed(a.toHit),
         damage: [
             `${a.damage} ${damageName(a.damageType)}`.trim(),
-            ...(a.extra ?? []).map((x) => `+ ${x.dice} ${damageName(x.type)}`.trim()),
+            ...(a.extra ?? []).map((x) =>
+                `+ ${x.dice} ${x.types?.length ? `${x.types.map(damageName).join('/')} (choice)` : damageName(x.type)}`.trim(),
+            ),
         ].join(' '),
         notes: [a.action === 'bonus' ? 'Bonus Action' : '', a.magic ? 'magic' : '', a.note ?? '']
             .filter(Boolean)

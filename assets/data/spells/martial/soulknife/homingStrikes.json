@@ -1,0 +1,13 @@
+{
+  "id": "skHomingStrikes",
+  "name": "Homing Strikes",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 9,
+  "action": "free",
+  "cost": {
+    "resource": "psionicEnergyDice",
+    "amount": 1
+  },
+  "desc": "If you make an attack roll with your Psychic Blades and miss, you can roll one Psionic Energy Die and add the number rolled to the attack roll. If this causes the attack to hit, the die is expended."
+}

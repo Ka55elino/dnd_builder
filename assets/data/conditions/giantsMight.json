@@ -1,0 +1,37 @@
+{
+  "id": "giantsMight",
+  "name": "Giant's Might",
+  "category": "effect",
+  "spell": "giantsMight",
+  "duration": "1 minute",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "damage",
+      "byLevel": {
+        "3": "1d6",
+        "10": "1d8",
+        "18": "1d10"
+      },
+      "sign": 1,
+      "note": "once per turn"
+    },
+    {
+      "kind": "note",
+      "note": "Size Large (Huge at level 18: +5 feet reach); extra damage once per turn"
+    }
+  ],
+  "desc": "Rune Knight: Large for 1 minute, Advantage on Strength checks and saves, and extra damage once per turn (1d6 / 1d8 at 10 / 1d10 at 18)."
+}

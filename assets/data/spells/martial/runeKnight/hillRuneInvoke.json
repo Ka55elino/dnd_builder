@@ -1,0 +1,30 @@
+{
+  "id": "hillRuneInvoke",
+  "name": "Hill Rune — Hill Toughness",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 7,
+  "with": "hillRune",
+  "showWhile": "hillRune",
+  "action": "bonus",
+  "resource": "hillRuneInvoke",
+  "uses": {
+    "count": 1,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        1
+      ],
+      [
+        15,
+        2
+      ]
+    ]
+  },
+  "desc": "As a Bonus Action, you invoke the rune: for 1 minute you have Resistance to Bludgeoning, Piercing, and Slashing damage. Once per Short or Long Rest (twice from level 15, Master of Runes).",
+  "apply": {
+    "condition": "hillRuneInvoked",
+    "target": "self"
+  }
+}

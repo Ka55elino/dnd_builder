@@ -26,6 +26,8 @@ const traitGrants = (level, ...sources) =>
  *   armor   — worn armor (or null),
  *   shield  — shield in hand (shield object or true / false),
  *   hands   — weapons in hand: [{ hand: 'main' | 'off', weapon }]
+ *   emptyHands — hands that hold nothing (not a shield, not taken by a two-handed weapon):
+ *             ['main' | 'off'] — each gets an Unarmed Strike row next to the weapon
  *   skills  — extra skill proficiencies (level choices, background): [id]
  *   expertise — expertise: [id]
  *   perks   — feat/fighting style effects: Set id ('tough', 'alert',
@@ -40,14 +42,15 @@ const traitGrants = (level, ...sources) =>
 export function computeSheet(
     build,
     {
-        race, subrace, cls, armor = null, shield = false, hands = [],
+        race, subrace, cls, armor = null, shield = false, hands = [], emptyHands = [],
         skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
         spellAbility = null, // the class's spellcasting ability (Shillelagh: "$spell")
+        scores: givenScores = null, // final scores with feature bonuses (models/Character.js withFeatureScores)
     } = {},
 ) {
     const level = build.level ?? 1;
     const prof = proficiencyBonus(level);
-    const scores = build.totalAbilities ?? build.abilities ?? {};
+    const scores = givenScores ?? build.totalAbilities ?? build.abilities ?? {};
     const mods = Object.fromEntries(ABILITY_KEYS.map((k) => [k, modifier(scores[k]) ?? 0]));
 
     const grants = traitGrants(level, race, subrace);
@@ -129,24 +132,21 @@ export function computeSheet(
     const weaponProf = new Set(cls?.data?.weaponProficiencies ?? []);
     // spells that change the weapons held (Shillelagh): { kind: 'weapon' } modifiers
     const weaponMods = modifiers.filter((m) => m.kind === 'weapon');
+    // Monk "Martial Arts": the die for Unarmed Strikes and Monk weapons, Dex instead of Str
+    const martialDie = martialArtsDie(cls, level);
     const attacks = handAttacks(hands, {
-        mods, prof, weaponProf, weaponMods, spellAbility, level,
+        mods, prof, weaponProf, weaponMods, spellAbility, level, martialDie,
         bonusAddsMod: perks.has('twf'), // "Two-Weapon Fighting" fighting style
         archery: perks.has('archery'),
         dueling: perks.has('dueling'),
     });
     if (!attacks.length) {
-        attacks.push({
-            id: 'unarmed',
-            name: 'Unarmed Strike',
-            hand: 'main',
-            action: 'action',
-            ability: 'str',
-            proficient: true,
-            toHit: mods.str + prof,
-            damage: `${Math.max(0, 1 + mods.str)}`,
-            damageType: 'bludgeoning',
-        });
+        attacks.push(unarmedAttack('main', { mods, prof, martialDie }));
+    } else {
+        // a hand that is really empty (not a shield, not the second hand of a two-handed weapon)
+        for (const h of emptyHands) {
+            if (!attacks.some((a) => a.hand === h)) attacks.push(unarmedAttack(h, { mods, prof, martialDie }));
+        }
     }
 
     const sheet = {
@@ -174,6 +174,52 @@ export function computeSheet(
 const cap = (t) => String(t)[0].toUpperCase() + String(t).slice(1);
 const isLight = (w) => (w?.data?.properties ?? []).includes('light');
 
+/** Martial Arts die by class level: class data `martialArtsDie` or the built-in Monk table. */
+const MARTIAL_ARTS = { monk: [[1, 'd6'], [5, 'd8'], [11, 'd10'], [17, 'd12']] };
+export function martialArtsDie(cls, level = 1) {
+    const table = cls?.data?.martialArtsDie ?? MARTIAL_ARTS[cls?.id];
+    let die = null;
+    for (const [l, d] of table ?? []) if (level >= l) die = d;
+    return die;
+}
+
+// average of a die like '1d8' / 'd8' — to pick the better of two dice
+const dieAvg = (s) => {
+    const m = /^(\d*)d(\d+)$/.exec(String(s ?? '').trim());
+    return m ? (Number(m[1] || 1) * (Number(m[2]) + 1)) / 2 : 0;
+};
+
+/** Monk weapon (2024): Simple melee, or Martial melee with the Light property. */
+const isMonkWeapon = (w) => {
+    const p = w?.data?.properties ?? [];
+    if (p.includes('ranged')) return false;
+    return w?.category === 'simple' || (w?.category === 'martial' && p.includes('light'));
+};
+
+/**
+ * Unarmed Strike: 1 + Str (bludgeoning); with Martial Arts — the Martial Arts die
+ * + Str or Dex (whichever is higher).
+ */
+export function unarmedAttack(hand, { mods, prof, martialDie = null }) {
+    const ability = martialDie && mods.dex > mods.str ? 'dex' : 'str';
+    const m = mods[ability];
+    return {
+        id: 'unarmed',
+        name: 'Unarmed Strike',
+        hand,
+        action: 'action',
+        ranged: false,
+        ability,
+        proficient: true,
+        toHit: m + prof,
+        damage: martialDie ? `1${martialDie}${fmtMod(m)}` : `${Math.max(0, 1 + mods.str)}`,
+        damageType: 'bludgeoning',
+        extra: [],
+        magic: null,
+        note: martialDie ? 'Martial Arts' : null,
+    };
+}
+
 /**
  * Attacks from what is in hand (2024 rules, the "Light" property):
  *
@@ -191,13 +237,13 @@ const isLight = (w) => (w?.data?.properties ?? []).includes('light');
  */
 export function handAttacks(
     hands,
-    { mods, prof, weaponProf, bonusAddsMod = false, anyLight = false, archery = false, dueling = false, weaponMods = [], spellAbility = null, level = 1 },
+    { mods, prof, weaponProf, bonusAddsMod = false, anyLight = false, archery = false, dueling = false, weaponMods = [], spellAbility = null, level = 1, martialDie = null },
 ) {
     const main = hands.find((h) => h.hand === 'main')?.weapon ?? null;
     const off = hands.find((h) => h.hand === 'off')?.weapon ?? null;
     // "Dueling": +2 damage with a one-handed melee weapon if the other hand holds no weapon
     const oneWeapon = !!main !== !!off;
-    const base = { mods, prof, weaponProf, archery, dueling: dueling && oneWeapon, weaponMods, spellAbility, level };
+    const base = { mods, prof, weaponProf, archery, dueling: dueling && oneWeapon, weaponMods, spellAbility, level, martialDie };
     const out = [];
 
     if (main) out.push(weaponAttack(main, { ...base, hand: 'main' }));
@@ -224,19 +270,22 @@ export function weaponAttack(
     w,
     {
         mods, prof, weaponProf, hand = 'main', bonus = false, bonusAddsMod = false, archery = false, dueling = false,
-        weaponMods = [], spellAbility = null, level = 1,
+        weaponMods = [], spellAbility = null, level = 1, martialDie = null,
     },
 ) {
     const p = w.data?.properties ?? [];
     const ranged = p.includes('ranged');
     const finesse = p.includes('finesse');
-    let ability = ranged ? 'dex' : finesse ? (mods.dex > mods.str ? 'dex' : 'str') : 'str';
+    // Martial Arts on a Monk weapon: Dex instead of Str, and its die if it is better
+    const martial = !!martialDie && isMonkWeapon(w);
+    let ability = ranged ? 'dex' : finesse || martial ? (mods.dex > mods.str ? 'dex' : 'str') : 'str';
 
     // a spell on this weapon (Shillelagh on a Club / Quarterstaff): every weapon held that it
     // fits gets it — two Clubs, both; a sword, never
     const base = w.data?.base ?? w.base ?? '';
     const spell = weaponMods.find((m) => (m.weapons ?? []).some((id) => id === w.id || id === base) && !(m.melee && ranged));
     let die = w.damage;
+    if (martial && dieAvg(`1${martialDie}`) > dieAvg(die)) die = `1${martialDie}`;
     if (spell) {
         const alt = spell.ability === '$spell' ? spellAbility : spell.ability;
         if (alt && (mods[alt] ?? -99) > mods[ability]) ability = alt; // "can use … instead of Strength"

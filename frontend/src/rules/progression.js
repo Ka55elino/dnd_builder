@@ -151,6 +151,19 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
         if (lvlOf(t) > upTo) continue;
         for (const g of t.grants ?? []) if (g.type === 'skill' && g.id) out.skills.add(g.id);
     }
+    // fixed skills / expertise from class and subclass features (up to this level):
+    //   "grants": [{ "type": "skill", "id": "persuasion", "orChoose": true }, { "type": "expertise", "id": "persuasion" }]
+    //   orChoose — if the skill is already there, the level offers another one (see featureChoices)
+    const cls = findCls(build, refs);
+    const subclass = cls?.subclasses?.find((s) => s.id === build.subclassId) ?? null;
+    for (const f of [...(cls?.data?.features ?? []), ...(subclass?.data?.features ?? [])]) {
+        if (lvlOf(f) > upTo) continue;
+        for (const g of f.grants ?? []) {
+            if (g.type === 'skill' && g.id) out.skills.add(g.id);
+            if (g.type === 'expertise' && g.id) out.expertise.add(g.id);
+        }
+    }
+
     // fixed skills from chosen feats / fighting styles / invocations
     // (feat data: "grants": [{ "type": "skill", "id": "deception" }] — e.g. Beguiling Influence)
     for (const id of [...out.feats, ...out.fightingStyles, ...out.invocations]) {
@@ -224,7 +237,7 @@ export function levelPlan(build, level, refs) {
         });
     }
 
-    for (const f of clsFeatures) featureChoices(f, 'class', level, done, refs, add);
+    for (const f of clsFeatures) featureChoices(f, 'class', level, done, refs, add, value);
 
     // subclass
     if (cls && level === (cls.subclassLevel ?? 3) && cls.subclasses?.length) {
@@ -242,7 +255,7 @@ export function levelPlan(build, level, refs) {
     if (subclass) {
         const subFeatures = (subclass.data?.features ?? []).filter((f) => lvlOf(f) === level);
         addGain(subclass.name, subFeatures.map((f) => ({ name: f.name, desc: f.desc })));
-        for (const f of subFeatures) featureChoices(f, 'subclass', level, done, refs, add);
+        for (const f of subFeatures) featureChoices(f, 'subclass', level, done, refs, add, value);
 
         // "choose N" pools: Battle Master maneuvers, arcane shots…
         for (const pool of subclass.data?.optionPools ?? []) {
@@ -503,13 +516,26 @@ export const spellcastingOf = (cls, subclass) =>
     cls?.data?.spellcasting ?? subclass?.data?.spellcasting ?? null;
 
 /** Feature choices: the choice field (one) or choices (several). */
-function featureChoices(f, src, level, done, refs, add) {
+function featureChoices(f, src, level, done, refs, add, value = () => null) {
     const list = f.choices ?? (f.choice ? [f.choice] : []);
-    list.forEach((ch, i) => classChoice(f, ch, list.length > 1 ? i : null, src, level, done, refs, add));
+    list.forEach((ch, i) => classChoice(f, ch, list.length > 1 ? i : null, src, level, done, refs, add, value));
+
+    // a fixed skill you already have → choose another one instead (Royal Envoy: Persuasion)
+    const had = (f.grants ?? []).filter((g) => g.type === 'skill' && g.id && g.orChoose && done.skills.has(g.id));
+    had.forEach((g, i) =>
+        add({
+            key: `L${level}:${src}:skillAlt:${f.name}` + (had.length > 1 ? `:${i}` : ''),
+            kind: 'skill',
+            title: `${f.name}: skill`,
+            desc: `You already have ${SKILL_BY_ID[g.id]?.name ?? g.id}: choose another skill instead.`,
+            pick: 1,
+            options: SKILLS.map((s) => s.id).filter((s) => !done.skills.has(s)).map(skillOption),
+        }),
+    );
 }
 
 /** A single class/subclass feature choice. */
-function classChoice(f, ch, idx, src, level, done, refs, add) {
+function classChoice(f, ch, idx, src, level, done, refs, add, value = () => null) {
     const key = `L${level}:${src}:${ch.type}:${f.name}` + (idx != null ? `:${idx}` : '');
     if (ch.type === 'fightingStyle') {
         add({
@@ -544,6 +570,24 @@ function classChoice(f, ch, idx, src, level, done, refs, add) {
             key, kind: 'option', title: f.name, desc: f.desc, pick: ch.pick ?? 1,
             options: ch.options.map((o) => (typeof o === 'string' ? { id: o, name: o } : asOption(o))),
         });
+        // the chosen option may grant more choices (Primal Order: Magician → an extra Druid cantrip)
+        const chosen = new Set(value(key)?.ids ?? []);
+        for (const o of ch.options) {
+            if (typeof o !== 'object' || !chosen.has(o.id)) continue;
+            for (const g of o.grants ?? []) {
+                if (g.type !== 'cantrip' && g.type !== 'spell') continue;
+                const lvl = g.type === 'cantrip' ? 0 : g.level ?? 1;
+                add({
+                    key: `${key}:${o.id}:${g.type}`,
+                    kind: lvl === 0 ? 'cantrips' : 'spells',
+                    title: `${f.name} (${o.name}): ${lvl === 0 ? 'cantrip' : 'spell'}`,
+                    pick: g.choose ?? 1,
+                    options: spellList(refs, g.from, { minLevel: lvl, maxLevel: lvl })
+                        .filter((sp) => !done.cantrips.includes(sp.id) && !done.spells.includes(sp.id))
+                        .map(spellOption),
+                });
+            }
+        }
     }
 }
 

@@ -1,0 +1,15 @@
+{
+  "id": "stormRuneInvoked",
+  "name": "Prophetic State",
+  "category": "effect",
+  "spell": "stormRuneInvoke",
+  "duration": "1 minute",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Reaction: give Advantage or Disadvantage to a D20 Test of a creature within 60 feet"
+    }
+  ],
+  "desc": "Rune Knight (Storm Rune): for 1 minute, as a Reaction you can give Advantage or Disadvantage to an attack roll, saving throw, or ability check of a creature you can see within 60 feet."
+}

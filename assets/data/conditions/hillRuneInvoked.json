@@ -1,0 +1,23 @@
+{
+  "id": "hillRuneInvoked",
+  "name": "Hill Toughness",
+  "category": "effect",
+  "spell": "hillRuneInvoke",
+  "duration": "1 minute",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "bludgeoning"
+    },
+    {
+      "kind": "resistance",
+      "value": "piercing"
+    },
+    {
+      "kind": "resistance",
+      "value": "slashing"
+    }
+  ],
+  "desc": "Rune Knight (Hill Rune): Resistance to Bludgeoning, Piercing, and Slashing damage for 1 minute."
+}

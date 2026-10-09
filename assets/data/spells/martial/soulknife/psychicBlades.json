@@ -1,0 +1,19 @@
+{
+  "id": "skPsychicBlades",
+  "name": "Psychic Blades",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 3,
+  "action": "free",
+  "damage": {
+    "main": {
+      "dice": "1d6",
+      "type": "psychic"
+    },
+    "offhand": {
+      "dice": "1d4",
+      "type": "psychic"
+    }
+  },
+  "desc": "Whenever you take the Attack action or make an Opportunity Attack, you can manifest a Psychic Blade (Simple Melee weapon, Finesse and Thrown, normal range 60 feet, Vex mastery): 1d6 Psychic damage + the ability modifier used for the attack. After attacking with it, you can make another attack with a second blade as a Bonus Action on the same turn (1d4 Psychic damage + the ability modifier). The blade vanishes right after it hits or misses and leaves no mark."
+}

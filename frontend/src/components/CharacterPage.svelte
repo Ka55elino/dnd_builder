@@ -506,10 +506,12 @@
     let usedKey = $state(null); // the card just used — a short "✓" confirmation
     let usedTimer;
     // the effect a card's spell leaves (rules/casting.js applyInfo): "on me" ticked and the first choice by default
-    const effectOf = (c) => applyInfo(c.item, character?.conditionDefs ?? []);
+    const effectOf = (c) => applyInfo(c.item, character?.conditionDefs ?? [], character);
     const selOf = (c, key) => {
         const ap = effectOf(c);
-        return { onMe: true, choose: ap?.choose?.[0]?.value ?? "", ...(useSel[key] ?? {}) };
+        // an effect already on you (Aspect of the Wilds: Owl) — the select shows what is chosen now
+        const now = ap ? state?.condition(ap.condition)?.choice : null;
+        return { onMe: true, choose: now ?? ap?.choose?.[0]?.value ?? "", ...(useSel[key] ?? {}) };
     };
     // what a card can summon (bestiary monsters) and the chosen one
     const summonOpts = (c) => summonChoices(c.item, monsters);
@@ -744,7 +746,7 @@
                 {:else}
                     <label class="fx-on" title="Untick when you cast it on someone else (the DM puts it on them)">
                         <input type="checkbox" checked={cs.onMe} onchange={(e) => setSel(key, { onMe: e.currentTarget.checked })} />
-                        <b>{ap.name}</b> on me
+                        {#if ap.onMeLabel}{ap.onMeLabel}{:else}<b>{ap.name}</b> on me{/if}
                     </label>
                 {/if}
                 {#if ap.choose && ap.target !== "enemy"}
@@ -1002,7 +1004,7 @@
                                 >{formatModifier(sheet.mods[k])}</span
                             >
                             <span class="ab-score"
-                                >{build.totalAbilities[k] ?? "—"}</span
+                                >{character.scores?.[k] ?? build.totalAbilities[k] ?? "—"}</span
                             >
                         </div>
                     {/each}
@@ -1065,7 +1067,7 @@
                 {#each BIO_GROUPS as group, gi}
                     <section class="card" id={gi === 0 ? "cs-bio" : null} data-section>
                         <h2>{group.title}</h2>
-                        <dl>
+                        <dl class="bio">
                             {#each group.fields as f}
                                 <dt>{f.label}</dt>
                                 <dd>{build.bio[f.key] || "—"}</dd>
@@ -1558,7 +1560,7 @@
                                     <span class="pool-name"
                                         >{r.name}{#if r.die}
                                             <b class="pool-die">{r.die}</b>{/if}
-                                        <small
+                                        {#if r.recharge === "none"}<small>no recharge</small>{:else}<small
                                             ><IconLabel
                                                 name={r.recharge === "short"
                                                     ? "shortRest"
@@ -1571,7 +1573,7 @@
                                                     ? "Short Rest"
                                                     : "Long Rest"}
                                             /></small
-                                        ></span
+                                        >{/if}</span
                                     >
                                     <span class="pips">
                                         {#if r.max > 10}
@@ -1970,7 +1972,36 @@
                                                 text={damageShort(a.damageType)}
                                             /></small
                                         >
+                                        <!-- another type it can deal (Sacred Weapon: Radiant) -->
+                                        {#each a.altTypes ?? [] as t (t.type)}
+                                            <span class="alt-type" title="{t.source}: the damage can be {damageLabel(t.type)}"
+                                                >or <small class="dmg-ico"
+                                                    ><IconLabel
+                                                        name={t.type}
+                                                        kind="dmg"
+                                                        label={damageLabel(t.type)}
+                                                        text={damageShort(t.type)}
+                                                    /></small
+                                                ></span
+                                            >
+                                        {/each}
                                         {#each a.extra ?? [] as x}
+                                            {#if x.types?.length}
+                                                <!-- one of several types, chosen at the table (Elemental Cleaver) -->
+                                                <span class="extra"
+                                                    title="{x.source}: one type of your choice — {x.types.map(damageLabel).join(', ')}"
+                                                    >+ {x.dice}
+                                                    {#each x.types as t, i (t)}{#if i}<span class="or">/</span>{/if}<small class="dmg-ico"
+                                                            ><IconLabel
+                                                                name={t}
+                                                                kind="dmg"
+                                                                label={damageLabel(t)}
+                                                                text={damageShort(t)}
+                                                            /></small
+                                                        >{/each}
+                                                    <small class="hint">choice</small></span
+                                                >
+                                            {:else}
                                             <span class="extra"
                                                 >+ {x.dice}
                                                 <small class="dmg-ico"
@@ -1986,6 +2017,7 @@
                                                     /></small
                                                 ></span
                                             >
+                                            {/if}
                                         {/each}
                                         {#if a.note}<small class="hint"
                                                 >· {a.note}</small
@@ -3462,6 +3494,27 @@
         word-break: break-word;
     }
 
+    /* Appearance / Personality: the label above, the text below on the full width;
+       line breaks typed in the text are kept */
+    dl.bio {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    dl.bio dt {
+        padding-top: 0;
+    }
+
+    dl.bio dt:not(:first-child) {
+        margin-top: 10px;
+    }
+
+    dl.bio dd {
+        margin-top: 2px;
+        white-space: pre-line;
+    }
+
     /* ---------- attacks ---------- */
     .attacks {
         width: 100%;
@@ -4011,6 +4064,17 @@
     .attacks .extra {
         margin-left: 4px;
         color: var(--color-text-accent);
+    }
+
+    .attacks .extra .or {
+        margin: 0 2px;
+        color: var(--color-text-muted);
+    }
+
+    .attacks .alt-type {
+        margin-left: 4px;
+        font-size: 0.85em;
+        color: var(--color-text-muted);
     }
 
     .attacks .magic {

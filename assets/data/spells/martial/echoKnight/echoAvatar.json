@@ -1,0 +1,9 @@
+{
+  "id": "echoAvatar",
+  "name": "Echo Avatar",
+  "kind": "martial",
+  "subclass": "echoKnight",
+  "level": 7,
+  "action": "action",
+  "desc": "As an action, you see and hear through the echo's senses for up to 10 minutes (you are Deafened and Blinded meanwhile); the echo can be up to 1,000 feet away without being destroyed."
+}

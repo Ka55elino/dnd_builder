@@ -12,5 +12,10 @@
     ],
     "amount": 1
   },
+  "apply": {
+    "condition": "sacredWeapon",
+    "target": "creature",
+    "onMeLabel": "Cast on self"
+  },
   "desc": "Costs 1 use of Channel Divinity. You imbue a weapon for 10 minutes: + your Charisma modifier to attack rolls, it sheds light in a 20-foot radius, and its damage counts as Radiant."
 }

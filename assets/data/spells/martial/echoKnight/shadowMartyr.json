@@ -1,0 +1,13 @@
+{
+  "id": "shadowMartyr",
+  "name": "Shadow Martyr",
+  "kind": "martial",
+  "subclass": "echoKnight",
+  "level": 10,
+  "action": "reaction",
+  "desc": "As a Reaction (no action needed, before the roll), you teleport the echo to an unoccupied space within 5 feet of a creature that is attacked; the attack targets the echo instead. Once per Short or Long Rest.",
+  "uses": {
+    "count": 1,
+    "per": "shortRest"
+  }
+}

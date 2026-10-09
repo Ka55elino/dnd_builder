@@ -1,0 +1,17 @@
+{
+  "id": "psychicVeil",
+  "name": "Psychic Veil",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 13,
+  "action": "action",
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "apply": {
+    "condition": "psychicVeil",
+    "target": "self"
+  },
+  "desc": "As a Magic action, you gain the Invisible condition for 1 hour or until you dismiss it (no action). The invisibility ends early immediately after you deal damage to a creature or force a creature to make a saving throw. Once per Long Rest, unless you expend a Psionic Energy Die to use it again."
+}

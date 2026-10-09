@@ -1,0 +1,24 @@
+{
+  "id": "cloudRune",
+  "name": "Cloud Rune",
+  "category": "effect",
+  "spell": "cloudRune",
+  "duration": "until you inscribe it on another object",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "dex",
+      "note": "Sleight of Hand"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "cha",
+      "note": "Deception"
+    }
+  ],
+  "desc": "Rune Knight — inscribed rune: Advantage on Dexterity (Sleight of Hand) and Charisma (Deception) checks."
+}

@@ -39,5 +39,29 @@
       "name": "Runic Juggernaut",
       "desc": "The extra damage from Giant's Might increases to 1d10; when you use it, you can become Huge, increasing your reach by 5 feet."
     }
+  ],
+  "optionPools": [
+    {
+      "id": "rune",
+      "name": "Runes",
+      "known": [
+        [
+          3,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          15,
+          5
+        ]
+      ]
+    }
   ]
 }

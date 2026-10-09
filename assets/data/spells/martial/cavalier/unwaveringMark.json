@@ -1,0 +1,14 @@
+{
+  "id": "unwaveringMark",
+  "name": "Unwavering Mark",
+  "kind": "martial",
+  "subclass": "cavalier",
+  "level": 3,
+  "action": "bonus",
+  "uses": {
+    "ability": "str",
+    "min": 1,
+    "per": "longRest"
+  },
+  "desc": "When you hit a creature with a melee weapon attack, you can mark it until the end of your next turn (ends early if you are Incapacitated or die, or someone else marks it). While it is within 5 feet of you, the marked creature has Disadvantage on attack rolls that don't target you. If it deals damage to anyone other than you, you can make a special melee weapon attack against it as a Bonus Action on your next turn, with Advantage; on a hit, it deals extra damage equal to half your Fighter level. Uses of the special attack = your Strength modifier (minimum 1), regained on a Long Rest."
+}

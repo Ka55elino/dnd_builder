@@ -1,0 +1,31 @@
+{
+  "id": "frostRuneInvoked",
+  "name": "Frost Might",
+  "category": "effect",
+  "spell": "frostRuneInvoke",
+  "duration": "10 minutes",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "check",
+      "ability": "str",
+      "value": 2
+    },
+    {
+      "kind": "check",
+      "ability": "con",
+      "value": 2
+    },
+    {
+      "kind": "save",
+      "ability": "str",
+      "value": 2
+    },
+    {
+      "kind": "save",
+      "ability": "con",
+      "value": 2
+    }
+  ],
+  "desc": "Rune Knight (Frost Rune): +2 to ability checks and saving throws that use Strength or Constitution, for 10 minutes."
+}

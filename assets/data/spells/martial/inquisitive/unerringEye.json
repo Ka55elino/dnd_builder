@@ -1,0 +1,14 @@
+{
+  "id": "unerringEye",
+  "name": "Unerring Eye",
+  "kind": "martial",
+  "subclass": "inquisitive",
+  "level": 13,
+  "action": "action",
+  "uses": {
+    "ability": "wis",
+    "min": 1,
+    "per": "longRest"
+  },
+  "desc": "As an action, you sense the presence of illusions, shapechangers not in their original form, and other magic designed to deceive the senses within 30 feet of you, provided you aren't Blinded or Deafened. You sense that an effect is trying to trick you, but you gain no insight into what is hidden or its true nature. Number of uses = your Wisdom modifier (minimum 1); you regain them on a Long Rest."
+}

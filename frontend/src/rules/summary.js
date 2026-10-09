@@ -53,7 +53,7 @@ export function buildSummary(build, ch, state, { form = null } = {}) {
             : null,
 
         mods: { ...ch.mods },
-        scores: { ...(build.totalAbilities ?? {}) },
+        scores: { ...(ch.scores ?? build.totalAbilities ?? {}) },
         saves: (ch.saves ?? []).map((s) => ({ key: s.key, value: s.value, proficient: !!s.proficient })),
         skills: (ch.skills ?? []).map((s) => ({
             id: s.id,

@@ -1,0 +1,51 @@
+{
+  "id": "raging",
+  "name": "Rage",
+  "category": "effect",
+  "spell": "rage",
+  "duration": "10 minutes",
+  "breaksConcentration": true,
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "resistance",
+      "value": "bludgeoning"
+    },
+    {
+      "kind": "resistance",
+      "value": "piercing"
+    },
+    {
+      "kind": "resistance",
+      "value": "slashing"
+    },
+    {
+      "kind": "damage",
+      "byLevel": {
+        "1": 2,
+        "9": 3,
+        "16": 4
+      },
+      "sign": 1,
+      "melee": true,
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "str"
+    },
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "ability": "str"
+    },
+    {
+      "kind": "note",
+      "note": "Can't cast spells or maintain Concentration"
+    }
+  ],
+  "desc": "Resistance to Bludgeoning, Piercing and Slashing damage; a bonus to damage with Strength-based melee attacks; Advantage on Strength checks and Strength saving throws. You can't cast spells or maintain Concentration. Lasts 10 minutes."
+}

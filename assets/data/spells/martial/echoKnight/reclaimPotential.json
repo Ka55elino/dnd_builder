@@ -1,0 +1,14 @@
+{
+  "id": "reclaimPotential",
+  "name": "Reclaim Potential",
+  "kind": "martial",
+  "subclass": "echoKnight",
+  "level": 15,
+  "action": "free",
+  "desc": "When the echo is destroyed by damage, you gain 2d6 + your Constitution modifier Temporary Hit Points (if you don't already have them). Number of uses = your Constitution modifier (minimum 1); you regain them on a Long Rest.",
+  "uses": {
+    "ability": "con",
+    "min": 1,
+    "per": "longRest"
+  }
+}

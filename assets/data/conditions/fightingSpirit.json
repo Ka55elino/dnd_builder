@@ -1,0 +1,17 @@
+{
+  "id": "fightingSpirit",
+  "name": "Fighting Spirit",
+  "category": "effect",
+  "spell": "fightingSpirit",
+  "duration": "until the end of the turn",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "attacks",
+      "note": "weapon attack rolls"
+    }
+  ],
+  "desc": "Samurai: Advantage on weapon attack rolls until the end of the turn."
+}

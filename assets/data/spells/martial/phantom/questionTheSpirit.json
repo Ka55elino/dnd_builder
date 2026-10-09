@@ -1,0 +1,13 @@
+{
+  "id": "phQuestionTheSpirit",
+  "name": "Question the Spirit",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 9,
+  "action": "action",
+  "cost": {
+    "resource": "soulTrinkets",
+    "amount": 1
+  },
+  "desc": "As a Magic action, you destroy one of your Soul Trinkets and ask its spirit one question. The spirit appears to you and answers in a language it knew; it is under no obligation to be truthful and answers as concisely as possible, eager to be free."
+}

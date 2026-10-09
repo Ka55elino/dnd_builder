@@ -1,0 +1,26 @@
+{
+  "id": "cloudRuneInvoke",
+  "name": "Cloud Rune — Redirect",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 3,
+  "with": "cloudRune",
+  "showWhile": "cloudRune",
+  "action": "reaction",
+  "resource": "cloudRuneInvoke",
+  "uses": {
+    "count": 1,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        1
+      ],
+      [
+        15,
+        2
+      ]
+    ]
+  },
+  "desc": "When you or a creature you can see within 30 feet of you is hit by an attack roll, you can take a Reaction to choose a different creature within 30 feet of you, other than the attacker; the chosen creature becomes the target of the attack, using the same roll. Once per Short or Long Rest (twice from level 15, Master of Runes)."
+}

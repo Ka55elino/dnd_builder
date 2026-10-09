@@ -1,0 +1,17 @@
+{
+  "id": "ghostWalk",
+  "name": "Ghost Walk",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 13,
+  "action": "bonus",
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "apply": {
+    "condition": "ghostWalk",
+    "target": "self"
+  },
+  "desc": "As a Bonus Action, you assume a spectral form for 10 minutes: you gain a Fly Speed of 10 feet and can hover, attack rolls against you have Disadvantage, and you can move through creatures and objects as if they were Difficult Terrain (1d10 Force damage if you end your turn inside one). You can end the form early (no action); it also ends if you are Incapacitated. Once per Long Rest, unless you destroy a Soul Trinket to use it again."
+}

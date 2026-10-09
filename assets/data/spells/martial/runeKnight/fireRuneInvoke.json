@@ -1,0 +1,30 @@
+{
+  "id": "fireRuneInvoke",
+  "name": "Fire Rune — Fire Shackles",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 3,
+  "with": "fireRune",
+  "showWhile": "fireRune",
+  "action": "free",
+  "resource": "fireRuneInvoke",
+  "uses": {
+    "count": 1,
+    "per": "shortRest",
+    "scale": [
+      [
+        3,
+        1
+      ],
+      [
+        15,
+        2
+      ]
+    ]
+  },
+  "desc": "When you hit a creature with an attack using a weapon, you can invoke the rune: the target takes an extra 2d6 Fire damage and must succeed on a Strength saving throw (DC 8 + Proficiency Bonus + Constitution modifier) or have the Restrained condition for 1 minute. While Restrained, it takes 2d6 Fire damage at the start of each of its turns; it repeats the save at the end of each of its turns, ending the effect on a success. Once per Short or Long Rest (twice from level 15, Master of Runes).",
+  "damage": {
+    "dice": "2d6",
+    "type": "fire"
+  }
+}

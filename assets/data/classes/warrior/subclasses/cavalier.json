@@ -7,7 +7,18 @@
     {
       "level": 3,
       "name": "Bonus Proficiencies",
-      "desc": "You gain proficiency in one skill (Performance, History, Insight, Persuasion, or Animal Handling) or one language of your choice."
+      "desc": "You gain proficiency in one skill (Performance, History, Insight, Persuasion, or Animal Handling) or one language of your choice.",
+      "choice": {
+        "type": "skill",
+        "pick": 1,
+        "options": [
+          "performance",
+          "history",
+          "insight",
+          "persuasion",
+          "animal"
+        ]
+      }
     },
     {
       "level": 3,

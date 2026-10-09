@@ -1,0 +1,9 @@
+{
+  "id": "aaEverReadyShot",
+  "name": "Ever-Ready Shot",
+  "kind": "martial",
+  "subclass": "arcaneArcher",
+  "level": 7,
+  "action": "bonus",
+  "desc": "When you miss with a magic arrow, you can take a Bonus Action to reroll the attack against a different target within 60 feet of the original one."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "whAspectOfTheWilds",
+  "name": "Aspect of the Wilds",
+  "kind": "martial",
+  "subclass": "wildHeart",
+  "level": 6,
+  "apply": {
+    "condition": "aspectOfTheWilds",
+    "target": "self",
+    "choose": "option",
+    "label": "Set",
+    "options": [
+      { "value": "owl", "label": "Owl — Darkvision 120 ft." },
+      { "value": "panther", "label": "Panther — Climb Speed" },
+      { "value": "salmon", "label": "Salmon — Swim Speed" },
+      { "value": "chameleon", "label": "Chameleon — Advantage on Stealth" }
+    ]
+  },
+  "desc": "A constant benefit of your choice; you can change it when you finish a Short or Long Rest. Owl: Darkvision 120 feet. Panther: a Climb Speed equal to your Speed. Salmon: a Swim Speed equal to your Speed. Chameleon: Advantage on Dexterity (Stealth) checks, and you can change your skin color."
+}

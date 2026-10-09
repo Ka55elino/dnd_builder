@@ -1,0 +1,31 @@
+{
+  "id": "aspectOfTheWilds",
+  "name": "Aspect of the Wilds",
+  "category": "effect",
+  "spell": "whAspectOfTheWilds",
+  "duration": "until you change it after a rest",
+  "modifiers": [
+    {
+      "choice": "owl",
+      "kind": "sense",
+      "sense": "darkvision",
+      "range": 120
+    },
+    {
+      "choice": "panther",
+      "kind": "note",
+      "note": "Climb Speed equal to your Speed"
+    },
+    {
+      "choice": "salmon",
+      "kind": "note",
+      "note": "Swim Speed equal to your Speed"
+    },
+    {
+      "choice": "chameleon",
+      "kind": "note",
+      "note": "Advantage on Dexterity (Stealth) checks; you can change your skin color"
+    }
+  ],
+  "desc": "Wild Heart: the aspect you chose — Owl (Darkvision 120 ft.), Panther (Climb Speed), Salmon (Swim Speed) or Chameleon (Advantage on Stealth)."
+}

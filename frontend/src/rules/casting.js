@@ -24,7 +24,10 @@
  *     bySlot: { '1': 2, … },                   — amount by the slot level created (Create Spell Slot)
  *     slot: { min, max },                      — spends a spell slot instead (Divine Smite)
  *   }
- *   gain: { resource, amount: 1 | 'slotLevel' } | { slot: { max } }  — conversions
+ *   gain: { resource, amount: 1 | 'slotLevel' } | { slot: { max } }  — conversions; with no cost
+ *                                              it just adds to the pool (Tokens of the Departed: +1 Soul Trinket)
+ *   gainTempHp: <formula>                      — Temporary Hit Points on use (Persistent Rage: "level")
+ *   requires: 'raging'                         — usable only while this effect is on you
  *   turnGain: { action: 1 }                    — one more Action / Bonus Action / Reaction this turn
  *                                              (Action Surge), see CharacterState.gainTurn
  *
@@ -36,7 +39,12 @@
  *     condition: 'bless',                      — the effect (assets/data/conditions) or a condition it inflicts
  *     target: 'self' | 'creature' | 'enemy',   — self: always on you; creature: on you if you tick "on me";
  *                                              enemy: never on you (the DM puts it on the target)
- *     choose: 'skill' | 'ability' | 'damageType', options?: [...]  — asked at casting (Guidance: a skill)
+ *     choose: 'skill' | 'skillOrTool' | 'ability' | 'damageType' | 'equipped', options?: [...]  — asked at casting
+ *                                              (equipped: an item in hand / worn — Rune Carver)
+ *                                              (Guidance: a skill; Whispers of the Dead: a skill or a tool)
+ *     choose: 'option', options: [{ value, label }]  — the ability's own options (Aspect of the Wilds);
+ *                                              the effect's modifiers with choice: '<value>' apply only to it
+ *     label?: 'Set'                            — the button text (an ability with no cost: a switch)
  *     rounds?,                                 — it lasts N rounds (Shield: 1)
  *     tempHp: <formula>                        — Temporary Hit Points on use (rules/formula.js;
  *                                              they don't stack: the higher value is kept)
@@ -48,12 +56,22 @@
  */
 import { isConcentration } from '../models/Character.js';
 import { evalFormula } from './formula.js';
-import { SKILLS } from './skills.js';
+import { SKILLS, TOOLS } from './skills.js';
 import { ABILITY_KEYS, ABILITIES } from './abilities.js';
 import { DAMAGE_TYPES } from './labels.js';
 
 const CHOICES = {
     skill: () => SKILLS.map((s) => ({ value: s.id, label: s.name })),
+    // what you hold and wear now (Rune Carver: the item a rune is inscribed on); value — the item's name
+    equipped: (ch) => {
+        const l = ch?.loadout ?? {};
+        const seen = new Set();
+        return [l.main, l.off, l.armor]
+            .filter((it) => it && !seen.has(it.name) && seen.add(it.name))
+            .map((it) => ({ value: it.name, label: it.name }));
+    },
+    // a skill or a tool (Whispers of the Dead)
+    skillOrTool: () => [...SKILLS, ...TOOLS].map((s) => ({ value: s.id, label: s.name })),
     ability: () => ABILITY_KEYS.map((k) => ({ value: k, label: ABILITIES[k]?.name ?? k })),
     damageType: () =>
         Object.entries(DAMAGE_TYPES)
@@ -63,18 +81,25 @@ const CHOICES = {
 
 /**
  * What a spell's lasting effect asks for at casting: { condition, target, choose: [{ value, label }] | null }
- * (null if the spell has none). defs — refs.conditions, for the effect's name.
+ * (null if the spell has none). defs — refs.conditions, for the effect's name; ch — the Character
+ * (choose: 'equipped' lists what it holds and wears).
  */
-export function applyInfo(item, defs = []) {
+export function applyInfo(item, defs = [], ch = null) {
     const a = item?.data?.apply;
     if (!a?.condition) return null;
     const def = defs.find((d) => d.id === a.condition);
     let choose = null;
-    if (a.choose && CHOICES[a.choose]) {
-        choose = CHOICES[a.choose]();
+    if (a.choose === 'option' && Array.isArray(a.options)) {
+        // own options (Aspect of the Wilds: Owl / Panther / Salmon / Chameleon): [{ value, label }]
+        choose = a.options.map((o) => (typeof o === 'string' ? { value: o, label: o[0].toUpperCase() + o.slice(1) } : o));
+    } else if (a.choose && CHOICES[a.choose]) {
+        choose = CHOICES[a.choose](ch);
         if (Array.isArray(a.options) && a.options.length) choose = choose.filter((o) => a.options.includes(o.value));
     }
-    return { condition: a.condition, name: def?.name ?? a.condition, target: a.target ?? 'self', choose, kind: a.choose ?? null };
+    return {
+        condition: a.condition, name: def?.name ?? a.condition, target: a.target ?? 'self', choose, kind: a.choose ?? null,
+        onMeLabel: a.onMeLabel ?? null, // the "on me" checkbox text (Sacred Weapon: "Cast on self")
+    };
 }
 
 const DICE = /^(\d+)d(\d+)$/;
@@ -259,6 +284,24 @@ export function useOptions(card, ch, state) {
     if (!r) {
         if (cost?.resource) return { kind: 'resource', label: 'Use', amount: 1, disabled: true, reason: 'You don\'t have the resource it needs' };
         if (d.summon) return { kind: 'free', label: 'Summon', concentration: conc, disabled: false }; // Primal Companion
+        // no cost, adds to a pool (Tokens of the Departed: +1 Soul Trinket, up to its max)
+        if (d.gain?.resource) {
+            const g = findResource(ch, d.gain.resource);
+            const full = !g || state.resourceLeft(g) >= g.max;
+            return {
+                kind: 'free', label: d.gain.label ?? 'Use', gain: g ? { ...d.gain, resource: g } : null, concentration: conc,
+                disabled: full, reason: !g ? "You don't have the resource it fills" : full ? `${g.name}: already at the maximum` : '',
+            };
+        }
+        // no cost, Temporary Hit Points on use (Persistent Rage: = level); requires — only while that effect is on
+        if (d.gainTempHp != null) {
+            const off = d.requires && !state.hasCondition(d.requires);
+            const name = ch.conditionDefs?.find((x) => x.id === d.requires)?.name ?? d.requires;
+            return { kind: 'free', label: 'Use', concentration: conc, disabled: !!off, reason: off ? `Only while ${name} is active` : '' };
+        }
+        // no cost, a lasting effect on you (Aspect of the Wilds): a switch — puts it on / changes the choice
+        if (d.apply?.condition && (d.apply.target ?? 'self') !== 'enemy')
+            return { kind: 'free', label: d.apply.label ?? 'Use', concentration: conc, disabled: false };
         return conc ? { kind: 'free', label: 'Use', concentration: true, disabled: false } : null;
     }
     const left = state.resourceLeft(r);
@@ -288,6 +331,7 @@ export function applyUse(info, choice, ch, state, item) {
     const opt = info.options?.find((o) => o.value === (choice?.value ?? info.defaultValue));
     switch (info.kind) {
         case 'free':
+            if (info.gain?.resource) state.restore(info.gain.resource, Number(info.gain.amount) || 1);
             break;
         case 'spell':
             if (!opt || opt.disabled) return false;
@@ -320,6 +364,11 @@ export function applyUse(info, choice, ch, state, item) {
     // a spell with a lasting effect (Mage Armor): it shows in Status and changes the sheet
     // Action Surge: an extra action this turn
     for (const [k, n] of Object.entries(item?.data?.turnGain ?? {})) state.gainTurn(k, Number(n) || 1, item.name);
+    // Temporary Hit Points on use, no lasting effect (Persistent Rage); they don't stack — the higher stays
+    if (item?.data?.gainTempHp != null) {
+        const hp = evalFormula(item.data.gainTempHp, { level: ch.level, prof: ch.prof, mods: ch.mods });
+        if (hp > state.tempHp) state.setTempHp(hp);
+    }
     // the lasting effect: on you if the spell targets you (self), or you ticked "on me" (creature);
     // an enemy-only one (Hold Person → Paralyzed) is put on the target by the DM
     const apply = item?.data?.apply;

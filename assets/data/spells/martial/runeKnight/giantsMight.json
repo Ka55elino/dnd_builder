@@ -1,0 +1,17 @@
+{
+  "id": "giantsMight",
+  "name": "Giant's Might",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 3,
+  "action": "bonus",
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  },
+  "apply": {
+    "condition": "giantsMight",
+    "target": "self"
+  },
+  "desc": "As a Bonus Action, you magically gain these benefits for 1 minute: if you are smaller than Large, you become Large, along with everything you are wearing; you have Advantage on Strength checks and Strength saving throws; once on each of your turns, one of your attacks with a weapon or Unarmed Strike deals an extra 1d6 damage (1d8 at level 10, 1d10 at level 18). Uses = your Proficiency Bonus, regained on a Long Rest."
+}

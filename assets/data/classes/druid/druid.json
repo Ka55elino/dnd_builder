@@ -150,7 +150,14 @@
           {
             "id": "magician",
             "name": "Magician",
-            "desc": "An extra Druid cantrip; add your Wisdom modifier to Arcana and Nature checks."
+            "desc": "An extra Druid cantrip; add your Wisdom modifier to Arcana and Nature checks.",
+            "grants": [
+              {
+                "type": "cantrip",
+                "from": "druid",
+                "choose": 1
+              }
+            ]
           },
           {
             "id": "warden",

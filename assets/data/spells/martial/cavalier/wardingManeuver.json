@@ -1,0 +1,17 @@
+{
+  "id": "wardingManeuver",
+  "name": "Warding Maneuver",
+  "kind": "martial",
+  "subclass": "cavalier",
+  "level": 7,
+  "action": "reaction",
+  "uses": {
+    "ability": "con",
+    "min": 1,
+    "per": "longRest"
+  },
+  "damage": {
+    "dice": "1d8"
+  },
+  "desc": "When you or a creature you can see within 5 feet of you is hit by an attack, you can take a Reaction to roll 1d8 and add it to the target's AC against that attack (you must be holding a melee weapon or a shield). If the attack still hits, the target has Resistance to its damage. Uses = your Constitution modifier (minimum 1), regained on a Long Rest."
+}

@@ -17,7 +17,17 @@
     {
       "level": 9,
       "name": "Tokens of the Departed",
-      "desc": "When someone nearby dies, you can use your Reaction to create a trinket (up to your Proficiency Bonus): it grants Advantage on Death Saving Throws and Constitution saving throws, fuels Wails from the Grave, or lets you ask a spirit a question."
+      "desc": "When someone nearby dies, you can use your Reaction to create a trinket (up to your Proficiency Bonus): it grants Advantage on Death Saving Throws and Constitution saving throws, fuels Wails from the Grave, or lets you ask a spirit a question.",
+      "grants": [
+        {
+          "type": "resource",
+          "id": "soulTrinkets",
+          "name": "Soul Trinkets",
+          "max": "prof",
+          "recharge": "none",
+          "startEmpty": true
+        }
+      ]
     },
     {
       "level": 13,

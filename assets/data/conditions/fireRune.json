@@ -1,0 +1,14 @@
+{
+  "id": "fireRune",
+  "name": "Fire Rune",
+  "category": "effect",
+  "spell": "fireRune",
+  "duration": "until you inscribe it on another object",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Proficiency Bonus doubled for tool checks"
+    }
+  ],
+  "desc": "Rune Knight — inscribed rune: Your Proficiency Bonus is doubled for any ability check that uses your proficiency with a tool."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "wailsFromTheGrave",
+  "name": "Wails from the Grave",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 3,
+  "action": "free",
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  },
+  "damage": {
+    "dice": "1d6",
+    "type": "necrotic",
+    "scaling": {
+      "5": "2d6",
+      "9": "3d6",
+      "13": "4d6",
+      "17": "5d6"
+    }
+  },
+  "desc": "Immediately after you deal Sneak Attack damage to a creature on your turn, you can target a second creature you can see within 30 feet of the first. Roll half your Sneak Attack dice (round up); the second creature takes Necrotic damage equal to the roll. Number of uses = your Proficiency Bonus; you regain them on a Long Rest."
+}

@@ -10,12 +10,9 @@
       "desc": "You gain proficiency with Light armor, one kind of Martial weapon, and the Performance skill.",
       "grants": [
         {
-          "type": "armor",
-          "id": "light"
-        },
-        {
-          "type": "weapon",
-          "id": "martial"
+          "type": "skill",
+          "id": "performance",
+          "orChoose": true
         }
       ]
     },

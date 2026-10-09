@@ -1,0 +1,24 @@
+{
+  "id": "ghostWalk",
+  "name": "Ghost Walk",
+  "category": "effect",
+  "spell": "ghostWalk",
+  "duration": "10 minutes",
+  "longRest": "remove",
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "Fly Speed 10 feet; you can hover"
+    },
+    {
+      "kind": "flag",
+      "mode": "disadvantage",
+      "on": "attacksAgainst"
+    },
+    {
+      "kind": "note",
+      "note": "You can move through creatures and objects as if they were Difficult Terrain; you take 1d10 Force damage if you end your turn inside a creature or an object"
+    }
+  ],
+  "desc": "Phantom: a spectral form for 10 minutes — Fly Speed 10 ft. (hover), attack rolls against you have Disadvantage, and you can move through creatures and objects. Ends early if you dismiss it (no action) or are Incapacitated."
+}

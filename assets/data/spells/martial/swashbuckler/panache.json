@@ -1,0 +1,9 @@
+{
+  "id": "swPanache",
+  "name": "Panache",
+  "kind": "martial",
+  "subclass": "swashbuckler",
+  "level": 9,
+  "action": "action",
+  "desc": "As an action, you make a Charisma (Persuasion) check contested by a creature's Wisdom (Insight); it must be able to hear you and share a language. On a success, a hostile creature has Disadvantage on attack rolls against targets other than you and can't make Opportunity Attacks against targets other than you (1 minute, ends if your companions attack it or affect it with a spell, or if you are more than 60 feet away). A non-hostile creature is Charmed by you for 1 minute (ends if you or your companions harm it)."
+}

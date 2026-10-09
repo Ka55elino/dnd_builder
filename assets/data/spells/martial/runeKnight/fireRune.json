@@ -1,0 +1,15 @@
+{
+  "id": "fireRune",
+  "name": "Fire Rune",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "pool": "rune",
+  "level": 3,
+  "apply": {
+    "condition": "fireRune",
+    "target": "self",
+    "choose": "equipped",
+    "label": "Inscribe"
+  },
+  "desc": "Inscribe the rune on a weapon or armor you hold or wear (you can change it when you finish a Short or Long Rest). While you wear or carry the inscribed object: Your Proficiency Bonus is doubled for any ability check that uses your proficiency with a tool. Once inscribed, its invocation appears among your actions."
+}

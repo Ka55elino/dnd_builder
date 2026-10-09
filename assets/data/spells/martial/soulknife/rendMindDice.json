@@ -1,0 +1,13 @@
+{
+  "id": "skRendMindDice",
+  "name": "Rend Mind (3 Energy Dice)",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 17,
+  "action": "free",
+  "cost": {
+    "resource": "psionicEnergyDice",
+    "amount": 3
+  },
+  "desc": "You expend three Psionic Energy Dice to use Rend Mind again: after Sneak Attack damage with your Psychic Blades, the target makes a Wisdom saving throw (DC 8 + Dex modifier + Proficiency Bonus) or has the Stunned condition for 1 minute (it repeats the save at the end of each of its turns)."
+}

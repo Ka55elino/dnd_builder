@@ -12,12 +12,40 @@
     {
       "level": 3,
       "name": "Survivalist",
-      "desc": "Proficiency in the Nature and Survival skills; your Proficiency Bonus is doubled for checks using these skills."
+      "desc": "Proficiency in the Nature and Survival skills; your Proficiency Bonus is doubled for checks using these skills.",
+      "grants": [
+        {
+          "type": "skill",
+          "id": "nature"
+        },
+        {
+          "type": "skill",
+          "id": "survival"
+        },
+        {
+          "type": "expertise",
+          "id": "nature"
+        },
+        {
+          "type": "expertise",
+          "id": "survival"
+        }
+      ]
     },
     {
       "level": 9,
       "name": "Superior Mobility",
-      "desc": "Your walking Speed increases by 10 feet; your Climb and Swim Speeds (if any) also increase."
+      "desc": "Your walking Speed increases by 10 feet; your Climb and Swim Speeds (if any) also increase.",
+      "grants": [
+        {
+          "type": "effect",
+          "effect": {
+            "kind": "bonus",
+            "target": "speed",
+            "value": 10
+          }
+        }
+      ]
     },
     {
       "level": 13,

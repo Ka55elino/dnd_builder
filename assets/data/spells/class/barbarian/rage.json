@@ -7,6 +7,10 @@
     "barbarian"
   ],
   "action": "bonus",
+  "apply": {
+    "condition": "raging",
+    "target": "self"
+  },
   "desc": "As a Bonus Action, you enter a Rage for 10 minutes: Resistance to Bludgeoning, Piercing, and Slashing damage, Advantage on Strength checks and Strength saving throws, and a bonus to damage with Strength-based melee attacks: +2 (levels 1–8), +3 (levels 9–15), +4 (levels 16+).",
   "uses": {
     "count": 2,

@@ -1,0 +1,23 @@
+{
+  "id": "phWailsTrinket",
+  "name": "Wails from the Grave (Soul Trinket)",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 9,
+  "action": "free",
+  "cost": {
+    "resource": "soulTrinkets",
+    "amount": 1
+  },
+  "damage": {
+    "dice": "1d6",
+    "type": "necrotic",
+    "scaling": {
+      "5": "2d6",
+      "9": "3d6",
+      "13": "4d6",
+      "17": "5d6"
+    }
+  },
+  "desc": "Instead of expending a use of Wails from the Grave, you destroy one of your Soul Trinkets: after you deal Sneak Attack damage, a second creature within 30 feet of the first takes Necrotic damage equal to half your Sneak Attack dice (round up)."
+}

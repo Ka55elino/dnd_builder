@@ -1,0 +1,21 @@
+{
+  "id": "stormRune",
+  "name": "Storm Rune",
+  "category": "effect",
+  "spell": "stormRune",
+  "duration": "until you inscribe it on another object",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "ability": "int",
+      "note": "Arcana"
+    },
+    {
+      "kind": "note",
+      "note": "You can't be Surprised unless Incapacitated"
+    }
+  ],
+  "desc": "Rune Knight — inscribed rune: Advantage on Intelligence (Arcana) checks, and you can't be Surprised unless you are Incapacitated."
+}

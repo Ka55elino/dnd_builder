@@ -1,0 +1,13 @@
+{
+  "id": "runicShield",
+  "name": "Runic Shield",
+  "kind": "martial",
+  "subclass": "runeKnight",
+  "level": 7,
+  "action": "reaction",
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  },
+  "desc": "When another creature you can see within 60 feet of you is hit by an attack roll, you can take a Reaction to force the attacker to reroll the d20 and use the new roll. Uses = your Proficiency Bonus, regained on a Long Rest."
+}

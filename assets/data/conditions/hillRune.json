@@ -1,0 +1,20 @@
+{
+  "id": "hillRune",
+  "name": "Hill Rune",
+  "category": "effect",
+  "spell": "hillRune",
+  "duration": "until you inscribe it on another object",
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "saves",
+      "note": "against the Poisoned condition"
+    },
+    {
+      "kind": "resistance",
+      "value": "poison"
+    }
+  ],
+  "desc": "Rune Knight — inscribed rune: Advantage on saving throws against the Poisoned condition, and Resistance to Poison damage."
+}

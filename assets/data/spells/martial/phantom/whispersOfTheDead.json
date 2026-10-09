@@ -1,0 +1,14 @@
+{
+  "id": "phWhispersOfTheDead",
+  "name": "Whispers of the Dead",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 3,
+  "apply": {
+    "condition": "whispersOfTheDead",
+    "target": "self",
+    "choose": "skillOrTool",
+    "label": "Set"
+  },
+  "desc": "Echoes of those who have died cling to you. Whenever you finish a Short or Long Rest, you can gain proficiency in one skill or tool of your choice. This proficiency lasts until you use this feature again."
+}

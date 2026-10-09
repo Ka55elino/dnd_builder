@@ -1,0 +1,13 @@
+{
+  "id": "skPsychicTeleportation",
+  "name": "Psychic Teleportation",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 9,
+  "action": "bonus",
+  "cost": {
+    "resource": "psionicEnergyDice",
+    "amount": 1
+  },
+  "desc": "As a Bonus Action, you manifest a Psychic Blade, expend one Psionic Energy Die and roll it, and throw the blade at an unoccupied space you can see up to a number of feet away equal to 10 times the number rolled. You then teleport to that space, and the blade vanishes."
+}

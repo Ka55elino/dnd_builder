@@ -197,15 +197,14 @@
     {
       "level": 20,
       "name": "Body and Mind",
-      "desc": "Dexterity and Wisdom +4 (maximum 25).",
+      "desc": "Dexterity and Wisdom +4.",
       "grants": [
         {
           "type": "effect",
           "effect": {
             "kind": "bonus",
             "target": "dex",
-            "value": 4,
-            "max": 25
+            "value": 4
           }
         },
         {
@@ -213,8 +212,7 @@
           "effect": {
             "kind": "bonus",
             "target": "wis",
-            "value": 4,
-            "max": 25
+            "value": 4
           }
         }
       ]

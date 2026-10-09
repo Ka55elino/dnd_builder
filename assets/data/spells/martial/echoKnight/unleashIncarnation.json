@@ -1,0 +1,14 @@
+{
+  "id": "unleashIncarnation",
+  "name": "Unleash Incarnation",
+  "kind": "martial",
+  "subclass": "echoKnight",
+  "level": 3,
+  "action": "free",
+  "desc": "When you take the Attack action, you can make one extra melee attack from the echo's position. Number of uses = your Constitution modifier (minimum 1); you regain them on a Long Rest.",
+  "uses": {
+    "ability": "con",
+    "min": 1,
+    "per": "longRest"
+  }
+}

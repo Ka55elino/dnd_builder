@@ -1,0 +1,13 @@
+{
+  "id": "tokensOfTheDeparted",
+  "name": "Tokens of the Departed",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 9,
+  "action": "reaction",
+  "gain": {
+    "resource": "soulTrinkets",
+    "amount": 1
+  },
+  "desc": "When a creature you can see dies within 30 feet of you, you can take a Reaction to open your free hand and cause a Tiny trinket to appear there, a Soul Trinket. You can have a maximum number of Soul Trinkets equal to your Proficiency Bonus. While a Soul Trinket is on your person, you have Advantage on Death Saving Throws and Constitution saving throws. You can destroy a trinket to use Wails from the Grave without expending a use, or (as a Magic action) to ask the trinket's spirit one question."
+}

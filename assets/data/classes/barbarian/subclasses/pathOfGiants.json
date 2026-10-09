@@ -12,7 +12,31 @@
     {
       "level": 6,
       "name": "Elemental Cleaver",
-      "desc": "When you enter a Rage, you imbue your melee weapon with an element of your choice: it deals an extra 1d6 damage of that type (Acid, Cold, Fire, or Thunder) and gains the Thrown property with a range of 20/60 feet, returning to you after being thrown. You can change the type each time you enter a Rage."
+      "desc": "When you enter a Rage, you imbue your melee weapon with an element of your choice: it deals an extra 1d6 damage of that type (Acid, Cold, Fire, or Thunder) and gains the Thrown property with a range of 20/60 feet, returning to you after being thrown. You can change the type each time you enter a Rage.",
+      "grants": [
+        {
+          "type": "while",
+          "condition": "raging",
+          "modifiers": [
+            {
+              "kind": "damage",
+              "byLevel": {
+                "6": "1d6",
+                "14": "2d6"
+              },
+              "sign": 1,
+              "melee": true,
+              "weaponOnly": true,
+              "typeChoice": [
+                "acid",
+                "cold",
+                "fire",
+                "thunder"
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "level": 10,

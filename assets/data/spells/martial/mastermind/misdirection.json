@@ -1,0 +1,9 @@
+{
+  "id": "mmMisdirection",
+  "name": "Misdirection",
+  "kind": "martial",
+  "subclass": "mastermind",
+  "level": 13,
+  "action": "reaction",
+  "desc": "When a creature targets you with an attack roll while a creature within 5 feet of you is giving you Half Cover or Three-Quarters Cover against that attack, you can take a Reaction to have the attack target the covering creature instead."
+}

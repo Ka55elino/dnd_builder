@@ -15,15 +15,33 @@
  *   { "type": "resource", "id": "rage", "name": "Rage",
  *     "max": <formula, see rules/formula.js>,
  *     "recharge": "long" | "short" | "none",
- *     "shortRestRegain": 1            // optional: how many to regain on a Short Rest
+ *     "shortRestRegain": 1,           // optional: how many to regain on a Short Rest
+ *     "startEmpty": true              // optional: you start with none and gain them (data.gain) —
+ *                                     // Phantom's Soul Trinkets; CharacterState keeps how many you hold
  *   }
  */
 import { computeSheet } from '../rules/sheet.js';
-import { ABILITIES } from '../rules/abilities.js';
+import { ABILITIES, ABILITY_KEYS } from '../rules/abilities.js';
+
+/**
+ * Ability scores + feature grants { type: 'effect', effect: { kind: 'bonus', target: 'str', value: 4, max: 25 } }.
+ * The data's max (25) is deliberately NOT applied — house rule: no cap. Null scores stay null.
+ */
+export function withFeatureScores(base, features = []) {
+    const out = { ...base };
+    for (const f of features) {
+        for (const g of f.grants ?? []) {
+            const e = g.type === 'effect' ? g.effect : null;
+            if (e?.kind !== 'bonus' || !ABILITY_KEYS.includes(e.target) || out[e.target] == null) continue;
+            out[e.target] += Number(e.value) || 0;
+        }
+    }
+    return out;
+}
 import { evalFormula, byLevelPairs } from '../rules/formula.js';
 import { spellSlots } from '../rules/spellcasting.js';
 import { dieAt } from '../rules/damage.js';
-import { defaultEquipped, normalize, resolve } from '../rules/loadout.js';
+import { defaultEquipped, normalize, resolve, isTwoHanded } from '../rules/loadout.js';
 import { summarizeChoices, spellcastingOf, subclassSpellIds } from '../rules/progression.js';
 import { wildShapeAbility, formTempHp, formHours, formCost } from '../rules/wildshape.js';
 import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
@@ -220,6 +238,13 @@ export class Character {
         // --- conditions (Prone, Grappled, Exhaustion…) and named effects (Slowed, Enlarged…) ---
         // immunities from species traits, class features and feats ({ kind: 'immunity', value: 'charmed' })
         const lvlOk = (f) => !f.level || f.level <= (build.level ?? 1);
+
+        // --- ability scores: the build's (base + origin + level choices) + class/subclass features
+        //     (Primal Champion: STR / CON +4, Body and Mind: DEX / WIS +4), no cap ---
+        this.scores = withFeatureScores(
+            build.totalAbilities ?? build.abilities ?? {},
+            [...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? [])].filter(lvlOk),
+        );
         const immuneTo = new Set(
             [
                 ...(this.race?.data?.traits ?? []), ...(this.subrace?.data?.traits ?? []),
@@ -256,6 +281,16 @@ export class Character {
         }
         // everything on the character as modifiers, each with its source (rules/modifiers.js)
         const modifiers = conditionModifiers(this.conditions);
+        // class/subclass features that add to an effect while it is on (Elemental Cleaver during Rage):
+        //   grants: [{ type: 'while', condition: 'raging', modifiers: [...] }]
+        const activeIds = new Set(this.conditions.filter((r) => !r.immune && !r.inactive).map((r) => r.id));
+        for (const f of [...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? [])]) {
+            if (!lvlOk(f)) continue;
+            for (const g of f.grants ?? []) {
+                if (g.type !== 'while' || !activeIds.has(g.condition)) continue;
+                for (const m of g.modifiers ?? []) modifiers.push({ ...m, source: f.name, from: 'condition' });
+            }
+        }
         // spell effects that are on (Mage Armor, Bless, Guidance…) — the "Active effects" list;
         // other named effects (Slowed, Hasted…) are in the Effects grid
         this.activeEffects = this.conditions
@@ -277,6 +312,7 @@ export class Character {
         Object.assign(
             this,
             computeSheet(build, {
+                scores: this.scores,
                 race: this.race,
                 subrace: this.subrace,
                 cls: this.cls,
@@ -285,6 +321,10 @@ export class Character {
                 hands: hands
                     .filter((h) => h.item?.kind === 'weapon')
                     .map((h) => ({ hand: h.hand, weapon: h.item.ref })),
+                // really empty: nothing in it and the other hand isn't holding a two-handed weapon
+                emptyHands: hands
+                    .filter((h) => !h.item && !hands.some((o) => o !== h && isTwoHanded(o.item)))
+                    .map((h) => h.hand),
                 skills: [...this.chosen.skills],
                 expertise: [...this.chosen.expertise],
                 perks,
@@ -377,6 +417,10 @@ export class Character {
                 if (racePoolIds.has(sp.id)) return true;
             }
             if (sp.level > lvl) return false;
+            // with: '<pool option id>' — only if that option is chosen (a rune's invocation comes with the rune);
+            // showWhile: '<condition id>' — only while that effect is on (the rune is inscribed)
+            if (d.with && !this.chosen.pool.includes(d.with)) return false;
+            if (d.showWhile && !this.conditions.some((r) => r.id === d.showWhile && !r.immune)) return false;
             if (d.subclass) return d.subclass === build.subclassId && !!build.subclassId;
             return sp.kind === 'class' && (d.classes ?? []).includes(build.classId);
         });
@@ -419,6 +463,7 @@ export class Character {
                 recharge: g.recharge ?? 'long',
                 shortRestRegain: g.shortRestRegain ?? null,
                 die: g.die ?? null,
+                startEmpty: !!g.startEmpty,
             }));
         const seen = new Set();
         this.resources = [...fromUses, ...fromGrants]
@@ -604,6 +649,13 @@ export class Character {
         const fillDesc = (f) => (f?.desc && /\{\w+\}/.test(f.desc) ? { ...f, desc: fillTemplate(f.desc, tpl) } : f);
         this.featureGroups = this.featureGroups.map((g) => ({ ...g, items: g.items.map(fillDesc) }));
         this.passives.abilities = this.passives.abilities.map(fillDesc);
+
+        // Darkvision from class/subclass features and feats (Umbral Sight, Eyes of the Dark,
+        // Devil's Sight) — the sheet itself counts only species traits and active effects
+        const dv = this.passives.effects
+            .find((g) => g.id === 'sense')
+            ?.items.find((l) => l.key === 'sense:darkvision')?.range;
+        if (Number(dv) > (this.darkvision ?? 0)) this.darkvision = Number(dv);
 
         // --- attacks per Attack action ---
         //   class/subclass features: grant { type: 'effect', effect: { kind: 'set', target: 'attacksPerAction', value } }

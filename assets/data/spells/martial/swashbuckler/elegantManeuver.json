@@ -1,0 +1,25 @@
+{
+  "id": "swElegantManeuver",
+  "name": "Elegant Maneuver",
+  "kind": "martial",
+  "subclass": "swashbuckler",
+  "level": 13,
+  "action": "bonus",
+  "apply": {
+    "condition": "elegantManeuver",
+    "target": "self",
+    "choose": "option",
+    "rounds": 1,
+    "options": [
+      {
+        "value": "acrobatics",
+        "label": "Dexterity (Acrobatics)"
+      },
+      {
+        "value": "athletics",
+        "label": "Strength (Athletics)"
+      }
+    ]
+  },
+  "desc": "As a Bonus Action, you give yourself Advantage on the next Dexterity (Acrobatics) or Strength (Athletics) check you make during the same turn."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "rendMind",
+  "name": "Rend Mind",
+  "kind": "martial",
+  "subclass": "soulknife",
+  "level": 17,
+  "action": "free",
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "When you use your Psychic Blades to deal Sneak Attack damage to a creature, you can force it to make a Wisdom saving throw (DC 8 + your Dexterity modifier + your Proficiency Bonus). On a failed save, it has the Stunned condition for 1 minute; it repeats the save at the end of each of its turns, ending the effect on a success. Once per Long Rest, unless you expend three Psionic Energy Dice to use it again."
+}

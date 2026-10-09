@@ -12,7 +12,11 @@
     {
       "level": 3,
       "name": "Student of War",
-      "desc": "Proficiency with one type of Artisan's Tools of your choice and one additional skill."
+      "desc": "Proficiency with one type of Artisan's Tools of your choice and one additional skill.",
+      "choice": {
+        "type": "skill",
+        "pick": 1
+      }
     },
     {
       "level": 7,

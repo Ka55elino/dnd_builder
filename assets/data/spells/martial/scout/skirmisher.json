@@ -1,0 +1,9 @@
+{
+  "id": "scSkirmisher",
+  "name": "Skirmisher",
+  "kind": "martial",
+  "subclass": "scout",
+  "level": 3,
+  "action": "reaction",
+  "desc": "When an enemy ends its turn within 5 feet of you, you can take a Reaction to move up to half your Speed. This movement doesn't provoke Opportunity Attacks."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "phGhostWalkTrinket",
+  "name": "Ghost Walk (Soul Trinket)",
+  "kind": "martial",
+  "subclass": "phantom",
+  "level": 13,
+  "action": "bonus",
+  "cost": {
+    "resource": "soulTrinkets",
+    "amount": 1
+  },
+  "apply": {
+    "condition": "ghostWalk",
+    "target": "self"
+  },
+  "desc": "You destroy one of your Soul Trinkets to use Ghost Walk again without expending its use: a spectral form for 10 minutes (Fly Speed 10 ft., Disadvantage on attack rolls against you, move through creatures and objects)."
+}

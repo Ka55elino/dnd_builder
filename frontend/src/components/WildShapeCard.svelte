@@ -21,7 +21,7 @@
     const st = $derived(
         formStats(monster, {
             mods: character?.mods ?? {},
-            scores: character?.build?.totalAbilities ?? {},
+            scores: character?.scores ?? character?.build?.totalAbilities ?? {},
             subclass: character?.subclass ?? null,
         }),
     );

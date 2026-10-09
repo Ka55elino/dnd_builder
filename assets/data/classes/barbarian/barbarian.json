@@ -140,15 +140,14 @@
     {
       "level": 20,
       "name": "Primal Champion",
-      "desc": "Your Strength and Constitution scores increase by 4 (maximum 25).",
+      "desc": "Your Strength and Constitution scores increase by 4.",
       "grants": [
         {
           "type": "effect",
           "effect": {
             "kind": "bonus",
             "target": "str",
-            "value": 4,
-            "max": 25
+            "value": 4
           }
         },
         {
@@ -156,8 +155,7 @@
           "effect": {
             "kind": "bonus",
             "target": "con",
-            "value": 4,
-            "max": 25
+            "value": 4
           }
         }
       ]
