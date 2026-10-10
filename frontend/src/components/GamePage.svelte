@@ -10,6 +10,7 @@
      * Leaving the screen keeps the game running (the header shows it).
      * onBack() — to the menu
      */
+    import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { untrack } from 'svelte';
     import { HostGame, StopGame, GetPlayerCharacter } from '../api.js';
@@ -32,7 +33,6 @@
     let name = $state('');
     let error = $state('');
     let busy = $state(false);
-    let confirmStop = $state(false);
 
     // ---------- encounter: the initiative line (combat.svelte.js) ----------
     let pickOpen = $state(false);
@@ -226,7 +226,15 @@
     let ending = $state(null); // { recap, notes, xp, loot } while the dialog is open
     let endBusy = $state(false);
     async function askEnd() {
-        if (!logTo?.session) return void (confirmStop = true);
+        if (!logTo?.session) {
+            const ok = await ask({
+                title: 'End the game?',
+                text: `“${server.game?.name ?? ''}” ends for everyone: the players are disconnected.`,
+                ok: 'End game',
+            });
+            if (ok) stop();
+            return;
+        }
         tab = 'party'; // the Log tab closes and saves what was being typed
         const s = await loadSession(logTo.session.id).catch(() => logTo.session);
         const d = s?.data ?? {};
@@ -255,7 +263,6 @@
     }
 
     async function stop() {
-        confirmStop = false;
         if (combat.active) endEncounter();
         try {
             await StopGame();
@@ -265,7 +272,7 @@
     }
 </script>
 
-<div class="page">
+<div class="page" class:setup={!hosting} class:hosting>
     <TopBar title={hosting ? server.game.name : 'New Game'} {onBack}>
         {#if hosting}
             <button class="logto" class:on={logTo} onclick={refreshLogTo}
@@ -275,20 +282,12 @@
         {/if}
         {#if hosting}
             <span class="spacer"></span>
-            {#if !confirmStop}
-                {#if combat.active}
-                    <button class="primary start end" onclick={endEncounter}>End encounter</button>
-                {:else}
-                    <button class="primary start" onclick={() => (pickOpen = true)}>Start encounter</button>
-                {/if}
-            {/if}
-            {#if confirmStop}
-                <span class="ask">End the game for everyone?</span>
-                <button class="danger" onclick={stop}>End game</button>
-                <button class="ghost" onclick={() => (confirmStop = false)}>Cancel</button>
+            {#if combat.active}
+                <button class="primary start end" onclick={endEncounter}>End encounter</button>
             {:else}
-                <button class="ghost stop" data-keep-open onclick={askEnd}>Stop game</button>
+                <button class="primary start" onclick={() => (pickOpen = true)}>Start encounter</button>
             {/if}
+            <button class="ghost stop" onclick={askEnd}>Stop game</button>
         {/if}
     </TopBar>
 
@@ -427,11 +426,24 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;
         flex-direction: column;
         gap: 28px;
+    }
+
+    /* "New Game" (the setup form): a narrow column in the middle of the screen */
+    .page.setup {
+        max-width: 720px;
+    }
+
+    /* a running game (initiative, combat): the whole width */
+    .page.hosting {
+        max-width: none;
     }
 
     /* phones: the page uses the whole width */
@@ -545,11 +557,6 @@
         color: var(--color-danger);
     }
 
-    .ask {
-        font-size: 14px;
-        color: var(--color-text-secondary);
-    }
-
     .error {
         margin: 0;
         color: var(--color-danger);
@@ -577,14 +584,6 @@
 
     .primary:not(:disabled):hover {
         background: var(--color-gold-hover);
-    }
-
-    .danger {
-        padding: 6px 12px;
-        background: var(--color-danger);
-        border: 1px solid var(--color-danger);
-        border-radius: 6px;
-        color: var(--color-text-primary);
     }
 
     .ghost {

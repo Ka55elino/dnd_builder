@@ -2,6 +2,7 @@
   "id": "poisoned",
   "name": "Poisoned",
   "category": "condition",
+  "repeatSave": "con",
   "modifiers": [
     {
       "kind": "flag",

@@ -20,6 +20,14 @@ ON CONFLICT(id) DO UPDATE SET
     build_json    = excluded.build_json,
     updated_at    = strftime('%s','now');
 
+-- name: DeleteCharacter
+DELETE FROM characters WHERE id = ?;
+
+-- name: DeleteCharacterLinks
+-- Campaign links to / from a deleted character (campaign_links has no foreign keys).
+DELETE FROM campaign_links
+WHERE (from_type = 'character' AND from_id = ?) OR (to_type = 'character' AND to_id = ?);
+
 -- name: GetCharacter
 SELECT build_json FROM characters WHERE id = ?;
 

@@ -6,6 +6,7 @@
      *
      * campaign — the campaign ({ id, … }); onChanged() — after a save/delete
      */
+    import { ask } from "../../confirm.svelte.js";
     import { onMount } from "svelte";
     import "./campaign.css";
     import RefHistory from "./RefHistory.svelte";
@@ -36,7 +37,6 @@
     let edit = $state(null);
     let saving = $state(false);
     let editError = $state("");
-    let confirmDelete = $state(false);
 
     async function reload() {
         [locations, npcs] = await Promise.all([loadLocations(campaign.id), loadNpcs(campaign.id)]);
@@ -83,7 +83,6 @@
             rest: d,
         };
         editError = "";
-        confirmDelete = false;
     }
 
     // where it can go: not inside itself or its own sub-locations
@@ -123,6 +122,7 @@
     }
 
     async function remove() {
+        if (!(await ask({ title: `Delete “${edit.name}”?`, text: kids.has(edit.id) ? "What's inside it moves one level up." : "" }))) return;
         try {
             await deleteLocation(edit.id);
             await reload();
@@ -270,13 +270,7 @@
         </div>
         <footer>
             {#if edit.id}
-                {#if confirmDelete}
-                    <span class="cp-muted">Delete {edit.name}?{kids.has(edit.id) ? " What's inside moves up." : ""}</span>
-                    <button class="cp-btn cp-sm cp-danger" onclick={remove}>Delete</button>
-                    <button class="cp-btn cp-sm" onclick={() => (confirmDelete = false)}>No</button>
-                {:else}
-                    <button class="cp-btn cp-sm cp-danger" onclick={() => (confirmDelete = true)}>Delete</button>
-                {/if}
+                <button class="cp-btn cp-sm cp-danger" onclick={remove}>Delete</button>
             {/if}
             <span class="cp-grow cp-error">{editError}</span>
             <button class="cp-btn" onclick={() => (edit = null)}>Cancel</button>

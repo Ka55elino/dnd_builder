@@ -26,6 +26,7 @@
      * Saving (maps.go): a layer is loaded when it is opened; the terrain is saved ~0.7 s after
      * a stroke (and right away when switching layers / leaving), markers — at once.
      */
+    import { ask } from "../../../confirm.svelte.js";
     import { onMount, onDestroy } from "svelte";
     import MapCanvas from "./MapCanvas.svelte";
     import { TERRAIN, terrainById } from "../../../data/mapTiles.js";
@@ -294,8 +295,9 @@
         if (menu && !e.target.closest?.(".menu-btn, .popup-menu")) menu = "";
     }
 
-    function clearAll() {
-        if (!count || !confirm(`Clear the map of “${layerName}”?`)) return;
+    async function clearAll() {
+        if (!count) return;
+        if (!(await ask({ title: `Clear the map of “${layerName}”?`, text: "All the painted terrain of this layer is erased.", ok: "Clear" }))) return;
         canvas?.setCells({});
         layerCells = { ...layerCells, [layer]: {} };
         scheduleSave(layer);

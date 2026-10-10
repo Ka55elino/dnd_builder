@@ -1,7 +1,9 @@
 <script>
     import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
-    import { ListCharacters } from "../api.js";
+    import { ListCharacters, DeleteCharacter } from "../api.js";
+    import { ask } from "../confirm.svelte.js";
+    import { server } from "../server.svelte.js";
     import { importCharacter } from "../transfer.js";
     import CharacterGrid from "./CharacterGrid.svelte";
 
@@ -21,6 +23,26 @@
     }
 
     onMount(reload);
+
+    // ✕ on a card: ask, then delete (not the character you play in a game right now)
+    async function remove(c) {
+        if (server.characterId === c.id) {
+            notice = { ok: false, text: `“${c.name}” is in the game you joined — leave the game to delete it.` };
+            return;
+        }
+        const ok = await ask({
+            title: `Delete “${c.name}”?`,
+            text: "The character is deleted with its play state (hit points, spent resources, notes). Export it first if you want to keep a copy.",
+        });
+        if (!ok) return;
+        try {
+            await DeleteCharacter(c.id);
+            notice = { ok: true, text: `“${c.name}” deleted.` };
+        } catch (e) {
+            notice = { ok: false, text: e?.message ?? String(e) };
+        }
+        await reload();
+    }
 
     // Import a character from a JSON file (transfer.js): it's added to the list
     async function doImport() {
@@ -47,7 +69,7 @@
 </script>
 
 <main class="start">
-    <CharacterGrid {characters} {onCreate} {onOpen}>
+    <CharacterGrid {characters} {onCreate} {onOpen} onDelete={remove}>
         {#snippet header()}
             <TopBar title="Characters" {onBack}>
                 <button class="ghost import" onclick={doImport} disabled={importing} title="Add a character from a .json file (Export on a character sheet)">

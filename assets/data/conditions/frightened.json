@@ -2,6 +2,7 @@
   "id": "frightened",
   "name": "Frightened",
   "category": "condition",
+  "repeatSave": "wis",
   "modifiers": [
     {
       "kind": "flag",

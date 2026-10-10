@@ -4,6 +4,7 @@
         onCreate = () => console.log("[create]"),
         onOpen = (id) => console.log("[open]", id),
         showCreate = true, // false: pick-only grid (Join Game)
+        onDelete = null, // (character) => … — an ✕ on each card (asks first: the caller's job)
         header = null, // snippet above the cards — spans exactly the width of the card columns
     } = $props();
 </script>
@@ -18,19 +19,24 @@
     {/if}
 
     {#each characters as c (c.id)}
-        <button
-            class="cell character"
-            onclick={() => onOpen(c.id)}
-            title={c.name}
-        >
-            {#if c.portrait}
-                <img class="portrait" src={c.portrait} alt="" />
+        <div class="card">
+            <button
+                class="cell character"
+                onclick={() => onOpen(c.id)}
+                title={c.name}
+            >
+                {#if c.portrait}
+                    <img class="portrait" src={c.portrait} alt="" />
+                {/if}
+                <span class="label name">{c.name}</span>
+                <span class="label meta">
+                    {[c.className, c.level ? `Level ${c.level}` : ""].filter(Boolean).join(" · ")}
+                </span>
+            </button>
+            {#if onDelete}
+                <button class="del" onclick={() => onDelete(c)} title="Delete {c.name}" aria-label="Delete {c.name}">✕</button>
             {/if}
-            <span class="label name">{c.name}</span>
-            <span class="label meta">
-                {[c.className, c.level ? `Level ${c.level}` : ""].filter(Boolean).join(" · ")}
-            </span>
-        </button>
+        </div>
     {/each}
 </div>
 
@@ -102,6 +108,53 @@
         font-size: 36px;
         line-height: 1;
         font-weight: var(--font-weight-light);
+    }
+
+    /* a character card + its ✕ (a sibling: a button can't hold a button) */
+    .card {
+        position: relative;
+    }
+
+    .card .character {
+        width: 100%;
+    }
+
+    .del {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        z-index: 1;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        color: var(--color-text-secondary);
+        font-size: 13px;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.15s;
+    }
+
+    /* shown on hover / focus; always on touch screens (no hover there) */
+    .card:hover .del,
+    .del:focus-visible {
+        opacity: 1;
+    }
+
+    @media (hover: none) {
+        .del {
+            opacity: 1;
+        }
+    }
+
+    .del:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
     }
 
     .character {

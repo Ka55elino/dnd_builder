@@ -11,6 +11,7 @@
     import { validateBuild, BUILDER_TABS } from "../../rules/validation.js";
     import { loadRefs, EMPTY_REFS } from "../../data/refs.js";
     import LevelScreen from "../LevelScreen.svelte";
+    import LevelClassBar from "./LevelClassBar.svelte";
     import { levelPlan, evaluatePlan } from "../../rules/progression.js";
 
     /**
@@ -29,11 +30,16 @@
 
     // 5 tabs + the level 1 screen (summary and choices)
     const LEVEL_STEP = BUILDER_TABS.length;
-    const steps = [...BUILDER_TABS, build.level > 1 ? "Levels" : "Summary · Lvl 1"];
+    // a character above level 1 is edited level by level ("Levels"): there a level's class
+    // can be changed and the last level removed (LevelClassBar), so this follows build.level
+    const editingLevels = untrack(() => build.level) > 1;
+    const steps = [...BUILDER_TABS, editingLevels ? "Levels" : "Summary · Lvl 1"];
 
-    // levels: when editing a character, each one can be revisited and adjusted
-    const levels = Array.from({ length: build.level }, (_, i) => i + 1);
+    const levels = $derived(Array.from({ length: build.level }, (_, i) => i + 1));
     let levelTab = $state(untrack(() => build.level));
+    $effect(() => {
+        if (levelTab > build.level) levelTab = build.level; // the shown level was removed
+    });
     let step = $state(0);
 
     // reference data: for validation (subspecies, armor) and the level screen
@@ -174,11 +180,14 @@
                             class:active={l === levelTab}
                             class:invalid={!levelDone[l]}
                             onclick={() => (levelTab = l)}
-                        >Lvl {l}</button>
+                        >Lvl {l}{#if build.classes.length > 1}<small>{build.classAt(l) ? refs.classes?.find((c) => c.id === build.classAt(l))?.name?.slice(0, 3) ?? "" : ""} {build.classLevelAt(l)}</small>{/if}</button>
                     {/each}
                 </nav>
             {/if}
-            {#key levelTab}
+            {#if editingLevels}
+                <LevelClassBar {build} level={levelTab} {refs} />
+            {/if}
+            {#key `${levelTab}:${build.classAt(levelTab)}`}
                 <LevelScreen {build} level={levelTab} {refs} />
             {/key}
         {/if}
@@ -187,6 +196,9 @@
 
 <style>
     .builder {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         height: 100%;
         padding: 32px;
         display: flex;
@@ -260,6 +272,13 @@
         flex-wrap: wrap;
         gap: 6px;
         margin-bottom: 16px;
+    }
+
+    /* multiclassed: the class of the level next to its number ("Lvl 4 Wiz 1") */
+    .chip small {
+        margin-left: 6px;
+        font-size: 11px;
+        color: var(--color-text-muted);
     }
 
     .chip.final {

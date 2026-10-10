@@ -11,6 +11,7 @@
      * onOpenMonster(id) — show a monster's stat block
      * onStatus(text)    — a short message in the page header
      */
+    import { ask } from "../../confirm.svelte.js";
     import {
         saveEncounter, deleteEncounter, loadEncounters, encounterTotals, partyBudget, difficultyOf,
         DIFFICULTY_LABELS, CREATURE_TYPES, crLabel, fmtXP,
@@ -25,7 +26,6 @@
     let draft = $state(null); // the preset being edited (a copy)
     let dirty = $state(false);
     let saving = $state(false);
-    let confirmDelete = $state(false);
     let error = $state("");
 
     // open a preset (or a new one) for editing
@@ -35,7 +35,6 @@
             ? { ...enc, monsters: enc.monsters.map((l) => ({ ...l })) }
             : { id: "", name: "New encounter", notes: "", monsters: [] };
         dirty = !enc;
-        confirmDelete = false;
         error = "";
     }
     $effect(() => {
@@ -77,8 +76,8 @@
     }
 
     async function remove() {
-        confirmDelete = false;
         const name = draft.name;
+        if (!(await ask({ title: `Delete “${name}”?`, text: "The encounter preset is deleted (campaigns that use it lose it too)." }))) return;
         try {
             if (draft.id) await deleteEncounter(draft.id);
             encounters = await loadEncounters();
@@ -140,12 +139,8 @@
             <div class="head">
                 <input class="title" bind:value={draft.name} oninput={touch} aria-label="Encounter name" />
                 <span class="dirty">{dirty ? "Unsaved changes" : ""}</span>
-                {#if confirmDelete}
-                    <span class="ask">Delete this preset?</span>
-                    <button class="ghost small danger" onclick={remove}>Yes</button>
-                    <button class="ghost small" onclick={() => (confirmDelete = false)}>No</button>
-                {:else if draft.id}
-                    <button class="ghost small" onclick={() => (confirmDelete = true)} title="Delete">✕</button>
+                {#if draft.id}
+                    <button class="ghost small" onclick={remove} title="Delete">✕</button>
                 {/if}
                 <button class="primary" onclick={save} disabled={saving || !dirty || !draft.name.trim()}>
                     {saving ? "Saving…" : "Save"}

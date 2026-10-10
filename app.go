@@ -141,6 +141,15 @@ func (a *App) ListCharacters() ([]CharacterSummary, error) {
 	return listCharacters(db)
 }
 
+// DeleteCharacter deletes a character with its play state and its campaign links.
+func (a *App) DeleteCharacter(id string) error {
+	db, err := a.conn()
+	if err != nil {
+		return err
+	}
+	return deleteCharacter(db, id)
+}
+
 // GetCharacterState returns the play state (hit points, resources); null if none has been saved yet.
 func (a *App) GetCharacterState(id string) (map[string]any, error) {
 	db, err := a.conn()

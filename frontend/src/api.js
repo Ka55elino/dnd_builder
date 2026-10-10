@@ -52,6 +52,7 @@ export const {
     DeleteCustomCondition,
     ListCharacters,
     SaveCharacter,
+    DeleteCharacter,
     SaveCharacterState,
     SaveCustomEquipment,
     SaveCustomSpell,

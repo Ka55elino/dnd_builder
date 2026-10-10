@@ -2,6 +2,7 @@
   "id": "deafened",
   "name": "Deafened",
   "category": "condition",
+  "repeatSave": "con",
   "modifiers": [
     {
       "kind": "flag",

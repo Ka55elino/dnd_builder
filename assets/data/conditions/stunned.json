@@ -2,6 +2,7 @@
   "id": "stunned",
   "name": "Stunned",
   "category": "condition",
+  "repeatSave": "con",
   "implies": [
     "incapacitated"
   ],

@@ -7,6 +7,7 @@
      *
      * campaign — the campaign ({ id, … }); onChanged() — after a change (the counts)
      */
+    import { ask } from "../../confirm.svelte.js";
     import { onMount } from "svelte";
     import "./campaign.css";
     import { loadSessions, saveSession, deleteSession, setSessionStatus, SESSION_STATUSES } from "../../data/campaigns.js";
@@ -18,7 +19,6 @@
     let loading = $state(true);
     let error = $state("");
     let openId = $state(null);
-    let confirmDelete = $state(null);
 
     const statusName = (s) => SESSION_STATUSES.find((x) => x.id === s)?.name ?? s;
     const date = (d) => (d ? new Date(d + "T12:00:00").toLocaleDateString() : "");
@@ -67,7 +67,7 @@
     }
 
     async function remove(s) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete Session ${s.number}?`, text: "The session is deleted with its log." }))) return;
         try {
             await deleteSession(s.id);
             await reload();
@@ -128,13 +128,7 @@
                             <button class="cp-btn cp-sm cp-add" onclick={() => status(s, "active")}
                                 title="Start playing: the game's log (combat, Give Item) goes here">▶ Start</button>
                         {/if}
-                        {#if confirmDelete === s.id}
-                            <span class="cp-muted">Delete with its log?</span>
-                            <button class="cp-btn cp-sm cp-danger" onclick={() => remove(s)}>Delete</button>
-                            <button class="cp-btn cp-sm" onclick={() => (confirmDelete = null)}>No</button>
-                        {:else}
-                            <button class="cp-btn cp-sm" onclick={() => (confirmDelete = s.id)} title="Delete">✕</button>
-                        {/if}
+                        <button class="cp-btn cp-sm" onclick={() => remove(s)} title="Delete">✕</button>
                     </div>
                 </article>
             {/each}

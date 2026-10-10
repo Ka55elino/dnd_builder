@@ -2,6 +2,7 @@
   "id": "blinded",
   "name": "Blinded",
   "category": "condition",
+  "repeatSave": "con",
   "modifiers": [
     {
       "kind": "flag",

@@ -1,4 +1,5 @@
 <script>
+    import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { damageShort, damageName, damageLabel, normAction } from "../rules/labels.js";
     import SectionNav from "./common/SectionNav.svelte";
@@ -36,7 +37,7 @@
     import { exportCharacter } from "../transfer.js";
     import { pdfModel, savePdf } from "../pdfSheet.js";
     import { hitDiceText } from "../rules/sheet.js";
-    import { NetStatus } from "../api.js";
+    import { NetStatus, DeleteCharacter } from "../api.js";
     import { buildSummary } from "../rules/summary.js";
     import {
         GetCharacter,
@@ -47,7 +48,7 @@
     import { Character, concentrationDC } from "../models/Character.js";
     import ActionCard from "./common/ActionCard.svelte";
     import { useOptions, applyUse, upcastLines, applyInfo } from "../rules/casting.js";
-    import { breaksConcentration } from "../rules/modifiers.js";
+    import { rowName } from "../rules/modifiers.js";
     import { instanceInfo } from "../rules/conditions.js";
     import ConditionDialog from "./ConditionDialog.svelte";
     import Tooltip from "./common/Tooltip.svelte";
@@ -92,6 +93,7 @@
         onEdit,
         onLevelUp,
         onGiveItem,
+        onDeleted = null, // set: a "Delete" button (asks first), then this is called — back to the list
         backLabel = "← Characters",
         actions,
         inGame = false,
@@ -362,9 +364,11 @@
         if (stateJson != null && savedJson == null) savedJson = stateJson;
     });
 
+    let deleted = false; // after Delete: no more state saves for this id
+
     async function saveNow() {
         clearTimeout(saveTimer);
-        if (!state) return;
+        if (!state || deleted) return;
         const json = JSON.stringify(state);
         if (json === savedJson) return;
         saving = true;
@@ -441,6 +445,23 @@
 
     function closeShare(e) {
         if (shareOpen && !e.target.closest?.(".share")) shareOpen = false;
+    }
+
+    async function deleteCharacter() {
+        const ok = await ask({
+            title: `Delete “${build?.name ?? "this character"}”?`,
+            text: "The character is deleted with its play state (hit points, spent resources, notes). Export it first (Download → JSON) if you want to keep a copy.",
+        });
+        if (!ok) return;
+        deleted = true;
+        clearTimeout(saveTimer);
+        try {
+            await DeleteCharacter(id);
+            onDeleted?.();
+        } catch (e) {
+            deleted = false;
+            stateError = e?.message ?? String(e);
+        }
     }
 
     const leave =
@@ -562,24 +583,10 @@
     }
     const setSel = (key, patch) => (useSel[key] = { ...(useSel[key] ?? {}), ...patch });
 
-    // --- Conditions (rules/modifiers.js): the grid toggles instances in state.effects ---
-    const condGroups = $derived.by(() => {
-        const defs = [...(character?.conditionDefs ?? [])].sort((a, b) => a.name.localeCompare(b.name));
-        return [
-            { id: "condition", title: "Conditions", defs: defs.filter((d) => (d.category ?? "condition") === "condition") },
-            { id: "effect", title: "Effects", defs: defs.filter((d) => d.category === "effect" && !d.data?.spell) },
-        ].filter((g) => g.defs.length);
-    });
-    const condRow = (id) => character?.conditions.find((c) => c.id === id) ?? null;
-    const maxLevel = (d) => Number(d.data?.levels) || null;
-    function toggleCondition(d) {
-        const before = state.concentration;
-        state.toggleCondition(d.id, {
-            breaks: breaksConcentration(d.id, character.conditionDefs),
-            level: maxLevel(d) ? 1 : null,
-        });
-        if (before && !state.concentration) concCheck = null;
-    }
+    // --- Conditions (rules/modifiers.js): what is on the character (spell effects are in
+    //     "Active effects"); the popup puts them on / changes them ---
+    const condRows = $derived((character?.conditions ?? []).filter((r) => !(r.def?.data ?? r.def)?.spell));
+    const abbr = (k) => ABILITIES[k]?.short ?? k;
     // the same popup the DM has: every condition, effect and spell effect, with rounds / save / choice
     let condDialog = $state(false);
     function onConditionDialog(data) {
@@ -909,6 +916,9 @@
                 <button class="ghost" onclick={leave(() => onEdit(raw))}
                     >Edit</button
                 >
+            {/if}
+            {#if onDeleted}
+                <button class="ghost delete" onclick={deleteCharacter} title="Delete this character">Delete</button>
             {/if}
         {/if}
         {#if actions}
@@ -1453,76 +1463,67 @@
                         </div>
                     {/each}
 
-                    <!-- conditions and named effects: click to put on / take off (rules/modifiers.js) -->
+                    <!-- conditions and named effects on the character; the popup adds / changes them -->
                     <div class="cond-head">
+                        <h3>Conditions</h3>
                         <button class="ghost step" onclick={() => (condDialog = true)}
-                            title="All conditions and effects (spell effects too): rounds, end-of-turn save, choice"
+                            title="All conditions and effects (spell effects too): search, rounds, end-of-turn save, choice"
                             >＋ Conditions & effects…</button
                         >
                     </div>
-                    {#if condGroups.length}
-                        {#each condGroups as grp (grp.id)}
-                            <h3>{grp.title}</h3>
-                            <div class="cond-grid">
-                                {#each grp.defs as d (d.id)}
-                                    {@const row = condRow(d.id)}
-                                    {@const immune =
-                                        row?.immune || character.conditionImmune?.has(d.id)}
-                                    <span
-                                        class="cond"
-                                        class:on={row?.explicit && !immune}
-                                        class:implied={row && !row.explicit && !immune}
-                                        class:immune
-                                    >
-                                        <Tooltip delay={250}>
-                                            <button
-                                                class="cond-btn"
-                                                onclick={() => toggleCondition(d)}
-                                                aria-pressed={!!row?.explicit}
-                                                >{d.name}{#if row?.level}
-                                                    <b>{row.level}</b>{/if}{#if row?.instance?.rounds}
-                                                    <small class="cond-r">{row.instance.rounds}r</small>{/if}</button
-                                            >
-                                            {#snippet tip()}
-                                                <div class="tip">
-                                                    <div class="tip-head">
-                                                        <b>{d.name}</b>
-                                                        {#if immune}<span
-                                                                class="tip-tag"
-                                                                >immune</span
-                                                            >{:else if row && !row.explicit}<span
-                                                                class="tip-tag"
-                                                                >via {row.impliedBy.join(", ")}</span
-                                                            >{/if}
-                                                    </div>
-                                                    <p class="tip-desc">{d.desc}</p>
-                                                    {#if row?.instance && instanceInfo(row.instance)}<p
-                                                            class="tip-desc"
-                                                        >
-                                                            {instanceInfo(row.instance, (k) => ABILITIES[k]?.short ?? k)}
-                                                        </p>{/if}
-                                                </div>
-                                            {/snippet}
-                                        </Tooltip>
-                                        {#if maxLevel(d) && row?.explicit}
-                                            <button
-                                                class="cond-step"
-                                                onclick={() =>
-                                                    state.setConditionLevel(d.id, row.level - 1, maxLevel(d))}
-                                                aria-label="Lower {d.name}">−</button
-                                            >
-                                            <button
-                                                class="cond-step"
-                                                disabled={row.level >= maxLevel(d)}
-                                                onclick={() =>
-                                                    state.setConditionLevel(d.id, row.level + 1, maxLevel(d))}
-                                                aria-label="Raise {d.name}">+</button
-                                            >
-                                        {/if}
-                                    </span>
-                                {/each}
-                            </div>
-                        {/each}
+                    {#if condRows.length}
+                        <ul class="conds">
+                            {#each condRows as r (r.id)}
+                                <li class:implied={!r.explicit} class:immune={r.immune}>
+                                    <Tooltip delay={250}>
+                                        <span class="cn-name">{rowName(r)}</span>
+                                        {#snippet tip()}
+                                            <div class="tip">
+                                                <div class="tip-head"><b>{r.name}</b></div>
+                                                <p class="tip-desc">{r.desc}</p>
+                                            </div>
+                                        {/snippet}
+                                    </Tooltip>
+                                    {#if r.immune}<small>immune</small>{:else if !r.explicit}<small
+                                            >via {r.impliedBy.join(", ")}</small
+                                        >{/if}
+                                    {#if r.instance?.rounds}<small
+                                            >{r.instance.rounds} {r.instance.rounds === 1 ? "round" : "rounds"} left</small
+                                        >{/if}
+                                    {#if r.instance?.save}
+                                        <!-- the roll that ends it -->
+                                        <span class="cn-save"
+                                            >{abbr(r.instance.save.ability)} save <b>DC {r.instance.save.dc}</b>
+                                            <small>at the end of each turn</small></span
+                                        >
+                                    {/if}
+                                    <span class="cn-grow"></span>
+                                    {#if r.maxLevel && r.explicit}
+                                        <button
+                                            class="cond-step"
+                                            onclick={() => state.setConditionLevel(r.id, r.level - 1, r.maxLevel)}
+                                            aria-label="Lower {r.name}">−</button
+                                        >
+                                        <button
+                                            class="cond-step"
+                                            disabled={r.level >= r.maxLevel}
+                                            onclick={() => state.setConditionLevel(r.id, r.level + 1, r.maxLevel)}
+                                            aria-label="Raise {r.name}">+</button
+                                        >
+                                    {/if}
+                                    {#if r.explicit}
+                                        <button
+                                            class="fx-x"
+                                            onclick={() => state.removeCondition(r.id)}
+                                            title="Remove {r.name}"
+                                            aria-label="Remove {r.name}">×</button
+                                        >
+                                    {/if}
+                                </li>
+                            {/each}
+                        </ul>
+                    {:else}
+                        <p class="cn-none">No conditions.</p>
                     {/if}
 
                     <!-- what everything on the character does: numbers changed + flags + notes -->
@@ -2137,6 +2138,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 24px 32px 40px;
         display: flex;
@@ -2345,6 +2349,11 @@
     }
 
     .share-note.bad {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    .ghost.delete:hover {
         border-color: var(--color-danger);
         color: var(--color-danger);
     }
@@ -2676,59 +2685,13 @@
     .cond-head {
         margin-top: 10px;
         display: flex;
-        justify-content: flex-end;
-    }
-
-    .cond-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .cond {
-        display: inline-flex;
         align-items: center;
-        border: 1px solid var(--color-border);
-        border-radius: 999px;
-        font-family: var(--font-ui);
-        font-size: 12px;
-        color: var(--color-text-secondary);
+        justify-content: space-between;
+        gap: 10px;
     }
 
-    .cond-btn {
-        padding: 3px 10px;
-        background: transparent;
-        border: none;
-        color: inherit;
-        font: inherit;
-        cursor: pointer;
-    }
-
-    .cond-btn b {
-        margin-left: 2px;
-    }
-
-    .cond.on {
-        border-color: var(--color-danger);
-        background: color-mix(in srgb, var(--color-danger) 15%, transparent);
-        color: var(--color-text-primary);
-    }
-
-    .cond.implied {
-        border-style: dashed;
-        border-color: var(--color-danger);
-        color: var(--color-text-primary);
-    }
-
-    .cond.immune {
-        opacity: 0.45;
-        text-decoration: line-through;
-    }
-
-    .cond-r {
-        margin-left: 3px;
-        color: var(--color-text-muted);
-        font-size: 10px;
+    .cond-head h3 {
+        margin: 0;
     }
 
     .save-due {
@@ -2822,6 +2785,70 @@
     }
 
     /* ---------- active effects ---------- */
+    /* ---------- conditions on the character ---------- */
+    .conds {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .conds li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px 10px;
+        padding: 4px 4px 4px 10px;
+        border: 1px solid var(--color-danger);
+        border-radius: 8px;
+        font-family: var(--font-ui);
+        font-size: 13px;
+    }
+
+    .conds li.implied {
+        border-style: dashed;
+    }
+
+    .conds li.immune {
+        opacity: 0.55;
+        border-color: var(--color-border);
+    }
+
+    .conds small {
+        font-size: 11px;
+        color: var(--color-text-muted);
+    }
+
+    .cn-name {
+        color: var(--color-text-primary);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .cn-save {
+        padding: 1px 8px;
+        border: 1px solid var(--color-gold);
+        border-radius: 999px;
+        font-size: 12px;
+        color: var(--color-gold);
+    }
+
+    .cn-save small {
+        color: var(--color-text-muted);
+    }
+
+    .cn-grow {
+        flex: 1;
+    }
+
+    .cn-none {
+        margin: 0;
+        font-family: var(--font-ui);
+        font-size: 13px;
+        color: var(--color-text-muted);
+    }
+
     .effects {
         margin: 0;
         padding: 0;

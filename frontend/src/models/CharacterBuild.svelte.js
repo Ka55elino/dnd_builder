@@ -249,6 +249,38 @@ export class CharacterBuild {
         this.pruneClasses();
     }
 
+    /**
+     * Change the class gained at character level n (≥ 2; level 1 is the primary class — setClass).
+     * Class levels shift for every later level of the old and the new class, so the class /
+     * subclass choices of those levels are dropped (made again on the level screens).
+     * The caller checks multiclass prerequisites and clears subclasses that are no longer
+     * reached (it knows the classes' subclass levels).
+     */
+    setLevelClass(n, classId) {
+        const old = this.levelClasses[n - 1];
+        if (n < 2 || n > this.levelClasses.length || !classId || old === classId) return;
+        if (!this.classes.some((c) => c.classId === classId)) this.classes.push({ classId, subclassId: null });
+        this.levelClasses[n - 1] = classId;
+        this.dropClassChoices((m) => m >= n && [old, classId].includes(this.levelClasses[m - 1]));
+        this.pruneClasses();
+        this.touch();
+    }
+
+    /** Lower the character level by one (the last level and its choices are removed). */
+    removeLastLevel() {
+        if (this.levelClasses.length <= 1) return;
+        this.dropChoicesAbove(this.levelClasses.length - 1);
+        this.touch();
+    }
+
+    /** Drop the class / subclass choices (keys L<m>:class:… / L<m>:subclass:…) of levels where pred(m). */
+    dropClassChoices(pred) {
+        for (const k of Object.keys(this.choices)) {
+            const m = /^L(\d+):(class|subclass):/.exec(k);
+            if (m && pred(Number(m[1]))) delete this.choices[k];
+        }
+    }
+
     /** Remove secondary classes that have no levels. */
     pruneClasses() {
         this.classes = this.classes.filter((c, i) => i === 0 || this.levelClasses.includes(c.classId));
@@ -325,6 +357,8 @@ export class CharacterBuild {
     setClass(classId, subclassId = null) {
         const old = this.classes[0]?.classId ?? null;
         classId = classId ?? null;
+        // the old class's choices don't fit the new one (skills, features…)
+        if (old !== classId) this.dropClassChoices((m) => [old, null].includes(this.levelClasses[m - 1] ?? null));
         this.levelClasses = this.levelClasses.map((id) => (id === old || id == null ? classId : id));
         const rest = this.classes.slice(1).filter((c) => c.classId !== classId);
         this.classes = classId ? [{ classId, subclassId }, ...rest] : rest;

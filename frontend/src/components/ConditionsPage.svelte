@@ -6,6 +6,7 @@
      * Stored in the DB (the conditions table), exported with the rest of the homebrew.
      * onBack() — to the menu
      */
+    import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomCondition } from "../data/refs.js";
@@ -19,7 +20,6 @@
     let error = $state(null);
     let query = $state("");
     let editor = $state(null); // { initial, copy } | null
-    let confirmDelete = $state(null);
     let status = $state("");
 
     const isCustom = (d) => !!d.data?.custom;
@@ -51,7 +51,7 @@
     }
 
     async function remove(d) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete “${d.name}”?`, text: "Your custom condition is removed from the list." }))) return;
         try {
             await deleteCustomCondition(d.id);
             await reload();
@@ -112,14 +112,8 @@
                             </ul>
                             <div class="actions">
                                 {#if isCustom(d)}
-                                    {#if confirmDelete === d.id}
-                                        <span class="ask">Delete?</span>
-                                        <button class="ghost small danger" onclick={() => remove(d)}>Yes</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
-                                    {:else}
-                                        <button class="ghost small" onclick={() => (editor = { initial: d, copy: false })}>Edit</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = d.id)} title="Delete">✕</button>
-                                    {/if}
+                                    <button class="ghost small" onclick={() => (editor = { initial: d, copy: false })}>Edit</button>
+                                    <button class="ghost small" onclick={() => remove(d)} title="Delete">✕</button>
                                 {:else}
                                     <button class="ghost small" onclick={() => (editor = { initial: d, copy: true })}
                                         title="Create your own based on this one">Copy</button>
@@ -143,6 +137,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;
@@ -188,11 +185,6 @@
     .ghost.small {
         padding: 2px 8px;
         font-size: 12px;
-    }
-
-    .ghost.danger:hover {
-        border-color: var(--color-danger);
-        color: var(--color-danger);
     }
 
     .add {
@@ -292,11 +284,6 @@
         align-items: center;
         justify-content: flex-end;
         gap: 6px;
-    }
-
-    .ask {
-        font-size: 12px;
-        color: var(--color-text-muted);
     }
 
     .muted {

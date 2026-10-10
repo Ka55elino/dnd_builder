@@ -4,6 +4,7 @@
      * Opening one shows its own screen (CampaignPage) with the sidebar.
      * onBack() — to the menu
      */
+    import { ask } from "../../confirm.svelte.js";
     import TopBar from "../common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadCampaigns, saveCampaign, deleteCampaign, CAMPAIGN_STATUSES } from "../../data/campaigns.js";
@@ -22,7 +23,6 @@
     let description = $state("");
     let busy = $state(false);
     let formError = $state("");
-    let confirmDelete = $state(null);
 
     const statusName = (id) => CAMPAIGN_STATUSES.find((s) => s.id === id)?.name ?? id;
     const date = (t) => (t ? new Date(t * 1000).toLocaleDateString() : "");
@@ -60,7 +60,7 @@
     }
 
     async function remove(c) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete “${c.name}”?`, text: "The campaign is deleted with everything in it: NPCs, locations, maps, encounters, quests, factions and sessions." }))) return;
         try {
             await deleteCampaign(c.id);
             await reload();
@@ -133,13 +133,7 @@
                             </span>
                         </button>
                         <div class="actions">
-                            {#if confirmDelete === c.id}
-                                <span class="ask">Delete with everything in it?</span>
-                                <button class="ghost small danger" onclick={() => remove(c)}>Delete</button>
-                                <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
-                            {:else}
-                                <button class="ghost small" onclick={() => (confirmDelete = c.id)} title="Delete">✕</button>
-                            {/if}
+                            <button class="ghost small" onclick={() => remove(c)} title="Delete">✕</button>
                         </div>
                     </article>
                 {/each}
@@ -150,6 +144,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;

@@ -260,3 +260,28 @@ func saveCharacterState(db *sql.DB, id, stateJSON string) error {
 	}
 	return nil
 }
+
+// deleteCharacter deletes a character with its play state (the same row) and its campaign
+// links; an uploaded portrait no other record uses goes too (deleteOrphanImages).
+func deleteCharacter(db *sql.DB, id string) error {
+	tx, err := db.Begin()
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	if _, err := tx.Exec(Q("DeleteCharacterLinks"), id, id); err != nil {
+		return err
+	}
+	res, err := tx.Exec(Q("DeleteCharacter"), id)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return fmt.Errorf("character %q not found", id)
+	}
+	if err := tx.Commit(); err != nil {
+		return err
+	}
+	deleteOrphanImages(db)
+	return nil
+}

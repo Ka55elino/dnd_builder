@@ -2,6 +2,7 @@
   "id": "incapacitated",
   "name": "Incapacitated",
   "category": "condition",
+  "repeatSave": "wis",
   "breaksConcentration": true,
   "modifiers": [
     {

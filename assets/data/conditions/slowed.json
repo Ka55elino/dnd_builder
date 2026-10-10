@@ -2,6 +2,7 @@
   "id": "slowed",
   "name": "Slowed",
   "category": "effect",
+  "repeatSave": "wis",
   "modifiers": [
     {
       "kind": "speed",

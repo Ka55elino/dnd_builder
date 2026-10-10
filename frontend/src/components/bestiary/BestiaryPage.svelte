@@ -8,6 +8,7 @@
      * screen (← back to the list, the actions in ☰).
      * onBack() — to the menu
      */
+    import { ask } from "../../confirm.svelte.js";
     import TopBar from "../common/TopBar.svelte";
     import { onMount, tick } from "svelte";
     import MonsterHead from "./MonsterHead.svelte";
@@ -66,7 +67,6 @@
         pageEl?.querySelector(`[data-mid="${CSS.escape(String(id))}"]`)?.scrollIntoView({ block: "center" });
     }
     let editor = $state(null); // { initial, copy } | null
-    let confirmDelete = $state(null);
 
     let statusTimer;
     function flash(msg) {
@@ -121,7 +121,7 @@
     }
 
     async function remove(m) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete “${m.name}”?`, text: "Your custom monster is removed from the bestiary and from encounter presets." }))) return;
         try {
             await deleteMonster(m.id);
             monsters = await loadMonsters();
@@ -170,14 +170,8 @@
         <option value="__new">New encounter</option>
     </select>
     {#if isCustomMonster(m)}
-        {#if confirmDelete === m.id}
-            <span class="ask">Delete?</span>
-            <button class="ghost small danger" onclick={() => remove(m)}>Yes</button>
-            <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
-        {:else}
-            <button class="ghost small" onclick={() => (editor = { initial: m, copy: false })}>Edit</button>
-            <button class="ghost small" data-keep-open onclick={() => (confirmDelete = m.id)} title="Delete">✕</button>
-        {/if}
+        <button class="ghost small" onclick={() => (editor = { initial: m, copy: false })}>Edit</button>
+        <button class="ghost small" onclick={() => remove(m)} title="Delete">✕</button>
     {:else}
         <button class="ghost small" onclick={() => (editor = { initial: m, copy: true })} title="Create your own monster based on this one">Copy</button>
     {/if}
@@ -278,6 +272,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         height: 100%;
         padding: 24px 32px;
         display: flex;
@@ -432,11 +429,6 @@
         font-size: 13px;
     }
 
-    .ask {
-        font-size: 13px;
-        color: var(--color-text-secondary);
-    }
-
     .muted {
         margin: 0;
         color: var(--color-text-muted);
@@ -502,11 +494,6 @@
     .ghost.small {
         padding: 4px 10px;
         font-size: 13px;
-    }
-
-    .ghost.danger:hover {
-        border-color: var(--color-danger);
-        color: var(--color-danger);
     }
 
     /* narrow: one scroll (the page's) — the list, or the chosen monster on its own screen */

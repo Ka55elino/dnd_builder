@@ -134,6 +134,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;

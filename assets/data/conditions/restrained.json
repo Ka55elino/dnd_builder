@@ -2,6 +2,7 @@
   "id": "restrained",
   "name": "Restrained",
   "category": "condition",
+  "repeatSave": "str",
   "modifiers": [
     {
       "kind": "speed",

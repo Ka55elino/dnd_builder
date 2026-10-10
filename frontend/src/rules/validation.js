@@ -10,6 +10,7 @@
  */
 import { ABILITY_KEYS, ABILITIES } from './abilities.js';
 import { BIO_GROUPS } from '../models/CharacterBuild.svelte.js';
+import { classEntries, meetsPrerequisites, prerequisitesText } from './multiclass.js';
 
 export const BUILDER_TABS = ['Basics', 'Abilities', 'Species', 'Class', 'Equipment'];
 
@@ -59,6 +60,19 @@ export function validateBuild(build, { races = [], classes = [] } = {}) {
 
     // --- Class (subclass is not checked) ---
     if (!build.classId) add(TAB.CLASS, 'No class chosen');
+
+    // multiclassing: every class needs its prerequisite (13 in the primary ability) — checked
+    // against the final scores (levels can be re-assigned when editing)
+    const entries = classEntries(build);
+    if (entries.length > 1) {
+        const scores = build.totalAbilities ?? {};
+        for (const e of entries) {
+            const cls = classes.find((c) => c.id === e.classId);
+            if (cls && !meetsPrerequisites(cls, scores)) {
+                add(TAB.CLASS, `Multiclassing: ${cls.name} needs ${prerequisitesText(cls)}`);
+            }
+        }
+    }
 
     // --- Equipment ---
     const eq = build.equipment ?? {};

@@ -2,6 +2,7 @@
   "id": "paralyzed",
   "name": "Paralyzed",
   "category": "condition",
+  "repeatSave": "wis",
   "implies": [
     "incapacitated"
   ],

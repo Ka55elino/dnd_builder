@@ -2,6 +2,7 @@
   "id": "rayOfEnfeeblement",
   "name": "Enfeebled",
   "category": "effect",
+  "repeatSave": "con",
   "spell": "rayOfEnfeeblement",
   "duration": "Concentration, up to 1 minute",
   "modifiers": [

@@ -28,4 +28,9 @@
     --font-weight-semibold: 600;
     --font-weight-bold:     700;
     --font-weight-black:    900;
+
+    /* --- Layout --- */
+    /* the widest a page's content gets (padding included): on big screens the page is
+       centered instead of stretched (character sheet, reference pages, builder…) */
+    --page-max-width: 1600px;
 }

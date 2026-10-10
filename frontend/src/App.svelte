@@ -12,6 +12,7 @@
     import GamePage from './components/GamePage.svelte';
     import JoinPage from './components/JoinPage.svelte';
     import WhisperPopups from './components/WhisperPopups.svelte';
+    import ConfirmDialog from './components/common/ConfirmDialog.svelte';
     import BestiaryPage from './components/bestiary/BestiaryPage.svelte';
     import HomebrewPage from './components/HomebrewPage.svelte';
     import ConditionsPage from './components/ConditionsPage.svelte';
@@ -78,6 +79,7 @@
             onEdit={showBuilder}
             onLevelUp={() => (screen = 'levelup')}
             onGiveItem={() => (screen = 'give')}
+            onDeleted={showCharacters}
         />
     {/key}
 {:else if screen === 'characters'}
@@ -106,6 +108,8 @@
 <AppFooter />
 
 <WhisperPopups />
+<!-- every confirmation of the app (confirm.svelte.js: ask) -->
+<ConfirmDialog />
 <QueryLoader />
 
 <style>

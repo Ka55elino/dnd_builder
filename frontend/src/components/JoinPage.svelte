@@ -119,7 +119,8 @@
         {/key}
     </div>
 {:else}
-<div class="page">
+<!-- the games list / the address: a narrow column in the middle (like "New Game") -->
+<div class="page" class:setup={!target || isHost}>
     <TopBar
         title={target ? 'Choose a character' : 'Join Game'}
         onBack={target && !joined ? () => (target = null) : onBack}
@@ -191,7 +192,10 @@
     .ptabs {
         display: flex;
         gap: 4px;
-        margin: 8px 24px 8px;
+        /* in line with the character sheet under it (centered on big screens) */
+        width: calc(100% - 48px);
+        max-width: calc(var(--page-max-width) - 64px);
+        margin: 8px auto;
         border-bottom: 1px solid var(--color-border);
     }
 
@@ -216,11 +220,18 @@
     }
 
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;
         flex-direction: column;
         gap: 28px;
+    }
+
+    .page.setup {
+        max-width: 720px;
     }
 
     h2 {
@@ -402,6 +413,7 @@
         }
 
         .ptabs {
+            width: auto;
             margin: 6px 12px;
         }
 

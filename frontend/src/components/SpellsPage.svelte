@@ -8,6 +8,7 @@
      * reference ones get “Copy” (a custom spell based on them). Stored in the DB.
      * onBack() — to the menu
      */
+    import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomSpell } from "../data/refs.js";
@@ -33,7 +34,6 @@
 
     // custom spell: open form { initial, copy } | null; id awaiting delete confirmation
     let editor = $state(null);
-    let confirmDelete = $state(null);
     let status = $state("");
     const isCustom = (s) => !!s.data?.custom;
 
@@ -60,7 +60,7 @@
     }
 
     async function remove(sp) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete “${sp.name}”?`, text: "Your custom spell is removed from the list. Characters who know it lose it." }))) return;
         try {
             await deleteCustomSpell(sp.id);
             await reload();
@@ -245,14 +245,8 @@
                             <ActionCard item={s} source={[isCustom(s) ? "custom" : "", classNames(s)].filter(Boolean).join(" · ")} />
                             <div class="spell-actions">
                                 {#if isCustom(s)}
-                                    {#if confirmDelete === s.id}
-                                        <span class="ask">Delete?</span>
-                                        <button class="ghost small danger" onclick={() => remove(s)}>Yes</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
-                                    {:else}
-                                        <button class="ghost small" onclick={() => (editor = { initial: s, copy: false })}>Edit</button>
-                                        <button class="ghost small" onclick={() => (confirmDelete = s.id)} title="Delete">✕</button>
-                                    {/if}
+                                    <button class="ghost small" onclick={() => (editor = { initial: s, copy: false })}>Edit</button>
+                                    <button class="ghost small" onclick={() => remove(s)} title="Delete">✕</button>
                                 {:else}
                                     <button class="ghost small" onclick={() => (editor = { initial: s, copy: true })} title="Create your own based on this one">Copy</button>
                                 {/if}
@@ -275,6 +269,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;
@@ -409,11 +406,6 @@
         font-size: 12px;
     }
 
-    .ghost.danger:hover {
-        border-color: var(--color-danger);
-        color: var(--color-danger);
-    }
-
     .add {
         padding: 8px 16px;
         background: var(--color-gold);
@@ -472,12 +464,6 @@
 
     .spell.custom > :global(.card) {
         padding-bottom: 40px; /* room for the custom spell buttons */
-    }
-
-    .ask {
-        font-family: var(--font-ui);
-        font-size: 12px;
-        color: var(--color-text-secondary);
     }
 
     .muted {

@@ -2,6 +2,7 @@
   "id": "unconscious",
   "name": "Unconscious",
   "category": "condition",
+  "repeatSave": "wis",
   "implies": [
     "incapacitated",
     "prone"

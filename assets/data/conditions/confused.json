@@ -2,6 +2,7 @@
   "id": "confused",
   "name": "Confused",
   "category": "effect",
+  "repeatSave": "wis",
   "spell": "confusion",
   "duration": "Concentration, up to 1 minute",
   "modifiers": [

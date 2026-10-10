@@ -15,8 +15,8 @@
      * painted into its cells; the map is being built step by step).
      *
      * Phones (≤ 720px): a bar on top (← · campaign · ☰); the sidebar is a drawer opened by ☰.
-     * The map is a preview under a dark cover with "Edit map": it opens the editor full screen
-     * (its ← returns).
+     * The map on the Overview is a preview under a dark cover with "Edit map" (on every device):
+     * it opens the editor full screen (its ← returns).
      *
      * id — campaign id; onBack() — to the list
      */
@@ -60,7 +60,7 @@
     let error = $state("");
     let section = $state("overview");
     let navOpen = $state(false); // phones: the sidebar drawer
-    let mapFull = $state(false); // phones: the map editor full screen
+    let mapFull = $state(false); // the map editor full screen ("Edit map")
 
     function go(id) {
         section = id;
@@ -256,7 +256,7 @@
             </header>
 
             <!-- the campaign map (work in progress: terrain on a coordinate grid) -->
-            <!-- phones: a preview under a cover; "Edit map" opens it full screen -->
+            <!-- a preview under a cover; "Edit map" opens the editor full screen -->
             <section class="map-box" class:full={mapFull}>
                 {#key campaign.id}
                     <MapEditor {campaign} onOpenSection={go} onClose={mapFull ? () => (mapFull = false) : null} />
@@ -308,8 +308,7 @@
 
     /* phones: the bar on top, the sidebar becomes a drawer */
     .m-bar,
-    .m-backdrop,
-    .map-cover {
+    .m-backdrop {
         display: none;
     }
 
@@ -843,41 +842,46 @@
         .ov-title h1 {
             font-size: 24px;
         }
+    }
 
-        /* the map: a preview under a dark cover */
+    /* the map: a preview under a dark cover (smaller on phones) */
+    .map-box {
+        position: relative;
+    }
+
+    @media (max-width: 720px) {
         .map-box {
-            position: relative;
             height: 55vh;
             min-height: 300px;
         }
+    }
 
-        .map-cover {
-            position: absolute;
-            inset: 0;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.6);
-        }
+    .map-cover {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+    }
 
-        .map-edit {
-            padding: 10px 22px;
-            font-size: 16px;
-        }
+    .map-edit {
+        padding: 10px 22px;
+        font-size: 16px;
+    }
 
-        /* "Edit map": the editor over the whole screen */
-        .map-box.full {
-            position: fixed;
-            inset: 0;
-            z-index: 970;
-            height: auto;
-            min-height: 0;
-            padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px)
-                env(safe-area-inset-left, 0px);
-            background: var(--color-bg);
-            border: none;
-            border-radius: 0;
-        }
+    /* "Edit map": the editor over the whole screen */
+    .map-box.full {
+        position: fixed;
+        inset: 0;
+        z-index: 970;
+        height: auto;
+        min-height: 0;
+        padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px)
+            env(safe-area-inset-left, 0px);
+        background: var(--color-bg);
+        border: none;
+        border-radius: 0;
     }
 </style>

@@ -7,6 +7,9 @@
      * tab     — (bindable) current tab: 'item' | 'armor' | 'weapon'
      * actions — snippet (x, tab) on the right of a row ("Add" buttons etc.)
      * marked  — (x, tab) => bool — highlight a row (e.g. "already in backpack")
+     *
+     * Armor / Weapons: a second filter by origin — All · Default (the standard gear) ·
+     * Named (magic and special items: isDefault false) · Custom (your own, if there are any).
      */
     import { damageShort, damageName, damageLabel } from "../../rules/labels.js";
     import IconLabel from "./IconLabel.svelte";
@@ -25,7 +28,23 @@
     const norm = (s) => String(s ?? "").toLowerCase().replace(/\u0451/g, "\u0435").trim();
     const match = (x) => !query || norm(x.name).includes(norm(query));
     const current = $derived(TABS.find((t) => t.id === tab) ?? TABS[0]);
-    const list = $derived((catalog?.[current.list] ?? []).filter(match));
+    // the current tab's list after the search, then the origin filter (armor / weapons)
+    const found = $derived((catalog?.[current.list] ?? []).filter(match));
+    const ORIGINS = [
+        { id: "all", label: "All" },
+        { id: "default", label: "Default" },
+        { id: "named", label: "Named" },
+        { id: "custom", label: "Custom" },
+    ];
+    let origin = $state("all");
+    const originOf = (x) => (x.data?.custom ? "custom" : x.isDefault === false ? "named" : "default");
+    const hasOrigin = $derived(tab === "armor" || tab === "weapon");
+    const originCounts = $derived(
+        Object.fromEntries(
+            ORIGINS.map((o) => [o.id, o.id === "all" ? found.length : found.filter((x) => originOf(x) === o.id).length]),
+        ),
+    );
+    const list = $derived(hasOrigin && origin !== "all" ? found.filter((x) => originOf(x) === origin) : found);
     const counts = $derived(
         Object.fromEntries(TABS.map((t) => [t.id, (catalog?.[t.list] ?? []).filter(match).length])),
     );
@@ -84,6 +103,22 @@
     const cardOf = (x) => (tab === "weapon" ? weaponCard(x) : tab === "armor" ? armorCard(x) : itemCard(x));
     const isCustom = (x) => !!x.data?.custom;
     const descOf = (x) => x.desc ?? x.data?.desc ?? "";
+
+    // a description is clamped to 4 lines; one that is cut off gets "Show more"
+    let expanded = $state({}); // id → true: shown in full
+    let cut = $state({}); // id → true: the clamped text doesn't fit
+    function clampWatch(node, id) {
+        const check = () => {
+            if (expanded[id]) return; // unclamped: keep the button ("Show less")
+            const over = node.scrollHeight > node.clientHeight + 1;
+            if (!!cut[id] !== over) cut = { ...cut, [id]: over };
+        };
+        const ro = new ResizeObserver(check);
+        ro.observe(node);
+        check();
+        return { destroy: () => ro.disconnect() };
+    }
+    const toggle = (id) => (expanded = { ...expanded, [id]: !expanded[id] });
     const initials = (name) => String(name ?? "?").trim().slice(0, 1).toUpperCase();
 </script>
 
@@ -97,6 +132,18 @@
     </nav>
     <input class="search" type="search" placeholder="Search by name…" bind:value={query} />
 </div>
+
+{#if hasOrigin}
+    <nav class="origins" aria-label="Origin">
+        {#each ORIGINS as o (o.id)}
+            {#if o.id !== "custom" || originCounts.custom || origin === "custom"}
+                <button class="chip small" class:active={origin === o.id} onclick={() => (origin = o.id)}>
+                    {o.label} <small>{originCounts[o.id]}</small>
+                </button>
+            {/if}
+        {/each}
+    </nav>
+{/if}
 
 <div class="grid">
     {#each list as x (x.id)}
@@ -147,7 +194,14 @@
                 </div>
             {/if}
 
-            {#if descOf(x)}<p class="desc" title={descOf(x)}>{descOf(x)}</p>{/if}
+            {#if descOf(x)}
+                <p class="desc" class:full={expanded[x.id]} use:clampWatch={x.id}>{descOf(x)}</p>
+                {#if cut[x.id] || expanded[x.id]}
+                    <button class="more" onclick={() => toggle(x.id)} aria-expanded={!!expanded[x.id]}>
+                        {expanded[x.id] ? "Show less ▴" : "Show more ▾"}
+                    </button>
+                {/if}
+            {/if}
 
             {#if actions}
                 <footer class="actions">{@render actions(x, tab)}</footer>
@@ -181,6 +235,19 @@
         font-family: var(--font-ui);
         font-size: 13px;
         cursor: pointer;
+    }
+
+    /* the origin filter (armor / weapons): a smaller second row */
+    .origins {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: -6px;
+    }
+
+    .chip.small {
+        padding: 3px 11px;
+        font-size: 12px;
     }
 
     .chip small {
@@ -400,6 +467,29 @@
         font-size: 14px;
         line-height: 1.4;
         color: var(--color-text-secondary);
+    }
+
+    .desc.full {
+        display: block;
+        -webkit-line-clamp: unset;
+        line-clamp: none;
+        overflow: visible;
+    }
+
+    .more {
+        align-self: flex-start;
+        margin-top: -4px;
+        padding: 0;
+        background: none;
+        border: none;
+        font-family: var(--font-ui);
+        font-size: 12px;
+        color: var(--color-gold);
+        cursor: pointer;
+    }
+
+    .more:hover {
+        color: var(--color-gold-hover);
     }
 
     .actions {

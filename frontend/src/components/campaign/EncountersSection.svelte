@@ -10,6 +10,7 @@
      *
      * campaign — the campaign ({ id, … }); onChanged() — after a change (the counts)
      */
+    import { ask } from "../../confirm.svelte.js";
     import { onMount } from "svelte";
     import "./campaign.css";
     import RefHistory from "./RefHistory.svelte";
@@ -32,7 +33,6 @@
     let edit = $state(null);
     let saving = $state(false);
     let editError = $state("");
-    let confirm = $state(""); // '' | 'remove' | 'delete'
 
     // the "From Bestiary" picker
     let picking = $state(false);
@@ -93,7 +93,6 @@
         };
         if (!edit.monsters.length) edit.monsters.push({ monsterId: "", count: 1 });
         editError = "";
-        confirm = "";
     }
 
     async function save() {
@@ -115,6 +114,12 @@
     }
 
     async function remove(deletePreset) {
+        const ok = await ask(
+            deletePreset
+                ? { title: `Delete “${edit.name}” everywhere?`, text: "The encounter preset is deleted from the Bestiary and from every campaign that uses it." }
+                : { title: `Remove “${edit.name}” from this campaign?`, text: "The preset stays in the Bestiary.", ok: "Remove" },
+        );
+        if (!ok) return;
         try {
             await removeCampaignEncounter(campaign.id, edit.id, deletePreset);
             await reload();
@@ -300,18 +305,8 @@
         </div>
         <footer>
             {#if edit.id}
-                {#if confirm === "remove"}
-                    <span class="cp-muted">Remove from this campaign?</span>
-                    <button class="cp-btn cp-sm cp-danger" onclick={() => remove(false)}>Remove</button>
-                    <button class="cp-btn cp-sm" onclick={() => (confirm = "")}>No</button>
-                {:else if confirm === "delete"}
-                    <span class="cp-muted">Delete the preset everywhere?</span>
-                    <button class="cp-btn cp-sm cp-danger" onclick={() => remove(true)}>Delete</button>
-                    <button class="cp-btn cp-sm" onclick={() => (confirm = "")}>No</button>
-                {:else}
-                    <button class="cp-btn cp-sm" onclick={() => (confirm = "remove")} title="The preset stays in the Bestiary">Remove</button>
-                    <button class="cp-btn cp-sm cp-danger" onclick={() => (confirm = "delete")}>Delete preset</button>
-                {/if}
+                <button class="cp-btn cp-sm" onclick={() => remove(false)} title="The preset stays in the Bestiary">Remove</button>
+                <button class="cp-btn cp-sm cp-danger" onclick={() => remove(true)}>Delete preset</button>
             {/if}
             <span class="cp-grow cp-error">{editError}</span>
             <button class="cp-btn" onclick={() => (edit = null)}>Cancel</button>

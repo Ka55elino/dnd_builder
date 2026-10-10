@@ -10,6 +10,11 @@
      *                 | { op: 'level', id, level } | { op: 'save', id, success }; may return a promise
      * onClose()
      *
+     * The list: search by name / description, each one with its description; a click opens
+     * its options. "Save at the end of each turn" is offered only where it makes sense:
+     * definitions with data.repeatSave (the usual ability — Frightened: WIS, Poisoned: CON…),
+     * custom ones, and an instance that already has a save.
+     *
      * Esc closes.
      */
     import { ABILITIES, ABILITY_KEYS } from "../rules/abilities.js";
@@ -34,8 +39,10 @@
 
     let picked = $state(null); // the definition being set up
     let rounds = $state("");
-    let saveAbility = $state("");
+    let saveOn = $state(false); // "Save at the end of each turn"
+    let saveAbility = $state("con");
     let saveDc = $state(13);
+    let query = $state("");
     let level = $state(1);
     let choice = $state("");
     let busy = $state(false);
@@ -43,8 +50,10 @@
 
     const short = (k) => ABILITIES[k]?.short ?? k;
     const byId = $derived(new Map(defs.map((d) => [d.id, d])));
+    const norm = (t) => String(t ?? "").toLowerCase();
+    const matches = (d) => !query.trim() || norm(d.name).includes(norm(query).trim()) || norm(d.desc).includes(norm(query).trim());
     const groups = $derived.by(() => {
-        const all = [...defs].sort((a, b) => a.name.localeCompare(b.name));
+        const all = [...defs].filter(matches).sort((a, b) => a.name.localeCompare(b.name));
         return [
             { id: "condition", title: "Conditions", list: all.filter((d) => (d.category ?? "condition") === "condition") },
             { id: "effect", title: "Effects", list: all.filter((d) => d.category === "effect" && !d.data?.spell) },
@@ -53,12 +62,16 @@
     });
     const on = $derived(new Set((current ?? []).map((e) => e.id)));
     const maxLevel = (d) => Number(d?.data?.levels) || null;
+    // can it be ended by repeating a save at the end of each turn?
+    const curOf = (d) => (current ?? []).find((e) => e.id === d?.id);
+    const canSave = (d) => !!(d?.data?.repeatSave || d?.data?.custom || curOf(d)?.save);
 
     function pick(d) {
         picked = d;
         const cur = (current ?? []).find((e) => e.id === d.id);
         rounds = cur?.rounds ?? "";
-        saveAbility = cur?.save?.ability ?? "";
+        saveOn = !!cur?.save;
+        saveAbility = cur?.save?.ability ?? d.data?.repeatSave ?? "con";
         saveDc = cur?.save?.dc ?? 13;
         level = cur?.level ?? 1;
         choice = cur?.choice ?? choicesOf(d)?.[0]?.[0] ?? "";
@@ -85,7 +98,10 @@
         const data = { op: "add", id: picked.id };
         if (maxLevel(picked)) data.level = Math.min(maxLevel(picked), Math.max(1, Math.floor(Number(level)) || 1));
         data.rounds = n > 0 ? n : null;
-        data.save = saveAbility && Number(saveDc) > 0 ? { ability: saveAbility, dc: Math.floor(Number(saveDc)) } : null;
+        data.save =
+            canSave(picked) && saveOn && saveAbility && Number(saveDc) > 0
+                ? { ability: saveAbility, dc: Math.floor(Number(saveDc)) }
+                : null;
         if (choicesOf(picked)) data.choice = choice || null;
         if (await run(data)) picked = null;
     }
@@ -168,29 +184,56 @@
                     <label title="Counts down at the end of each of its turns; empty — until removed"
                         >Rounds <input type="number" min="1" bind:value={rounds} placeholder="∞" /></label
                     >
-                    <label
-                        >Save at the end of each turn
-                        <select bind:value={saveAbility}>
-                            <option value="">— none —</option>
-                            {#each ABILITY_KEYS as k}<option value={k}>{short(k)}</option>{/each}
-                        </select>
-                    </label>
-                    {#if saveAbility}<label>DC <input type="number" min="1" bind:value={saveDc} /></label>{/if}
                 </div>
+                {#if canSave(picked)}
+                    <!-- only where a repeated save can end it (data.repeatSave / custom) -->
+                    <div class="row">
+                        <label class="check"
+                            ><input type="checkbox" bind:checked={saveOn} /> Save at the end of each turn ends it</label
+                        >
+                        {#if saveOn}
+                            <label
+                                >Ability
+                                <select bind:value={saveAbility}>
+                                    {#each ABILITY_KEYS as k}<option value={k}>{short(k)}</option>{/each}
+                                </select>
+                            </label>
+                            <label>DC <input type="number" min="1" bind:value={saveDc} /></label>
+                        {/if}
+                    </div>
+                {/if}
                 <div class="row end">
                     <button class="ghost" onclick={() => (picked = null)}>Back</button>
                     <button class="primary" disabled={busy} onclick={apply}>{on.has(picked.id) ? "Update" : "Apply"}</button>
                 </div>
             </div>
         {:else}
-            {#each groups as g (g.id)}
-                <h3>{g.title}</h3>
-                <div class="grid">
-                    {#each g.list as d (d.id)}
-                        <button class="chip" class:on={on.has(d.id)} title={d.desc} onclick={() => pick(d)}>{d.name}</button>
-                    {/each}
-                </div>
-            {/each}
+            <!-- svelte-ignore a11y_autofocus -->
+            <input class="search" type="search" placeholder="Search conditions and effects…" bind:value={query} autofocus />
+            <div class="list">
+                {#each groups as g (g.id)}
+                    <h3>{g.title}</h3>
+                    <ul>
+                        {#each g.list as d (d.id)}
+                            <li>
+                                <button class="item" class:on={on.has(d.id)} onclick={() => pick(d)}>
+                                    <span class="i-head">
+                                        <b>{d.name}</b>
+                                        {#if on.has(d.id)}<span class="i-tag on">on</span>{/if}
+                                        {#if d.data?.repeatSave}<span class="i-tag" title="Usually ended by a save at the end of each turn"
+                                                >{short(d.data.repeatSave)} save</span
+                                            >{/if}
+                                        {#if maxLevel(d)}<span class="i-tag">levels 1–{maxLevel(d)}</span>{/if}
+                                    </span>
+                                    {#if d.desc}<span class="i-desc">{d.desc}</span>{/if}
+                                </button>
+                            </li>
+                        {/each}
+                    </ul>
+                {:else}
+                    <p class="muted">Nothing matches “{query}”.</p>
+                {/each}
+            </div>
         {/if}
 
         {#if error}<p class="error">{error}</p>{/if}
@@ -296,31 +339,94 @@
         flex: 1;
     }
 
-    .grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
+    .search {
+        width: 100%;
+        padding: 7px 10px;
+        font-size: 14px;
     }
 
-    .chip {
-        padding: 3px 10px;
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .list ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 7px 10px;
         background: transparent;
         border: 1px solid var(--color-border);
-        border-radius: 999px;
-        color: var(--color-text-secondary);
+        border-radius: 8px;
+        color: var(--color-text-primary);
         font: inherit;
-        font-size: 12px;
+        text-align: left;
         cursor: pointer;
     }
 
-    .chip:hover {
+    .item:hover {
         border-color: var(--color-gold);
     }
 
-    .chip.on {
+    .item.on {
         border-color: var(--color-danger);
-        background: color-mix(in srgb, var(--color-danger) 15%, transparent);
-        color: var(--color-text-primary);
+        background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    }
+
+    .i-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .i-tag {
+        padding: 0 6px;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        font-size: 10px;
+        color: var(--color-text-muted);
+    }
+
+    .i-tag.on {
+        border-color: var(--color-danger);
+        color: var(--color-danger);
+    }
+
+    .i-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-family: var(--font-spell);
+        font-size: 13px;
+        line-height: 1.35;
+        color: var(--color-text-secondary);
+    }
+
+    label.check {
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--color-text-secondary);
+    }
+
+    label.check input {
+        width: auto;
     }
 
     .opts {

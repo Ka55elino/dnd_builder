@@ -4,6 +4,7 @@
      * and custom equipment: create, edit, copy, delete (stored in the DB).
      * onBack() — to the menu
      */
+    import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomEquipment } from "../data/refs.js";
@@ -20,8 +21,6 @@
 
     // open form: { kind, initial, copy } | null
     let editor = $state(null);
-    // id of the record awaiting delete confirmation
-    let confirmDelete = $state(null);
 
     const KIND_ADD = { item: "item", armor: "armor", weapon: "weapon" };
 
@@ -50,7 +49,7 @@
     }
 
     async function remove(kind, x) {
-        confirmDelete = null;
+        if (!(await ask({ title: `Delete “${x.name}”?`, text: "Your custom item is removed from the catalog." }))) return;
         try {
             await deleteCustomEquipment(kind, x.id);
             await reload();
@@ -64,14 +63,8 @@
 
 {#snippet actions(x, kind)}
     {#if x.data?.custom}
-        {#if confirmDelete === x.id}
-            <span class="ask">Delete?</span>
-            <button class="ghost small danger" onclick={() => remove(kind, x)}>Yes</button>
-            <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
-        {:else}
-            <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: false })}>Edit</button>
-            <button class="ghost small" onclick={() => (confirmDelete = x.id)} title="Delete">✕</button>
-        {/if}
+        <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: false })}>Edit</button>
+        <button class="ghost small" onclick={() => remove(kind, x)} title="Delete">✕</button>
     {:else}
         <button class="ghost small" onclick={() => (editor = { kind, initial: x, copy: true })} title="Create your own based on this one">Copy</button>
     {/if}
@@ -110,6 +103,9 @@
 
 <style>
     .page {
+        width: 100%;
+        max-width: var(--page-max-width); /* big screens: centered, not stretched */
+        margin: 0 auto;
         min-height: 100%;
         padding: 32px;
         display: flex;
@@ -165,17 +161,6 @@
     .ghost.small {
         padding: 4px 10px;
         font-size: 13px;
-    }
-
-    .ghost.danger:hover {
-        border-color: var(--color-danger);
-        color: var(--color-danger);
-    }
-
-    .ask {
-        font-family: var(--font-ui);
-        font-size: 13px;
-        color: var(--color-text-secondary);
     }
 
     .muted {

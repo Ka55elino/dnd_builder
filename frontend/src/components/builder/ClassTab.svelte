@@ -8,6 +8,7 @@
      *
      * The subclass comes at the class's subclassLevel (usually 3): below it there is no
      * picker (just a note), and a subclass left from before is dropped.
+     * (The class of each level and removing levels — on the "Levels" step, LevelClassBar.)
      */
     import { onMount } from "svelte";
     import { loadRefs } from "../../data/refs.js"; // cached: loaded once at startup
@@ -30,8 +31,13 @@
     // the level the class picks its subclass at (usually 3)
     const subLevel = $derived(cls?.subclassLevel || 3);
     const subclassOpen = $derived(build.classLevel(build.classId) >= subLevel);
+    // a subclass whose class level is below its subclass level is dropped (every class:
+    // a level can be removed or given to another class)
     $effect(() => {
-        if (cls && !subclassOpen && build.subclassId) build.setSubclass(null);
+        for (const e of build.classEntries()) {
+            const c = classes.find((x) => x.id === e.classId);
+            if (c && e.subclassId && e.level < (c.subclassLevel || 3)) build.setSubclassFor(e.classId, null);
+        }
     });
 
     const ARMOR = { light: "light", medium: "medium", heavy: "heavy", shield: "shields" };

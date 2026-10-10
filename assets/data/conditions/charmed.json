@@ -2,6 +2,7 @@
   "id": "charmed",
   "name": "Charmed",
   "category": "condition",
+  "repeatSave": "wis",
   "modifiers": [
     {
       "kind": "flag",

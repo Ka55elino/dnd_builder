@@ -4,6 +4,7 @@
      *
      * campaign — the campaign ({ id, … }); onChanged() — after a save/delete (the counts change)
      */
+    import { ask } from "../../confirm.svelte.js";
     import { onMount } from "svelte";
     import "./campaign.css";
     import RefHistory from "./RefHistory.svelte";
@@ -27,7 +28,6 @@
     let edit = $state(null); // the form while the editor is open
     let saving = $state(false);
     let editError = $state("");
-    let confirmDelete = $state(false);
 
     const name = (list, id) => list.find((x) => x.id === id)?.name ?? "";
     const tree = $derived(locationTree(locations));
@@ -81,7 +81,6 @@
             rest: d, // fields this form doesn't know are kept
         };
         editError = "";
-        confirmDelete = false;
     }
 
     async function save() {
@@ -115,6 +114,7 @@
     }
 
     async function remove() {
+        if (!(await ask({ title: `Delete “${edit.name}”?`, text: "The NPC is deleted from the campaign." }))) return;
         try {
             await deleteNpc(edit.id);
             await reload();
@@ -266,13 +266,7 @@
         </div>
         <footer>
             {#if edit.id}
-                {#if confirmDelete}
-                    <span class="cp-muted">Delete {edit.name}?</span>
-                    <button class="cp-btn cp-sm cp-danger" onclick={remove}>Delete</button>
-                    <button class="cp-btn cp-sm" onclick={() => (confirmDelete = false)}>No</button>
-                {:else}
-                    <button class="cp-btn cp-sm cp-danger" onclick={() => (confirmDelete = true)}>Delete</button>
-                {/if}
+                <button class="cp-btn cp-sm cp-danger" onclick={remove}>Delete</button>
             {/if}
             <span class="cp-grow cp-error">{editError}</span>
             <button class="cp-btn" onclick={() => (edit = null)}>Cancel</button>

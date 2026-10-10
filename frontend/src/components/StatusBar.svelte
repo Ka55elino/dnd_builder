@@ -3,8 +3,8 @@
      * Global status header, shown on every screen:
      * the game server status (host / player / not connected) and, while
      * hosting, the "ip:port" to share — click copies it to the clipboard.
-     * While in a game, ✕ ends it (DM) or leaves it (player); the first click
-     * asks, the second confirms (in-app, no OS dialog — works the same on every platform).
+     * While in a game, ✕ ends it (DM) or leaves it (player) after a confirmation popup
+     * (in-app, no OS dialog — works the same on every platform; Esc / a click outside cancels).
      * ⛶ next to the app name: full screen on / off (the window; F11 / Esc / the system
      * button work too — the icon follows the window).
      */
@@ -13,20 +13,22 @@
     import { StopGame, LeaveGame } from '../api.js';
     import { server, STATUS_LABELS, gameAddress } from '../server.svelte.js';
     import { isMobileDevice } from '../device.js';
+    import { ask } from '../confirm.svelte.js';
 
     let inGame = $derived(!!server.role && !!server.game);
-    let confirming = $state(false);
-    let confirmTimer;
-
-    function askClose() {
-        confirming = true;
-        clearTimeout(confirmTimer);
-        confirmTimer = setTimeout(() => (confirming = false), 4000); // forget if not confirmed
+    async function askClose() {
+        const host = server.role === 'host';
+        const ok = await ask({
+            title: host ? 'End the game?' : 'Leave the game?',
+            text: host
+                ? `“${server.game?.name ?? ''}” ends for everyone: the players are disconnected.`
+                : `You leave “${server.game?.name ?? ''}”. You can join again from “Join Game”.`,
+            ok: host ? 'End game' : 'Leave',
+        });
+        if (ok && inGame) close();
     }
 
     async function close() {
-        clearTimeout(confirmTimer);
-        confirming = false;
         try {
             await (server.role === 'host' ? StopGame() : LeaveGame());
         } catch (e) {
@@ -34,10 +36,6 @@
         }
     }
 
-    // a new game shouldn't start in the "confirm" state
-    $effect(() => {
-        if (!inGame) confirming = false;
-    });
 
     let address = $derived(server.role === 'host' && server.game ? gameAddress(server.game) : '');
     let copied = $state(false);
@@ -145,7 +143,8 @@
 
     <span class="server {server.state}" {title}>
         <span class="dot" aria-hidden="true"></span>
-        {label}
+        <!-- its own element: a long game name ends in "…" instead of widening the page -->
+        <span class="label">{label}</span>
     </span>
 
     {#if address}
@@ -155,22 +154,15 @@
     {/if}
 
     {#if inGame}
-        {#if confirming}
-            <span class="confirm">
-                {server.role === 'host' ? 'End the game for everyone?' : 'Leave the game?'}
-                <button class="yes" onclick={close}>{server.role === 'host' ? 'End' : 'Leave'}</button>
-                <button class="no" onclick={() => (confirming = false)}>Cancel</button>
-            </span>
-        {:else}
-            <button
-                class="close"
-                onclick={askClose}
-                title={server.role === 'host' ? 'End the game' : 'Leave the game'}
-                aria-label={server.role === 'host' ? 'End the game' : 'Leave the game'}>✕</button
-            >
-        {/if}
+        <button
+            class="close"
+            onclick={askClose}
+            title={server.role === 'host' ? 'End the game' : 'Leave the game'}
+            aria-label={server.role === 'host' ? 'End the game' : 'Leave the game'}>✕</button
+        >
     {/if}
 </header>
+
 
 <style>
     .status-bar {
@@ -186,9 +178,11 @@
         color: var(--color-text-muted);
         user-select: none;
         white-space: nowrap;
+        overflow: hidden; /* nothing in the bar may widen the page */
     }
 
     .app {
+        flex: none;
         font-family: var(--font-heading);
         font-weight: var(--font-weight-semibold);
         letter-spacing: 0.04em;
@@ -229,6 +223,7 @@
     }
 
     .ip {
+        flex: none; /* the game name shrinks, not this */
         padding: 2px 8px;
         background: transparent;
         border: 1px solid var(--color-border);
@@ -252,6 +247,7 @@
     }
 
     .close {
+        flex: none; /* the game name shrinks, not this */
         width: 22px;
         height: 22px;
         padding: 0;
@@ -271,43 +267,15 @@
         color: var(--color-danger);
     }
 
-    .confirm {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--color-text-secondary);
-    }
-
-    .confirm button {
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-family: var(--font-ui);
-        font-size: 12px;
-        cursor: pointer;
-    }
-
-    .confirm .yes {
-        background: var(--color-danger);
-        border: 1px solid var(--color-danger);
-        color: var(--color-text-primary);
-    }
-
-    .confirm .no {
-        background: transparent;
-        border: 1px solid var(--color-border);
-        color: var(--color-text-secondary);
-    }
-
-    .confirm .no:hover {
-        border-color: var(--color-gold);
-        color: var(--color-gold-hover);
-    }
-
     .server {
         margin-left: auto;
         display: flex;
         align-items: center;
         gap: 6px;
+        min-width: 0;
+    }
+
+    .label {
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
