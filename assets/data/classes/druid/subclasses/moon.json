@@ -1,7 +1,7 @@
 {
   "id": "moon",
   "name": "Circle of the Moon",
-  "image": "/img/classes/druid/subclasses/moon.png",
+  "image": "/img/classes/druid/subclasses/moon.webp",
   "class": "druid",
   "wildShape": {
     "cr": "level/3",

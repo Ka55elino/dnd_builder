@@ -8,6 +8,10 @@
 import { ABILITY_KEYS, modifier } from './abilities.js';
 import { SKILLS } from './skills.js';
 import { applyModifiers } from './modifiers.js';
+import { multiclassInfo } from './multiclass.js';
+
+/** Hit Point Dice as text: [{ die: 10, count: 3 }, { die: 6, count: 2 }] → "3d10 + 2d6". */
+export const hitDiceText = (hitDice = []) => hitDice.map((d) => `${d.count}d${d.die}`).join(' + ');
 
 /** Proficiency bonus by level: +2 at 1–4, +3 at 5–8 … +6 at 17–20. */
 export const proficiencyBonus = (level) => 2 + Math.floor((Math.max(1, level) - 1) / 4);
@@ -23,6 +27,9 @@ const traitGrants = (level, ...sources) =>
  * Computes everything for the sheet.
  * ctx: {
  *   race, subrace, cls,
+ *   classList — multiclassing: [{ cls, level }] in the order taken, [0] — the primary class
+ *             (saving throws, full proficiencies); default — [{ cls, level: build.level }]
+ *   levelClasses — the class id gained at each character level (hit points); default — all cls
  *   armor   — worn armor (or null),
  *   shield  — shield in hand (shield object or true / false),
  *   hands   — weapons in hand: [{ hand: 'main' | 'off', weapon }]
@@ -42,7 +49,7 @@ const traitGrants = (level, ...sources) =>
 export function computeSheet(
     build,
     {
-        race, subrace, cls, armor = null, shield = false, hands = [], emptyHands = [],
+        race, subrace, cls, classList = null, levelClasses = null, armor = null, shield = false, hands = [], emptyHands = [],
         skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
         spellAbility = null, // the class's spellcasting ability (Shillelagh: "$spell")
         scores: givenScores = null, // final scores with feature bonuses (models/Character.js withFeatureScores)
@@ -50,6 +57,8 @@ export function computeSheet(
 ) {
     const level = build.level ?? 1;
     const prof = proficiencyBonus(level);
+    const classes = (classList ?? [{ cls, level }]).filter((c) => c?.cls);
+    const primary = classes[0]?.cls ?? cls ?? null;
     const scores = givenScores ?? build.totalAbilities ?? build.abilities ?? {};
     const mods = Object.fromEntries(ABILITY_KEYS.map((k) => [k, modifier(scores[k]) ?? 0]));
 
@@ -57,7 +66,8 @@ export function computeSheet(
     const effects = grants.filter((g) => g.type === 'effect').map((g) => g.effect);
 
     // --- saving throws ---
-    const saveProf = new Set(cls?.data?.savingThrows ?? []);
+    // saving throws — only from the primary (first) class
+    const saveProf = new Set(primary?.data?.savingThrows ?? []);
     const saves = ABILITY_KEYS.map((k) => ({
         key: k,
         proficient: saveProf.has(k),
@@ -78,8 +88,9 @@ export function computeSheet(
     const passivePerception = 10 + (skills.find((s) => s.id === 'perception')?.value ?? mods.wis);
 
     // --- AC ---
-    // no armor: 10 + Dex, or the class's "Unarmored Defense" (monk: Dex+Wis, barbarian: Dex+Con)
-    const unarmored = cls?.data?.unarmoredDefense ?? [];
+    // no armor: 10 + Dex, or the class's "Unarmored Defense" (monk: Dex+Wis, barbarian: Dex+Con);
+    // multiclassing — it doesn't stack: the first class that has it
+    const unarmored = classes.find((c) => c.cls.data?.unarmoredDefense?.length)?.cls.data.unarmoredDefense ?? [];
     let ac = unarmored.length ? 10 + unarmored.reduce((sum, k) => sum + (mods[k] ?? 0), 0) : 10 + mods.dex;
     // clothing (category 'clothing') is worn in the armor slot but is not armor
     const wearing = !!armor && armor.category !== 'shield' && armor.category !== 'clothing';
@@ -116,24 +127,36 @@ export function computeSheet(
             .filter((e) => e.kind === 'bonus' && e.target === 'speed')
             .reduce((sum, e) => sum + (Number(e.value) || 0), 0);
 
-    // --- hit points: lvl 1 — max die, then average (die/2 + 1) ---
-    const hitDie = cls?.hitDie ?? 8;
+    // --- hit points: lvl 1 — max die, then average (die/2 + 1) of the class gained at each level ---
+    const hitDie = primary?.hitDie ?? 8;
+    const dieOf = (id) => classes.find((c) => c.cls.id === id)?.cls.hitDie ?? hitDie;
+    const dice = Array.from({ length: level }, (_, i) => (levelClasses?.[i] ? dieOf(levelClasses[i]) : hitDie));
     const hp = Math.max(
         1,
-        hitDie + mods.con + (level - 1) * (Math.floor(hitDie / 2) + 1 + mods.con) +
+        dice.reduce((sum, d, i) => sum + (i === 0 ? d : Math.floor(d / 2) + 1) + mods.con, 0) +
             (perks.has('tough') ? 2 * level : 0), // "Tough" feat
     );
+    // Hit Point Dice by size: [{ die: 10, count: 3 }, { die: 6, count: 2 }] (largest first)
+    const hitDice = Object.entries(dice.reduce((m, d) => ((m[d] = (m[d] ?? 0) + 1), m), {}))
+        .map(([die, count]) => ({ die: Number(die), count }))
+        .sort((a, b) => b.die - a.die);
+
+    // --- proficiencies: the primary class in full, other classes — their multiclass part ---
+    const profFrom = (key, mcKey) =>
+        new Set(classes.flatMap((c, i) => (i === 0 ? c.cls.data?.[key] : multiclassInfo(c.cls).proficiencies[mcKey]) ?? []));
+    const armorTraining = [...profFrom('armorTraining', 'armor')];
 
     // --- darkvision ---
     const darkvision =
         effects.find((e) => e.kind === 'sense' && e.sense === 'darkvision')?.range ?? 0;
 
     // --- attacks: weapons in hand; empty hands — unarmed strike ---
-    const weaponProf = new Set(cls?.data?.weaponProficiencies ?? []);
+    const weaponProf = profFrom('weaponProficiencies', 'weapons');
     // spells that change the weapons held (Shillelagh): { kind: 'weapon' } modifiers
     const weaponMods = modifiers.filter((m) => m.kind === 'weapon');
     // Monk "Martial Arts": the die for Unarmed Strikes and Monk weapons, Dex instead of Str
-    const martialDie = martialArtsDie(cls, level);
+    const ma = classes.find((c) => martialArtsDie(c.cls, c.level));
+    const martialDie = ma ? martialArtsDie(ma.cls, ma.level) : null;
     const attacks = handAttacks(hands, {
         mods, prof, weaponProf, weaponMods, spellAbility, level, martialDie,
         bonusAddsMod: perks.has('twf'), // "Two-Weapon Fighting" fighting style
@@ -161,7 +184,10 @@ export function computeSheet(
         initiative: mods.dex + (perks.has('alert') ? prof : 0), // "Alert" feat
         speed,
         hp,
-        hitDie,
+        hitDie,   // the primary class's die
+        hitDice,  // [{ die, count }] — all classes
+        armorTraining,
+        weaponProficiencies: [...weaponProf],
         darkvision,
         attacks,
     };

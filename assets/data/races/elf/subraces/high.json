@@ -1,7 +1,7 @@
 {
   "id": "high",
   "name": "High Elf",
-  "image": "/img/races/elf/subraces/high.png",
+  "image": "/img/races/elf/subraces/high.webp",
   "race": "elf",
   "traits": [
     {

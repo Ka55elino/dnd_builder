@@ -9,9 +9,10 @@
      * button work too — the icon follows the window).
      */
     import { onMount } from 'svelte';
-    import { Clipboard, Window, System } from '@wailsio/runtime';
+    import { Clipboard, Window } from '@wailsio/runtime';
     import { StopGame, LeaveGame } from '../api.js';
     import { server, STATUS_LABELS, gameAddress } from '../server.svelte.js';
+    import { isMobileDevice } from '../device.js';
 
     let inGame = $derived(!!server.role && !!server.game);
     let confirming = $state(false);
@@ -69,13 +70,8 @@
     let title = $derived(server.game ? gameAddress(server.game) : '');
 
     // ---------- full screen ----------
-    const mobile = (() => {
-        try {
-            return System.IsMobile();
-        } catch {
-            return false;
-        }
-    })();
+    // phones / tablets (the app or a mobile browser): no full screen button
+    const mobile = isMobileDevice();
     let fullscreen = $state(false);
 
     // the window's state (the app: Wails; a plain browser: the Fullscreen API)

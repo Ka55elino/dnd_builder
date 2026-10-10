@@ -1,7 +1,7 @@
 {
   "id": "bottleGlass",
   "name": "Bottle, Glass",
-  "image": "/img/items/bottleGlass.png",
+  "image": "/img/items/bottleGlass.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "2 GP",

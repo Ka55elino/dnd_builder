@@ -8,6 +8,7 @@
      * reference ones get “Copy” (a custom spell based on them). Stored in the DB.
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomSpell } from "../data/refs.js";
     import SpellEditor from "./SpellEditor.svelte";
@@ -162,9 +163,7 @@
 </script>
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>Spells</h1>
+    <TopBar title="Spells" {onBack}>
         <nav class="modes">
             <button class="chip" class:active={mode === "spells"} onclick={() => (mode = "spells")}>
                 Spells <small>{spells.length}</small>
@@ -180,7 +179,7 @@
         {#if mode === "spells" && !loading && !error}
             <button class="add" onclick={() => (editor = { initial: null, copy: false })}>+ Add spell</button>
         {/if}
-    </header>
+    </TopBar>
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -283,17 +282,12 @@
         gap: 20px;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     .total {
@@ -443,6 +437,7 @@
     /* spell card + buttons: on reference spells they appear on hover */
     .spell {
         position: relative;
+        min-width: 0; /* a grid item: don't let a long card widen the column */
         display: flex;
         flex-direction: column;
     }

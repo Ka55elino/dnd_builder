@@ -1,4 +1,5 @@
 <script>
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { ListCharacters } from "../api.js";
     import { importCharacter } from "../transfer.js";
@@ -48,13 +49,11 @@
 <main class="start">
     <CharacterGrid {characters} {onCreate} {onOpen}>
         {#snippet header()}
-            <header class="top">
-                {#if onBack}<button class="ghost back" onclick={onBack}>← Menu</button>{:else}<span></span>{/if}
-                <h1>Characters</h1>
+            <TopBar title="Characters" {onBack}>
                 <button class="ghost import" onclick={doImport} disabled={importing} title="Add a character from a .json file (Export on a character sheet)">
                     {importing ? "Importing…" : "Import"}
                 </button>
-            </header>
+            </TopBar>
             {#if notice}
                 <p class="notice" class:bad={!notice.ok}>
                     {notice.text}
@@ -77,26 +76,8 @@
         align-items: center;
     }
 
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
-    }
-
     /* back · title · import — over exactly the width of the card grid */
-    .top {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .top .back {
-        justify-self: start;
-    }
-
-    .top .ghost {
+    .ghost {
         padding: 6px 12px;
         background: transparent;
         border: 1px solid var(--color-border);
@@ -106,16 +87,16 @@
         cursor: pointer;
     }
 
-    .top .ghost:hover {
+    .ghost:hover {
         border-color: var(--color-gold);
         color: var(--color-gold-hover);
     }
 
-    .top .ghost.import {
-        justify-self: end;
+    .ghost.import {
+        margin-left: auto;
     }
 
-    .top .ghost:disabled {
+    .ghost:disabled {
         opacity: 0.6;
         cursor: default;
     }
@@ -162,14 +143,5 @@
             gap: 16px;
         }
 
-        .top {
-            grid-template-columns: auto 1fr auto;
-            gap: 8px;
-        }
-
-        h1 {
-            font-size: 24px;
-            text-align: center;
-        }
     }
 </style>

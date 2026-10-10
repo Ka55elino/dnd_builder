@@ -1,7 +1,7 @@
 {
   "id": "evocation",
   "name": "School of Evocation",
-  "image": "/img/classes/wizard/subclasses/evocation.png",
+  "image": "/img/classes/wizard/subclasses/evocation.webp",
   "class": "wizard",
   "features": [
     {

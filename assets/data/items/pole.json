@@ -1,7 +1,7 @@
 {
   "id": "pole",
   "name": "Pole",
-  "image": "/img/items/pole.png",
+  "image": "/img/items/pole.webp",
   "isDefault": true,
   "weight": 7.0,
   "cost": "5 CP",

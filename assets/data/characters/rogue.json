@@ -64,8 +64,17 @@
   },
   "raceId": "tiefling",
   "subraceId": "infernal",
-  "classId": "rogue",
-  "subclassId": "thief",
+  "classes": [
+    {
+      "classId": "rogue",
+      "subclassId": "thief"
+    }
+  ],
+  "levelClasses": [
+    "rogue",
+    "rogue",
+    "rogue"
+  ],
   "equipment": {
     "armorId": "leather",
     "shield": false,

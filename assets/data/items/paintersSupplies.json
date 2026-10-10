@@ -1,7 +1,7 @@
 {
   "id": "paintersSupplies",
   "name": "Painter's Supplies",
-  "image": "/img/items/paintersSupplies.png",
+  "image": "/img/items/paintersSupplies.webp",
   "isDefault": true,
   "weight": 5.0,
   "cost": "10 GP",

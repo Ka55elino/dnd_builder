@@ -1,7 +1,7 @@
 {
   "id": "jug",
   "name": "Jug",
-  "image": "/img/items/jug.png",
+  "image": "/img/items/jug.webp",
   "isDefault": true,
   "weight": 4.0,
   "cost": "2 CP",

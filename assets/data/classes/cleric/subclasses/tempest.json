@@ -1,7 +1,7 @@
 {
   "id": "tempest",
   "name": "Tempest",
-  "image": "/img/classes/cleric/subclasses/tempest.png",
+  "image": "/img/classes/cleric/subclasses/tempest.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

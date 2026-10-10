@@ -9,6 +9,7 @@
      * Leaving the screen keeps the connection (the header shows it).
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from 'svelte';
     import { StartDiscovery, StopDiscovery, JoinGame, LeaveGame, ListCharacters } from '../api.js';
     import { server, discovered, applyStatus, gameAddress } from '../server.svelte.js';
@@ -119,14 +120,11 @@
     </div>
 {:else}
 <div class="page">
-    <header class="top">
-        {#if target && !joined}
-            <button class="ghost" onclick={() => (target = null)}>← Games</button>
-        {:else}
-            <button class="ghost" onclick={onBack}>← Menu</button>
-        {/if}
-        <h1>{target ? 'Choose a character' : 'Join Game'}</h1>
-    </header>
+    <TopBar
+        title={target ? 'Choose a character' : 'Join Game'}
+        onBack={target && !joined ? () => (target = null) : onBack}
+        back={target && !joined ? 'Games' : 'Menu'}
+    />
 
     {#if isHost}
         <p class="note">You are hosting a game. Stop it in “Start Game” to join another one.</p>
@@ -223,19 +221,6 @@
         display: flex;
         flex-direction: column;
         gap: 28px;
-    }
-
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
     }
 
     h2 {
@@ -411,6 +396,11 @@
     }
 
     @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
+
         .ptabs {
             margin: 6px 12px;
         }
@@ -426,9 +416,5 @@
             gap: 20px;
         }
 
-        .top {
-            flex-wrap: wrap;
-            gap: 10px;
-        }
     }
 </style>

@@ -2,7 +2,7 @@
   "id": "warriorOrc",
   "name": "Warrior Orc Heritage",
   "race": "orc",
-  "image": "/img/races/orc/subraces/warriorOrc.png",
+  "image": "/img/races/orc/subraces/warriorOrc.webp",
   "desc": "Orcs raised for war: drilled in the tricks and maneuvers of seasoned battle masters.",
   "traits": [
     {

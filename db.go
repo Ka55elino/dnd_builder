@@ -169,6 +169,10 @@ func migrate(db *sql.DB) error {
 	if _, err := ensureColumn(db, "characters", "state_json", "TEXT"); err != nil {
 		return err
 	}
+	// multiclassing: the class line for the character list
+	if _, err := ensureColumn(db, "characters", "class_summary", "TEXT"); err != nil {
+		return err
+	}
 	// custom equipment (the "Items" page): is_custom and timestamps on old tables
 	for _, table := range []string{"weapons", "armor", "items"} {
 		if _, err := ensureColumn(db, table, "is_custom", "INTEGER NOT NULL DEFAULT 0"); err != nil {

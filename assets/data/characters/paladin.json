@@ -64,8 +64,19 @@
   },
   "raceId": "aasimar",
   "subraceId": "protector",
-  "classId": "paladin",
-  "subclassId": "devotion",
+  "classes": [
+    {
+      "classId": "paladin",
+      "subclassId": "devotion"
+    }
+  ],
+  "levelClasses": [
+    "paladin",
+    "paladin",
+    "paladin",
+    "paladin",
+    "paladin"
+  ],
   "equipment": {
     "armorId": "chainMail",
     "shield": true,

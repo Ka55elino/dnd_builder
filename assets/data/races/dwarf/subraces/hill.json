@@ -1,7 +1,7 @@
 {
   "id": "hill",
   "name": "Hill Dwarf",
-  "image": "/img/races/dwarf/subraces/hill.png",
+  "image": "/img/races/dwarf/subraces/hill.webp",
   "race": "dwarf",
   "traits": [
     {

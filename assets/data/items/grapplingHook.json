@@ -1,7 +1,7 @@
 {
   "id": "grapplingHook",
   "name": "Grappling Hook",
-  "image": "/img/items/grapplingHook.png",
+  "image": "/img/items/grapplingHook.webp",
   "isDefault": true,
   "weight": 4.0,
   "cost": "2 GP",

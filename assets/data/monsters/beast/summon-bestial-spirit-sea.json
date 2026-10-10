@@ -79,5 +79,5 @@
     "note": "Obeys your verbal commands; acts right after you in Initiative.",
     "hp": "30 + 5 * (slot - 2)"
   },
-  "image": "/img/monsters/beast/reef-shark.png"
+  "image": "/img/monsters/beast/reef-shark.webp"
 }

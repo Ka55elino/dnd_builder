@@ -1,7 +1,7 @@
 {
   "id": "greatOldOne",
   "name": "Great Old One",
-  "image": "/img/classes/warlock/subclasses/greatOldOne.png",
+  "image": "/img/classes/warlock/subclasses/greatOldOne.webp",
   "class": "warlock",
   "domainSpells": {
     "3": [

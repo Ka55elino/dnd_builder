@@ -1,7 +1,7 @@
 {
   "id": "red",
   "name": "Red Dragon",
-  "image": "/img/races/dragonborn/subraces/red.png",
+  "image": "/img/races/dragonborn/subraces/red.webp",
   "race": "dragonborn",
   "traits": [
     {

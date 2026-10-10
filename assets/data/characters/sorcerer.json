@@ -64,8 +64,15 @@
   },
   "raceId": "dragonborn",
   "subraceId": "red",
-  "classId": "sorcerer",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "sorcerer",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "sorcerer"
+  ],
   "equipment": {
     "armorId": null,
     "shield": false,

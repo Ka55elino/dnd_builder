@@ -1,7 +1,7 @@
 {
   "id": "frost",
   "name": "Frost Giant Ancestry",
-  "image": "/img/races/goliath/subraces/frost.png",
+  "image": "/img/races/goliath/subraces/frost.webp",
   "race": "goliath",
   "traits": [
     {

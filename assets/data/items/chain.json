@@ -1,7 +1,7 @@
 {
   "id": "chain",
   "name": "Chain",
-  "image": "/img/items/chain.png",
+  "image": "/img/items/chain.webp",
   "isDefault": true,
   "weight": 10.0,
   "cost": "5 GP",

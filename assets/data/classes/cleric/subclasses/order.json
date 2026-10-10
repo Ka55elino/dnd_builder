@@ -1,7 +1,7 @@
 {
   "id": "order",
   "name": "Order",
-  "image": "/img/classes/cleric/subclasses/order.png",
+  "image": "/img/classes/cleric/subclasses/order.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

@@ -2,7 +2,7 @@
   "id": "halfHighElf",
   "name": "Half-High Elf",
   "race": "human",
-  "image": "/img/races/human/subraces/halfHighElf.png",
+  "image": "/img/races/human/subraces/halfHighElf.webp",
   "desc": "Humans with high elf blood: keen-eyed in the dark and born with a spark of arcane talent.",
   "traits": [
     {

@@ -1,7 +1,7 @@
 {
   "id": "clothesTravelers",
   "name": "Traveler's Clothes",
-  "image": "/img/items/clothesTravelers.png",
+  "image": "/img/items/clothesTravelers.webp",
   "isDefault": true,
   "category": "clothing",
   "weight": 4.0,

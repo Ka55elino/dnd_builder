@@ -1,7 +1,7 @@
 {
   "id": "mace",
   "name": "Mace",
-  "image": "/img/weapons/simple/mace.png",
+  "image": "/img/weapons/simple/mace.webp",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

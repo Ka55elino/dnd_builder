@@ -34,7 +34,7 @@ import { findItem, imageData } from './game.js';
 import { equipmentDefinition, spellDefinition } from './homebrew.js';
 
 export const CHARACTER_FORMAT = 'dnd-builder-character';
-export const CHARACTER_FORMAT_VERSION = 1;
+export const CHARACTER_FORMAT_VERSION = 2; // 2 — multiclassing (classes / levelClasses)
 
 const KINDS = { weapon: 'weapons', armor: 'armor', item: 'items' };
 
@@ -107,12 +107,15 @@ export function parseCharacterFile(text) {
         throw new Error("This isn't a character file (not valid JSON).");
     }
     if (f?.format !== CHARACTER_FORMAT) throw new Error("This isn't a DnD Builder character file.");
+    if (f.version < CHARACTER_FORMAT_VERSION) {
+        throw new Error(`The file is from an older app (format ${f.version}) and can't be opened.`);
+    }
     if (!(f.version >= 1) || f.version > CHARACTER_FORMAT_VERSION) {
         throw new Error(`The file is from a newer app (format ${f.version}) — update DnD Builder to open it.`);
     }
     const c = f.character;
     if (!c || typeof c !== 'object' || !String(c.name ?? '').trim()) throw new Error('The file has no character in it.');
-    if (!c.raceId || !c.classId) throw new Error('The character in the file has no species or class.');
+    if (!c.raceId || !c.classes?.length) throw new Error('The character in the file has no species or class.');
     return f;
 }
 
@@ -154,9 +157,11 @@ export async function importCharacterText(text) {
     const race = refs.races?.find((r) => r.id === character.raceId);
     if (!race) missing.push(`species “${character.raceId}”`);
     else if (character.subraceId && !race.subraces?.some((s) => s.id === character.subraceId)) missing.push(`subspecies “${character.subraceId}”`);
-    const cls = refs.classes?.find((c) => c.id === character.classId);
-    if (!cls) missing.push(`class “${character.classId}”`);
-    else if (character.subclassId && !cls.subclasses?.some((s) => s.id === character.subclassId)) missing.push(`subclass “${character.subclassId}”`);
+    for (const { classId, subclassId } of character.classes ?? []) {
+        const cls = refs.classes?.find((c) => c.id === classId);
+        if (!cls) missing.push(`class “${classId}”`);
+        else if (subclassId && !cls.subclasses?.some((s) => s.id === subclassId)) missing.push(`subclass “${subclassId}”`);
+    }
 
     return { id, name: character.name, copy, added, missing, appVersion: f.appVersion ?? '' };
 }

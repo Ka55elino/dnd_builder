@@ -22,7 +22,7 @@
         formStats(monster, {
             mods: character?.mods ?? {},
             scores: character?.scores ?? character?.build?.totalAbilities ?? {},
-            subclass: character?.subclass ?? null,
+            subclass: character?.wildShapeSubclass ?? null,
         }),
     );
     const senses = $derived(

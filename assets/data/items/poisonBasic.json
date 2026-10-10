@@ -1,7 +1,7 @@
 {
   "id": "poisonBasic",
   "name": "Poison, Basic",
-  "image": "/img/items/poisonBasic.png",
+  "image": "/img/items/poisonBasic.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "100 GP",

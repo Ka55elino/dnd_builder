@@ -464,7 +464,7 @@ export function playerSheet(snap, state, refs, summary = null) {
             conditions: summary.conditions ?? [], conditionInstances: summary.conditionInstances ?? [],
         };
     try {
-        if (!snap?.build?.classId || !refs) return null;
+        if (!snap?.build?.classes?.length || !refs) return null;
         const build = CharacterBuild.fromJSON(snap.build);
         const st = CharacterState.fromJSON(state ?? snap.state ?? {});
         const ch = new Character(build, refs, st.equipped ?? null, st.bagAdjust ?? null, st.effects ?? null);

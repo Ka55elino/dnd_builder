@@ -1,7 +1,7 @@
 {
   "id": "human",
   "name": "Human",
-  "image": "/img/races/human/human.png",
+  "image": "/img/races/human/human.webp",
   "size": "Medium",
   "speed": 30,
   "traits": [

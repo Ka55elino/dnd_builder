@@ -1,7 +1,7 @@
 {
   "id": "barbarian",
   "name": "Barbarian",
-  "image": "/img/classes/barbarian/barbarian.png",
+  "image": "/img/classes/barbarian/barbarian.webp",
   "hitDie": 12,
   "primaryAbility": [
     "str"
@@ -37,6 +37,24 @@
     "simple",
     "martial"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "str"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "shield"
+      ],
+      "weapons": [
+        "martial"
+      ],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "unarmoredDefense": [
     "dex",
     "con"

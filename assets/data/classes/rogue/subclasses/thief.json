@@ -1,7 +1,7 @@
 {
   "id": "thief",
   "name": "Thief",
-  "image": "/img/classes/rogue/subclasses/thief.png",
+  "image": "/img/classes/rogue/subclasses/thief.webp",
   "class": "rogue",
   "features": [
     {

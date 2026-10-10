@@ -1,7 +1,7 @@
 {
   "id": "wizard",
   "name": "Wizard",
-  "image": "/img/classes/wizard/wizard.png",
+  "image": "/img/classes/wizard/wizard.webp",
   "hitDie": 6,
   "primaryAbility": [
     "int"
@@ -33,6 +33,20 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "int"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "spellcasting": {
     "ability": "int",
     "list": "wizard",

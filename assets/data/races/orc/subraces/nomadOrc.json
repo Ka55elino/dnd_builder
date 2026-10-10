@@ -2,7 +2,7 @@
   "id": "nomadOrc",
   "name": "Nomad Orc",
   "race": "orc",
-  "image": "/img/races/orc/subraces/nomadOrc.png",
+  "image": "/img/races/orc/subraces/nomadOrc.webp",
   "desc": "Orcs of the open steppes and badlands: tireless travelers who live off the land.",
   "traits": [
     {

@@ -66,23 +66,60 @@ export function casterLevel(progression, level) {
     }
 }
 
-/**
- * Slots for a class: [{ level: slot level, max, pact? }]
- * Warlock — separate pact slots (recovered on a Short Rest).
- */
-export function spellSlots(progression, level) {
-    if (progression === 'pact') {
-        const [count, circle] = PACT[Math.min(20, Math.max(0, level))];
-        return count ? [{ level: circle, max: count, pact: true }] : [];
-    }
-    const cl = casterLevel(progression, level);
-    const row = [...(FULL[Math.min(20, cl)] ?? [])];
-    for (const [at, slots] of Object.entries(BOOST[progression] ?? {})) {
-        if (level < Number(at)) continue;
+/** FULL table row for a caster level + the BOOST house rule (by CHARACTER level). */
+function slotRow(cl, boostProgression, charLevel) {
+    const row = [...(FULL[Math.min(20, Math.max(0, cl))] ?? [])];
+    for (const [at, slots] of Object.entries(BOOST[boostProgression] ?? {})) {
+        if (charLevel < Number(at)) continue;
         for (const [sl, n] of Object.entries(slots)) {
             const i = Number(sl) - 1;
             if (i < row.length) row[i] = Math.max(row[i], n);
         }
     }
     return row.map((max, i) => ({ level: i + 1, max }));
+}
+
+const pactSlots = (level) => {
+    const [count, circle] = PACT[Math.min(20, Math.max(0, level))];
+    return count ? [{ level: circle, max: count, pact: true }] : [];
+};
+
+/**
+ * Slots for a class: [{ level: slot level, max, pact? }]
+ * Warlock — separate pact slots (recovered on a Short Rest).
+ * level — the class level; charLevel — the character level (BOOST), default — the same.
+ */
+export function spellSlots(progression, level, charLevel = level) {
+    if (progression === 'pact') return pactSlots(level);
+    return slotRow(casterLevel(progression, level), progression, charLevel);
+}
+
+const STRENGTH = { full: 3, half: 2, third: 1 };
+
+/**
+ * A character's slots, multiclassing included (PHB 2024):
+ *   one spellcasting class — its own table;
+ *   several — caster level = full levels + half levels / 2 (round up) + third levels / 3
+ *   (round down), on the full caster table;
+ *   Pact Magic — separate, by the warlock level.
+ * BOOST (house rule): by the character level, with the strongest progression among the classes.
+ * casters — [{ progression, level }] (classes whose spellcasting has started); charLevel — total.
+ */
+export function multiclassSlots(casters, charLevel) {
+    const pact = casters.filter((c) => c.progression === 'pact');
+    const other = casters.filter((c) => STRENGTH[c.progression]);
+    let slots = [];
+    if (other.length === 1) {
+        slots = spellSlots(other[0].progression, other[0].level, charLevel);
+    } else if (other.length > 1) {
+        const cl = other.reduce((sum, c) => {
+            if (c.progression === 'full') return sum + c.level;
+            if (c.progression === 'half') return sum + Math.ceil(c.level / 2);
+            return sum + Math.floor(c.level / 3);
+        }, 0);
+        const best = other.reduce((a, c) => (STRENGTH[c.progression] > STRENGTH[a.progression] ? c : a)).progression;
+        slots = slotRow(cl, best, charLevel);
+    }
+    const pactLevel = pact.reduce((sum, c) => sum + c.level, 0);
+    return [...slots, ...(pactLevel ? pactSlots(pactLevel) : [])];
 }

@@ -1,7 +1,7 @@
 {
   "id": "leather",
   "name": "Leather Armor",
-  "image": "/img/armor/light/leather.png",
+  "image": "/img/armor/light/leather.webp",
   "isDefault": true,
   "category": "light",
   "baseAC": 11,

@@ -1,7 +1,7 @@
 {
   "id": "shortsword",
   "name": "Shortsword",
-  "image": "/img/weapons/martial/shortsword.png",
+  "image": "/img/weapons/martial/shortsword.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d6",

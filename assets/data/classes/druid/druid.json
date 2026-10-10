@@ -1,7 +1,7 @@
 {
   "id": "druid",
   "name": "Druid",
-  "image": "/img/classes/druid/druid.png",
+  "image": "/img/classes/druid/druid.webp",
   "hitDie": 8,
   "primaryAbility": [
     "wis"
@@ -38,6 +38,23 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "wis"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light",
+        "shield"
+      ],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "spellcasting": {
     "ability": "wis",
     "list": "druid",

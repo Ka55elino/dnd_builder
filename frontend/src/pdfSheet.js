@@ -16,6 +16,7 @@ import { BIO_GROUPS } from './models/CharacterBuild.svelte.js';
 import { damageName, actionName, restName } from './rules/labels.js';
 import { slotsOf } from './rules/loadout.js';
 import { rowName } from './rules/modifiers.js';
+import { hitDiceText } from './rules/sheet.js';
 import { SaveCharacterPDF } from './api.js';
 
 export const PDF_MODEL_VERSION = 1;
@@ -155,10 +156,10 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
         .filter(Boolean)
         .join(' + ');
 
-    const clsData = ch.cls?.data ?? {};
+    // armor / weapons: the primary class in full + other classes' multiclass part (rules/sheet.js)
     const proficiencies = [
-        { label: 'Armor', value: (clsData.armorTraining ?? []).map((k) => ARMOR[k] ?? k).join(', ') },
-        { label: 'Weapons', value: (clsData.weaponProficiencies ?? []).map((k) => WEAPONS[k] ?? k).join(', ') },
+        { label: 'Armor', value: (ch.armorTraining ?? []).map((k) => ARMOR[k] ?? k).join(', ') },
+        { label: 'Weapons', value: (ch.weaponProficiencies ?? []).map((k) => WEAPONS[k] ?? k).join(', ') },
         { label: 'Tools', value: background?.data?.tool ?? '' },
     ].filter((p) => p.value);
 
@@ -189,7 +190,6 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
     }));
 
     // --- page 3 ---
-    const sc = ch.spellcasting;
     const rsc = ch.raceSpellcasting;
     const spellGroups = (ch.actionGroups ?? [])
         .filter((g) => g.spells)
@@ -203,15 +203,13 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
             pact: !!s.pact,
         };
     });
-    const casting = [];
-    if (sc) {
-        casting.push({
-            title: ch.subclass && !ch.cls?.caster ? ch.subclass.name : ch.cls?.name ?? 'Spellcasting',
-            ability: ABILITIES[sc.ability]?.name ?? sc.ability ?? '',
-            dc: sc.saveDC,
-            attack: signed(sc.attack),
-        });
-    }
+    // one row per spellcasting class (multiclassing: each has its own ability / DC / attack)
+    const casting = (ch.spellcastings ?? []).map((sc) => ({
+        title: sc.name,
+        ability: ABILITIES[sc.ability]?.name ?? sc.ability ?? '',
+        dc: sc.saveDC,
+        attack: signed(sc.attack),
+    }));
     if (rsc) {
         casting.push({
             title: ch.subrace?.name ?? ch.race?.name ?? 'Species',
@@ -229,8 +227,8 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
 
         name: build.name || 'Unnamed',
         level: build.level ?? 1,
-        className: ch.cls?.name ?? build.classId ?? '',
-        subclassName: ch.subclass?.name ?? '',
+        className: ch.className || (build.classId ?? ''), // "Fighter 3 / Wizard 2" when multiclassed
+        subclassName: ch.subclassName ?? '',
         species: [ch.race?.name ?? build.raceId ?? '', ch.subrace?.name ?? ''].filter(Boolean).join(' · '),
         size: ch.race?.data?.size ?? '',
         background: background?.name ?? '',
@@ -247,8 +245,8 @@ export async function pdfModel({ build, character: ch, state, refs = {}, appVers
         hpMax,
         hpCurrent: state ? state.currentHp(ch) : hpMax,
         hpTemp: state?.tempHp ?? 0,
-        hitDice: `${build.level ?? 1}d${ch.hitDie ?? ch.cls?.data?.hitDie ?? ''}`,
-        hitDiceLeft: Math.max(0, (build.level ?? 1) - (state?.hitDiceUsed ?? 0)),
+        hitDice: hitDiceText(ch.hitDice),
+        hitDiceLeft: state ? state.hitDiceLeft(ch).reduce((s, d) => s + d.left, 0) : (build.level ?? 1),
         deathSaves: { success: state?.deathSaves?.success ?? 0, fail: state?.deathSaves?.fail ?? 0 },
         inspiration: !!state?.inspiration,
         passivePerception: ch.passivePerception ?? 10,

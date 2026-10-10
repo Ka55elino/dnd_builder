@@ -1,7 +1,7 @@
 {
   "id": "rations",
   "name": "Rations (1 Day)",
-  "image": "/img/items/rations.png",
+  "image": "/img/items/rations.webp",
   "isDefault": true,
   "weight": 2,
   "cost": "5 SP",

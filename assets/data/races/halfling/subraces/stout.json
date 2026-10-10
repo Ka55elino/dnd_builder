@@ -1,7 +1,7 @@
 {
   "id": "stout",
   "name": "Stout Halfling",
-  "image": "/img/races/halfling/subraces/stout.png",
+  "image": "/img/races/halfling/subraces/stout.webp",
   "race": "halfling",
   "traits": [
     {

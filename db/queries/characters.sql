@@ -6,13 +6,14 @@ SELECT COUNT(*) FROM characters;
 
 -- name: UpsertCharacter
 -- A new character is inserted; an existing one (same id) is updated.
-INSERT INTO characters (id, name, level, class_id, subclass_id, race_id, background_id, portrait, build_json)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO characters (id, name, level, class_id, subclass_id, class_summary, race_id, background_id, portrait, build_json)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(id) DO UPDATE SET
     name          = excluded.name,
     level         = excluded.level,
     class_id      = excluded.class_id,
     subclass_id   = excluded.subclass_id,
+    class_summary = excluded.class_summary,
     race_id       = excluded.race_id,
     background_id = excluded.background_id,
     portrait      = excluded.portrait,
@@ -25,7 +26,7 @@ SELECT build_json FROM characters WHERE id = ?;
 -- name: ListCharacters
 -- For the grid on the start page: most recent first.
 SELECT ch.id, ch.name, ch.level, ch.race_id, ch.class_id,
-       COALESCE(c.name, ''), ch.portrait, ch.updated_at
+       COALESCE(NULLIF(ch.class_summary, ''), c.name, ''), ch.portrait, ch.updated_at
 FROM characters ch
 LEFT JOIN classes c ON c.id = ch.class_id
 ORDER BY ch.updated_at DESC, ch.name COLLATE NOCASE;

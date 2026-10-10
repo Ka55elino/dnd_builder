@@ -366,7 +366,7 @@ export function applyUse(info, choice, ch, state, item) {
     for (const [k, n] of Object.entries(item?.data?.turnGain ?? {})) state.gainTurn(k, Number(n) || 1, item.name);
     // Temporary Hit Points on use, no lasting effect (Persistent Rage); they don't stack — the higher stays
     if (item?.data?.gainTempHp != null) {
-        const hp = evalFormula(item.data.gainTempHp, { level: ch.level, prof: ch.prof, mods: ch.mods });
+        const hp = evalFormula(item.data.gainTempHp, { level: ch.powerLevel?.[item.id] ?? ch.level, prof: ch.prof, mods: ch.mods });
         if (hp > state.tempHp) state.setTempHp(hp);
     }
     // the lasting effect: on you if the spell targets you (self), or you ticked "on me" (creature);
@@ -376,7 +376,7 @@ export function applyUse(info, choice, ch, state, item) {
     const onMe = target === 'self' || (target === 'creature' && !!choice?.onMe);
     if (apply?.condition && item.id && onMe) {
         if (apply.tempHp != null) {
-            const hp = evalFormula(apply.tempHp, { level: ch.level, prof: ch.prof, mods: ch.mods });
+            const hp = evalFormula(apply.tempHp, { level: ch.powerLevel?.[item.id] ?? ch.level, prof: ch.prof, mods: ch.mods });
             if (hp > state.tempHp) state.setTempHp(hp); // Temporary Hit Points don't stack
         }
         state.addCondition(apply.condition, {

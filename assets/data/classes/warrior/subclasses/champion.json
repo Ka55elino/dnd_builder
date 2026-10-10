@@ -1,7 +1,7 @@
 {
   "id": "champion",
   "name": "Champion",
-  "image": "/img/classes/warrior/subclasses/champion.png",
+  "image": "/img/classes/warrior/subclasses/champion.webp",
   "class": "warrior",
   "features": [
     {

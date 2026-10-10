@@ -64,8 +64,17 @@
   },
   "raceId": "goliath",
   "subraceId": "stone",
-  "classId": "barbarian",
-  "subclassId": "berserker",
+  "classes": [
+    {
+      "classId": "barbarian",
+      "subclassId": "berserker"
+    }
+  ],
+  "levelClasses": [
+    "barbarian",
+    "barbarian",
+    "barbarian"
+  ],
   "equipment": {
     "armorId": "hide",
     "shield": false,

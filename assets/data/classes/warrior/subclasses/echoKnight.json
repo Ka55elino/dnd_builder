@@ -1,7 +1,7 @@
 {
   "id": "echoKnight",
   "name": "Echo Knight",
-  "image": "/img/classes/warrior/subclasses/echoKnight.png",
+  "image": "/img/classes/warrior/subclasses/echoKnight.webp",
   "class": "warrior",
   "features": [
     {

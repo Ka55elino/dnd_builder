@@ -1,7 +1,7 @@
 {
   "id": "death",
   "name": "Death Domain",
-  "image": "/img/classes/cleric/subclasses/death.png",
+  "image": "/img/classes/cleric/subclasses/death.webp",
   "class": "cleric",
   "domainSpells": {
     "0": [

@@ -14,6 +14,10 @@
      * the counts and the campaign map (map/MapEditor.svelte — a coordinate grid with terrain
      * painted into its cells; the map is being built step by step).
      *
+     * Phones (≤ 720px): a bar on top (← · campaign · ☰); the sidebar is a drawer opened by ☰.
+     * The map is a preview under a dark cover with "Edit map": it opens the editor full screen
+     * (its ← returns).
+     *
      * id — campaign id; onBack() — to the list
      */
     import { onMount } from "svelte";
@@ -55,6 +59,14 @@
     let loading = $state(true);
     let error = $state("");
     let section = $state("overview");
+    let navOpen = $state(false); // phones: the sidebar drawer
+    let mapFull = $state(false); // phones: the map editor full screen
+
+    function go(id) {
+        section = id;
+        navOpen = false;
+        mapFull = false;
+    }
 
     // the ✎ popup: name, short description, status
     let form = $state(null); // null — closed
@@ -169,8 +181,28 @@
 {/if}
 
 <div class="campaign">
-    <!-- ================= sidebar ================= -->
-    <aside class="side">
+    <!-- ================= phones: the bar on top ================= -->
+    <header class="m-bar">
+        <button class="m-btn" onclick={back} title="Back to Campaigns" aria-label="Back to Campaigns">←</button>
+        <span class="m-title">
+            <b>{campaign?.name ?? "Campaign"}</b>
+            <small>{current.title}</small>
+        </span>
+        <button
+            class="m-btn"
+            class:open={navOpen}
+            onclick={() => (navOpen = !navOpen)}
+            aria-label="Campaign menu"
+            aria-expanded={navOpen}>☰</button
+        >
+    </header>
+    {#if navOpen}
+        <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+        <div class="m-backdrop" onclick={() => (navOpen = false)}></div>
+    {/if}
+
+    <!-- ================= sidebar (phones: a drawer) ================= -->
+    <aside class="side" class:open={navOpen}>
         <button class="back" onclick={back}>← Campaigns</button>
 
         {#if campaign}
@@ -186,7 +218,7 @@
                 <ul>
                     {#each g.items as it (it.id)}
                         <li>
-                            <button class="nav-item" class:active={section === it.id} class:soon={it.soon} onclick={() => (section = it.id)}>
+                            <button class="nav-item" class:active={section === it.id} class:soon={it.soon} onclick={() => go(it.id)}>
                                 <span class="ico" aria-hidden="true">{it.icon}</span>
                                 <span class="lbl">{it.title}</span>
                                 {#if it.count && campaign}<span class="cnt">{campaign[it.count]}</span>{/if}
@@ -215,7 +247,7 @@
                 <p class="ov-meta">
                     <span class="c-status s-{campaign.status}">{statusName(campaign.status)}</span>
                     {#each ALL.filter((x) => x.count) as it (it.id)}
-                        <button class="ov-count" onclick={() => (section = it.id)}>{campaign[it.count]} {it.title}</button>
+                        <button class="ov-count" onclick={() => go(it.id)}>{campaign[it.count]} {it.title}</button>
                     {/each}
                     {#if startName}<button class="ov-count start" onclick={() => (section = "locations")} title="Where the adventure begins"
                             >★ Starts in {startName}</button
@@ -224,10 +256,16 @@
             </header>
 
             <!-- the campaign map (work in progress: terrain on a coordinate grid) -->
-            <section class="map-box">
+            <!-- phones: a preview under a cover; "Edit map" opens it full screen -->
+            <section class="map-box" class:full={mapFull}>
                 {#key campaign.id}
-                    <MapEditor {campaign} onOpenSection={(s) => (section = s)} />
+                    <MapEditor {campaign} onOpenSection={go} onClose={mapFull ? () => (mapFull = false) : null} />
                 {/key}
+                {#if !mapFull}
+                    <div class="map-cover">
+                        <button class="primary map-edit" onclick={() => (mapFull = true)}>✎ Edit map</button>
+                    </div>
+                {/if}
             </section>
         {:else if section === "npcs"}
             <header class="sec-head"><h1>NPCs</h1></header>
@@ -268,12 +306,13 @@
         font-family: var(--font-ui);
     }
 
-    @media (max-width: 720px) {
-        .campaign {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto 1fr;
-        }
+    /* phones: the bar on top, the sidebar becomes a drawer */
+    .m-bar,
+    .m-backdrop,
+    .map-cover {
+        display: none;
     }
+
 
     .side {
         min-height: 0;
@@ -701,5 +740,144 @@
 
     .error {
         color: var(--color-danger);
+    }
+
+    @media (max-width: 720px) {
+        .campaign {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto minmax(0, 1fr);
+        }
+
+        .m-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: var(--color-sidebar);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .m-btn {
+            flex: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            color: var(--color-text-secondary);
+            font: inherit;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .m-btn.open {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+        }
+
+        .m-title {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .m-title b,
+        .m-title small {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .m-title b {
+            font-family: var(--font-heading);
+            font-weight: var(--font-weight-regular);
+            font-size: 18px;
+            color: var(--color-gold);
+        }
+
+        .m-title small {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .m-backdrop {
+            display: block;
+            position: fixed;
+            inset: 0;
+            z-index: 955;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .side {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 960;
+            width: min(300px, 85vw);
+            padding-top: calc(18px + env(safe-area-inset-top, 0px));
+            padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            box-shadow: 8px 0 32px rgba(0, 0, 0, 0.5);
+            transform: translateX(-105%);
+            visibility: hidden;
+            transition:
+                transform 0.2s ease,
+                visibility 0s linear 0.2s;
+        }
+
+        .side.open {
+            transform: none;
+            visibility: visible;
+            transition: transform 0.2s ease;
+        }
+
+        .content {
+            padding: 14px 12px 24px;
+            gap: 14px;
+        }
+
+        .sec-head h1,
+        .ov-title h1 {
+            font-size: 24px;
+        }
+
+        /* the map: a preview under a dark cover */
+        .map-box {
+            position: relative;
+            height: 55vh;
+            min-height: 300px;
+        }
+
+        .map-cover {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .map-edit {
+            padding: 10px 22px;
+            font-size: 16px;
+        }
+
+        /* "Edit map": the editor over the whole screen */
+        .map-box.full {
+            position: fixed;
+            inset: 0;
+            z-index: 970;
+            height: auto;
+            min-height: 0;
+            padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px)
+                env(safe-area-inset-left, 0px);
+            background: var(--color-bg);
+            border: none;
+            border-radius: 0;
+        }
     }
 </style>

@@ -1,7 +1,7 @@
 {
   "id": "explorerPack",
   "name": "Explorer's Pack",
-  "image": "/img/packs/explorerPack.png",
+  "image": "/img/packs/explorerPack.webp",
   "isDefault": true,
   "cost": "10 GP",
   "weight": 55,

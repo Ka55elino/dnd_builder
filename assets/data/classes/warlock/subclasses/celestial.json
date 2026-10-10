@@ -1,7 +1,7 @@
 {
   "id": "celestial",
   "name": "Celestial",
-  "image": "/img/classes/warlock/subclasses/celestial.png",
+  "image": "/img/classes/warlock/subclasses/celestial.webp",
   "class": "warlock",
   "domainSpells": {
     "3": [

@@ -1,7 +1,7 @@
 {
   "id": "forest",
   "name": "Forest Gnome",
-  "image": "/img/races/gnome/subraces/forest.png",
+  "image": "/img/races/gnome/subraces/forest.webp",
   "race": "gnome",
   "traits": [
     {

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS characters (
     level         INTEGER NOT NULL DEFAULT 1,
     class_id      TEXT,                          -- primary class
     subclass_id   TEXT,
+    class_summary TEXT,                          -- multiclassing: "Fighter 3 / Wizard 2" ('' — one class)
     race_id       TEXT,
     background_id TEXT,
     portrait      TEXT,                          -- portrait data URL/path (nullable)

@@ -1,7 +1,7 @@
 {
   "id": "warMagic",
   "name": "War Magic",
-  "image": "/img/classes/wizard/subclasses/warMagic.png",
+  "image": "/img/classes/wizard/subclasses/warMagic.webp",
   "class": "wizard",
   "features": [
     {

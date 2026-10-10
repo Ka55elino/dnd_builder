@@ -1,7 +1,7 @@
 {
   "id": "parchment",
   "name": "Parchment (Sheet)",
-  "image": "/img/items/parchment.png",
+  "image": "/img/items/parchment.webp",
   "isDefault": true,
   "cost": "1 SP",
   "desc": "A sheet can hold about 250 handwritten words."

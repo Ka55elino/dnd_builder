@@ -1,7 +1,7 @@
 {
   "id": "tiefling",
   "name": "Tiefling",
-  "image": "/img/races/tiefling/tiefling.png",
+  "image": "/img/races/tiefling/tiefling.webp",
   "size": "Medium",
   "speed": 30,
   "subraceLevel": 1,

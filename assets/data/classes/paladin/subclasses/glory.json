@@ -1,7 +1,7 @@
 {
   "id": "glory",
   "name": "Oath of Glory",
-  "image": "/img/classes/paladin/subclasses/glory.png",
+  "image": "/img/classes/paladin/subclasses/glory.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

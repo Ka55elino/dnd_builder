@@ -1,7 +1,7 @@
 {
   "id": "dwarf",
   "name": "Dwarf",
-  "image": "/img/races/dwarf/dwarf.png",
+  "image": "/img/races/dwarf/dwarf.webp",
   "size": "Medium",
   "speed": 30,
   "subraceLevel": 1,

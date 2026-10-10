@@ -1,7 +1,7 @@
 {
   "id": "vial",
   "name": "Vial",
-  "image": "/img/items/vial.png",
+  "image": "/img/items/vial.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "1 GP",

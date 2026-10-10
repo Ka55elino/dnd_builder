@@ -30,7 +30,7 @@ export class CharacterState {
     resourcesHeld = $state({});  // { [resourceId]: held } — resources that start empty (r.startEmpty: Soul Trinkets);
                                  // kept as a count held, so a bigger max doesn't hand out free ones
     slotsUsed = $state({});      // { [spell level]: spent }, Pact Magic slots — key 'pact'
-    hitDiceUsed = $state(0);
+    hitDiceUsed = $state({});    // { [die size]: spent }
     deathSaves = $state({ success: 0, fail: 0 });
     inspiration = $state(false);
     equipped = $state(null);     // { main, off, armor } — backpack item keys, see rules/loadout.js
@@ -56,7 +56,12 @@ export class CharacterState {
         this.resourcesUsed = { ...(data.resourcesUsed ?? {}) };
         this.resourcesHeld = { ...(data.resourcesHeld ?? {}) };
         this.slotsUsed = { ...(data.slotsUsed ?? {}) };
-        this.hitDiceUsed = Math.max(0, data.hitDiceUsed ?? 0);
+        // spent Hit Point Dice by die size: { 10: 2, 6: 1 } (multiclassing — several sizes)
+        this.hitDiceUsed = Object.fromEntries(
+            Object.entries(data.hitDiceUsed && typeof data.hitDiceUsed === 'object' ? data.hitDiceUsed : {})
+                .map(([d, n]) => [d, Math.max(0, Math.floor(Number(n) || 0))])
+                .filter(([, n]) => n > 0),
+        );
         this.deathSaves = { success: 0, fail: 0, ...(data.deathSaves ?? {}) };
         this.inspiration = !!data.inspiration;
         this.equipped = data.equipped ? { ...data.equipped } : null;
@@ -373,6 +378,11 @@ export class CharacterState {
         if (this.slotsUsed.pact) this.slotsUsed.pact = 0;
     }
 
+    /** Hit Point Dice left: [{ die, count, left }] (ch.hitDice from the sheet). */
+    hitDiceLeft(ch) {
+        return (ch.hitDice ?? []).map((d) => ({ ...d, left: Math.max(0, d.count - (this.hitDiceUsed[d.die] ?? 0)) }));
+    }
+
     /** Long Rest: everything is restored, Hit Point Dice — half. */
     longRest(ch) {
         this.turnUsed = {};
@@ -384,7 +394,16 @@ export class CharacterState {
             ch.resources.filter((r) => r.recharge === 'none' && this.resourcesUsed[r.id]).map((r) => [r.id, this.resourcesUsed[r.id]]),
         );
         this.slotsUsed = {};
-        this.hitDiceUsed = Math.max(0, this.hitDiceUsed - Math.max(1, Math.floor(ch.level / 2)));
+        // half the character's total Hit Point Dice come back (min 1) — the largest ones first
+        let back = Math.max(1, Math.floor(ch.level / 2));
+        const used = { ...this.hitDiceUsed };
+        for (const d of Object.keys(used).map(Number).sort((a, b) => b - a)) {
+            const n = Math.min(back, used[d]);
+            used[d] -= n;
+            back -= n;
+            if (!used[d]) delete used[d];
+        }
+        this.hitDiceUsed = used;
         this.deathSaves = { success: 0, fail: 0 };
         this.concentration = null;
         this.wildShape = null; // 8 hours: longer than any form lasts before level 16

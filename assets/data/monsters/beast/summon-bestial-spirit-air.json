@@ -75,5 +75,5 @@
     "note": "Obeys your verbal commands; acts right after you in Initiative.",
     "hp": "20 + 5 * (slot - 2)"
   },
-  "image": "/img/monsters/beast/eagle.png"
+  "image": "/img/monsters/beast/eagle.webp"
 }

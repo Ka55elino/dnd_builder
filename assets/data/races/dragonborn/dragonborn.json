@@ -1,7 +1,7 @@
 {
   "id": "dragonborn",
   "name": "Dragonborn",
-  "image": "/img/races/dragonborn/dragonborn.png",
+  "image": "/img/races/dragonborn/dragonborn.webp",
   "size": "Medium",
   "speed": 30,
   "subraceLevel": 1,

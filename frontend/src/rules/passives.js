@@ -165,6 +165,9 @@ function effectLine(e, ctx) {
  * @param src {
  *   raceTraits, classFeatures, subclassFeatures,  — already filtered by level
  *   raceName, className, subclassName,
+ *   classGroups: [{ features, name, level }]        — multiclassing: features per class / subclass
+ *                                                     with that class's level (replaces the four above);
+ *                                                     abilities get ctxLevel — for {level} in their text
  *   feats: [{ ...feat, sourceTitle }]               — chosen feats/styles/invocations
  *   activeNames: Set<string>                        — names of features with an action card
  *   ctx: { level, prof, mods }
@@ -174,8 +177,8 @@ function effectLine(e, ctx) {
 export function collectPassives(src) {
     const { ctx } = src;
     const lines = new Map(); // key → { group, label, sources }
-    const push = (e, source) => {
-        const l = effectLine(e, ctx);
+    const push = (e, source, c = ctx) => {
+        const l = effectLine(e, c);
         if (!l) return;
         const prev = lines.get(l.key);
         // senses: take the longest range
@@ -188,8 +191,8 @@ export function collectPassives(src) {
     };
 
     const abilities = [];
-    const addAbility = (f, source, extra = []) =>
-        abilities.push({ name: f.name, desc: f.desc ?? '', level: f.level ?? null, source, notes: extra });
+    const addAbility = (f, source, extra = [], ctxLevel = null) =>
+        abilities.push({ name: f.name, desc: f.desc ?? '', level: f.level ?? null, source, notes: extra, ctxLevel });
 
     // --- race: effects go to the summary; text traits without grants go to abilities ---
     for (const t of src.raceTraits ?? []) {
@@ -200,16 +203,19 @@ export function collectPassives(src) {
     }
 
     // --- class and subclass ---
-    const features = [
-        ...(src.classFeatures ?? []).map((f) => [f, src.className]),
-        ...(src.subclassFeatures ?? []).map((f) => [f, src.subclassName]),
+    // { features, name, level } — level: the class level for templates ({level}, {rageBonus}…)
+    const groups = src.classGroups ?? [
+        { features: src.classFeatures, name: src.className, level: null },
+        { features: src.subclassFeatures, name: src.subclassName, level: null },
     ];
+    const features = groups.flatMap((g) => (g.features ?? []).map((f) => [f, g.name, g.level]));
     const seenFeature = new Set();
-    for (const [f, from] of features) {
+    for (const [f, from, level] of features) {
+        const fctx = level != null ? { ...ctx, level } : ctx;
         const source = { name: f.name, desc: f.desc, from };
         const grants = f.grants ?? [];
-        grants.filter((g) => g.type === 'effect').forEach((g) => push(g.effect, source));
-        const notes = grants.filter((g) => g.type === 'passive' && g.note).map((g) => fillTemplate(g.note, ctx));
+        grants.filter((g) => g.type === 'effect').forEach((g) => push(g.effect, source, fctx));
+        const notes = grants.filter((g) => g.type === 'passive' && g.note).map((g) => fillTemplate(g.note, fctx));
 
         let passive = f.passive;
         if (passive == null) {
@@ -226,7 +232,7 @@ export function collectPassives(src) {
                 if (i >= 0) abilities.splice(i, 1);
             }
             seenFeature.add(key);
-            addAbility(f, from, notes);
+            addAbility(f, from, notes, level);
         }
     }
 

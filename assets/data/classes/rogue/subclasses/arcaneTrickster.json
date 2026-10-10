@@ -1,7 +1,7 @@
 {
   "id": "arcaneTrickster",
   "name": "Arcane Trickster",
-  "image": "/img/classes/rogue/subclasses/arcaneTrickster.png",
+  "image": "/img/classes/rogue/subclasses/arcaneTrickster.webp",
   "class": "rogue",
   "spellcasting": {
     "ability": "int",

@@ -1,7 +1,7 @@
 {
   "id": "undead",
   "name": "Undead",
-  "image": "/img/classes/warlock/subclasses/undead.png",
+  "image": "/img/classes/warlock/subclasses/undead.webp",
   "class": "warlock",
   "domainSpells": {
     "3": [

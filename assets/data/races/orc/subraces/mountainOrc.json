@@ -2,7 +2,7 @@
   "id": "mountainOrc",
   "name": "Mountain Orc",
   "race": "orc",
-  "image": "/img/races/orc/subraces/mountainOrc.png",
+  "image": "/img/races/orc/subraces/mountainOrc.webp",
   "desc": "Orcs of the high peaks: hardened by thin air, rock and endless cold.",
   "traits": [
     {

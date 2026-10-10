@@ -24,3 +24,6 @@ VALUES (?, ?, ?, ?, ?);
 SELECT id, class_id, name, image, data_json, is_custom
 FROM subclasses
 ORDER BY name COLLATE NOCASE;
+
+-- name: GetClassName
+SELECT name FROM classes WHERE id = ?;

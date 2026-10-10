@@ -64,8 +64,18 @@
   },
   "raceId": "gnome",
   "subraceId": "rock",
-  "classId": "wizard",
-  "subclassId": "evocation",
+  "classes": [
+    {
+      "classId": "wizard",
+      "subclassId": "evocation"
+    }
+  ],
+  "levelClasses": [
+    "wizard",
+    "wizard",
+    "wizard",
+    "wizard"
+  ],
   "equipment": {
     "armorId": null,
     "shield": false,

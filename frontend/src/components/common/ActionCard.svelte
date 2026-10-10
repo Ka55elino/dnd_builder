@@ -155,6 +155,7 @@
     }
 
     .card {
+        min-width: 0;
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -227,9 +228,11 @@
 
     header {
         display: flex;
+        flex-wrap: wrap; /* a long source ("BARD, CLERIC, DRUID…") goes to its own line */
         align-items: baseline;
         justify-content: space-between;
-        gap: 8px;
+        gap: 2px 8px;
+        min-width: 0;
     }
 
     .name {
@@ -239,7 +242,10 @@
     }
 
     .src {
-        flex: 0 0 auto;
+        flex: 0 1 auto;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        text-align: right;
         font-family: var(--font-ui);
         font-size: 10px;
         letter-spacing: 0.06em;
@@ -249,6 +255,7 @@
 
     .desc {
         margin: 0;
+        overflow-wrap: anywhere;
         font-family: var(--font-spell);
         font-size: 14px;
         line-height: 1.35;

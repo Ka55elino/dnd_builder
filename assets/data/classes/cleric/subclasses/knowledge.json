@@ -1,7 +1,7 @@
 {
   "id": "knowledge",
   "name": "Knowledge",
-  "image": "/img/classes/cleric/subclasses/knowledge.png",
+  "image": "/img/classes/cleric/subclasses/knowledge.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

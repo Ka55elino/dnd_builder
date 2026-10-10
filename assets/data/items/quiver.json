@@ -1,7 +1,7 @@
 {
   "id": "quiver",
   "name": "Quiver",
-  "image": "/img/items/quiver.png",
+  "image": "/img/items/quiver.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "1 GP",

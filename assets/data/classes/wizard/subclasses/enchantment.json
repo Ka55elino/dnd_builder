@@ -1,7 +1,7 @@
 {
   "id": "enchantment",
   "name": "School of Enchantment",
-  "image": "/img/classes/wizard/subclasses/enchantment.png",
+  "image": "/img/classes/wizard/subclasses/enchantment.webp",
   "class": "wizard",
   "features": [
     {

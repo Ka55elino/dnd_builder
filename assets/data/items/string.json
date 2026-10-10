@@ -1,7 +1,7 @@
 {
   "id": "string",
   "name": "String",
-  "image": "/img/items/string.png",
+  "image": "/img/items/string.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "1 SP",

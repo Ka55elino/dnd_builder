@@ -1,7 +1,7 @@
 {
   "id": "archfey",
   "name": "Archfey",
-  "image": "/img/classes/warlock/subclasses/archfey.png",
+  "image": "/img/classes/warlock/subclasses/archfey.webp",
   "class": "warlock",
   "domainSpells": {
     "3": [

@@ -1,7 +1,7 @@
 {
   "id": "halfling",
   "name": "Halfling",
-  "image": "/img/races/halfling/halfling.png",
+  "image": "/img/races/halfling/halfling.webp",
   "size": "Small",
   "speed": 30,
   "subraceLevel": 1,

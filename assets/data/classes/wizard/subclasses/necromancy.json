@@ -1,7 +1,7 @@
 {
   "id": "necromancy",
   "name": "School of Necromancy",
-  "image": "/img/classes/wizard/subclasses/necromancy.png",
+  "image": "/img/classes/wizard/subclasses/necromancy.webp",
   "class": "wizard",
   "features": [
     {

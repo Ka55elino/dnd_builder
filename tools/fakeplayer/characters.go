@@ -115,12 +115,7 @@ func fromSeeds(dir string) ([]fakeChar, error) {
 		c.info.CharacterID, _ = build["id"].(string)
 		c.info.Name, _ = build["name"].(string)
 		c.info.Portrait, _ = build["portrait"].(string)
-		if lvl, ok := build["level"].(float64); ok {
-			c.info.Level = int(lvl)
-		}
-		if cls, _ := build["classId"].(string); cls != "" {
-			c.info.ClassName = strings.ToUpper(cls[:1]) + cls[1:]
-		}
+		c.info.Level, c.info.ClassName = levelAndClass(build)
 		out = append(out, c)
 	}
 	if len(out) == 0 {
@@ -140,4 +135,34 @@ func (c fakeChar) withName(name string) fakeChar {
 	c.snap.Build = build
 	c.info.Name = name
 	return c
+}
+
+// levelAndClass reads the character level and a class label ("Fighter 3 / Wizard 2")
+// from a build's classes / levelClasses.
+func levelAndClass(build map[string]any) (int, string) {
+	lc, _ := build["levelClasses"].([]any)
+	counts := map[string]int{}
+	for _, v := range lc {
+		if id, _ := v.(string); id != "" {
+			counts[id]++
+		}
+	}
+	level := len(lc)
+	if level < 1 {
+		level = 1
+	}
+	cls, _ := build["classes"].([]any)
+	var parts []string
+	for _, v := range cls {
+		m, _ := v.(map[string]any)
+		id, _ := m["classId"].(string)
+		if id == "" || (counts[id] == 0 && len(parts) > 0) {
+			continue
+		}
+		parts = append(parts, fmt.Sprintf("%s %d", strings.ToUpper(id[:1])+id[1:], counts[id]))
+	}
+	if len(parts) == 1 {
+		parts[0] = strings.Fields(parts[0])[0]
+	}
+	return level, strings.Join(parts, " / ")
 }

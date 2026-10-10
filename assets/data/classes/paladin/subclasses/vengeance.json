@@ -1,7 +1,7 @@
 {
   "id": "vengeance",
   "name": "Oath of Vengeance",
-  "image": "/img/classes/paladin/subclasses/vengeance.png",
+  "image": "/img/classes/paladin/subclasses/vengeance.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

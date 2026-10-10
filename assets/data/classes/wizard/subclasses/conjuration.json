@@ -1,7 +1,7 @@
 {
   "id": "conjuration",
   "name": "School of Conjuration",
-  "image": "/img/classes/wizard/subclasses/conjuration.png",
+  "image": "/img/classes/wizard/subclasses/conjuration.webp",
   "class": "wizard",
   "features": [
     {

@@ -1,7 +1,7 @@
 {
   "id": "costume",
   "name": "Costume",
-  "image": "/img/items/costume.png",
+  "image": "/img/items/costume.webp",
   "isDefault": true,
   "category": "clothing",
   "weight": 4,

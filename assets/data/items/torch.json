@@ -1,7 +1,7 @@
 {
   "id": "torch",
   "name": "Torch",
-  "image": "/img/items/torch.png",
+  "image": "/img/items/torch.webp",
   "isDefault": true,
   "weight": 1,
   "cost": "1 CP",

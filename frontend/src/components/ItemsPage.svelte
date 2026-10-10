@@ -4,6 +4,7 @@
      * and custom equipment: create, edit, copy, delete (stored in the DB).
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomEquipment } from "../data/refs.js";
     import CatalogList from "./common/CatalogList.svelte";
@@ -77,16 +78,14 @@
 {/snippet}
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>Items</h1>
+    <TopBar title="Items" {onBack}>
         <span class="status">{status}</span>
         {#if !loading && !error}
             <button class="add" onclick={() => (editor = { kind: tab, initial: null, copy: false })}>
                 + Add {KIND_ADD[tab]}
             </button>
         {/if}
-    </header>
+    </TopBar>
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -118,17 +117,12 @@
         gap: 20px;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     .status {

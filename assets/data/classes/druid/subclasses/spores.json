@@ -1,7 +1,7 @@
 {
   "id": "spores",
   "name": "Circle of Spores",
-  "image": "/img/classes/druid/subclasses/spores.png",
+  "image": "/img/classes/druid/subclasses/spores.webp",
   "class": "druid",
   "domainSpells": {
     "0": [

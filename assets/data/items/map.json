@@ -1,7 +1,7 @@
 {
   "id": "map",
   "name": "Map",
-  "image": "/img/items/map.png",
+  "image": "/img/items/map.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "1 GP",

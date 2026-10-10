@@ -1,7 +1,7 @@
 {
   "id": "monk",
   "name": "Monk",
-  "image": "/img/classes/monk/monk.png",
+  "image": "/img/classes/monk/monk.webp",
   "hitDie": 8,
   "primaryAbility": [
     "dex",
@@ -34,6 +34,21 @@
     "simple",
     "martial"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "dex",
+        "wis"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "unarmoredDefense": [
     "dex",
     "wis"

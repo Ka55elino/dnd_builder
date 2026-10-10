@@ -2,7 +2,7 @@
   "id": "imperial",
   "name": "Imperial",
   "race": "human",
-  "image": "/img/races/human/subraces/imperial.png",
+  "image": "/img/races/human/subraces/imperial.webp",
   "desc": "Humans raised in the heart of an empire: schooled, disciplined and used to learning whatever the realm needs of them.",
   "traits": [
     {

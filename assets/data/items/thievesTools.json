@@ -1,7 +1,7 @@
 {
   "id": "thievesTools",
   "name": "Thieves' Tools",
-  "image": "/img/items/thievesTools.png",
+  "image": "/img/items/thievesTools.webp",
   "isDefault": true,
   "weight": 1,
   "cost": "25 GP",

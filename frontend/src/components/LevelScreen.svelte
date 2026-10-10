@@ -98,7 +98,7 @@
         else if (ids.length < choice.pick) ids.push(id);
         else return;
 
-        if (choice.kind === "subclass") build.setSubclass(ids[0] ?? null);
+        if (choice.kind === "subclass") build.setSubclassFor(choice.classId, ids[0] ?? null);
         build.setChoice(choice.key, ids.length ? { kind: choice.kind, ids } : null);
 
         // invocation replacement cancelled — remove the replacement pick too
@@ -134,6 +134,9 @@
         <div class="big">
             <span class="lbl">Level</span>
             <span class="val">{level}</span>
+            {#if plan.classId && plan.classLevel !== level}
+                <small>{refs.classes?.find((c) => c.id === plan.classId)?.name ?? plan.classId} {plan.classLevel}</small>
+            {/if}
         </div>
         <div class="stat">
             <span class="lbl">Hit Points</span>
@@ -257,7 +260,7 @@
                         {#if desc}<p class="sub-desc">{desc}</p>{/if}
                         <ul class="sub-feats">
                             {#each subFeatures(o.ref) as f}
-                                <li class:now={(f.level ?? 1) === level} class:later={(f.level ?? 1) > level}>
+                                <li class:now={(f.level ?? 1) === plan.classLevel} class:later={(f.level ?? 1) > plan.classLevel}>
                                     <span class="f-lvl">Level {f.level ?? 1}</span>
                                     <b>{f.name}</b>
                                     {#if f.desc}<span class="f-desc">{f.desc}</span>{/if}
@@ -401,6 +404,11 @@
     .val.slots sup {
         font-size: 9px;
         color: var(--color-text-muted);
+    }
+
+    .big small {
+        font-size: 12px;
+        color: var(--color-text-secondary);
     }
 
     .stat small {

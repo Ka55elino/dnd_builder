@@ -1,7 +1,7 @@
 {
   "id": "spear",
   "name": "Spear",
-  "image": "/img/weapons/simple/spear.png",
+  "image": "/img/weapons/simple/spear.webp",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

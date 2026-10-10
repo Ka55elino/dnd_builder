@@ -1,7 +1,7 @@
 {
   "id": "poisonersKit",
   "name": "Poisoner's Kit",
-  "image": "/img/items/poisonersKit.png",
+  "image": "/img/items/poisonersKit.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "50 GP",

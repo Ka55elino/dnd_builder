@@ -2,7 +2,7 @@
   "id": "halfWoodElf",
   "name": "Half-Wood Elf",
   "race": "human",
-  "image": "/img/races/human/subraces/halfWoodElf.png",
+  "image": "/img/races/human/subraces/halfWoodElf.webp",
   "desc": "Humans with wood elf blood: light-footed, at home in the wilds and able to hear the voice of the forest.",
   "traits": [
     {

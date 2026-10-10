@@ -1,7 +1,7 @@
 {
   "id": "shadow",
   "name": "Warrior of Shadow",
-  "image": "/img/classes/monk/subclasses/shadow.png",
+  "image": "/img/classes/monk/subclasses/shadow.webp",
   "class": "monk",
   "features": [
     {

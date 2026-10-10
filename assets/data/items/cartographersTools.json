@@ -1,7 +1,7 @@
 {
   "id": "cartographersTools",
   "name": "Cartographer's Tools",
-  "image": "/img/items/cartographersTools.png",
+  "image": "/img/items/cartographersTools.webp",
   "isDefault": true,
   "weight": 6.0,
   "cost": "15 GP",

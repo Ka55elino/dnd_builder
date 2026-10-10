@@ -1,7 +1,7 @@
 {
   "id": "weaversTools",
   "name": "Weaver's Tools",
-  "image": "/img/items/weaversTools.png",
+  "image": "/img/items/weaversTools.webp",
   "isDefault": true,
   "weight": 5.0,
   "cost": "1 GP",

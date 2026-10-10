@@ -1,7 +1,7 @@
 {
   "id": "eldritchKnight",
   "name": "Eldritch Knight",
-  "image": "/img/classes/warrior/subclasses/eldritchKnight.png",
+  "image": "/img/classes/warrior/subclasses/eldritchKnight.webp",
   "class": "warrior",
   "spellcasting": {
     "ability": "int",

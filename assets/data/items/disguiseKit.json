@@ -1,7 +1,7 @@
 {
   "id": "disguiseKit",
   "name": "Disguise Kit",
-  "image": "/img/items/disguiseKit.png",
+  "image": "/img/items/disguiseKit.webp",
   "isDefault": true,
   "weight": 3.0,
   "cost": "25 GP",

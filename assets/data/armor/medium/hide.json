@@ -1,7 +1,7 @@
 {
   "id": "hide",
   "name": "Hide Armor",
-  "image": "/img/armor/medium/hide.png",
+  "image": "/img/armor/medium/hide.webp",
   "isDefault": true,
   "category": "medium",
   "baseAC": 12,

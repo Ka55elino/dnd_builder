@@ -1,7 +1,7 @@
 {
   "id": "nobleGenies",
   "name": "Oath of the Noble Genies",
-  "image": "/img/classes/paladin/subclasses/nobleGenies.png",
+  "image": "/img/classes/paladin/subclasses/nobleGenies.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

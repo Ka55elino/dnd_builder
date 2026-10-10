@@ -1,7 +1,7 @@
 {
   "id": "flail",
   "name": "Flail",
-  "image": "/img/weapons/martial/flail.png",
+  "image": "/img/weapons/martial/flail.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

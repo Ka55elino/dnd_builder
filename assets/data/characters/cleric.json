@@ -64,8 +64,18 @@
   },
   "raceId": "dwarf",
   "subraceId": "hill",
-  "classId": "cleric",
-  "subclassId": "life",
+  "classes": [
+    {
+      "classId": "cleric",
+      "subclassId": "life"
+    }
+  ],
+  "levelClasses": [
+    "cleric",
+    "cleric",
+    "cleric",
+    "cleric"
+  ],
   "equipment": {
     "armorId": "scaleMail",
     "shield": true,

@@ -1,7 +1,7 @@
 {
   "id": "gamingSet",
   "name": "Gaming Set",
-  "image": "/img/items/gamingSet.png",
+  "image": "/img/items/gamingSet.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "Varies",

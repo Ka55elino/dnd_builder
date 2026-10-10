@@ -1,7 +1,7 @@
 {
   "id": "ramPortable",
   "name": "Ram, Portable",
-  "image": "/img/items/ramPortable.png",
+  "image": "/img/items/ramPortable.webp",
   "isDefault": true,
   "weight": 35.0,
   "cost": "4 GP",

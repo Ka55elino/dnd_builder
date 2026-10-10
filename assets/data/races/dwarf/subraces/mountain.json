@@ -1,7 +1,7 @@
 {
   "id": "mountain",
   "name": "Mountain Dwarf",
-  "image": "/img/races/dwarf/subraces/mountain.png",
+  "image": "/img/races/dwarf/subraces/mountain.webp",
   "race": "dwarf",
   "traits": [
     {

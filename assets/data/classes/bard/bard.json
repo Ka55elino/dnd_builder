@@ -1,7 +1,7 @@
 {
   "id": "bard",
   "name": "Bard",
-  "image": "/img/classes/bard/bard.png",
+  "image": "/img/classes/bard/bard.webp",
   "hitDie": 8,
   "primaryAbility": [
     "cha"
@@ -46,6 +46,24 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "cha"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light"
+      ],
+      "weapons": [],
+      "tools": [
+        "instrument"
+      ],
+      "skills": 1
+    }
+  },
   "spellcasting": {
     "ability": "cha",
     "list": "bard",

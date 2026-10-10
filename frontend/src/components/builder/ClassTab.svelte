@@ -29,7 +29,7 @@
 
     // the level the class picks its subclass at (usually 3)
     const subLevel = $derived(cls?.subclassLevel || 3);
-    const subclassOpen = $derived((build.level ?? 1) >= subLevel);
+    const subclassOpen = $derived(build.classLevel(build.classId) >= subLevel);
     $effect(() => {
         if (cls && !subclassOpen && build.subclassId) build.setSubclass(null);
     });

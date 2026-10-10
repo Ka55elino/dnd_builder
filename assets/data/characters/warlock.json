@@ -64,8 +64,16 @@
   },
   "raceId": "human",
   "subraceId": "imperial",
-  "classId": "warlock",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "warlock",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "warlock",
+    "warlock"
+  ],
   "equipment": {
     "armorId": "leather",
     "shield": false,

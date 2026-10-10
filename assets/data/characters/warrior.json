@@ -64,8 +64,15 @@
   },
   "raceId": "elf",
   "subraceId": "wood",
-  "classId": "warrior",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "warrior",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "warrior"
+  ],
   "equipment": {
     "armorId": "chainMail",
     "shield": false,

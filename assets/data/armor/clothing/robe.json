@@ -1,7 +1,7 @@
 {
   "id": "robe",
   "name": "Robe",
-  "image": "/img/items/robe.png",
+  "image": "/img/items/robe.webp",
   "isDefault": true,
   "category": "clothing",
   "weight": 4,

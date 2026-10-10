@@ -1,7 +1,7 @@
 {
   "id": "aasimar",
   "name": "Aasimar",
-  "image": "/img/races/aasimar/aasimar.png",
+  "image": "/img/races/aasimar/aasimar.webp",
   "size": "Medium",
   "speed": 30,
   "subraceLevel": 1,

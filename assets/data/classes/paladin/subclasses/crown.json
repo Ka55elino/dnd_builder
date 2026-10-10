@@ -1,7 +1,7 @@
 {
   "id": "crown",
   "name": "Oath of the Crown",
-  "image": "/img/classes/paladin/subclasses/crown.png",
+  "image": "/img/classes/paladin/subclasses/crown.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

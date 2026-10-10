@@ -10,6 +10,7 @@
      * Leaving the screen keeps the game running (the header shows it).
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { untrack } from 'svelte';
     import { HostGame, StopGame, GetPlayerCharacter } from '../api.js';
     import { server, applyStatus, onGameEvent } from '../server.svelte.js';
@@ -265,9 +266,7 @@
 </script>
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>{hosting ? server.game.name : 'New Game'}</h1>
+    <TopBar title={hosting ? server.game.name : 'New Game'} {onBack}>
         {#if hosting}
             <button class="logto" class:on={logTo} onclick={refreshLogTo}
                 title={logTo ? 'Combat and Give Item are logged into this session (click to refresh)' : 'Start a session in Campaign → Sessions to log combat and Give Item (click to refresh)'}
@@ -288,10 +287,10 @@
                 <button class="danger" onclick={stop}>End game</button>
                 <button class="ghost" onclick={() => (confirmStop = false)}>Cancel</button>
             {:else}
-                <button class="ghost stop" onclick={askEnd}>Stop game</button>
+                <button class="ghost stop" data-keep-open onclick={askEnd}>Stop game</button>
             {/if}
         {/if}
-    </header>
+    </TopBar>
 
     {#if hosting}
         {#if combat.active}
@@ -435,17 +434,12 @@
         gap: 28px;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     h2 {

@@ -1,7 +1,7 @@
 {
   "id": "carpentersTools",
   "name": "Carpenter's Tools",
-  "image": "/img/items/carpentersTools.png",
+  "image": "/img/items/carpentersTools.webp",
   "isDefault": true,
   "weight": 6.0,
   "cost": "8 GP",

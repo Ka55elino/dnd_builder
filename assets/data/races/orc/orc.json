@@ -1,7 +1,7 @@
 {
   "id": "orc",
   "name": "Orc",
-  "image": "/img/races/orc/orc.png",
+  "image": "/img/races/orc/orc.webp",
   "size": "Medium",
   "speed": 30,
   "traits": [

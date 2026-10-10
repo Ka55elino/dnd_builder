@@ -1,7 +1,7 @@
 {
   "id": "flask",
   "name": "Flask",
-  "image": "/img/items/flask.png",
+  "image": "/img/items/flask.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "2 CP",

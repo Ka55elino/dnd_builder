@@ -6,14 +6,17 @@
      * caption  — (item) => line below the name (optional)
      * badge    — (item) => a count / mark in the corner (optional; falsy — none): "×2"
      * small    — smaller cells (160px) for long lists (weapons)
+     * disabled — (item) => false | reason string: the cell is dimmed and can't be picked (optional)
      */
-    let { items = [], onpick, caption = null, badge = null, small = false } = $props();
+    let { items = [], onpick, caption = null, badge = null, small = false, disabled = null } = $props();
 </script>
 
 <div class="grid" class:small>
     {#each items as item (item.id)}
         {@const b = badge?.(item)}
-        <button class="cell" class:marked={!!b} onclick={() => onpick(item.id)} title={item.name}>
+        {@const off = disabled?.(item)}
+        <button class="cell" class:marked={!!b} class:off={!!off} disabled={!!off}
+            onclick={() => onpick(item.id)} title={typeof off === "string" ? off : item.name}>
             {#if b}<span class="badge">{b}</span>{/if}
             {#if item.image}
                 <img src={item.image} alt="" />
@@ -61,6 +64,16 @@
     .cell:hover {
         border-color: var(--color-gold);
         transform: translateY(-2px);
+    }
+
+    .cell.off {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+
+    .cell.off:hover {
+        border-color: var(--color-border);
+        transform: none;
     }
 
     .grid.small {

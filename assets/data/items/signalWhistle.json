@@ -1,7 +1,7 @@
 {
   "id": "signalWhistle",
   "name": "Signal Whistle",
-  "image": "/img/items/signalWhistle.png",
+  "image": "/img/items/signalWhistle.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "5 CP",

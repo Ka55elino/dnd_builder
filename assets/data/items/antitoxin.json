@@ -1,7 +1,7 @@
 {
   "id": "antitoxin",
   "name": "Antitoxin",
-  "image": "/img/items/antitoxin.png",
+  "image": "/img/items/antitoxin.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "50 GP",

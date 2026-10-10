@@ -20,16 +20,67 @@ type CharacterSummary struct {
 	UpdatedAt int64  `json:"updatedAt"` // unix time
 }
 
+// buildClass is one entry of build.classes (multiclassing).
+type buildClass struct {
+	ClassID    string  `json:"classId"`
+	SubclassID *string `json:"subclassId"`
+}
+
 // buildHead holds the build fields that are duplicated into table columns.
+// Classes: classes[0] is the primary class; the character level is the number
+// of entries in levelClasses (the class gained at each level).
 type buildHead struct {
-	ID           string  `json:"id"`
-	Name         string  `json:"name"`
-	Level        int     `json:"level"`
-	RaceID       *string `json:"raceId"`
-	ClassID      *string `json:"classId"`
-	SubclassID   *string `json:"subclassId"`
-	BackgroundID *string `json:"backgroundId"`
-	Portrait     *string `json:"portrait"`
+	ID           string       `json:"id"`
+	Name         string       `json:"name"`
+	RaceID       *string      `json:"raceId"`
+	Classes      []buildClass `json:"classes"`
+	LevelClasses []*string    `json:"levelClasses"`
+	BackgroundID *string      `json:"backgroundId"`
+	Portrait     *string      `json:"portrait"`
+}
+
+// level is the character level (total of class levels).
+func (b buildHead) level() int {
+	if n := len(b.LevelClasses); n > 0 {
+		return n
+	}
+	return 1
+}
+
+// primary returns the primary class and subclass ids (nil if there is no class).
+func (b buildHead) primary() (classID, subclassID *string) {
+	if len(b.Classes) == 0 || b.Classes[0].ClassID == "" {
+		return nil, nil
+	}
+	return &b.Classes[0].ClassID, b.Classes[0].SubclassID
+}
+
+// classSummary is the class line for the character list: "Fighter 3 / Wizard 2".
+// A single class — "" (the list shows the class name from the classes table).
+func (b buildHead) classSummary(db querier) string {
+	counts := map[string]int{}
+	for _, id := range b.LevelClasses {
+		if id != nil && *id != "" {
+			counts[*id]++
+		}
+	}
+	var parts []string
+	for _, c := range b.Classes {
+		n := counts[c.ClassID]
+		if n == 0 {
+			continue
+		}
+		name := c.ClassID
+		var dbName string
+		if err := db.QueryRow(Q("GetClassName"), c.ClassID).Scan(&dbName); err == nil && dbName != "" {
+			name = dbName
+		}
+		parts = append(parts, fmt.Sprintf("%s %d", name, n))
+	}
+	if len(parts) < 2 {
+		return ""
+	}
+	return strings.Join(parts, " / ")
 }
 
 // validate performs minimal server-side validation (full validation is on the frontend).
@@ -44,7 +95,7 @@ func (b buildHead) validate() error {
 	if b.RaceID == nil || *b.RaceID == "" {
 		missing = append(missing, "race")
 	}
-	if b.ClassID == nil || *b.ClassID == "" {
+	if cls, _ := b.primary(); cls == nil {
 		missing = append(missing, "class")
 	}
 	if len(missing) > 0 {
@@ -104,7 +155,7 @@ func isPlaceholderPortrait(p string) bool {
 }
 
 // saveCharacter saves a build (CharacterBuild object JSON) and returns its id.
-func saveCharacter(db execer, buildJSON string) (string, error) {
+func saveCharacter(db querier, buildJSON string) (string, error) {
 	// an uploaded portrait (data URL) goes to the images table, the build keeps its /img/db/ URL
 	if strings.Contains(buildJSON, `"portrait":"data:`) || strings.Contains(buildJSON, `"portrait": "data:`) {
 		var obj map[string]any
@@ -127,13 +178,11 @@ func saveCharacter(db execer, buildJSON string) (string, error) {
 	if err := head.validate(); err != nil {
 		return "", err
 	}
-	if head.Level < 1 {
-		head.Level = 1
-	}
+	classID, subclassID := head.primary()
 
 	_, err := db.Exec(Q("UpsertCharacter"),
-		head.ID, strings.TrimSpace(head.Name), head.Level,
-		head.ClassID, head.SubclassID, head.RaceID, head.BackgroundID, head.Portrait,
+		head.ID, strings.TrimSpace(head.Name), head.level(),
+		classID, subclassID, head.classSummary(db), head.RaceID, head.BackgroundID, head.Portrait,
 		buildJSON)
 	if err != nil {
 		return "", err

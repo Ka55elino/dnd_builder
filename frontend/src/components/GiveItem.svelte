@@ -6,6 +6,7 @@
      *
      * id — character; onBack() — back to the character page
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { GetCharacter, SaveCharacter } from "../api.js";
     import { CharacterBuild } from "../models/CharacterBuild.svelte.js";
@@ -68,14 +69,9 @@
 {/snippet}
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← To character</button>
-        <h1>
-            Give Item
-            {#if build}<span>{build.name}</span>{/if}
-        </h1>
-        <span class="status">{status}</span>
-    </header>
+    <TopBar title="Give Item" sub={build?.name ?? ""} {onBack} back="To character">
+        {#snippet pinned()}<span class="status">{status}</span>{/snippet}
+    </TopBar>
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -95,25 +91,12 @@
         gap: 20px;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
-    }
-
-    h1 span {
-        margin-left: 10px;
-        font-family: var(--font-heading-alt);
-        font-size: 18px;
-        font-weight: var(--font-weight-regular);
-        color: var(--color-text-secondary);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     .status {

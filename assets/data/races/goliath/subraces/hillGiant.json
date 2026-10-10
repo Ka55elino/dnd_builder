@@ -1,7 +1,7 @@
 {
   "id": "hillGiant",
   "name": "Hill Giant Ancestry",
-  "image": "/img/races/goliath/subraces/hillGiant.png",
+  "image": "/img/races/goliath/subraces/hillGiant.webp",
   "race": "goliath",
   "traits": [
     {

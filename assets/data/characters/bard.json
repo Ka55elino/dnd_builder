@@ -64,8 +64,16 @@
   },
   "raceId": "halfling",
   "subraceId": "lightfoot",
-  "classId": "bard",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "bard",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "bard",
+    "bard"
+  ],
   "equipment": {
     "armorId": "leather",
     "shield": false,

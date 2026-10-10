@@ -1,7 +1,7 @@
 {
   "id": "ringMail",
   "name": "Ring Mail",
-  "image": "/img/armor/heavy/ringMail.png",
+  "image": "/img/armor/heavy/ringMail.webp",
   "isDefault": true,
   "category": "heavy",
   "baseAC": 14,

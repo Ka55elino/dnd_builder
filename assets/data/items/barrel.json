@@ -1,7 +1,7 @@
 {
   "id": "barrel",
   "name": "Barrel",
-  "image": "/img/items/barrel.png",
+  "image": "/img/items/barrel.webp",
   "isDefault": true,
   "weight": 70.0,
   "cost": "2 GP",

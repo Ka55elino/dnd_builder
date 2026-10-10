@@ -1,7 +1,7 @@
 {
   "id": "ranger",
   "name": "Ranger",
-  "image": "/img/classes/ranger/ranger.png",
+  "image": "/img/classes/ranger/ranger.webp",
   "hitDie": 10,
   "primaryAbility": [
     "dex",
@@ -40,6 +40,27 @@
     "simple",
     "martial"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "dex",
+        "wis"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light",
+        "medium",
+        "shield"
+      ],
+      "weapons": [
+        "martial"
+      ],
+      "tools": [],
+      "skills": 1
+    }
+  },
   "spellcasting": {
     "ability": "wis",
     "list": "ranger",

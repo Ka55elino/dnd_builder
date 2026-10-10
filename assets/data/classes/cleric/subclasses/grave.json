@@ -1,7 +1,7 @@
 {
   "id": "grave",
   "name": "Grave",
-  "image": "/img/classes/cleric/subclasses/grave.png",
+  "image": "/img/classes/cleric/subclasses/grave.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

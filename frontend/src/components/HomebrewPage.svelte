@@ -7,6 +7,7 @@
      *           from the version here → Import the ticked records.
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { localHomebrew, exportHomebrew, openHomebrew, applyHomebrew } from "../homebrew.js";
     import { CREATURE_TYPES, crLabel } from "../data/bestiary.js";
@@ -169,9 +170,7 @@
 <svelte:window onkeydown={onKey} />
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>Homebrew</h1>
+    <TopBar title="Homebrew" {onBack}>
         <span class="spacer"></span>
         <button class="ghost" onclick={doOpen} disabled={!!busy || loading}>
             {busy === "open" ? "Opening…" : "Import…"}
@@ -179,7 +178,7 @@
         <button class="add" onclick={doExport} disabled={!!busy || loading || !pickedCount}>
             {busy === "export" ? "Exporting…" : `Export ${pickedCount || ""}`.trim()}
         </button>
-    </header>
+    </TopBar>
 
     <p class="lead">
         Your own items, spells, monsters and conditions in one file — to move them to another computer or share them
@@ -302,6 +301,14 @@
         gap: 20px;
     }
 
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
+    }
+
     .top {
         display: flex;
         align-items: center;
@@ -310,13 +317,6 @@
 
     .spacer {
         flex: 1;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
     }
 
     .lead {

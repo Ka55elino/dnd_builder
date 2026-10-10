@@ -1,7 +1,7 @@
 {
   "id": "acid",
   "name": "Acid",
-  "image": "/img/items/acid.png",
+  "image": "/img/items/acid.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "25 GP",

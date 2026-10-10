@@ -1,7 +1,7 @@
 {
   "id": "elf",
   "name": "Elf",
-  "image": "/img/races/elf/elf.png",
+  "image": "/img/races/elf/elf.webp",
   "size": "Medium",
   "speed": 30,
   "subraceLevel": 1,

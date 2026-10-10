@@ -1,7 +1,7 @@
 {
   "id": "tinkersTools",
   "name": "Tinker's Tools",
-  "image": "/img/items/tinkersTools.png",
+  "image": "/img/items/tinkersTools.webp",
   "isDefault": true,
   "weight": 10.0,
   "cost": "50 GP",

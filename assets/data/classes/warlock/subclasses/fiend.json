@@ -1,7 +1,7 @@
 {
   "id": "fiend",
   "name": "Fiend",
-  "image": "/img/classes/warlock/subclasses/fiend.png",
+  "image": "/img/classes/warlock/subclasses/fiend.webp",
   "class": "warlock",
   "domainSpells": {
     "3": [

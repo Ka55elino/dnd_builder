@@ -1,7 +1,7 @@
 {
   "id": "warrior",
   "name": "Fighter",
-  "image": "/img/classes/warrior/warrior.png",
+  "image": "/img/classes/warrior/warrior.webp",
   "hitDie": 10,
   "primaryAbility": [
     "str",
@@ -44,6 +44,27 @@
     "simple",
     "martial"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "anyOf": [
+        "str",
+        "dex"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light",
+        "medium",
+        "shield"
+      ],
+      "weapons": [
+        "martial"
+      ],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "features": [
     {
       "level": 1,

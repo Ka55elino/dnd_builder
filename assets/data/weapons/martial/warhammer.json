@@ -1,7 +1,7 @@
 {
   "id": "warhammer",
   "name": "Warhammer",
-  "image": "/img/weapons/martial/warhammer.png",
+  "image": "/img/weapons/martial/warhammer.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

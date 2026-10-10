@@ -1,7 +1,7 @@
 {
   "id": "ladder",
   "name": "Ladder",
-  "image": "/img/items/ladder.png",
+  "image": "/img/items/ladder.webp",
   "isDefault": true,
   "weight": 25.0,
   "cost": "1 SP",

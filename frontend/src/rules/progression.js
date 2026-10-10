@@ -12,6 +12,11 @@
  * The key starts with the level: `L<level>:<source>:<what>` — so on
  * level-up it is clear what belongs to which level.
  *
+ * Multiclassing: `level` is always the CHARACTER level. Each character level
+ * belongs to one class (build.levelClasses, rules/multiclass.js); class and
+ * subclass features, ASI, spells known etc. go by that class's own level.
+ * Species and background traits go by the character level.
+ *
  * Choice kinds (kind):
  *   skills | skill       — skills (class at level 1, race, the "Skilled" feat)
  *   expertise            — expertise (doubled proficiency bonus)
@@ -33,9 +38,10 @@ import { SKILLS } from './skills.js';
 import { ABILITY_KEYS, ABILITIES, modifier } from './abilities.js';
 import { byLevelPairs } from './formula.js';
 import { formsKnownAt, formsAvailable, crText, speedText } from './wildshape.js';
-import { spellSlots } from './spellcasting.js';
+import { spellSlots, multiclassSlots } from './spellcasting.js';
 import { proficiencyBonus } from './sheet.js';
 import { SCHOOLS } from './labels.js';
+import { classAt, classLevelAt, classEntries, subclassOf, primaryClassId, multiclassInfo } from './multiclass.js';
 
 const SKILL_BY_ID = Object.fromEntries(SKILLS.map((s) => [s.id, s]));
 const skillOption = (id) => ({ id, name: SKILL_BY_ID[id]?.name ?? id });
@@ -64,7 +70,7 @@ function spellList(refs, list, { minLevel = 0, maxLevel = 9 } = {}) {
     );
 }
 
-const findCls = (build, refs) => (refs.classes ?? []).find((c) => c.id === build.classId) ?? null;
+const findClsById = (refs, id) => (refs.classes ?? []).find((c) => c.id === id) ?? null;
 const findRace = (build, refs) => (refs.races ?? []).find((r) => r.id === build.raceId) ?? null;
 const findBg = (build, refs) => (refs.backgrounds ?? []).find((b) => b.id === build.backgroundId) ?? null;
 const findFeat = (refs, id) => (refs.feats ?? []).find((f) => f.id === id) ?? null;
@@ -151,16 +157,18 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
         if (lvlOf(t) > upTo) continue;
         for (const g of t.grants ?? []) if (g.type === 'skill' && g.id) out.skills.add(g.id);
     }
-    // fixed skills / expertise from class and subclass features (up to this level):
+    // fixed skills / expertise from class and subclass features (up to each class's level):
     //   "grants": [{ "type": "skill", "id": "persuasion", "orChoose": true }, { "type": "expertise", "id": "persuasion" }]
     //   orChoose — if the skill is already there, the level offers another one (see featureChoices)
-    const cls = findCls(build, refs);
-    const subclass = cls?.subclasses?.find((s) => s.id === build.subclassId) ?? null;
-    for (const f of [...(cls?.data?.features ?? []), ...(subclass?.data?.features ?? [])]) {
-        if (lvlOf(f) > upTo) continue;
-        for (const g of f.grants ?? []) {
-            if (g.type === 'skill' && g.id) out.skills.add(g.id);
-            if (g.type === 'expertise' && g.id) out.expertise.add(g.id);
+    for (const entry of classEntries(build, upTo)) {
+        const cls = findClsById(refs, entry.classId);
+        const subclass = cls?.subclasses?.find((s) => s.id === entry.subclassId) ?? null;
+        for (const f of [...(cls?.data?.features ?? []), ...(subclass?.data?.features ?? [])]) {
+            if (lvlOf(f) > entry.level) continue;
+            for (const g of f.grants ?? []) {
+                if (g.type === 'skill' && g.id) out.skills.add(g.id);
+                if (g.type === 'expertise' && g.id) out.expertise.add(g.id);
+            }
         }
     }
 
@@ -176,18 +184,23 @@ export function summarizeChoices(build, refs, upTo = build.level ?? 1) {
 // level plan
 
 /**
+ * level — the character level.
  * @returns {{
- *   level, prof, profChanged, hp: { gain, formula },
+ *   level, classId, classLevel, newClass, prof, profChanged, hp: { gain, formula },
  *   slots: [{ level, max, pact? }], slotsChanged,
  *   gains: [{ title, items: [{ name, desc, tag? }] }],
  *   choices: [{ key, kind, title, desc?, pick, options, value, repeatable? }]
  * }}
  */
 export function levelPlan(build, level, refs) {
-    const cls = findCls(build, refs);
+    // the class gained at this character level and the level reached in it
+    const cls = findClsById(refs, classAt(build, level) ?? primaryClassId(build));
+    const clsLvl = classAt(build, level) ? classLevelAt(build, level) : level;
+    const newClass = !!cls && clsLvl === 1 && level > 1; // multiclassing into it now
     const race = findRace(build, refs);
     const sub = race?.subraces?.find((s) => s.id === build.subraceId) ?? null;
-    const subclass = cls?.subclasses?.find((s) => s.id === build.subclassId) ?? null;
+    const subclassId = cls ? subclassOf(build, cls.id) : null;
+    const subclass = cls?.subclasses?.find((s) => s.id === subclassId) ?? null;
     const bg = findBg(build, refs);
 
     const gains = [];
@@ -209,23 +222,26 @@ export function levelPlan(build, level, refs) {
     const profChanged = level === 1 || prof !== proficiencyBonus(level - 1);
 
     // --- slots ---
-    // class or subclass spellcasting (Eldritch Knight / Arcane Trickster — from level 3)
+    // the character's slots (all classes, rules/spellcasting.js multiclassSlots)
+    const slots = multiclassSlots(castersOf(build, refs, level), level);
+    const prevSlots = level > 1 ? multiclassSlots(castersOf(build, refs, level - 1), level - 1) : [];
+    const slotsChanged = JSON.stringify(slots) !== JSON.stringify(prevSlots);
+    // this class's spellcasting (subclass — Eldritch Knight / Arcane Trickster, from level 3):
+    // what to learn goes by its own level, as for a single-class caster of that level
     const sc = spellcastingOf(cls, subclass);
     const scOwner = cls?.data?.spellcasting ? cls : subclass;
     const progression = sc?.progression ?? cls?.caster ?? 'none';
     const scOn = (lvl) => !!sc && lvl >= (sc.startLevel ?? 1);
-    const slots = scOn(level) ? spellSlots(progression, level) : [];
-    const prevSlots = level > 1 && scOn(level - 1) ? spellSlots(progression, level - 1) : [];
-    const slotsChanged = JSON.stringify(slots) !== JSON.stringify(prevSlots);
+    const ownSlots = scOn(clsLvl) ? spellSlots(progression, clsLvl) : [];
 
     // ================= class =================
-    const clsFeatures = (cls?.data?.features ?? []).filter((f) => lvlOf(f) === level);
+    const clsFeatures = (cls?.data?.features ?? []).filter((f) => lvlOf(f) === clsLvl);
     addGain(
-        cls ? `${cls.name} · Level ${level}` : 'Class',
+        cls ? `${cls.name} · Level ${clsLvl}` : 'Class',
         clsFeatures.map((f) => ({ name: f.name, desc: f.desc })),
     );
 
-    // class skills — at level 1
+    // class skills — at level 1 (the starting class: the full list)
     if (level === 1 && cls?.data?.skills?.length) {
         add({
             key: 'L1:class:skills',
@@ -237,29 +253,53 @@ export function levelPlan(build, level, refs) {
         });
     }
 
+    // a new class (multiclassing): only part of its starting proficiencies
+    if (newClass) {
+        const mc = multiclassInfo(cls).proficiencies;
+        const items = [
+            { name: 'Hit Point Die', desc: `d${cls.hitDie ?? 8}` },
+            mc.armor.length && { name: 'Armor training', desc: mc.armor.map(cap).join(', ') },
+            mc.weapons.length && { name: 'Weapon proficiency', desc: mc.weapons.map((w) => `${cap(w)} weapons`).join(', ') },
+            mc.tools.length && { name: 'Tools', desc: mc.tools.map((t) => TOOL_LABELS[t] ?? cap(t)).join(', ') },
+            mc.skills && { name: 'Skills', desc: `${mc.skills} from the ${cls.name} list` },
+        ].filter(Boolean);
+        addGain(`Multiclassing into ${cls.name}`, items);
+        if (mc.skills && cls.data?.skills?.length) {
+            add({
+                key: `L${level}:class:skills`,
+                kind: 'skills',
+                title: `Class Skills (${cls.name})`,
+                desc: `Multiclassing: choose ${mc.skills} from the class list.`,
+                pick: mc.skills,
+                options: cls.data.skills.filter((s) => !done.skills.has(s)).map(skillOption),
+            });
+        }
+    }
+
     for (const f of clsFeatures) featureChoices(f, 'class', level, done, refs, add, value);
 
-    // subclass
-    if (cls && level === (cls.subclassLevel ?? 3) && cls.subclasses?.length) {
+    // subclass (stored in build.classes, not in choices; classId — whose subclass it is)
+    if (cls && clsLvl === (cls.subclassLevel ?? 3) && cls.subclasses?.length) {
         choices.push({
             key: `L${level}:class:subclass`,
             kind: 'subclass',
+            classId: cls.id,
             title: `Subclass (${cls.name})`,
             pick: 1,
             options: cls.subclasses.map((s) => asOption(s)),
-            value: build.subclassId ? { kind: 'subclass', ids: [build.subclassId] } : null,
+            value: subclassId ? { kind: 'subclass', ids: [subclassId] } : null,
         });
     }
 
     // subclass features
     if (subclass) {
-        const subFeatures = (subclass.data?.features ?? []).filter((f) => lvlOf(f) === level);
+        const subFeatures = (subclass.data?.features ?? []).filter((f) => lvlOf(f) === clsLvl);
         addGain(subclass.name, subFeatures.map((f) => ({ name: f.name, desc: f.desc })));
         for (const f of subFeatures) featureChoices(f, 'subclass', level, done, refs, add, value);
 
         // "choose N" pools: Battle Master maneuvers, arcane shots…
         for (const pool of subclass.data?.optionPools ?? []) {
-            const n = byLevelPairs(pool.known, level) - (level > 1 ? byLevelPairs(pool.known, level - 1) : 0);
+            const n = byLevelPairs(pool.known, clsLvl) - (clsLvl > 1 ? byLevelPairs(pool.known, clsLvl - 1) : 0);
             if (n <= 0) continue;
             add({
                 key: `L${level}:subclass:pool:${pool.id}`,
@@ -268,7 +308,7 @@ export function levelPlan(build, level, refs) {
                 pick: n,
                 options: (refs.spells ?? [])
                     .filter((sp) => sp.data?.pool === pool.id && sp.data?.subclass === subclass.id)
-                    .filter((sp) => sp.level <= level && !done.pool.includes(sp.id))
+                    .filter((sp) => sp.level <= clsLvl && !done.pool.includes(sp.id))
                     .map((sp) => asOption(sp)),
             });
         }
@@ -276,7 +316,7 @@ export function levelPlan(build, level, refs) {
 
     // class abilities (from the spells table) — what unlocks at this level
     const powers = (refs.spells ?? []).filter((sp) => {
-        if (sp.kind === 'spell' || sp.level !== level) return false;
+        if (sp.kind === 'spell' || sp.level !== clsLvl) return false;
         const d = sp.data ?? {};
         if (d.pool) return false; // pool options are chosen separately
         if (d.subclass) return !!subclass && d.subclass === subclass.id;
@@ -292,7 +332,7 @@ export function levelPlan(build, level, refs) {
     );
 
     // Ability Score Improvement / feat
-    if ((cls?.data?.asiLevels ?? []).includes(level)) {
+    if ((cls?.data?.asiLevels ?? []).includes(clsLvl)) {
         const key = `L${level}:class:feat`;
         add({
             key,
@@ -308,7 +348,7 @@ export function levelPlan(build, level, refs) {
     }
 
     // metamagic / invocations — how many new at this level
-    const newCount = (table) => byLevelPairs(table ?? [], level) - (level > 1 ? byLevelPairs(table ?? [], level - 1) : 0);
+    const newCount = (table) => byLevelPairs(table ?? [], clsLvl) - (clsLvl > 1 ? byLevelPairs(table ?? [], clsLvl - 1) : 0);
     const mmNew = newCount(cls?.data?.metamagicKnown);
     if (mmNew > 0) {
         add({
@@ -330,7 +370,7 @@ export function levelPlan(build, level, refs) {
         });
     }
     // PHB 2024: on each level-up a warlock may replace one known invocation
-    if (level > 1 && cls?.data?.invocationsKnown?.length && done.invocations.length) {
+    if (clsLvl > 1 && cls?.data?.invocationsKnown?.length && done.invocations.length) {
         const forgetKey = `L${level}:class:invocationForget`;
         const forgotten = value(forgetKey)?.ids ?? [];
         add({
@@ -357,7 +397,7 @@ export function levelPlan(build, level, refs) {
 
     // Wild Shape: new known forms at this level (4 at 2, 6 at 4, 8 at 8) — from the forms linked
     // to the class (rules/wildshape.js); Circle of the Moon may take higher CRs
-    const formsNew = cls ? formsKnownAt(refs, cls.id, level) - (level > 1 ? formsKnownAt(refs, cls.id, level - 1) : 0) : 0;
+    const formsNew = cls ? formsKnownAt(refs, cls.id, clsLvl) - (clsLvl > 1 ? formsKnownAt(refs, cls.id, clsLvl - 1) : 0) : 0;
     if (formsNew > 0) {
         add({
             key: `L${level}:class:wildShapeForms`,
@@ -365,7 +405,7 @@ export function levelPlan(build, level, refs) {
             title: 'Wild Shape: known forms',
             desc: 'Beasts you can turn into. Flying forms — from level 8.',
             pick: formsNew,
-            options: formsAvailable(refs, cls.id, subclass?.id ?? '', level, subclass)
+            options: formsAvailable(refs, cls.id, subclass?.id ?? '', clsLvl, subclass)
                 .filter((f) => !done.wildShapeForms.includes(f.monsterId))
                 .map((f) => ({
                     id: f.monsterId,
@@ -382,13 +422,13 @@ export function levelPlan(build, level, refs) {
     }
 
     // class (or subclass) spells
-    const granted = new Set(subclassSpellIds(subclass, cls, level).map((x) => x.id));
-    if (scOn(level)) {
+    const granted = new Set(subclassSpellIds(subclass, cls, clsLvl).map((x) => x.id));
+    if (scOn(clsLvl)) {
         const list = sc.list ?? cls.id;
         const who = scOwner?.name ?? cls.name;
-        const maxCircle = Math.max(0, ...slots.map((s) => s.level));
-        const cNew = byLevelPairs(sc.cantripsKnown, level) - (level > 1 ? byLevelPairs(sc.cantripsKnown, level - 1) : 0);
-        const pNew = byLevelPairs(sc.preparedKnown, level) - (level > 1 ? byLevelPairs(sc.preparedKnown, level - 1) : 0);
+        const maxCircle = Math.max(0, ...ownSlots.map((s) => s.level));
+        const cNew = byLevelPairs(sc.cantripsKnown, clsLvl) - (clsLvl > 1 ? byLevelPairs(sc.cantripsKnown, clsLvl - 1) : 0);
+        const pNew = byLevelPairs(sc.preparedKnown, clsLvl) - (clsLvl > 1 ? byLevelPairs(sc.preparedKnown, clsLvl - 1) : 0);
         if (cNew > 0) {
             add({
                 key: `L${level}:class:cantrips`,
@@ -489,14 +529,14 @@ export function levelPlan(build, level, refs) {
         featFollowUps(bg.feat, 'L1:background:feat', level, done, refs, add);
     }
 
-    return { level, prof, profChanged, hp, slots, slotsChanged, gains, choices };
+    return { level, classId: cls?.id ?? null, classLevel: clsLvl, newClass, prof, profChanged, hp, slots, slotsChanged, gains, choices };
 }
 
 /**
  * Spells the subclass gives for free (always prepared, not counted against the choice):
- * subclass.data.domainSpells = { "<character level>": [spell ids] } — Domain / Oath / Patron /
+ * subclass.data.domainSpells = { "<class level>": [spell ids] } — Domain / Oath / Patron /
  * Circle spells; the key "0" — cantrips from the subclass level (Death: Chill Touch, Spores…).
- * → [{ id, from }] up to `level`.
+ * → [{ id, from }] up to `level` (the level in that class).
  */
 export function subclassSpellIds(subclass, cls, level) {
     const ds = subclass?.data?.domainSpells;
@@ -507,6 +547,23 @@ export function subclassSpellIds(subclass, cls, level) {
         const at = Number(k) === 0 ? start : Math.max(Number(k) || 0, start);
         if (level < at) continue;
         for (const id of [].concat(ids ?? [])) if (!out.some((x) => x.id === id)) out.push({ id, from: at });
+    }
+    return out;
+}
+
+/**
+ * Spellcasting classes at character level upTo (default — current), multiclassing included:
+ * [{ classId, cls, subclass, sc, progression, level }] — only those whose spellcasting has
+ * started (sc.startLevel: Eldritch Knight from 3). [0] — the first one taken.
+ */
+export function castersOf(build, refs, upTo = Infinity) {
+    const out = [];
+    for (const e of classEntries(build, upTo)) {
+        const cls = findClsById(refs, e.classId);
+        const subclass = cls?.subclasses?.find((s) => s.id === e.subclassId) ?? null;
+        const sc = spellcastingOf(cls, subclass);
+        if (!sc || e.level < (sc.startLevel ?? 1)) continue;
+        out.push({ classId: e.classId, cls, subclass, sc, progression: sc.progression ?? cls?.caster ?? 'none', level: e.level });
     }
     return out;
 }
@@ -689,6 +746,8 @@ export function choiceCount(c) {
     return c.value?.ids?.length ?? 0;
 }
 
+const TOOL_LABELS = { thieves: "Thieves' Tools", instrument: 'One musical instrument of your choice' };
+const cap = (s) => String(s ?? '').charAt(0).toUpperCase() + String(s ?? '').slice(1);
 const norm = (s) => String(s ?? '').toLowerCase().replace(/\s*\(.*?\)\s*/g, '').trim();
 const fmt = (n) => (n >= 0 ? `+ ${n}` : `− ${-n}`);
 const actionTag = (a) => ({ action: 'action', bonus: 'bonus', reaction: 'reaction', free: 'free' })[a] ?? '';

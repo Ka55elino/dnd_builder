@@ -1,7 +1,7 @@
 {
   "id": "warlock",
   "name": "Warlock",
-  "image": "/img/classes/warlock/warlock.png",
+  "image": "/img/classes/warlock/warlock.webp",
   "hitDie": 8,
   "primaryAbility": [
     "cha"
@@ -35,6 +35,22 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "cha"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light"
+      ],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "spellcasting": {
     "ability": "cha",
     "list": "warlock",

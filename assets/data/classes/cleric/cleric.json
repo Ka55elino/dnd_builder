@@ -1,7 +1,7 @@
 {
   "id": "cleric",
   "name": "Cleric",
-  "image": "/img/classes/cleric/cleric.png",
+  "image": "/img/classes/cleric/cleric.webp",
   "hitDie": 8,
   "primaryAbility": [
     "wis"
@@ -35,6 +35,24 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "wis"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light",
+        "medium",
+        "shield"
+      ],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "spellcasting": {
     "ability": "wis",
     "list": "cleric",

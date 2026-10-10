@@ -1,7 +1,7 @@
 {
   "id": "crowbar",
   "name": "Crowbar",
-  "image": "/img/items/crowbar.png",
+  "image": "/img/items/crowbar.webp",
   "isDefault": true,
   "weight": 5,
   "cost": "2 GP",

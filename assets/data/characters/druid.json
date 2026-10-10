@@ -64,8 +64,15 @@
   },
   "raceId": "elf",
   "subraceId": "wood",
-  "classId": "druid",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "druid",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "druid"
+  ],
   "equipment": {
     "armorId": "leather",
     "shield": true,

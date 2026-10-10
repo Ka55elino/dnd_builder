@@ -1,7 +1,7 @@
 {
   "id": "trickery",
   "name": "Trickery",
-  "image": "/img/classes/cleric/subclasses/trickery.png",
+  "image": "/img/classes/cleric/subclasses/trickery.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

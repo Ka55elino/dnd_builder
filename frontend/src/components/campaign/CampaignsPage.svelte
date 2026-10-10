@@ -4,6 +4,7 @@
      * Opening one shows its own screen (CampaignPage) with the sidebar.
      * onBack() — to the menu
      */
+    import TopBar from "../common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadCampaigns, saveCampaign, deleteCampaign, CAMPAIGN_STATUSES } from "../../data/campaigns.js";
     import CampaignPage from "./CampaignPage.svelte";
@@ -80,14 +81,12 @@
     {/key}
 {:else}
     <div class="page">
-        <header class="top">
-            <button class="ghost" onclick={onBack}>← Menu</button>
-            <h1>Campaigns</h1>
+        <TopBar title="Campaigns" {onBack}>
             <span class="spacer"></span>
             {#if !creating}
                 <button class="add" onclick={() => (creating = true)}>+ New campaign</button>
             {/if}
-        </header>
+        </TopBar>
 
         {#if creating}
             <form class="new" onsubmit={create}>
@@ -159,16 +158,18 @@
         font-family: var(--font-ui);
     }
 
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
+    }
+
     .top {
         display: flex;
         align-items: center;
         gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        color: var(--color-gold);
     }
 
     .spacer {

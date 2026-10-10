@@ -1,7 +1,7 @@
 {
   "id": "drow",
   "name": "Drow (Dark Elf)",
-  "image": "/img/races/elf/subraces/drow.png",
+  "image": "/img/races/elf/subraces/drow.webp",
   "race": "elf",
   "traits": [
     {

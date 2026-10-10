@@ -1,7 +1,7 @@
 {
   "id": "calligraphersSupplies",
   "name": "Calligrapher's Supplies",
-  "image": "/img/items/calligraphersSupplies.png",
+  "image": "/img/items/calligraphersSupplies.webp",
   "isDefault": true,
   "weight": 5.0,
   "cost": "10 GP",

@@ -1,7 +1,7 @@
 {
   "id": "navigatorsTools",
   "name": "Navigator's Tools",
-  "image": "/img/items/navigatorsTools.png",
+  "image": "/img/items/navigatorsTools.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "25 GP",

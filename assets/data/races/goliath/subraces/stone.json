@@ -1,7 +1,7 @@
 {
   "id": "stone",
   "name": "Stone Ancestry",
-  "image": "/img/races/goliath/subraces/stone.png",
+  "image": "/img/races/goliath/subraces/stone.webp",
   "race": "goliath",
   "traits": [
     {

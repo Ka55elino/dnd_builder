@@ -1,7 +1,7 @@
 {
   "id": "basket",
   "name": "Basket",
-  "image": "/img/items/basket.png",
+  "image": "/img/items/basket.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "4 SP",

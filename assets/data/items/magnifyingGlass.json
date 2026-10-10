@@ -1,7 +1,7 @@
 {
   "id": "magnifyingGlass",
   "name": "Magnifying Glass",
-  "image": "/img/items/magnifyingGlass.png",
+  "image": "/img/items/magnifyingGlass.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "100 GP",

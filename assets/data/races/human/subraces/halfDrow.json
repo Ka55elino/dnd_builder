@@ -2,7 +2,7 @@
   "id": "halfDrow",
   "name": "Half-Drow",
   "race": "human",
-  "image": "/img/races/human/subraces/halfDrow.png",
+  "image": "/img/races/human/subraces/halfDrow.webp",
   "desc": "Humans with drow blood: sharp-eyed in the dark and touched by the Underdark's innate magic.",
   "traits": [
     {

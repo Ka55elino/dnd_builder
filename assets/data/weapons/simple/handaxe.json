@@ -1,7 +1,7 @@
 {
   "id": "handaxe",
   "name": "Handaxe",
-  "image": "/img/weapons/simple/handaxe.png",
+  "image": "/img/weapons/simple/handaxe.webp",
   "isDefault": true,
   "category": "simple",
   "damage": "1d6",

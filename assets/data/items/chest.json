@@ -1,7 +1,7 @@
 {
   "id": "chest",
   "name": "Chest",
-  "image": "/img/items/chest.png",
+  "image": "/img/items/chest.webp",
   "isDefault": true,
   "weight": 25,
   "cost": "5 GP",

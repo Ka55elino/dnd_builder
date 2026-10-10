@@ -1,0 +1,188 @@
+{
+  "id": "seed-paladin-warlock",
+  "createdAt": "2026-10-10T00:00:00.000Z",
+  "updatedAt": "2026-10-09T23:46:30.503Z",
+  "name": "Mordai Ashveil",
+  "portrait": "/img/characters/warlock.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "31",
+    "height": "6'1\"",
+    "weight": "190 lb",
+    "eyes": "Solid gold",
+    "skin": "Ash-red",
+    "hair": "Black, braided",
+    "alignment": "Lawful Neutral",
+    "trait": "Prays at dawn and bargains at dusk.",
+    "ideal": "Power. A promise is only as good as the strength to keep it.",
+    "bond": "His oath and his pact were sworn on the same night.",
+    "flaw": "Believes every debt must be repaid — with interest.",
+    "weakness": "The patron's voice grows louder when he is wounded."
+  },
+  "level": 5,
+  "backgroundId": "acolyte",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "cha": 2,
+    "wis": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 0,
+    "dex": 3,
+    "con": 2,
+    "int": 5,
+    "wis": 4,
+    "cha": 1
+  },
+  "abilities": {
+    "str": 15,
+    "dex": 12,
+    "con": 13,
+    "int": 8,
+    "wis": 10,
+    "cha": 14
+  },
+  "totalAbilities": {
+    "str": 15,
+    "dex": 12,
+    "con": 13,
+    "int": 8,
+    "wis": 11,
+    "cha": 16
+  },
+  "raceId": "tiefling",
+  "subraceId": "infernal",
+  "classes": [
+    {
+      "classId": "paladin",
+      "subclassId": null
+    },
+    {
+      "classId": "warlock",
+      "subclassId": "fiend"
+    }
+  ],
+  "levelClasses": [
+    "paladin",
+    "paladin",
+    "warlock",
+    "warlock",
+    "warlock"
+  ],
+  "equipment": {
+    "armorId": "chainMail",
+    "clothingId": null,
+    "shield": true,
+    "weaponIds": [
+      "longsword",
+      "javelin"
+    ],
+    "packId": "priestPack",
+    "items": [],
+    "bag": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "athletics",
+        "persuasion"
+      ]
+    },
+    "L1:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "bless",
+        "shieldOfFaith"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "cha"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "guidance",
+        "sacredFlame"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "healingWord"
+      ]
+    },
+    "L2:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "defense"
+      ]
+    },
+    "L2:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "cureWounds"
+      ]
+    },
+    "L3:class:invocations": {
+      "kind": "invocations",
+      "ids": [
+        "pactOfTheBlade"
+      ]
+    },
+    "L3:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "eldritchBlast",
+        "minorIllusion"
+      ]
+    },
+    "L3:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "hex",
+        "armorOfAgathys"
+      ]
+    },
+    "L4:class:invocations": {
+      "kind": "invocations",
+      "ids": [
+        "agonizingBlast",
+        "devilsSight"
+      ]
+    },
+    "L4:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "hellishRebuke"
+      ]
+    },
+    "L5:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "mistyStep"
+      ]
+    },
+    "L5:class:subclass": {
+      "kind": "subclass",
+      "ids": [
+        "fiend"
+      ]
+    }
+  }
+}

@@ -64,8 +64,17 @@
   },
   "raceId": "human",
   "subraceId": "imperial",
-  "classId": "monk",
-  "subclassId": "openHand",
+  "classes": [
+    {
+      "classId": "monk",
+      "subclassId": "openHand"
+    }
+  ],
+  "levelClasses": [
+    "monk",
+    "monk",
+    "monk"
+  ],
   "equipment": {
     "armorId": null,
     "shield": false,

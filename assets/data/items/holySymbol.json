@@ -1,7 +1,7 @@
 {
   "id": "holySymbol",
   "name": "Holy Symbol",
-  "image": "/img/items/holySymbol.png",
+  "image": "/img/items/holySymbol.webp",
   "isDefault": true,
   "weight": 0,
   "cost": "Varies",

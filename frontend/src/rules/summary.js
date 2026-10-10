@@ -22,8 +22,8 @@ export function buildSummary(build, ch, state, { form = null } = {}) {
         v: SUMMARY_VERSION,
         name: build.name ?? '',
         level: build.level ?? 1,
-        className: ch.cls?.name ?? build.classId ?? '',
-        subclassName: ch.subclass?.name ?? '',
+        className: ch.className || (build.classId ?? ''), // "Fighter 3 / Wizard 2" when multiclassed
+        subclassName: ch.subclassName ?? '',
         raceName: ch.race?.name ?? build.raceId ?? '',
         subraceName: ch.subrace?.name ?? '',
         icon: build.portrait || ch.subrace?.image || ch.race?.image || '',
@@ -47,7 +47,7 @@ export function buildSummary(build, ch, state, { form = null } = {}) {
             ? {
                   name: state.wildShape.name || form?.name || '',
                   // Circle of the Moon: at least 13 + WIS
-                  ac: form ? formStats(form, { mods: ch.mods, subclass: ch.subclass }).ac : null,
+                  ac: form ? formStats(form, { mods: ch.mods, subclass: ch.wildShapeSubclass ?? null }).ac : null,
                   image: form?.image ?? '',
               }
             : null,

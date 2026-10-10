@@ -1,7 +1,7 @@
 {
   "id": "oathbreaker",
   "name": "Oathbreaker",
-  "image": "/img/classes/paladin/subclasses/oathbreaker.png",
+  "image": "/img/classes/paladin/subclasses/oathbreaker.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

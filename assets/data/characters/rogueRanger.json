@@ -1,0 +1,165 @@
+{
+  "id": "seed-rogue-ranger",
+  "createdAt": "2026-10-10T00:00:00.000Z",
+  "updatedAt": "2026-10-09T23:46:30.523Z",
+  "name": "Pip Thornbrook",
+  "portrait": "/img/characters/rogue.svg",
+  "bio": {
+    "gender": "Male",
+    "identity": "Man",
+    "attraction": "—",
+    "age": "27",
+    "height": "3'1\"",
+    "weight": "38 lb",
+    "eyes": "Green",
+    "skin": "Tanned",
+    "hair": "Brown, curly",
+    "alignment": "Chaotic Good",
+    "trait": "Knows every back door and every badger sett.",
+    "ideal": "Freedom. Fences are for sheep.",
+    "bond": "Owes his life to the hunter who caught him poaching.",
+    "flaw": "Pockets anything shiny, then feels bad about it.",
+    "weakness": "Terrified of deep water."
+  },
+  "level": 5,
+  "backgroundId": "guide",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "dex": 2,
+    "wis": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 4,
+    "dex": 0,
+    "con": 2,
+    "int": 3,
+    "wis": 1,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 10,
+    "dex": 15,
+    "con": 13,
+    "int": 12,
+    "wis": 14,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 10,
+    "dex": 17,
+    "con": 13,
+    "int": 12,
+    "wis": 15,
+    "cha": 8
+  },
+  "raceId": "halfling",
+  "subraceId": "lightfoot",
+  "classes": [
+    {
+      "classId": "rogue",
+      "subclassId": "thief"
+    },
+    {
+      "classId": "ranger",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "rogue",
+    "rogue",
+    "rogue",
+    "ranger",
+    "ranger"
+  ],
+  "equipment": {
+    "armorId": "studded",
+    "clothingId": null,
+    "shield": false,
+    "weaponIds": [
+      "shortsword",
+      "shortbow",
+      "dagger"
+    ],
+    "packId": "burglarPack",
+    "items": [],
+    "bag": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "perception",
+        "sleight",
+        "acrobatics",
+        "athletics"
+      ]
+    },
+    "L1:class:expertise:Expertise": {
+      "kind": "expertise",
+      "ids": [
+        "stealth",
+        "survival"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "druidcraft",
+        "guidance"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "goodberry"
+      ]
+    },
+    "L3:class:subclass": {
+      "kind": "subclass",
+      "ids": [
+        "thief"
+      ]
+    },
+    "L4:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "nature"
+      ]
+    },
+    "L4:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "huntersMark",
+        "ensnaringStrike"
+      ]
+    },
+    "L5:class:expertise:Deft Explorer": {
+      "kind": "expertise",
+      "ids": [
+        "acrobatics"
+      ]
+    },
+    "L5:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "archery"
+      ]
+    },
+    "L5:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "cureWounds"
+      ]
+    }
+  }
+}

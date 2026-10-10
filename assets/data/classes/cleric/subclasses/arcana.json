@@ -1,7 +1,7 @@
 {
   "id": "arcana",
   "name": "Arcana",
-  "image": "/img/classes/cleric/subclasses/arcana.png",
+  "image": "/img/classes/cleric/subclasses/arcana.webp",
   "class": "cleric",
   "domainSpells": {
     "3": [

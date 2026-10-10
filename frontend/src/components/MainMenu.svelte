@@ -8,8 +8,9 @@
      * Exit — the last item: quits the app (desktop only; phones close apps themselves).
      */
     import { onMount } from "svelte";
-    import { Application, System } from "@wailsio/runtime";
+    import { Application } from "@wailsio/runtime";
     import { server } from "../server.svelte.js";
+    import { isMobileDevice } from "../device.js";
 
     let { onNavigate } = $props();
 
@@ -24,13 +25,9 @@
         ...exitItem(),
     ];
 
+    // phones / tablets (the app or a mobile browser) close apps themselves: no Exit
     function exitItem() {
-        try {
-            if (System.IsMobile()) return [];
-        } catch {
-            // no desktop shell
-        }
-        return [{ id: "exit", title: "Exit", divider: true }];
+        return isMobileDevice() ? [] : [{ id: "exit", title: "Exit", divider: true }];
     }
 
     let ITEMS = $derived.by(() => {

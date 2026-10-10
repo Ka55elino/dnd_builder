@@ -1,7 +1,7 @@
 {
   "id": "battleaxe",
   "name": "Battleaxe",
-  "image": "/img/weapons/martial/battleaxe.png",
+  "image": "/img/weapons/martial/battleaxe.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

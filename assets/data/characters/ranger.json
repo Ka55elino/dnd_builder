@@ -64,8 +64,16 @@
   },
   "raceId": "elf",
   "subraceId": "wood",
-  "classId": "ranger",
-  "subclassId": null,
+  "classes": [
+    {
+      "classId": "ranger",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "ranger",
+    "ranger"
+  ],
   "equipment": {
     "armorId": "studded",
     "shield": false,

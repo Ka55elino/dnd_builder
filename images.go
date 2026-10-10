@@ -2,23 +2,28 @@ package main
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
 	"database/sql"
 	"embed"
 	"encoding/base64"
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"io/fs"
 	"log"
+	"mime"
 	"net/http"
 	"net/url"
+	"path"
+	"strconv"
 	"strings"
+	"sync"
 )
 
 // Images are served by URL instead of being sent to the frontend as base64:
 //
 //	/img/<path>    — built-in images, files in assets/images embedded into the binary
-//	                 (the JSON in assets/data stores "image": "/img/races/elf/elf.png")
+//	                 (the JSON in assets/data stores "image": "/img/races/elf/elf.webp";
+//	                 tools/img2webp.py converts PNG/JPEG and updates these URLs)
 //	/img/db/<id>   — user-uploaded images from the images table
 //
 // The frontend just uses <img src={x.image}>. A data URL in an image field
@@ -32,13 +37,87 @@ const (
 	dbImgPrefix = "/img/db/"
 )
 
-var builtinImages = func() http.Handler {
-	sub, err := fs.Sub(imagesFS, "assets/images")
-	if err != nil {
-		panic(err)
+// Built-in images are written in ONE piece with an explicit Content-Length (not streamed
+// by http.FileServer): on macOS the webview's asset scheme sometimes cut a streamed body
+// short, and WebKit then cached a half-drawn picture as if it were complete.
+//
+// Caching: an ETag (a hash of the file) — a repeat request gets 304 without a body.
+// Release builds also let the webview keep an image for a day without asking.
+//
+// Old URLs: a record saved with "/img/….png" still works after the images became
+// WebP — a missing .png / .jpg falls back to the .webp with the same name.
+
+// builtinMeta is what is known about one embedded image (the bytes are read per request).
+type builtinMeta struct {
+	name string // the file under assets/images (the .webp for an old .png URL)
+	mime string
+	etag string
+}
+
+var (
+	builtinMu    sync.Mutex
+	builtinMetas = map[string]*builtinMeta{} // URL path → meta (nil — not found)
+)
+
+func lookupBuiltin(p string) *builtinMeta {
+	builtinMu.Lock()
+	defer builtinMu.Unlock()
+	if m, ok := builtinMetas[p]; ok {
+		return m
 	}
-	return http.StripPrefix(imgPrefix, http.FileServer(http.FS(sub)))
-}()
+	names := []string{p}
+	if ext := path.Ext(p); ext == ".png" || ext == ".jpg" || ext == ".jpeg" {
+		names = append(names, strings.TrimSuffix(p, ext)+".webp")
+	}
+	var m *builtinMeta
+	for _, name := range names {
+		data, err := imagesFS.ReadFile("assets/images/" + name)
+		if err != nil {
+			continue
+		}
+		sum := sha256.Sum256(data)
+		ct := mime.TypeByExtension(path.Ext(name))
+		if ct == "" {
+			ct = http.DetectContentType(data)
+		}
+		m = &builtinMeta{name: name, mime: ct, etag: `"` + hex.EncodeToString(sum[:12]) + `"`}
+		break
+	}
+	builtinMetas[p] = m
+	return m
+}
+
+// serveBuiltinImage serves /img/<p> from assets/images.
+func serveBuiltinImage(w http.ResponseWriter, r *http.Request, p string) {
+	p = strings.TrimPrefix(path.Clean("/"+p), "/")
+	m := lookupBuiltin(p)
+	if p == "" || m == nil {
+		http.NotFound(w, r)
+		return
+	}
+	h := w.Header()
+	h.Set("ETag", m.etag)
+	if devMode {
+		h.Set("Cache-Control", "no-cache") // files change between `wails3 dev` restarts: always ask (304 if the same)
+	} else {
+		h.Set("Cache-Control", "public, max-age=86400")
+	}
+	if inm := r.Header.Get("If-None-Match"); inm != "" && strings.Contains(inm, m.etag) {
+		w.WriteHeader(http.StatusNotModified)
+		return
+	}
+	data, err := imagesFS.ReadFile("assets/images/" + m.name)
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+	h.Set("Content-Type", m.mime)
+	h.Set("Content-Length", strconv.Itoa(len(data)))
+	if r.Method == http.MethodHead {
+		return
+	}
+	_, _ = w.Write(data) // one piece
+}
 
 // imageMiddleware serves /img/… before the frontend assets (and the Vite dev server in `wails3 dev`).
 func (a *App) imageMiddleware(next http.Handler) http.Handler {
@@ -51,9 +130,7 @@ func (a *App) imageMiddleware(next http.Handler) http.Handler {
 			a.serveDBImage(w, id)
 			return
 		}
-		// built-in files may be replaced between `wails3 dev` restarts: revalidate
-		w.Header().Set("Cache-Control", "no-cache")
-		builtinImages.ServeHTTP(w, r)
+		serveBuiltinImage(w, r, strings.TrimPrefix(r.URL.Path, imgPrefix))
 	})
 }
 
@@ -77,6 +154,7 @@ func (a *App) serveDBImage(w http.ResponseWriter, id string) {
 		return
 	}
 	w.Header().Set("Content-Type", mime)
+	w.Header().Set("Content-Length", strconv.Itoa(len(data))) // one piece, see serveBuiltinImage
 	w.Header().Set("Cache-Control", "private, max-age=31536000, immutable") // an id's content never changes
 	_, _ = w.Write(data)
 }

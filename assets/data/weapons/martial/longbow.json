@@ -1,7 +1,7 @@
 {
   "id": "longbow",
   "name": "Longbow",
-  "image": "/img/weapons/martial/longbow.png",
+  "image": "/img/weapons/martial/longbow.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

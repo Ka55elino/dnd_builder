@@ -6,6 +6,7 @@
      * Stored in the DB (the conditions table), exported with the rest of the homebrew.
      * onBack() — to the menu
      */
+    import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
     import { loadRefs, deleteCustomCondition } from "../data/refs.js";
     import { modifierText } from "../rules/modifiers.js";
@@ -75,14 +76,12 @@
 </script>
 
 <div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>Conditions</h1>
+    <TopBar title="Conditions" {onBack}>
         <span class="total">{#if status}<span class="status">{status}</span>{/if}{defs.length}</span>
         {#if !loading && !error}
             <button class="add" onclick={() => (editor = { initial: null, copy: false })}>+ Add condition</button>
         {/if}
-    </header>
+    </TopBar>
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -152,16 +151,12 @@
         font-family: var(--font-ui);
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        color: var(--color-gold);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     .total {

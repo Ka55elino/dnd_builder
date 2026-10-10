@@ -1,7 +1,7 @@
 {
   "id": "componentPouch",
   "name": "Component Pouch",
-  "image": "/img/items/componentPouch.png",
+  "image": "/img/items/componentPouch.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "25 GP",

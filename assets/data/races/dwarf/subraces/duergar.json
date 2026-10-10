@@ -1,7 +1,7 @@
 {
   "id": "duergar",
   "name": "Duergar (Gray Dwarf)",
-  "image": "/img/races/dwarf/subraces/duergar.png",
+  "image": "/img/races/dwarf/subraces/duergar.webp",
   "race": "dwarf",
   "traits": [
     {

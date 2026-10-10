@@ -1,7 +1,7 @@
 {
   "id": "devotion",
   "name": "Oath of Devotion",
-  "image": "/img/classes/paladin/subclasses/devotion.png",
+  "image": "/img/classes/paladin/subclasses/devotion.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

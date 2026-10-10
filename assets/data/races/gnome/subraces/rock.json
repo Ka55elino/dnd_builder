@@ -1,7 +1,7 @@
 {
   "id": "rock",
   "name": "Rock Gnome",
-  "image": "/img/races/gnome/subraces/rock.png",
+  "image": "/img/races/gnome/subraces/rock.webp",
   "race": "gnome",
   "traits": [
     {

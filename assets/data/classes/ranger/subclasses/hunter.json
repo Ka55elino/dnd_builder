@@ -1,7 +1,7 @@
 {
   "id": "hunter",
   "name": "Hunter",
-  "image": "/img/classes/ranger/subclasses/hunter.png",
+  "image": "/img/classes/ranger/subclasses/hunter.webp",
   "class": "ranger",
   "features": [
     {

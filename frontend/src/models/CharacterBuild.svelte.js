@@ -22,6 +22,7 @@ import {
     pointBuySpent,
     rollAbilitySet,
 } from '../rules/abilities.js';
+import { classLevel, classAt, classLevelAt, classEntries, subclassOf } from '../rules/multiclass.js';
 
 export { ABILITY_KEYS };
 
@@ -64,9 +65,6 @@ export const BIO_KEYS = BIO_GROUPS.flatMap((g) => g.fields.map((f) => f.key));
 
 const defaultBio = () => Object.fromEntries(BIO_KEYS.map((k) => [k, '']));
 
-const clampLevel = (n) =>
-    Math.min(MAX_LEVEL, Math.max(MIN_LEVEL, Math.round(Number(n) || MIN_LEVEL)));
-
 const byAbility = (fn) => Object.fromEntries(ABILITY_KEYS.map((k) => [k, fn(k)]));
 
 const defaultPointBuy = () => byAbility(() => POINT_BUY_MIN);
@@ -95,7 +93,6 @@ export class CharacterBuild {
     name = $state('');
     portrait = $state(null);   // character portrait, data URL (image/jpeg) or null
     bio = $state(defaultBio()); // Personality + Appearance, see BIO_GROUPS
-    level = $state(MIN_LEVEL);
     backgroundId = $state(null);
 
     // --- Abilities ---
@@ -152,9 +149,18 @@ export class CharacterBuild {
     raceId = $state(null);
     subraceId = $state(null);
 
-    // --- Class ---
-    classId = $state(null);
-    subclassId = $state(null);
+    // --- Classes (multiclassing, see rules/multiclass.js) ---
+    // [{ classId, subclassId }] in the order taken; [0] — the primary (starting) class
+    classes = $state([]);
+    // the class gained at each character level: levelClasses[n-1] — at level n
+    // (null — the primary class was cleared in the builder and not picked again yet)
+    levelClasses = $state([]);
+
+    /** Character level = total of class levels (1 before a class is chosen). */
+    level = $derived(Math.max(MIN_LEVEL, this.levelClasses.length));
+    /** The primary class / its subclass. */
+    classId = $derived(this.classes[0]?.classId ?? null);
+    subclassId = $derived(this.classes[0]?.subclassId ?? null);
 
     // --- Equipment ---
     equipment = $state(defaultEquipment());
@@ -173,7 +179,6 @@ export class CharacterBuild {
         this.name = data.name ?? '';
         this.portrait = data.portrait ?? null;
         this.bio = { ...defaultBio(), ...(data.bio ?? {}) };
-        this.level = clampLevel(data.level);
         this.backgroundId = data.backgroundId ?? null;
         this.backgroundBonusMode = data.backgroundBonusMode === '1-1-1' ? '1-1-1' : '2-1';
         this.backgroundBonus = { ...(data.backgroundBonus ?? {}) };
@@ -186,8 +191,16 @@ export class CharacterBuild {
         this.raceId = data.raceId ?? null;
         this.subraceId = data.subraceId ?? null;
 
-        this.classId = data.classId ?? null;
-        this.subclassId = data.subclassId ?? null;
+        const seen = new Set();
+        this.classes = (Array.isArray(data.classes) ? data.classes : [])
+            .filter((c) => c?.classId && !seen.has(c.classId) && seen.add(c.classId))
+            .map((c) => ({ classId: c.classId, subclassId: c.subclassId ?? null }));
+        const primary = this.classes[0]?.classId ?? null;
+        this.levelClasses = (Array.isArray(data.levelClasses) ? data.levelClasses : [])
+            .slice(0, MAX_LEVEL)
+            .map((id) => (id && seen.has(id) ? id : primary));
+        if (primary && !this.levelClasses.length) this.levelClasses = [primary];
+        this.pruneClasses();
 
         this.equipment = { ...defaultEquipment(), ...(data.equipment ?? {}) };
 
@@ -196,9 +209,49 @@ export class CharacterBuild {
 
     // --- mutations ---
 
-    setLevel(n) {
-        this.level = clampLevel(n);
+    // --- classes ---
+
+    /** Levels in a class (up to character level upTo). */
+    classLevel(classId, upTo = Infinity) {
+        return classLevel(this, classId, upTo);
+    }
+
+    /** The class gained at character level n. */
+    classAt(n) {
+        return classAt(this, n);
+    }
+
+    /** The class level reached at character level n ("Wizard 2" → 2). */
+    classLevelAt(n) {
+        return classLevelAt(this, n);
+    }
+
+    /** [{ classId, subclassId, level }] at character level upTo. */
+    classEntries(upTo = Infinity) {
+        return classEntries(this, upTo);
+    }
+
+    subclassOf(classId) {
+        return subclassOf(this, classId);
+    }
+
+    /** Gain a level in a class (a new class is added to the list). */
+    addLevel(classId) {
+        if (!classId || this.levelClasses.length >= MAX_LEVEL) return;
+        if (!this.classes.some((c) => c.classId === classId)) this.classes.push({ classId, subclassId: null });
+        this.levelClasses.push(classId);
         this.touch();
+    }
+
+    /** Drop levels above n (classes left with no levels are removed, except the primary). */
+    trimLevels(n) {
+        if (this.levelClasses.length > n) this.levelClasses = this.levelClasses.slice(0, Math.max(0, n));
+        this.pruneClasses();
+    }
+
+    /** Remove secondary classes that have no levels. */
+    pruneClasses() {
+        this.classes = this.classes.filter((c, i) => i === 0 || this.levelClasses.includes(c.classId));
     }
 
     // --- abilities ---
@@ -264,17 +317,31 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Select a class (null — clear). The subclass is reset. */
+    /**
+     * Select the primary class (null — clear). Its subclass is reset; its levels
+     * stay (they become levels of the new class). If the new class was already a
+     * secondary class, the two merge.
+     */
     setClass(classId, subclassId = null) {
-        this.classId = classId ?? null;
-        this.subclassId = this.classId ? subclassId : null;
+        const old = this.classes[0]?.classId ?? null;
+        classId = classId ?? null;
+        this.levelClasses = this.levelClasses.map((id) => (id === old || id == null ? classId : id));
+        const rest = this.classes.slice(1).filter((c) => c.classId !== classId);
+        this.classes = classId ? [{ classId, subclassId }, ...rest] : rest;
+        if (classId && !this.levelClasses.length) this.levelClasses = [classId];
         this.touch();
     }
 
-    /** Select a subclass of the current class (null — clear). */
+    /** Select a subclass of the primary class (null — clear). */
     setSubclass(subclassId) {
-        if (!this.classId) return;
-        this.subclassId = subclassId ?? null;
+        this.setSubclassFor(this.classId, subclassId);
+    }
+
+    /** Select a subclass of a class the character has (null — clear). */
+    setSubclassFor(classId, subclassId) {
+        const c = this.classes.find((x) => x.classId === classId);
+        if (!c) return;
+        c.subclassId = subclassId ?? null;
         this.touch();
     }
 
@@ -406,12 +473,13 @@ export class CharacterBuild {
         this.touch();
     }
 
-    /** Drop level choices above the given level (e.g. when undoing a level-up). */
+    /** Drop levels and level choices above the given level (e.g. when undoing a level-up). */
     dropChoicesAbove(level) {
         for (const k of Object.keys(this.choices)) {
             const m = /^L(\d+):/.exec(k);
             if (m && Number(m[1]) > level) delete this.choices[k];
         }
+        this.trimLevels(level);
     }
 
     touch() {
@@ -429,7 +497,7 @@ export class CharacterBuild {
             name: this.name,
             portrait: this.portrait,
             bio: this.bio,
-            level: this.level,
+            level: this.level, // derived (levelClasses.length), for readability
             backgroundId: this.backgroundId,
             backgroundBonusMode: this.backgroundBonusMode,
             backgroundBonus: this.backgroundBonus,
@@ -441,8 +509,8 @@ export class CharacterBuild {
             totalAbilities: this.totalAbilities, // derived: with bonuses
             raceId: this.raceId,
             subraceId: this.subraceId,
-            classId: this.classId,
-            subclassId: this.subclassId,
+            classes: this.classes,
+            levelClasses: this.levelClasses,
             equipment: this.equipment,
             choices: this.choices,
         });

@@ -1,4 +1,5 @@
 <script>
+    import TopBar from "../common/TopBar.svelte";
     import { CharacterBuild } from "../../models/CharacterBuild.svelte.js";
     import BasicsTab from "./BasicsTab.svelte";
     import AbilitiesTab from "./AbilitiesTab.svelte";
@@ -104,18 +105,19 @@
 </script>
 
 <div class="builder">
-    <header class="top">
-        <button class="back" onclick={onExit}>← Back</button>
-        <h1>{initial ? "Edit character" : "Create character"}</h1>
-        {#if onLevelStep}
-            <button class="save" onclick={save} disabled={saving || !levelComplete}
-                title={levelComplete ? "" : "Make all choices on every level"}>
-                {saving ? "Saving…" : "Save"}
-            </button>
-        {:else}
-            <button class="save" onclick={next}>Next →</button>
-        {/if}
-    </header>
+    <!-- Next / Save — the wizard's main button: stays in the bar on phones too -->
+    <TopBar title={initial ? "Edit character" : "Create character"} onBack={onExit} back="Back">
+        {#snippet pinned()}
+            {#if onLevelStep}
+                <button class="save" onclick={save} disabled={saving || !levelComplete}
+                    title={levelComplete ? "" : "Make all choices on every level"}>
+                    {saving ? "Saving…" : "Save"}
+                </button>
+            {:else}
+                <button class="save" onclick={next}>Next →</button>
+            {/if}
+        {/snippet}
+    </TopBar>
 
     <nav class="steps">
         {#each steps as label, i}
@@ -192,30 +194,8 @@
         gap: 20px;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
-    }
-
-    .back {
-        padding: 6px 12px;
-        background: transparent;
-        border: 1px solid var(--color-border);
-        border-radius: 6px;
-        color: var(--color-text-secondary);
-        font-family: var(--font-ui);
-        cursor: pointer;
-    }
-
     .save {
+        margin-left: auto;
         padding: 8px 20px;
         background: var(--color-gold);
         border: 1px solid var(--color-gold);
@@ -301,11 +281,6 @@
         color: var(--color-danger);
     }
 
-    .back:hover {
-        border-color: var(--color-gold);
-        color: var(--color-gold-hover);
-    }
-
     .steps {
         display: flex;
         flex-wrap: wrap;
@@ -341,12 +316,6 @@
         border-radius: 8px;
     }
 
-    h2 {
-        margin: 0 0 8px;
-        font-family: var(--font-heading-alt);
-        color: var(--color-text-primary);
-    }
-
     p {
         margin: 0;
         color: var(--color-text-muted);
@@ -359,16 +328,6 @@
             min-height: 100%;
             padding: 12px 12px 24px;
             gap: 12px;
-        }
-
-        .top {
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        h1 {
-            flex: 1;
-            font-size: 22px;
         }
 
         .steps {

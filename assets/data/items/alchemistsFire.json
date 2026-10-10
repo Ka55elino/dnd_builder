@@ -1,7 +1,7 @@
 {
   "id": "alchemistsFire",
   "name": "Alchemist's Fire",
-  "image": "/img/items/alchemistsFire.png",
+  "image": "/img/items/alchemistsFire.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "50 GP",

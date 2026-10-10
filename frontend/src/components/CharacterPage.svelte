@@ -1,4 +1,5 @@
 <script>
+    import TopBar from "./common/TopBar.svelte";
     import { damageShort, damageName, damageLabel, normAction } from "../rules/labels.js";
     import SectionNav from "./common/SectionNav.svelte";
     import WildShapeCard from "./WildShapeCard.svelte";
@@ -34,6 +35,7 @@
     import { EV, applyHp, applySummonHp, applyCondition, sendState, findItem, giftEvents } from "../game.js";
     import { exportCharacter } from "../transfer.js";
     import { pdfModel, savePdf } from "../pdfSheet.js";
+    import { hitDiceText } from "../rules/sheet.js";
     import { NetStatus } from "../api.js";
     import { buildSummary } from "../rules/summary.js";
     import {
@@ -690,7 +692,7 @@
             (c.item.kind === "spell" || info.kind === "slot") && opt?.slot
                 ? upcastLines(c.item, opt.level)
                 : []}
-        {@const noCast = !!state?.wildShape && c.item.kind === "spell" && character.level < 18}
+        {@const noCast = !!state?.wildShape && c.item.kind === "spell" && character.wildShapeLevel < 18}
         {@const off =
             noCast ||
             info.disabled ||
@@ -830,11 +832,10 @@
 {/if}
 
 <div class="page">
-    <header class="top no-print">
-        <button class="ghost" onclick={leave(onBack)}>{backLabel}</button>
-        {#if build}
-            <span class="spacer"></span>
-            {#if state}
+    <div class="no-print">
+    <TopBar onBack={leave(onBack)} back={backLabel}>
+        {#snippet pinned()}
+            {#if build && state}
                 <span class="save-status" class:dirty class:err={stateError}>
                     {#if stateError}Not saved
                     {:else if saving}Saving…
@@ -843,6 +844,10 @@
                     {:else}All saved
                     {/if}
                 </span>
+            {/if}
+        {/snippet}
+        {#if build}
+            {#if state}
                 <button
                     class="save"
                     onclick={saveNow}
@@ -867,6 +872,7 @@
                     class="ghost"
                     class:bad={!!shareError}
                     class:open={shareOpen}
+                    data-keep-open
                     onclick={() => (shareOpen = !shareOpen)}
                     disabled={shareBusy}
                     aria-haspopup="menu"
@@ -906,10 +912,10 @@
             {/if}
         {/if}
         {#if actions}
-            {#if !build}<span class="spacer"></span>{/if}
             {@render actions(leave)}
         {/if}
-    </header>
+    </TopBar>
+    </div>
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -928,14 +934,14 @@
                     </p>
                 {/if}
                 <p class="class-line">
-                    {cls?.name ?? build.classId}
+                    {character?.className || cls?.name || build.classId}
                     <span class="lvl">Level {build.level}</span>
                 </p>
                 <p class="sub-line">
                     {race?.name ?? build.raceId}{subrace
                         ? ` · ${subrace.name}`
                         : ""}
-                    {#if subclass}<br />{subclass.name}{/if}
+                    {#if character?.subclassName}<br />{character.subclassName}{/if}
                 </p>
             </section>
         </div>
@@ -985,7 +991,7 @@
                     <div class="stat">
                         <span class="stat-label">Hit Dice</span>
                         <span class="stat-value"
-                            >{build.level}d{sheet.hitDie}</span
+                            >{hitDiceText(sheet.hitDice)}</span
                         >
                     </div>
                     <div class="stat">
@@ -1662,9 +1668,7 @@
                                     label="Your spell save DC"
                                     text="DC"
                                 />
-                                {character.spellcasting.saveDC} · attack {formatModifier(
-                                    character.spellcasting.attack,
-                                )}</small
+                                {#each character.spellcastings as sc, i (sc.classId)}{i ? " | " : ""}{character.spellcastings.length > 1 ? `${sc.name} ` : ""}{sc.saveDC} · attack {formatModifier(sc.attack)}{/each}</small
                             >
                         </h3>
                         <ul class="pools">
@@ -2034,11 +2038,9 @@
                     <section class="card" id="cs-actions" data-section>
                         <h2>
                             Actions & spells
-                            {#if character.spellcasting}
+                            {#if character.spellcastings.length}
                                 <small class="h2-sub">
-                                    DC {character.spellcasting.saveDC} · attack {formatModifier(
-                                        character.spellcasting.attack,
-                                    )}
+                                    {#each character.spellcastings as sc, i (sc.classId)}{i ? " | " : ""}{character.spellcastings.length > 1 ? `${sc.name}: ` : ""}DC {sc.saveDC} · attack {formatModifier(sc.attack)}{/each}
                                 </small>
                             {/if}
                         </h2>
@@ -2090,7 +2092,7 @@
                                 {#each g.cards as c (c.item.id)}
                                     <ActionCard
                                         item={c.item}
-                                        level={character.level}
+                                        level={character.powerLevel?.[c.item.id] ?? character.level}
                                         source={c.source}
                                         uses={c.uses}
                                         saveDC={g.spells
@@ -2140,12 +2142,6 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-    }
-
-    .top {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
     }
 
     .ghost {
@@ -2260,10 +2256,6 @@
     .ws-cost {
         color: var(--color-gold);
         font-size: 11px;
-    }
-
-    .top {
-        align-items: center;
     }
 
     .share {
@@ -4194,19 +4186,10 @@
             gap: 14px;
         }
 
-        .top {
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .top .spacer {
-            display: none;
-        }
-
-        .top .save-status {
-            order: 10; /* its own line, under the buttons */
-            flex-basis: 100%;
+        .save-status {
+            min-width: 0;
             font-size: 11px;
+            text-align: right;
         }
 
         .ghost,

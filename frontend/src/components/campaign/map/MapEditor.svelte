@@ -20,7 +20,8 @@
      *            directly); the brush button shows the current one; Alt+click on the map picks
      *            a cell's tile
      *
-     * campaign; onOpenSection(id) — go to another section of the campaign ("locations")
+     * campaign; onOpenSection(id) — go to another section of the campaign ("locations");
+ * onClose — set when the editor is opened full screen (phones): a ← button on top of the tools
      *
      * Saving (maps.go): a layer is loaded when it is opened; the terrain is saved ~0.7 s after
      * a stroke (and right away when switching layers / leaving), markers — at once.
@@ -34,7 +35,7 @@
     } from "../../../data/campaigns.js";
     import { layerOwner, layerKey, typeIcon, placeablesOf, markersOf, placedOf, pathTo } from "../../../data/mapLayers.js";
 
-    let { campaign, onOpenSection } = $props();
+    let { campaign, onOpenSection, onClose = null } = $props();
 
     let tool = $state("paint");
     let tile = $state(TERRAIN[0]?.id ?? null);
@@ -336,6 +337,10 @@
 {:else}
     <div class="editor">
         <aside class="palette" aria-label="Map tools">
+            {#if onClose}
+                <button class="tool" onclick={onClose} title="Back" aria-label="Back">←</button>
+                <hr />
+            {/if}
             <button
                 class="tool menu-btn"
                 class:open={menu === "layers"}

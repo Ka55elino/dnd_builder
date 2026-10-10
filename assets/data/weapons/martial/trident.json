@@ -1,7 +1,7 @@
 {
   "id": "trident",
   "name": "Trident",
-  "image": "/img/weapons/martial/trident.png",
+  "image": "/img/weapons/martial/trident.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

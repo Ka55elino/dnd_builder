@@ -1,7 +1,7 @@
 {
   "id": "sorcerer",
   "name": "Sorcerer",
-  "image": "/img/classes/sorcerer/sorcerer.png",
+  "image": "/img/classes/sorcerer/sorcerer.webp",
   "hitDie": 6,
   "primaryAbility": [
     "cha"
@@ -32,6 +32,20 @@
   "weaponProficiencies": [
     "simple"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "cha"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [],
+      "weapons": [],
+      "tools": [],
+      "skills": 0
+    }
+  },
   "spellcasting": {
     "ability": "cha",
     "list": "sorcerer",

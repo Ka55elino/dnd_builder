@@ -1,7 +1,7 @@
 {
   "id": "masonsTools",
   "name": "Mason's Tools",
-  "image": "/img/items/masonsTools.png",
+  "image": "/img/items/masonsTools.webp",
   "isDefault": true,
   "weight": 8.0,
   "cost": "10 GP",

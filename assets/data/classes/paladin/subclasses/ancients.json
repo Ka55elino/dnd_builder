@@ -1,7 +1,7 @@
 {
   "id": "ancients",
   "name": "Oath of the Ancients",
-  "image": "/img/classes/paladin/subclasses/ancients.png",
+  "image": "/img/classes/paladin/subclasses/ancients.webp",
   "class": "paladin",
   "domainSpells": {
     "3": [

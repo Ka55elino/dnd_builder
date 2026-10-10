@@ -1,7 +1,7 @@
 {
   "id": "potIron",
   "name": "Pot, Iron",
-  "image": "/img/items/potIron.png",
+  "image": "/img/items/potIron.webp",
   "isDefault": true,
   "weight": 10.0,
   "cost": "2 GP",

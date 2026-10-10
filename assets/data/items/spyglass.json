@@ -1,7 +1,7 @@
 {
   "id": "spyglass",
   "name": "Spyglass",
-  "image": "/img/items/spyglass.png",
+  "image": "/img/items/spyglass.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "1,000 GP",

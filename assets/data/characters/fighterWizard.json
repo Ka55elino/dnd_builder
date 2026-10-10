@@ -1,0 +1,186 @@
+{
+  "id": "seed-fighter-wizard",
+  "createdAt": "2026-10-10T00:00:00.000Z",
+  "updatedAt": "2026-10-09T23:46:30.519Z",
+  "name": "Caelynn Starblade",
+  "portrait": "/img/characters/wizard.svg",
+  "bio": {
+    "gender": "Female",
+    "identity": "Woman",
+    "attraction": "—",
+    "age": "142",
+    "height": "5'9\"",
+    "weight": "130 lb",
+    "eyes": "Silver",
+    "skin": "Pale",
+    "hair": "White, tied back",
+    "alignment": "Neutral Good",
+    "trait": "Annotates her spellbook between sword drills.",
+    "ideal": "Discipline. Steel and spell are the same art.",
+    "bond": "Her blade was forged by the academy that expelled her.",
+    "flaw": "Can't resist correcting other people's casting.",
+    "weakness": "Overthinks when she should strike."
+  },
+  "level": 5,
+  "backgroundId": "sage",
+  "backgroundBonusMode": "2-1",
+  "backgroundBonus": {
+    "int": 2,
+    "con": 1
+  },
+  "abilityMethod": "array",
+  "pointBuy": {
+    "str": 8,
+    "dex": 8,
+    "con": 8,
+    "int": 8,
+    "wis": 8,
+    "cha": 8
+  },
+  "abilityRolls": null,
+  "abilityAssign": {
+    "str": 0,
+    "dex": 3,
+    "con": 1,
+    "int": 2,
+    "wis": 4,
+    "cha": 5
+  },
+  "abilities": {
+    "str": 15,
+    "dex": 12,
+    "con": 14,
+    "int": 13,
+    "wis": 10,
+    "cha": 8
+  },
+  "totalAbilities": {
+    "str": 15,
+    "dex": 12,
+    "con": 15,
+    "int": 15,
+    "wis": 10,
+    "cha": 8
+  },
+  "raceId": "elf",
+  "subraceId": "high",
+  "classes": [
+    {
+      "classId": "warrior",
+      "subclassId": "eldritchKnight"
+    },
+    {
+      "classId": "wizard",
+      "subclassId": null
+    }
+  ],
+  "levelClasses": [
+    "warrior",
+    "warrior",
+    "warrior",
+    "wizard",
+    "wizard"
+  ],
+  "equipment": {
+    "armorId": "chainMail",
+    "clothingId": null,
+    "shield": true,
+    "weaponIds": [
+      "longsword",
+      "dagger"
+    ],
+    "packId": "scholarPack",
+    "items": [],
+    "bag": []
+  },
+  "choices": {
+    "L1:class:skills": {
+      "kind": "skills",
+      "ids": [
+        "athletics",
+        "perception"
+      ]
+    },
+    "L1:class:fightingStyle:Fighting Style": {
+      "kind": "fightingStyle",
+      "ids": [
+        "defense"
+      ]
+    },
+    "L1:subrace:spell:Wizard Cantrip": {
+      "kind": "cantrips",
+      "ids": [
+        "fireBolt"
+      ]
+    },
+    "L1:race:spellAbility": {
+      "kind": "spellAbility",
+      "ids": [
+        "int"
+      ]
+    },
+    "L1:background:feat:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "light",
+        "mending"
+      ]
+    },
+    "L1:background:feat:spells": {
+      "kind": "spells",
+      "ids": [
+        "findFamiliar"
+      ]
+    },
+    "L3:class:subclass": {
+      "kind": "subclass",
+      "ids": [
+        "eldritchKnight"
+      ]
+    },
+    "L3:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "boomingBlade",
+        "greenFlameBlade"
+      ]
+    },
+    "L3:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "shield",
+        "magicMissile",
+        "mageArmor"
+      ]
+    },
+    "L4:class:cantrips": {
+      "kind": "cantrips",
+      "ids": [
+        "mageHand",
+        "minorIllusion",
+        "shockingGrasp"
+      ]
+    },
+    "L4:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "detectMagic",
+        "sleep",
+        "thunderwave",
+        "featherFall"
+      ]
+    },
+    "L5:class:expertise:Scholar": {
+      "kind": "expertise",
+      "ids": [
+        "arcana"
+      ]
+    },
+    "L5:class:spells": {
+      "kind": "spells",
+      "ids": [
+        "chromaticOrb"
+      ]
+    }
+  }
+}

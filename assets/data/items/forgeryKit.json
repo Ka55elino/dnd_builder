@@ -1,7 +1,7 @@
 {
   "id": "forgeryKit",
   "name": "Forgery Kit",
-  "image": "/img/items/forgeryKit.png",
+  "image": "/img/items/forgeryKit.webp",
   "isDefault": true,
   "weight": 5.0,
   "cost": "15 GP",

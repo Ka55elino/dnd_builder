@@ -1,7 +1,7 @@
 {
   "id": "alchemistsSupplies",
   "name": "Alchemist's Supplies",
-  "image": "/img/items/alchemistsSupplies.png",
+  "image": "/img/items/alchemistsSupplies.webp",
   "isDefault": true,
   "weight": 8.0,
   "cost": "50 GP",

@@ -1,7 +1,7 @@
 {
   "id": "lock",
   "name": "Lock",
-  "image": "/img/items/lock.png",
+  "image": "/img/items/lock.webp",
   "isDefault": true,
   "weight": 1.0,
   "cost": "10 GP",

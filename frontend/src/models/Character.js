@@ -21,6 +21,7 @@
  *   }
  */
 import { computeSheet } from '../rules/sheet.js';
+import { classEntries, classAt, classSummary } from '../rules/multiclass.js';
 import { ABILITIES, ABILITY_KEYS } from '../rules/abilities.js';
 
 /**
@@ -39,10 +40,10 @@ export function withFeatureScores(base, features = []) {
     return out;
 }
 import { evalFormula, byLevelPairs } from '../rules/formula.js';
-import { spellSlots } from '../rules/spellcasting.js';
+import { multiclassSlots } from '../rules/spellcasting.js';
 import { dieAt } from '../rules/damage.js';
 import { defaultEquipped, normalize, resolve, isTwoHanded } from '../rules/loadout.js';
-import { summarizeChoices, spellcastingOf, subclassSpellIds } from '../rules/progression.js';
+import { summarizeChoices, subclassSpellIds, castersOf } from '../rules/progression.js';
 import { wildShapeAbility, formTempHp, formHours, formCost } from '../rules/wildshape.js';
 import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
 import { isBodyArmor } from '../rules/equipment.js';
@@ -158,8 +159,27 @@ export class Character {
         // --- sources ---
         this.race = races.find((r) => r.id === build.raceId) ?? null;
         this.subrace = this.race?.subraces?.find((s) => s.id === build.subraceId) ?? null;
-        this.cls = classes.find((c) => c.id === build.classId) ?? null;
+        this.cls = classes.find((c) => c.id === build.classId) ?? null; // the primary class
         this.subclass = this.cls?.subclasses?.find((s) => s.id === build.subclassId) ?? null;
+        // multiclassing: every class with its level and subclass, [0] — the primary one
+        this.classList = classEntries(build)
+            .map((e) => {
+                const cls = classes.find((c) => c.id === e.classId) ?? null;
+                return { cls, level: e.level, subclass: cls?.subclasses?.find((s) => s.id === e.subclassId) ?? null };
+            })
+            .filter((e) => e.cls);
+        // class and subclass features each up to its own class level
+        const clsFeatures = (e) => (e.cls.data?.features ?? []).filter((f) => !f.level || f.level <= e.level);
+        const subFeatures = (e) => (e.subclass?.data?.features ?? []).filter((f) => !f.level || f.level <= e.level);
+        this.classFeatures = this.classList.flatMap((e) => [...clsFeatures(e), ...subFeatures(e)]);
+        const multi = this.classList.length > 1;
+        // for headers / summary / PDF: "Fighter 3 / Wizard 2" (one class — its name), subclasses "Champion / Evoker"
+        this.className = classSummary(build, refs) || (this.cls?.name ?? '');
+        this.subclassName = this.classList.map((x) => x.subclass?.name).filter(Boolean).join(' / ');
+        // the class with Wild Shape (multiclassing: not necessarily the primary one)
+        const ws = this.classList.find((x) => wildShapeAbility(refs, x.cls.id));
+        this.wildShapeLevel = ws?.level ?? 0;
+        this.wildShapeSubclass = ws?.subclass ?? null;
 
         // --- equipment ---
         const e = build.equipment ?? {};
@@ -243,14 +263,12 @@ export class Character {
         //     (Primal Champion: STR / CON +4, Body and Mind: DEX / WIS +4), no cap ---
         this.scores = withFeatureScores(
             build.totalAbilities ?? build.abilities ?? {},
-            [...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? [])].filter(lvlOk),
+            this.classFeatures,
         );
         const immuneTo = new Set(
-            [
-                ...(this.race?.data?.traits ?? []), ...(this.subrace?.data?.traits ?? []),
-                ...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? []),
-            ]
+            [...(this.race?.data?.traits ?? []), ...(this.subrace?.data?.traits ?? [])]
                 .filter(lvlOk)
+                .concat(this.classFeatures)
                 .flatMap((f) => (f.grants ?? []).filter((g) => g.type === 'effect').map((g) => g.effect))
                 .concat(
                     [...this.chosen.feats, ...this.chosen.invocations]
@@ -284,8 +302,7 @@ export class Character {
         // class/subclass features that add to an effect while it is on (Elemental Cleaver during Rage):
         //   grants: [{ type: 'while', condition: 'raging', modifiers: [...] }]
         const activeIds = new Set(this.conditions.filter((r) => !r.immune && !r.inactive).map((r) => r.id));
-        for (const f of [...(this.cls?.data?.features ?? []), ...(this.subclass?.data?.features ?? [])]) {
-            if (!lvlOk(f)) continue;
+        for (const f of this.classFeatures) {
             for (const g of f.grants ?? []) {
                 if (g.type !== 'while' || !activeIds.has(g.condition)) continue;
                 for (const m of g.modifiers ?? []) modifiers.push({ ...m, source: f.name, from: 'condition' });
@@ -316,6 +333,8 @@ export class Character {
                 race: this.race,
                 subrace: this.subrace,
                 cls: this.cls,
+                classList: this.classList,
+                levelClasses: build.levelClasses,
                 armor: this.loadout.armor?.ref ?? null,
                 shield: hands.find((h) => h.item?.kind === 'shield')?.item?.ref ?? false,
                 hands: hands
@@ -329,7 +348,7 @@ export class Character {
                 expertise: [...this.chosen.expertise],
                 perks,
                 modifiers,
-                spellAbility: spellcastingOf(this.cls, this.subclass)?.ability ?? null,
+                spellAbility: castersOf(build, refs)[0]?.sc.ability ?? null, // the first spellcasting class
             }),
         );
         this.maxHp = this.hp;
@@ -338,12 +357,8 @@ export class Character {
         //   { kind: 'economy', action: 'action' | 'bonus' | 'reaction', value: +1 } — from conditions
         //   (Hasted: +1 action), spell effects and class/subclass feature grants (Thief: +1 Bonus Action);
         //   a "can't" flag (Incapacitated: actions, bonusActions, reactions) blocks it
-        const featureEcon = [
-            ...(this.cls?.data?.features ?? []).map((f) => [f, this.cls?.name]),
-            ...(this.subclass?.data?.features ?? []).map((f) => [f, this.subclass?.name]),
-        ]
-            .filter(([f]) => lvlOk(f))
-            .flatMap(([f]) =>
+        const featureEcon = this.classFeatures
+            .flatMap((f) =>
                 (f.grants ?? [])
                     .filter((g) => g.type === 'effect' && g.effect?.kind === 'economy')
                     .map((g) => ({ ...g.effect, source: f.name })),
@@ -366,11 +381,14 @@ export class Character {
 
         // --- features (up to the current level), grouped by source ---
         const upTo = (list) => (list ?? []).filter((f) => !f.level || f.level <= this.level);
+        // level — for templates in the texts ({level}: the class level for class features)
         this.featureGroups = [
-            { source: 'race', title: this.race?.name, items: upTo(this.race?.data?.traits) },
-            { source: 'subrace', title: this.subrace?.name, items: upTo(this.subrace?.data?.traits) },
-            { source: 'class', title: this.cls?.name, items: upTo(this.cls?.data?.features) },
-            { source: 'subclass', title: this.subclass?.name, items: upTo(this.subclass?.data?.features) },
+            { source: 'race', title: this.race?.name, items: upTo(this.race?.data?.traits), level: this.level },
+            { source: 'subrace', title: this.subrace?.name, items: upTo(this.subrace?.data?.traits), level: this.level },
+            ...this.classList.flatMap((e) => [
+                { source: 'class', classId: e.cls.id, title: multi ? `${e.cls.name} ${e.level}` : e.cls.name, items: clsFeatures(e), level: e.level },
+                { source: 'subclass', classId: e.cls.id, title: e.subclass?.name, items: subFeatures(e), level: e.level },
+            ]),
         ].filter((g) => g.title && g.items.length);
 
         // feats, Fighting Styles, invocations, Metamagic — as a separate group
@@ -390,12 +408,12 @@ export class Character {
         }
 
         const grants = this.featureGroups.flatMap((g) =>
-            g.items.flatMap((f) => (f.grants ?? []).map((gr) => ({ ...gr, feature: f.name }))),
+            g.items.flatMap((f) => (f.grants ?? []).map((gr) => ({ ...gr, feature: f.name, lvl: g.level ?? this.level }))),
         );
 
         // --- abilities (spells table: kind = class | martial | action) ---
-        //   class:    kind 'class', classes ∋ classId, no subclass, level ≤ character level
-        //   subclass: subclass = subclassId, level ≤ character level
+        //   class:    kind 'class', classes ∋ one of the character's classes, level ≤ that class level
+        //   subclass: subclass = one of the chosen subclasses, level ≤ that class level
         //   species:  via trait grants { type: 'ability', id }
         const spells = refs.spells ?? [];
         const lvl = this.level;
@@ -406,6 +424,16 @@ export class Character {
                 .filter(([k, c]) => /^L\d+:(race|subrace):/.test(k) && c?.kind === 'pool')
                 .flatMap(([, c]) => c.ids ?? []),
         );
+        // the class an ability belongs to (the highest level one if it's on several classes' lists)
+        const ownerOf = (sp) => {
+            const d = sp.data ?? {};
+            if (d.subclass) return this.classList.find((e) => e.subclass?.id === d.subclass) ?? null;
+            if (sp.kind !== 'class') return null;
+            return this.classList
+                .filter((e) => (d.classes ?? []).includes(e.cls.id))
+                .reduce((a, e) => (!a || e.level > a.level ? e : a), null);
+        };
+        const powerOwner = new Map(); // ability id → class entry (species abilities — none)
         this.powers = spells.filter((sp) => {
             if (sp.kind === 'spell') return false;
             const d = sp.data ?? {};
@@ -416,19 +444,25 @@ export class Character {
                 if (!this.chosen.pool.includes(sp.id)) return false;
                 if (racePoolIds.has(sp.id)) return true;
             }
-            if (sp.level > lvl) return false;
+            const owner = ownerOf(sp);
+            if (sp.level > (owner?.level ?? lvl)) return false;
             // with: '<pool option id>' — only if that option is chosen (a rune's invocation comes with the rune);
             // showWhile: '<condition id>' — only while that effect is on (the rune is inscribed)
             if (d.with && !this.chosen.pool.includes(d.with)) return false;
             if (d.showWhile && !this.conditions.some((r) => r.id === d.showWhile && !r.immune)) return false;
-            if (d.subclass) return d.subclass === build.subclassId && !!build.subclassId;
-            return sp.kind === 'class' && (d.classes ?? []).includes(build.classId);
+            if (!owner) return false;
+            powerOwner.set(sp.id, owner);
+            return true;
         });
+        // the level an ability scales with: its class level (species abilities — the character level)
+        const lvlFor = (sp) => powerOwner.get(sp?.id)?.level ?? this.level;
+        this.powerLevel = Object.fromEntries([...powerOwner].map(([id, e]) => [id, e.level])); // rules/casting.js
 
         // --- resources ---
         //   1) from abilities with uses (Channel Divinity, Focus Points, Wild Shape…)
         //   2) from { type: 'resource' } grants in the data (for the future / homebrew)
         const ctx = { level: this.level, prof: this.prof, mods: this.mods };
+        const ctxFor = (sp) => ({ ...ctx, level: lvlFor(sp) });
         // data.resource — id of a shared resource: abilities with the same one form a single
         // pool (e.g. the Warrior Orc's Superiority Dice add to the Battle Master's)
         const fromUsesRaw = this.powers
@@ -437,10 +471,10 @@ export class Character {
                 id: sp.data.resource ?? sp.id,
                 name: sp.name,
                 feature: sp.name,
-                max: Math.max(0, usesMax(sp.data.uses, ctx)),
+                max: Math.max(0, usesMax(sp.data.uses, ctxFor(sp))),
                 recharge: sp.data.uses.per === 'shortRest' ? 'short' : 'long',
                 shortRestRegain: sp.data.uses.shortRestRegain ?? null, // Wild Shape: one back on a Short Rest
-                die: dieAt(sp.data.scaleDie, this.level) || null,
+                die: dieAt(sp.data.scaleDie, lvlFor(sp)) || null,
             }));
         const DIE = (d) => Number(String(d ?? '').replace(/^\d*d/, '')) || 0;
         const fromUses = [];
@@ -459,7 +493,7 @@ export class Character {
                 id: g.id,
                 name: g.name ?? g.feature,
                 feature: g.feature,
-                max: Math.max(0, evalFormula(g.max, ctx)),
+                max: Math.max(0, evalFormula(g.max, { ...ctx, level: g.lvl })),
                 recharge: g.recharge ?? 'long',
                 shortRestRegain: g.shortRestRegain ?? null,
                 die: g.die ?? null,
@@ -470,23 +504,42 @@ export class Character {
             .filter((r) => r.max > 0 && !seen.has(r.id) && seen.add(r.id));
 
         // --- spellcasting ---
-        // class or subclass spellcasting (Eldritch Knight / Arcane Trickster)
-        const sc = spellcastingOf(this.cls, this.subclass);
-        const progression = sc?.progression ?? this.cls?.caster ?? 'none';
-        this.spellcasting = sc
-            ? {
-                ability: sc.ability,
-                progression,
-                saveDC: 8 + this.prof + (this.mods[sc.ability] ?? 0),
-                attack: this.prof + (this.mods[sc.ability] ?? 0),
-            }
-            : null;
-        this.spellSlots = sc && this.level >= (sc.startLevel ?? 1) ? spellSlots(progression, this.level) : [];
+        // class or subclass spellcasting (Eldritch Knight / Arcane Trickster), one per class:
+        // each has its own ability, DC and attack; the slots are shared (multiclassSlots)
+        const casters = castersOf(build, refs);
+        this.spellcastings = casters.map((c) => ({
+            classId: c.classId,
+            name: c.cls.data?.spellcasting ? c.cls.name : c.subclass?.name ?? c.cls.name,
+            ability: c.sc.ability,
+            progression: c.progression,
+            level: c.level,
+            saveDC: 8 + this.prof + (this.mods[c.sc.ability] ?? 0),
+            attack: this.prof + (this.mods[c.sc.ability] ?? 0),
+        }));
+        this.spellcasting = this.spellcastings[0] ?? null; // the first one (summons, templates)
+        this.spellSlots = multiclassSlots(casters, this.level);
 
         // --- known spells: chosen + fixed species grants ---
         const raceSpellIds = grants.filter((g) => g.type === 'spell' && g.id).map((g) => g.id);
+        // which class a spell is cast with: chosen at a level → the class of that level;
+        // Domain / Oath / Patron / Circle spells → the subclass's class
+        const spellOwner = new Map();
+        for (const [k, c] of Object.entries(build.choices ?? {})) {
+            const m = /^L(\d+):(class|subclass):/.exec(k);
+            if (!m || !['cantrips', 'spells'].includes(c?.kind)) continue;
+            const owner = classAt(build, Number(m[1]));
+            for (const id of c.ids ?? []) if (owner && !spellOwner.has(id)) spellOwner.set(id, owner);
+        }
         // Domain / Oath / Patron / Circle spells: always prepared, cast with the class ability
-        this.subclassSpellIds = new Set(subclassSpellIds(this.subclass, this.cls, this.level).map((x) => x.id));
+        this.subclassSpellIds = new Set();
+        const subclassOfSpell = new Map();
+        for (const e of this.classList) {
+            for (const { id } of subclassSpellIds(e.subclass, e.cls, e.level)) {
+                this.subclassSpellIds.add(id);
+                subclassOfSpell.set(id, e.subclass);
+                spellOwner.set(id, e.cls.id);
+            }
+        }
         const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...this.subclassSpellIds, ...raceSpellIds])];
 
         // species spells have their own spellcasting ability (see speciesSpellAbility):
@@ -521,17 +574,19 @@ export class Character {
         // --- action and spell cards (groups for the sheet) ---
         const speciesName = this.subrace?.name ?? this.race?.name ?? 'Species';
         const withUses = (sp) =>
-            sp.data?.uses ? { max: usesMax(sp.data.uses, ctx), per: sp.data.uses.per } : null;
+            sp.data?.uses ? { max: usesMax(sp.data.uses, ctxFor(sp)), per: sp.data.uses.per } : null;
         // descriptions with placeholders ({sporesHp}, {saveDc}…) get the character's numbers
+        // ({level} — the level of the ability's class)
         const tpl = { ...ctx, saveDC: this.spellcasting?.saveDC ?? null };
         this.tplCtx = tpl;
-        const fill = (sp) => (sp?.desc && /\{\w+\}/.test(sp.desc) ? { ...sp, desc: fillTemplate(sp.desc, tpl) } : sp);
+        const fill = (sp) =>
+            sp?.desc && /\{\w+\}/.test(sp.desc) ? { ...sp, desc: fillTemplate(sp.desc, { ...tpl, level: lvlFor(sp) }) } : sp;
         // active effects that change a card's die (Symbiotic Entity: Halo of Spores ×2)
         const dieBoost = (sp) => {
             const fx = modifiers
                 .filter((x) => x.kind === 'die' && [].concat(x.target ?? []).includes(sp.id))
                 .map((x) => ({ ...x, from: x.source }));
-            const base = fx.length ? dieAt(sp.data?.scaleDie, this.level) : null;
+            const base = fx.length ? dieAt(sp.data?.scaleDie, lvlFor(sp)) : null;
             if (!base) return null;
             const die = fx.reduce((d, x) => multiplyDice(d, Number(x.multiply) || 1), base);
             return { die, base, from: [...new Set(fx.map((x) => x.from))].join(', ') };
@@ -540,11 +595,18 @@ export class Character {
         // spell card: species spells use the species ability for the DC and get a note
         const spellCard = (sp, title) => {
             if (!this.raceSpellIds.has(sp.id)) {
-                const sub = this.subclassSpellIds.has(sp.id) && this.subclass;
+                const sub = this.subclassSpellIds.has(sp.id) && subclassOfSpell.get(sp.id);
+                // multiclassing: the spell's class — its DC and attack
+                const sc = this.spellcastings.find((x) => x.classId === spellOwner.get(sp.id)) ?? this.spellcasting;
+                const abil = sc && this.spellcastings.length > 1 ? ABILITIES[sc.ability]?.short : null;
+                const note = [
+                    sub ? (sp.level > 0 ? 'always prepared' : 'from the subclass') : '',
+                    abil ? `${sc.name}: ${abil} · DC ${sc.saveDC} · attack ${fmtMod(sc.attack)}` : '',
+                ].filter(Boolean).join(' · ');
                 return {
                     ...card(sp, sub ? `${title} · ${sub.name}` : title),
-                    saveDC: this.spellcasting?.saveDC ?? null,
-                    ...(sub ? { note: sp.level > 0 ? 'always prepared' : 'from the subclass' } : {}),
+                    saveDC: sc?.saveDC ?? null,
+                    ...(note ? { note } : {}),
                 };
             }
             const rs = this.raceSpellcasting;
@@ -563,9 +625,10 @@ export class Character {
         const classPowers = this.powers.filter((sp) => !isRace(sp) && !sp.data?.subclass);
         const subPowers = this.powers.filter((sp) => !isRace(sp) && sp.data?.subclass);
 
+        const subNames = [...new Set(subPowers.map((sp) => powerOwner.get(sp.id)?.subclass?.name).filter(Boolean))];
         this.actionGroups = [
-            { title: 'Class Actions', cards: classPowers.map((sp) => card(sp, this.cls?.name ?? 'Class')) },
-            { title: this.subclass?.name ?? 'Subclass', cards: subPowers.map((sp) => card(sp, this.subclass?.name ?? '')) },
+            { title: 'Class Actions', cards: classPowers.map((sp) => card(sp, powerOwner.get(sp.id)?.cls.name ?? this.cls?.name ?? 'Class')) },
+            { title: subNames.join(' / ') || 'Subclass', cards: subPowers.map((sp) => card(sp, powerOwner.get(sp.id)?.subclass?.name ?? '')) },
             { title: 'Species Abilities', cards: racePowers.map((sp) => card(sp, speciesName)) },
             { title: 'Metamagic', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Metamagic')) },
         ];
@@ -636,19 +699,20 @@ export class Character {
         this.passives = collectPassives({
             raceTraits: [...upTo(this.race?.data?.traits), ...upTo(this.subrace?.data?.traits)],
             raceName: speciesName,
-            classFeatures: upTo(this.cls?.data?.features),
-            className: this.cls?.name ?? 'Class',
-            subclassFeatures: upTo(this.subclass?.data?.features),
-            subclassName: this.subclass?.name ?? 'Subclass',
+            classGroups: this.classList.flatMap((e) => [
+                { features: clsFeatures(e), name: e.cls.name, level: e.level },
+                { features: subFeatures(e), name: e.subclass?.name ?? 'Subclass', level: e.level },
+            ]),
             feats: passiveFeats,
             activeNames: new Set([...this.powers, ...this.resources].map((x) => normName(x.name))),
             ctx,
         });
 
         // placeholders in feature texts too ({chaMod} in Aura of Protection, {level}…)
-        const fillDesc = (f) => (f?.desc && /\{\w+\}/.test(f.desc) ? { ...f, desc: fillTemplate(f.desc, tpl) } : f);
-        this.featureGroups = this.featureGroups.map((g) => ({ ...g, items: g.items.map(fillDesc) }));
-        this.passives.abilities = this.passives.abilities.map(fillDesc);
+        const fillDesc = (f, level) =>
+            f?.desc && /\{\w+\}/.test(f.desc) ? { ...f, desc: fillTemplate(f.desc, { ...tpl, level: level ?? this.level }) } : f;
+        this.featureGroups = this.featureGroups.map((g) => ({ ...g, items: g.items.map((f) => fillDesc(f, g.level)) }));
+        this.passives.abilities = this.passives.abilities.map((a) => fillDesc(a, a.ctxLevel));
 
         // Darkvision from class/subclass features and feats (Umbral Sight, Eyes of the Dark,
         // Devil's Sight) — the sheet itself counts only species traits and active effects
@@ -661,10 +725,8 @@ export class Character {
         //   class/subclass features: grant { type: 'effect', effect: { kind: 'set', target: 'attacksPerAction', value } }
         //   (Extra Attack → 2, Two Extra Attacks → 3…); invocations/feats: the same effect in their effects field.
         //   An effect with when.weapon (Thirsting Blade: pact weapon) counts only for that weapon.
-        this.attackCount = attacksPerAction(
-            [...upTo(this.cls?.data?.features), ...upTo(this.subclass?.data?.features)],
-            passiveFeats,
-        );
+        // Extra Attack from several classes doesn't stack: attacksPerAction takes the highest
+        this.attackCount = attacksPerAction(this.classFeatures, passiveFeats);
     }
 
     /**
@@ -673,19 +735,21 @@ export class Character {
      *   { forms: [form], resource, tempHp, hours, cost(form) }
      */
     get wildShapeInfo() {
-        const ab = wildShapeAbility(this.refs, this.cls?.id);
-        if (!ab || this.level < (ab.level ?? 2)) return null;
+        // the class that has Wild Shape (multiclassing: not necessarily the primary one), by its level
+        const e = (this.classList ?? []).find((x) => wildShapeAbility(this.refs, x.cls.id));
+        const ab = e && wildShapeAbility(this.refs, e.cls.id);
+        if (!ab || e.level < (ab.level ?? 2)) return null;
         const known = new Set(this.chosen.wildShapeForms ?? []);
         const forms = (this.refs?.wildShapeForms ?? []).filter(
-            (f) => known.has(f.monsterId) && f.classId === this.cls?.id && (!f.subclassId || f.subclassId === this.subclass?.id),
+            (f) => known.has(f.monsterId) && f.classId === e.cls.id && (!f.subclassId || f.subclassId === e.subclass?.id),
         );
         const seen = new Set();
         return {
             forms: forms.filter((f) => !seen.has(f.monsterId) && seen.add(f.monsterId)),
             resource: this.resource(ab.data?.resource ?? ab.id),
-            tempHp: formTempHp(this.refs, this.cls?.id, this.subclass, this.level),
-            hours: formHours(this.level),
-            cost: (f) => formCost(f, this.subclass),
+            tempHp: formTempHp(this.refs, e.cls.id, e.subclass, e.level),
+            hours: formHours(e.level),
+            cost: (f) => formCost(f, e.subclass),
         };
     }
 

@@ -1,7 +1,7 @@
 {
   "id": "glaive",
   "name": "Glaive",
-  "image": "/img/weapons/martial/glaive.png",
+  "image": "/img/weapons/martial/glaive.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d10",

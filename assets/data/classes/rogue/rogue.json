@@ -1,7 +1,7 @@
 {
   "id": "rogue",
   "name": "Rogue",
-  "image": "/img/classes/rogue/rogue.png",
+  "image": "/img/classes/rogue/rogue.webp",
   "hitDie": 8,
   "primaryAbility": [
     "dex"
@@ -41,6 +41,24 @@
     "simple",
     "martial"
   ],
+  "multiclass": {
+    "prerequisites": {
+      "allOf": [
+        "dex"
+      ],
+      "min": 13
+    },
+    "proficiencies": {
+      "armor": [
+        "light"
+      ],
+      "weapons": [],
+      "tools": [
+        "thieves"
+      ],
+      "skills": 1
+    }
+  },
   "features": [
     {
       "level": 1,

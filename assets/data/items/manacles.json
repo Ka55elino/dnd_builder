@@ -1,7 +1,7 @@
 {
   "id": "manacles",
   "name": "Manacles",
-  "image": "/img/items/manacles.png",
+  "image": "/img/items/manacles.webp",
   "isDefault": true,
   "weight": 6.0,
   "cost": "2 GP",

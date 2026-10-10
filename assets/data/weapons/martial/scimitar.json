@@ -1,7 +1,7 @@
 {
   "id": "scimitar",
   "name": "Scimitar",
-  "image": "/img/weapons/martial/scimitar.png",
+  "image": "/img/weapons/martial/scimitar.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d6",

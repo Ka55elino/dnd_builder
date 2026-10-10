@@ -1,7 +1,7 @@
 {
   "id": "bucket",
   "name": "Bucket",
-  "image": "/img/items/bucket.png",
+  "image": "/img/items/bucket.webp",
   "isDefault": true,
   "weight": 2.0,
   "cost": "5 CP",

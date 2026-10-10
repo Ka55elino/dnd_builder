@@ -1,7 +1,7 @@
 {
   "id": "morningstar",
   "name": "Morningstar",
-  "image": "/img/weapons/martial/morningstar.png",
+  "image": "/img/weapons/martial/morningstar.webp",
   "isDefault": true,
   "category": "martial",
   "damage": "1d8",

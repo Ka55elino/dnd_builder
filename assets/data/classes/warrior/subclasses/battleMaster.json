@@ -1,7 +1,7 @@
 {
   "id": "battleMaster",
   "name": "Battle Master",
-  "image": "/img/classes/warrior/subclasses/battleMaster.png",
+  "image": "/img/classes/warrior/subclasses/battleMaster.webp",
   "class": "warrior",
   "features": [
     {

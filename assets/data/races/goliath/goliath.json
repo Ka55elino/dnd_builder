@@ -1,7 +1,7 @@
 {
   "id": "goliath",
   "name": "Goliath",
-  "image": "/img/races/goliath/goliath.png",
+  "image": "/img/races/goliath/goliath.webp",
   "size": "Medium",
   "speed": 35,
   "subraceLevel": 1,

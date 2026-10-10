@@ -1,7 +1,7 @@
 {
   "id": "padded",
   "name": "Padded Armor",
-  "image": "/img/armor/light/padded.png",
+  "image": "/img/armor/light/padded.webp",
   "isDefault": true,
   "category": "light",
   "baseAC": 11,

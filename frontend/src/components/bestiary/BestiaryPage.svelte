@@ -4,9 +4,13 @@
      *   Monsters   — search + filters (type, CR, habitat) on the left, the stat block on the right;
      *                custom monsters: “+ Add monster”, Edit / Delete; built-in ones: Copy.
      *   Encounters — presets: a named group of monsters with XP and difficulty for the party.
+     * Narrow screens (≤ 760px): one scroll — the list, and a tap opens the monster on its own
+     * screen (← back to the list, the actions in ☰).
      * onBack() — to the menu
      */
-    import { onMount } from "svelte";
+    import TopBar from "../common/TopBar.svelte";
+    import { onMount, tick } from "svelte";
+    import MonsterHead from "./MonsterHead.svelte";
     import {
         loadMonsters, deleteMonster, isCustomMonster, loadEncounters, saveEncounter,
         CREATURE_TYPES, HABITATS, CRS, crLabel, fmtXP,
@@ -33,6 +37,34 @@
     let customOnly = $state(false);
 
     let selectedId = $state(null);
+
+    // narrow screens: list → the monster's own screen
+    let narrow = $state(false);
+    let detailOpen = $state(false);
+    let pageEl = $state(null);
+    onMount(() => {
+        const mq = matchMedia("(max-width: 760px)");
+        const sync = () => (narrow = mq.matches);
+        sync();
+        mq.addEventListener("change", sync);
+        return () => mq.removeEventListener("change", sync);
+    });
+
+    async function pick(id) {
+        selectedId = id;
+        if (!narrow) return;
+        detailOpen = true;
+        await tick();
+        pageEl?.scrollIntoView({ block: "start" }); // the monster from its top
+    }
+
+    async function closeDetail() {
+        const id = selectedId;
+        detailOpen = false;
+        await tick();
+        // back where the list was: the monster's row in view
+        pageEl?.querySelector(`[data-mid="${CSS.escape(String(id))}"]`)?.scrollIntoView({ block: "center" });
+    }
     let editor = $state(null); // { initial, copy } | null
     let confirmDelete = $state(null);
 
@@ -70,6 +102,7 @@
     );
     const typeCounts = $derived(monsters.reduce((acc, m) => ((acc[m.type] = (acc[m.type] ?? 0) + 1), acc), {}));
     const selected = $derived(monsters.find((m) => m.id === selectedId) ?? filtered[0] ?? null);
+    const detail = $derived(narrow && detailOpen && mode === "monsters" && !!selected);
     const filtersOn = $derived(!!(query || type || habitat || crMin > 0 || crMax < 30 || customOnly));
 
     function resetFilters() {
@@ -117,7 +150,7 @@
     function openMonster(id) {
         mode = "monsters";
         resetFilters();
-        selectedId = id;
+        pick(id); // narrow: straight to the monster's screen
     }
 </script>
 
@@ -143,17 +176,21 @@
             <button class="ghost small" onclick={() => (confirmDelete = null)}>No</button>
         {:else}
             <button class="ghost small" onclick={() => (editor = { initial: m, copy: false })}>Edit</button>
-            <button class="ghost small" onclick={() => (confirmDelete = m.id)} title="Delete">✕</button>
+            <button class="ghost small" data-keep-open onclick={() => (confirmDelete = m.id)} title="Delete">✕</button>
         {/if}
     {:else}
         <button class="ghost small" onclick={() => (editor = { initial: m, copy: true })} title="Create your own monster based on this one">Copy</button>
     {/if}
 {/snippet}
 
-<div class="page">
-    <header class="top">
-        <button class="ghost" onclick={onBack}>← Menu</button>
-        <h1>Bestiary</h1>
+<div class="page" class:detail bind:this={pageEl}>
+    {#if detail}
+        <!-- narrow: the monster's own screen -->
+        <TopBar title={selected.name} onBack={closeDetail} back="Bestiary">
+            {@render blockActions(selected)}
+        </TopBar>
+    {:else}
+    <TopBar title="Bestiary" {onBack}>
         <nav class="modes">
             <button class="chip" class:active={mode === "monsters"} onclick={() => (mode = "monsters")}>
                 Monsters <small>{monsters.length}</small>
@@ -166,7 +203,8 @@
         {#if mode === "monsters" && !loading && !error}
             <button class="add" onclick={() => (editor = { initial: null, copy: false })}>+ Add monster</button>
         {/if}
-    </header>
+    </TopBar>
+    {/if}
 
     {#if loading}
         <p class="muted">Loading…</p>
@@ -208,15 +246,8 @@
                 <ul>
                     {#each filtered as m (m.id)}
                         <li>
-                            <button class="row" class:active={selected?.id === m.id} onclick={() => (selectedId = m.id)}>
-                                <span class="name">
-                                    {m.name}
-                                    {#if m.legendary}<span class="leg" title="Legendary">★</span>{/if}
-                                    {#if isCustomMonster(m)}<span class="own">custom</span>{/if}
-                                </span>
-                                <span class="meta">{CREATURE_TYPES[m.type] ?? m.type}</span>
-                                <span class="cr">CR {crLabel(m.cr)}</span>
-                                <span class="xp">{fmtXP(m.xp)} XP</span>
+                            <button class="row" class:active={!narrow && selected?.id === m.id} data-mid={m.id} onclick={() => pick(m.id)}>
+                                <MonsterHead monster={m} compact />
                             </button>
                         </li>
                     {:else}
@@ -228,7 +259,8 @@
             <main class="view">
                 {#if selected}
                     {#key selected.id}
-                        <MonsterStatBlock monster={selected} actions={blockActions} />
+                        <!-- narrow: the actions are in the bar's ☰ -->
+                        <MonsterStatBlock monster={selected} actions={narrow ? null : blockActions} />
                     {/key}
                 {:else}
                     <p class="muted">Choose a monster on the left.</p>
@@ -254,18 +286,12 @@
         min-height: 0;
     }
 
-    .top {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    h1 {
-        margin: 0;
-        font-family: var(--font-heading);
-        font-weight: var(--font-weight-bold);
-        color: var(--color-gold);
+    /* phones: the page uses the whole width */
+    @media (max-width: 640px) {
+        .page {
+            padding: 12px 12px 24px;
+            gap: 14px;
+        }
     }
 
     .modes {
@@ -366,12 +392,11 @@
         gap: 4px;
     }
 
+    /* a row looks like the stat block's head (MonsterHead compact) */
     .row {
         width: 100%;
-        padding: 8px 12px;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 2px 10px;
+        padding: 8px 10px;
+        display: block;
         background: var(--color-card);
         border: 1px solid var(--color-border);
         border-radius: 8px;
@@ -387,41 +412,6 @@
     .row.active {
         background: var(--color-card-elevated);
         border-color: var(--color-gold);
-    }
-
-    .row .name {
-        font-family: var(--font-heading);
-        font-size: 15px;
-    }
-
-    .leg {
-        color: var(--color-meta-concentration);
-    }
-
-    .own {
-        margin-left: 4px;
-        font-family: var(--font-ui);
-        font-size: 10px;
-        color: var(--color-meta-range);
-    }
-
-    .row .meta,
-    .row .xp {
-        font-family: var(--font-ui);
-        font-size: 12px;
-        color: var(--color-text-muted);
-    }
-
-    .row .cr {
-        font-family: var(--font-ui);
-        font-size: 13px;
-        font-weight: var(--font-weight-semibold);
-        color: var(--color-gold);
-        text-align: right;
-    }
-
-    .row .xp {
-        text-align: right;
     }
 
     .none {
@@ -519,9 +509,26 @@
         color: var(--color-danger);
     }
 
+    /* narrow: one scroll (the page's) — the list, or the chosen monster on its own screen */
     @media (max-width: 760px) {
+        .page {
+            height: auto;
+            min-height: 100%;
+        }
+
         .split {
-            grid-template-columns: 1fr;
+            display: block;
+        }
+
+        .list ul,
+        .view {
+            overflow: visible;
+            padding-right: 0;
+        }
+
+        .page:not(.detail) .view,
+        .page.detail .list {
+            display: none;
         }
     }
 </style>

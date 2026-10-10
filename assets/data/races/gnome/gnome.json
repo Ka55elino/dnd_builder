@@ -1,7 +1,7 @@
 {
   "id": "gnome",
   "name": "Gnome",
-  "image": "/img/races/gnome/gnome.png",
+  "image": "/img/races/gnome/gnome.webp",
   "size": "Small",
   "speed": 30,
   "subraceLevel": 1,

@@ -1,7 +1,7 @@
 {
   "id": "greatclub",
   "name": "Greatclub",
-  "image": "/img/weapons/simple/greatclub.png",
+  "image": "/img/weapons/simple/greatclub.webp",
   "isDefault": true,
   "category": "simple",
   "damage": "1d8",

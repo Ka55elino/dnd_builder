@@ -1,7 +1,7 @@
 {
   "id": "herbalismKit",
   "name": "Herbalism Kit",
-  "image": "/img/items/herbalismKit.png",
+  "image": "/img/items/herbalismKit.webp",
   "isDefault": true,
   "weight": 3.0,
   "cost": "5 GP",
