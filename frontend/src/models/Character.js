@@ -20,7 +20,7 @@
  *                                     // Phantom's Soul Trinkets; CharacterState keeps how many you hold
  *   }
  */
-import { computeSheet } from '../rules/sheet.js';
+import { computeSheet, proficiencyBonus, trainingOf } from '../rules/sheet.js';
 import { classEntries, classAt, classSummary } from '../rules/multiclass.js';
 import { ABILITIES, ABILITY_KEYS } from '../rules/abilities.js';
 
@@ -47,10 +47,14 @@ import { summarizeChoices, subclassSpellIds, castersOf } from '../rules/progress
 import { wildShapeAbility, formTempHp, formHours, formCost } from '../rules/wildshape.js';
 import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
 import { isBodyArmor } from '../rules/equipment.js';
+import { DAMAGE_TYPES } from '../rules/labels.js';
 import { resolveConditions, conditionModifiers, inlineDef, rowName, modifierText } from '../rules/modifiers.js';
 
 // feat and Fighting Style effects that the sheet accounts for (rules/sheet.js)
-const PERKS = { tough: 'tough', alert: 'alert', defense: 'defense', archery: 'archery', dueling: 'dueling', twf: 'twf' };
+const PERKS = {
+    tough: 'tough', alert: 'alert', defense: 'defense', archery: 'archery', dueling: 'dueling', twf: 'twf',
+    mediumArmorMaster: 'mediumArmorMaster', // Dexterity up to +3 in Medium armor (rules/sheet.js)
+};
 
 /**
  * Max uses from an ability's uses field (v2 format):
@@ -263,6 +267,79 @@ export class Character {
 
         const wearing = isBodyArmor(this.loadout.armor?.ref); // clothing doesn't count
 
+        // --- feats: what was chosen for each (rules/progression.js featFollowUps) ---
+        //   the key a feat was taken with (L4:class:feat, L1:background:feat, L1:race:feat:…) and its
+        //   follow-ups: `${key}:asi` (which ability got the +1), `${key}:choice` (Elemental Adept's
+        //   element), `${key}:spells` / `${key}:cantrips` (Fey-Touched, Ritual Caster, Spell Sniper)
+        const featKeys = new Map(); // feat id → [choice key]
+        const addFeatKey = (id, k) => (featKeys.get(id) ?? featKeys.set(id, []).get(id)).push(k);
+        for (const [k, c] of Object.entries(build.choices ?? {})) if (c?.kind === 'feat') for (const id of c.ids ?? []) addFeatKey(id, k);
+        const bgFeat = (refs.backgrounds ?? []).find((b) => b.id === build.backgroundId)?.feat;
+        if (bgFeat) addFeatKey(bgFeat, 'L1:background:feat');
+        const featFollow = (id, sub) => (featKeys.get(id) ?? []).flatMap((k) => build.choices?.[`${k}:${sub}`]?.ids ?? []);
+        // the ability a feat raised (its +1): the feat's spellcasting ability, Inspiring Leader's numbers
+        const featAbility = (f) => {
+            for (const k of featKeys.get(f.id) ?? []) {
+                const a = Object.keys(build.choices?.[`${k}:asi`]?.asi ?? {})[0];
+                if (a) return a;
+            }
+            const opts = Array.isArray(f.data?.asi) ? f.data.asi : f.data?.asi?.options;
+            return opts?.length === 1 ? opts[0] : null;
+        };
+        const featDefs = [...this.chosen.feats, ...this.chosen.fightingStyles, ...this.chosen.invocations]
+            .map((id) => (refs.feats ?? []).find((f) => f.id === id))
+            .filter(Boolean);
+        // a feat's effects / modifiers apply only when (when: { shield: true } — a shield in hand,
+        // { armor: 'heavy' | 'medium' } — that armor worn); '$choice' — its chosen option
+        const heldShield = hands.find((h) => h.item?.kind === 'shield')?.item?.ref ?? null;
+        const wornCat = wearing ? this.loadout.armor?.ref?.category : null;
+        const whenOk = (w) => !w || ((!w.shield || !!heldShield) && (!w.armor || w.armor === wornCat));
+        const prof0 = proficiencyBonus(build.level ?? 1);
+        const featValue = (m) =>
+            m.valueFrom === 'shield' ? Number(heldShield?.data?.acBonus) || 2 : m.valueFrom === 'prof' ? prof0 : m.value;
+        const withFeatChoice = (m, f) => {
+            const ch = featFollow(f.id, 'choice')[0];
+            const out = {};
+            for (const [k, v] of Object.entries(m)) {
+                out[k] = typeof v === 'string' && v.includes('$choice') ? v.replaceAll('$choice', ch ? (DAMAGE_TYPES[ch]?.name ?? ch) : '…') : v;
+            }
+            return out;
+        };
+        // numbers a feat changes (data.modifiers, rules/modifiers.js): Speedy +10 ft., Shield Master DEX
+        // saves, Sharpshooter damage, Observant passive Perception — next to items and conditions
+        const featModifiers = featDefs.flatMap((f) =>
+            (f.data?.modifiers ?? [])
+                .filter((m) => whenOk(m.when))
+                .map((m) => ({ ...withFeatChoice(m, f), value: featValue(m), source: f.name, from: 'feat' })),
+        );
+        // proficiencies a feat gives (data.proficiencies: { weapons: ['martial'], armor: ['heavy'] } —
+        // Martial Weapon Training); with the classes' → this.training (Features & Traits)
+        const featArmor = featDefs.flatMap((f) => f.data?.proficiencies?.armor ?? []);
+        const featWeapons = featDefs.flatMap((f) => f.data?.proficiencies?.weapons ?? []);
+        const training = trainingOf(this.classList, { armor: featArmor, weapons: featWeapons });
+        // gear without training (PHB 2024): armor / a shield — Disadvantage on any D20 Test that uses
+        // Strength or Dexterity, and no spellcasting; a weapon — no Proficiency Bonus to its attacks
+        const untrained = [];
+        const wornArmor = wearing ? this.loadout.armor?.ref : null;
+        for (const g of [wornArmor && { ref: wornArmor, cat: wornArmor.category }, heldShield && { ref: heldShield, cat: 'shield' }]) {
+            if (!g || training.armor.has(g.cat)) continue;
+            const source = `${g.ref.name} (no training)`;
+            for (const ability of ['str', 'dex']) {
+                untrained.push({ kind: 'flag', mode: 'disadvantage', on: 'checks', ability, source, from: 'gear' });
+                untrained.push({ kind: 'flag', mode: 'disadvantage', on: 'saves', ability, source, from: 'gear' });
+            }
+            untrained.push({ kind: 'flag', mode: 'disadvantage', on: 'attacks', note: 'Strength or Dexterity', source, from: 'gear' });
+            untrained.push({ kind: 'note', note: "can't cast spells", source, from: 'gear' });
+        }
+        for (const h of hands) {
+            const w = h.item?.kind === 'weapon' ? h.item.ref : null;
+            if (!w || training.weapons.has(w.category) || training.weapons.has(w.id) || training.weapons.has(w.data?.base)) continue;
+            untrained.push({ kind: 'note', note: `no Proficiency Bonus to attacks with ${w.name}`, source: `${w.name} (not proficient)`, from: 'gear' });
+        }
+        // what a feat shows among the passives (data.effects): the same conditions and '$choice'
+        const featEffects = (f) =>
+            (f.effects ?? f.data?.effects ?? []).filter((e) => whenOk(e.when)).map((e) => withFeatChoice(e, f));
+
         // --- conditions (Prone, Grappled, Exhaustion…) and named effects (Slowed, Enlarged…) ---
         // immunities from species traits, class features and feats ({ kind: 'immunity', value: 'charmed' })
         const lvlOk = (f) => !f.level || f.level <= (build.level ?? 1);
@@ -307,7 +384,7 @@ export class Character {
             }
         }
         // everything on the character as modifiers, each with its source (rules/modifiers.js)
-        const modifiers = [...conditionModifiers(this.conditions), ...itemModifiers];
+        const modifiers = [...conditionModifiers(this.conditions), ...itemModifiers, ...featModifiers, ...untrained];
         // class/subclass features that add to an effect while it is on (Elemental Cleaver during Rage):
         //   grants: [{ type: 'while', condition: 'raging', modifiers: [...] }]
         const activeIds = new Set(this.conditions.filter((r) => !r.immune && !r.inactive).map((r) => r.id));
@@ -344,6 +421,8 @@ export class Character {
                 cls: this.cls,
                 classList: this.classList,
                 levelClasses: build.levelClasses,
+                extraArmor: featArmor,
+                extraWeapons: featWeapons,
                 armor: this.loadout.armor?.ref ?? null,
                 shield: hands.find((h) => h.item?.kind === 'shield')?.item?.ref ?? false,
                 hands: hands
@@ -427,6 +506,11 @@ export class Character {
         const spells = refs.spells ?? [];
         const lvl = this.level;
         const raceAbilityIds = new Set(grants.filter((g) => g.type === 'ability').map((g) => g.id));
+        // abilities a chosen feat grants (feat.data.grants { type: 'ability', id } — Charger: Charge
+        // Attack): ability id → the feat's name (the card's source)
+        const featAbilityOf = new Map();
+        for (const f of chosenFeats)
+            for (const g of f.data?.grants ?? []) if (g.type === 'ability' && g.id && !featAbilityOf.has(g.id)) featAbilityOf.set(g.id, f);
         // pool options chosen through species traits (choice keys L<n>:race:… / L<n>:subrace:…)
         const racePoolIds = new Set(
             Object.entries(build.choices ?? {})
@@ -446,7 +530,7 @@ export class Character {
         this.powers = spells.filter((sp) => {
             if (sp.kind === 'spell') return false;
             const d = sp.data ?? {};
-            if (raceAbilityIds.has(sp.id)) return true;
+            if (raceAbilityIds.has(sp.id) || featAbilityOf.has(sp.id)) return true;
             // pool options (maneuvers, arcane shots) — only the chosen ones;
             // picked through a species trait they don't need the subclass
             if (d.pool) {
@@ -549,13 +633,38 @@ export class Character {
                 spellOwner.set(id, e.cls.id);
             }
         }
-        const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...this.subclassSpellIds, ...raceSpellIds])];
+        // feat spells (data.spells: { fixed: [ids], choose: {…} } — Fey-Touched, Shadow-Touched,
+        // Ritual Caster, Spell Sniper, Telekinetic): cast with the ability the feat raised, shown under
+        // "Feat Spells" — not in the class's spellbook. featSpellsOf: [{ feat, ability, sp, fixed }]
+        const featSpellKeys = new Set();
+        const featSpellsOf = [];
+        for (const f of featDefs) {
+            const fs = f.data?.spells;
+            if (!fs) continue;
+            for (const k of featKeys.get(f.id) ?? []) featSpellKeys.add(`${k}:spells`).add(`${k}:cantrips`);
+            // more picks later, as the Proficiency Bonus grows (Ritual Caster): L<n>:feat:<id>:spells
+            const later = Object.keys(build.choices ?? {}).filter((k) => k.startsWith('L') && k.endsWith(`:feat:${f.id}:spells`) && /^L\d+:feat:/.test(k));
+            for (const k of later) featSpellKeys.add(k);
+            const ability = featAbility(f);
+            const fixed = (fs.fixed ?? []).map((id) => ({ id, fixed: true }));
+            const chosen = [...featFollow(f.id, 'cantrips'), ...featFollow(f.id, 'spells'), ...later.flatMap((k) => build.choices[k]?.ids ?? [])]
+                .map((id) => ({ id, fixed: false }));
+            for (const x of [...fixed, ...chosen]) {
+                const sp = spells.find((s) => s.id === x.id);
+                if (sp) featSpellsOf.push({ feat: f, ability, sp, fixed: x.fixed, ritual: !!fs.choose?.ritual && !x.fixed });
+            }
+        }
+        const featChosenSpellIds = new Set(
+            [...featSpellKeys].flatMap((k) => build.choices?.[k]?.ids ?? []),
+        );
+        const spellIds = [...new Set([...this.chosen.cantrips, ...this.chosen.spells, ...this.subclassSpellIds, ...raceSpellIds])]
+            .filter((id) => !featChosenSpellIds.has(id));
 
         // species spells have their own spellcasting ability (see speciesSpellAbility):
         // fixed grants + spells chosen through species traits (choice keys L<n>:race:… / L<n>:subrace:…)
         const classSpellIds = new Set(
             Object.entries(build.choices ?? {})
-                .filter(([k, c]) => !/^L\d+:(race|subrace):/.test(k) && ['cantrips', 'spells'].includes(c?.kind))
+                .filter(([k, c]) => !/^L\d+:(race|subrace):/.test(k) && !featSpellKeys.has(k) && ['cantrips', 'spells'].includes(c?.kind))
                 .flatMap(([, c]) => c.ids ?? []),
         );
         const raceChosenIds = Object.entries(build.choices ?? {})
@@ -588,8 +697,15 @@ export class Character {
         // ({level} — the level of the ability's class)
         const tpl = { ...ctx, saveDC: this.spellcasting?.saveDC ?? null };
         this.tplCtx = tpl;
+        // a feat's ability card: the ability the feat raised ({featDc}, {levelPlusFeatMod} — Telekinetic
+        // shove DC, Inspiring Leader's Temporary Hit Points)
+        const featCtx = (sp) => {
+            const f = featAbilityOf.get(sp?.id);
+            const a = f && featAbility(f);
+            return a ? { featMod: this.mods[a] ?? 0, featDc: 8 + this.prof + (this.mods[a] ?? 0) } : {};
+        };
         const fill = (sp) =>
-            sp?.desc && /\{\w+\}/.test(sp.desc) ? { ...sp, desc: fillTemplate(sp.desc, { ...tpl, level: lvlFor(sp) }) } : sp;
+            sp?.desc && /\{\w+\}/.test(sp.desc) ? { ...sp, desc: fillTemplate(sp.desc, { ...tpl, level: lvlFor(sp), ...featCtx(sp) }) } : sp;
         // active effects that change a card's die (Symbiotic Entity: Halo of Spores ×2)
         const dieBoost = (sp) => {
             const fx = modifiers
@@ -630,15 +746,18 @@ export class Character {
             };
         };
         const isRace = (sp) => raceAbilityIds.has(sp.id) || racePoolIds.has(sp.id);
+        const isFeat = (sp) => featAbilityOf.has(sp.id) && !isRace(sp);
         const racePowers = this.powers.filter(isRace);
-        const classPowers = this.powers.filter((sp) => !isRace(sp) && !sp.data?.subclass);
-        const subPowers = this.powers.filter((sp) => !isRace(sp) && sp.data?.subclass);
+        const featPowers = this.powers.filter(isFeat);
+        const classPowers = this.powers.filter((sp) => !isRace(sp) && !isFeat(sp) && !sp.data?.subclass);
+        const subPowers = this.powers.filter((sp) => !isRace(sp) && !isFeat(sp) && sp.data?.subclass);
 
         const subNames = [...new Set(subPowers.map((sp) => powerOwner.get(sp.id)?.subclass?.name).filter(Boolean))];
         this.actionGroups = [
             { title: 'Class Actions', cards: classPowers.map((sp) => card(sp, powerOwner.get(sp.id)?.cls.name ?? this.cls?.name ?? 'Class')) },
             { title: subNames.join(' / ') || 'Subclass', cards: subPowers.map((sp) => card(sp, powerOwner.get(sp.id)?.subclass?.name ?? '')) },
             { title: 'Species Abilities', cards: racePowers.map((sp) => card(sp, speciesName)) },
+            { title: 'Feat Abilities', cards: featPowers.map((sp) => card(sp, featAbilityOf.get(sp.id).name)) },
             { title: 'Metamagic', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Metamagic')) },
         ];
 
@@ -657,6 +776,19 @@ export class Character {
                 // free: at will (no slot); ritual: can be cast as a Ritual (rules/casting.js)
                 list.push({ ...card(sp, f.name), saveDC: this.spellcasting?.saveDC ?? null, note, free: !!g.atWill, ritual: !!g.ritual });
             }
+        }
+        // feat spells (see featSpellsOf): the feat's ability, DC and attack; a fixed level 1+ spell —
+        // also once per Long Rest without a slot (Fey-Touched: Misty Step); Ritual Caster's — Rituals
+        for (const x of featSpellsOf) {
+            if (grantCards.other.some((c) => c.item.id === x.sp.id)) continue;
+            const a = x.ability;
+            const dc = a ? 8 + this.prof + (this.mods[a] ?? 0) : null;
+            const note = [
+                a ? `${ABILITIES[a]?.short ?? a} · DC ${dc} · attack ${fmtMod(this.prof + (this.mods[a] ?? 0))}` : 'choose the feat\'s ability',
+                x.fixed && x.sp.level > 0 ? 'free cast 1/Long Rest' : '',
+                x.ritual ? 'as a Ritual' : '',
+            ].filter(Boolean).join(' · ');
+            grantCards.other.push({ ...card(x.sp, x.feat.name), saveDC: dc, note, free: false, ritual: x.ritual });
         }
         this.actionGroups.push(
             { title: 'Eldritch Invocations', spells: true, cards: grantCards.invocation },
@@ -704,7 +836,8 @@ export class Character {
             .filter((id) => id !== 'abilityScoreImprovement') // on its own — only + to ability scores
             .map(byId)
             .filter(Boolean)
-            .map((f) => ({ ...f, sourceTitle: FEAT_SOURCE[f.category] ?? 'Feat' }));
+            // effects: only those that apply now (Heavy Armor Master — in Heavy armor), '$choice' filled in
+            .map((f) => ({ ...f, sourceTitle: FEAT_SOURCE[f.category] ?? 'Feat', effects: featEffects(f) }));
         this.passives = collectPassives({
             raceTraits: [...upTo(this.race?.data?.traits), ...upTo(this.subrace?.data?.traits)],
             raceName: speciesName,

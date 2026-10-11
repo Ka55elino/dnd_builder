@@ -1,0 +1,9 @@
+{
+  "id": "telekineticShove",
+  "name": "Telekinetic Shove",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "bonus",
+  "desc": "Choose a creature you can see within 30 feet: it makes a Strength saving throw (DC {featDc}) or is moved 5 feet toward or away from you."
+}

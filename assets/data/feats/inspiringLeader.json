@@ -7,5 +7,11 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Wisdom or Charisma; your speech grants allies Temporary Hit Points."
+  "desc": "+1 Wisdom or Charisma. Bolstering Performance: when you finish a Short or Long Rest, you can inspire up to six allies (you can include yourself) within 30 feet who witness your performance: each gains Temporary Hit Points equal to your character level plus the modifier of the ability increased by this feat.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "bolsteringPerformance"
+    }
+  ]
 }

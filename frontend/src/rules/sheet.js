@@ -13,6 +13,21 @@ import { multiclassInfo } from './multiclass.js';
 /** Hit Point Dice as text: [{ die: 10, count: 3 }, { die: 6, count: 2 }] → "3d10 + 2d6". */
 export const hitDiceText = (hitDice = []) => hitDice.map((d) => `${d.count}d${d.die}`).join(' + ');
 
+/**
+ * Armor training and weapon proficiencies: the primary class in full, other classes — their
+ * multiclass part (rules/multiclass.js), plus extra ones (feats: Martial Weapon Training).
+ * classes — [{ cls, level }], [0] — the primary; → { armor: Set, weapons: Set }
+ */
+export function trainingOf(classes, { armor = [], weapons = [] } = {}) {
+    const from = (key, mcKey) =>
+        new Set(classes.filter((c) => c?.cls).flatMap((c, i) => (i === 0 ? c.cls.data?.[key] : multiclassInfo(c.cls).proficiencies[mcKey]) ?? []));
+    const a = from('armorTraining', 'armor');
+    const w = from('weaponProficiencies', 'weapons');
+    for (const x of armor) a.add(x);
+    for (const x of weapons) w.add(x);
+    return { armor: a, weapons: w };
+}
+
 /** Proficiency bonus by level: +2 at 1–4, +3 at 5–8 … +6 at 17–20. */
 export const proficiencyBonus = (level) => 2 + Math.floor((Math.max(1, level) - 1) / 4);
 
@@ -49,7 +64,9 @@ const traitGrants = (level, ...sources) =>
 export function computeSheet(
     build,
     {
-        race, subrace, cls, classList = null, levelClasses = null, armor = null, shield = false, hands = [], emptyHands = [],
+        race, subrace, cls, classList = null, levelClasses = null, armor = null,
+        extraArmor = [], extraWeapons = [], // proficiencies from feats (Martial Weapon Training)
+        shield = false, hands = [], emptyHands = [],
         skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
         spellAbility = null, // the class's spellcasting ability (Shillelagh: "$spell")
         scores: givenScores = null, // final scores with feature bonuses (models/Character.js withFeatureScores)
@@ -105,7 +122,9 @@ export function computeSheet(
     if (wearing) {
         const d = armor.data ?? {};
         let dex = d.addDex ? mods.dex : 0;
-        if (d.addDex && d.maxDex != null) dex = Math.min(dex, d.maxDex);
+        // "Medium Armor Master": in Medium armor, Dexterity counts up to +3 (instead of +2)
+        const maxDex = d.maxDex != null && perks.has('mediumArmorMaster') && armor.category === 'medium' ? Math.max(d.maxDex, 3) : d.maxDex;
+        if (d.addDex && maxDex != null) dex = Math.min(dex, maxDex);
         ac = (armor.baseAC ?? 10) + dex + (Number(d.acBonus) || 0); // + armor's magic bonus
     }
     // another base AC (Mage Armor: 13 + Dex) — used if it is better
@@ -142,16 +161,15 @@ export function computeSheet(
         .sort((a, b) => b.die - a.die);
 
     // --- proficiencies: the primary class in full, other classes — their multiclass part ---
-    const profFrom = (key, mcKey) =>
-        new Set(classes.flatMap((c, i) => (i === 0 ? c.cls.data?.[key] : multiclassInfo(c.cls).proficiencies[mcKey]) ?? []));
-    const armorTraining = [...profFrom('armorTraining', 'armor')];
+    const training = trainingOf(classes, { armor: extraArmor, weapons: extraWeapons });
+    const armorTraining = [...training.armor];
 
     // --- darkvision ---
     const darkvision =
         effects.find((e) => e.kind === 'sense' && e.sense === 'darkvision')?.range ?? 0;
 
     // --- attacks: weapons in hand; empty hands — unarmed strike ---
-    const weaponProf = profFrom('weaponProficiencies', 'weapons');
+    const weaponProf = training.weapons;
     // spells that change the weapons held (Shillelagh): { kind: 'weapon' } modifiers
     const weaponMods = modifiers.filter((m) => m.kind === 'weapon');
     // Monk "Martial Arts": the die for Unarmed Strikes and Monk weapons, Dex instead of Str

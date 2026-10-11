@@ -7,11 +7,11 @@
     "dex",
     "con"
   ],
-  "desc": "+1 Dex or Con; +10 feet Speed, Dash without provoking Opportunity Attacks.",
-  "effects": [
+  "desc": "+1 Dexterity or Constitution. Your Speed increases by 10 feet; difficult terrain doesn't cost you extra movement when you Dash, and Opportunity Attacks against you have Disadvantage.",
+  "modifiers": [
     {
-      "kind": "bonus",
-      "target": "speed",
+      "kind": "speed",
+      "op": "add",
       "value": 10
     }
   ]

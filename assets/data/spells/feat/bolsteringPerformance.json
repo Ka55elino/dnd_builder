@@ -1,0 +1,8 @@
+{
+  "id": "bolsteringPerformance",
+  "name": "Bolstering Performance",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "desc": "When you finish a Short or Long Rest, give an inspiring speech, song or dance: up to six allies (you can include yourself) within 30 feet who witness it each gain {levelPlusFeatMod} Temporary Hit Points."
+}

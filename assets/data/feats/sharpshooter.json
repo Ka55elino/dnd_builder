@@ -6,5 +6,20 @@
   "asi": [
     "dex"
   ],
-  "desc": "+1 Dexterity; ignore cover and long-range Disadvantage, a power-attack damage bonus with ranged weapons."
+  "desc": "+1 Dexterity. Your ranged weapon attacks ignore Half and Three-Quarters Cover, you have no Disadvantage at long range or when attacking within 5 feet of an enemy, and your ranged weapon attacks deal extra damage equal to your Proficiency Bonus.",
+  "modifiers": [
+    {
+      "kind": "damage",
+      "valueFrom": "prof",
+      "sign": 1,
+      "ranged": true,
+      "weaponOnly": true
+    }
+  ],
+  "effects": [
+    {
+      "kind": "note",
+      "note": "Ranged weapons: ignore Half / Three-Quarters Cover, no Disadvantage at long range or in melee"
+    }
+  ]
 }

@@ -7,5 +7,10 @@
     "str",
     "dex"
   ],
-  "desc": "+1 Strength or Dexterity; proficiency with all Martial weapons."
+  "desc": "+1 Strength or Dexterity. You gain proficiency with Martial weapons.",
+  "proficiencies": {
+    "weapons": [
+      "martial"
+    ]
+  }
 }

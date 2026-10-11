@@ -7,5 +7,11 @@
     "dex",
     "int"
   ],
-  "desc": "+1 Dex or Int; potent poisons, ignore Resistance to Poison damage."
+  "desc": "+1 Dexterity or Intelligence. Your attacks and spells ignore Resistance to Poison damage. You can brew potent poisons with a Poisoner's Kit.",
+  "effects": [
+    {
+      "kind": "note",
+      "note": "Your attacks ignore Resistance to Poison damage"
+    }
+  ]
 }

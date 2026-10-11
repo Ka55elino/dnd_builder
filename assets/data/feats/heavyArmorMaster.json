@@ -7,5 +7,14 @@
     "str",
     "con"
   ],
-  "desc": "+1 Strength or Constitution; reduce Bludgeoning, Piercing, and Slashing damage."
+  "desc": "+1 Strength or Constitution. While you wear Heavy armor, Bludgeoning, Piercing and Slashing damage you take is reduced by your Proficiency Bonus.",
+  "effects": [
+    {
+      "kind": "note",
+      "note": "Bludgeoning, Piercing and Slashing damage you take is reduced by {prof} (in Heavy armor)",
+      "when": {
+        "armor": "heavy"
+      }
+    }
+  ]
 }

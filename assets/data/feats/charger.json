@@ -7,5 +7,11 @@
     "str",
     "dex"
   ],
-  "desc": "+1 Strength or Dexterity; charge attack with extra damage or a push."
+  "desc": "+1 Strength or Dexterity. Improved Dash: when you take the Dash action, your Speed increases by 10 feet for that action. Charge Attack: once per turn, after moving at least 10 feet in a straight line toward a target, a melee hit as part of the Attack action deals an extra 1d8 damage or pushes the target up to 10 feet.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "chargeAttack"
+    }
+  ]
 }

@@ -11,5 +11,11 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 to any ability score; proficiency and Expertise in a skill."
+  "desc": "+1 to an ability of your choice. You gain proficiency in a skill of your choice, and Expertise in a skill you are proficient in.",
+  "skillChoice": {
+    "choose": 1
+  },
+  "expertiseChoice": {
+    "choose": 1
+  }
 }

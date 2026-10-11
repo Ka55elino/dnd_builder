@@ -8,5 +8,11 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Int/Wis/Cha; double the range of attack spells, +1 cantrip."
+  "desc": "+1 Int, Wis or Cha. You learn one cantrip of your choice; your attack spells' range is doubled and ignores Half and Three-Quarters Cover.",
+  "spells": {
+    "choose": {
+      "count": 1,
+      "level": 0
+    }
+  }
 }

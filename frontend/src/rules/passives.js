@@ -93,6 +93,9 @@ export function fillTemplate(text, ctx) {
         beastHp: 5 * ctx.level,
         touchOfDeath: 5 + 2 * ctx.level,
         searUndead: `${Math.max(1, wis)}d8`,
+        // a feat's ability card (models/Character.js featCtx): the ability the feat raised
+        featDc: ctx.featDc ?? null,
+        levelPlusFeatMod: ctx.featMod != null ? ctx.level + ctx.featMod : null,
         ...Object.fromEntries(Object.entries(ctx.mods ?? {}).map(([k, v]) => [`${k}Mod`, sign(Math.max(1, v))])),
     };
     return String(text ?? '').replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? String(vars[k]) : m));

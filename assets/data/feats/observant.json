@@ -7,5 +7,23 @@
     "int",
     "wis"
   ],
-  "desc": "+1 Intelligence or Wisdom; bonus to Passive checks, lip reading."
+  "desc": "+1 Intelligence or Wisdom. You get +5 to your passive Wisdom (Perception) and passive Intelligence (Investigation) scores, and you can read the lips of a creature you can see that speaks a language you know.",
+  "modifiers": [
+    {
+      "kind": "passive",
+      "skill": "perception",
+      "value": 5
+    },
+    {
+      "kind": "passive",
+      "skill": "investigation",
+      "value": 5
+    }
+  ],
+  "effects": [
+    {
+      "kind": "note",
+      "note": "You can read lips (a language you know)"
+    }
+  ]
 }

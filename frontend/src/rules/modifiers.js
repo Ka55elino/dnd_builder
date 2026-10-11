@@ -18,6 +18,8 @@
  *   { kind: 'ac', op: 'add' | 'min', value }        (also legacy 'acBonus' / 'acMin'; 'acBase' — rules/sheet.js)
  *   { kind: 'd20', value, perLevel? }               — every D20 Test: attacks, checks, saves, Initiative
  *   { kind: 'save', ability?, value } · { kind: 'check', ability?, skill?, value }
+ *   { kind: 'passive', skill?: 'perception' | 'investigation' | 'insight', value } — a passive score only
+ *        (Observant +5): Passive Perception is on the sheet, the others are shown as notes
  *   { kind: 'attack', value } · { kind: 'initiative', value }
  *   { kind: 'attack', valueFrom: 'cha', min?: 1, melee? } — + an ability modifier (Sacred Weapon; weapons only)
  *   { kind: 'damageType', alt: 'radiant', melee? }  — weapon damage can also be this type (Sacred Weapon)
@@ -251,6 +253,12 @@ export function applyModifiers(sheet, modifiers = []) {
     // Passive Perception isn't a D20 Test: only check modifiers move it
     const perc = sheet.skills.find((sk) => sk.id === 'perception');
     if (perc) sheet.passivePerception += checkFor(perc);
+    // passive scores only (Observant: +5)
+    for (const m of of('passive')) {
+        const sk = m.skill ?? 'perception';
+        if (sk === 'perception') sheet.passivePerception += val(m);
+        note(`Passive ${SKILL_NAME[sk] ?? sk} ${SIGN(val(m))}`, [m.source]);
+    }
     for (const m of checkMods) note(`${m.skill ?? (m.ability ? `${ABBR(m.ability)} checks` : 'Ability checks')} ${SIGN(val(m))}`, [m.source]);
 
     // attack bonus: a number, or an ability modifier (valueFrom: 'cha', min — Sacred Weapon: Cha, at least +1)
@@ -348,7 +356,9 @@ export function applyModifiers(sheet, modifiers = []) {
     const notes = [
         ...of('resistance').map((m) => ({ note: `Resistance to ${m.value === 'all' ? 'all damage' : `${m.value} damage`}`, source: m.source })),
         ...of('immunity').map((m) => ({ note: `Immunity: ${m.value}`, source: m.source })),
-        ...of('note').filter((m) => m.from === 'condition').map((m) => ({ note: m.note, source: m.source })),
+        // notes of conditions, worn items (Helm of Comprehending Languages) and gear without training
+        // ("can't cast spells"); feats show theirs among the passives
+        ...of('note').filter((m) => ['condition', 'item', 'gear'].includes(m.from)).map((m) => ({ note: m.note, source: m.source })),
         ...profNotes,
     ];
 
@@ -453,6 +463,8 @@ export function modifierText(m) {
             return `${m.ability ? `${ABBR(m.ability)} saving throws` : 'Saving throws'} ${SIGN(v)}`;
         case 'check':
             return `${m.skill ?? (m.ability ? `${ABBR(m.ability)} checks` : 'Ability checks')} ${SIGN(v)}`;
+        case 'passive':
+            return `Passive ${SKILL_NAME[m.skill ?? 'perception'] ?? m.skill} ${SIGN(v)}`;
         case 'attack': {
             const what = m.melee ? 'Melee attack rolls' : m.ranged ? 'Ranged attack rolls' : 'Attack rolls';
             if (m.valueFrom) return `${what} + ${ABBR(m.valueFrom)} modifier${m.min != null ? ` (min ${SIGN(Number(m.min))})` : ''}`;

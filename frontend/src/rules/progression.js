@@ -454,6 +454,17 @@ export function levelPlan(build, level, refs) {
         }
     }
 
+    // a feat taken before whose spells go by the Proficiency Bonus (Ritual Caster): one more each
+    // time it grows — key L<n>:feat:<id>:spells (models/Character.js counts it with the feat)
+    if (level > 1 && prof > proficiencyBonus(level - 1)) {
+        for (const id of new Set(done.feats)) {
+            const f = findFeat(refs, id);
+            const pick = f?.data?.spells?.choose;
+            if (pick?.count !== 'pb') continue;
+            add(featSpellChoice(f, pick, `L${level}:feat:${f.id}:spells`, prof - proficiencyBonus(level - 1), done, refs));
+        }
+    }
+
     // ================= race =================
     const raceTraits = [
         ...(race?.data?.traits ?? []).map((t) => ({ t, src: 'race', title: race.name })),
@@ -648,6 +659,34 @@ function classChoice(f, ch, idx, src, level, done, refs, add, value = () => null
     }
 }
 
+/** A feat's spell choice: n spells of pick.level (schools / ritual / list filters). */
+function featSpellChoice(feat, pick, key, n, done, refs) {
+    const lvl = pick.level ?? 1;
+    const cantrip = lvl === 0;
+    const known = cantrip ? done.cantrips : done.spells;
+    return {
+        key,
+        kind: cantrip ? 'cantrips' : 'spells',
+        title: `${feat.name}: ${cantrip ? 'cantrip' : `level ${lvl} spell`}${n > 1 ? 's' : ''}`,
+        desc: [
+            pick.schools?.length ? `School: ${pick.schools.map((x) => SCHOOLS[x] ?? x).join(' or ')}.` : '',
+            pick.ritual ? 'Only spells with the Ritual tag (cast as Rituals).' : '',
+        ].filter(Boolean).join(' '),
+        pick: n,
+        options: (refs.spells ?? [])
+            .filter(
+                (sp) =>
+                    sp.kind === 'spell' &&
+                    sp.level === lvl &&
+                    (!pick.schools?.length || pick.schools.includes(sp.school)) &&
+                    (!pick.ritual || sp.data?.casting?.ritual) &&
+                    (!pick.list || (sp.data?.classes ?? []).includes(pick.list)) &&
+                    !known.includes(sp.id),
+            )
+            .map(spellOption),
+    };
+}
+
 /** Choices the feat itself requires: +abilities, skills, spells. */
 function featFollowUps(featId, key, level, done, refs, add) {
     const feat = featId ? findFeat(refs, featId) : null;
@@ -679,6 +718,39 @@ function featFollowUps(featId, key, level, done, refs, add) {
             pick: d.skillChoice.choose ?? 1,
             options: SKILLS.map((s) => s.id).filter((s) => !done.skills.has(s)).map(skillOption),
         });
+    }
+    // expertise ("Skill Expert"): a skill you are proficient in (one picked at this level counts)
+    if (d.expertiseChoice) {
+        add({
+            key: `${key}:expertise`,
+            kind: 'expertise',
+            title: `${feat.name}: expertise`,
+            desc: 'A skill you are proficient in: your Proficiency Bonus is doubled for it.',
+            pick: d.expertiseChoice.choose ?? 1,
+            options: SKILLS.map((s) => s.id).filter((s) => !done.expertise.has(s)).map(skillOption),
+            needsProficiency: true,
+        });
+    }
+    // an option the feat asks for ("Elemental Adept": the element) → '$choice' in its effects /
+    // modifiers (models/Character.js)
+    if (d.choose?.options?.length) {
+        add({
+            key: `${key}:choice`,
+            kind: 'option',
+            title: `${feat.name}: ${d.choose.title ?? 'choice'}`,
+            pick: 1,
+            options: d.choose.options.map((o) => (typeof o === 'string' ? { id: o, name: o } : { id: o.id, name: o.name ?? o.id })),
+        });
+    }
+    // spells to pick ("Fey-Touched": a level 1 Divination or Enchantment spell, "Ritual Caster":
+    // level 1 Ritual spells, "Spell Sniper": a cantrip): d.spells.choose = { count, level,
+    // schools?, ritual?, list? }; cast with the feat's ability (models/Character.js featSpells).
+    // count: 'pb' — as many as the Proficiency Bonus (Ritual Caster; +1 each time it grows —
+    // see levelPlan)
+    const pickSpells = d.spells?.choose;
+    if (pickSpells) {
+        const n = pickSpells.count === 'pb' ? proficiencyBonus(level) : pickSpells.count ?? 1;
+        add(featSpellChoice(feat, pickSpells, `${key}:${(pickSpells.level ?? 1) === 0 ? 'cantrips' : 'spells'}`, n, done, refs));
     }
     // "Magic Initiate" — 2 cantrips and 1 level 1 spell from a list
     const mi = /^magicInitiate(\w+)$/.exec(feat.id);

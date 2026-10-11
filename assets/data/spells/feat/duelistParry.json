@@ -1,0 +1,9 @@
+{
+  "id": "duelistParry",
+  "name": "Parry",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "reaction",
+  "desc": "When a creature you can see hits you with a melee attack while you are holding a Finesse weapon, add your Proficiency Bonus (+{prof}) to your AC for that attack, possibly making it miss."
+}

@@ -6,5 +6,15 @@
   "asi": [
     "str"
   ],
-  "desc": "+1 Strength; Shield shove, add your Shield to Dexterity saving throws."
+  "desc": "+1 Strength. While you hold a Shield, you add its AC bonus to your Dexterity saving throws, and you can shove a creature with it after hitting with a melee attack.",
+  "modifiers": [
+    {
+      "kind": "save",
+      "ability": "dex",
+      "valueFrom": "shield",
+      "when": {
+        "shield": true
+      }
+    }
+  ]
 }

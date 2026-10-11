@@ -52,7 +52,7 @@
     import { instanceInfo } from "../rules/conditions.js";
     import ConditionDialog from "./ConditionDialog.svelte";
     import Tooltip from "./common/Tooltip.svelte";
-    import { describeItem, armorSummary } from "../rules/equipment.js";
+    import { describeItem, armorSummary, ARMOR_CAT, WEAPON_CAT } from "../rules/equipment.js";
     import {
         CharacterState,
         BAG_MAX,
@@ -1179,6 +1179,19 @@
                 </section>
                 <section class="card" id="cs-features" data-section>
                     <h2>Features & traits</h2>
+                    <!-- armor training and weapons: classes (the primary in full, others' multiclass part)
+                         and feats (Martial Weapon Training); gear without them — a warning in Status -->
+                    <h3>Proficiencies</h3>
+                    <ul class="features">
+                        <li>
+                            <b>Armor</b>
+                            <span>{(sheet.armorTraining ?? []).map((k) => ARMOR_CAT[k] ?? k).join(", ") || "—"}</span>
+                        </li>
+                        <li>
+                            <b>Weapons</b>
+                            <span>{(sheet.weaponProficiencies ?? []).map((k) => WEAPON_CAT[k] ?? k).join(", ") || "—"}</span>
+                        </li>
+                    </ul>
                     {#each features as g}
                         <h3>{g.title}</h3>
                         <ul class="features">

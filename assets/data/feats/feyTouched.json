@@ -8,16 +8,17 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Int/Wis/Cha; Misty Step and one level 1 spell (Divination or Enchantment).",
+  "desc": "+1 Int, Wis or Cha. You learn Misty Step and one level 1 Divination or Enchantment spell. You can cast each of them once per Long Rest without a spell slot, and with spell slots as usual; the spellcasting ability is the one increased by this feat.",
   "spells": {
     "fixed": [
       "mistyStep"
     ],
     "choose": {
       "count": 1,
-      "list": "wizard",
-      "circles": [
-        1
+      "level": 1,
+      "schools": [
+        "divination",
+        "enchantment"
       ]
     }
   }

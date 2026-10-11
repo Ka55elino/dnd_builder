@@ -8,5 +8,12 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Int/Wis/Cha; ritual book, Ritual casting."
+  "desc": "+1 Int, Wis or Cha. You learn level 1 spells with the Ritual tag — as many as your Proficiency Bonus, and one more each time it increases — and can cast them as Rituals; the spellcasting ability is the one increased by this feat.",
+  "spells": {
+    "choose": {
+      "count": "pb",
+      "level": 1,
+      "ritual": true
+    }
+  }
 }

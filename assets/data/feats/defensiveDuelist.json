@@ -6,5 +6,11 @@
   "asi": [
     "dex"
   ],
-  "desc": "+1 Dexterity; as a Reaction, add your Proficiency Bonus to AC with a Finesse weapon."
+  "desc": "+1 Dexterity. Parry: when a creature you can see hits you with a melee attack while you are holding a Finesse weapon, you can take a Reaction to add your Proficiency Bonus to your AC for that attack, possibly making it miss.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "duelistParry"
+    }
+  ]
 }

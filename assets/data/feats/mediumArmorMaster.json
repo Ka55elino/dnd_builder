@@ -6,12 +6,14 @@
   "asi": [
     "dex"
   ],
-  "desc": "+1 Dexterity; in Medium armor, the maximum Dexterity bonus to AC increases from +2 to +3.",
+  "desc": "+1 Dexterity. While you wear Medium armor, you can add up to +3 (instead of +2) from your Dexterity to your Armor Class.",
   "effects": [
     {
-      "kind": "set",
-      "target": "mediumArmorMaxDex",
-      "value": 3
+      "kind": "note",
+      "note": "Medium armor: Dexterity counts up to +3 for AC",
+      "when": {
+        "armor": "medium"
+      }
     }
   ]
 }

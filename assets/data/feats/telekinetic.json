@@ -8,10 +8,16 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 Int, Wis, or Cha; Mage Hand as a Bonus Action, telekinetic shove.",
+  "desc": "+1 Int, Wis or Cha. You learn Mage Hand (cast without components, the hand can be invisible). As a Bonus Action you can telekinetically shove a creature within 30 feet: it makes a Strength saving throw or is moved 5 feet toward or away from you.",
   "spells": {
     "fixed": [
       "mageHand"
     ]
-  }
+  },
+  "grants": [
+    {
+      "type": "ability",
+      "id": "telekineticShove"
+    }
+  ]
 }
