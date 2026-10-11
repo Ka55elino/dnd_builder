@@ -10,7 +10,7 @@
   <Identity 
     Name="com.ka55elino.dndbuilder"
     Publisher="CN=Ka55elino"
-    Version="0.5.6.0" 
+    Version="0.5.7.0" 
     ProcessorArchitecture="x64" />
   
   <Properties>
