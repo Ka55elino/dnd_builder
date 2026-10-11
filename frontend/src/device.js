@@ -51,17 +51,5 @@ export function openExternal(url) {
     Browser.OpenURL(url).catch(() => window.open(url, '_blank', 'noopener'));
 }
 
-/**
- * Download a file natively, if the platform can (Android: the system DownloadManager —
- * progress in the notifications, a tap on the finished download installs an APK). Returns
- * true if it was started; false — not possible here (use openExternal instead).
- */
-export function downloadFile(url) {
-    const android = globalThis.window?.wails;
-    if (!url || !android || typeof android.downloadFile !== 'function') return false;
-    try {
-        return !!android.downloadFile(String(url));
-    } catch {
-        return false;
-    }
-}
+/** Running as the Android app (its bridge: window.wails from WailsJSBridge.java). */
+export const isAndroidApp = () => typeof globalThis.window?.wails?.openURL === 'function';

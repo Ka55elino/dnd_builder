@@ -10,11 +10,11 @@
      * The last answer is kept in localStorage, so the notice stays all day without asking
      * again; no network — nothing is shown, and the next launch tries again.
      * "Check for updates" (when there is no notice) asks right away, whatever the timer says.
-     * Android: "Update" downloads the APK with the system DownloadManager (progress in the
-     * notifications, a tap on the finished download installs it) instead of the browser.
+     * Android: "Update" opens the release page in the default browser (download the APK there
+     * and install it) — a direct APK link from inside the app hung or vanished.
      */
     import { onMount, onDestroy } from "svelte";
-    import { openExternal, downloadFile } from "../device.js";
+    import { openExternal, isAndroidApp } from "../device.js";
     import { server } from "../server.svelte.js";
     import { CheckForUpdate } from "../api.js";
 
@@ -25,7 +25,6 @@
     let checking = $state(false);
     let result = $state(""); // after a manual check: "Up to date" / "Check failed" (for a few seconds)
     let resultTimer;
-    let updNote = $state(""); // after "Update" on Android: where the download is
 
     // a > b by major.minor.patch ("0.5.10" > "0.5.9"; a "-beta" suffix is ignored)
     function newer(a, b) {
@@ -82,30 +81,19 @@
     const available = $derived(!!info?.latest && !!server.appVersion && newer(info.latest, server.appVersion));
 
     function update() {
-        const url = info?.downloadUrl || info?.pageUrl;
-        if (!url) return;
-        // Android: the system downloader (the browser's download sheet can hang on an APK)
-        if (/\.apk(\?|$)/i.test(url) && downloadFile(url)) {
-            updNote = "Downloading — see notifications, tap it to install";
-            clearTimeout(resultTimer);
-            resultTimer = setTimeout(() => (updNote = ""), 8000);
-            return;
-        }
-        openExternal(url); // the browser (Android: through the app's bridge, device.js)
+        // Android: the release page in the default browser; elsewhere — this platform's file
+        const url = isAndroidApp() ? info?.pageUrl : info?.downloadUrl || info?.pageUrl;
+        if (url) openExternal(url);
     }
 </script>
 
 <footer class="app-footer">
     {#if available}
         <span class="upd" title={info.name || `Version ${info.latest}`}>
-            {#if updNote}
-                {updNote}
-            {:else}
-                v{info.latest} available
-                <button onclick={update} title={info.downloadUrl ? "Download the new version" : "Open the release page"}
-                    >Update</button
-                >
-            {/if}
+            v{info.latest} available
+            <button onclick={update} title={info.downloadUrl && !isAndroidApp() ? "Download the new version" : "Open the release page"}
+                >Update</button
+            >
         </span>
     {:else}
         <span class="chk">

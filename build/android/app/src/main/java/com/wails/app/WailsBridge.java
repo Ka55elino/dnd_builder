@@ -1,7 +1,6 @@
 package com.wails.app;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -31,7 +30,6 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
@@ -450,30 +448,6 @@ public class WailsBridge {
                 Log.e(TAG, "share failed", e);
             }
         });
-    }
-
-    /**
-     * Download a file with the system DownloadManager (an app update's APK): progress in the
-     * notification shade, a tap on "Download complete" opens it — for an APK, the installer.
-     * Saved in the app's own Downloads folder (no storage permission on any Android version).
-     * Returns false if it couldn't be started (the caller falls back to the browser).
-     */
-    public boolean downloadFile(final String url, final String fileName) {
-        try {
-            DownloadManager dm = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
-            if (dm == null) return false;
-            DownloadManager.Request req = new DownloadManager.Request(Uri.parse(url));
-            req.setTitle(fileName);
-            req.setDescription("DnD Builder update");
-            if (fileName.endsWith(".apk")) req.setMimeType("application/vnd.android.package-archive");
-            req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            req.setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, fileName);
-            dm.enqueue(req);
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG, "downloadFile failed", e);
-            return false;
-        }
     }
 
     /**

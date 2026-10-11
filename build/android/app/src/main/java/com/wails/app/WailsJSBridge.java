@@ -108,22 +108,6 @@ public class WailsJSBridge {
     }
 
     /**
-     * Download a file with the system DownloadManager (an update's APK): progress and the
-     * "open / install" in the notification shade. Only https links; the name is the file's
-     * last path part. Returns false if it couldn't be started.
-     * Called from JavaScript: wails.downloadFile(url) — frontend/src/device.js downloadFile
-     */
-    @JavascriptInterface
-    public boolean downloadFile(String url) {
-        if (url == null || !url.startsWith("https://")) return false;
-        String name = url.substring(url.lastIndexOf('/') + 1);
-        int q = name.indexOf('?');
-        if (q >= 0) name = name.substring(0, q);
-        if (name.isEmpty() || name.contains("..")) name = "download";
-        return bridge.downloadFile(url, name);
-    }
-
-    /**
      * Get the platform name
      * Called from JavaScript: wails.platform()
      *
