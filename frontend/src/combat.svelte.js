@@ -388,6 +388,7 @@ export function notePlayerConditions(playerId, names) {
 /** Monsters' Hit Points (players' go to their app as "hp" events). Same rules as the character sheet. */
 export function monsterHp(c, op, n) {
     n = Math.max(0, Math.floor(Number(n) || 0));
+    const wasDown = c.hp <= 0;
     if (op === 'damage') {
         const fromTemp = Math.min(c.temp, n);
         c.temp -= fromTemp;
@@ -397,6 +398,9 @@ export function monsterHp(c, op, n) {
     } else if (op === 'temp') {
         c.temp = n;
     }
+    // players don't see Hit Points — but they do see who fell (or got back up): the line's
+    // "down" and the map's dimmed token / 💀 (publicLine)
+    if ((c.hp <= 0) !== wasDown) broadcast();
 }
 
 /**

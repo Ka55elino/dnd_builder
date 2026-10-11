@@ -24,7 +24,7 @@
      *   tool 'move' (combat tokens): drag a marker to another cell → onmovemarker(id, x, y);
      *          a click on a marker → onclickmarker(id); a click on an empty cell with `placing`
      *          → onplace(x, y); otherwise a drag pans. Markers of kind 'player' / 'monster' / 'summon' are
-     *          tokens: a portrait, `active` (whose turn) — a gold glow, `down` — dimmed;
+     *          tokens: a portrait, `active` (whose turn) — a gold glow, `down` — dimmed, 💀 over it;
      *          `selected` — the id of the marker drawn with a dashed ring
      *   ondropitem(data, x, y) — an HTML drag of "text/x-map-item" dropped on a cell
      *   bounded — view only (the game): the view is held to what is on the map (terrain and
@@ -579,6 +579,16 @@
                 const k = Math.max((2 * r) / img.naturalWidth, (2 * r) / img.naturalHeight);
                 const iw = img.naturalWidth * k, ih = img.naturalHeight * k;
                 c.drawImage(img, mx - iw / 2, my - ih / 2, iw, ih);
+                if (m.down) {
+                    // fell (0 Hit Points): the portrait darkened, a 💀 over it
+                    c.fillStyle = "rgba(0,0,0,0.55)";
+                    c.fillRect(mx - r, my - r, 2 * r, 2 * r);
+                    c.font = `${Math.round(r * 1.05)}px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+                    c.textAlign = "center";
+                    c.textBaseline = "middle";
+                    c.fillStyle = "#fff";
+                    c.fillText("💀", mx, my + r * 0.06);
+                }
                 c.restore();
             }
             c.beginPath();

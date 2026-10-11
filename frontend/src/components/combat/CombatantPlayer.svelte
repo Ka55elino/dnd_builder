@@ -7,12 +7,14 @@
      * n   — its place in the line (1-based)
      * me  — this is the player's own character
      * turn — it's this combatant's turn (set by the DM; shown as a check on the icon)
+     * c.down — a monster at 0 Hit Points: dimmed, grey, 💀 on the icon
      */
     let { c, n = 1, me = false, turn = false } = $props();
     let broken = $state(false);
 </script>
 
-<div class="cmb {c.kind}" class:me class:turn title={turn ? `${c.name} — their turn` : c.name}>
+<div class="cmb {c.kind}" class:me class:turn class:down={c.down}
+    title={c.down ? `${c.name} — down` : turn ? `${c.name} — their turn` : c.name}>
     <span class="n">{n}</span>
     <div class="icon-wrap">
         <div class="icon type-{c.type ?? ''}">
@@ -23,6 +25,7 @@
             {/if}
         </div>
         {#if turn}<span class="turn-mark" aria-label="Their turn">✓</span>{/if}
+        {#if c.down}<span class="down-mark" aria-label="Down">💀</span>{/if}
     </div>
     <span class="name">{c.name}{#if me}<small> (you)</small>{/if}</span>
     {#if c.kind === "summon"}<small class="owner">{c.ownerName || "summon"}</small>{/if}
@@ -132,6 +135,35 @@
         box-shadow: 0 0 0 1px var(--color-gold), 0 0 14px color-mix(in srgb, var(--color-gold) 35%, transparent);
     }
 
+    /* a monster at 0 Hit Points */
+    .cmb.down {
+        opacity: 0.55;
+    }
+
+    .cmb.down .icon {
+        filter: grayscale(1) brightness(0.6);
+    }
+
+    .cmb.down .name {
+        text-decoration: line-through;
+        color: var(--color-text-muted);
+    }
+
+    .down-mark {
+        position: absolute;
+        left: -2px;
+        bottom: -2px;
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        background: var(--color-card);
+        border: 2px solid var(--color-danger);
+        border-radius: 50%;
+        font-size: 12px;
+        line-height: 1;
+    }
+
     .cmb.turn .icon {
         border-color: var(--color-gold);
     }
@@ -177,10 +209,11 @@
             font-size: 20px;
         }
 
-        .turn-mark {
+        .turn-mark,
+        .down-mark {
             width: 18px;
             height: 18px;
-            font-size: 11px;
+            font-size: 10px;
         }
     }
 </style>
