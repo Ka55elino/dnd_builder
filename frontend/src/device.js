@@ -7,7 +7,7 @@
  *
  * Not by the screen width: a narrow desktop window is still a desktop.
  */
-import { System } from '@wailsio/runtime';
+import { System, Browser } from '@wailsio/runtime';
 
 let cached = null;
 
@@ -33,4 +33,20 @@ function detect() {
     // iPadOS 13+ says it is a Mac: a "Mac" with a touch screen is an iPad
     if (/Macintosh/.test(ua) && (nav.maxTouchPoints ?? 0) > 1) return true;
     return false;
+}
+
+/**
+ * Open a web link outside the app, in the system browser.
+ *   Android: the app's own bridge (window.wails.openURL — WailsJSBridge.java), since Wails
+ *            has no Android Browser.OpenURL and window.open does nothing in the WebView;
+ *   desktop / iOS: Wails Browser.OpenURL; a plain browser (web version): a new tab.
+ */
+export function openExternal(url) {
+    if (!url) return;
+    const android = globalThis.window?.wails;
+    if (android && typeof android.openURL === 'function') {
+        android.openURL(String(url));
+        return;
+    }
+    Browser.OpenURL(url).catch(() => window.open(url, '_blank', 'noopener'));
 }

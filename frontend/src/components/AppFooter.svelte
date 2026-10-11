@@ -12,7 +12,7 @@
      * "Check for updates" (when there is no notice) asks right away, whatever the timer says.
      */
     import { onMount, onDestroy } from "svelte";
-    import { Browser } from "@wailsio/runtime";
+    import { openExternal } from "../device.js";
     import { server } from "../server.svelte.js";
     import { CheckForUpdate } from "../api.js";
 
@@ -81,7 +81,7 @@
     function update() {
         const url = info?.downloadUrl || info?.pageUrl;
         if (!url) return;
-        Browser.OpenURL(url).catch(() => window.open(url, "_blank", "noopener"));
+        openExternal(url); // Android: through the app's bridge (device.js)
     }
 </script>
 

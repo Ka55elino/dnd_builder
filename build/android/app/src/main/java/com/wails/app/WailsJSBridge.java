@@ -94,6 +94,20 @@ public class WailsJSBridge {
     }
 
     /**
+     * Open a web link in the system browser (Wails has no Android Browser.OpenURL, and
+     * window.open does nothing in the WebView). Only http(s) links.
+     * Called from JavaScript: wails.openURL(url) — frontend/src/device.js openExternal
+     */
+    @JavascriptInterface
+    public void openURL(String url) {
+        if (url == null || !(url.startsWith("https://") || url.startsWith("http://"))) {
+            Log.w(TAG, "openURL: not a web link");
+            return;
+        }
+        bridge.openURL(url);
+    }
+
+    /**
      * Get the platform name
      * Called from JavaScript: wails.platform()
      *
