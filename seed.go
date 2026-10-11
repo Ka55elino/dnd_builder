@@ -2,11 +2,13 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"database/sql"
 	"embed"
 	"encoding/json"
 	"fmt"
 	"io/fs"
+	"log"
 	"strings"
 )
 
@@ -16,7 +18,59 @@ import (
 //go:embed all:assets/data
 var dataFS embed.FS
 
-// seeder fills one table from a folder of JSON files if the table is empty.
+// Reference data and app versions: the database is one file for every version (db.go), and
+// app_meta.data_version says which version's built-in data it holds. When the app version is
+// different, the built-in rows (is_custom = 0) of the reference tables are deleted and seeded
+// again from this binary's JSON; the user's rows — characters, campaigns, custom spells /
+// items / monsters / conditions… — are not touched. No migrations: a new column is added
+// with ensureColumn (db.go), the reference data itself just comes again.
+
+// builtinTables are the reference tables refreshed on a version change (all have is_custom).
+var builtinTables = []string{
+	"races", "classes", "subclasses",
+	"weapons", "armor", "items", "packs",
+	"backgrounds", "feats", "spells", "conditions",
+	"monsters", "wild_shape_forms",
+}
+
+// clearBuiltins deletes the built-in rows of the reference tables (and their link rows).
+// Foreign keys are off for it (on its own connection): a custom subclass of a built-in
+// class, a custom pack with built-in items must not cascade away — the same ids come back
+// right after with the new seed.
+func clearBuiltins(db *sql.DB) error {
+	ctx := context.Background()
+	conn, err := db.Conn(ctx)
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+	if _, err := conn.ExecContext(ctx, "PRAGMA foreign_keys = OFF"); err != nil {
+		return err
+	}
+	defer conn.ExecContext(ctx, "PRAGMA foreign_keys = ON") //nolint:errcheck
+
+	tx, err := conn.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	stmts := []string{
+		"DELETE FROM pack_items WHERE pack_id IN (SELECT id FROM packs WHERE is_custom = 0)",
+		"DELETE FROM spell_classes WHERE spell_id IN (SELECT id FROM spells WHERE is_custom = 0)",
+	}
+	for _, t := range builtinTables {
+		stmts = append(stmts, "DELETE FROM "+t+" WHERE is_custom = 0")
+	}
+	for _, q := range stmts {
+		if _, err := tx.ExecContext(ctx, q); err != nil {
+			return fmt.Errorf("%s: %w", q, err)
+		}
+	}
+	return tx.Commit()
+}
+
+// seeder fills one table from a folder of JSON files if the table is empty
+// (or always, when the built-in data is being refreshed).
 type seeder struct {
 	table string                             // for logging
 	dir   string                             // folder in dataFS
@@ -60,26 +114,53 @@ var seeders = []seeder{
 func inSubclasses(path string) bool    { return strings.Contains(path, "/subclasses/") }
 func notInSubclasses(path string) bool { return !inSubclasses(path) }
 
-// seedAll is called on application startup.
+// seedAll is called on application startup. A database whose built-in data is from another
+// app version gets it refreshed (a backup, clearBuiltins, seed again); the version is
+// written only when everything went in, so a failed refresh is tried again next launch.
 func seedAll(db *sql.DB) error {
+	var have string
+	if err := db.QueryRow(Q("GetMeta"), "data_version").Scan(&have); err != nil && err != sql.ErrNoRows {
+		return err
+	}
+	refresh := have != APP_VERSION
+	if refresh {
+		// a copy of the user's data first (not fatal: the refresh doesn't touch user rows)
+		if err := backupDB(db, have); err != nil {
+			log.Printf("database: backup: %v", err)
+		}
+		if err := clearBuiltins(db); err != nil {
+			return fmt.Errorf("refresh built-in data: %w", err)
+		}
+		if have != "" {
+			log.Printf("database: built-in data %s → %s", have, APP_VERSION)
+		}
+	}
 	for _, s := range seeders {
 		if s.dev && !devMode {
 			continue
 		}
-		if err := s.run(db); err != nil {
+		// dev samples (characters, a campaign) only fill an empty table; never refreshed
+		if err := s.run(db, refresh && !s.dev); err != nil {
 			return fmt.Errorf("seed %s: %w", s.table, err)
 		}
+	}
+	if _, err := db.Exec(Q("SetMeta"), "data_version", APP_VERSION); err != nil {
+		return err
 	}
 	return nil
 }
 
-func (s seeder) run(db *sql.DB) error {
-	var n int
-	if err := db.QueryRow(Q(s.count)).Scan(&n); err != nil {
-		return err
-	}
-	if n > 0 {
-		return nil // table is already populated; leave it alone
+// run inserts the table's JSON files: into an empty table, or always when force (the
+// built-in rows were just cleared).
+func (s seeder) run(db *sql.DB, force bool) error {
+	if !force {
+		var n int
+		if err := db.QueryRow(Q(s.count)).Scan(&n); err != nil {
+			return err
+		}
+		if n > 0 {
+			return nil // table is already populated; leave it alone
+		}
 	}
 
 	tx, err := db.Begin()

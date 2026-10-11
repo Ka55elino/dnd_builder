@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strings"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
@@ -62,13 +63,70 @@ func androidFilesDir() string {
 	return filepath.Join("/data/data", pkg, "files")
 }
 
-// dbFileName returns the database file name including the app version: dnd-v0.1.0.db.
-// In dev mode a separate file (dnd-dev-v0.1.0.db) is used so the working database is not overwritten.
+// dbFileName is the database file: one for every app version (dnd.db) — an update keeps
+// the user's characters, campaigns and custom records; the built-in reference data in it
+// is refreshed when the version changes (seed.go). Dev mode uses its own file (dnd-dev.db),
+// recreated on every launch, so the working database is not touched.
 func dbFileName() string {
 	if devMode {
-		return fmt.Sprintf("dnd-dev-v%s.db", APP_VERSION)
+		return "dnd-dev.db"
 	}
-	return fmt.Sprintf("dnd-v%s.db", APP_VERSION)
+	return "dnd.db"
+}
+
+// keepBackups is how many dnd-backup-v*.db files stay (the newest ones).
+const keepBackups = 3
+
+// backupDB copies the database to dnd-backup-v<from>.db before another app version changes
+// it (seed.go refreshes the built-in data): if something goes wrong, the user's data is in
+// the copy. Only the newest keepBackups copies are kept. Dev mode: no backups.
+func backupDB(db *sql.DB, from string) error {
+	if devMode || from == "" {
+		return nil
+	}
+	dir, err := appDataDir()
+	if err != nil {
+		return err
+	}
+	name := "dnd-backup-v" + strings.Map(func(r rune) rune {
+		if r == '.' || r == '-' || (r >= '0' && r <= '9') || (r >= 'a' && r <= 'z') {
+			return r
+		}
+		return '_'
+	}, from) + ".db"
+	path := filepath.Join(dir, name)
+	if _, err := os.Stat(path); err == nil {
+		return nil // this version is already backed up
+	}
+	if _, err := db.Exec("VACUUM INTO '" + strings.ReplaceAll(path, "'", "''") + "'"); err != nil {
+		_ = removeDB(path)
+		return err
+	}
+	log.Printf("database: backup %s", name)
+
+	// the oldest copies go
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil
+	}
+	type bk struct {
+		name string
+		mod  int64
+	}
+	var all []bk
+	for _, e := range entries {
+		if !strings.HasPrefix(e.Name(), "dnd-backup-v") || !strings.HasSuffix(e.Name(), ".db") {
+			continue
+		}
+		if fi, err := e.Info(); err == nil {
+			all = append(all, bk{e.Name(), fi.ModTime().UnixNano()})
+		}
+	}
+	sort.Slice(all, func(i, j int) bool { return all[i].mod > all[j].mod })
+	for _, b := range all[min(len(all), keepBackups):] {
+		_ = removeDB(filepath.Join(dir, b.name))
+	}
+	return nil
 }
 
 // removeDB deletes the database file along with its WAL/SHM files (missing files are not an error).

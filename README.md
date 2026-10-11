@@ -170,8 +170,24 @@ wails3 task version:sync                 # APP_VERSION was edited by hand: copy 
 
 Without the Taskfile: `go run ./tools/version`, `go run ./tools/version 0.3.1`, `go run ./tools/version -sync`.
 
-The version is part of the database file name (`dnd-v<version>.db`), so a new version starts with its
-own fresh database.
+### Database and updates
+
+The database is one file for every version: `dnd.db` in the app's data folder. Dev mode (`wails3 dev`)
+uses `dnd-dev.db` and recreates it on every launch. An update keeps the user's data:
+
+- **Built-in reference data** (classes, spells, conditions, monsters…) is refreshed when the app version
+  changes: `app_meta.data_version` says which version seeded it; a different one deletes the built-in rows
+  (`is_custom = 0`) and seeds them again from the binary's JSON (`seed.go`). User rows — characters,
+  campaigns, custom spells / items / monsters / conditions — are not touched.
+- **Before that refresh** the database is copied to `dnd-backup-v<old version>.db` (the newest 3 are kept).
+- **No migrations.** New tables / indexes: `CREATE … IF NOT EXISTS` in `db/schema`. New columns:
+  `ensureColumn` in `migrate()` (`db.go`) — nullable or with a `DEFAULT`. Columns are never renamed or
+  dropped (add a new one instead). Data inside the JSON columns (`build_json`, `state_json`, `data_json`)
+  changes format in code: defaults / conversion when it is read, the new format when it is saved.
+
+The app checks the latest GitHub release at most once a day, on launch (`updates.go`, the footer): a
+newer one shows "vX.Y.Z available · Update", which opens this platform's file from the release in the
+browser. Drafts and pre-releases (`v0.6.0-beta.1`) are not offered.
 
 ## Releases (CI)
 

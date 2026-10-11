@@ -23,6 +23,7 @@ const SILENT = new Set([
     'StartDiscovery',
     'StopDiscovery',
     'SendGameEvent',
+    'CheckForUpdate', // in the background, the footer shows the result
     'SaveTextFile', // system dialogs: the user takes their time, no loader over them
     'OpenTextFile',
 ]);
@@ -59,6 +60,8 @@ export const {
     // files: save / open through the system dialogs (files.go)
     SaveTextFile,
     OpenTextFile,
+    // a newer release on GitHub (updates.go)
+    CheckForUpdate,
     // character sheet PDF (pdf.go)
     SaveCharacterPDF,
     // bestiary (bestiary.go)
