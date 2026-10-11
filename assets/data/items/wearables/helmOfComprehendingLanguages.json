@@ -10,5 +10,6 @@
       "note": "you can cast Comprehend Languages from the helm at will"
     }
   ],
-  "desc": "Uncommon wondrous item. While wearing this helm, you can cast Comprehend Languages from it without expending a spell slot."
+  "desc": "Uncommon wondrous item. While wearing this helm, you can cast Comprehend Languages from it without expending a spell slot.",
+  "image": "/img/items/wearables/helmOfComprehendingLanguages.webp"
 }

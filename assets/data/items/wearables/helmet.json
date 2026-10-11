@@ -5,5 +5,6 @@
   "isDefault": true,
   "weight": 3,
   "cost": "5 GP",
-  "desc": "A simple open-faced metal cap. It doesn't change your Armor Class, but it looks the part."
+  "desc": "A simple open-faced metal cap. It doesn't change your Armor Class, but it looks the part.",
+  "image": "/img/items/wearables/helmet.webp"
 }

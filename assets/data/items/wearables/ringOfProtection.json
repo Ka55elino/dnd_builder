@@ -15,5 +15,6 @@
       "value": 1
     }
   ],
-  "desc": "Rare ring (requires attunement). You gain a +1 bonus to Armor Class and saving throws while wearing this ring."
+  "desc": "Rare ring (requires attunement). You gain a +1 bonus to Armor Class and saving throws while wearing this ring.",
+  "image": "/img/items/wearables/ringOfProtection.webp"
 }

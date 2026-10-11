@@ -5,5 +5,6 @@
   "isDefault": true,
   "weight": 0,
   "cost": "5 GP",
-  "desc": "A plain band of polished metal."
+  "desc": "A plain band of polished metal.",
+  "image": "/img/items/wearables/ring.webp"
 }

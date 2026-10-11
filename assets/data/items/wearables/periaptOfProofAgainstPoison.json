@@ -14,5 +14,6 @@
       "value": "poison"
     }
   ],
-  "desc": "Rare wondrous item. This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, you have Immunity to the Poisoned condition and to Poison damage."
+  "desc": "Rare wondrous item. This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, you have Immunity to the Poisoned condition and to Poison damage.",
+  "image": "/img/items/wearables/periaptOfProofAgainstPoison.webp"
 }
