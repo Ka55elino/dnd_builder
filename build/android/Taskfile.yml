@@ -49,9 +49,13 @@ tasks:
             ref: .PRODUCTION
     cmds:
       - echo "Building Android app {{.APP_NAME}}..."
+      # PRODUCTION must be passed on: compile:go:shared picks its build tags from it
+      # (without it the release APK was built in dev mode — the database recreated on every launch)
       - task: compile:go:shared
         vars:
           ARCH: '{{.ARCH | default .HOST_ARCH}}'
+          PRODUCTION:
+            ref: .PRODUCTION
     vars:
       BUILD_FLAGS: '{{if eq .PRODUCTION "true"}}-tags production,android -trimpath -buildvcs=false -ldflags="-w -s"{{else}}-tags android,debug -buildvcs=false -gcflags=all="-l"{{end}}'
     env:
