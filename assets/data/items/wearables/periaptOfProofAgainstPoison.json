@@ -1,0 +1,18 @@
+{
+  "id": "periaptOfProofAgainstPoison",
+  "name": "Periapt of Proof against Poison",
+  "slot": "necklace",
+  "isDefault": false,
+  "weight": 0,
+  "modifiers": [
+    {
+      "kind": "immunity",
+      "value": "poisoned"
+    },
+    {
+      "kind": "immunity",
+      "value": "poison"
+    }
+  ],
+  "desc": "Rare wondrous item. This delicate silver chain has a brilliant-cut black gem pendant. While you wear it, you have Immunity to the Poisoned condition and to Poison damage."
+}

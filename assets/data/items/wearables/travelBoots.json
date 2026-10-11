@@ -1,0 +1,9 @@
+{
+  "id": "travelBoots",
+  "name": "Traveling Boots",
+  "slot": "boots",
+  "isDefault": true,
+  "weight": 2,
+  "cost": "1 GP",
+  "desc": "Sturdy boots with thick soles, made for long marches on rough roads."
+}

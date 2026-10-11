@@ -1,0 +1,20 @@
+{
+  "id": "bootsOfElvenkind",
+  "name": "Boots of Elvenkind",
+  "slot": "boots",
+  "isDefault": false,
+  "weight": 1,
+  "modifiers": [
+    {
+      "kind": "flag",
+      "mode": "advantage",
+      "on": "checks",
+      "note": "Dexterity (Stealth) checks to move silently"
+    },
+    {
+      "kind": "note",
+      "note": "your steps make no sound"
+    }
+  ],
+  "desc": "Uncommon wondrous item. While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have Advantage on Dexterity (Stealth) checks that rely on moving silently."
+}

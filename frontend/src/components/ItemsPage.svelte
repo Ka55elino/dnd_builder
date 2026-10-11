@@ -4,6 +4,7 @@
      * and custom equipment: create, edit, copy, delete (stored in the DB).
      * onBack() — to the menu
      */
+    import { WEAR_TYPES } from "../rules/loadout.js";
     import { ask } from "../confirm.svelte.js";
     import TopBar from "./common/TopBar.svelte";
     import { onMount } from "svelte";
@@ -22,7 +23,15 @@
     // open form: { kind, initial, copy } | null
     let editor = $state(null);
 
-    const KIND_ADD = { item: "item", armor: "armor", weapon: "weapon" };
+    // "+ Add …" by tab; wearable tabs add an item worn in that slot
+    const KIND_ADD = {
+        item: "item", armor: "armor", weapon: "weapon",
+        gloves: "gloves", boots: "boots", helmet: "helmet", necklace: "necklace", ring: "ring",
+    };
+    const addNew = () =>
+        (editor = WEAR_TYPES[tab]
+            ? { kind: "item", slot: tab, initial: null, copy: false }
+            : { kind: tab, initial: null, copy: false });
 
     onMount(async () => {
         try {
@@ -39,11 +48,11 @@
         catalog = (await loadRefs()).catalog;
     }
 
-    async function onSaved(id, kind) {
+    async function onSaved(id, kind, slot) {
         const wasEdit = editor?.initial && !editor?.copy;
         editor = null;
         await reload();
-        tab = kind;
+        tab = slot && WEAR_TYPES[slot] ? slot : kind; // a wearable — its own tab
         status = wasEdit ? "Changes saved" : "Added";
         setTimeout(() => (status = ""), 2500);
     }
@@ -74,7 +83,7 @@
     <TopBar title="Items" {onBack}>
         <span class="status">{status}</span>
         {#if !loading && !error}
-            <button class="add" onclick={() => (editor = { kind: tab, initial: null, copy: false })}>
+            <button class="add" onclick={addNew}>
                 + Add {KIND_ADD[tab]}
             </button>
         {/if}
@@ -95,6 +104,7 @@
             kind={editor.kind}
             initial={editor.initial}
             copy={editor.copy}
+            slot={editor.slot ?? null}
             {onSaved}
             onCancel={() => (editor = null)}
         />

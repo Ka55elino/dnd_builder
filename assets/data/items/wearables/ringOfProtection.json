@@ -1,0 +1,19 @@
+{
+  "id": "ringOfProtection",
+  "name": "Ring of Protection",
+  "slot": "ring",
+  "isDefault": false,
+  "weight": 0,
+  "modifiers": [
+    {
+      "kind": "ac",
+      "op": "add",
+      "value": 1
+    },
+    {
+      "kind": "save",
+      "value": 1
+    }
+  ],
+  "desc": "Rare ring (requires attunement). You gain a +1 bonus to Armor Class and saving throws while wearing this ring."
+}

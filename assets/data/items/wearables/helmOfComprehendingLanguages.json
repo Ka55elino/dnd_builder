@@ -1,0 +1,14 @@
+{
+  "id": "helmOfComprehendingLanguages",
+  "name": "Helm of Comprehending Languages",
+  "slot": "helmet",
+  "isDefault": false,
+  "weight": 3,
+  "modifiers": [
+    {
+      "kind": "note",
+      "note": "you can cast Comprehend Languages from the helm at will"
+    }
+  ],
+  "desc": "Uncommon wondrous item. While wearing this helm, you can cast Comprehend Languages from it without expending a spell slot."
+}

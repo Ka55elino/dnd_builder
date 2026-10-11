@@ -1,0 +1,9 @@
+{
+  "id": "ring",
+  "name": "Ring",
+  "slot": "ring",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "5 GP",
+  "desc": "A plain band of polished metal."
+}

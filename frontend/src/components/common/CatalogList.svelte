@@ -8,20 +8,37 @@
      * actions — snippet (x, tab) on the right of a row ("Add" buttons etc.)
      * marked  — (x, tab) => bool — highlight a row (e.g. "already in backpack")
      *
-     * Armor / Weapons: a second filter by origin — All · Default (the standard gear) ·
+     * Wearables (Gloves, Boots, Helmets, Necklaces, Rings): items with data.slot, each kind its
+     * own tab (the Items tab is the rest of the gear); actions / marked get kind 'item' for them.
+     *
+     * Armor / Weapons / wearables: a second filter by origin — All · Default (the standard gear) ·
      * Named (magic and special items: isDefault false) · Custom (your own, if there are any).
      */
     import { damageShort, damageName, damageLabel } from "../../rules/labels.js";
     import IconLabel from "./IconLabel.svelte";
     import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, acText } from "../../rules/equipment.js";
+    import { WEAR_TYPES } from "../../rules/loadout.js";
+    import { modifierText } from "../../rules/modifiers.js";
 
     let { catalog, tab = $bindable("item"), actions = null, marked = null } = $props();
 
+    // kind — what the record is for actions / marked ('item' for wearables too); wear — data.slot
     const TABS = [
-        { id: "item", label: "Items", list: "items" },
-        { id: "armor", label: "Armor", list: "armor" },
-        { id: "weapon", label: "Weapons", list: "weapons" },
+        { id: "item", label: "Items", list: "items", kind: "item", wear: null },
+        { id: "armor", label: "Armor", list: "armor", kind: "armor" },
+        { id: "weapon", label: "Weapons", list: "weapons", kind: "weapon" },
+        { id: "gloves", label: "Gloves", list: "items", kind: "item", wear: "gloves" },
+        { id: "boots", label: "Boots", list: "items", kind: "item", wear: "boots" },
+        { id: "helmet", label: "Helmets", list: "items", kind: "item", wear: "helmet" },
+        { id: "necklace", label: "Necklaces", list: "items", kind: "item", wear: "necklace" },
+        { id: "ring", label: "Rings", list: "items", kind: "item", wear: "ring" },
     ];
+    // a tab's records: items split by data.slot (no slot — the Items tab)
+    const slotOf = (x) => (WEAR_TYPES[x.data?.slot] ? x.data.slot : null);
+    const ofTab = (t) => {
+        const all = catalog?.[t.list] ?? [];
+        return t.wear === undefined ? all : all.filter((x) => slotOf(x) === t.wear);
+    };
 
     let query = $state("");
 
@@ -29,7 +46,7 @@
     const match = (x) => !query || norm(x.name).includes(norm(query));
     const current = $derived(TABS.find((t) => t.id === tab) ?? TABS[0]);
     // the current tab's list after the search, then the origin filter (armor / weapons)
-    const found = $derived((catalog?.[current.list] ?? []).filter(match));
+    const found = $derived(ofTab(current).filter(match));
     const ORIGINS = [
         { id: "all", label: "All" },
         { id: "default", label: "Default" },
@@ -38,7 +55,7 @@
     ];
     let origin = $state("all");
     const originOf = (x) => (x.data?.custom ? "custom" : x.isDefault === false ? "named" : "default");
-    const hasOrigin = $derived(tab === "armor" || tab === "weapon");
+    const hasOrigin = $derived(tab !== "item");
     const originCounts = $derived(
         Object.fromEntries(
             ORIGINS.map((o) => [o.id, o.id === "all" ? found.length : found.filter((x) => originOf(x) === o.id).length]),
@@ -46,7 +63,7 @@
     );
     const list = $derived(hasOrigin && origin !== "all" ? found.filter((x) => originOf(x) === origin) : found);
     const counts = $derived(
-        Object.fromEntries(TABS.map((t) => [t.id, (catalog?.[t.list] ?? []).filter(match).length])),
+        Object.fromEntries(TABS.map((t) => [t.id, ofTab(t).filter(match).length])),
     );
 
     const fmt = (n) => (n > 0 ? `+${n}` : `${n}`);
@@ -91,16 +108,18 @@
         };
     }
 
+    // gear; a wearable — its kind and what it does while worn (its modifiers)
     const itemCard = (i) => ({
-        sub: "Gear",
+        sub: WEAR_TYPES[i.data?.slot] ?? "Gear",
         stat: i.cost ?? "",
         statLabel: i.cost ? "cost" : "",
         extra: i.weight ? [{ text: `${i.weight} lb.` }] : [],
-        tags: [],
+        tags: (i.data?.modifiers ?? []).map((m) => modifierText(m)).filter(Boolean),
         warn: [],
     });
 
     const cardOf = (x) => (tab === "weapon" ? weaponCard(x) : tab === "armor" ? armorCard(x) : itemCard(x));
+    const kindOf = $derived(current.kind); // what actions / marked get
     const isCustom = (x) => !!x.data?.custom;
     const descOf = (x) => x.desc ?? x.data?.desc ?? "";
 
@@ -152,7 +171,7 @@
             class="card"
             class:named={x.isDefault === false && !isCustom(x)}
             class:custom={isCustom(x)}
-            class:marked={marked?.(x, tab)}
+            class:marked={marked?.(x, kindOf)}
         >
             <header class="c-head">
                 <div class="pic">
@@ -204,7 +223,7 @@
             {/if}
 
             {#if actions}
-                <footer class="actions">{@render actions(x, tab)}</footer>
+                <footer class="actions">{@render actions(x, kindOf)}</footer>
             {/if}
         </article>
     {:else}
@@ -223,6 +242,7 @@
 
     .tabs {
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
     }
 

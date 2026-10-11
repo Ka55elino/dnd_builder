@@ -1,0 +1,9 @@
+{
+  "id": "necklace",
+  "name": "Necklace",
+  "slot": "necklace",
+  "isDefault": true,
+  "weight": 0,
+  "cost": "5 GP",
+  "desc": "A thin silver chain with a small pendant."
+}

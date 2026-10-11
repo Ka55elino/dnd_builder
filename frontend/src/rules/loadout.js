@@ -8,22 +8,41 @@
  * Loadout (stored in CharacterState.equipped):
  *   { main: key | null,   // right hand — weapon or shield
  *     off:  key | null,   // left hand  — weapon or shield
- *     armor: key | null } // armor only
+ *     armor: key | null,  // armor only
+ *     gloves, boots, helmet, necklace, ring1, ring2: key | null }
+ *                         // wearables: items with data.slot of that kind (both rings: 'ring');
+ *                         // a worn one's data.modifiers apply (models/Character.js)
  *
  * Rules:
  *   - hands hold only weapons or shields; the armor slot holds only armor;
+ *   - a wearable slot holds only an item of its kind; one ring can't be on both fingers
+ *     unless there are two of it;
  *   - one item cannot be held in both hands at once — unless there are two or more of it
  *     (2 Clubs, 2 Daggers: one in each hand);
  *   - a two-handed weapon takes both hands: the other hand becomes empty.
  */
 
+// group: 'hands' — hands and armor; 'worn' — wearables
 export const SLOTS = [
-    { id: 'main', label: 'Right hand' },
-    { id: 'off', label: 'Left hand' },
-    { id: 'armor', label: 'Armor' },
+    { id: 'main', label: 'Right hand', group: 'hands' },
+    { id: 'off', label: 'Left hand', group: 'hands' },
+    { id: 'armor', label: 'Armor', group: 'hands' },
+    { id: 'gloves', label: 'Gloves', group: 'worn', wear: 'gloves' },
+    { id: 'boots', label: 'Boots', group: 'worn', wear: 'boots' },
+    { id: 'helmet', label: 'Helmet', group: 'worn', wear: 'helmet' },
+    { id: 'necklace', label: 'Necklace', group: 'worn', wear: 'necklace' },
+    { id: 'ring1', label: 'Ring', group: 'worn', wear: 'ring' },
+    { id: 'ring2', label: 'Ring', group: 'worn', wear: 'ring' },
 ];
 
-export const EMPTY = { main: null, off: null, armor: null };
+/** Wearable kinds (an item's data.slot) → name: the Items page tabs, the item editor. */
+export const WEAR_TYPES = { gloves: 'Gloves', boots: 'Boots', helmet: 'Helmet', necklace: 'Necklace', ring: 'Ring' };
+
+export const EMPTY = Object.fromEntries(SLOTS.map((s) => [s.id, null]));
+const WEAR_SLOTS = SLOTS.filter((s) => s.wear);
+
+/** A wearable's kind ('gloves' … 'ring'), or null — not a wearable. */
+export const wearOf = (it) => (it?.kind === 'item' && WEAR_TYPES[it.ref?.data?.slot] ? it.ref.data.slot : null);
 
 const isHandItem = (it) => it.kind === 'weapon' || it.kind === 'shield';
 export const isTwoHanded = (it) =>
@@ -35,6 +54,8 @@ const pair = (it) => (Number(it?.qty) || 1) >= 2;
 
 /** Options for a slot (for the select). */
 export function slotOptions(slot, inventory) {
+    const wear = SLOTS.find((s) => s.id === slot)?.wear;
+    if (wear) return inventory.filter((it) => wearOf(it) === wear);
     return slot === 'armor'
         ? inventory.filter((it) => it.kind === 'armor')
         : inventory.filter(isHandItem);
@@ -51,7 +72,16 @@ export function defaultEquipped(inventory) {
     let main = weapons[0]?.key ?? null;
     let off = shield;
     if (isTwoHanded(weapons[0])) off = null; // two-handed — the shield stays in the backpack
-    return normalize({ main, off, armor }, inventory);
+    // wearables: the first of each kind is worn; rings — the first two (or a pair)
+    const worn = {};
+    for (const s of WEAR_SLOTS) {
+        const opts = inventory.filter((it) => wearOf(it) === s.wear);
+        if (s.id === 'ring2') {
+            const second = opts.find((it) => it.key !== worn.ring1) ?? (pair(opts[0]) ? opts[0] : null);
+            worn.ring2 = second?.key ?? null;
+        } else worn[s.id] = opts[0]?.key ?? null;
+    }
+    return normalize({ main, off, armor, ...worn }, inventory);
 }
 
 /**
@@ -67,6 +97,11 @@ export function normalize(equipped, inventory) {
     e.main = main && isHandItem(main) ? main.key : null;
     e.off = off && isHandItem(off) && (off.key !== e.main || pair(off)) ? off.key : null;
     e.armor = armor?.kind === 'armor' ? armor.key : null;
+    for (const s of WEAR_SLOTS) {
+        const it = byKey(inventory, e[s.id]);
+        e[s.id] = wearOf(it) === s.wear ? it.key : null;
+    }
+    if (e.ring2 && e.ring2 === e.ring1 && !pair(byKey(inventory, e.ring2))) e.ring2 = null;
 
     if (isTwoHanded(byKey(inventory, e.main))) e.off = null;
     else if (isTwoHanded(byKey(inventory, e.off))) e.main = null;
@@ -78,7 +113,13 @@ export function equip(equipped, slot, key, inventory) {
     const e = { ...EMPTY, ...(equipped ?? {}) };
     e[slot] = key || null;
 
-    if (slot !== 'armor' && key) {
+    // the same ring on the other finger — it moves (two of it: one on each)
+    if ((slot === 'ring1' || slot === 'ring2') && key) {
+        const other = slot === 'ring1' ? 'ring2' : 'ring1';
+        if (e[other] === key && !pair(byKey(inventory, key))) e[other] = null;
+    }
+
+    if ((slot === 'main' || slot === 'off') && key) {
         const other = slot === 'main' ? 'off' : 'main';
         // the same item in the other hand — move it (two of it: one in each hand)
         if (e[other] === key && !pair(byKey(inventory, key))) e[other] = null;
@@ -92,14 +133,10 @@ export function equip(equipped, slot, key, inventory) {
 
 /** Resolved loadout items → objects. */
 export function resolve(equipped, inventory) {
-    return {
-        main: byKey(inventory, equipped.main),
-        off: byKey(inventory, equipped.off),
-        armor: byKey(inventory, equipped.armor),
-    };
+    return Object.fromEntries(SLOTS.map((s) => [s.id, byKey(inventory, equipped[s.id])]));
 }
 
-/** Where the item is now: 'main' | 'off' | 'armor' | null (both hands — 'main'; see slotsOf). */
+/** Where the item is now: a slot id or null (both hands — 'main'; see slotsOf). */
 export function slotOf(key, equipped) {
     return SLOTS.find((s) => equipped[s.id] === key)?.id ?? null;
 }

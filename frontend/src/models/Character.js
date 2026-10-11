@@ -42,7 +42,7 @@ export function withFeatureScores(base, features = []) {
 import { evalFormula, byLevelPairs } from '../rules/formula.js';
 import { multiclassSlots } from '../rules/spellcasting.js';
 import { dieAt } from '../rules/damage.js';
-import { defaultEquipped, normalize, resolve, isTwoHanded } from '../rules/loadout.js';
+import { defaultEquipped, normalize, resolve, isTwoHanded, SLOTS, wearOf } from '../rules/loadout.js';
 import { summarizeChoices, subclassSpellIds, castersOf } from '../rules/progression.js';
 import { wildShapeAbility, formTempHp, formHours, formCost } from '../rules/wildshape.js';
 import { collectPassives, normName, fillTemplate } from '../rules/passives.js';
@@ -247,6 +247,14 @@ export class Character {
             { hand: 'main', item: this.loadout.main },
             { hand: 'off', item: this.loadout.off },
         ];
+        // worn wearables (gloves, boots, helmet, necklace, rings): their data.modifiers apply —
+        // the same vocabulary as conditions (rules/modifiers.js), the item's name as the source
+        this.wornItems = SLOTS.filter((s) => s.wear)
+            .map((s) => this.loadout[s.id])
+            .filter((it, i, all) => wearOf(it) && all.indexOf(it) === i); // a pair of one ring: once
+        const itemModifiers = this.wornItems.flatMap((it) =>
+            (it.ref?.data?.modifiers ?? []).map((m) => ({ ...m, source: it.name, from: 'item' })),
+        );
 
         // --- level choices: skills, feats, styles, spells ---
         this.chosen = summarizeChoices(build, refs);
@@ -275,6 +283,7 @@ export class Character {
                         .map((id) => (refs.feats ?? []).find((f) => f.id === id))
                         .flatMap((f) => f?.data?.effects ?? []),
                 )
+                .concat(itemModifiers) // Periapt of Proof against Poison: Poisoned
                 .filter((x) => x?.kind === 'immunity')
                 .map((x) => x.value),
         );
@@ -298,7 +307,7 @@ export class Character {
             }
         }
         // everything on the character as modifiers, each with its source (rules/modifiers.js)
-        const modifiers = conditionModifiers(this.conditions);
+        const modifiers = [...conditionModifiers(this.conditions), ...itemModifiers];
         // class/subclass features that add to an effect while it is on (Elemental Cleaver during Rage):
         //   grants: [{ type: 'while', condition: 'raging', modifiers: [...] }]
         const activeIds = new Set(this.conditions.filter((r) => !r.immune && !r.inactive).map((r) => r.id));

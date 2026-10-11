@@ -1,0 +1,9 @@
+{
+  "id": "helmet",
+  "name": "Helmet",
+  "slot": "helmet",
+  "isDefault": true,
+  "weight": 3,
+  "cost": "5 GP",
+  "desc": "A simple open-faced metal cap. It doesn't change your Armor Class, but it looks the part."
+}

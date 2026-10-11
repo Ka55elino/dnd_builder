@@ -1,0 +1,9 @@
+{
+  "id": "leatherGloves",
+  "name": "Leather Gloves",
+  "slot": "gloves",
+  "isDefault": true,
+  "weight": 0.5,
+  "cost": "5 SP",
+  "desc": "A pair of supple leather gloves that keep your hands warm and protect them from rope burn and splinters."
+}

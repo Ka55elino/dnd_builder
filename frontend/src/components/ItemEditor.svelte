@@ -7,14 +7,19 @@
      * kind     — 'item' | 'armor' | 'weapon'
      * initial  — catalog record to edit (or the base for a copy), null — new
      * copy     — true: initial is only a base, save as a new record
-     * onSaved(id, kind) / onCancel()
+     * slot     — a new item: worn as (gloves | boots | helmet | necklace | ring), null — gear
+     * onSaved(id, kind, slot) / onCancel()
+     *
+     * An item can be a wearable (data.slot): it goes into that slot on the sheet. A named one's
+     * effects (data.modifiers) are kept when it is edited or copied (no editor for them here).
      */
     import { saveCustomEquipment } from "../data/refs.js"; // also reloads the equipment cache
     import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS } from "../rules/equipment.js";
     import { DAMAGE_TYPES } from "../rules/labels.js";
+    import { WEAR_TYPES } from "../rules/loadout.js";
     import { untrack } from "svelte";
 
-    let { kind, initial = null, copy = false, onSaved, onCancel } = $props();
+    let { kind, initial = null, copy = false, slot = null, onSaved, onCancel } = $props();
 
     const NEW_TITLE = { item: "New item", armor: "New armor", weapon: "New weapon" };
     const EDIT_TITLE = { item: "Edit item", armor: "Edit armor", weapon: "Edit weapon" };
@@ -36,6 +41,8 @@
         desc: initial?.desc ?? d.desc ?? "",
         weight: initial?.weight ?? d.weight ?? "",
         cost: initial?.cost ?? d.cost ?? "",
+        // item: worn as (a wearable) — "" — ordinary gear
+        slot: d.slot ?? untrack(() => slot) ?? "",
         // weapon
         wCategory: initial?.category ?? "simple",
         damage: initial?.damage ?? "1d6",
@@ -107,7 +114,16 @@
             ...(desc ? { desc } : {}),
         };
 
-        if (kind === "item") return { ...base, ...extra };
+        if (kind === "item") {
+            const d = initial?.data ?? {};
+            return {
+                ...base,
+                ...(WEAR_TYPES[f.slot] ? { slot: f.slot } : {}),
+                // a named wearable's effects (Ring of Protection: +1 AC…) stay with it
+                ...(WEAR_TYPES[f.slot] && d.modifiers?.length ? { modifiers: d.modifiers } : {}),
+                ...extra,
+            };
+        }
 
         if (kind === "weapon") {
             const damage = f.damage.trim().toLowerCase();
@@ -178,7 +194,7 @@
         saving = true;
         try {
             const id = await saveCustomEquipment(kind, JSON.stringify(obj));
-            onSaved?.(id, kind);
+            onSaved?.(id, kind, kind === "item" && WEAR_TYPES[f.slot] ? f.slot : null);
         } catch (e) {
             error = "Failed to save: " + (e?.message ?? e);
         } finally {
@@ -322,6 +338,19 @@
                 {:else if isClothes}Clothing: worn in the Armor slot but doesn't count as armor (Mage Armor, Unarmored Defense still work). An own base AC applies only if it is better.
                 {:else}Shield: adds to AC, occupies a hand.{/if}
             </p>
+        {/if}
+
+        {#if kind === "item"}
+            <label class="field">
+                <span>Worn as</span>
+                <select bind:value={f.slot}>
+                    <option value="">— not worn (gear) —</option>
+                    {#each Object.entries(WEAR_TYPES) as [k, label] (k)}<option value={k}>{label}</option>{/each}
+                </select>
+            </label>
+            {#if WEAR_TYPES[f.slot] && initial?.data?.modifiers?.length}
+                <p class="hint">Its effects while worn are kept from “{initial.name}”.</p>
+            {/if}
         {/if}
 
         <div class="grid">

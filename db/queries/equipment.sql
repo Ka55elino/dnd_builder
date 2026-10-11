@@ -63,13 +63,13 @@ INSERT INTO items (id, name, image, weight, cost, description, is_default, data_
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 -- name: GetDefaultItems
-SELECT id, name, image, weight, cost, description, data_json
+SELECT id, name, image, weight, cost, description, is_default, data_json
 FROM items
 WHERE is_default = 1
 ORDER BY name COLLATE NOCASE;
 
 -- name: GetAllItems
-SELECT id, name, image, weight, cost, description, data_json
+SELECT id, name, image, weight, cost, description, is_default, data_json
 FROM items
 ORDER BY name COLLATE NOCASE;
 
@@ -95,7 +95,7 @@ ORDER BY name COLLATE NOCASE;
 -- name: GetPackItems
 -- Contents of all packs (JOIN via the junction table).
 SELECT pi.pack_id, pi.quantity,
-       i.id, i.name, i.image, i.weight, i.cost, i.description, i.data_json
+       i.id, i.name, i.image, i.weight, i.cost, i.description, i.is_default, i.data_json
 FROM pack_items pi
 JOIN items i ON i.id = pi.item_id
 ORDER BY pi.pack_id, i.name COLLATE NOCASE;

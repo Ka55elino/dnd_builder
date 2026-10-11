@@ -194,7 +194,7 @@
     }
     // the other hand is taken by a two-handed weapon
     const handBlocked = (slot) => {
-        if (slot === "armor") return false;
+        if (slot !== "main" && slot !== "off") return false; // armor, wearables
         const other = character.loadout[slot === "main" ? "off" : "main"];
         return isTwoHanded(other);
     };
@@ -215,6 +215,12 @@
         main: "in main hand",
         off: "in off hand",
         armor: "worn",
+        gloves: "worn",
+        boots: "worn",
+        helmet: "worn",
+        necklace: "worn",
+        ring1: "worn",
+        ring2: "worn",
     };
     // a pair held in both hands: one tag
     const slotTag = (slots) =>
@@ -1848,8 +1854,9 @@
 
                 <section class="card" id="cs-attacks" data-section>
                     <h2>Equipment & attacks</h2>
+                    {#snippet slotGroup(group)}
                     <div class="slots">
-                        {#each SLOTS as slot (slot.id)}
+                        {#each SLOTS.filter((x) => x.group === group) as slot (slot.id)}
                             {@const blocked = handBlocked(slot.id)}
                             {@const held = character.loadout[slot.id]}
                             <label class="slot" class:blocked>
@@ -1890,6 +1897,11 @@
                             </label>
                         {/each}
                     </div>
+                    {/snippet}
+                    {@render slotGroup("hands")}
+                    <!-- gloves, boots, helmet, necklace, rings: what they do counts while worn -->
+                    <h3 class="worn-h">Worn items</h3>
+                    {@render slotGroup("worn")}
 
                     <div class="armor-line">
                         <span class="al-label">Armor</span>
@@ -3578,6 +3590,10 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 12px;
         margin-bottom: 14px;
+    }
+
+    .worn-h {
+        margin: 4px 0 10px;
     }
 
     @media (max-width: 900px) {

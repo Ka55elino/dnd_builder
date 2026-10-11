@@ -28,15 +28,17 @@ type Armor struct {
 	Data      map[string]any `json:"data"`
 }
 
-// Item is a piece of adventuring gear.
+// Item is a piece of adventuring gear — or a wearable (data.slot: gloves | boots | helmet |
+// necklace | ring), worn in the slot of that kind (frontend/src/rules/loadout.js).
 type Item struct {
-	ID     string         `json:"id"`
-	Name   string         `json:"name"`
-	Image  string         `json:"image"`
-	Weight float64        `json:"weight"`
-	Cost   string         `json:"cost"`
-	Desc   string         `json:"desc"`
-	Data   map[string]any `json:"data"`
+	ID        string         `json:"id"`
+	Name      string         `json:"name"`
+	Image     string         `json:"image"`
+	Weight    float64        `json:"weight"`
+	Cost      string         `json:"cost"`
+	Desc      string         `json:"desc"`
+	IsDefault bool           `json:"isDefault"` // false: named/magic (not in the builder's choices)
+	Data      map[string]any `json:"data"`
 }
 
 // PackItem is an item in a pack, with its quantity.
@@ -195,7 +197,7 @@ func queryItems(db *sql.DB, query string) ([]Item, error) {
 	return out, rows.Err()
 }
 
-// readItem reads the columns id, name, image, weight, cost, description, data_json
+// readItem reads the columns id, name, image, weight, cost, description, is_default, data_json
 // (plus any columns before them, via prefix).
 func readItem(scan func(...any) error, prefix ...any) (Item, error) {
 	var (
@@ -204,7 +206,7 @@ func readItem(scan func(...any) error, prefix ...any) (Item, error) {
 		weight            sql.NullFloat64
 		data              string
 	)
-	dest := append(prefix, &it.ID, &it.Name, &image, &weight, &cost, &desc, &data)
+	dest := append(prefix, &it.ID, &it.Name, &image, &weight, &cost, &desc, &it.IsDefault, &data)
 	if err := scan(dest...); err != nil {
 		return it, err
 	}
