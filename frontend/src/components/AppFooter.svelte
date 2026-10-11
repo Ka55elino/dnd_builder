@@ -9,8 +9,9 @@
      * installs it as usual; the database is kept (one dnd.db, see db.go).
      * The last answer is kept in localStorage, so the notice stays all day without asking
      * again; no network — nothing is shown, and the next launch tries again.
+     * "Check for updates" (when there is no notice) asks right away, whatever the timer says.
      */
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
     import { Browser } from "@wailsio/runtime";
     import { server } from "../server.svelte.js";
     import { CheckForUpdate } from "../api.js";
@@ -19,6 +20,9 @@
     const DAY = 24 * 60 * 60 * 1000;
 
     let info = $state(null); // UpdateInfo (updates.go)
+    let checking = $state(false);
+    let result = $state(""); // after a manual check: "Up to date" / "Check failed" (for a few seconds)
+    let resultTimer;
 
     // a > b by major.minor.patch ("0.5.10" > "0.5.9"; a "-beta" suffix is ignored)
     function newer(a, b) {
@@ -29,6 +33,23 @@
         return false;
     }
 
+    // ask GitHub now; the answer is kept for the day. Returns false if it failed.
+    async function ask() {
+        try {
+            const fresh = await CheckForUpdate();
+            info = fresh;
+            try {
+                localStorage.setItem(KEY, JSON.stringify({ at: Date.now(), info: fresh }));
+            } catch {
+                // not kept — fine
+            }
+            return true;
+        } catch {
+            return false; // offline / GitHub unavailable
+        }
+    }
+
+    // on launch: the day's answer if there is one, otherwise ask
     onMount(async () => {
         let cached = null;
         try {
@@ -36,20 +57,23 @@
         } catch {
             // no storage (private mode…): ask every launch
         }
-        if (!cached?.info || !(Date.now() - cached.at < DAY)) {
-            try {
-                cached = { at: Date.now(), info: await CheckForUpdate() };
-                try {
-                    localStorage.setItem(KEY, JSON.stringify(cached));
-                } catch {
-                    // not kept — fine
-                }
-            } catch {
-                return; // offline / GitHub unavailable: nothing to show
-            }
-        }
-        info = cached.info;
+        if (cached?.info && Date.now() - cached.at < DAY) info = cached.info;
+        else await ask();
     });
+    onDestroy(() => clearTimeout(resultTimer));
+
+    // "Check for updates": right away, whatever the timer says
+    async function checkNow() {
+        if (checking) return;
+        checking = true;
+        result = "";
+        const ok = await ask();
+        checking = false;
+        if (available) return; // the notice shows instead
+        result = ok ? "Up to date" : "Check failed";
+        clearTimeout(resultTimer);
+        resultTimer = setTimeout(() => (result = ""), 4000);
+    }
 
     // newer than what runs now (an answer cached before this app was updated doesn't count)
     const available = $derived(!!info?.latest && !!server.appVersion && newer(info.latest, server.appVersion));
@@ -68,6 +92,17 @@
             <button onclick={update} title={info.downloadUrl ? "Download the new version" : "Open the release page"}
                 >Update</button
             >
+        </span>
+    {:else}
+        <span class="chk">
+            <!-- the result for a few seconds, then the button again -->
+            {#if result}
+                <span class="res" class:bad={result !== "Up to date"}>{result}</span>
+            {:else}
+                <button onclick={checkNow} disabled={checking} title="Look for a newer version on GitHub"
+                    >{checking ? "Checking…" : "Check for updates"}</button
+                >
+            {/if}
         </span>
     {/if}
     <span>DnD Builder</span>
@@ -123,6 +158,41 @@
 
     .upd button:hover {
         background: var(--color-gold-hover);
+    }
+
+    /* no notice: "Check for updates" (asks right away) */
+    .chk {
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .chk button {
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-family: var(--font-ui);
+        font-size: 11px;
+        cursor: pointer;
+    }
+
+    .chk button:hover:not(:disabled) {
+        color: var(--color-gold);
+        text-decoration: underline;
+    }
+
+    .chk button:disabled {
+        cursor: default;
+    }
+
+    .res {
+        color: var(--color-success);
+    }
+
+    .res.bad {
+        color: var(--color-danger);
     }
 
     @media print {
