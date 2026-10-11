@@ -1,7 +1,7 @@
 {
   "id": "dragonScale",
   "name": "Dragon Scale",
-  "image": "/img/armor/named/dragonScale.svg",
+  "image": "/img/armor/named/dragonScale.webp",
   "isDefault": false,
   "base": "halfPlate",
   "baseAC": 16,

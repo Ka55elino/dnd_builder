@@ -1,7 +1,7 @@
 {
   "id": "dawnbringer",
   "name": "Dawnbringer",
-  "image": "/img/weapons/named/dawnbringer.svg",
+  "image": "/img/weapons/named/dawnbringer.webp",
   "isDefault": false,
   "base": "longsword",
   "damage": "1d10",

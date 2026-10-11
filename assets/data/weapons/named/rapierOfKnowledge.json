@@ -1,7 +1,7 @@
 {
   "id": "rapierOfKnowledge",
   "name": "Rapier of Knowledge",
-  "image": "/img/weapons/named/rapierOfKnowledge.svg",
+  "image": "/img/weapons/named/rapierOfKnowledge.webp",
   "isDefault": false,
   "base": "rapier",
   "damage": "3d8",
