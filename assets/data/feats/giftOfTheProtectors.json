@@ -1,0 +1,16 @@
+{
+  "id": "giftOfTheProtectors",
+  "name": "Gift of the Protectors",
+  "category": "invocation",
+  "level": 9,
+  "prereq": {
+    "boon": "pactOfTheTome"
+  },
+  "desc": "Requires Pact of the Tome. A new page appears in your Book of Shadows; creatures can write their names on it. When one of them is reduced to 0 Hit Points but not killed outright, it drops to 1 Hit Point instead — once per Long Rest.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "giftOfTheProtectors"
+    }
+  ]
+}

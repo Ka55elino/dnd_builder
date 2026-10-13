@@ -11,5 +11,6 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 to a chosen ability score and proficiency in its saving throws."
+  "desc": "+1 to a chosen ability score and proficiency in its saving throws.",
+  "saveProficiency": "asi"
 }

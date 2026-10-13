@@ -1,0 +1,17 @@
+{
+  "id": "lightlyArmored",
+  "name": "Lightly Armored",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex"
+  ],
+  "desc": "+1 Strength or Dexterity. You gain training with Light armor and Shields.",
+  "proficiencies": {
+    "armor": [
+      "light",
+      "shield"
+    ]
+  }
+}

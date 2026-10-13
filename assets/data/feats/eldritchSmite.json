@@ -1,0 +1,16 @@
+{
+  "id": "eldritchSmite",
+  "name": "Eldritch Smite",
+  "category": "invocation",
+  "level": 5,
+  "prereq": {
+    "boon": "pactOfTheBlade"
+  },
+  "desc": "Requires Pact of the Blade. Once per turn when you hit with your pact weapon, you can expend a Pact Magic slot: an extra 1d8 Force damage plus 1d8 per slot level, and you can knock a Huge or smaller target Prone.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "eldritchSmite"
+    }
+  ]
+}

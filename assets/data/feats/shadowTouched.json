@@ -10,6 +10,7 @@
   ],
   "desc": "+1 Int, Wis or Cha. You learn Invisibility and one level 1 Illusion or Necromancy spell. You can cast each of them once per Long Rest without a spell slot, and with spell slots as usual; the spellcasting ability is the one increased by this feat.",
   "spells": {
+    "free": true,
     "fixed": [
       "invisibility"
     ],

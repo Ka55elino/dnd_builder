@@ -208,7 +208,12 @@ export function levelPlan(build, level, refs) {
     const done = summarizeChoices(build, refs, level - 1);
 
     const value = (key) => build.choices?.[key] ?? null;
-    const add = (c) => choices.push({ ...c, value: value(c.key) });
+    // returns the choice's current value (a feat's follow-ups need what was picked in it)
+    const add = (c) => {
+        const v = value(c.key);
+        choices.push({ ...c, value: v });
+        return v;
+    };
     const addGain = (title, items) => items.length && gains.push({ title, items });
 
     // --- hit points and proficiency ---
@@ -368,6 +373,9 @@ export function levelPlan(build, level, refs) {
             pick: invNew,
             options: featsBy(refs, 'invocation', level).filter((f) => !done.invocations.includes(f.id)).map((f) => asOption(f)),
         });
+        // an invocation's own choices (Lessons of the First Ones: an Origin feat)
+        for (const id of value(`L${level}:class:invocations`)?.ids ?? [])
+            featFollowUps(id, `L${level}:class:invocations:${id}`, level, done, refs, add);
     }
     // PHB 2024: on each level-up a warlock may replace one known invocation
     if (clsLvl > 1 && cls?.data?.invocationsKnown?.length && done.invocations.length) {
@@ -392,6 +400,8 @@ export function levelPlan(build, level, refs) {
                     .filter((f) => !done.invocations.includes(f.id))
                     .map((f) => asOption(f)),
             });
+            for (const id of value(`L${level}:class:invocationSwap`)?.ids ?? [])
+                featFollowUps(id, `L${level}:class:invocationSwap:${id}`, level, done, refs, add);
         }
     }
 
@@ -741,6 +751,16 @@ function featFollowUps(featId, key, level, done, refs, add) {
             pick: 1,
             options: d.choose.options.map((o) => (typeof o === 'string' ? { id: o, name: o } : { id: o.id, name: o.name ?? o.id })),
         });
+    }
+    // a feat from another category (Lessons of the First Ones: an Origin feat) — counted as the
+    // character's feat (kind 'feat'), with its own follow-ups
+    if (d.featChoice) {
+        const fk = `${key}:feat`;
+        const picked = add({
+            key: fk, kind: 'feat', title: `${feat.name}: ${d.featChoice.from} feat`, pick: 1,
+            options: featsBy(refs, d.featChoice.from).filter((f) => !done.feats.includes(f.id)).map((f) => asOption(f)),
+        });
+        featFollowUps(picked?.ids?.[0], fk, level, done, refs, add);
     }
     // spells to pick ("Fey-Touched": a level 1 Divination or Enchantment spell, "Ritual Caster":
     // level 1 Ritual spells, "Spell Sniper": a cantrip): d.spells.choose = { count, level,

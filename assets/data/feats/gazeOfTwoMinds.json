@@ -1,0 +1,13 @@
+{
+  "id": "gazeOfTwoMinds",
+  "name": "Gaze of Two Minds",
+  "category": "invocation",
+  "level": 5,
+  "desc": "As a Bonus Action, you touch a willing creature and perceive through its senses until the end of your next turn (extendable with a Bonus Action each turn); you can cast spells as if from its space.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "gazeOfTwoMinds"
+    }
+  ]
+}

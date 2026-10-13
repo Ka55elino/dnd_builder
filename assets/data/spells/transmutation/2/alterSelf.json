@@ -1,0 +1,20 @@
+{
+  "id": "alterSelf",
+  "name": "Alter Self",
+  "kind": "spell",
+  "action": "action",
+  "level": 2,
+  "school": "transmutation",
+  "classes": [
+    "sorcerer",
+    "wizard"
+  ],
+  "casting": {
+    "time": "1 action",
+    "range": "Self",
+    "components": "V, S",
+    "duration": "Conc., 1 hour",
+    "concentration": true
+  },
+  "desc": "You alter your physical form. Choose one option: Aquatic Adaptation (gills and webbing: breathe underwater, Swim Speed equal to your Speed), Change Appearance (alter your look, size and build within your type), or Natural Weapons (claws, fangs, horns or hooves: an Unarmed Strike deals 1d6 + your spellcasting modifier Bludgeoning, Piercing or Slashing damage, using your spellcasting ability for the attack roll). As a Magic action you can switch options. Concentration, up to 1 hour."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "gazeOfTwoMinds",
+  "name": "Gaze of Two Minds",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "bonus",
+  "desc": "You touch a willing creature and perceive through its senses until the end of your next turn. As a Bonus Action on later turns you can extend the duration until the end of your next turn. While perceiving through the other creature's senses, you benefit from any special senses it has, and you can cast spells as if you were in your space or the other creature's space if you are within 60 miles of each other."
+}

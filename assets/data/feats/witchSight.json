@@ -1,0 +1,14 @@
+{
+  "id": "witchSight",
+  "name": "Witch Sight",
+  "category": "invocation",
+  "level": 15,
+  "desc": "You have Truesight with a range of 30 feet.",
+  "effects": [
+    {
+      "kind": "sense",
+      "sense": "truesight",
+      "range": 30
+    }
+  ]
+}

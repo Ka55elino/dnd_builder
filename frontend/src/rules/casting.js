@@ -226,6 +226,11 @@ export function useOptions(card, ch, state) {
         const opts = slotChoices(ch, state, it.level);
         const ritual = !!(it.ritual || d.casting?.ritual || card.ritual);
         if (ritual) opts.push({ value: 'ritual', label: 'Ritual · no slot, +10 min', level: it.level, disabled: false });
+        // once per Long Rest without a slot (Fey-Touched, Shadow-Touched) — first, so it's picked while left
+        if (card.freeCast) {
+            const left = state.resourceLeft(card.freeCast);
+            opts.unshift({ value: 'free', resource: card.freeCast, level: it.level, label: `Free · ${left}/${card.freeCast.max}`, disabled: left <= 0 });
+        }
         if (!opts.length) return { kind: 'spell', label: 'Cast', options: [], disabled: true, reason: 'No spell slots of this level', concentration: conc };
         const allSpent = opts.every((o) => o.disabled);
         return {
@@ -247,7 +252,8 @@ export function useOptions(card, ch, state) {
 
     // ----- spends a spell slot (Divine Smite, Wild Resurgence, Convert Slot to Points) -----
     if (cost?.slot) {
-        const opts = slotChoices(ch, state, cost.slot.min ?? 1, cost.slot.max ?? 9);
+        // pact: true — only a Pact Magic slot (Eldritch Smite)
+        const opts = slotChoices(ch, state, cost.slot.min ?? 1, cost.slot.max ?? 9).filter((o) => !cost.slot.pact || o.slot.pact);
         const allSpent = !opts.length || opts.every((o) => o.disabled);
         return {
             kind: 'slot', label: 'Use', options: opts, defaultValue: firstFree(opts),
@@ -335,7 +341,8 @@ export function applyUse(info, choice, ch, state, item) {
             break;
         case 'spell':
             if (!opt || opt.disabled) return false;
-            if (opt.slot) state.useSlot(opt.slot, 1);
+            if (opt.resource) state.spend(opt.resource, 1); // free cast
+            else if (opt.slot) state.useSlot(opt.slot, 1);
             break;
         case 'slot':
             if (!opt?.slot || opt.disabled) return false;

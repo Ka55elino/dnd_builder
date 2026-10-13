@@ -1,0 +1,13 @@
+{
+  "id": "oneWithShadows",
+  "name": "One with Shadows",
+  "category": "invocation",
+  "level": 5,
+  "desc": "While you're in an area of Dim Light or Darkness, you can take a Magic action to give yourself the Invisible condition until you move or take an action, a Bonus Action or a Reaction.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "oneWithShadows"
+    }
+  ]
+}

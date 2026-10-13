@@ -1,0 +1,17 @@
+{
+  "id": "moderatelyArmored",
+  "name": "Moderately Armored",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "str",
+    "dex"
+  ],
+  "desc": "Requires Light armor training. +1 Strength or Dexterity. You gain training with Medium armor and Shields.",
+  "proficiencies": {
+    "armor": [
+      "medium",
+      "shield"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "oneWithShadows",
+  "name": "One with Shadows",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "action",
+  "apply": {
+    "condition": "invisible",
+    "target": "self"
+  },
+  "desc": "While you're in an area of Dim Light or Darkness, you can take a Magic action to give yourself the Invisible condition. It lasts until you move or take an action, a Bonus Action or a Reaction."
+}

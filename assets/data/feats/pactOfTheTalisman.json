@@ -4,5 +4,11 @@
   "category": "invocation",
   "level": 1,
   "desc": "Once per Long Rest, the bearer of the talisman can add 1d4 to a failed ability check (the number of uses increases with level).",
-  "boon": true
+  "boon": true,
+  "grants": [
+    {
+      "type": "ability",
+      "id": "talismanBoon"
+    }
+  ]
 }

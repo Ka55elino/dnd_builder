@@ -1,0 +1,16 @@
+{
+  "id": "investmentOfTheChainMaster",
+  "name": "Investment of the Chain Master",
+  "category": "invocation",
+  "level": 5,
+  "prereq": {
+    "boon": "pactOfTheChain"
+  },
+  "desc": "Requires Pact of the Chain. Your familiar gains a Fly or Swim Speed of 40 feet; as a Bonus Action you can command it to take the Attack action; its Bludgeoning, Piercing or Slashing damage can be Necrotic or Radiant instead; its saving throws use your spell save DC; when it takes damage you can take a Reaction to give it Resistance to that damage.",
+  "effects": [
+    {
+      "kind": "note",
+      "note": "Familiar: Fly/Swim 40 ft, attacks on your Bonus Action, uses your spell save DC"
+    }
+  ]
+}

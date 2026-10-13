@@ -3,5 +3,12 @@
   "name": "Boon of Truesight",
   "category": "boon",
   "level": 19,
-  "desc": "True Sight 60 feet."
+  "desc": "True Sight 60 feet.",
+  "effects": [
+    {
+      "kind": "sense",
+      "sense": "truesight",
+      "range": 60
+    }
+  ]
 }

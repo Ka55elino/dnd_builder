@@ -3,5 +3,15 @@
   "name": "Boon of Recovery",
   "category": "boon",
   "level": 19,
-  "desc": "Once per day, heal for half your Hit Points; recover Hit Point Dice."
+  "desc": "Once per day, heal for half your Hit Points; recover Hit Point Dice.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "lastStand"
+    },
+    {
+      "type": "ability",
+      "id": "recoverVitality"
+    }
+  ]
 }

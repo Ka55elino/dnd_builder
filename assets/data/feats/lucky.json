@@ -3,5 +3,11 @@
   "name": "Lucky",
   "category": "origin",
   "level": 1,
-  "desc": "Luck Points equal to your Proficiency Bonus per Long Rest: gain Advantage on your own d20 roll or impose Disadvantage on an attacker."
+  "desc": "Luck Points equal to your Proficiency Bonus per Long Rest: gain Advantage on your own d20 roll or impose Disadvantage on an attacker.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "luckPoints"
+    }
+  ]
 }

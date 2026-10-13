@@ -1,0 +1,21 @@
+{
+  "id": "recoverVitality",
+  "name": "Recover Vitality",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "bonus",
+  "uses": {
+    "count": 10,
+    "per": "longRest"
+  },
+  "cost": {
+    "amount": {
+      "min": 1
+    }
+  },
+  "damage": {
+    "dice": "1d10"
+  },
+  "desc": "You have a pool of ten d10s. As a Bonus Action, you can expend dice from the pool, roll those dice, and regain a number of Hit Points equal to the roll's total. You regain all the expended dice when you finish a Long Rest."
+}

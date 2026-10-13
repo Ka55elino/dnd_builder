@@ -1,0 +1,21 @@
+{
+  "id": "skulker",
+  "name": "Skulker",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "dex"
+  ],
+  "desc": "Requires Dexterity 13+. +1 Dexterity. Blindsight 10 feet. Fog of War: you have Advantage on the Dexterity (Stealth) check you make as part of the Hide action. Sniper: if you make an attack roll while hidden and it misses, making the attack doesn't reveal your location.",
+  "effects": [
+    {
+      "kind": "sense",
+      "sense": "blindsight",
+      "range": 10
+    },
+    {
+      "kind": "note",
+      "note": "Hide action: Advantage on the Stealth check; a missed attack while hidden doesn't reveal you"
+    }
+  ]
+}

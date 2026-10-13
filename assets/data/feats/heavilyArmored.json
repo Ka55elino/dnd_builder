@@ -1,0 +1,16 @@
+{
+  "id": "heavilyArmored",
+  "name": "Heavily Armored",
+  "category": "general",
+  "level": 4,
+  "asi": [
+    "con",
+    "str"
+  ],
+  "desc": "Requires Medium armor training. +1 Constitution or Strength. You gain training with Heavy armor.",
+  "proficiencies": {
+    "armor": [
+      "heavy"
+    ]
+  }
+}

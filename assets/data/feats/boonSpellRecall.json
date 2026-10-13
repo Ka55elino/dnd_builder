@@ -1,0 +1,18 @@
+{
+  "id": "boonSpellRecall",
+  "name": "Boon of Spell Recall",
+  "category": "boon",
+  "level": 19,
+  "asi": [
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "Requires the Spellcasting feature. +1 Intelligence, Wisdom or Charisma (maximum 30). Free Casting: when you cast a spell with a level 1–4 spell slot, you can cast it without expending that slot, once per Long Rest.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "freeCasting"
+    }
+  ]
+}

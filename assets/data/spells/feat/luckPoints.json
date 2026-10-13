@@ -1,0 +1,12 @@
+{
+  "id": "luckPoints",
+  "name": "Luck Points",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  },
+  "desc": "You have Luck Points equal to your Proficiency Bonus. When you roll a d20 for a D20 Test, you can spend 1 Luck Point to give yourself Advantage on the roll. When a creature rolls a d20 for an attack roll against you, you can spend 1 Luck Point to impose Disadvantage on that roll. You regain your expended Luck Points when you finish a Long Rest."
+}

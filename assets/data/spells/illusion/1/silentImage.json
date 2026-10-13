@@ -1,0 +1,21 @@
+{
+  "id": "silentImage",
+  "name": "Silent Image",
+  "kind": "spell",
+  "action": "action",
+  "level": 1,
+  "school": "illusion",
+  "classes": [
+    "bard",
+    "sorcerer",
+    "wizard"
+  ],
+  "casting": {
+    "time": "1 action",
+    "range": "60 feet",
+    "components": "V, S, M",
+    "duration": "Conc., 10 min",
+    "concentration": true
+  },
+  "desc": "You create the image of an object, a creature, or some other visible phenomenon no larger than a 15-foot cube. The image has no sound, smell or other sensory effects, and physical interaction reveals it as an illusion. As a Magic action you can move it within range. A creature that takes a Study action can make an Intelligence (Investigation) check against your spell save DC to discern it. Concentration, up to 10 minutes."
+}

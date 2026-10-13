@@ -1,0 +1,27 @@
+{
+  "id": "boonNightSpirit",
+  "name": "Boon of the Night Spirit",
+  "category": "boon",
+  "level": 19,
+  "asi": [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+  ],
+  "desc": "+1 to an ability score (maximum 30). Merge with Shadows: while within Dim Light or Darkness, you can take a Bonus Action to become Invisible until you take an action, a Bonus Action or a Reaction. Shadowy Form: while within Dim Light or Darkness, you have Resistance to all damage except Psychic and Radiant.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "mergeWithShadows"
+    }
+  ],
+  "effects": [
+    {
+      "kind": "note",
+      "note": "In Dim Light or Darkness: Resistance to all damage except Psychic and Radiant"
+    }
+  ]
+}

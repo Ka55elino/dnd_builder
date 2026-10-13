@@ -1,0 +1,14 @@
+{
+  "id": "mistyVisions",
+  "name": "Misty Visions",
+  "category": "invocation",
+  "level": 2,
+  "desc": "You can cast Silent Image without expending a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "silentImage",
+      "atWill": true
+    }
+  ]
+}

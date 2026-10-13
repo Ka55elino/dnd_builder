@@ -8,5 +8,11 @@
     "dex",
     "con"
   ],
-  "desc": "+1 Str/Dex/Con; impose Disadvantage on enemies' Concentration, Reaction attack against spellcasters."
+  "desc": "+1 Str/Dex/Con; impose Disadvantage on enemies' Concentration, Reaction attack against spellcasters.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "guardedMind"
+    }
+  ]
 }

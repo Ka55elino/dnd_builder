@@ -1,0 +1,12 @@
+{
+  "id": "freeCasting",
+  "name": "Free Casting",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "When you cast a spell with a level 1–4 spell slot, you can cast it without expending that slot. Once you use this benefit, you can't use it again until you finish a Long Rest."
+}

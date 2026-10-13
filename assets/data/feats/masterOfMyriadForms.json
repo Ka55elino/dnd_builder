@@ -1,0 +1,14 @@
+{
+  "id": "masterOfMyriadForms",
+  "name": "Master of Myriad Forms",
+  "category": "invocation",
+  "level": 5,
+  "desc": "You can cast Alter Self without expending a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "alterSelf",
+      "atWill": true
+    }
+  ]
+}

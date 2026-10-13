@@ -1,0 +1,12 @@
+{
+  "id": "giftOfTheProtectors",
+  "name": "Gift of the Protectors",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "uses": {
+    "count": 1,
+    "per": "longRest"
+  },
+  "desc": "When a creature whose name is written on the Gift of the Protectors page of your Book of Shadows is reduced to 0 Hit Points but not killed outright, it drops to 1 Hit Point instead. Once this benefit is used, no one can benefit from it again until you finish a Long Rest. As a Magic action you can erase a name by touching it."
+}

@@ -29,6 +29,8 @@
         for (const c of ev.choices) {
             if (c.kind === "asi" || c.kind === "subclass" || !c.value?.ids) continue;
             if (c.valid.length !== c.value.ids.length) {
+                if (c.kind === "invocations")
+                    for (const old of c.value.ids) if (!c.valid.includes(old)) build.dropInvocationFollowUps(old, c.key);
                 build.setChoice(c.key, c.valid.length ? { kind: c.kind, ids: [...c.valid] } : null);
             }
         }
@@ -101,9 +103,20 @@
         if (choice.kind === "subclass") build.setSubclassFor(choice.classId, ids[0] ?? null);
         build.setChoice(choice.key, ids.length ? { kind: choice.kind, ids } : null);
 
-        // invocation replacement cancelled — remove the replacement pick too
+        // an invocation unticked — what it brought goes too (Lessons of the First Ones: its Origin feat)
+        if (choice.kind === "invocations") {
+            for (const old of choice.valid) if (!ids.includes(old)) build.dropInvocationFollowUps(old, choice.key);
+        }
+        // an invocation forgotten (replaced on a level-up) — its picks from the level it was learned on
+        if (choice.kind === "invocationForget") {
+            for (const id of ids) if (!choice.valid.includes(id)) build.dropInvocationFollowUps(id);
+        }
+
+        // invocation replacement cancelled — remove the replacement pick too (and what it brought)
         if (choice.kind === "invocationForget" && !ids.length) {
-            build.setChoice(choice.key.replace(/Forget$/, "Swap"), null);
+            const swapKey = choice.key.replace(/Forget$/, "Swap");
+            for (const old of build.choices[swapKey]?.ids ?? []) build.dropInvocationFollowUps(old, swapKey);
+            build.setChoice(swapKey, null);
         }
 
         // feat changed — reset the choices that depend on it (…:asi, …:skills)

@@ -1,0 +1,14 @@
+{
+  "id": "visionsOfDistantRealms",
+  "name": "Visions of Distant Realms",
+  "category": "invocation",
+  "level": 9,
+  "desc": "You can cast Arcane Eye without expending a spell slot.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "arcaneEye",
+      "atWill": true
+    }
+  ]
+}

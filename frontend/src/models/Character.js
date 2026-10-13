@@ -423,6 +423,8 @@ export class Character {
                 levelClasses: build.levelClasses,
                 extraArmor: featArmor,
                 extraWeapons: featWeapons,
+                // Resilient: proficiency in the saving throws of the ability it raised (data.saveProficiency: 'asi')
+                extraSaves: featDefs.filter((f) => f.data?.saveProficiency === 'asi').map(featAbility).filter(Boolean),
                 armor: this.loadout.armor?.ref ?? null,
                 shield: hands.find((h) => h.item?.kind === 'shield')?.item?.ref ?? false,
                 hands: hands
@@ -673,6 +675,13 @@ export class Character {
         for (const id of this.subclassSpellIds) classSpellIds.add(id);
         // a spell the class also grants is cast with the class ability
         this.raceSpellIds = new Set([...raceSpellIds, ...raceChosenIds].filter((id) => !classSpellIds.has(id)));
+        // Magic Initiate (its spells go to the spellbook — rules/progression.js): spell id → the feat
+        const magicInitiateOf = new Map();
+        for (const id of featKeys.keys()) {
+            if (!/^magicInitiate/.test(id)) continue;
+            const f = (refs.feats ?? []).find((x) => x.id === id);
+            if (f) for (const sid of featFollow(id, 'spells')) magicInitiateOf.set(sid, f);
+        }
         const freeCastIds = new Set(
             grants.filter((g) => g.type === 'spell' && g.id && (g.level ?? 1) > 0).map((g) => g.id),
         );
@@ -728,20 +737,27 @@ export class Character {
                     sub ? (sp.level > 0 ? 'always prepared' : 'from the subclass') : '',
                     abil ? `${sc.name}: ${abil} · DC ${sc.saveDC} · attack ${fmtMod(sc.attack)}` : '',
                 ].filter(Boolean).join(' · ');
+                // Magic Initiate's level 1 spell: once per Long Rest without a slot (see card.freeCast)
+                const mi = sp.level > 0 && magicInitiateOf.get(sp.id);
                 return {
                     ...card(sp, sub ? `${title} · ${sub.name}` : title),
                     saveDC: sc?.saveDC ?? null,
-                    ...(note ? { note } : {}),
+                    ...(mi ? { freeCast: { id: `free:${mi.id}:${sp.id}`, name: `${sp.name} (${mi.name})`, max: 1, recharge: 'long' } } : {}),
+                    ...(note || mi ? { note: [note, mi ? `${mi.name}: free cast 1/Long Rest` : ''].filter(Boolean).join(' · ') } : {}),
                 };
             }
             const rs = this.raceSpellcasting;
             const abil = rs?.ability ? ABILITIES[rs.ability]?.short : null;
+            // level 1+ species spell: once per Long Rest without a slot — a 1-use counter on the card
+            // (the same as feat spells, see card.freeCast below)
+            const free = freeCastIds.has(sp.id) && sp.level > 0;
             return {
                 ...card(sp, `${title} · ${speciesName}`),
                 saveDC: rs?.saveDC ?? null,
+                freeCast: free ? { id: `free:species:${sp.id}`, name: `${sp.name} (${speciesName})`, max: 1, recharge: 'long' } : null,
                 note: [
                     abil ? `${abil} · DC ${rs.saveDC} · attack ${fmtMod(rs.attack)}` : 'choose a spellcasting ability',
-                    freeCastIds.has(sp.id) ? 'free cast 1/Long Rest' : '',
+                    free ? 'free cast 1/Long Rest' : '',
                 ].filter(Boolean).join(' · '),
             };
         };
@@ -761,7 +777,7 @@ export class Character {
             { title: 'Metamagic', cards: this.chosen.metamagic.map(byId).filter(Boolean).map((f) => card(f, 'Metamagic')) },
         ];
 
-        // spells granted by chosen invocations / feats (feat.data.grants { type: 'spell', id, atWill?, ritual?, note? }):
+        // spells granted by chosen invocations / feats (feat.data.grants { type: 'spell', id, atWill?, ritual?, perLongRest?, note? }):
         // Armor of Shadows → Mage Armor at will, Pact of the Chain → Find Familiar as a Ritual…
         const grantCards = { invocation: [], other: [] };
         for (const f of chosenFeats) {
@@ -769,26 +785,36 @@ export class Character {
                 if (g.type !== 'spell' || !g.id) continue;
                 const sp = spells.find((s) => s.id === g.id);
                 if (!sp) continue;
-                const how = g.atWill ? 'at will, without a spell slot' : g.ritual ? 'as a Ritual' : '';
+                const how = g.atWill ? 'at will, without a spell slot' : g.ritual ? 'as a Ritual' : g.perLongRest ? 'free cast 1/Long Rest' : '';
                 const note = [how, g.note].filter(Boolean).join(' · ');
                 const list = f.category === 'invocation' ? grantCards.invocation : grantCards.other;
                 if (list.some((c) => c.item.id === sp.id)) continue;
                 // free: at will (no slot); ritual: can be cast as a Ritual (rules/casting.js)
-                list.push({ ...card(sp, f.name), saveDC: this.spellcasting?.saveDC ?? null, note, free: !!g.atWill, ritual: !!g.ritual });
+                // perLongRest: n — cast n times per Long Rest without a slot (Gift of the Depths), see card.freeCast
+                const freeCast = g.perLongRest && !g.atWill
+                    ? { id: `free:${f.id}:${sp.id}`, name: `${sp.name} (${f.name})`, max: Number(g.perLongRest) || 1, recharge: 'long' }
+                    : null;
+                list.push({ ...card(sp, f.name), saveDC: this.spellcasting?.saveDC ?? null, note, free: !!g.atWill, freeCast, ritual: !!g.ritual });
             }
         }
-        // feat spells (see featSpellsOf): the feat's ability, DC and attack; a fixed level 1+ spell —
-        // also once per Long Rest without a slot (Fey-Touched: Misty Step); Ritual Caster's — Rituals
+        // feat spells (see featSpellsOf): the feat's ability, DC and attack; Ritual Caster's — Rituals.
+        // A level 1+ spell that's fixed, or any spell of a feat with spells.free (Fey-Touched,
+        // Shadow-Touched), is also cast once per Long Rest without a slot: card.freeCast — a 1-use
+        // counter kept on the card only (not in Resources), spent from the slot dropdown (rules/casting.js);
+        // CharacterState.longRest resets it with the other resources
         for (const x of featSpellsOf) {
             if (grantCards.other.some((c) => c.item.id === x.sp.id)) continue;
             const a = x.ability;
             const dc = a ? 8 + this.prof + (this.mods[a] ?? 0) : null;
+            const freeCast = x.sp.level > 0 && (x.fixed || x.feat.data?.spells?.free)
+                ? { id: `free:${x.feat.id}:${x.sp.id}`, name: `${x.sp.name} (${x.feat.name})`, max: 1, recharge: 'long' }
+                : null;
             const note = [
                 a ? `${ABILITIES[a]?.short ?? a} · DC ${dc} · attack ${fmtMod(this.prof + (this.mods[a] ?? 0))}` : 'choose the feat\'s ability',
-                x.fixed && x.sp.level > 0 ? 'free cast 1/Long Rest' : '',
+                freeCast ? 'free cast 1/Long Rest' : '',
                 x.ritual ? 'as a Ritual' : '',
             ].filter(Boolean).join(' · ');
-            grantCards.other.push({ ...card(x.sp, x.feat.name), saveDC: dc, note, free: false, ritual: x.ritual });
+            grantCards.other.push({ ...card(x.sp, x.feat.name), saveDC: dc, note, free: false, freeCast, ritual: x.ritual });
         }
         this.actionGroups.push(
             { title: 'Eldritch Invocations', spells: true, cards: grantCards.invocation },

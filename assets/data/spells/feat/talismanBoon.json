@@ -1,0 +1,15 @@
+{
+  "id": "talismanBoon",
+  "name": "Pact of the Talisman",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "uses": {
+    "pb": true,
+    "per": "longRest"
+  },
+  "damage": {
+    "dice": "1d4"
+  },
+  "desc": "While wearing the talisman, the wearer can add a d4 to an ability check that fails, potentially turning it into a success. This benefit can be used a number of times equal to your Proficiency Bonus; all expended uses are restored when you finish a Long Rest."
+}

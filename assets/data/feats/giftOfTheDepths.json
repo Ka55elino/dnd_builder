@@ -1,0 +1,20 @@
+{
+  "id": "giftOfTheDepths",
+  "name": "Gift of the Depths",
+  "category": "invocation",
+  "level": 5,
+  "desc": "You can breathe underwater, and you gain a Swim Speed equal to your Speed. You can also cast Water Breathing once without a spell slot; you regain the ability to cast it this way when you finish a Long Rest.",
+  "grants": [
+    {
+      "type": "spell",
+      "id": "waterBreathing",
+      "perLongRest": 1
+    }
+  ],
+  "effects": [
+    {
+      "kind": "note",
+      "note": "Breathe underwater; Swim Speed equal to your Speed"
+    }
+  ]
+}

@@ -11,5 +11,11 @@
     "wis",
     "cha"
   ],
-  "desc": "+1 to an ability score (maximum 30); add 2d4 to another creature's roll or your own."
+  "desc": "+1 to an ability score (maximum 30); add 2d4 to another creature's roll or your own.",
+  "grants": [
+    {
+      "type": "ability",
+      "id": "improveFate"
+    }
+  ]
 }

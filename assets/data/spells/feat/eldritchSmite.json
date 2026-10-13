@@ -1,0 +1,21 @@
+{
+  "id": "eldritchSmite",
+  "name": "Eldritch Smite",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "cost": {
+    "slot": {
+      "min": 1,
+      "pact": true
+    }
+  },
+  "upcast": {
+    "damage": "1d8"
+  },
+  "desc": "Once per turn when you hit a creature with your pact weapon, you can expend a Pact Magic spell slot to deal an extra 1d8 Force damage plus another 1d8 per level of the slot, and you can give the target the Prone condition if it is Huge or smaller.",
+  "damage": {
+    "dice": "2d8",
+    "type": "force"
+  }
+}

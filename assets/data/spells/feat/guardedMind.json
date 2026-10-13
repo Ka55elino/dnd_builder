@@ -1,0 +1,12 @@
+{
+  "id": "guardedMind",
+  "name": "Guarded Mind",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "uses": {
+    "count": 1,
+    "per": "shortRest"
+  },
+  "desc": "If you fail an Intelligence, a Wisdom, or a Charisma saving throw, you can cause yourself to succeed instead. Once you use this benefit, you can't use it again until you finish a Short or Long Rest."
+}

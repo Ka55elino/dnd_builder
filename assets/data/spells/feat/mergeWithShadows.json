@@ -1,0 +1,13 @@
+{
+  "id": "mergeWithShadows",
+  "name": "Merge with Shadows",
+  "kind": "action",
+  "source": "feat",
+  "level": 1,
+  "action": "bonus",
+  "apply": {
+    "condition": "invisible",
+    "target": "self"
+  },
+  "desc": "While within Dim Light or Darkness, you can take a Bonus Action to give yourself the Invisible condition. It lasts until you take an action, a Bonus Action or a Reaction."
+}

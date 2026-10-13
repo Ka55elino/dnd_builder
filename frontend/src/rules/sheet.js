@@ -66,6 +66,7 @@ export function computeSheet(
     {
         race, subrace, cls, classList = null, levelClasses = null, armor = null,
         extraArmor = [], extraWeapons = [], // proficiencies from feats (Martial Weapon Training)
+        extraSaves = [], // saving throw proficiencies from feats (Resilient: the ability it raised)
         shield = false, hands = [], emptyHands = [],
         skills: extraSkills = [], expertise = [], perks = new Set(), modifiers = [],
         spellAbility = null, // the class's spellcasting ability (Shillelagh: "$spell")
@@ -83,8 +84,8 @@ export function computeSheet(
     const effects = grants.filter((g) => g.type === 'effect').map((g) => g.effect);
 
     // --- saving throws ---
-    // saving throws — only from the primary (first) class
-    const saveProf = new Set(primary?.data?.savingThrows ?? []);
+    // saving throws — from the primary (first) class, plus feats (extraSaves)
+    const saveProf = new Set([...(primary?.data?.savingThrows ?? []), ...extraSaves]);
     const saves = ABILITY_KEYS.map((k) => ({
         key: k,
         proficient: saveProf.has(k),

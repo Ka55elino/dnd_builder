@@ -507,6 +507,23 @@ export class CharacterBuild {
         this.touch();
     }
 
+    /**
+     * Drop the choices an invocation brought with it (Lessons of the First Ones: its Origin feat and
+     * that feat's own picks — keys L<n>:class:invocations:<id>:… / L<n>:class:invocationSwap:<id>:…).
+     * key — only under that choice (the invocation unticked there); none — at every level (forgotten).
+     */
+    dropInvocationFollowUps(id, key = null) {
+        const re = new RegExp(`^L\\d+:class:invocation(s|Swap):${id}:`);
+        let changed = false;
+        for (const k of Object.keys(this.choices)) {
+            if (key ? k.startsWith(`${key}:${id}:`) : re.test(k)) {
+                delete this.choices[k];
+                changed = true;
+            }
+        }
+        if (changed) this.touch();
+    }
+
     /** Drop levels and level choices above the given level (e.g. when undoing a level-up). */
     dropChoicesAbove(level) {
         for (const k of Object.keys(this.choices)) {
