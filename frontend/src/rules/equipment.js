@@ -48,6 +48,9 @@ export function armorSummary(a) {
     return `${cat} · AC ${acText(a)}${bonus}`;
 }
 
+/** Ammunition types (weapon data.ammo, item data.ammo.type): what the item is for. */
+export const AMMO_TYPES = { arrow: 'Arrows (bows)', bolt: 'Bolts (crossbows)', stone: 'Stones (sling)' };
+
 /**
  * Item description for a tooltip: { title, tag, lines: [stat lines], desc }.
  * item — a backpack entry (Character.inventory): { kind: 'weapon'|'armor'|'shield'|'item', ref, qty }
@@ -70,6 +73,7 @@ export function describeItem(item, { damageShort = (t) => t } = {}) {
         for (const x of d.extraDamage ?? []) lines.push(`Extra damage: ${x.dice} ${damageShort(x.type)}`);
         if (d.mastery) lines.push(`Mastery: ${d.mastery}`);
         if (d.properties?.length) lines.push(d.properties.map((p) => WEAPON_PROPS[p] ?? p).join(', '));
+        if (d.ammo) lines.push(`Ammunition: ${AMMO_TYPES[d.ammo] ?? d.ammo}`);
     } else if (item.kind === 'armor' || item.kind === 'shield') {
         lines.push(ARMOR_CAT[r.category] ?? r.category ?? '');
         if (isClothing(r)) {
@@ -82,6 +86,9 @@ export function describeItem(item, { damageShort = (t) => t } = {}) {
         if (d.strengthReq) lines.push(`Requires Strength ${d.strengthReq}`);
         if (d.stealthDisadvantage) lines.push('Disadvantage on Stealth');
     } else {
+        // ammunition (data.ammo: { type }) — what shoots it, and its extra damage
+        if (d.ammo?.type) lines.push(`Ammunition: ${AMMO_TYPES[d.ammo.type] ?? d.ammo.type}`);
+        for (const x of d.extraDamage ?? []) lines.push(`Extra damage on a hit: ${x.dice} ${damageShort(x.type)}`);
         if (r.weight) lines.push(`Weight: ${r.weight} lb.`);
         if (r.cost) lines.push(`Cost: ${r.cost}`);
     }

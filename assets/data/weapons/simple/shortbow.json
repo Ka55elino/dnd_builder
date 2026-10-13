@@ -10,5 +10,6 @@
   "properties": [
     "ranged",
     "twoHanded"
-  ]
+  ],
+  "ammo": "arrow"
 }

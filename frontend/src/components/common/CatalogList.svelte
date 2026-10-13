@@ -11,12 +11,14 @@
      * Wearables (Gloves, Boots, Helmets, Necklaces, Rings): items with data.slot, each kind its
      * own tab (the Items tab is the rest of the gear); actions / marked get kind 'item' for them.
      *
+     * Ammunition (Arrows, Bolts, Stones…): items with data.ammo, their own tab (not in Items).
+     *
      * Armor / Weapons / wearables: a second filter by origin — All · Default (the standard gear) ·
      * Named (magic and special items: isDefault false) · Custom (your own, if there are any).
      */
     import { damageShort, damageName, damageLabel } from "../../rules/labels.js";
     import IconLabel from "./IconLabel.svelte";
-    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, acText } from "../../rules/equipment.js";
+    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, AMMO_TYPES, acText } from "../../rules/equipment.js";
     import { WEAR_TYPES } from "../../rules/loadout.js";
     import { modifierText } from "../../rules/modifiers.js";
 
@@ -27,17 +29,21 @@
         { id: "item", label: "Items", list: "items", kind: "item", wear: null },
         { id: "armor", label: "Armor", list: "armor", kind: "armor" },
         { id: "weapon", label: "Weapons", list: "weapons", kind: "weapon" },
+        { id: "ammo", label: "Ammunition", list: "items", kind: "item", ammo: true },
         { id: "gloves", label: "Gloves", list: "items", kind: "item", wear: "gloves" },
         { id: "boots", label: "Boots", list: "items", kind: "item", wear: "boots" },
         { id: "helmet", label: "Helmets", list: "items", kind: "item", wear: "helmet" },
         { id: "necklace", label: "Necklaces", list: "items", kind: "item", wear: "necklace" },
         { id: "ring", label: "Rings", list: "items", kind: "item", wear: "ring" },
     ];
-    // a tab's records: items split by data.slot (no slot — the Items tab)
+    // a tab's records: items split by data.slot (no slot — the Items tab) and ammunition (data.ammo)
     const slotOf = (x) => (WEAR_TYPES[x.data?.slot] ? x.data.slot : null);
+    const isAmmo = (x) => !!x.data?.ammo?.type && !slotOf(x);
     const ofTab = (t) => {
         const all = catalog?.[t.list] ?? [];
-        return t.wear === undefined ? all : all.filter((x) => slotOf(x) === t.wear);
+        if (t.ammo) return all.filter(isAmmo);
+        if (t.wear === undefined) return all;
+        return all.filter((x) => slotOf(x) === t.wear && !(t.wear === null && isAmmo(x)));
     };
 
     let query = $state("");
@@ -110,10 +116,14 @@
 
     // gear; a wearable — its kind and what it does while worn (its modifiers)
     const itemCard = (i) => ({
-        sub: WEAR_TYPES[i.data?.slot] ?? "Gear",
+        sub: WEAR_TYPES[i.data?.slot] ?? (isAmmo(i) ? AMMO_TYPES[i.data.ammo.type] ?? "Ammunition" : "Gear"),
         stat: i.cost ?? "",
         statLabel: i.cost ? "cost" : "",
-        extra: i.weight ? [{ text: `${i.weight} lb.` }] : [],
+        // special ammunition: its extra damage (with the type icon, as on weapons)
+        extra: [
+            ...(isAmmo(i) ? (i.data.extraDamage ?? []).map((x) => ({ text: `+${x.dice}`, type: x.type })) : []),
+            ...(i.weight ? [{ text: `${i.weight} lb.` }] : []),
+        ],
         tags: (i.data?.modifiers ?? []).map((m) => modifierText(m)).filter(Boolean),
         warn: [],
     });

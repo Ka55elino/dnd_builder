@@ -1,0 +1,18 @@
+{
+  "id": "fireBolts",
+  "name": "Fire Bolts",
+  "image": "/img/items/ammunition/fireBolts.webp",
+  "isDefault": true,
+  "weight": 0.075,
+  "cost": "5 GP",
+  "ammo": {
+    "type": "bolt"
+  },
+  "extraDamage": [
+    {
+      "dice": "1d4",
+      "type": "fire"
+    }
+  ],
+  "desc": "Crossbow bolts with smoldering, oil-soaked heads: a hit deals an extra 1d4 Fire damage."
+}

@@ -9,5 +9,6 @@
   "mastery": "Slow",
   "properties": [
     "ranged"
-  ]
+  ],
+  "ammo": "stone"
 }

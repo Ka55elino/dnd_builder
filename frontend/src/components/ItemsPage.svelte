@@ -27,11 +27,15 @@
     const KIND_ADD = {
         item: "item", armor: "armor", weapon: "weapon",
         gloves: "gloves", boots: "boots", helmet: "helmet", necklace: "necklace", ring: "ring",
+        ammo: "ammunition",
     };
+    // the Ammunition tab adds an item that is ammunition (arrows by default)
     const addNew = () =>
         (editor = WEAR_TYPES[tab]
             ? { kind: "item", slot: tab, initial: null, copy: false }
-            : { kind: tab, initial: null, copy: false });
+            : tab === "ammo"
+              ? { kind: "item", ammo: "arrow", initial: null, copy: false }
+              : { kind: tab, initial: null, copy: false });
 
     onMount(async () => {
         try {
@@ -52,7 +56,7 @@
         const wasEdit = editor?.initial && !editor?.copy;
         editor = null;
         await reload();
-        tab = slot && WEAR_TYPES[slot] ? slot : kind; // a wearable — its own tab
+        tab = slot && (WEAR_TYPES[slot] || slot === "ammo") ? slot : kind; // a wearable / ammunition — its own tab
         status = wasEdit ? "Changes saved" : "Added";
         setTimeout(() => (status = ""), 2500);
     }
@@ -105,6 +109,7 @@
             initial={editor.initial}
             copy={editor.copy}
             slot={editor.slot ?? null}
+            ammo={editor.ammo ?? null}
             {onSaved}
             onCancel={() => (editor = null)}
         />

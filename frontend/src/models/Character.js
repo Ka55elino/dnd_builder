@@ -151,7 +151,7 @@ export class Character {
      *                  e.g. Mage Armor → AC) and conditions [{ id, type: 'condition', level? }]
      *                  (refs.conditions; Prone, Exhaustion 2, Slowed…) — see rules/modifiers.js
      */
-    constructor(build, refs = {}, equipped = null, bagAdjust = null, effects = null) {
+    constructor(build, refs = {}, equipped = null, bagAdjust = null, effects = null, ammoSel = null) {
         const races = refs.races ?? [];
         const classes = refs.classes ?? [];
         const eq = refs.eq ?? {};
@@ -223,6 +223,16 @@ export class Character {
             const same = baseInventory.find((x) => x.kind === 'armor' && x.ref?.id === pa.armor.id);
             if (same) same.qty += pa.qty;
             else baseInventory.push({ key: `armor:${pa.armor.id}`, kind: 'armor', name: pa.armor.name, ref: pa.armor, qty: pa.qty });
+        }
+        // ammunition for the ranged weapons chosen in the builder (weapon data.ammo: 'arrow' | 'bolt' |
+        // 'stone'): the plain kind (item data.ammo: { type, start: 20 }) — once per ammunition type
+        const allItems = pool(catalog.items, eq.items);
+        for (const type of new Set(this.weapons.map((w) => w.data?.ammo).filter(Boolean))) {
+            const ref = allItems.find((x) => x.data?.ammo?.type === type && x.data.ammo.start);
+            if (!ref) continue;
+            const same = baseInventory.find((x) => x.kind === 'item' && x.ref?.id === ref.id);
+            if (same) same.qty += ref.data.ammo.start;
+            else baseInventory.push({ key: `item:${ref.id}`, kind: 'item', name: ref.name, ref, qty: ref.data.ammo.start });
         }
         // granted: identical items stack into one row with a quantity
         this.inventory = [...baseInventory];
@@ -442,6 +452,30 @@ export class Character {
             }),
         );
         this.maxHp = this.hp;
+
+        // --- ammunition: a ranged weapon that shoots it (data.ammo, or its base weapon's) gets
+        //   attack.ammo = { type, options: [{ key, name, qty }], key, name, qty } — what's in the backpack
+        //   for it and which one is loaded (ammoSel[weapon id], or the first); special ammunition adds its
+        //   data.extraDamage to the attack (Poison Arrows: +1d4 Poison)
+        const weaponRefs = pool(catalog.weapons, eq.weapons);
+        const ammoTypeOf = (w) => w?.data?.ammo ?? weaponRefs.find((x) => x.id === w?.data?.base)?.data?.ammo ?? null;
+        for (const a of this.attacks ?? []) {
+            const w = hands.find((h) => h.hand === a.hand)?.item?.ref;
+            const type = w?.id === a.id ? ammoTypeOf(w) : null;
+            if (!type) continue;
+            const options = this.inventory.filter((it) => it.kind === 'item' && it.ref?.data?.ammo?.type === type);
+            const sel = options.find((o) => o.key === ammoSel?.[a.id]) ?? options[0] ?? null;
+            a.ammo = {
+                type,
+                options: options.map((o) => ({ key: o.key, name: o.name, qty: o.qty })),
+                key: sel?.key ?? null,
+                name: sel?.name ?? null,
+                qty: sel?.qty ?? 0,
+            };
+            const extra = (sel?.ref?.data?.extraDamage ?? []).filter((x) => x?.dice).map((x) => ({ ...x, source: sel.name }));
+            if (extra.length) a.extra = [...(a.extra ?? []), ...extra];
+            if (!sel) a.note = [a.note, 'no ammunition'].filter(Boolean).join(' · ');
+        }
 
         // --- action economy: Action, Bonus Action, Reaction per turn ---
         //   { kind: 'economy', action: 'action' | 'bonus' | 'reaction', value: +1 } — from conditions

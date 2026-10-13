@@ -1,0 +1,13 @@
+{
+  "id": "arrows",
+  "name": "Arrows",
+  "image": "/img/items/ammunition/arrows.webp",
+  "isDefault": true,
+  "weight": 0.05,
+  "cost": "5 CP",
+  "ammo": {
+    "type": "arrow",
+    "start": 20
+  },
+  "desc": "Ammunition for a Longbow or Shortbow; sold in a bundle of 20 (1 GP), stored in a Quiver. A Longbow or Shortbow gets 20 when you choose it."
+}

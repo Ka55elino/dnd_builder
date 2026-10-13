@@ -1,0 +1,18 @@
+{
+  "id": "poisonArrows",
+  "name": "Poison Arrows",
+  "image": "/img/items/ammunition/poisonArrows.webp",
+  "isDefault": true,
+  "weight": 0.05,
+  "cost": "5 GP",
+  "ammo": {
+    "type": "arrow"
+  },
+  "extraDamage": [
+    {
+      "dice": "1d4",
+      "type": "poison"
+    }
+  ],
+  "desc": "Arrows with poison-coated heads: a hit deals an extra 1d4 Poison damage."
+}

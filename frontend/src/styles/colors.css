@@ -61,6 +61,7 @@
     --color-meta-ritual:        #D6B56A;
     --color-meta-dc:            #D99A5B;
     --color-meta-range:         #6FA8DC;
+    --color-meta-ammo:          #C9A26B;                 /* ammunition under a ranged weapon */
     --color-meta-duration:      #6FA8DC;
     --color-meta-slot:          var(--color-slot);
     --color-meta-pact:          var(--color-slot-pact);

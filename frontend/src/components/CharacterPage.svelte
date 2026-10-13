@@ -133,6 +133,7 @@
                   state?.equipped ?? null,
                   state?.bagAdjust ?? null,
                   state?.effects ?? null,
+                  state?.ammoSel ?? null,
               )
             : null,
     );
@@ -1872,8 +1873,9 @@
                         {#each SLOTS.filter((x) => x.group === group) as slot (slot.id)}
                             {@const blocked = handBlocked(slot.id)}
                             {@const held = character.loadout[slot.id]}
-                            <label class="slot" class:blocked>
-                                <span>{slot.label}</span>
+                            {@const shot = sheet.attacks.find((a) => a.hand === slot.id && a.ammo)}
+                            <div class="slot" class:blocked>
+                                <span class="slot-label">{slot.label}</span>
                                 {#if held}
                                     <Tooltip>
                                         {@render thumb(held, "lg")}
@@ -1888,6 +1890,7 @@
                                     value={character.equipped[slot.id] ?? ""}
                                     disabled={blocked}
                                     onchange={(e) => onEquip(slot.id, e)}
+                                    aria-label={slot.label}
                                 >
                                     <option value=""
                                         >{blocked
@@ -1907,7 +1910,26 @@
                                         </option>
                                     {/each}
                                 </select>
-                            </label>
+                                {#if shot}
+                                    <!-- a ranged weapon in this hand: the ammunition it shoots (spent in Attacks) -->
+                                    <div class="slot-ammo">
+                                        <Icon name="ammo" kind="meta" label="Ammunition" />
+                                        {#if shot.ammo.options.length}
+                                            <select
+                                                value={shot.ammo.key}
+                                                onchange={(e) => state.setAmmo(shot.id, e.currentTarget.value)}
+                                                aria-label="Ammunition for {shot.name}"
+                                            >
+                                                {#each shot.ammo.options as o (o.key)}
+                                                    <option value={o.key}>{o.name} × {o.qty}</option>
+                                                {/each}
+                                            </select>
+                                        {:else}
+                                            <small class="muted">no ammunition</small>
+                                        {/if}
+                                    </div>
+                                {/if}
+                            </div>
                         {/each}
                     </div>
                     {/snippet}
@@ -1960,7 +1982,7 @@
                         </thead>
                         <tbody>
                             {#each sheet.attacks as a (a.hand + a.id)}
-                                <tr>
+                                <tr class:has-ammo={!!a.ammo}>
                                     <td class="hand"
                                         >{a.hand === "off" ? "off" : "main"}</td
                                     >
@@ -2032,7 +2054,7 @@
                                                     <small class="hint">choice</small></span
                                                 >
                                             {:else}
-                                            <span class="extra"
+                                            <span class="extra" title={x.source ?? ""}
                                                 >+ {x.dice}
                                                 <small class="dmg-ico"
                                                     ><IconLabel
@@ -2054,6 +2076,31 @@
                                             >{/if}
                                     </td>
                                 </tr>
+                                {#if a.ammo}
+                                    <!-- the ammunition loaded (chosen under the hand slot above): its own row under
+                                         the weapon, across the table — fits a narrow screen; −1 per shot -->
+                                    <tr class="ammo-row">
+                                        <td></td>
+                                        <td colspan="4">
+                                            <div class="ammo">
+                                                <Icon name="ammo" kind="meta" label="Ammunition" />
+                                                {#if a.ammo.key}
+                                                    <span class="ammo-name">{a.ammo.name}</span>
+                                                    <b class="ammo-qty">× {a.ammo.qty}</b>
+                                                    <button
+                                                        class="qty-btn"
+                                                        title="Shoot: −1 {a.ammo.name}"
+                                                        aria-label="Shoot: −1 {a.ammo.name}"
+                                                        disabled={!a.ammo.qty}
+                                                        onclick={() => state.useAmmo(a.ammo.key, a.ammo.qty)}>−1</button
+                                                    >
+                                                {:else}
+                                                    <small class="muted">no ammunition</small>
+                                                {/if}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {/if}
                             {/each}
                         </tbody>
                     </table>
@@ -3621,7 +3668,7 @@
         gap: 4px;
     }
 
-    .slot > span {
+    .slot > .slot-label {
         font-family: var(--font-ui);
         font-size: 11px;
         letter-spacing: 0.06em;
@@ -3690,6 +3737,21 @@
         font-size: 14px;
     }
 
+    /* ammunition of a ranged weapon in the slot */
+    .slot-ammo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 0;
+    }
+
+    .slot .slot-ammo select {
+        flex: 1;
+        min-width: 0;
+        padding: 4px 6px;
+        font-size: 13px;
+    }
+
     .slot select:focus {
         outline: none;
         border-color: var(--color-gold);
@@ -3699,6 +3761,36 @@
         opacity: 0.5;
     }
 
+    /* the ammunition row under a ranged weapon */
+    .attacks tr.has-ammo td {
+        border-bottom: none;
+        padding-bottom: 2px;
+    }
+    .attacks tr.ammo-row td {
+        padding-top: 0;
+    }
+    .attacks .ammo {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85em;
+        color: var(--color-text-secondary);
+        white-space: nowrap;
+    }
+    .attacks .ammo-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+    }
+    .attacks .ammo-qty {
+        color: var(--color-text-primary);
+        font-variant-numeric: tabular-nums;
+    }
+    .attacks .ammo .qty-btn {
+        width: auto;
+        padding: 0 4px;
+        font-size: 0.9em;
+    }
     .attacks .hand {
         font-size: 12px;
         color: var(--color-text-muted);
@@ -4312,8 +4404,13 @@
             column-gap: 10px;
         }
 
-        .slot > span {
+        /* the label over the whole row; the empty-slot picture (a span too) stays in its column */
+        .slot > .slot-label {
             grid-column: 1 / -1;
+        }
+
+        .slot-ammo {
+            grid-column: 2;
         }
 
         .thumb.lg {

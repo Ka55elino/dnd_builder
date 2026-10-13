@@ -471,7 +471,7 @@ export function playerSheet(snap, state, refs, summary = null) {
         if (!snap?.build?.classes?.length || !refs) return null;
         const build = CharacterBuild.fromJSON(snap.build);
         const st = CharacterState.fromJSON(state ?? snap.state ?? {});
-        const ch = new Character(build, refs, st.equipped ?? null, st.bagAdjust ?? null, st.effects ?? null);
+        const ch = new Character(build, refs, st.equipped ?? null, st.bagAdjust ?? null, st.effects ?? null, st.ammoSel ?? null);
         return {
             hp: st.currentHp(ch), maxHp: ch.maxHp, temp: st.tempHp ?? 0, ac: ch.ac,
             conditions: ch.conditions.filter((r) => !r.immune).map((r) => rowName(r)),

@@ -1,0 +1,13 @@
+{
+  "id": "slingStones",
+  "name": "Bag of Stones",
+  "image": "/img/items/ammunition/slingStones.webp",
+  "isDefault": true,
+  "weight": 0.075,
+  "cost": "2 CP",
+  "ammo": {
+    "type": "stone",
+    "start": 20
+  },
+  "desc": "Smooth stones or Sling Bullets for a Sling; sold in a bundle of 20 (4 CP), carried in a Pouch. A Sling gets 20 when you choose it."
+}

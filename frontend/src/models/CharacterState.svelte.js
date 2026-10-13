@@ -49,9 +49,12 @@ export class CharacterState {
                                  //   initiative: 'owner' | 'own', since } — the DM puts them in the line and on the map
     bagAdjust = $state({});      // { [backpack item key]: qty delta } — used up / found / thrown away;
                                  // an item whose qty drops to 0 is removed (see Character)
+    ammoSel = $state({});        // { [weapon id]: backpack item key } — the ammunition a ranged weapon shoots
+                                 // (Character → sheet.attacks[].ammo); none / gone — the first that fits
 
     constructor(data = {}) {
         this.hpLost = Math.max(0, data.hpLost ?? 0);
+        this.ammoSel = { ...(data.ammoSel ?? {}) };
         this.tempHp = Math.max(0, data.tempHp ?? 0);
         this.resourcesUsed = { ...(data.resourcesUsed ?? {}) };
         this.resourcesHeld = { ...(data.resourcesHeld ?? {}) };
@@ -190,6 +193,17 @@ export class CharacterState {
     changeQty(it, n) {
         const next = clamp(it.qty + n, 1, BAG_MAX);
         if (next !== it.qty) this.#shift(it.key, next - it.qty);
+    }
+
+    /** Shoot one piece of ammunition (key — its backpack row, qty — how many are left); the last one empties the row. */
+    useAmmo(key, qty) {
+        if (key && qty > 0) this.#shift(key, -1);
+    }
+
+    /** The ammunition a weapon shoots (key — a backpack item key; null — the first that fits). */
+    setAmmo(weaponId, key) {
+        if (key) this.ammoSel[weaponId] = key;
+        else delete this.ammoSel[weaponId];
     }
 
     /** Throw the whole row out of the backpack. */
@@ -442,6 +456,7 @@ export class CharacterState {
             turnExtra: this.turnExtra,
             effects: this.effects,
             bagAdjust: this.bagAdjust,
+            ammoSel: this.ammoSel,
             wildShape: this.wildShape,
             summons: this.summons,
         });

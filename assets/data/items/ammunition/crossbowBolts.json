@@ -1,0 +1,13 @@
+{
+  "id": "crossbowBolts",
+  "name": "Crossbow Bolts",
+  "image": "/img/items/ammunition/crossbowBolts.webp",
+  "isDefault": true,
+  "weight": 0.075,
+  "cost": "5 CP",
+  "ammo": {
+    "type": "bolt",
+    "start": 20
+  },
+  "desc": "Ammunition for a Hand, Light or Heavy Crossbow; sold in a bundle of 20 (1 GP), stored in a Crossbow Bolt Case. A crossbow gets 20 when you choose it."
+}

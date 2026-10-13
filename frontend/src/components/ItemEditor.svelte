@@ -8,18 +8,19 @@
      * initial  — catalog record to edit (or the base for a copy), null — new
      * copy     — true: initial is only a base, save as a new record
      * slot     — a new item: worn as (gloves | boots | helmet | necklace | ring), null — gear
-     * onSaved(id, kind, slot) / onCancel()
+     * ammo     — a new item: ammunition of that type ('arrow' | 'bolt' | 'stone'), null — not
+     * onSaved(id, kind, slot) / onCancel() — slot: a wearable's slot, 'ammo' for ammunition, else null
      *
      * An item can be a wearable (data.slot): it goes into that slot on the sheet. A named one's
      * effects (data.modifiers) are kept when it is edited or copied (no editor for them here).
      */
     import { saveCustomEquipment } from "../data/refs.js"; // also reloads the equipment cache
-    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS } from "../rules/equipment.js";
+    import { ARMOR_CAT, WEAPON_CAT, WEAPON_PROPS, AMMO_TYPES } from "../rules/equipment.js";
     import { DAMAGE_TYPES } from "../rules/labels.js";
     import { WEAR_TYPES } from "../rules/loadout.js";
     import { untrack } from "svelte";
 
-    let { kind, initial = null, copy = false, slot = null, onSaved, onCancel } = $props();
+    let { kind, initial = null, copy = false, slot = null, ammo = null, onSaved, onCancel } = $props();
 
     const NEW_TITLE = { item: "New item", armor: "New armor", weapon: "New weapon" };
     const EDIT_TITLE = { item: "Edit item", armor: "Edit armor", weapon: "Edit weapon" };
@@ -52,6 +53,9 @@
         attackBonus: d.attackBonus ?? "",
         damageBonus: d.damageBonus ?? "",
         extraDamage: (d.extraDamage ?? []).map((x) => ({ ...x })),
+        // ammunition: a weapon — what it shoots (data.ammo: 'arrow'); an item — what it is (data.ammo: { type })
+        weaponAmmo: typeof d.ammo === "string" ? d.ammo : "",
+        ammoType: d.ammo?.type ?? untrack(() => ammo) ?? "",
         // armor
         aCategory: initial?.category ?? "light",
         baseAC: initial?.category === "clothing" ? 11 : initial?.baseAC ?? 11,
@@ -114,11 +118,25 @@
             ...(desc ? { desc } : {}),
         };
 
+        // extra damage rows (a weapon; ammunition — Poison Arrows)
+        const extraDamageOf = () => {
+            const list = f.extraDamage
+                .map((x) => ({ dice: String(x.dice).trim().toLowerCase(), type: x.type }))
+                .filter((x) => x.dice);
+            if (list.some((x) => !DICE.test(x.dice))) throw new Error("Extra damage must be a die like 1d6.");
+            return list;
+        };
+
         if (kind === "item") {
             const d = initial?.data ?? {};
+            const ammo = AMMO_TYPES[f.ammoType] && !WEAR_TYPES[f.slot];
+            const extraDamage = ammo ? extraDamageOf() : [];
             return {
                 ...base,
                 ...(WEAR_TYPES[f.slot] ? { slot: f.slot } : {}),
+                // ammunition: its type; "start" (given with a new weapon) stays only on the record itself
+                ...(ammo ? { ammo: { type: f.ammoType, ...(d.ammo?.start && !copy ? { start: d.ammo.start } : {}) } } : {}),
+                ...(extraDamage.length ? { extraDamage } : {}),
                 // a named wearable's effects (Ring of Protection: +1 AC…) stay with it
                 ...(WEAR_TYPES[f.slot] && d.modifiers?.length ? { modifiers: d.modifiers } : {}),
                 ...extra,
@@ -128,16 +146,14 @@
         if (kind === "weapon") {
             const damage = f.damage.trim().toLowerCase();
             if (!DICE.test(damage)) throw new Error("Damage must be a die like 1d8 or a number.");
-            const extraDamage = f.extraDamage
-                .map((x) => ({ dice: String(x.dice).trim().toLowerCase(), type: x.type }))
-                .filter((x) => x.dice);
-            if (extraDamage.some((x) => !DICE.test(x.dice))) throw new Error("Extra damage must be a die like 1d6.");
+            const extraDamage = extraDamageOf();
             return {
                 ...base,
                 category: f.wCategory,
                 damage,
                 damageType: f.damageType,
                 properties: [...f.properties],
+                ...(AMMO_TYPES[f.weaponAmmo] ? { ammo: f.weaponAmmo } : {}),
                 ...(f.mastery ? { mastery: f.mastery } : {}),
                 ...(num(f.attackBonus) ? { attackBonus: num(f.attackBonus) } : {}),
                 ...(num(f.damageBonus) ? { damageBonus: num(f.damageBonus) } : {}),
@@ -194,7 +210,7 @@
         saving = true;
         try {
             const id = await saveCustomEquipment(kind, JSON.stringify(obj));
-            onSaved?.(id, kind, kind === "item" && WEAR_TYPES[f.slot] ? f.slot : null);
+            onSaved?.(id, kind, kind !== "item" ? null : WEAR_TYPES[f.slot] ? f.slot : AMMO_TYPES[f.ammoType] ? "ammo" : null);
         } catch (e) {
             error = "Failed to save: " + (e?.message ?? e);
         } finally {
@@ -208,6 +224,22 @@
 </script>
 
 <svelte:window onkeydown={onKey} />
+
+{#snippet extraDamageRows(title)}
+    <div class="field">
+        <span>{title}</span>
+        {#each f.extraDamage as x, i}
+            <div class="extra-row">
+                <input type="text" bind:value={x.dice} placeholder="1d6" />
+                <select bind:value={x.type}>
+                    {#each DMG as [k, v]}<option value={k}>{v.short}</option>{/each}
+                </select>
+                <button class="ghost small" onclick={() => f.extraDamage.splice(i, 1)} aria-label="Remove">×</button>
+            </div>
+        {/each}
+        <button class="link" onclick={() => f.extraDamage.push({ dice: "1d6", type: "fire" })}>+ add damage</button>
+    </div>
+{/snippet}
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
 <div class="backdrop" onclick={(e) => e.target === e.currentTarget && onCancel?.()}>
@@ -254,6 +286,13 @@
                     </select>
                 </label>
                 <label class="field">
+                    <span>Ammunition</span>
+                    <select bind:value={f.weaponAmmo}>
+                        <option value="">—</option>
+                        {#each Object.entries(AMMO_TYPES) as [k, v] (k)}<option value={k}>{v}</option>{/each}
+                    </select>
+                </label>
+                <label class="field">
                     <span>Attack bonus</span>
                     <input type="number" bind:value={f.attackBonus} placeholder="0" />
                 </label>
@@ -272,19 +311,7 @@
                 </div>
             </div>
 
-            <div class="field">
-                <span>Extra damage</span>
-                {#each f.extraDamage as x, i}
-                    <div class="extra-row">
-                        <input type="text" bind:value={x.dice} placeholder="1d6" />
-                        <select bind:value={x.type}>
-                            {#each DMG as [k, v]}<option value={k}>{v.short}</option>{/each}
-                        </select>
-                        <button class="ghost small" onclick={() => f.extraDamage.splice(i, 1)} aria-label="Remove">×</button>
-                    </div>
-                {/each}
-                <button class="link" onclick={() => f.extraDamage.push({ dice: "1d6", type: "fire" })}>+ add damage</button>
-            </div>
+            {@render extraDamageRows("Extra damage")}
         {:else if kind === "armor"}
             <div class="grid">
                 <label class="field">
@@ -350,6 +377,16 @@
             </label>
             {#if WEAR_TYPES[f.slot] && initial?.data?.modifiers?.length}
                 <p class="hint">Its effects while worn are kept from “{initial.name}”.</p>
+            {/if}
+            {#if !WEAR_TYPES[f.slot]}
+                <label class="field">
+                    <span>Ammunition for</span>
+                    <select bind:value={f.ammoType}>
+                        <option value="">— not ammunition —</option>
+                        {#each Object.entries(AMMO_TYPES) as [k, v] (k)}<option value={k}>{v}</option>{/each}
+                    </select>
+                </label>
+                {#if AMMO_TYPES[f.ammoType]}{@render extraDamageRows("Extra damage on a hit")}{/if}
             {/if}
         {/if}
 

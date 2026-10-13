@@ -10,5 +10,6 @@
   "properties": [
     "light",
     "ranged"
-  ]
+  ],
+  "ammo": "bolt"
 }
